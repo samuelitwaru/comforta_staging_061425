@@ -1,0 +1,756 @@
+{
+"ObjectType":"ServiceGroup",
+"Name":"API_ResidentService",
+"BasePath":"api",
+"Mappings":
+[
+{
+"Verb":"POST",
+"PathRegexp":"auth/resident-login",
+"Path":"auth/resident-login",
+"Name":"loginwithqrcode",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_loginwithqrcode",
+"Implementation":"Prc_LoginResident"
+},
+{
+"Verb":"POST",
+"PathRegexp":"auth/resident-login-username-password",
+"Path":"auth/resident-login-username-password",
+"Name":"loginwithusernamepassword",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_loginwithusernamepassword",
+"Implementation":"Prc_LoginResident2"
+},
+{
+"Verb":"POST",
+"PathRegexp":"auth/resident-recover-password-step1",
+"Path":"auth/resident-recover-password-step1",
+"Name":"recoverpasswordstep1",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_recoverpasswordstep1",
+"Implementation":"Prc_RecoverPasswordStep1"
+},
+{
+"Verb":"POST",
+"PathRegexp":"auth/resident-change-password",
+"Path":"auth/resident-change-password",
+"Name":"changeuserpassword",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_changeuserpassword",
+"Implementation":"Prc_ChangeUserPassword"
+},
+{
+"Verb":"POST",
+"PathRegexp":"auth/refresh-token",
+"Path":"auth/refresh-token",
+"Name":"refreshauthtoken",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_refreshauthtoken",
+"Implementation":"Prc_RefreshAuthToken"
+},
+{
+"PathRegexp":"auth/resident",
+"Path":"auth/resident",
+"Name":"getresidentinformation",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_getresidentinformation",
+"Implementation":"Prc_GetResidentInformation",
+"Verb":"GET"
+},
+{
+"PathRegexp":"resident/organisation",
+"Path":"resident/organisation",
+"Name":"getorganisationinformation",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_getorganisationinformation",
+"Implementation":"Prc_GetOrganisationInformation",
+"Verb":"GET"
+},
+{
+"PathRegexp":"resident/location",
+"Path":"resident/location",
+"Name":"getlocationinformation",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_getlocationinformation",
+"Implementation":"Prc_GetLocationInformation",
+"Verb":"GET"
+},
+{
+"PathRegexp":"resident/notification-history",
+"Path":"resident/notification-history",
+"Name":"getresidentnotificationhistory",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_getresidentnotificationhistory",
+"Implementation":"Prc_GetResidentNotificationHistory",
+"Verb":"GET"
+},
+{
+"PathRegexp":"resident/filled-forms",
+"Path":"resident/filled-forms",
+"Name":"getresidentfilledforms",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_getresidentfilledforms",
+"Implementation":"Prc_GetResidentFilledForms",
+"Verb":"GET"
+},
+{
+"PathRegexp":"resident/update-avatar",
+"Path":"resident/update-avatar",
+"Verb":"POST",
+"Name":"updateresidentavatar",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_updateresidentavatar",
+"Implementation":"Prc_UpdateResidentAvatar"
+},
+{
+"PathRegexp":"mobile/register-device",
+"Path":"mobile/register-device",
+"Verb":"POST",
+"Name":"registerdevice",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_registerdevice",
+"Implementation":"Prc_RegisterMobileDevice"
+},
+{
+"PathRegexp":"mobile/set-language",
+"Path":"mobile/set-language",
+"Verb":"POST",
+"Name":"setresidentlanguage",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_setresidentlanguage",
+"Implementation":"Prc_RegisterResidentLanguage"
+},
+{
+"PathRegexp":"mobile/send-notification",
+"Path":"mobile/send-notification",
+"Verb":"POST",
+"Name":"sendnotification",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_sendnotification",
+"Implementation":"Prc_SendNotification"
+},
+{
+"PathRegexp":"resident/agenda-events",
+"Path":"resident/agenda-events",
+"Verb":"GET",
+"Name":"agendalocation",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_agendalocation",
+"Implementation":"Prc_AgendaLocationAPI"
+},
+{
+"PathRegexp":"form/dynamic-form",
+"Path":"form/dynamic-form",
+"Name":"senddynamicform",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_senddynamicform",
+"Implementation":"Prc_DynamicFormAPI",
+"Verb":"GET"
+},
+{
+"Verb":"POST",
+"PathRegexp":"media/upload",
+"Path":"media/upload",
+"Name":"uploadmedia",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_uploadmedia",
+"Implementation":"Prc_UploadMedia"
+},
+{
+"Verb":"GET",
+"PathRegexp":"media/delete",
+"Path":"media/delete",
+"Name":"deletemedia",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_deletemedia",
+"Implementation":"Prc_DeleteMedia"
+},
+{
+"PathRegexp":"toolbox/media",
+"Path":"toolbox/media",
+"Name":"getmedia",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_getmedia",
+"Implementation":"Prc_GetMedia",
+"Verb":"GET"
+},
+{
+"Verb":"POST",
+"PathRegexp":"media/upload/logo",
+"Path":"media/upload/logo",
+"Name":"uploadlogo",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_uploadlogo",
+"Implementation":"Prc_UploadLogo"
+},
+{
+"Verb":"POST",
+"PathRegexp":"media/upload/profile",
+"Path":"media/upload/profile",
+"Name":"uploadprofileimage",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_uploadprofileimage",
+"Implementation":"Prc_UploadProfileImage"
+},
+{
+"PathRegexp":"toolbox/pages/list",
+"Path":"toolbox/pages/list",
+"Name":"getpages",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_getpages",
+"Implementation":"Prc_GetPages",
+"Verb":"GET"
+},
+{
+"PathRegexp":"toolbox/pages",
+"Path":"toolbox/pages",
+"Name":"pagesapi",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_pagesapi",
+"Implementation":"Prc_PagesAPIV2",
+"Verb":"GET"
+},
+{
+"PathRegexp":"toolbox/home-page",
+"Path":"toolbox/home-page",
+"Name":"homepageapi",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_homepageapi",
+"Implementation":"Prc_HomePageAPI",
+"Verb":"GET"
+},
+{
+"PathRegexp":"toolbox/page",
+"Path":"toolbox/page",
+"Name":"pageapi",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_pageapi",
+"Implementation":"Prc_PageAPIV2",
+"Verb":"GET"
+},
+{
+"PathRegexp":"toolbox/info-page",
+"Path":"toolbox/info-page",
+"Name":"infopageapi",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_infopageapi",
+"Implementation":"Prc_InfoPageAPI",
+"Verb":"GET"
+},
+{
+"PathRegexp":"toolbox/content-pages",
+"Path":"toolbox/content-pages",
+"Name":"contentpagesapi",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_contentpagesapi",
+"Implementation":"Prc_ContentPagesAPIV2",
+"Verb":"GET"
+},
+{
+"PathRegexp":"toolbox/singlepage",
+"Path":"toolbox/singlepage",
+"Name":"getsinglepage",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_getsinglepage",
+"Implementation":"Prc_GetSinglePageAPI",
+"Verb":"GET"
+},
+{
+"PathRegexp":"toolbox/deletepage",
+"Path":"toolbox/deletepage",
+"Name":"deletepage",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_deletepage",
+"Implementation":"Prc_DeletePageAPI",
+"Verb":"GET"
+},
+{
+"PathRegexp":"toolbox/pages/tree",
+"Path":"toolbox/pages/tree",
+"Name":"listpages",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_listpages",
+"Implementation":"Prc_ListPages",
+"Verb":"GET"
+},
+{
+"Verb":"POST",
+"PathRegexp":"toolbox/create-page",
+"Path":"toolbox/create-page",
+"Name":"createpage",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_createpage",
+"Implementation":"Prc_CreatePage"
+},
+{
+"Verb":"POST",
+"PathRegexp":"toolbox/create-content-page",
+"Path":"toolbox/create-content-page",
+"Name":"createcontentpage",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_createcontentpage",
+"Implementation":"Prc_CreateContentPage"
+},
+{
+"Verb":"POST",
+"PathRegexp":"toolbox/create-dynamic-form-page",
+"Path":"toolbox/create-dynamic-form-page",
+"Name":"createdynamicformpage",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_createdynamicformpage",
+"Implementation":"Prc_CreateDynamicFormPage"
+},
+{
+"Verb":"POST",
+"PathRegexp":"toolbox/save-page",
+"Path":"toolbox/save-page",
+"Name":"savepage",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_savepage",
+"Implementation":"Prc_SavePage"
+},
+{
+"Verb":"POST",
+"PathRegexp":"toolbox/update-page",
+"Path":"toolbox/update-page",
+"Name":"updatepage",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_updatepage",
+"Implementation":"Prc_UpdatePage"
+},
+{
+"Verb":"POST",
+"PathRegexp":"toolbox/update-pages-batch",
+"Path":"toolbox/update-pages-batch",
+"Name":"updatepagebatch",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_updatepagebatch",
+"Implementation":"Prc_UpdatePageBatch"
+},
+{
+"Verb":"POST",
+"PathRegexp":"toolbox/add-page-children",
+"Path":"toolbox/add-page-children",
+"Name":"addpagecildren",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_addpagecildren",
+"Implementation":"Prc_AddPageChildren"
+},
+{
+"PathRegexp":"productservice",
+"Path":"productservice",
+"Name":"productserviceapi",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_productserviceapi",
+"Implementation":"Prc_ProductServiceAPI",
+"Verb":"GET"
+},
+{
+"PathRegexp":"toolbox/services",
+"Path":"toolbox/services",
+"Name":"getservices",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_getservices",
+"Implementation":"Prc_GetServices",
+"Verb":"GET"
+},
+{
+"PathRegexp":"location-theme",
+"Path":"location-theme",
+"Name":"getlocationtheme",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_getlocationtheme",
+"Implementation":"Prc_GetLocationTheme",
+"Verb":"GET"
+},
+{
+"PathRegexp":"toolbox/location-theme",
+"Path":"toolbox/location-theme",
+"Name":"toolboxgetlocationtheme",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_toolboxgetlocationtheme",
+"Implementation":"Prc_ToolboxGetLocationTheme",
+"Verb":"GET"
+},
+{
+"PathRegexp":"toolbox/themes",
+"Path":"toolbox/themes",
+"Name":"getthemes",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_getthemes",
+"Implementation":"Prc_GetThemes",
+"Verb":"GET"
+},
+{
+"PathRegexp":"toolbox/v2/get-trash",
+"Path":"toolbox/v2/get-trash",
+"Name":"getatrashitems",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_getatrashitems",
+"Implementation":"Prc_GetTrashItems",
+"Verb":"GET"
+},
+{
+"PathRegexp":"toolbox/v2/restore-trash",
+"Path":"toolbox/v2/restore-trash",
+"Verb":"POST",
+"Name":"restoretrash",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_restoretrash",
+"Implementation":"Prc_RestoreTrash"
+},
+{
+"PathRegexp":"toolbox/v2/delete-trash",
+"Path":"toolbox/v2/delete-trash",
+"Verb":"POST",
+"Name":"deletetrash",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_deletetrash",
+"Implementation":"Prc_DeleteTrash"
+},
+{
+"PathRegexp":"toolbox/v2/appversions",
+"Path":"toolbox/v2/appversions",
+"Name":"getappversions",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_getappversions",
+"Implementation":"Prc_GetAppVersions",
+"Verb":"GET"
+},
+{
+"PathRegexp":"toolbox/v2/appversion",
+"Path":"toolbox/v2/appversion",
+"Name":"getappversion",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_getappversion",
+"Implementation":"Prc_GetAppVersion",
+"Verb":"GET"
+},
+{
+"PathRegexp":"toolbox/v2/create-appversion",
+"Path":"toolbox/v2/create-appversion",
+"Verb":"POST",
+"Name":"createappversion",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_createappversion",
+"Implementation":"Prc_CreateAppVersion"
+},
+{
+"PathRegexp":"toolbox/v2/copy-appversion",
+"Path":"toolbox/v2/copy-appversion",
+"Verb":"POST",
+"Name":"copyappversion",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_copyappversion",
+"Implementation":"Prc_CopyAppVersion"
+},
+{
+"PathRegexp":"toolbox/v2/update-appversion",
+"Path":"toolbox/v2/update-appversion",
+"Verb":"POST",
+"Name":"updateappversion",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_updateappversion",
+"Implementation":"Prc_UpdateAppVersion"
+},
+{
+"PathRegexp":"toolbox/update-appversion-theme",
+"Path":"toolbox/update-appversion-theme",
+"Verb":"POST",
+"Name":"updateappversiontheme",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_updateappversiontheme",
+"Implementation":"Prc_UpdateAppVersionTheme"
+},
+{
+"PathRegexp":"toolbox/v2/activate-appversion",
+"Path":"toolbox/v2/activate-appversion",
+"Verb":"POST",
+"Name":"activateappversion",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_activateappversion",
+"Implementation":"Prc_ActivateAppVersion"
+},
+{
+"PathRegexp":"toolbox/v2/delete-version",
+"Path":"toolbox/v2/delete-version",
+"Verb":"POST",
+"Name":"deleteappversion",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_deleteappversion",
+"Implementation":"Prc_DeleteAppVersion"
+},
+{
+"Verb":"POST",
+"PathRegexp":"toolbox/v2/save-page",
+"Path":"toolbox/v2/save-page",
+"Name":"savepagev2",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_savepagev2",
+"Implementation":"Prc_SavePageV2"
+},
+{
+"Verb":"POST",
+"PathRegexp":"toolbox/v2/save-page-thumbnail",
+"Path":"toolbox/v2/save-page-thumbnail",
+"Name":"savepagethumbnail",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_savepagethumbnail",
+"Implementation":"Prc_SavePageThumbnail"
+},
+{
+"Verb":"POST",
+"PathRegexp":"toolbox/v2/publish-appversion",
+"Path":"toolbox/v2/publish-appversion",
+"Name":"publishappversion",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_publishappversion",
+"Implementation":"Prc_PublishAppVersion"
+},
+{
+"Verb":"POST",
+"PathRegexp":"toolbox/v2/create-menu-page",
+"Path":"toolbox/v2/create-menu-page",
+"Name":"createmenupage",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_createmenupage",
+"Implementation":"Prc_CreateMenuPage"
+},
+{
+"Verb":"POST",
+"PathRegexp":"toolbox/v2/create-info-page",
+"Path":"toolbox/v2/create-info-page",
+"Name":"createinfopage",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_createinfopage",
+"Implementation":"Prc_CreateInfoPage"
+},
+{
+"Verb":"POST",
+"PathRegexp":"toolbox/v2/create-link-page",
+"Path":"toolbox/v2/create-link-page",
+"Name":"createlinkpage",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_createlinkpage",
+"Implementation":"Prc_CreateLinkPage"
+},
+{
+"Verb":"POST",
+"PathRegexp":"toolbox/v2/create-service-page",
+"Path":"toolbox/v2/create-service-page",
+"Name":"createservicepage",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_createservicepage",
+"Implementation":"Prc_CreateServicePage"
+},
+{
+"PathRegexp":"toolbox/v2/delete-page",
+"Path":"toolbox/v2/delete-page",
+"Verb":"POST",
+"Name":"deletepagev2",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_deletepagev2",
+"Implementation":"Prc_DeletePage"
+},
+{
+"Verb":"POST",
+"PathRegexp":"toolbox/v2/update-page-title",
+"Path":"toolbox/v2/update-page-title",
+"Name":"updatepagetitle",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_updatepagetitle",
+"Implementation":"Prc_UpdatePageTitle"
+},
+{
+"Verb":"POST",
+"PathRegexp":"toolbox/v2/debug",
+"Path":"toolbox/v2/debug",
+"Name":"debugappversion",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_debugappversion",
+"Implementation":"Prc_DebugAppVersion"
+},
+{
+"PathRegexp":"toolbox/v2/update-service",
+"Path":"toolbox/v2/update-service",
+"Verb":"POST",
+"Name":"updateproductserviceapi",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_updateproductserviceapi",
+"Implementation":"Prc_UpdateProductServiceAPI"
+},
+{
+"PathRegexp":"toolbox/v2/delete-service-image",
+"Path":"toolbox/v2/delete-service-image",
+"Verb":"POST",
+"Name":"deleteproductserviceimageapi",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_deleteproductserviceimageapi",
+"Implementation":"Prc_DeleteProductServiceImageAPI"
+},
+{
+"PathRegexp":"toolbox/v2/get-location",
+"Path":"toolbox/v2/get-location",
+"Verb":"GET",
+"Name":"updatelocationapi__get",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_updatelocationapi__get",
+"Implementation":"Prc_GetLocationAPI"
+},
+{
+"PathRegexp":"toolbox/v2/update-location",
+"Path":"toolbox/v2/update-location",
+"Verb":"POST",
+"Name":"updatelocationapi__post",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_updatelocationapi__post",
+"Implementation":"Prc_UpdateLocationAPI"
+},
+{
+"PathRegexp":"bulletin-board/memo-categories",
+"Path":"bulletin-board/memo-categories",
+"Name":"getmemocategories",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_getmemocategories",
+"Implementation":"Prc_GetMemoCategories",
+"Verb":"GET"
+},
+{
+"PathRegexp":"bulletin-board/memo-category",
+"Path":"bulletin-board/memo-category",
+"Name":"getmemocategory",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_getmemocategory",
+"Implementation":"Prc_GetMemoCategory",
+"Verb":"GET"
+},
+{
+"Verb":"POST",
+"PathRegexp":"bulletin-board/create-memo",
+"Path":"bulletin-board/create-memo",
+"Name":"creatememo",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_creatememo",
+"Implementation":"Prc_CreateMemo"
+},
+{
+"Verb":"POST",
+"PathRegexp":"bulletin-board/update-memo",
+"Path":"bulletin-board/update-memo",
+"Name":"updatememo",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_updatememo",
+"Implementation":"Prc_UpdateMemo"
+},
+{
+"PathRegexp":"bulletin-board/memo",
+"Path":"bulletin-board/memo",
+"Name":"getmemo",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_getmemo",
+"Implementation":"Prc_GetMemo",
+"Verb":"GET"
+},
+{
+"PathRegexp":"bulletin-board/resident-memos",
+"Path":"bulletin-board/resident-memos",
+"Name":"getresidentmemos",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_getresidentmemos",
+"Implementation":"Prc_GetResidentMemos",
+"Verb":"GET"
+},
+{
+"PathRegexp":"bulletin-board/location-memos",
+"Path":"bulletin-board/location-memos",
+"Name":"getlocationmemos",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_getlocationmemos",
+"Implementation":"Prc_GetLocationMemos",
+"Verb":"GET"
+},
+{
+"PathRegexp":"bulletin-board/delete-memo",
+"Path":"bulletin-board/delete-memo",
+"Name":"deletememo",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_deletememo",
+"Implementation":"Prc_DeleteMemo",
+"Verb":"GET"
+}]}

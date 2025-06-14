@@ -1,0 +1,60 @@
+
+<style>
+    body.pv-modal-open {
+      	overflow: hidden; /* Prevent background scrolling */
+    }
+
+    .pv-modal-backdrop {
+     	position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 1040;
+		background-color: #000;
+		opacity: 0.8;
+    }
+
+    .pv-modal {
+		background: white;
+		border-radius: 8px;
+		width: 90%;
+		max-width: 500px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+		/* text-align: center; */
+		z-index: 1041;
+		position: fixed;
+		top:100px;
+		left: 33%;
+    }
+
+    /* Optional: Blur background content */
+    .blur {
+      	filter: blur(4px);
+    }
+</style>
+
+<div>
+  	<div id="content" class="blur">
+    	<h1>Main Page Content</h1>
+    	<p>You can't interact with this until the modal is closed.</p>
+ 	</div>
+	
+	<div class="pv-modal">
+		<div class="popup-header">
+			<span>Access Blocked</span>
+		</div>
+		<hr style="margin:0px"/>
+		<div class="popup-body">
+			<p>The App builder is being used by another receptionist.</p>
+			<div class="popup-footer">
+				<a target="_blank" style="text-decoration:none" href="{{gxTpr_PreviewLink}}{{PreviewLink}}" class="tb-btn tb-btn-primary" id='pv-button-review'>Review Only</a>
+				<button class="tb-btn tb-btn-outline" id='pv-button'>Close</button>
+			</div>
+		</div>
+	</div>
+	
+	<div id="pv-modal" align="center" class="pv-modal-backdrop">
+	</div>
+
+</div>

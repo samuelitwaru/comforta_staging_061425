@@ -1,0 +1,10 @@
+media/*
+!media/Calendar.png
+!media/LocationInfo.png
+!media/receptie-197@3x.png
+!media/comfortaMailLogo.png
+PublicTempStorage/*
+!.gitignore
+Resources/UCGrapes1/TB
+Logs.txt
+Data.txt

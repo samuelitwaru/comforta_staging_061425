@@ -1,0 +1,21 @@
+@layer WorkWithPlusGAMDS{
+:root
+{
+	--colors_primary : Teal;
+	--colors_primary-active : Teal;
+	--colors_primary-hover : #006767;
+	--colors_baseforecolor : #FFF;
+	--colors_primary-hover-20 : rgba(0, 128, 128, 0.1);
+	--colors_gray08 : #575b5d;
+	--colors_sidebarmenu_itemforecolor : #607D8B;
+	--colors_on-secondary : #607D8B;
+	--colors_sidebarmenu_backgroundcolor : #FCFCFC;
+	--colors_secondary-enabled : #FCFCFC;
+	--colors_secondary-active : Teal;
+	--fonts_primary-light : Poppins, sans-serif;
+	--fonts_primary-regular : Poppins, sans-serif;
+	--fonts_primary-semibold : Poppins, sans-serif;
+	--fonts_primary-bold : Poppins, sans-serif;
+
+}
+}

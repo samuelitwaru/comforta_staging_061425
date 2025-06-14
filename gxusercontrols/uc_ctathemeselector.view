@@ -1,0 +1,55 @@
+<style>
+   .cta-color-picker {
+       width: 40px;
+       height: 40px;
+       border-radius: 2px;
+       border: none;
+       background-color: transparent;
+       appearance: none;
+       -webkit-appearance: none;
+       appearance: none;
+       -webkit-appearance: none;
+       box-sizing: border-box;
+       cursor: pointer;
+   }
+
+   .cta-color-picker:focus {
+       outline: none;
+       cursor: pointer;
+       background-color: transparent;
+       box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+   }
+</style>
+
+<div class="color-container">
+    <div class="color-selector">
+        <input type="color" class="cta-color-picker" name="ctaColor1" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"
+            value="{{gxTpr_ctaColor1}}{{ctaColor1}}{{^ctaColor1}}#2C405A{{/ctaColor1}}">
+        <input type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{gxTpr_ctaColor1}}{{ctaColor1}}{{^ctaColor1}}#2C405A{{/ctaColor1}}" id="ctaColor1HexValue">
+    </div>
+    <div class="color-selector">
+        <input type="color" class="cta-color-picker" name="ctaColor2" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"
+            value="{{gxTpr_ctaColor2}}{{ctaColor2}}{{^ctaColor2}}#D4A76A{{/ctaColor2}}">
+        <input type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{gxTpr_ctaColor2}}{{ctaColor2}}{{^ctaColor2}}#D4A76A{{/ctaColor2}}" id="ctaColor2HexValue">
+    </div>
+    <div class="color-selector">
+        <input type="color" class="cta-color-picker" name="ctaColor3" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"
+            value="{{gxTpr_ctaColor3}}{{ctaColor3}}{{^ctaColor3}}#969674{{/ctaColor3}}">
+        <input type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{gxTpr_ctaColor3}}{{ctaColor3}}{{^ctaColor3}}#969674{{/ctaColor3}}" id="ctaColor3HexValue">
+    </div>
+    <div class="color-selector">
+        <input type="color" class="cta-color-picker" name="ctaColor4" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"
+            value="{{gxTpr_ctaColor4}}{{ctaColor4}}{{^ctaColor4}}#C4A082{{/ctaColor4}}">
+        <input type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{gxTpr_ctaColor4}}{{ctaColor4}}{{^ctaColor4}}#C4A082{{/ctaColor4}}" id="ctaColor4HexValue">
+    </div>
+    <div class="color-selector">
+        <input type="color" class="cta-color-picker" name="ctaColor5" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"
+            value="{{gxTpr_ctaColor5}}{{ctaColor5}}{{^ctaColor5}}#E9C4AA{{/ctaColor5}}">
+        <input type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{gxTpr_ctaColor5}}{{ctaColor5}}{{^ctaColor5}}#E9C4AA{{/ctaColor5}}" id="ctaColor5HexValue">
+    </div>
+    <div class="color-selector">
+        <input type="color" class="cta-color-picker" name="ctaColor6" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"
+            value="{{gxTpr_ctaColor6}}{{ctaColor6}}{{^ctaColor6}}#B7B7B7{{/ctaColor6}}">
+        <input type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="{{gxTpr_ctaColor6}}{{ctaColor6}}{{^ctaColor6}}#B7B7B7{{/ctaColor6}}" id="ctaColor6HexValue">
+    </div>
+</div>

@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Objects xmlns="qv">
+  <Object name="General.UI.SidebarItemsDP" id="1" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="SidebarItemsDP" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="WorkWithPlus.WWP_Parameter_DataProvider" id="2" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="WWP_Parameter_DataProvider" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="WorkWithPlus_Web.GetHomeModulesSample" id="3" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="GetHomeModulesSample" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="WorkWithPlus_Web.WWP_LoadTreeViewSampleData" id="4" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="WWP_LoadTreeViewSampleData" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="WWPBaseObjects.SecGAMGetAdvancedSecurityWWPFunctionalities" id="5" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="SecGAMGetAdvancedSecurityWWPFunctionalities" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="WorkWithPlus_Web.GetMainHomeModulesSample" id="6" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="GetMainHomeModulesSample" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="WorkWithPlus_Web.GetSomeHomeModulesSample" id="7" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="GetSomeHomeModulesSample" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="WWPBaseObjects.Notifications.Common.WWP_AutomaticNotificationDefinitionsToLoad" id="8" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="WWP_AutomaticNotificationDefinitionsToLoad" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="WWPBaseObjects.Notifications.Common.WWP_GetNotificationsForUser" id="9" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="WWP_GetNotificationsForUser" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="WWPBaseObjects.MenuOptionsData" id="10" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="MenuOptionsData" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="DP_GetDashboardItems" id="11" type="DataProvider" IntegratedSecurityLevel="SecurityLow" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="WorkWithPlus.WWP_Calendar_GetEvents" id="14" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="WWP_Calendar_GetEvents1" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="DP_Country" id="15" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="DP_Country" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="DP_LocationDynamicForm" id="16" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="DP_LocationDynamicForm" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="Trn_Theme_DataProvider" id="17" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="Trn_Theme_DataProvider" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="Trn_Template_DataProvider" id="19" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="Trn_Template_DataProvider" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="Trn_Page_DataProvider" id="20" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="Trn_Page_DataProvider" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="DP_RecurringEventType" id="23" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="DP_RecurringEventType" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="DP_LocationResident" id="24" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="DP_LocationResident" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="DP_ProductServiceSupplierGroup" id="25" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="DP_ProductServiceSupplierGroup" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="DP_GetUserNotifications" id="26" type="DataProvider" IntegratedSecurityLevel="SecurityLow" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="UMenuOptionsData" id="27" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="MenuOptionsData" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="DP_ResidentProvisioning" id="28" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="DP_ResidentProvisioning" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="WorkWithPlus_Web.GetNotificationSamples" id="29" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="GetNotificationSamples" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="WorkWithPlus_Web.GetHomeSampleData" id="30" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="GetHomeSampleData" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="Trn_EnvironmentVariable_DataProvider" id="34" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="Trn_EnvironmentVariable_DataProvider" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+</Objects>

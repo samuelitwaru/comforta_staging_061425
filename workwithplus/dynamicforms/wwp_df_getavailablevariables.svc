@@ -1,0 +1,1 @@
+<%@ServiceHost Service= "GeneXus.Programs.workwithplus.dynamicforms.wwp_df_getavailablevariables,workwithplus.dynamicforms.wwp_df_getavailablevariables" %>

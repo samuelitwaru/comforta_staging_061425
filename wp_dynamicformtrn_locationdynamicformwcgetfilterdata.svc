@@ -1,0 +1,1 @@
+<%@ServiceHost Service= "GeneXus.Programs.wp_dynamicformtrn_locationdynamicformwcgetfilterdata,wp_dynamicformtrn_locationdynamicformwcgetfilterdata" %>

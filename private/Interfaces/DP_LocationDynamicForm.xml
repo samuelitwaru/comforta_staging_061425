@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CallableObject guid="802f0ec7-1cdb-4a34-b7ca-0fcb5f4ab866" name="DP_LocationDynamicForm" description="DP_Location Dynamic Form" namespace="GeneXus.Programs">
+  <Signature name="parm">
+    <Parameter name="ReturnValue" accessor="out">
+      <Field name="SDT_LocationDynamicForm" description="SDT_Location Dynamic Form" collection="true">
+        <Fields>
+          <Field name="LocationDynamicFormId" description="Location Dynamic Form Id">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>GUID</Value>
+              </Property>
+              <Property>
+                <Name>Picture</Name>
+                <Value>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="OrganisationId" description="Organisation Id">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>GUID</Value>
+              </Property>
+              <Property>
+                <Name>Picture</Name>
+                <Value>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="LocationId" description="Location Id">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>GUID</Value>
+              </Property>
+              <Property>
+                <Name>Picture</Name>
+                <Value>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="WWPFormId" description="WWPForm Id">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Numeric</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>4</Value>
+              </Property>
+              <Property>
+                <Name>Picture</Name>
+                <Value>ZZZ9</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="WWPFormVersionNumber" description="WWPForm Version Number">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Numeric</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>4</Value>
+              </Property>
+              <Property>
+                <Name>Picture</Name>
+                <Value>ZZZ9</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="WWPFormReferenceName" description="WWPForm Reference Name">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>100</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="WWPFormTitle" description="WWPForm Title">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>100</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="WWPFormDate" description="WWPForm Date">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>DateTime</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>8</Value>
+              </Property>
+              <Property>
+                <Name>Decimals</Name>
+                <Value>5</Value>
+              </Property>
+              <Property>
+                <Name>Picture</Name>
+                <Value>99/99/99 99:99</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="WWPFormIsWizard" description="WWPForm Is Wizard">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Boolean</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="WWPFormResume" description="WWPForm Resume">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Numeric</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>1</Value>
+              </Property>
+              <Property>
+                <Name>Picture</Name>
+                <Value>9</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="WWPFormResumeMessage" description="WWPForm Resume Message">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>LongVarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>2097152</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="WWPFormValidations" description="WWPForm Validations">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>LongVarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>2097152</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="WWPFormInstantiated" description="WWPForm Instantiated">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Boolean</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="WWPFormLatestVersionNumber" description="WWPForm Latest Version Number">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Numeric</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>4</Value>
+              </Property>
+              <Property>
+                <Name>Picture</Name>
+                <Value>ZZZ9</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="WWPFormType" description="WWPForm Type">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Numeric</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>1</Value>
+              </Property>
+              <Property>
+                <Name>Picture</Name>
+                <Value>9</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="WWPFormSectionRefElements" description="WWPForm Section Ref Elements">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>400</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="WWPFormIsForDynamicValidations" description="WWPForm Is For Dynamic Validations">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Boolean</Value>
+              </Property>
+            </Properties>
+          </Field>
+        </Fields>
+      </Field>
+    </Parameter>
+  </Signature>
+</CallableObject>

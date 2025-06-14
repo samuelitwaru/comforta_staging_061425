@@ -1,0 +1,1 @@
+<%@ServiceHost Service= "GeneXus.Programs.workwithplus.dynamicforms.wwp_df_dynamiccombobox_wcloaddvcombo,workwithplus.dynamicforms.wwp_df_dynamiccombobox_wcloaddvcombo" %>

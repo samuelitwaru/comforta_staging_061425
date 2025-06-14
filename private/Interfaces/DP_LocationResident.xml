@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CallableObject guid="0ffc79c8-e5e9-47be-a8cc-cb677631e6cd" name="DP_LocationResident" description="DP_Location Resident" namespace="GeneXus.Programs">
+  <Signature name="parm">
+    <Parameter name="ReturnValue" accessor="out">
+      <Field name="SDT_ResidentAddressBook" description="SDT_Resident Address Book" collection="true">
+        <Fields>
+          <Field name="ResidentId" description="Resident Id">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>GUID</Value>
+              </Property>
+              <Property>
+                <Name>Picture</Name>
+                <Value>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="LocationId" description="Location Id">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>GUID</Value>
+              </Property>
+              <Property>
+                <Name>Picture</Name>
+                <Value>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="OrganisationId" description="Organisation Id">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>GUID</Value>
+              </Property>
+              <Property>
+                <Name>Picture</Name>
+                <Value>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="ResidentGivenName" description="Resident Given Name">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>100</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="ResidentLastName" description="Resident Last Name">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>100</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="ResidentFullName" description="Resident Full Name">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>100</Value>
+              </Property>
+            </Properties>
+          </Field>
+        </Fields>
+      </Field>
+    </Parameter>
+  </Signature>
+</CallableObject>

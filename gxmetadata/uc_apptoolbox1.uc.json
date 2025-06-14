@@ -1,0 +1,181 @@
+{
+	"Name": "UC_AppToolBox1",
+	"Target": "",
+	"IsControlType": false,
+	"Template": "<div class=\"preloader\" id=\"preloader\">   <div class=\"spinner\"></div></div><div id=\"tb-body\">   <!-- Navbar -->   <div class=\"tb-navbar\" id=\"tb-navbar\">      <!--<h3 id=\"navbar_title\"></h3>-->      <div class=\"navbar-buttons\" id=\"navbar-buttons-left\"></div>	<div class=\"navbar-buttons\" id=\"navbar-buttons\"></div>   </div>   <div class=\"tb-container\">      	<!-- Editor Container -->      	<div class=\"main-content\" id=\"main-content\"></div>	      	<div class=\"sidebar sidebar-right\" id=\"tb-sidebar\">			<div id=\"page-info-title\"></div>			<div id=\"page-info-section\"></div>			<div id=\"tools-section\"></div>			<div id=\"mapping-section\" style=\"display: none;\">				<div class=\"mapping-header\">				<h3>					<span id=\"sidebar_mapping_title\">					</span>				</h3>				</div>				<div class=\"sidebar-section\">				<div id=\"tree-container\" class=\"tb-list-container\">				</div>				</div>        	</div>      	</div>				<div class=\"tb-alerts-container\" id=\"tb-alerts-container\">		</div>   </div></div>", 
+	"Events": [
+		{
+			"Name": "OnSave",
+			"On": "save",
+			"Parameters": ""
+		} ,
+		{
+			"Name": "addServiceButtonEvent",
+			"On": "addservicebuttonevent",
+			"Parameters": ""
+		} 
+	],
+	"Properties": [
+		{
+			"Id": "Current_Language",
+			"Name": "Current_Language",
+			"Type": "string",
+			"Default": "english"
+		} ,
+		{
+			"Id": "SDT_Page",
+			"Name": "SDT_Page",
+			"Type": "sdt",
+			"Default": ""
+		} ,
+		{
+			"Id": "SDT_Pages",
+			"Name": "SDT_Pages",
+			"Type": "sdt",
+			"Default": ""
+		} ,
+		{
+			"Id": "LocationId",
+			"Name": "LocationId",
+			"Type": "string",
+			"Default": ""
+		} ,
+		{
+			"Id": "OrganisationId",
+			"Name": "OrganisationId",
+			"Type": "string",
+			"Default": ""
+		} ,
+		{
+			"Id": "LocationLogo",
+			"Name": "LocationLogo",
+			"Type": "string",
+			"Default": ""
+		} ,
+		{
+			"Id": "LocationProfileImage",
+			"Name": "LocationProfileImage",
+			"Type": "string",
+			"Default": ""
+		} ,
+		{
+			"Id": "SDT_ProductServiceCollection",
+			"Name": "SDT_ProductServiceCollection",
+			"Type": "sdt",
+			"Default": ""
+		} ,
+		{
+			"Id": "Suppliers",
+			"Name": "Suppliers",
+			"Type": "sdt",
+			"Default": ""
+		} ,
+		{
+			"Id": "SDT_DynamicFormsCollection",
+			"Name": "SDT_DynamicFormsCollection",
+			"Type": "sdt",
+			"Default": ""
+		} ,
+		{
+			"Id": "BC_Trn_TemplateCollection",
+			"Name": "BC_Trn_TemplateCollection",
+			"Type": "sdt",
+			"Default": ""
+		} ,
+		{
+			"Id": "BC_Trn_ThemeCollection",
+			"Name": "BC_Trn_ThemeCollection",
+			"Type": "sdt",
+			"Default": ""
+		} ,
+		{
+			"Id": "BC_Trn_MediaCollection",
+			"Name": "BC_Trn_MediaCollection",
+			"Type": "sdt",
+			"Default": ""
+		} ,
+		{
+			"Id": "BC_Trn_Location",
+			"Name": "BC_Trn_Location",
+			"Type": "sdt",
+			"Default": ""
+		} ,
+		{
+			"Id": "Current_Theme",
+			"Name": "Current_Theme",
+			"Type": "string",
+			"Default": ""
+		} ,
+		{
+			"Id": "Current_Version",
+			"Name": "Current_Version",
+			"Type": "sdt",
+			"Default": ""
+		} ,
+		{
+			"Id": "OrganisationLogo",
+			"Name": "OrganisationLogo",
+			"Type": "string",
+			"Default": ""
+		} ,
+		{
+			"Id": "Layout",
+			"Name": "Layout",
+			"Type": "string",
+			"Default": ""
+		} ,
+		{
+			"Id": "NewProductServiceId",
+			"Name": "NewProductServiceId",
+			"Type": "string",
+			"Default": ""
+		} ,
+		{
+			"Id": "ServiceCreationParentPageType",
+			"Name": "ServiceCreationParentPageType",
+			"Type": "string",
+			"Default": ""
+		} 
+	],
+	"Methods": {
+		"Public": [
+			{
+				"Name": "SetProductToTile",
+				"Source": "		try {			console.log(this.app.ToolboxManager)			this.app.toolboxApp.toolboxManager.pageAttacher.attachNewServiceToTile(ProductServiceId)			}catch (e) {			console.error(e)		}			",
+				"Return": "",
+				"Parameters": [
+					 {
+						"Name": "ProductServiceId",
+						"Type": "ProductServiceId"
+					} 
+				]
+			} ,
+			{
+				"Name": "SetServiceCreationParentPageType",
+				"Source": "		this.ServiceCreationParentPageType = localStorage.getItem(\"ServiceCreationParentPageType\")			",
+				"Return": "",
+				"Parameters": [
+				]
+			} 
+		],
+		"Private": [
+		]
+	},
+	"Scripts": {
+		"AfterShow": [
+			{
+				"Name": "Start",
+				"Source": "   try {	   	this.d3 = d3;		const themes = this.BC_Trn_ThemeCollection.map(theme => {//			theme.CtaColor.map(ctaColor => {//				ctaColor.CtaColorName = ctaColor.CtaColorName//												.replace(\'ctaColor1\', \'CtaColorOne\').replace(\'ctaColor2\',\'CtaColorTwo\')//												.replace(\'ctaColor3\',\'CtaColorThree\').replace(\'ctaColor4\',\'CtaColorFour\')//												.replace(\'ctaColor5\',\'CtaColorFive\').replace(\'ctaColor6\',\'CtaColorSix\')//				return ctaColor//			})						console.log(theme.CtaColor)						let res = {			ThemeId: theme.Trn_ThemeId,			ThemeName: theme.Trn_ThemeName,			ThemeFontFamily: theme.Trn_ThemeFontFamily,			ThemeColors: {},			ThemeIcons: theme.Icon,			ThemeCtaColors: theme.CtaColor.sort((a, b) => a.CtaColorName.localeCompare(b.CtaColorName))			};						// Sort and map ThemeColors by ColorName			theme.Color			.sort((a, b) => a.ColorName.localeCompare(b.ColorName))			.forEach(color => {				res.ThemeColors[color.ColorName] = color.ColorCode;			});						// Sort ThemeCtaColors by CtaColorName			if (theme.CtaColor) {				res.ThemeCtaColors = [...theme.CtaColor].sort((a, b) => {					// Extract the number words from the names					const numWords = [\'One\', \'Two\', \'Three\', \'Four\', \'Five\', \'Six\'];					const aNum = numWords.indexOf(a.CtaColorName.replace(\'CtaColor\', \'\'));					const bNum = numWords.indexOf(b.CtaColorName.replace(\'CtaColor\', \'\'));					return aNum - bNum;				});			}						// Sort ThemeIcons by IconName			if (theme.Icon) {			res.ThemeIcons = [...theme.Icon].sort((a, b) => 				a.IconName.localeCompare(b.IconName)			);			}						return res;		});				if (typeof App !== \'undefined\') {			localStorage.clear();			this.app = new App(				this,				themes,				this.Suppliers,				this.SDT_ProductServiceCollection, 				this.SDT_DynamicFormsCollection, 				this.BC_Trn_MediaCollection,				this.Current_Theme,				this.Current_Version,				this.OrganisationLogo,				this.Current_Language,				this.addServiceButtonEvent			);			window.app = this.app		} else {			console.error(\"App class is not defined. Check if bundle.js is loaded.\");		}	}catch(e) {		console.log(e)	}",
+				"AngularLocation": ""
+			} 
+		],
+		"BeforeShow": [
+		]
+	},
+	"Dependencies": [
+	],
+	"Imports": [
+	],
+	"Styles": [
+	]
+}

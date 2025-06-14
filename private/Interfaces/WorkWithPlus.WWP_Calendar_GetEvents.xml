@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CallableObject guid="cf24edcb-065e-48ec-babb-40068a6f0fc9" name="WorkWithPlus.WWP_Calendar_GetEvents" description="WWP_Calendar_Get Events" namespace="GeneXus.Programs">
+  <Signature name="par">
+    <Parameter name="IsSearching">
+      <Field>
+        <Properties>
+          <Property>
+            <Name>Type</Name>
+            <Value>Boolean</Value>
+          </Property>
+        </Properties>
+      </Field>
+    </Parameter>
+    <Parameter name="TitleFilter">
+      <Field>
+        <Properties>
+          <Property>
+            <Name>Type</Name>
+            <Value>VarChar</Value>
+          </Property>
+          <Property>
+            <Name>Length</Name>
+            <Value>40</Value>
+          </Property>
+        </Properties>
+      </Field>
+    </Parameter>
+    <Parameter name="LoadFromDate">
+      <Field>
+        <Properties>
+          <Property>
+            <Name>Type</Name>
+            <Value>DateTime</Value>
+          </Property>
+          <Property>
+            <Name>Length</Name>
+            <Value>8</Value>
+          </Property>
+          <Property>
+            <Name>Decimals</Name>
+            <Value>5</Value>
+          </Property>
+        </Properties>
+      </Field>
+    </Parameter>
+    <Parameter name="LoadToDate">
+      <Field>
+        <Properties>
+          <Property>
+            <Name>Type</Name>
+            <Value>Date</Value>
+          </Property>
+          <Property>
+            <Name>Length</Name>
+            <Value>8</Value>
+          </Property>
+        </Properties>
+      </Field>
+    </Parameter>
+    <Parameter name="ReturnValue" accessor="out">
+      <Field name="WWP_Calendar_Events" description="WWP_Calendar_Events" collection="true">
+        <Fields>
+          <Field name="Id" description="Id">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>40</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="AllDay" description="All Day">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Boolean</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="Start" description="Start">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>DateTime</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>8</Value>
+              </Property>
+              <Property>
+                <Name>Decimals</Name>
+                <Value>5</Value>
+              </Property>
+              <Property>
+                <Name>Picture</Name>
+                <Value>99/99/99 99:99</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="End" description="End">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>DateTime</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>8</Value>
+              </Property>
+              <Property>
+                <Name>Decimals</Name>
+                <Value>5</Value>
+              </Property>
+              <Property>
+                <Name>Picture</Name>
+                <Value>99/99/99 99:99</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="Title" description="Title">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>100</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="Editable" description="Editable">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Boolean</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="Overlap" description="Overlap">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Boolean</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="ClassName" description="Class Name">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>100</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="BackgroundColor" description="Background Color">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>100</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="ColorBorder" description="Color Border">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>40</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="TextColor" description="Text Color">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>100</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="Display" description="Display">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Numeric</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>4</Value>
+              </Property>
+              <Property>
+                <Name>Picture</Name>
+                <Value>ZZZ9</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="Url" description="Url">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>1000</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="Actions" description="Actions" collection="true">
+            <Fields>
+              <Field name="Key" description="Key">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>VarChar</Value>
+                  </Property>
+                  <Property>
+                    <Name>Length</Name>
+                    <Value>40</Value>
+                  </Property>
+                </Properties>
+              </Field>
+              <Field name="Url" description="Url">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>VarChar</Value>
+                  </Property>
+                  <Property>
+                    <Name>Length</Name>
+                    <Value>40</Value>
+                  </Property>
+                </Properties>
+              </Field>
+              <Field name="Caption" description="Caption">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>VarChar</Value>
+                  </Property>
+                  <Property>
+                    <Name>Length</Name>
+                    <Value>40</Value>
+                  </Property>
+                </Properties>
+              </Field>
+              <Field name="Icon" description="Icon">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>VarChar</Value>
+                  </Property>
+                  <Property>
+                    <Name>Length</Name>
+                    <Value>40</Value>
+                  </Property>
+                </Properties>
+              </Field>
+            </Fields>
+          </Field>
+        </Fields>
+      </Field>
+    </Parameter>
+  </Signature>
+</CallableObject>

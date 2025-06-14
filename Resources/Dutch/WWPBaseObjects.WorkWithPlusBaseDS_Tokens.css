@@ -1,0 +1,662 @@
+@layer WWPBaseObjects.WorkWithPlusBaseDS{
+:root
+{
+	--colors_headerforecolor : #FFF;
+	--colors_pdf : #ea4c3a;
+	--colors_excelcolor : #08743b;
+	--colors_danger : #f56a67;
+	--colors_danger_condform : #dd4b39;
+	--colors_danger_condform_row_background : #f2dede;
+	--colors_danger_condform_action : #e5cccc;
+	--colors_danger_condform_action_hover : rgba(245,106,103,0.5);
+	--colors_warning : #f39c12;
+	--colors_warning_condform : #fb6e52;
+	--colors_warning_condform_row_background : #faf2cc;
+	--colors_warning_condform_action : #fed6be;
+	--colors_warning_condform_action_hover : rgba(251,110,82,0.5);
+	--colors_success_condform : #00a65a;
+	--colors_success_condform_row_background : #dff0d8;
+	--colors_success_condform_action : #b9ccb7;
+	--colors_success_condform_action_hover : rgba(0,166,90,0.5);
+	--colors_info_condform : #3c8dbc;
+	--colors_info_condform_row_background : #e0f1ff;
+	--colors_info_condform_action : #bcdcf5;
+	--colors_info_condform_action_hover : rgba(60,141,188,0.5);
+	--colors_infolight : #00c0ef;
+	--fonts_primary-regular : Poppins, sans-serif;
+	--fonts_primary-bold : PoppinsBold, sans-serif;
+	--fontsizes_font-icon-xxs : 10px;
+	--fontsizes_font-icon-xs : 12px;
+	--fontsizes_font-icon-s : 16px;
+	--fontsizes_font-icon-m : 19px;
+	--fontsizes_font-icon-l : 24px;
+	--fontsizes_font-icon-xl : 36px;
+	--borders_xs : 1px;
+	--borders_s : 2px;
+	--borders_m : 3px;
+	--radius_s : 2px;
+	--radius_m : 4px;
+	--radius_l : 6px;
+
+}
+
+[gx-data-base-color="LightPink"]
+{
+	--colors_basecolor : #b05792;
+	--colors_basecolorforecolor : #b05792;
+	--colors_actionborder_and_focuscolor : #973E79;
+	--colors_actionhover : #A64D88;
+	--colors_actionhoverborder : #9C437E;
+	--colors_basecolorshadow : rgba(176, 87, 146, 0.7);
+	--colors_baseforecolor80 : rgba(255,255,255,0.8);
+	--colors_basecolor30 : rgba(176, 87, 146, 0.3);
+	--colors_basecolor20 : rgba(176, 87, 146, 0.2);
+	--colors_basecolor10 : rgba(176, 87, 146, 0.1);
+	--colors_baseforecolor : #FFF;
+	--colors_sidebarmenu_itemhoverforecolor : #b05792;
+	--colors_sidebarmenu_itemopenbackground : #b05792;
+	--colors_sidebarmenu_submenuitemhoverforecolor : #b05792;
+	--colors_sidebarmenu_selecteditembackground : #b05792;
+
+}
+
+[gx-data-base-color="MediumViolet"]
+{
+	--colors_basecolor : MediumVioletRed;
+	--colors_basecolorforecolor : MediumVioletRed;
+	--colors_actionborder_and_focuscolor : #BD0B7B;
+	--colors_actionhover : #AE156C;
+	--colors_actionhoverborder : #B30171;
+	--colors_basecolorshadow : rgba(199, 21, 133, 0.7);
+	--colors_baseforecolor80 : rgba(255,255,255,0.8);
+	--colors_basecolor30 : rgba(199, 21, 133, 0.3);
+	--colors_basecolor20 : rgba(199, 21, 133, 0.2);
+	--colors_basecolor10 : rgba(199, 21, 133, 0.1);
+	--colors_baseforecolor : #FFF;
+	--colors_sidebarmenu_itemhoverforecolor : MediumVioletRed;
+	--colors_sidebarmenu_itemopenbackground : MediumVioletRed;
+	--colors_sidebarmenu_submenuitemhoverforecolor : MediumVioletRed;
+	--colors_sidebarmenu_selecteditembackground : MediumVioletRed;
+
+}
+
+[gx-data-base-color="Pink"]
+{
+	--colors_basecolor : #a11a74;
+	--colors_basecolorforecolor : #a11a74;
+	--colors_actionborder_and_focuscolor : #88015B;
+	--colors_actionhover : #88015B;
+	--colors_actionhoverborder : #8D0660;
+	--colors_basecolorshadow : rgba(161, 26, 116, 0.7);
+	--colors_baseforecolor80 : rgba(255,255,255,0.8);
+	--colors_basecolor30 : rgba(161, 26, 116, 0.3);
+	--colors_basecolor20 : rgba(161, 26, 116, 0.2);
+	--colors_basecolor10 : rgba(161, 26, 116, 0.1);
+	--colors_baseforecolor : #FFF;
+	--colors_sidebarmenu_itemhoverforecolor : #a11a74;
+	--colors_sidebarmenu_itemopenbackground : #a11a74;
+	--colors_sidebarmenu_submenuitemhoverforecolor : #a11a74;
+	--colors_sidebarmenu_selecteditembackground : #a11a74;
+
+}
+
+[gx-data-base-color="MediumPink"]
+{
+	--colors_basecolor : #ED66D2;
+	--colors_basecolorforecolor : #ED66D2;
+	--colors_actionborder_and_focuscolor : #D44DB9;
+	--colors_actionhover : #E35CC8;
+	--colors_actionhoverborder : #D952BE;
+	--colors_basecolorshadow : rgba(237, 102, 210, 0.7);
+	--colors_baseforecolor80 : rgba(255,255,255,0.8);
+	--colors_basecolor30 : rgba(237, 102, 210, 0.3);
+	--colors_basecolor20 : rgba(237, 102, 210, 0.2);
+	--colors_basecolor10 : rgba(237, 102, 210, 0.1);
+	--colors_baseforecolor : #FFF;
+	--colors_sidebarmenu_itemhoverforecolor : #ED66D2;
+	--colors_sidebarmenu_itemopenbackground : #ED66D2;
+	--colors_sidebarmenu_submenuitemhoverforecolor : #ED66D2;
+	--colors_sidebarmenu_selecteditembackground : #ED66D2;
+
+}
+
+[gx-data-base-color="MediumPurple"]
+{
+	--colors_basecolor : MediumPurple;
+	--colors_basecolorforecolor : MediumPurple;
+	--colors_actionborder_and_focuscolor : #7A57C2;
+	--colors_actionhover : #8966D1;
+	--colors_actionhoverborder : #7F5CC7;
+	--colors_basecolorshadow : rgba(147, 112, 219, 0.7);
+	--colors_baseforecolor80 : rgba(255,255,255,0.8);
+	--colors_basecolor30 : rgba(147, 112, 219, 0.3);
+	--colors_basecolor20 : rgba(147, 112, 219, 0.2);
+	--colors_basecolor10 : rgba(147, 112, 219, 0.1);
+	--colors_baseforecolor : white;
+	--colors_sidebarmenu_itemhoverforecolor : MediumPurple;
+	--colors_sidebarmenu_itemopenbackground : MediumPurple;
+	--colors_sidebarmenu_submenuitemhoverforecolor : MediumPurple;
+	--colors_sidebarmenu_selecteditembackground : MediumPurple;
+
+}
+
+[gx-data-base-color="LightPurple"]
+{
+	--colors_basecolor : #696ef2;
+	--colors_basecolorforecolor : #696ef2;
+	--colors_actionborder_and_focuscolor : #696ef2;
+	--colors_actionhover : #413cd4;
+	--colors_actionhoverborder : #555ADE;
+	--colors_basecolorshadow : rgba(105, 110, 242, 0.7);
+	--colors_baseforecolor80 : rgba(255,255,255,0.8);
+	--colors_basecolor30 : rgba(105, 110, 242, 0.3);
+	--colors_basecolor20 : rgba(105, 110, 242, 0.2);
+	--colors_basecolor10 : rgba(105, 110, 242, 0.1);
+	--colors_baseforecolor : white;
+	--colors_sidebarmenu_itemhoverforecolor : #696ef2;
+	--colors_sidebarmenu_itemopenbackground : #696ef2;
+	--colors_sidebarmenu_submenuitemhoverforecolor : #696ef2;
+	--colors_sidebarmenu_selecteditembackground : #696ef2;
+
+}
+
+[gx-data-base-color="Purple"]
+{
+	--colors_basecolor : #7F4494;
+	--colors_basecolorforecolor : #7F4494;
+	--colors_actionborder_and_focuscolor : #8B3DAF;
+	--colors_actionhover : #5E2772;
+	--colors_actionhoverborder : #72318E;
+	--colors_basecolorshadow : rgba(127, 68, 148, 0.7);
+	--colors_baseforecolor80 : rgba(255,255,255,0.8);
+	--colors_basecolor30 : rgba(127, 68, 148, 0.3);
+	--colors_basecolor20 : rgba(127, 68, 148, 0.2);
+	--colors_basecolor10 : rgba(127, 68, 148, 0.1);
+	--colors_baseforecolor : white;
+	--colors_sidebarmenu_itemhoverforecolor : #7F4494;
+	--colors_sidebarmenu_itemopenbackground : #7F4494;
+	--colors_sidebarmenu_submenuitemhoverforecolor : #7F4494;
+	--colors_sidebarmenu_selecteditembackground : #7F4494;
+
+}
+
+[gx-data-base-color="Indigo"]
+{
+	--colors_basecolor : Indigo;
+	--colors_basecolorforecolor : Indigo;
+	--colors_actionborder_and_focuscolor : #410078;
+	--colors_actionhover : #320069;
+	--colors_actionhoverborder : #37006E;
+	--colors_basecolorshadow : rgba(75, 0, 130, 0.7);
+	--colors_baseforecolor80 : rgba(255,255,255,0.8);
+	--colors_basecolor30 : rgba(75, 0, 130, 0.3);
+	--colors_basecolor20 : rgba(75, 0, 130, 0.2);
+	--colors_basecolor10 : rgba(75, 0, 130, 0.1);
+	--colors_baseforecolor : #FFF;
+	--colors_sidebarmenu_itemhoverforecolor : Indigo;
+	--colors_sidebarmenu_itemopenbackground : Indigo;
+	--colors_sidebarmenu_submenuitemhoverforecolor : Indigo;
+	--colors_sidebarmenu_selecteditembackground : Indigo;
+
+}
+
+[gx-data-base-color="LightBlue"]
+{
+	--colors_basecolor : #39b3d7;
+	--colors_basecolorforecolor : #39b3d7;
+	--colors_actionborder_and_focuscolor : #46b8da;
+	--colors_actionhover : #2FA9CD;
+	--colors_actionhoverborder : #269abc;
+	--colors_basecolorshadow : rgba(57, 179, 215, 0.7);
+	--colors_baseforecolor80 : rgba(255,255,255,0.8);
+	--colors_basecolor30 : rgba(57, 179, 215, 0.3);
+	--colors_basecolor20 : rgba(57, 179, 215, 0.2);
+	--colors_basecolor10 : rgba(57, 179, 215, 0.1);
+	--colors_baseforecolor : white;
+	--colors_sidebarmenu_itemhoverforecolor : #39b3d7;
+	--colors_sidebarmenu_itemopenbackground : #39b3d7;
+	--colors_sidebarmenu_submenuitemhoverforecolor : #39b3d7;
+	--colors_sidebarmenu_selecteditembackground : #39b3d7;
+
+}
+
+[gx-data-base-color="Blue"]
+{
+	--colors_basecolor : #078bcd;
+	--colors_basecolorforecolor : #078bcd;
+	--colors_actionborder_and_focuscolor : #357ebd;
+	--colors_actionhover : #3276b1;
+	--colors_actionhoverborder : #285e8e;
+	--colors_basecolorshadow : rgba(7, 139, 205, 0.7);
+	--colors_baseforecolor80 : rgba(255,255,255,0.8);
+	--colors_basecolor30 : rgba(7, 139, 205, 0.3);
+	--colors_basecolor20 : rgba(7, 139, 205, 0.2);
+	--colors_basecolor10 : rgba(7, 139, 205, 0.1);
+	--colors_baseforecolor : white;
+	--colors_sidebarmenu_itemhoverforecolor : #078bcd;
+	--colors_sidebarmenu_itemopenbackground : #078bcd;
+	--colors_sidebarmenu_submenuitemhoverforecolor : #078bcd;
+	--colors_sidebarmenu_selecteditembackground : #078bcd;
+
+}
+
+[gx-data-base-color="SkyBlue"]
+{
+	--colors_basecolor : #4978b0;
+	--colors_basecolorforecolor : #4978b0;
+	--colors_actionborder_and_focuscolor : #305F97;
+	--colors_actionhover : #3F6EA6;
+	--colors_actionhoverborder : #35649C;
+	--colors_basecolorshadow : rgba(73, 120, 176, 0.7);
+	--colors_baseforecolor80 : rgba(255,255,255,0.8);
+	--colors_basecolor30 : rgba(73, 120, 176, 0.3);
+	--colors_basecolor20 : rgba(73, 120, 176, 0.2);
+	--colors_basecolor10 : rgba(73, 120, 176, 0.1);
+	--colors_baseforecolor : white;
+	--colors_sidebarmenu_itemhoverforecolor : #4978b0;
+	--colors_sidebarmenu_itemopenbackground : #4978b0;
+	--colors_sidebarmenu_submenuitemhoverforecolor : #4978b0;
+	--colors_sidebarmenu_selecteditembackground : #4978b0;
+
+}
+
+[gx-data-base-color="Navy"]
+{
+	--colors_basecolor : #004080;
+	--colors_basecolorforecolor : #004080;
+	--colors_actionborder_and_focuscolor : #003676;
+	--colors_actionhover : #002767;
+	--colors_actionhoverborder : #002C6C;
+	--colors_basecolorshadow : rgba(0, 64, 128, 0.7);
+	--colors_baseforecolor80 : rgba(255,255,255,0.8);
+	--colors_basecolor30 : rgba(0, 64, 128, 0.3);
+	--colors_basecolor20 : rgba(0, 64, 128, 0.2);
+	--colors_basecolor10 : rgba(0, 64, 128, 0.1);
+	--colors_baseforecolor : #FFF;
+	--colors_sidebarmenu_itemhoverforecolor : #004080;
+	--colors_sidebarmenu_itemopenbackground : #004080;
+	--colors_sidebarmenu_submenuitemhoverforecolor : #004080;
+	--colors_sidebarmenu_selecteditembackground : #004080;
+
+}
+
+[gx-data-base-color="Green"]
+{
+	--colors_basecolor : #5CB85C;
+	--colors_basecolorforecolor : #5CB85C;
+	--colors_actionborder_and_focuscolor : #4CAE4C;
+	--colors_actionhover : #47A447;
+	--colors_actionhoverborder : #398439;
+	--colors_basecolorshadow : rgba(92, 184, 92, 0.7);
+	--colors_baseforecolor80 : rgba(255,255,255,0.8);
+	--colors_basecolor30 : rgba(92, 184, 92, 0.3);
+	--colors_basecolor20 : rgba(92, 184, 92, 0.2);
+	--colors_basecolor10 : rgba(92, 184, 92, 0.1);
+	--colors_baseforecolor : white;
+	--colors_sidebarmenu_itemhoverforecolor : #5CB85C;
+	--colors_sidebarmenu_itemopenbackground : #5CB85C;
+	--colors_sidebarmenu_submenuitemhoverforecolor : #5CB85C;
+	--colors_sidebarmenu_selecteditembackground : #5CB85C;
+
+}
+
+[gx-data-base-color="SeaGreen"]
+{
+	--colors_basecolor : #08A086;
+	--colors_basecolorforecolor : #08A086;
+	--colors_actionborder_and_focuscolor : #0AC6A6;
+	--colors_actionhover : #0AC6A6;
+	--colors_actionhoverborder : #09B595;
+	--colors_basecolorshadow : rgba(8, 160, 134, 0.7);
+	--colors_baseforecolor80 : rgba(255,255,255,0.8);
+	--colors_basecolor30 : rgba(8, 160, 134, 0.3);
+	--colors_basecolor20 : rgba(8, 160, 134, 0.2);
+	--colors_basecolor10 : rgba(8, 160, 134, 0.1);
+	--colors_baseforecolor : white;
+	--colors_sidebarmenu_itemhoverforecolor : #08A086;
+	--colors_sidebarmenu_itemopenbackground : #08A086;
+	--colors_sidebarmenu_submenuitemhoverforecolor : #08A086;
+	--colors_sidebarmenu_selecteditembackground : #08A086;
+
+}
+
+[gx-data-base-color="Teal"]
+{
+	--colors_basecolor : Teal;
+	--colors_basecolorforecolor : Teal;
+	--colors_actionborder_and_focuscolor : #007676;
+	--colors_actionhover : #006767;
+	--colors_actionhoverborder : #006C6C;
+	--colors_basecolorshadow : rgba(0, 128, 128, 0.7);
+	--colors_baseforecolor80 : rgba(255,255,255,0.8);
+	--colors_basecolor30 : rgba(0, 128, 128, 0.3);
+	--colors_basecolor20 : rgba(0, 128, 128, 0.2);
+	--colors_basecolor10 : rgba(0, 128, 128, 0.1);
+	--colors_baseforecolor : #FFF;
+	--colors_sidebarmenu_itemhoverforecolor : Teal;
+	--colors_sidebarmenu_itemopenbackground : Teal;
+	--colors_sidebarmenu_submenuitemhoverforecolor : Teal;
+	--colors_sidebarmenu_selecteditembackground : Teal;
+
+}
+
+[gx-data-base-color="Olive"]
+{
+	--colors_basecolor : #004000;
+	--colors_basecolorforecolor : #004000;
+	--colors_actionborder_and_focuscolor : #003600;
+	--colors_actionhover : #002700;
+	--colors_actionhoverborder : #002C00;
+	--colors_basecolorshadow : rgba(0, 64, 0, 0.7);
+	--colors_baseforecolor80 : rgba(255,255,255,0.8);
+	--colors_basecolor30 : rgba(0, 64, 0, 0.3);
+	--colors_basecolor20 : rgba(0, 64, 0, 0.2);
+	--colors_basecolor10 : rgba(0, 64, 0, 0.1);
+	--colors_baseforecolor : #FFF;
+	--colors_sidebarmenu_itemhoverforecolor : #004000;
+	--colors_sidebarmenu_itemopenbackground : #004000;
+	--colors_sidebarmenu_submenuitemhoverforecolor : #004000;
+	--colors_sidebarmenu_selecteditembackground : #004000;
+
+}
+
+[gx-data-base-color="Salmon"]
+{
+	--colors_basecolor : Salmon;
+	--colors_basecolorforecolor : Salmon;
+	--colors_actionborder_and_focuscolor : #E16759;
+	--colors_actionhover : #F07668;
+	--colors_actionhoverborder : #E66C5E;
+	--colors_basecolorshadow : rgba(250, 128, 114, 0.7);
+	--colors_baseforecolor80 : rgba(255,255,255,0.8);
+	--colors_basecolor30 : rgba(250, 128, 114, 0.3);
+	--colors_basecolor20 : rgba(250, 128, 114, 0.2);
+	--colors_basecolor10 : rgba(250, 128, 114, 0.1);
+	--colors_baseforecolor : #FFF;
+	--colors_sidebarmenu_itemhoverforecolor : Salmon;
+	--colors_sidebarmenu_itemopenbackground : Salmon;
+	--colors_sidebarmenu_submenuitemhoverforecolor : Salmon;
+	--colors_sidebarmenu_selecteditembackground : Salmon;
+
+}
+
+[gx-data-base-color="Red"]
+{
+	--colors_basecolor : #d9534f;
+	--colors_basecolorforecolor : #d9534f;
+	--colors_actionborder_and_focuscolor : #d43f3a;
+	--colors_actionhover : #d2322d;
+	--colors_actionhoverborder : #d50000;
+	--colors_basecolorshadow : rgba(217, 83, 79, 0.7);
+	--colors_baseforecolor80 : rgba(255,255,255,0.8);
+	--colors_basecolor30 : rgba(217, 83, 79, 0.3);
+	--colors_basecolor20 : rgba(217, 83, 79, 0.2);
+	--colors_basecolor10 : rgba(217, 83, 79, 0.1);
+	--colors_baseforecolor : white;
+	--colors_sidebarmenu_itemhoverforecolor : #d9534f;
+	--colors_sidebarmenu_itemopenbackground : #d9534f;
+	--colors_sidebarmenu_submenuitemhoverforecolor : #d9534f;
+	--colors_sidebarmenu_selecteditembackground : #d9534f;
+
+}
+
+[gx-data-base-color="Tomato"]
+{
+	--colors_basecolor : Tomato;
+	--colors_basecolorforecolor : Tomato;
+	--colors_actionborder_and_focuscolor : #F5593D;
+	--colors_actionhover : #E64A2E;
+	--colors_actionhoverborder : #EB4F33;
+	--colors_basecolorshadow : rgba(255, 99, 71, 0.7);
+	--colors_baseforecolor80 : rgba(255,255,255,0.8);
+	--colors_basecolor30 : rgba(255, 99, 71, 0.3);
+	--colors_basecolor20 : rgba(255, 99, 71, 0.2);
+	--colors_basecolor10 : rgba(255, 99, 71, 0.1);
+	--colors_baseforecolor : #FFF;
+	--colors_sidebarmenu_itemhoverforecolor : Tomato;
+	--colors_sidebarmenu_itemopenbackground : Tomato;
+	--colors_sidebarmenu_submenuitemhoverforecolor : Tomato;
+	--colors_sidebarmenu_selecteditembackground : Tomato;
+
+}
+
+[gx-data-base-color="Maroon"]
+{
+	--colors_basecolor : #950000;
+	--colors_basecolorforecolor : #950000;
+	--colors_actionborder_and_focuscolor : #8B0000;
+	--colors_actionhover : #7C0000;
+	--colors_actionhoverborder : #810000;
+	--colors_basecolorshadow : rgba(149, 0, 0, 0.7);
+	--colors_baseforecolor80 : rgba(255,255,255,0.8);
+	--colors_basecolor30 : rgba(149, 0, 0, 0.3);
+	--colors_basecolor20 : rgba(149, 0, 0, 0.2);
+	--colors_basecolor10 : rgba(149, 0, 0, 0.1);
+	--colors_baseforecolor : #FFF;
+	--colors_sidebarmenu_itemhoverforecolor : #950000;
+	--colors_sidebarmenu_itemopenbackground : #950000;
+	--colors_sidebarmenu_submenuitemhoverforecolor : #950000;
+	--colors_sidebarmenu_selecteditembackground : #950000;
+
+}
+
+[gx-data-base-color="Orange"]
+{
+	--colors_basecolor : #FF8040;
+	--colors_basecolorforecolor : #FF8040;
+	--colors_actionborder_and_focuscolor : #F57636;
+	--colors_actionhover : #E66727;
+	--colors_actionhoverborder : #EB6C2C;
+	--colors_basecolorshadow : rgba(255, 128, 64, 0.7);
+	--colors_baseforecolor80 : rgba(255,255,255,0.8);
+	--colors_basecolor30 : rgba(255, 128, 64, 0.3);
+	--colors_basecolor20 : rgba(255, 128, 64, 0.2);
+	--colors_basecolor10 : rgba(255, 128, 64, 0.1);
+	--colors_baseforecolor : #FFF;
+	--colors_sidebarmenu_itemhoverforecolor : #FF8040;
+	--colors_sidebarmenu_itemopenbackground : #FF8040;
+	--colors_sidebarmenu_submenuitemhoverforecolor : #FF8040;
+	--colors_sidebarmenu_selecteditembackground : #FF8040;
+
+}
+
+[gx-data-base-color="Yellow"]
+{
+	--colors_basecolor : #f0ad4e;
+	--colors_basecolorforecolor : #f0ad4e;
+	--colors_actionborder_and_focuscolor : #eea236;
+	--colors_actionhover : #ed9c28;
+	--colors_actionhoverborder : #d58512;
+	--colors_basecolorshadow : rgba(240, 173, 78, 0.7);
+	--colors_baseforecolor80 : rgba(255,255,255,0.8);
+	--colors_basecolor30 : rgba(240, 173, 78, 0.3);
+	--colors_basecolor20 : rgba(240, 173, 78, 0.2);
+	--colors_basecolor10 : rgba(240, 173, 78, 0.1);
+	--colors_baseforecolor : white;
+	--colors_sidebarmenu_itemhoverforecolor : #f0ad4e;
+	--colors_sidebarmenu_itemopenbackground : #f0ad4e;
+	--colors_sidebarmenu_submenuitemhoverforecolor : #f0ad4e;
+	--colors_sidebarmenu_selecteditembackground : #f0ad4e;
+
+}
+
+[gx-data-base-color="Ecru"]
+{
+	--colors_basecolor : #B75B00;
+	--colors_basecolorforecolor : #B75B00;
+	--colors_actionborder_and_focuscolor : #AD5100;
+	--colors_actionhover : #9E4200;
+	--colors_actionhoverborder : #A34700;
+	--colors_basecolorshadow : rgba(183, 91, 0, 0.7);
+	--colors_baseforecolor80 : rgba(255,255,255,0.8);
+	--colors_basecolor30 : rgba(183, 91, 0, 0.3);
+	--colors_basecolor20 : rgba(183, 91, 0, 0.2);
+	--colors_basecolor10 : rgba(183, 91, 0, 0.1);
+	--colors_baseforecolor : #FFF;
+	--colors_sidebarmenu_itemhoverforecolor : #B75B00;
+	--colors_sidebarmenu_itemopenbackground : #B75B00;
+	--colors_sidebarmenu_submenuitemhoverforecolor : #B75B00;
+	--colors_sidebarmenu_selecteditembackground : #B75B00;
+
+}
+
+[gx-data-base-color="Custom"]
+{
+	--colors_basecolor : #222f54;
+	--colors_basecolorforecolor : #222f54;
+	--colors_actionborder_and_focuscolor : rgba(9,22,59,255);
+	--colors_actionhover : rgba(24,37,74,255);
+	--colors_actionhoverborder : rgba(14,27,64,255);
+	--colors_basecolorshadow : rgba(34, 47, 84, 0.7);
+	--colors_baseforecolor80 : rgba(255,255,255,0.8);
+	--colors_basecolor30 : rgba(34, 47, 84, 0.3);
+	--colors_basecolor20 : rgba(34, 47, 84, 0.2);
+	--colors_basecolor10 : rgba(34, 47, 84, 0.1);
+	--colors_baseforecolor : white;
+	--colors_sidebarmenu_itemhoverforecolor : #222f54;
+	--colors_sidebarmenu_itemopenbackground : #222f54;
+	--colors_sidebarmenu_submenuitemhoverforecolor : #222f54;
+	--colors_sidebarmenu_selecteditembackground : #222f54;
+
+}
+
+[gx-data-background-color="Dark"]
+{
+	--colors_basecolorforecolor : white;
+	--colors_gray01 : #202c31;
+	--colors_gray02 : #222E34;
+	--colors_gray03 : #2e393f;
+	--colors_gray04 : #383f48;
+	--colors_gray05 : #3e4e56;
+	--colors_gray06 : #5D6F78;
+	--colors_gray07 : #99abb4;
+	--colors_gray08 : #D9DFE2;
+	--colors_gxqv-color-01 : #345a8c;
+	--colors_gxqv-color-02 : #dcf6f4;
+	--colors_gxqv-color-03 : #f8af96;
+	--colors_gxqv-color-04 : #fde2b6;
+	--colors_gxqv-color-05 : #da553b;
+	--colors_gxqv-color-06 : #96e4dc;
+	--colors_gxqv-color-07 : #c490af;
+	--colors_gxqv-color-08 : #d8777b;
+	--colors_gxqv-color-09 : #b9b7c8;
+	--colors_gxqv-color-10 : #2eb7de;
+	--colors_backgroundcolor : #263238;
+	--colors_databackgroundcolor : #263238;
+	--colors_gridforecolor : #99abb4;
+	--colors_gridactioniconcolor : #99abb4;
+
+}
+
+[gx-data-background-color="Light"]
+{
+	--colors_gray01 : #fbfbfb;
+	--colors_gray02 : #f7f7f7;
+	--colors_gray03 : #f5f4f4;
+	--colors_gray04 : #eee;
+	--colors_gray05 : #d9d9d9;
+	--colors_gray06 : #c8c8c8;
+	--colors_gray07 : #8c8d8e;
+	--colors_gray08 : #575b5d;
+	--colors_gxqv-color-01 : #182f53;
+	--colors_gxqv-color-02 : #a7e9e1;
+	--colors_gxqv-color-03 : #f57a4d;
+	--colors_gxqv-color-04 : #fbbc58;
+	--colors_gxqv-color-05 : #9c3725;
+	--colors_gxqv-color-06 : #2ed3c6;
+	--colors_gxqv-color-07 : #aa6890;
+	--colors_gxqv-color-08 : #c53b3d;
+	--colors_gxqv-color-09 : #8d89a3;
+	--colors_gxqv-color-10 : #095d6a;
+	--colors_backgroundcolor : white;
+	--colors_databackgroundcolor : #fff;
+	--colors_gridforecolor : #000;
+	--colors_gridactioniconcolor : #fff;
+
+}
+
+[gx-data-menu-color="Light"]
+{
+	--colors_sidebarmenu_backgroundcolor : #FCFCFC;
+	--colors_sidebarmenu_itemforecolor : #607D8B;
+	--colors_sidebarmenu_selecteditemforecolor : #FFF;
+	--colors_sidebarmenu_submenuitemforecolor : #607D8B;
+	--colors_sidebarmenu_submenuselecteditembackground : #FCFCFC;
+	--colors_sidebarmenu_submenuselecteditemforecolor : #263238;
+	--colors_sidebarmenu_lineseparator : #FCFCFC;
+	--colors_sidebarmenu_itemhoverbackground : #FCFCFC;
+	--colors_sidebarmenu_linesubmenuitemcolor : #FCFCFC;
+	--colors_sidebarmenu_circlesubmenuitemcolor : #FCFCFC;
+	--colors_sidebarmenu_circlesubmenuitembackground : #FCFCFC;
+	--colors_sidebarmenu_circelsubmenuitemactivecolor : #FCFCFC;
+	--colors_sidebarmenu_bordersecondlevelsubmenu : #FCFCFC;
+	--colors_sidebarmenu_submenuitembackground : #FCFCFC;
+	--colors_sidebarmenu_scrollbackground : #FCFCFC;
+	--colors_sidebarmenu_headerbackground : #F9F9F9;
+	--colors_sidebarmenu_searchbackground : #FCFCFC;
+	--colors_sidebarmenu_searchbordercolor : #DDD;
+	--colors_sidebarmenu_searchfocusbackground : #FFF;
+	--colors_sidebarmenu_subtitlebackground : #FBFBFB;
+	--colors_sidebarmenu_subtitleforecolor : #848484;
+
+}
+
+[gx-data-menu-color="Dark"]
+{
+	--colors_sidebarmenu_backgroundcolor : #222D32;
+	--colors_sidebarmenu_itemforecolor : #798699;
+	--colors_sidebarmenu_selecteditemforecolor : #FFF;
+	--colors_sidebarmenu_submenuitemforecolor : #798699;
+	--colors_sidebarmenu_submenuselecteditembackground : #222D32;
+	--colors_sidebarmenu_submenuselecteditemforecolor : #FFF;
+	--colors_sidebarmenu_lineseparator : #222D32;
+	--colors_sidebarmenu_itemhoverbackground : #222D32;
+	--colors_sidebarmenu_linesubmenuitemcolor : #222D32;
+	--colors_sidebarmenu_circlesubmenuitemcolor : #222D32;
+	--colors_sidebarmenu_circlesubmenuitembackground : #222D32;
+	--colors_sidebarmenu_circelsubmenuitemactivecolor : #222D32;
+	--colors_sidebarmenu_bordersecondlevelsubmenu : #222D32;
+	--colors_sidebarmenu_submenuitembackground : #222D32;
+	--colors_sidebarmenu_scrollbackground : #222D32;
+	--colors_sidebarmenu_headerbackground : #1A2226;
+	--colors_sidebarmenu_searchbackground : #374850;
+	--colors_sidebarmenu_searchbordercolor : #374850;
+	--colors_sidebarmenu_searchfocusbackground : #FFF;
+	--colors_sidebarmenu_subtitlebackground : #1A2226;
+	--colors_sidebarmenu_subtitleforecolor : #4B646F;
+
+}
+
+[gx-data-font-size="Small"]
+{
+	--fontsizes_xs : 9.9px;
+	--fontsizes_s : 12.6px;
+	--fontsizes_m : 16.2px;
+	--fontsizes_l : 19.8px;
+	--fontsizes_xl : 25.2px;
+	--fontsizes_xxl : 31.6px;
+
+}
+
+[gx-data-font-size="Medium"]
+{
+	--fontsizes_xs : 11px;
+	--fontsizes_s : 14px;
+	--fontsizes_m : 18px;
+	--fontsizes_l : 22px;
+	--fontsizes_xl : 28px;
+	--fontsizes_xxl : 34px;
+
+}
+
+[gx-data-font-size="Large"]
+{
+	--fontsizes_xs : 12.1px;
+	--fontsizes_s : 15.4px;
+	--fontsizes_m : 19.8px;
+	--fontsizes_l : 24.2px;
+	--fontsizes_xl : 30.8px;
+	--fontsizes_xxl : 37.4px;
+
+}
+}

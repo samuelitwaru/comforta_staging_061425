@@ -1,0 +1,1 @@
+<%@ServiceHost Service= "GeneXus.Programs.prc_getlocationinformation,prc_getlocationinformation" %>

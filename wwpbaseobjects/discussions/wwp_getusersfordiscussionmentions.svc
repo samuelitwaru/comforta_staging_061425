@@ -1,0 +1,1 @@
+<%@ServiceHost Service= "GeneXus.Programs.wwpbaseobjects.discussions.wwp_getusersfordiscussionmentions,wwpbaseobjects.discussions.wwp_getusersfordiscussionmentions" %>

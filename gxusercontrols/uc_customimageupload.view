@@ -1,0 +1,157 @@
+<style>
+.uc-uploader-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.uc-upload-controls {
+  display: flex;
+  align-items: center;
+}
+
+.uc-upload-btn {
+  background-color: #222f54;
+  color: white;
+  padding: 0.4rem 1.2rem;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  white-space: nowrap;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.uc-upload-btn.dragover {
+  border: 2px dashed #ccc;
+  background-color: transparent;
+}
+
+.uc-image-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.uc-image-preview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 12px;
+}
+
+.uc-preview img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-right: 1rem;
+}
+
+.uc-preview-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  background: white;
+  padding-right: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.uc-image-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.uc-image-wrapper img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+  display: block;
+}
+
+.uc-image-wrapper .uc-delete-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: rgba(255, 0, 0, 0.6);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.uc-image-wrapper .uc-delete-btn:hover {
+  background: red;
+  color: white;
+}
+
+.uc-delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  font-size: 0.8rem;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.uc-delete-btn:hover {
+  color: #e11d48;
+}
+
+.uc-progress-bar {
+  height: 4px;
+  width: 100%;
+  background-color: #eee;
+  position: relative;
+  overflow: hidden;
+}
+
+.uc-progress-fill {
+  height: 100%;
+  width: 0%;
+  background-color: #22c55e;
+  transition: width 0.3s ease;
+}
+
+.uc-image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 0.75rem;
+}
+
+.uc-image-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+</style>
+
+<div class="uc-uploader-container">
+  <div class="uc-upload-controls">
+    <div id="ucUploadImageBtn" class="uc-upload-btn">&plus; &nbsp;&nbsp;<span>Add Image</span></div>
+  </div>
+
+  <input type="file" id="ucImageControlInput" multiple accept="image/*" style="display: none;">
+  <div id="ucImagePreview" class="uc-image-preview"></div>
+</div>

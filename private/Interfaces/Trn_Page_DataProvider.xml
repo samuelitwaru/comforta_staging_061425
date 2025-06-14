@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CallableObject guid="4c2bcf57-7379-7e16-bbe7-d8e1d893d8c0" name="Trn_Page_DataProvider" description="Trn_Page_Data Provider" namespace="GeneXus.Programs">
+  <Signature name="parm">
+    <Parameter name="ReturnValue" accessor="out" collection="true">
+      <Field name="Trn_Page" description="App builder pages">
+        <Fields>
+          <Field name="Trn_PageId" description="Trn_Page Id">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>GUID</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="Trn_PageName" description="Trn_Page Name">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>100</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="LocationId" description="Location Id">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>GUID</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="PageJsonContent" description="Page Json Content">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>LongVarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>2097152</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="PageGJSHtml" description="Page GJSHtml">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>LongVarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>2097152</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="PageGJSJson" description="Page GJSJson">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>LongVarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>2097152</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="PageIsPublished" description="Page Is Published">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Boolean</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="PageIsPredefined" description="Page Is Predefined">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Boolean</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="PageIsContentPage" description="Page Is Content Page">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Boolean</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="PageIsDynamicForm" description="Page Is Dynamic Form">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Boolean</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="PageIsWebLinkPage" description="Page Is Web Link Page">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Boolean</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="PageChildren" description="Page Children">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>LongVarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>2097152</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="ProductServiceId" description="Product Service Id">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>GUID</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="OrganisationId" description="Organisation Id">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>GUID</Value>
+              </Property>
+            </Properties>
+          </Field>
+        </Fields>
+      </Field>
+    </Parameter>
+  </Signature>
+</CallableObject>

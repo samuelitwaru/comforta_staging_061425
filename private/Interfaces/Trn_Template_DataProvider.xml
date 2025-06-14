@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CallableObject guid="6ca62626-4297-7aa2-a0c2-e723f300a293" name="Trn_Template_DataProvider" description="Trn_Template_Data Provider" namespace="GeneXus.Programs">
+  <Signature name="parm">
+    <Parameter name="ReturnValue" accessor="out" collection="true">
+      <Field name="Trn_Template" description="Template">
+        <Fields>
+          <Field name="Trn_TemplateId" description="Trn_Template Id">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>GUID</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="Trn_TemplateName" description="Trn_Template Name">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>100</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="Trn_TemplateMedia" description="Trn_Template Media">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>100</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="Trn_TemplateContent" description="Trn_Template Content">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>LongVarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>2097152</Value>
+              </Property>
+            </Properties>
+          </Field>
+        </Fields>
+      </Field>
+    </Parameter>
+  </Signature>
+</CallableObject>

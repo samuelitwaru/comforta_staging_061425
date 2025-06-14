@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CallableObject guid="43592df4-9cbc-793d-b668-83e5efb9eb18" name="Trn_Theme_DataProvider" description="Trn_Theme_Data Provider" namespace="GeneXus.Programs">
+  <Signature name="parm">
+    <Parameter name="ReturnValue" accessor="out" collection="true">
+      <Field name="Trn_Theme" description="Trn_Theme">
+        <Fields>
+          <Field name="Trn_ThemeId" description="Trn_Theme Id">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>GUID</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="Trn_ThemeName" description="Trn_Theme Name">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>100</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="Trn_ThemeFontFamily" description="Trn_Theme Font Family">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>40</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="Trn_ThemeFontSize" description="Trn_Theme Font Size">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Numeric</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>4</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="ThemeIsPredefined" description="Theme Is Predefined">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Boolean</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="CtaColor" description="Cta Color" collection="true">
+            <Fields>
+              <Field name="CtaColorId" description="Cta Color Id">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>GUID</Value>
+                  </Property>
+                </Properties>
+              </Field>
+              <Field name="CtaColorName" description="Cta Color Name">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>VarChar</Value>
+                  </Property>
+                  <Property>
+                    <Name>Length</Name>
+                    <Value>100</Value>
+                  </Property>
+                </Properties>
+              </Field>
+              <Field name="CtaColorCode" description="Cta Color Code">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>VarChar</Value>
+                  </Property>
+                  <Property>
+                    <Name>Length</Name>
+                    <Value>100</Value>
+                  </Property>
+                </Properties>
+              </Field>
+            </Fields>
+          </Field>
+          <Field name="Icon" description="Icon" collection="true">
+            <Fields>
+              <Field name="IconId" description="Icon Id">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>GUID</Value>
+                  </Property>
+                </Properties>
+              </Field>
+              <Field name="IconCategory" description="Icon Category">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>VarChar</Value>
+                  </Property>
+                  <Property>
+                    <Name>Length</Name>
+                    <Value>40</Value>
+                  </Property>
+                </Properties>
+              </Field>
+              <Field name="IconName" description="Icon Name">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>VarChar</Value>
+                  </Property>
+                  <Property>
+                    <Name>Length</Name>
+                    <Value>100</Value>
+                  </Property>
+                </Properties>
+              </Field>
+              <Field name="IconSVG" description="Icon SVG">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>LongVarChar</Value>
+                  </Property>
+                  <Property>
+                    <Name>Length</Name>
+                    <Value>2097152</Value>
+                  </Property>
+                </Properties>
+              </Field>
+            </Fields>
+          </Field>
+          <Field name="Color" description="Color" collection="true">
+            <Fields>
+              <Field name="ColorId" description="Color Id">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>GUID</Value>
+                  </Property>
+                </Properties>
+              </Field>
+              <Field name="ColorName" description="Color Name">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>VarChar</Value>
+                  </Property>
+                  <Property>
+                    <Name>Length</Name>
+                    <Value>100</Value>
+                  </Property>
+                </Properties>
+              </Field>
+              <Field name="ColorCode" description="Color Code">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>VarChar</Value>
+                  </Property>
+                  <Property>
+                    <Name>Length</Name>
+                    <Value>100</Value>
+                  </Property>
+                </Properties>
+              </Field>
+            </Fields>
+          </Field>
+        </Fields>
+      </Field>
+    </Parameter>
+  </Signature>
+</CallableObject>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CallableObject guid="1b73d5e6-6b3a-4590-a00b-eaa8e622e2c3" name="DP_ProductServiceSupplierGroup" description="DP_Product Service Supplier Group" namespace="GeneXus.Programs">
+  <Signature name="parm">
+    <Parameter name="ReturnValue" accessor="out">
+      <Field name="SDT_ProductServiceSupplierGroup" description="SDT_Product Service Supplier Group" collection="true">
+        <Fields>
+          <Field name="SDT_ProductServiceSupplierGroupId" description="SDT_Product Service Supplier Group Id">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>400</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="SDT_ProductServiceSupplierGroupName" description="SDT_Product Service Supplier Group Name">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>100</Value>
+              </Property>
+            </Properties>
+          </Field>
+        </Fields>
+      </Field>
+    </Parameter>
+  </Signature>
+</CallableObject>

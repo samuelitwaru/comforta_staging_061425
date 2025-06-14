@@ -1,0 +1,3660 @@
+openapi: 3.0.0
+info:
+  title: "Development"
+  version: "20250614062100"
+servers:
+  - url: http://localhost:8082/Comforta_version21DevelopmentNETPostgreSQL/rest
+paths:
+  /Trn_AppVersionWWGetFilterData:
+    post:
+      tags:
+        - Trn_AppVersionWWGetFilterData
+      operationId: "Trn_AppVersionWWGetFilterData"
+      summary: "Trn_App Version WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_AppVersionWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_AppVersionWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_AuditLoadDVCombo:
+    post:
+      tags:
+        - Trn_AuditLoadDVCombo
+      operationId: "Trn_AuditLoadDVCombo"
+      summary: "Trn_Audit Load DVCombo"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_AuditLoadDVComboInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_AuditLoadDVComboOutput"
+        404:
+          description: "Not found"
+  /Trn_AuditWWGetFilterData:
+    post:
+      tags:
+        - Trn_AuditWWGetFilterData
+      operationId: "Trn_AuditWWGetFilterData"
+      summary: "Trn_Audit WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_AuditWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_AuditWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_CallToActionLoadDVCombo:
+    post:
+      tags:
+        - Trn_CallToActionLoadDVCombo
+      operationId: "Trn_CallToActionLoadDVCombo"
+      summary: "Trn_Call To Action Load DVCombo"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_CallToActionLoadDVComboInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_CallToActionLoadDVComboOutput"
+        404:
+          description: "Not found"
+  /Trn_DynamicFormTranslationWWGetFilterData:
+    post:
+      tags:
+        - Trn_DynamicFormTranslationWWGetFilterData
+      operationId: "Trn_DynamicFormTranslationWWGetFilterData"
+      summary: "Trn_Dynamic Form Translation WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_DynamicFormTranslationWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_DynamicFormTranslationWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_DynamicTranslationWWGetFilterData:
+    post:
+      tags:
+        - Trn_DynamicTranslationWWGetFilterData
+      operationId: "Trn_DynamicTranslationWWGetFilterData"
+      summary: "Trn_Dynamic Translation WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_DynamicTranslationWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_DynamicTranslationWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_EnvironmentVariableWWGetFilterData:
+    post:
+      tags:
+        - Trn_EnvironmentVariableWWGetFilterData
+      operationId: "Trn_EnvironmentVariableWWGetFilterData"
+      summary: "Trn_Environment Variable WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_EnvironmentVariableWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_EnvironmentVariableWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_LocationWWGetFilterData:
+    post:
+      tags:
+        - Trn_LocationWWGetFilterData
+      operationId: "Trn_LocationWWGetFilterData"
+      summary: "Trn_Location WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_LocationWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_LocationWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_ManagerWWGetFilterData:
+    post:
+      tags:
+        - Trn_ManagerWWGetFilterData
+      operationId: "Trn_ManagerWWGetFilterData"
+      summary: "Trn_Manager WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_ManagerWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_ManagerWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_MediaWWGetFilterData:
+    post:
+      tags:
+        - Trn_MediaWWGetFilterData
+      operationId: "Trn_MediaWWGetFilterData"
+      summary: "Trn_Media WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_MediaWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_MediaWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_MedicalIndicationWWGetFilterData:
+    post:
+      tags:
+        - Trn_MedicalIndicationWWGetFilterData
+      operationId: "Trn_MedicalIndicationWWGetFilterData"
+      summary: "Trn_Medical Indication WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_MedicalIndicationWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_MedicalIndicationWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_MemoCategoryWWGetFilterData:
+    post:
+      tags:
+        - Trn_MemoCategoryWWGetFilterData
+      operationId: "Trn_MemoCategoryWWGetFilterData"
+      summary: "Trn_Memo Category WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_MemoCategoryWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_MemoCategoryWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_MemoWWGetFilterData:
+    post:
+      tags:
+        - Trn_MemoWWGetFilterData
+      operationId: "Trn_MemoWWGetFilterData"
+      summary: "Trn_Memo WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_MemoWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_MemoWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_OrganisationLoadDVCombo:
+    post:
+      tags:
+        - Trn_OrganisationLoadDVCombo
+      operationId: "Trn_OrganisationLoadDVCombo"
+      summary: "Trn_Organisation Load DVCombo"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_OrganisationLoadDVComboInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_OrganisationLoadDVComboOutput"
+        404:
+          description: "Not found"
+  /Trn_OrganisationSettingWWGetFilterData:
+    post:
+      tags:
+        - Trn_OrganisationSettingWWGetFilterData
+      operationId: "Trn_OrganisationSettingWWGetFilterData"
+      summary: "Trn_Organisation Setting WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_OrganisationSettingWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_OrganisationSettingWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_OrganisationTypeWWGetFilterData:
+    post:
+      tags:
+        - Trn_OrganisationTypeWWGetFilterData
+      operationId: "Trn_OrganisationTypeWWGetFilterData"
+      summary: "Trn_Organisation Type WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_OrganisationTypeWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_OrganisationTypeWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_OrganisationWWGetFilterData:
+    post:
+      tags:
+        - Trn_OrganisationWWGetFilterData
+      operationId: "Trn_OrganisationWWGetFilterData"
+      summary: "Trn_Organisation WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_OrganisationWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_OrganisationWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_PageLoadDVCombo:
+    post:
+      tags:
+        - Trn_PageLoadDVCombo
+      operationId: "Trn_PageLoadDVCombo"
+      summary: "Trn_Page Load DVCombo"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_PageLoadDVComboInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_PageLoadDVComboOutput"
+        404:
+          description: "Not found"
+  /Trn_PageWWGetFilterData:
+    post:
+      tags:
+        - Trn_PageWWGetFilterData
+      operationId: "Trn_PageWWGetFilterData"
+      summary: "Trn_Page WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_PageWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_PageWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_ProductServiceWWGetFilterData:
+    post:
+      tags:
+        - Trn_ProductServiceWWGetFilterData
+      operationId: "Trn_ProductServiceWWGetFilterData"
+      summary: "Trn_Product Service WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_ProductServiceWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_ProductServiceWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_ReceptionistWWGetFilterData:
+    post:
+      tags:
+        - Trn_ReceptionistWWGetFilterData
+      operationId: "Trn_ReceptionistWWGetFilterData"
+      summary: "Trn_Receptionist WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_ReceptionistWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_ReceptionistWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_ResidentPackageWWGetFilterData:
+    post:
+      tags:
+        - Trn_ResidentPackageWWGetFilterData
+      operationId: "Trn_ResidentPackageWWGetFilterData"
+      summary: "Trn_Resident Package WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_ResidentPackageWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_ResidentPackageWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_ResidentTypeWWGetFilterData:
+    post:
+      tags:
+        - Trn_ResidentTypeWWGetFilterData
+      operationId: "Trn_ResidentTypeWWGetFilterData"
+      summary: "Trn_Resident Type WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_ResidentTypeWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_ResidentTypeWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_ResidentWWGetFilterData:
+    post:
+      tags:
+        - Trn_ResidentWWGetFilterData
+      operationId: "Trn_ResidentWWGetFilterData"
+      summary: "Trn_Resident WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_ResidentWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_ResidentWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_SupplierAgbTypeWWGetFilterData:
+    post:
+      tags:
+        - Trn_SupplierAgbTypeWWGetFilterData
+      operationId: "Trn_SupplierAgbTypeWWGetFilterData"
+      summary: "Trn_Supplier Agb Type WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_SupplierAgbTypeWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_SupplierAgbTypeWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_SupplierAgbWWGetFilterData:
+    post:
+      tags:
+        - Trn_SupplierAgbWWGetFilterData
+      operationId: "Trn_SupplierAgbWWGetFilterData"
+      summary: "Trn_Supplier Agb WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_SupplierAgbWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_SupplierAgbWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_SupplierGenTypeWWGetFilterData:
+    post:
+      tags:
+        - Trn_SupplierGenTypeWWGetFilterData
+      operationId: "Trn_SupplierGenTypeWWGetFilterData"
+      summary: "Trn_Supplier Gen Type WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_SupplierGenTypeWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_SupplierGenTypeWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_SupplierGenWWGetFilterData:
+    post:
+      tags:
+        - Trn_SupplierGenWWGetFilterData
+      operationId: "Trn_SupplierGenWWGetFilterData"
+      summary: "Trn_Supplier Gen WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_SupplierGenWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_SupplierGenWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_TemplateWWGetFilterData:
+    post:
+      tags:
+        - Trn_TemplateWWGetFilterData
+      operationId: "Trn_TemplateWWGetFilterData"
+      summary: "Trn_Template WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_TemplateWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_TemplateWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_ThemeWWGetFilterData:
+    post:
+      tags:
+        - Trn_ThemeWWGetFilterData
+      operationId: "Trn_ThemeWWGetFilterData"
+      summary: "Trn_Theme WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_ThemeWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_ThemeWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /UFilledOutFormsGetFilterData:
+    post:
+      tags:
+        - UFilledOutFormsGetFilterData
+      operationId: "UFilledOutFormsGetFilterData"
+      summary: "UFilled Out Forms Get Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UFilledOutFormsGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UFilledOutFormsGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /WorkWithPlus/DynamicForms/WWP_DF_DynamicComboBox_WCLoadDVCombo:
+    post:
+      tags:
+        - WorkWithPlus.DynamicForms
+      operationId: "WorkWithPlus.DynamicForms.WWP_DF_DynamicComboBox_WCLoadDVCombo"
+      summary: "WWP_Dynamic Form_Dynamic Combo Box_WCLoad DVCombo"
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkWithPlus.DynamicForms.WWP_DF_DynamicComboBox_WCLoadDVComboInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkWithPlus.DynamicForms.WWP_DF_DynamicComboBox_WCLoadDVComboOutput"
+        404:
+          description: "Not found"
+  /WorkWithPlus/DynamicForms/WWP_DF_DynamicSuggest_WCLoadDVCombo:
+    post:
+      tags:
+        - WorkWithPlus.DynamicForms
+      operationId: "WorkWithPlus.DynamicForms.WWP_DF_DynamicSuggest_WCLoadDVCombo"
+      summary: "WWP_Dynamic Form_Dynamic Suggest_WCLoad DVCombo"
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkWithPlus.DynamicForms.WWP_DF_DynamicSuggest_WCLoadDVComboInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkWithPlus.DynamicForms.WWP_DF_DynamicSuggest_WCLoadDVComboOutput"
+        404:
+          description: "Not found"
+  /WorkWithPlus/DynamicForms/WWP_DF_GetAvailableVariables:
+    post:
+      tags:
+        - WorkWithPlus.DynamicForms
+      operationId: "WorkWithPlus.DynamicForms.WWP_DF_GetAvailableVariables"
+      summary: "WWP_DF_Get Available Variables"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkWithPlus.DynamicForms.WWP_DF_GetAvailableVariablesInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkWithPlus.DynamicForms.WWP_DF_GetAvailableVariablesOutput"
+        404:
+          description: "Not found"
+  /WorkWithPlus/DynamicForms/WWP_DF_LoadFormInstance:
+    post:
+      tags:
+        - WorkWithPlus.DynamicForms
+      operationId: "WorkWithPlus.DynamicForms.WWP_DF_LoadFormInstance"
+      summary: "WWP_Dynamic Form_Load Form Instance"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkWithPlus.DynamicForms.WWP_DF_LoadFormInstanceInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkWithPlus.DynamicForms.WWP_DF_LoadFormInstanceOutput"
+        404:
+          description: "Not found"
+  /WorkWithPlus/DynamicForms/WWP_FormInstanceWWGetFilterData:
+    post:
+      tags:
+        - WorkWithPlus.DynamicForms
+      operationId: "WorkWithPlus.DynamicForms.WWP_FormInstanceWWGetFilterData"
+      summary: "WWP_Form Instance WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkWithPlus.DynamicForms.WWP_FormInstanceWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkWithPlus.DynamicForms.WWP_FormInstanceWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /WorkWithPlus/DynamicForms/WWP_FormWWGetFilterData:
+    post:
+      tags:
+        - WorkWithPlus.DynamicForms
+      operationId: "WorkWithPlus.DynamicForms.WWP_FormWWGetFilterData"
+      summary: "WWP_Form WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkWithPlus.DynamicForms.WWP_FormWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkWithPlus.DynamicForms.WWP_FormWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /WorkWithPlus/WWP_ParameterWWGetFilterData:
+    post:
+      tags:
+        - WorkWithPlus
+      operationId: "WorkWithPlus.WWP_ParameterWWGetFilterData"
+      summary: "WWPParameter WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkWithPlus.WWP_ParameterWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkWithPlus.WWP_ParameterWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /WP_DynamicFormElementUFormWCGetFilterData:
+    post:
+      tags:
+        - WP_DynamicFormElementUFormWCGetFilterData
+      operationId: "WP_DynamicFormElementUFormWCGetFilterData"
+      summary: "WP_Dynamic Form Element UForm WCGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WP_DynamicFormElementUFormWCGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WP_DynamicFormElementUFormWCGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /WP_DynamicFormTrn_LocationDynamicFormWCGetFilterData:
+    post:
+      tags:
+        - WP_DynamicFormTrn_LocationDynamicFormWCGetFilterData
+      operationId: "WP_DynamicFormTrn_LocationDynamicFormWCGetFilterData"
+      summary: "WP_Dynamic Form Trn_Location Dynamic Form WCGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WP_DynamicFormTrn_LocationDynamicFormWCGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WP_DynamicFormTrn_LocationDynamicFormWCGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /WP_DynamicFormTrn_OrganisationDynamicFormWCGetFilterData:
+    post:
+      tags:
+        - WP_DynamicFormTrn_OrganisationDynamicFormWCGetFilterData
+      operationId: "WP_DynamicFormTrn_OrganisationDynamicFormWCGetFilterData"
+      summary: "WP_Dynamic Form Trn_Organisation Dynamic Form WCGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WP_DynamicFormTrn_OrganisationDynamicFormWCGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WP_DynamicFormTrn_OrganisationDynamicFormWCGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /WP_DynamicFormTrn_SupplierDynamicFormGetFilterData:
+    post:
+      tags:
+        - WP_DynamicFormTrn_SupplierDynamicFormGetFilterData
+      operationId: "WP_DynamicFormTrn_SupplierDynamicFormGetFilterData"
+      summary: "WP_Dynamic Form Trn_Supplier Dynamic Form Get Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WP_DynamicFormTrn_SupplierDynamicFormGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WP_DynamicFormTrn_SupplierDynamicFormGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /WP_OrganisationAGBSuppliersGetFilterData:
+    post:
+      tags:
+        - WP_OrganisationAGBSuppliersGetFilterData
+      operationId: "WP_OrganisationAGBSuppliersGetFilterData"
+      summary: "WP_Organisation AGBSuppliers Get Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WP_OrganisationAGBSuppliersGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WP_OrganisationAGBSuppliersGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /WP_OrganisationGeneralSuppliersGetFilterData:
+    post:
+      tags:
+        - WP_OrganisationGeneralSuppliersGetFilterData
+      operationId: "WP_OrganisationGeneralSuppliersGetFilterData"
+      summary: "WP_Organisation General Suppliers Get Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WP_OrganisationGeneralSuppliersGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WP_OrganisationGeneralSuppliersGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /WWPBaseObjects/Discussions/WWP_GetUsersForDiscussionMentions:
+    post:
+      tags:
+        - WWPBaseObjects.Discussions
+      operationId: "WWPBaseObjects.Discussions.WWP_GetUsersForDiscussionMentions"
+      summary: "WWP_Get Users For Discussion Mentions"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WWPBaseObjects.Discussions.WWP_GetUsersForDiscussionMentionsInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WWPBaseObjects.Discussions.WWP_GetUsersForDiscussionMentionsOutput"
+        404:
+          description: "Not found"
+  /oauth/access_token:
+    post:
+      tags:
+        - oauth
+      operationId: "oauth.access_token"
+      summary: "GeneXus GAM Services"
+      responses:
+        200:
+          description: "Successful operation"
+        404:
+          description: "Not found"
+  /oauth/logout:
+    post:
+      tags:
+        - oauth
+      operationId: "oauth.logout"
+      summary: "GeneXus GAM Services"
+      responses:
+        200:
+          description: "Successful operation"
+        404:
+          description: "Not found"
+  /oauth/userinfo:
+    get:
+      tags:
+        - oauth
+      operationId: "oauth.userinfo"
+      summary: "GeneXus GAM Services"
+      responses:
+        200:
+          description: "Successful operation"
+        404:
+          description: "Not found"
+  /gx_valid_service:
+    post:
+      tags:
+        - GXValidService
+      operationId: "gx_valid_service"
+      summary: "GeneXus GAM Services"
+      responses:
+        200:
+          description: "Successful operation"
+        404:
+          description: "Not found"
+  /oauth/gam/signin:
+    post:
+      tags:
+        - oauth.gam
+      operationId: "oauth.gam.signin"
+      summary: "GeneXus GAM Services"
+      responses:
+        200:
+          description: "Successful operation"
+        404:
+          description: "Not found"
+  /oauth/gam/callback:
+    get:
+      tags:
+        - oauth.gam
+      operationId: "oauth.gam.callback"
+      summary: "GeneXus GAM Services"
+      responses:
+        200:
+          description: "Successful operation"
+        404:
+          description: "Not found"
+  /oauth/gam/access_token:
+    post:
+      tags:
+        - oauth.gam
+      operationId: "oauth.gam.access_token"
+      summary: "GeneXus GAM Services"
+      responses:
+        200:
+          description: "Successful operation"
+        404:
+          description: "Not found"
+  /oauth/gam/userinfo:
+    post:
+      tags:
+        - oauth.gam
+      operationId: "oauth.gam.userinfo"
+      summary: "GeneXus GAM Services"
+      responses:
+        200:
+          description: "Successful operation"
+        404:
+          description: "Not found"
+  /oauth/gam/signout:
+    post:
+      tags:
+        - oauth.gam
+      operationId: "oauth.gam.signout"
+      summary: "GeneXus GAM Services"
+      responses:
+        200:
+          description: "Successful operation"
+        404:
+          description: "Not found"
+  /oauth/RequestTokenService:
+    post:
+      tags:
+        - oauth
+      operationId: "oauth.RequestTokenService"
+      summary: "GeneXus GAM Services"
+      responses:
+        200:
+          description: "Successful operation"
+        404:
+          description: "Not found"
+  /oauth/QueryAccessToken:
+    post:
+      tags:
+        - oauth
+      operationId: "oauth.QueryAccessToken"
+      summary: "GeneXus GAM Services"
+      responses:
+        200:
+          description: "Successful operation"
+        404:
+          description: "Not found"
+  /saml/gam/signout:
+    post:
+      tags:
+        - saml.gam
+      operationId: "saml.gam.signout"
+      summary: "GeneXus GAM Services"
+      responses:
+        200:
+          description: "Successful operation"
+        404:
+          description: "Not found"
+  /saml/gam/signin:
+    post:
+      tags:
+        - saml.gam
+      operationId: "saml.gam.signin"
+      summary: "GeneXus GAM Services"
+      responses:
+        200:
+          description: "Successful operation"
+        404:
+          description: "Not found"
+components:
+  securitySchemes:
+    oAuthGXGAM:
+      type: oauth2
+      description: GAM OAuth 2
+      flows:
+        password:          
+          tokenUrl: http://localhost:8082/Comforta_version21DevelopmentNETPostgreSQL/oauth/gam/v2.0/access_token
+          scopes: 
+            fullcontrol: Full access
+  schemas:
+    Trn_AppVersionWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_AuditLoadDVComboOutput:
+      properties:
+        SelectedValue:
+          type: "string"
+        SelectedText:
+          type: "string"
+        Combo_DataJson:
+          type: "string"
+    Trn_AuditWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_CallToActionLoadDVComboOutput:
+      properties:
+        SelectedValue:
+          type: "string"
+        SelectedText:
+          type: "string"
+        Combo_DataJson:
+          type: "string"
+    Trn_DynamicFormTranslationWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_DynamicTranslationWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_EnvironmentVariableWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_LocationWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_ManagerWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_MediaWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_MedicalIndicationWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_MemoCategoryWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_MemoWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_OrganisationLoadDVComboOutput:
+      properties:
+        SelectedValue:
+          type: "string"
+        SelectedText:
+          type: "string"
+        Combo_DataJson:
+          type: "string"
+    Trn_OrganisationSettingWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_OrganisationTypeWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_OrganisationWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_PageLoadDVComboOutput:
+      properties:
+        SelectedValue:
+          type: "string"
+        SelectedText:
+          type: "string"
+        Combo_DataJson:
+          type: "string"
+    Trn_PageWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_ProductServiceWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_ReceptionistWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_ResidentPackageWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_ResidentTypeWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_ResidentWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_SupplierAgbTypeWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_SupplierAgbWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_SupplierGenTypeWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_SupplierGenWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_TemplateWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    Trn_ThemeWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    UFilledOutFormsGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    WorkWithPlus.DynamicForms.WWP_DF_DynamicComboBox_WCLoadDVComboOutput:
+      properties:
+        Combo_DataJson:
+          type: "string"
+    WorkWithPlus.DynamicForms.WWP_DF_DynamicSuggest_WCLoadDVComboOutput:
+      properties:
+        Combo_DataJson:
+          type: "string"
+    WorkWithPlus.DynamicForms.WWP_DF_GetAvailableVariablesOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+    WorkWithPlus.DynamicForms.WWP_DF_LoadFormInstanceOutput:
+      properties:
+        WWPFormInstance:
+          description: "WWPForm Instance"
+          $ref: "#/components/schemas/WorkWithPlus.DynamicForms.WWP_FormInstance"
+    WorkWithPlus.DynamicForms.WWP_FormInstanceWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    WorkWithPlus.DynamicForms.WWP_FormWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    WorkWithPlus.WWP_ParameterWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    WP_DynamicFormElementUFormWCGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    WP_DynamicFormTrn_LocationDynamicFormWCGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    WP_DynamicFormTrn_OrganisationDynamicFormWCGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    WP_DynamicFormTrn_SupplierDynamicFormGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    WP_OrganisationAGBSuppliersGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    WP_OrganisationGeneralSuppliersGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    WWPBaseObjects.Discussions.WWP_GetUsersForDiscussionMentionsOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+    Trn_AppVersionWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_AuditLoadDVComboInput:  
+      properties:
+        ComboName:
+          type: "string"
+        TrnMode:
+          type: "string"
+        IsDynamicCall:
+          type: "boolean"
+        AuditId:
+          type: "string"
+          format: "uuid"
+        SearchTxtParms:
+          type: "string"
+    Trn_AuditWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_CallToActionLoadDVComboInput:  
+      properties:
+        ComboName:
+          type: "string"
+        TrnMode:
+          type: "string"
+        IsDynamicCall:
+          type: "boolean"
+        CallToActionId:
+          type: "string"
+          format: "uuid"
+        SearchTxtParms:
+          type: "string"
+    Trn_DynamicFormTranslationWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_DynamicTranslationWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_EnvironmentVariableWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_LocationWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_ManagerWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_MediaWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_MedicalIndicationWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_MemoCategoryWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_MemoWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_OrganisationLoadDVComboInput:  
+      properties:
+        ComboName:
+          type: "string"
+        TrnMode:
+          type: "string"
+        IsDynamicCall:
+          type: "boolean"
+        OrganisationId:
+          type: "string"
+          format: "uuid"
+        SearchTxtParms:
+          type: "string"
+    Trn_OrganisationSettingWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_OrganisationTypeWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_OrganisationWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_PageLoadDVComboInput:  
+      properties:
+        ComboName:
+          type: "string"
+        TrnMode:
+          type: "string"
+        IsDynamicCall:
+          type: "boolean"
+        Trn_PageId:
+          type: "string"
+          format: "uuid"
+        LocationId:
+          type: "string"
+          format: "uuid"
+        Cond_OrganisationId:
+          type: "string"
+          format: "uuid"
+        Cond_LocationId:
+          type: "string"
+          format: "uuid"
+        SearchTxtParms:
+          type: "string"
+    Trn_PageWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_ProductServiceWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_ReceptionistWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_ResidentPackageWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_ResidentTypeWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_ResidentWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_SupplierAgbTypeWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_SupplierAgbWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_SupplierGenTypeWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_SupplierGenWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_TemplateWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_ThemeWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    UFilledOutFormsGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    WorkWithPlus.DynamicForms.WWP_DF_DynamicComboBox_WCLoadDVComboInput:  
+      properties:
+        ComboName:
+          type: "string"
+        Cond_SessionId:
+          type: "integer"
+          format: "int32"
+        Cond_WWPFormElementId:
+          type: "integer"
+          format: "int32"
+        SearchTxtParms:
+          type: "string"
+    WorkWithPlus.DynamicForms.WWP_DF_DynamicSuggest_WCLoadDVComboInput:  
+      properties:
+        ComboName:
+          type: "string"
+        Cond_SessionId:
+          type: "integer"
+          format: "int32"
+        Cond_WWPFormElementId:
+          type: "integer"
+          format: "int32"
+        SearchTxtParms:
+          type: "string"
+    WorkWithPlus.DynamicForms.WWP_DF_GetAvailableVariablesInput:  
+      properties:
+        SessionId:
+          type: "integer"
+          format: "int32"
+        IncludeCurrentElement:
+          type: "boolean"
+        CurrentElementId:
+          type: "integer"
+          format: "int32"
+        MaxOptions:
+          type: "integer"
+          format: "int32"
+        SearchTxt:
+          type: "string"
+    WorkWithPlus.DynamicForms.WWP_DF_LoadFormInstanceInput:  
+      properties:
+        SessionId:
+          type: "integer"
+          format: "int64"
+    WorkWithPlus.DynamicForms.WWP_FormInstanceWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    WorkWithPlus.DynamicForms.WWP_FormWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    WorkWithPlus.WWP_ParameterWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    WP_DynamicFormElementUFormWCGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    WP_DynamicFormTrn_LocationDynamicFormWCGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    WP_DynamicFormTrn_OrganisationDynamicFormWCGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    WP_DynamicFormTrn_SupplierDynamicFormGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    WP_OrganisationAGBSuppliersGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    WP_OrganisationGeneralSuppliersGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    WWPBaseObjects.Discussions.WWP_GetUsersForDiscussionMentionsInput:  
+      properties:
+        SearchTxt:
+          type: "string"
+    SDT_AgendaLocation:
+      properties:
+        AgendaCalendarId:
+          description: "Agenda Calendar Id"
+          type: "string"
+          format: "uuid"
+        AgendaCalendarTitle:
+          description: "Agenda Calendar Title"
+          type: "string"
+        AgendaCalendarStartDate:
+          description: "Agenda Calendar Start Date"
+          type: "string"
+          format: "date-time"
+        AgendaCalendarEndDate:
+          description: "Agenda Calendar End Date"
+          type: "string"
+          format: "date-time"
+        AgendaCalendarAllDay:
+          description: "Agenda Calendar All Day"
+          type: "boolean"
+        AgendaCalendarType:
+          description: "Agenda Calendar Type"
+          type: "string"
+        AgendaCalendarRecurring:
+          description: "Agenda Calendar Recurring"
+          type: "boolean"
+        AgendaCalendarRecurringType:
+          description: "Agenda Calendar Recurring Type"
+          type: "string"
+        AgendaCalendarAddRSVP:
+          description: "Agenda Calendar Add RSVP"
+          type: "boolean"
+        LocationId:
+          description: "Location Id"
+          type: "string"
+          format: "uuid"
+        OrganisationId:
+          description: "Organisation Id"
+          type: "string"
+          format: "uuid"
+    SDT_ApiListResponse:
+      properties:
+        notificationHistory:
+          description: "SDT_Resident Notification"
+          type: array
+          items:
+            $ref: "#/components/schemas/SDT_ResidentNotification"
+        filledForms:
+          description: "SDT_Api Resident Filled Forms"
+          type: array
+          items:
+            $ref: "#/components/schemas/SDT_ApiResidentFilledForms"
+        pageSize:
+          description: "page Size"
+          type: "integer"
+          format: "int32"
+        pageNumber:
+          description: "page Number"
+          type: "integer"
+          format: "int32"
+        numberOfPages:
+          description: "number Of Pages"
+          type: "integer"
+          format: "int32"
+        memos:
+          description: "SDT_Memo"
+          type: array
+          items:
+            $ref: "#/components/schemas/SDT_Memo"
+    SDT_ApiResidentFilledForms:
+      properties:
+        FormId:
+          description: "Form Id"
+          type: "integer"
+          format: "int32"
+        FormInstanceId:
+          description: "Form Instance Id"
+          type: "integer"
+          format: "int32"
+        FormReferenceName:
+          description: "Form Reference Name"
+          type: "string"
+        FormTitle:
+          description: "Form Title"
+          type: "string"
+        FormFilledDate:
+          description: "Form Filled Date"
+          type: "string"
+          format: "date-time"
+        FormVersionNumber:
+          description: "Form Version Number"
+          type: "integer"
+          format: "int32"
+        FormFilledBy:
+          description: "Form Filled By"
+          type: "string"
+    SDT_AppVersion:
+      properties:
+        AppVersionId:
+          description: "App Version Id"
+          type: "string"
+          format: "uuid"
+        AppVersionName:
+          description: "App Version Name"
+          type: "string"
+        LocationId:
+          description: "Location Id"
+          type: "string"
+          format: "uuid"
+        IsActive:
+          description: "Is Active"
+          type: "boolean"
+        ThemeId:
+          description: "Trn_Theme Id"
+          type: "string"
+          format: "uuid"
+        Pages:
+          type: array
+          items:
+            description: PagesItem
+            $ref: "#/components/schemas/SDT_AppVersion.Pages_PagesItem"
+    SDT_AppVersion.Pages_PagesItem:
+      properties:
+        PageId:
+          description: "Page Id"
+          type: "string"
+          format: "uuid"
+        PageName:
+          description: "Page Name"
+          type: "string"
+        IsPredefined:
+          description: "Is Predefined"
+          type: "boolean"
+        PageStructure:
+          description: "Page Structure"
+          type: "string"
+        PageType:
+          description: "Page Type"
+          type: "string"
+        PageThumbnailUrl:
+          description: "Page Thumbnail Url"
+          type: "string"
+        PageLinkStructure:
+          description: "SDT_Link Page"
+          $ref: "#/components/schemas/SDT_LinkPage"
+        PageMenuStructure:
+          description: "SDT_Menu Page"
+          $ref: "#/components/schemas/SDT_MenuPage"
+        PageContentStructure:
+          description: "SDT_Content Page"
+          $ref: "#/components/schemas/SDT_ContentPage"
+        PageInfoStructure:
+          description: "SDT_Info Content"
+          $ref: "#/components/schemas/SDT_InfoContent"
+      x-gx-level: "SDT_AppVersion"
+    SDT_AppVersionPage:
+      properties:
+        PageId:
+          description: "Page Id"
+          type: "string"
+          format: "uuid"
+        PageName:
+          description: "Page Name"
+          type: "string"
+        PageType:
+          description: "Page Type"
+          type: "string"
+        PageStructure:
+          description: "Page Structure"
+          type: "string"
+        PageContentStructure:
+          description: "SDT_Content Page"
+          $ref: "#/components/schemas/SDT_ContentPage"
+        PageMenuStructure:
+          description: "SDT_Menu Page"
+          $ref: "#/components/schemas/SDT_MenuPage"
+        PageInfoStructure:
+          description: "SDT_Info Content"
+          $ref: "#/components/schemas/SDT_InfoContent"
+    SDT_CallToAction_SDT_CallToActionItem:
+      properties:
+        CallToActionId:
+          description: "Call To Action Id"
+          type: "string"
+          format: "uuid"
+        OrganisationId:
+          description: "Organisation Id"
+          type: "string"
+          format: "uuid"
+        LocationId:
+          description: "Location Id"
+          type: "string"
+          format: "uuid"
+        ProductServiceId:
+          description: "Product Service Id"
+          type: "string"
+          format: "uuid"
+        CallToActionName:
+          description: "Call To Action Name"
+          type: "string"
+        CallToActionType:
+          description: "Call To Action Type"
+          type: "string"
+        CallToActionPhone:
+          description: "Call To Action Phone"
+          type: "string"
+        CallToActionPhoneCode:
+          description: "Call To Action Phone Code"
+          type: "string"
+        CallToActionPhoneNumber:
+          description: "Call To Action Phone Number"
+          type: "string"
+        CallToActionUrl:
+          description: "Call To Action Url"
+          type: "string"
+        CallToActionEmail:
+          description: "Call To Action Email"
+          type: "string"
+        LocationDynamicFormId:
+          description: "Location Dynamic Form Id"
+          type: "string"
+          format: "uuid"
+        WWPFormId:
+          description: "WWPForm Id"
+          type: "integer"
+          format: "int32"
+        WWPFormVersionNumber:
+          description: "WWPForm Version Number"
+          type: "integer"
+          format: "int32"
+        WWPFormReferenceName:
+          description: "WWPForm Reference Name"
+          type: "string"
+        WWPFormTitle:
+          description: "WWPForm Title"
+          type: "string"
+        WWPFormDate:
+          description: "WWPForm Date"
+          type: "string"
+          format: "date-time"
+        WWPFormIsWizard:
+          description: "WWPForm Is Wizard"
+          type: "boolean"
+        WWPFormResume:
+          description: "WWPForm Resume"
+          type: "integer"
+          format: "int32"
+        WWPFormResumeMessage:
+          description: "WWPForm Resume Message"
+          type: "string"
+        WWPFormValidations:
+          description: "WWPForm Validations"
+          type: "string"
+        WWPFormInstantiated:
+          description: "WWPForm Instantiated"
+          type: "boolean"
+        WWPFormLatestVersionNumber:
+          description: "WWPForm Latest Version Number"
+          type: "integer"
+          format: "int32"
+        WWPFormType:
+          description: "WWPForm Type"
+          type: "integer"
+          format: "int32"
+        WWPFormSectionRefElements:
+          description: "WWPForm Section Ref Elements"
+          type: "string"
+        WWPFormIsForDynamicValidations:
+          description: "WWPForm Is For Dynamic Validations"
+          type: "boolean"
+    SDT_ChangeYourPassword:
+      properties:
+        success_message:
+          description: "success_message"
+          type: "string"
+        error:
+          description: "SDT_Error Response"
+          $ref: "#/components/schemas/SDT_ErrorResponse"
+    SDT_Col:
+      properties:
+        Tile:
+          description: "SDT_Tile"
+          $ref: "#/components/schemas/SDT_Tile"
+    SDT_ContentPage:
+      properties:
+        Content:
+          type: array
+          items:
+            description: ContentItem
+            $ref: "#/components/schemas/SDT_ContentPage.Content_ContentItem"
+        Cta:
+          type: array
+          items:
+            description: CtaItem
+            $ref: "#/components/schemas/SDT_ContentPage.Cta_CtaItem"
+    SDT_ContentPage.Content_ContentItem:
+      properties:
+        ContentId:
+          description: "Content Id"
+          type: "string"
+        ContentType:
+          description: "Content Type"
+          type: "string"
+        ContentValue:
+          description: "Content Value"
+          type: "string"
+      x-gx-level: "SDT_ContentPage"
+    SDT_ContentPage.Cta_CtaItem:
+      properties:
+        CtaId:
+          description: "Cta Id"
+          type: "string"
+        CtaType:
+          description: "Cta Type"
+          type: "string"
+        CtaLabel:
+          description: "Cta Label"
+          type: "string"
+        CtaAction:
+          description: "Cta Action"
+          type: "string"
+        CtaColor:
+          description: "Cta Color"
+          type: "string"
+        CtaBGColor:
+          description: "Cta BGColor"
+          type: "string"
+        CtaButtonType:
+          description: "Cta Button Type"
+          type: "string"
+        CtaButtonImgUrl:
+          description: "Cta Button Img Url"
+          type: "string"
+      x-gx-level: "SDT_ContentPage"
+    SDT_DebugResult:
+      properties:
+        Summary:
+          $ref: "#/components/schemas/SDT_DebugResult.Summary"
+        Pages:
+          type: array
+          items:
+            description: PagesItem
+            $ref: "#/components/schemas/SDT_DebugResult.Pages_PagesItem"
+    SDT_DebugResult.Summary:
+      properties:
+        TotalUrls:
+          description: "Total Urls"
+          type: "number"
+          format: "double"
+        SuccessCount:
+          description: "Success Count"
+          type: "number"
+          format: "double"
+        FailureCount:
+          description: "Failure Count"
+          type: "number"
+          format: "double"
+      x-gx-level: "SDT_DebugResult"
+    SDT_DebugResult.Pages_PagesItem:
+      properties:
+        Page:
+          description: "Page"
+          type: "string"
+        UrlList:
+          type: array
+          items:
+            description: UrlListItem
+            $ref: "#/components/schemas/SDT_DebugResult.Pages.UrlList_UrlListItem"
+      x-gx-level: "SDT_DebugResult"
+    SDT_DebugResult.Pages.UrlList_UrlListItem:
+      properties:
+        Url:
+          description: "Url"
+          type: "string"
+        StatusCode:
+          description: "Status Code"
+          type: "string"
+        StatusMessage:
+          description: "Status Message"
+          type: "string"
+        AffectedType:
+          description: "Affected Type"
+          type: "string"
+        AffectedName:
+          description: "Affected Name"
+          type: "string"
+      x-gx-level: "SDT_DebugResult.Pages"
+    SDT_Error:
+      properties:
+        Status:
+          description: "Status"
+          type: "string"
+        Message:
+          description: "Message"
+          type: "string"
+    SDT_ErrorResponse:
+      properties:
+        code:
+          description: "code"
+          type: "string"
+        message:
+          description: "message"
+          type: "string"
+    SDT_InfoContent:
+      properties:
+        InfoContent:
+          type: array
+          items:
+            description: InfoContentItem
+            $ref: "#/components/schemas/SDT_InfoContent.InfoContent_InfoContentItem"
+    SDT_InfoContent.InfoContent_InfoContentItem:
+      properties:
+        InfoId:
+          description: "Info Id"
+          type: "string"
+        InfoType:
+          description: "Info Type"
+          type: "string"
+        InfoValue:
+          description: "Info Value"
+          type: "string"
+        Tiles:
+          description: "SDT_Info Tile"
+          type: array
+          items:
+            $ref: "#/components/schemas/SDT_InfoTile_SDT_InfoTileItem"
+        Images:
+          description: "SDT_Info Image"
+          type: array
+          items:
+            $ref: "#/components/schemas/SDT_InfoImage_SDT_InfoImageItem"
+        CtaAttributes:
+          $ref: "#/components/schemas/SDT_InfoContent.InfoContent.CtaAttributes"
+      x-gx-level: "SDT_InfoContent"
+    SDT_InfoContent.InfoContent.CtaAttributes:
+      properties:
+        CtaId:
+          description: "Cta Id"
+          type: "string"
+        CtaType:
+          description: "Cta Type"
+          type: "string"
+        CtaLabel:
+          description: "Cta Label"
+          type: "string"
+        CtaAction:
+          description: "Cta Action"
+          type: "string"
+        CtaColor:
+          description: "Cta Color"
+          type: "string"
+        CtaBGColor:
+          description: "Cta BGColor"
+          type: "string"
+        CtaButtonType:
+          description: "Cta Button Type"
+          type: "string"
+        CtaButtonImgUrl:
+          description: "Cta Button Img Url"
+          type: "string"
+        CtaButtonIcon:
+          description: "Cta Button Icon"
+          type: "string"
+        CtaSupplierIsConnected:
+          description: "Cta Supplier Is Connected"
+          type: "boolean"
+        CtaConnectedSupplierId:
+          description: "Cta Connected Supplier Id"
+          type: "string"
+          format: "uuid"
+        Action:
+          $ref: "#/components/schemas/SDT_InfoContent.InfoContent.CtaAttributes.Action"
+      x-gx-level: "SDT_InfoContent.InfoContent"
+    SDT_InfoContent.InfoContent.CtaAttributes.Action:
+      properties:
+        ObjectType:
+          description: "Object Type"
+          type: "string"
+        ObjectUrl:
+          description: "Object Url"
+          type: "string"
+        ObjectId:
+          description: "Object Id"
+          type: "string"
+      x-gx-level: "SDT_InfoContent.InfoContent.CtaAttributes"
+    SDT_InfoImage_SDT_InfoImageItem:
+      properties:
+        InfoImageId:
+          description: "Info Image Id"
+          type: "string"
+        InfoImageValue:
+          description: "Info Image Value"
+          type: "string"
+    SDT_InfoPage:
+      properties:
+        PageId:
+          description: "Page Id"
+          type: "string"
+          format: "uuid"
+        PageName:
+          description: "Page Name"
+          type: "string"
+        InfoContent:
+          type: array
+          items:
+            description: InfoContentItem
+            $ref: "#/components/schemas/SDT_InfoPage.InfoContent_InfoContentItem"
+    SDT_InfoPage.InfoContent_InfoContentItem:
+      properties:
+        InfoId:
+          description: "Info Id"
+          type: "string"
+        InfoType:
+          description: "Info Type"
+          type: "string"
+        InfoValue:
+          description: "Info Value"
+          type: "string"
+        Tiles:
+          description: "SDT_Info Tile"
+          type: array
+          items:
+            $ref: "#/components/schemas/SDT_InfoTile_SDT_InfoTileItem"
+        Images:
+          description: "Images"
+          type: array
+          items:
+            type: "string"
+        CtaAttributes:
+          $ref: "#/components/schemas/SDT_InfoPage.InfoContent.CtaAttributes"
+      x-gx-level: "SDT_InfoPage"
+    SDT_InfoPage.InfoContent.CtaAttributes:
+      properties:
+        CtaId:
+          description: "Cta Id"
+          type: "string"
+        CtaType:
+          description: "Cta Type"
+          type: "string"
+        CtaLabel:
+          description: "Cta Label"
+          type: "string"
+        CtaAction:
+          description: "Cta Action"
+          type: "string"
+        CtaColor:
+          description: "Cta Color"
+          type: "string"
+        CtaBGColor:
+          description: "Cta BGColor"
+          type: "string"
+        CtaButtonType:
+          description: "Cta Button Type"
+          type: "string"
+        CtaButtonImgUrl:
+          description: "Cta Button Img Url"
+          type: "string"
+        CtaButtonIcon:
+          description: "Cta Button Icon"
+          type: "string"
+        CtaSupplierIsConnected:
+          description: "Cta Supplier Is Connected"
+          type: "boolean"
+        CtaConnectedSupplierId:
+          description: "Cta Connected Supplier Id"
+          type: "string"
+          format: "uuid"
+      x-gx-level: "SDT_InfoPage.InfoContent"
+    SDT_InfoTile_SDT_InfoTileItem:
+      properties:
+        Id:
+          description: "Id"
+          type: "string"
+        Name:
+          description: "Name"
+          type: "string"
+        Text:
+          description: "Text"
+          type: "string"
+        Color:
+          description: "Color"
+          type: "string"
+        Align:
+          description: "Align"
+          type: "string"
+        Icon:
+          description: "Icon"
+          type: "string"
+        BGColor:
+          description: "BGColor"
+          type: "string"
+        BGImageUrl:
+          description: "BGImage Url"
+          type: "string"
+        Opacity:
+          description: "Opacity"
+          type: "integer"
+          format: "int32"
+        Size:
+          description: "Size"
+          type: "number"
+          format: "double"
+        BGSize:
+          description: "BGSize"
+          type: "string"
+        BGPosition:
+          description: "BGPosition"
+          type: "string"
+        Left:
+          description: "Left"
+          type: "string"
+        Top:
+          description: "Top"
+          type: "string"
+        OriginalImageUrl:
+          description: "Original Image Url"
+          type: "string"
+        Action:
+          $ref: "#/components/schemas/SDT_InfoTile.Action"
+    SDT_InfoTile.Action:
+      properties:
+        ObjectType:
+          description: "Object Type"
+          type: "string"
+        ObjectId:
+          description: "Object Id"
+          type: "string"
+        ObjectUrl:
+          description: "Object Url"
+          type: "string"
+        FormId:
+          description: "Form Id"
+          type: "integer"
+          format: "int32"
+      x-gx-level: "SDT_InfoTile"
+    SDT_LinkPage:
+      properties:
+        Url:
+          description: "Url"
+          type: "string"
+        WWPFormId:
+          description: "WWPForm Id"
+          type: "integer"
+          format: "int32"
+    SDT_Location:
+      properties:
+        LocationId:
+          description: "Location Id"
+          type: "string"
+          format: "uuid"
+        OrganisationId:
+          description: "Organisation Id"
+          type: "string"
+          format: "uuid"
+        LocationName:
+          description: "Location Name"
+          type: "string"
+        LocationCountry:
+          description: "Location Country"
+          type: "string"
+        LocationCity:
+          description: "Location City"
+          type: "string"
+        LocationZipCode:
+          description: "Location Zip Code"
+          type: "string"
+        LocationAddressLine1:
+          description: "Location Address Line1"
+          type: "string"
+        LocationAddressLine2:
+          description: "Location Address Line2"
+          type: "string"
+        LocationEmail:
+          description: "Location Email"
+          type: "string"
+        LocationPhone:
+          description: "Location Phone"
+          type: "string"
+        LocationDescription:
+          description: "Location Description"
+          type: "string"
+    SDT_LocationTheme:
+      properties:
+        ThemeId:
+          description: "Theme Id"
+          type: "string"
+          format: "uuid"
+        ThemeName:
+          description: "Trn_Theme Name"
+          type: "string"
+        ThemeFontFamily:
+          description: "Trn_Theme Font Family"
+          type: "string"
+        ThemeFontSize:
+          description: "Trn_Theme Font Size"
+          type: "integer"
+          format: "int32"
+        Color:
+          $ref: "#/components/schemas/SDT_LocationTheme.Color"
+    SDT_LocationTheme.Color:
+      properties:
+        ColorId:
+          description: "Cta Color Id"
+          type: "string"
+          format: "uuid"
+        ColorName:
+          description: "Cta Color Name"
+          type: "string"
+        ColorCode:
+          description: "Cta Color Code"
+          type: "string"
+      x-gx-level: "SDT_LocationTheme"
+    SDT_LoginResidentResponse:
+      properties:
+        access_token:
+          description: "access_token"
+          type: "string"
+        token_type:
+          description: "token_type"
+          type: "string"
+        expires_in:
+          description: "expires_in"
+          type: "number"
+          format: "double"
+        refresh_token:
+          description: "refresh_token"
+          type: "string"
+        scope:
+          description: "scope"
+          type: "string"
+        user_guid:
+          description: "user_guid"
+          type: "string"
+        error:
+          description: "SDT_Error Response"
+          $ref: "#/components/schemas/SDT_ErrorResponse"
+    SDT_Media:
+      properties:
+        MediaId:
+          description: "Media Id"
+          type: "string"
+          format: "uuid"
+        MediaName:
+          description: "Media Name"
+          type: "string"
+        MediaImage:
+          description: "Media Image"
+          type: "string"
+        MediaSize:
+          description: "Media Size"
+          type: "integer"
+          format: "int64"
+        MediaType:
+          description: "Media Type"
+          type: "string"
+        MediaUrl:
+          description: "Media Url"
+          type: "string"
+        IsCropped:
+          description: "Is Cropped"
+          type: "boolean"
+    SDT_Memo:
+      properties:
+        MemoId:
+          description: "Memo Id"
+          type: "string"
+          format: "uuid"
+        MemoTitle:
+          description: "Memo Title"
+          type: "string"
+        MemoDescription:
+          description: "Memo Description"
+          type: "string"
+        MemoImage:
+          description: "Memo Image"
+          type: "string"
+        MemoDocument:
+          description: "Memo Document"
+          type: "string"
+        MemoStartDateTime:
+          description: "Memo Start Date Time"
+          type: "string"
+          format: "date-time"
+        MemoEndDateTime:
+          description: "Memo End Date Time"
+          type: "string"
+          format: "date-time"
+        MemoDuration:
+          description: "Memo Duration"
+          type: "number"
+          format: "double"
+        MemoRemoveDate:
+          description: "Memo Remove Date"
+          type: "string"
+          format: "date"
+        ResidentId:
+          description: "Resident Id"
+          type: "string"
+          format: "uuid"
+        ResidentSalutation:
+          description: "Resident Salutation"
+          type: "string"
+        ResidentGivenName:
+          description: "Resident Given Name"
+          type: "string"
+        ResidentLastName:
+          description: "Resident Last Name"
+          type: "string"
+        ResidentGUID:
+          description: "Resident GUID"
+          type: "string"
+        MemoBgColorCode:
+          description: "Memo Bg Color Code"
+          type: "string"
+        MemoForm:
+          description: "Memo Form"
+          type: "string"
+        CreatedBy:
+          description: "Created By"
+          type: "string"
+        MemoType:
+          description: "Memo Type"
+          type: "string"
+        MemoName:
+          description: "Memo Name"
+          type: "string"
+        MemoLeftOffset:
+          description: "Memo Left Offset"
+          type: "number"
+          format: "double"
+        MemoTopOffset:
+          description: "Memo Top Offset"
+          type: "number"
+          format: "double"
+        MemoTitleAngle:
+          description: "Memo Title Angle"
+          type: "number"
+          format: "double"
+        MemoTitleScale:
+          description: "Memo Title Scale"
+          type: "number"
+          format: "double"
+        MemoTextFontName:
+          description: "Memo Text Font Name"
+          type: "string"
+        MemoTextAlignment:
+          description: "Memo Text Alignment"
+          type: "string"
+        MemoIsBold:
+          description: "Memo Is Bold"
+          type: "boolean"
+        MemoIsItalic:
+          description: "Memo Is Italic"
+          type: "boolean"
+        MemoIsCapitalized:
+          description: "Memo Is Capitalized"
+          type: "boolean"
+        MemoTextColor:
+          description: "Memo Text Color"
+          type: "string"
+    SDT_MemoCategory:
+      properties:
+        MemoCategoryId:
+          description: "Memo Category Id"
+          type: "string"
+          format: "uuid"
+        MemoCategoryName:
+          description: "Memo Category Name"
+          type: "string"
+    SDT_MenuPage:
+      properties:
+        Rows:
+          type: array
+          items:
+            description: RowsItem
+            $ref: "#/components/schemas/SDT_MenuPage.Rows_RowsItem"
+    SDT_MenuPage.Rows_RowsItem:
+      properties:
+        Id:
+          description: "Id"
+          type: "string"
+        Tiles:
+          type: array
+          items:
+            description: TilesItem
+            $ref: "#/components/schemas/SDT_MenuPage.Rows.Tiles_TilesItem"
+      x-gx-level: "SDT_MenuPage"
+    SDT_MenuPage.Rows.Tiles_TilesItem:
+      properties:
+        Id:
+          description: "Id"
+          type: "string"
+        Name:
+          description: "Name"
+          type: "string"
+        Text:
+          description: "Text"
+          type: "string"
+        Color:
+          description: "Color"
+          type: "string"
+        Align:
+          description: "Align"
+          type: "string"
+        Icon:
+          description: "Icon"
+          type: "string"
+        BGColor:
+          description: "BGColor"
+          type: "string"
+        BGImageUrl:
+          description: "BGImage Url"
+          type: "string"
+        Opacity:
+          description: "Opacity"
+          type: "integer"
+          format: "int32"
+        Size:
+          description: "Size"
+          type: "integer"
+          format: "int32"
+        Permissions:
+          description: "Permissions"
+          type: array
+          items:
+            type: "string"
+        Action:
+          $ref: "#/components/schemas/SDT_MenuPage.Rows.Tiles.Action"
+      x-gx-level: "SDT_MenuPage.Rows"
+    SDT_MenuPage.Rows.Tiles.Action:
+      properties:
+        ObjectType:
+          description: "Object Type"
+          type: "string"
+        ObjectId:
+          description: "Object Id"
+          type: "string"
+        ObjectUrl:
+          description: "Object Url"
+          type: "string"
+      x-gx-level: "SDT_MenuPage.Rows.Tiles"
+    SDT_MobilePage:
+      properties:
+        PageId:
+          description: "Page Id"
+          type: "string"
+          format: "uuid"
+        PageName:
+          description: "Page Name"
+          type: "string"
+        Row:
+          description: "SDT_Row"
+          type: array
+          items:
+            $ref: "#/components/schemas/SDT_Row"
+    SDT_OneSignalCustomData:
+      properties:
+        notificationCategory:
+          description: "notification Category"
+          type: "string"
+        formDetails:
+          $ref: "#/components/schemas/SDT_OneSignalCustomData.formDetails"
+        discussionDetails:
+          $ref: "#/components/schemas/SDT_OneSignalCustomData.discussionDetails"
+        agendaDetails:
+          $ref: "#/components/schemas/SDT_OneSignalCustomData.agendaDetails"
+        toolboxDetails:
+          type: array
+          items:
+            description: toolboxDetailsItem
+            $ref: "#/components/schemas/SDT_OneSignalCustomData.toolboxDetails_toolboxDetailsItem"
+    SDT_OneSignalCustomData.formDetails:
+      properties:
+        formMode:
+          description: "form Mode"
+          type: "string"
+        formInstanceId:
+          description: "form Instance Id"
+          type: "integer"
+          format: "int32"
+        formReferenceName:
+          description: "form Reference Name"
+          type: "string"
+      x-gx-level: "SDT_OneSignalCustomData"
+    SDT_OneSignalCustomData.discussionDetails:
+      properties:
+        discussionId:
+          description: "discussion Id"
+          type: "string"
+      x-gx-level: "SDT_OneSignalCustomData"
+    SDT_OneSignalCustomData.agendaDetails:
+      properties:
+        agendaEventId:
+          description: "Agenda Calendar Id"
+          type: "string"
+          format: "uuid"
+      x-gx-level: "SDT_OneSignalCustomData"
+    SDT_OneSignalCustomData.toolboxDetails_toolboxDetailsItem:
+      properties:
+        pageName:
+          description: "page Name"
+          type: "string"
+        pageId:
+          description: "page Id"
+          type: "string"
+          format: "uuid"
+      x-gx-level: "SDT_OneSignalCustomData"
+    SDT_Organisation:
+      properties:
+        OrganisationId:
+          description: "Organisation Id"
+          type: "string"
+          format: "uuid"
+        OrganisationName:
+          description: "Organisation Name"
+          type: "string"
+        OrganisationKvkNumber:
+          description: "Organisation Kvk Number"
+          type: "string"
+        OrganisationEmail:
+          description: "Organisation Email"
+          type: "string"
+        OrganisationPhone:
+          description: "Organisation Phone"
+          type: "string"
+        OrganisationVATNumber:
+          description: "Organisation VATNumber"
+          type: "string"
+        OrganisationCountry:
+          description: "Organisation Address Country"
+          type: "string"
+        OrganisationCity:
+          description: "Organisation Address City"
+          type: "string"
+        OrganisationZipCode:
+          description: "Organisation Address Zip Code"
+          type: "string"
+        OrganisationAddressLine1:
+          description: "Organisation Address Line1"
+          type: "string"
+        OrganisationAddressLine2:
+          description: "Organisation Address Line2"
+          type: "string"
+        OrganisationTypeId:
+          description: "Organisation Type Id"
+          type: "string"
+          format: "uuid"
+        OrganisationTypeName:
+          description: "Organisation Type Name"
+          type: "string"
+        OrganisationLogo:
+          description: "Organisation Logo"
+          type: "string"
+    SDT_Page:
+      properties:
+        PageId:
+          description: "Page Id"
+          type: "string"
+          format: "uuid"
+        PageName:
+          description: "Page Name"
+          type: "string"
+        Theme:
+          description: "SDT_Theme"
+          $ref: "#/components/schemas/SDT_Theme"
+        PageIsPublished:
+          description: "Page Is Published"
+          type: "boolean"
+        PageIsContentPage:
+          description: "Page Is Content Page"
+          type: "boolean"
+        PageIsPredefined:
+          description: "Page Is Predefined"
+          type: "boolean"
+        PageGJSJson:
+          description: "Page GJSJson"
+          type: "string"
+        PageGJSHtml:
+          description: "Page GJSHtml"
+          type: "string"
+        PageJsonContent:
+          description: "Page Json Content"
+          type: "string"
+        PageIsDynamicForm:
+          description: "Page Is Dynamic Form"
+          type: "boolean"
+        PageIsWebLinkPage:
+          description: "Page Is Web Link Page"
+          type: "boolean"
+        WWPFormId:
+          description: "WWPForm Id"
+          type: "integer"
+          format: "int32"
+        PageChildren:
+          description: "SDT_Page Children"
+          type: array
+          items:
+            $ref: "#/components/schemas/SDT_PageChildren"
+        LocationId:
+          description: "Location Id"
+          type: "string"
+          format: "uuid"
+        Row:
+          description: "SDT_Row"
+          type: array
+          items:
+            $ref: "#/components/schemas/SDT_Row"
+    SDT_PageChildren:
+      properties:
+        Id:
+          description: "Id"
+          type: "string"
+          format: "uuid"
+        Name:
+          description: "Name"
+          type: "string"
+    SDT_PageStructure:
+      properties:
+        Id:
+          description: "Id"
+          type: "string"
+          format: "uuid"
+        Name:
+          description: "Name"
+          type: "string"
+        Children:
+          type: array
+          items:
+            description: ChildrenItem
+            $ref: "#/components/schemas/SDT_PageStructure.Children_ChildrenItem"
+    SDT_PageStructure.Children_ChildrenItem:
+      properties:
+        Id:
+          description: "Id"
+          type: "string"
+          format: "uuid"
+        Name:
+          description: "Name"
+          type: "string"
+      x-gx-level: "SDT_PageStructure"
+    SDT_PageUrl:
+      properties:
+        Page:
+          description: "Page"
+          type: "string"
+        Urls:
+          type: array
+          items:
+            description: UrlsItem
+            $ref: "#/components/schemas/SDT_PageUrl.Urls_UrlsItem"
+    SDT_PageUrl.Urls_UrlsItem:
+      properties:
+        Url:
+          description: "Url"
+          type: "string"
+        AffectedType:
+          description: "Affected Type"
+          type: "string"
+        AffectedName:
+          description: "Affected Name"
+          type: "string"
+      x-gx-level: "SDT_PageUrl"
+    SDT_ProductService:
+      properties:
+        ProductServiceId:
+          description: "Product Service Id"
+          type: "string"
+          format: "uuid"
+        LocationId:
+          description: "Location Id"
+          type: "string"
+          format: "uuid"
+        OrganisationId:
+          description: "Organisation Id"
+          type: "string"
+          format: "uuid"
+        ProductServiceName:
+          description: "Product Service Name"
+          type: "string"
+        ProductServiceTileName:
+          description: "Product Service Tile Name"
+          type: "string"
+        ProductServiceDescription:
+          description: "Product Service Description"
+          type: "string"
+        ProductServiceClass:
+          description: "Product Service Class"
+          type: "string"
+        ProductServiceImage:
+          description: "Product Service Image"
+          type: "string"
+        ProductServiceGroup:
+          description: "Product Service Group"
+          type: "string"
+        SupplierGenId:
+          description: "Supplier Gen Id"
+          type: "string"
+          format: "uuid"
+        SupplierGenCompanyName:
+          description: "Company Name"
+          type: "string"
+        SupplierAgbId:
+          description: "Supplier Agb Id"
+          type: "string"
+          format: "uuid"
+        SupplierAgbName:
+          description: "Supplier Agb Name"
+          type: "string"
+        CallToActions:
+          description: "SDT_Call To Action"
+          type: array
+          items:
+            $ref: "#/components/schemas/SDT_CallToAction_SDT_CallToActionItem"
+    SDT_PublishPage:
+      properties:
+        PageId:
+          description: "Page Id"
+          type: "string"
+          format: "uuid"
+        PageName:
+          description: "Page Name"
+          type: "string"
+        PageIsPublished:
+          description: "Page Is Published"
+          type: "boolean"
+        PageIsContentPage:
+          description: "Page Is Content Page"
+          type: "boolean"
+        PageIsPredefined:
+          description: "Page Is Predefined"
+          type: "boolean"
+        PageGJSJson:
+          description: "Page GJSJson"
+          type: "string"
+        PageGJSHtml:
+          description: "Page GJSHtml"
+          type: "string"
+        PageJsonContent:
+          description: "Page Json Content"
+          type: "string"
+        SDT_Page:
+          description: "SDT_Page"
+          $ref: "#/components/schemas/SDT_Page"
+    SDT_RecoverPasswordStep1:
+      properties:
+        success_message:
+          description: "success_message"
+          type: "string"
+        error:
+          description: "SDT_Error Response"
+          $ref: "#/components/schemas/SDT_ErrorResponse"
+    SDT_Resident:
+      properties:
+        ResidentId:
+          description: "Resident Id"
+          type: "string"
+          format: "uuid"
+        LocationId:
+          description: "Location Id"
+          type: "string"
+          format: "uuid"
+        OrganisationId:
+          description: "Organisation Id"
+          type: "string"
+          format: "uuid"
+        ResidentSalutation:
+          description: "Resident Salutation"
+          type: "string"
+        ResidentBsnNumber:
+          description: "Resident Bsn Number"
+          type: "string"
+        ResidentGivenName:
+          description: "Resident Given Name"
+          type: "string"
+        ResidentLastName:
+          description: "Resident Last Name"
+          type: "string"
+        ResidentInitials:
+          description: "Resident Initials"
+          type: "string"
+        ResidentEmail:
+          description: "Resident Email"
+          type: "string"
+        ResidentGender:
+          description: "Resident Gender"
+          type: "string"
+        ResidentAddress:
+          description: "Resident Address"
+          type: "string"
+        ResidentPhone:
+          description: "Resident Phone"
+          type: "string"
+        ResidentBirthDate:
+          description: "Resident Birth Date"
+          type: "string"
+          format: "date"
+        ResidentGUID:
+          description: "Resident GUID"
+          type: "string"
+        ResidentTypeId:
+          description: "Resident Type Id"
+          type: "string"
+          format: "uuid"
+        ResidentTypeName:
+          description: "Resident Type Name"
+          type: "string"
+        MedicalIndicationId:
+          description: "Medical Indication Id"
+          type: "string"
+          format: "uuid"
+        MedicalIndicationName:
+          description: "Medical Indication Name"
+          type: "string"
+        ResidentImage:
+          description: "Resident Image"
+          type: "string"
+        ResidentLanguage:
+          description: "Resident Language"
+          type: "string"
+    SDT_ResidentNotification:
+      properties:
+        NotificationId:
+          description: "Notification Id"
+          type: "string"
+          format: "uuid"
+        NotificationTitle:
+          description: "App Notification Title"
+          type: "string"
+        NotificationDescription:
+          description: "App Notification Description"
+          type: "string"
+        NotificationDate:
+          description: "App Notification Date"
+          type: "string"
+          format: "date-time"
+        NotificationTopic:
+          description: "App Notification Topic"
+          type: "string"
+        NotificationMetadata:
+          description: "SDT_One Signal Custom Data"
+          $ref: "#/components/schemas/SDT_OneSignalCustomData"
+    SDT_Row:
+      properties:
+        Col:
+          description: "SDT_Col"
+          type: array
+          items:
+            $ref: "#/components/schemas/SDT_Col"
+    SDT_Theme:
+      properties:
+        ThemeId:
+          description: "Trn_Theme Id"
+          type: "string"
+          format: "uuid"
+        ThemeName:
+          description: "Trn_Theme Name"
+          type: "string"
+        ThemeFontFamily:
+          description: "Trn_Theme Font Family"
+          type: "string"
+        ThemeFontSize:
+          description: "Trn_Theme Font Size"
+          type: "integer"
+          format: "int32"
+        Icons:
+          type: array
+          items:
+            description: IconsItem
+            $ref: "#/components/schemas/SDT_Theme.Icons_IconsItem"
+        Colors:
+          type: array
+          items:
+            description: ColorsItem
+            $ref: "#/components/schemas/SDT_Theme.Colors_ColorsItem"
+        CtaColors:
+          type: array
+          items:
+            description: CtaColorsItem
+            $ref: "#/components/schemas/SDT_Theme.CtaColors_CtaColorsItem"
+    SDT_Theme.Icons_IconsItem:
+      properties:
+        IconId:
+          description: "Icon Id"
+          type: "string"
+          format: "uuid"
+        IconCategory:
+          description: "Icon Category"
+          type: "string"
+        IconName:
+          description: "Icon Name"
+          type: "string"
+        IconSVG:
+          description: "Icon SVG"
+          type: "string"
+      x-gx-level: "SDT_Theme"
+    SDT_Theme.Colors_ColorsItem:
+      properties:
+        ColorId:
+          description: "Color Id"
+          type: "string"
+          format: "uuid"
+        ColorName:
+          description: "Color Name"
+          type: "string"
+        ColorCode:
+          description: "Color Code"
+          type: "string"
+      x-gx-level: "SDT_Theme"
+    SDT_Theme.CtaColors_CtaColorsItem:
+      properties:
+        CtaColorId:
+          description: "Cta Color Id"
+          type: "string"
+          format: "uuid"
+        CtaColorName:
+          description: "Cta Color Name"
+          type: "string"
+        CtaColorCode:
+          description: "Cta Color Code"
+          type: "string"
+      x-gx-level: "SDT_Theme"
+    SDT_Tile:
+      properties:
+        TileId:
+          description: "Tile Id"
+          type: "string"
+        TileName:
+          description: "Tile Name"
+          type: "string"
+        TileText:
+          description: "Tile Text"
+          type: "string"
+        TileColor:
+          description: "Tile Color"
+          type: "string"
+        TileAlignment:
+          description: "Tile Alignment"
+          type: "string"
+        TileIcon:
+          description: "Tile Icon"
+          type: "string"
+        TileBGColor:
+          description: "Tile BGColor"
+          type: "string"
+        TileBGImageUrl:
+          description: "Tile BGImage Url"
+          type: "string"
+        TileBGImageOpacity:
+          description: "Tile BGImage Opacity"
+          type: "integer"
+          format: "int32"
+        TileAction:
+          description: "SDT_Tile Action"
+          $ref: "#/components/schemas/SDT_TileAction"
+        TileSize:
+          description: "Tile Size"
+          type: "number"
+          format: "double"
+    SDT_TileAction:
+      properties:
+        ObjectType:
+          description: "Object Type"
+          type: "string"
+        ObjectId:
+          description: "Object Id"
+          type: "string"
+        ObjectUrl:
+          description: "Object Url"
+          type: "string"
+    SDT_TrashItem:
+      properties:
+        Type:
+          description: "Type"
+          type: "string"
+        Page:
+          description: "SDT_App Version Page"
+          $ref: "#/components/schemas/SDT_AppVersionPage"
+        Version:
+          description: "SDT_App Version"
+          $ref: "#/components/schemas/SDT_AppVersion"
+        DeletedAt:
+          description: "Deleted At"
+          type: "string"
+          format: "date-time"
+        TrashId:
+          description: "Trash Id"
+          type: "string"
+          format: "uuid"
+    Trn_Location:
+      properties:
+        LocationId:
+          description: "Location Id"
+          type: "string"
+          format: "uuid"
+        OrganisationId:
+          description: "Organisation Id"
+          type: "string"
+          format: "uuid"
+        LocationName:
+          description: "Location Name"
+          type: "string"
+        LocationImage:
+          description: "Location Image"
+          type: "string"
+        LocationCountry:
+          description: "Location Country"
+          type: "string"
+        LocationCity:
+          description: "Location City"
+          type: "string"
+        LocationZipCode:
+          description: "Location Zip Code"
+          type: "string"
+        LocationAddressLine1:
+          description: "Location Address Line1"
+          type: "string"
+        LocationAddressLine2:
+          description: "Location Address Line2"
+          type: "string"
+        LocationEmail:
+          description: "Location Email"
+          type: "string"
+        LocationPhoneCode:
+          description: "Location Phone Code"
+          type: "string"
+        LocationPhoneNumber:
+          description: "Location Phone Number"
+          type: "string"
+        LocationPhone:
+          description: "Location Phone"
+          type: "string"
+        LocationDescription:
+          description: "Location Description"
+          type: "string"
+        LocationBrandTheme:
+          description: "Location Brand Theme"
+          type: "string"
+        LocationCtaTheme:
+          description: "Location Cta Theme"
+          type: "string"
+        LocationHasMyCare:
+          description: "Location Has My Care"
+          type: "boolean"
+        LocationHasMyServices:
+          description: "Location Has My Services"
+          type: "boolean"
+        LocationHasMyLiving:
+          description: "Location Has My Living"
+          type: "boolean"
+        LocationHasOwnBrand:
+          description: "Location Has Own Brand"
+          type: "boolean"
+        ToolBoxDefaultProfileImage:
+          description: "Tool Box Default Profile Image"
+          type: "string"
+        ToolBoxDefaultLogo:
+          description: "Tool Box Default Logo"
+          type: "string"
+        ReceptionImage:
+          description: "Reception Image"
+          type: "string"
+        ReceptionDescription:
+          description: "Reception Description"
+          type: "string"
+        ActiveAppVersionId:
+          description: "Active App Version Id"
+          type: "string"
+          format: "uuid"
+        PublishedActiveAppVersionId:
+          description: "Published Active App Version Id"
+          type: "string"
+          format: "uuid"
+        Trn_ThemeId:
+          description: "Trn_Theme Id"
+          type: "string"
+          format: "uuid"
+        LocationThemeId:
+          description: "Location Theme Id"
+          type: "string"
+          format: "uuid"
+        ToolBoxLastUpdateReceptionistId:
+          description: "Tool Box Last Update Receptionist Id"
+          type: "string"
+          format: "uuid"
+        ToolBoxLastUpdateTime:
+          description: "Tool Box Last Update Time"
+          type: "string"
+          format: "date-time"
+    Trn_Media:
+      properties:
+        MediaId:
+          description: "Media Id"
+          type: "string"
+          format: "uuid"
+        MediaName:
+          description: "Media Name"
+          type: "string"
+        MediaImage:
+          description: "Media Image"
+          type: "string"
+        MediaSize:
+          description: "Media Size"
+          type: "integer"
+          format: "int64"
+        MediaType:
+          description: "Media Type"
+          type: "string"
+        MediaDateTime:
+          description: "Media Date Time"
+          type: "string"
+          format: "date-time"
+        MediaUrl:
+          description: "Media Url"
+          type: "string"
+        LocationId:
+          description: "Location Id"
+          type: "string"
+          format: "uuid"
+        IsCropped:
+          description: "Is Cropped"
+          type: "boolean"
+    WorkWithPlus.DynamicForms.WWP_FormInstance:
+      properties:
+        WWPFormInstanceId:
+          description: "Instance Id"
+          type: "integer"
+          format: "int64"
+        WWPFormInstanceDate:
+          description: "Instance Date"
+          type: "string"
+          format: "date-time"
+        WWPFormId:
+          description: "WWPForm Id"
+          type: "integer"
+          format: "int32"
+        WWPFormReferenceName:
+          description: "WWPForm Reference Name"
+          type: "string"
+        WWPFormVersionNumber:
+          description: "WWPForm Version Number"
+          type: "integer"
+          format: "int32"
+        WWPFormTitle:
+          description: "WWPForm Title"
+          type: "string"
+        WWPUserExtendedId:
+          description: "User Id"
+          type: "string"
+        WWPUserExtendedFullName:
+          description: "User Full Name"
+          type: "string"
+        WWPFormResume:
+          description: "WWPForm Resume"
+          type: "integer"
+          format: "int32"
+        WWPFormValidations:
+          description: "WWPForm Validations"
+          type: "string"
+        WWPFormInstanceRecordKey:
+          description: "WWPForm Instance Record Key"
+          type: "string"
+        Element:
+          $ref: "#/components/schemas/WorkWithPlus.DynamicForms.WWP_FormInstance.Element"
+    WorkWithPlus.DynamicForms.WWP_FormInstance.Element:
+      properties:
+        WWPFormElementId:
+          description: "WWPForm Element Id"
+          type: "integer"
+          format: "int32"
+        WWPFormInstanceElementId:
+          description: "WWPForm Instance Element Id"
+          type: "integer"
+          format: "int32"
+        WWPFormElementTitle:
+          description: "WWPForm Element Title"
+          type: "string"
+        WWPFormElementReferenceId:
+          description: "WWPForm Element Reference Id"
+          type: "string"
+        WWPFormElementDataType:
+          description: "WWPForm Element Data Type"
+          type: "integer"
+          format: "int32"
+        WWPFormElementParentId:
+          description: "WWPForm Element Parent Id"
+          type: "integer"
+          format: "int32"
+        WWPFormElementParentType:
+          description: "WWPForm Element Parent Type"
+          type: "integer"
+          format: "int32"
+        WWPFormElementType:
+          description: "WWPForm Element Type"
+          type: "integer"
+          format: "int32"
+        WWPFormElementMetadata:
+          description: "WWPForm Element Metadata"
+          type: "string"
+        WWPFormElementCaption:
+          description: "WWPForm Element Caption"
+          type: "integer"
+          format: "int32"
+        WWPFormInstanceElemChar:
+          description: "WWPForm Instance Elem Char"
+          type: "string"
+        WWPFormInstanceElemDate:
+          description: "WWPForm Instance Elem Date"
+          type: "string"
+          format: "date"
+        WWPFormInstanceElemDateTime:
+          description: "WWPForm Instance Elem Date Time"
+          type: "string"
+          format: "date-time"
+        WWPFormInstanceElemNumeric:
+          description: "WWPForm Instance Elem Numeric"
+          type: "number"
+          format: "double"
+        WWPFormInstanceElemBlob:
+          description: "WWPForm Instance Elem Blob"
+          type: "string"
+        WWPFormInstanceElemBlobFileName:
+          description: "WWPForm Instance Elem Blob File Name"
+          type: "string"
+        WWPFormInstanceElemBlobFileType:
+          description: "WWPForm Instance Elem Blob File Type"
+          type: "string"
+        WWPFormInstanceElemBoolean:
+          description: "WWPForm Instance Elem Boolean"
+          type: "boolean"
+      x-gx-level: "WWP_FormInstance"

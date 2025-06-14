@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CallableObject guid="3cf9574e-e8c1-7fdb-a944-815bbe159953" name="Trn_EnvironmentVariable_DataProvider" description="Trn_Environment Variable_Data Provider" namespace="GeneXus.Programs">
+  <Signature name="parm">
+    <Parameter name="ReturnValue" accessor="out" collection="true">
+      <Field name="Trn_EnvironmentVariable" description="Trn_Environment Variable">
+        <Fields>
+          <Field name="EnvironmentVariableId" description="Environment Variable Id">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>GUID</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="EnvironmentVariableKey" description="Environment Variable Key">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>400</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="EnvironmentVariableValue" description="Environment Variable Value">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>LongVarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>2097152</Value>
+              </Property>
+            </Properties>
+          </Field>
+        </Fields>
+      </Field>
+    </Parameter>
+  </Signature>
+</CallableObject>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CallableObject guid="03e45198-c3e4-4ccc-a256-85b38e7cb132" name="DP_RecurringEventType" description="DP_Recurring Event Type" namespace="GeneXus.Programs">
+  <Signature name="Par">
+    <Parameter name="CurrentDate">
+      <Field>
+        <Properties>
+          <Property>
+            <Name>Type</Name>
+            <Value>DateTime</Value>
+          </Property>
+          <Property>
+            <Name>Length</Name>
+            <Value>8</Value>
+          </Property>
+          <Property>
+            <Name>Decimals</Name>
+            <Value>5</Value>
+          </Property>
+        </Properties>
+      </Field>
+    </Parameter>
+    <Parameter name="ReturnValue" accessor="out">
+      <Field name="SDT_RecurringEventType" description="SDT_Recurring Event Type" collection="true">
+        <Fields>
+          <Field name="RecurringEventTypeId" description="Recurring Event Type Id">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>100</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="RecurringEventTypeDescription" description="Recurring Event Type Description">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>400</Value>
+              </Property>
+            </Properties>
+          </Field>
+        </Fields>
+      </Field>
+    </Parameter>
+  </Signature>
+</CallableObject>

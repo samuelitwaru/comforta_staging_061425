@@ -1,0 +1,39 @@
+{
+	"Name": "UC_DynamicFormJSCSS",
+	"Target": "",
+	"IsControlType": false,
+	 "Template": "", 
+	"Events": [
+	],
+	"Properties": [
+		{
+			"Id": "BackgroundColor",
+			"Name": "BackgroundColor",
+			"Type": "string",
+			"Default": ""
+		} 
+	],
+	"Methods": {
+		"Public": [
+		],
+		"Private": [
+		]
+	},
+	"Scripts": {
+		"AfterShow": [
+			{
+				"Name": "Start",
+				"Source": "		try {			if(document) {				const dynamicFormButtons = document.querySelectorAll(\".MobileSubmitBtn\")				console.log(this.BackgroundColor)				dynamicFormButtons.forEach((button) => {					button.style.backgroundColor = this.BackgroundColor				});			} else {				console.log(\"No document found\")			}		} catch (e) {			console.log(e)		}		",
+				"AngularLocation": ""
+			} 
+		],
+		"BeforeShow": [
+		]
+	},
+	"Dependencies": [
+	],
+	"Imports": [
+	],
+	"Styles": [
+	]
+}

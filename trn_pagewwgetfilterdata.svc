@@ -1,0 +1,1 @@
+<%@ServiceHost Service= "GeneXus.Programs.trn_pagewwgetfilterdata,trn_pagewwgetfilterdata" %>

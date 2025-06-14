@@ -1,0 +1,1 @@
+<%@ServiceHost Service= "GeneXus.Programs.workwithplus.dynamicforms.wwp_formwwgetfilterdata,workwithplus.dynamicforms.wwp_formwwgetfilterdata" %>

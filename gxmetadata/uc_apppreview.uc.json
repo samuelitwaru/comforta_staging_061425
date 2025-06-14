@@ -1,0 +1,39 @@
+{
+	"Name": "UC_AppPreview",
+	"Target": "",
+	"IsControlType": false,
+	"Template": "<div class=\"tbap-container\">  <div class=\"tbap-mobile-frame\" id=\"frame\">	  </div></div>", 
+	"Events": [
+	],
+	"Properties": [
+		{
+			"Id": "AppVersion",
+			"Name": "AppVersion",
+			"Type": "sdt",
+			"Default": ""
+		} 
+	],
+	"Methods": {
+		"Public": [
+		],
+		"Private": [
+		]
+	},
+	"Scripts": {
+		"AfterShow": [
+			{
+				"Name": "Start",
+				"Source": "	console.log(\"AppVersion: \", this.AppVersion)	localStorage.removeItem(\"navigation\");	if (typeof PreviewApp !== \'undefined\') {		new PreviewApp(this.AppVersion);	} else {		console.error(\"PreviewApp class is not defined. Check if bundle.js is loaded.\");	}",
+				"AngularLocation": ""
+			} 
+		],
+		"BeforeShow": [
+		]
+	},
+	"Dependencies": [
+	],
+	"Imports": [
+	],
+	"Styles": [
+	]
+}

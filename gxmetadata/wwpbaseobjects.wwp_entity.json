@@ -1,0 +1,4 @@
+{
+
+"GxObject":{"ObjectType":"BusinessComponent","Name":"WWPBaseObjects.WWP_Entity","idConnectivitySupport":"idInherit","Structure":{"Levels":[{"Name":"Wwp_entity","ParentLevel":"","LevelName":"WWPBaseObjects.WWP_Entity","Description":"WWP_Entity","Attributes":[{"Name":"WWPEntityId","Caption":"","default":"0","AutoNumber":"true","IsKey":"true","ReadOnly":"false","AttributeType":"int","Description":"","Length":"10","Decimals":"0","Signed":"false","AllowDBNulls":"false","Domain":"WorkWithPlus_Web\\WWP_Id","InternalName":"WWPEntityId","InputPicture":"ZZZZZZZZZ9","Type":"xs:int"},{"Name":"WWPEntityName","Caption":"","default":"","IsKey":"false","ReadOnly":"false","AttributeType":"svchar","Description":"","Length":"100","Decimals":"0","Signed":"false","AllowDBNulls":"false","Domain":"WorkWithPlus_Web\\WWP_Description","InternalName":"WWPEntityName","DescriptionAtt":"true","InputPicture":"","Type":"xs:string"}]}]},"Relations":{"ManyToOne":{"references":[]}}}
+}
