@@ -1510,6 +1510,12 @@ div#cta-selected-actions {
   justify-items: center;
   align-items: center;
   margin: 16px 0;
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+  padding: 0 8px;
 }
 
 .sidebar-section .icons-list .icon {
