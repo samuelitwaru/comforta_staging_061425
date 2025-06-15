@@ -1344,7 +1344,7 @@ img.content-page-block {
 }
 
 /* Image edit styles */
-.img-button-container .icon-edit-button {
+.img-button-icon .icon-edit-button {
   position: absolute;
   bottom: 0;
   right: -15px;
@@ -1352,6 +1352,12 @@ img.content-page-block {
 }
 .img-button-container.gjs-selected .img-button:hover .icon-edit-button {
   display: block;
+}
+
+.cta-container-child.cta-child.gjs-selected .cta-button:hover .icon-edit-button {
+  display: block;
+  bottom: 10px;
+  right: 5px;
 }
 
 .img-button-container .icon-edit-button svg path {
@@ -1366,11 +1372,11 @@ img.content-page-block {
   fill: #5068a8;
 }
 
-.img-button-container .icon-edit-button:hover path {
+.icon-edit-button:hover path {
   fill: #fdfdfd;
 }
 
-.img-button-container .icon-edit-button:hover g {
+.icon-edit-button:hover g {
   fill: #5068a8;
   stroke: #fdfdfd;
 }

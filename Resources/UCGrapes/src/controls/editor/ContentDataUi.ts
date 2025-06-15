@@ -387,7 +387,8 @@ export class ContentDataUi {
     if (
       ctaIconEditButton &&
       selectedComponent &&
-      selectedComponent.getClasses().includes("img-button-container")
+      (selectedComponent.getClasses().includes("img-button-container") ||
+      selectedComponent.getClasses().includes("cta-container-child")) // edit-icon
     ) {
       this.e.preventDefault();
       this.e.stopPropagation();
