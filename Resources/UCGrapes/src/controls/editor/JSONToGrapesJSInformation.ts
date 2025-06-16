@@ -293,44 +293,6 @@ export class JSONToGrapesJSInformation {
   public generateHTML(): any {
     let contentHtml = "";
     const infoContent = this.data?.PageInfoStructure?.InfoContent;
-
-    infoContent.push(
-      {
-        "InfoId": "zSafbeXpjQshSGi",
-        "InfoType": "TileCol",
-        "InfoValue": "",
-        "TileCols": [
-          {
-            "TileColId": "zSafbeFpjQShaGi",
-            "Tiles": [
-              {
-                  "Id": "OEWvyXuoJEbBwNW",
-                  "Name": "Reception",
-                  "Text": "Reception",
-                  "Color": "#ffffff",
-                  "Align": "left",
-                  "Icon": "Reception",
-                  "BGColor": "",
-                  "BGImageUrl": "https://staging.comforta.yukon.software/PublicTempStorage/multimedia/ReceptionImageFile_aa83139cd0b24a77a4065585f1e77523.png",
-                  "Opacity": 0,
-                  "Size": 0,
-                  "BGSize": "",
-                  "BGPosition": "",
-                  "Left": "",
-                  "Top": "",
-                  "OriginalImageUrl": "",
-                  "Action": {
-                      "ObjectType": "Information",
-                      "ObjectId": "4dc1970c-87c6-41c0-ba99-2cef009bd572",
-                      "ObjectUrl": "",
-                      "FormId": 0
-                  }
-              }
-            ]
-          }
-        ],
-      }
-    )
     
     const isEmpty = !Array.isArray(infoContent) || infoContent.length === 0;
     const containerClass = `content-frame-container${isEmpty ? " empty-state" : ""
