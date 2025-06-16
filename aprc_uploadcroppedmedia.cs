@@ -152,7 +152,7 @@ namespace GeneXus.Programs {
             new prc_logtofile(context ).execute(  StringUtil.BoolToStr( AV13BC_Trn_Media.Success())) ;
             if ( AV13BC_Trn_Media.Success() )
             {
-               AV19Path = context.GetMessage( "media/", "");
+               AV19Path = context.GetMessage( "media/cropped/", "");
                if ( StringUtil.StartsWith( AV8HttpRequest.BaseURL, context.GetMessage( "http://localhost", "")) )
                {
                   AV19Path = context.GetMessage( "D:\\KBs\\ComfortaKB\\NETSQLServer043\\Web\\media\\cropped\\", "");
