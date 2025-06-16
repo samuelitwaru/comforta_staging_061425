@@ -175,6 +175,16 @@
 "Implementation":"Prc_UploadMedia"
 },
 {
+"Verb":"POST",
+"PathRegexp":"media/upload/cropped",
+"Path":"media/upload/cropped",
+"Name":"uploadcroppedmedia",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_uploadcroppedmedia",
+"Implementation":"Prc_UploadCroppedMedia"
+},
+{
 "Verb":"GET",
 "PathRegexp":"media/delete",
 "Path":"media/delete",

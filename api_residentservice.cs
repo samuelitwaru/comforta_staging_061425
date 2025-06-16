@@ -99,6 +99,10 @@ namespace GeneXus.Programs {
          {
             return GAMSecurityLevel.SecurityNone ;
          }
+         else if ( StringUtil.StrCmp(permissionMethod, "gxep_uploadcroppedmedia") == 0 )
+         {
+            return GAMSecurityLevel.SecurityNone ;
+         }
          else if ( StringUtil.StrCmp(permissionMethod, "gxep_deletemedia") == 0 )
          {
             return GAMSecurityLevel.SecurityNone ;
@@ -792,7 +796,7 @@ namespace GeneXus.Programs {
          this.AV55ResidentId = aP0_ResidentId;
          this.AV60StartDate = aP1_StartDate;
          this.AV58EndDate = aP2_EndDate;
-         AV42SDT_AgendaLocation = new GXBaseCollection<SdtSDT_AgendaLocation>( context, "SDT_AgendaLocation", "Comforta_version21");
+         AV42SDT_AgendaLocation = new GXBaseCollection<SdtSDT_AgendaLocation>( context, "SDT_AgendaLocation", "Comforta_version2");
          initialize();
          /* AgendaLocation Constructor */
          new prc_agendalocationapi(context ).execute(  AV55ResidentId,  AV60StartDate,  AV58EndDate, out  AV17result) ;
@@ -828,6 +832,26 @@ namespace GeneXus.Programs {
          initialize();
          /* UploadMedia Constructor */
          new prc_uploadmedia(context ).execute(  AV30MediaName,  AV32MediaImageData,  AV34MediaSize,  AV35MediaType, out  AV33BC_Trn_Media, out  AV69error) ;
+         aP4_BC_Trn_Media=this.AV33BC_Trn_Media;
+         aP5_error=this.AV69error;
+      }
+
+      public void gxep_uploadcroppedmedia( string aP0_MediaName ,
+                                           string aP1_MediaImageData ,
+                                           int aP2_MediaSize ,
+                                           string aP3_MediaType ,
+                                           out SdtTrn_Media aP4_BC_Trn_Media ,
+                                           out SdtSDT_Error aP5_error )
+      {
+         this.AV30MediaName = aP0_MediaName;
+         this.AV32MediaImageData = aP1_MediaImageData;
+         this.AV34MediaSize = aP2_MediaSize;
+         this.AV35MediaType = aP3_MediaType;
+         AV33BC_Trn_Media = new SdtTrn_Media(context);
+         AV69error = new SdtSDT_Error(context);
+         initialize();
+         /* UploadCroppedMedia Constructor */
+         new prc_uploadcroppedmedia(context ).execute(  AV30MediaName,  AV32MediaImageData,  AV34MediaSize,  AV35MediaType, out  AV33BC_Trn_Media, out  AV69error) ;
          aP4_BC_Trn_Media=this.AV33BC_Trn_Media;
          aP5_error=this.AV69error;
       }
@@ -1791,31 +1815,31 @@ namespace GeneXus.Programs {
          AV22SDT_Resident = new SdtSDT_Resident(context);
          AV23SDT_Organisation = new SdtSDT_Organisation(context);
          AV19SDT_Location = new SdtSDT_Location(context);
-         AV42SDT_AgendaLocation = new GXBaseCollection<SdtSDT_AgendaLocation>( context, "SDT_AgendaLocation", "Comforta_version21");
+         AV42SDT_AgendaLocation = new GXBaseCollection<SdtSDT_AgendaLocation>( context, "SDT_AgendaLocation", "Comforta_version2");
          AV87SDT_ApiListResponse = new SdtSDT_ApiListResponse(context);
          AV143EmptyGUID = Guid.Empty;
          AV33BC_Trn_Media = new SdtTrn_Media(context);
          AV69error = new SdtSDT_Error(context);
-         AV64SDT_MediaCollection = new GXBaseCollection<SdtSDT_Media>( context, "SDT_Media", "Comforta_version21");
-         AV27SDT_PageCollection = new GXBaseCollection<SdtSDT_Page>( context, "SDT_Page", "Comforta_version21");
-         AV52SDT_MobilePageCollection = new GXBaseCollection<SdtSDT_MobilePage>( context, "SDT_MobilePage", "Comforta_version21");
+         AV64SDT_MediaCollection = new GXBaseCollection<SdtSDT_Media>( context, "SDT_Media", "Comforta_version2");
+         AV27SDT_PageCollection = new GXBaseCollection<SdtSDT_Page>( context, "SDT_Page", "Comforta_version2");
+         AV52SDT_MobilePageCollection = new GXBaseCollection<SdtSDT_MobilePage>( context, "SDT_MobilePage", "Comforta_version2");
          AV136SDT_InfoPage = new SdtSDT_InfoPage(context);
          AV56SDT_MobilePage = new SdtSDT_MobilePage(context);
-         AV51SDT_ContentPageCollection = new GXBaseCollection<SdtSDT_ContentPage>( context, "SDT_ContentPage", "Comforta_version21");
-         AV47SDT_PageStructureCollection = new GXBaseCollection<SdtSDT_PageStructure>( context, "SDT_PageStructure", "Comforta_version21");
+         AV51SDT_ContentPageCollection = new GXBaseCollection<SdtSDT_ContentPage>( context, "SDT_ContentPage", "Comforta_version2");
+         AV47SDT_PageStructureCollection = new GXBaseCollection<SdtSDT_PageStructure>( context, "SDT_PageStructure", "Comforta_version2");
          AV50SDT_ProductService = new SdtSDT_ProductService(context);
-         AV78SDT_ProductServiceCollection = new GXBaseCollection<SdtSDT_ProductService>( context, "SDT_ProductService", "Comforta_version21");
+         AV78SDT_ProductServiceCollection = new GXBaseCollection<SdtSDT_ProductService>( context, "SDT_ProductService", "Comforta_version2");
          AV54SDT_Theme = new SdtSDT_Theme(context);
          AV62SDT_LocationTheme = new SdtSDT_LocationTheme(context);
-         AV88SDT_ThemeCollection = new GXBaseCollection<SdtSDT_Theme>( context, "SDT_Theme", "Comforta_version21");
-         AV140TrashItems = new GXBaseCollection<SdtSDT_TrashItem>( context, "SDT_TrashItem", "Comforta_version21");
-         AV96AppVersions = new GXBaseCollection<SdtSDT_AppVersion>( context, "SDT_AppVersion", "Comforta_version21");
+         AV88SDT_ThemeCollection = new GXBaseCollection<SdtSDT_Theme>( context, "SDT_Theme", "Comforta_version2");
+         AV140TrashItems = new GXBaseCollection<SdtSDT_TrashItem>( context, "SDT_TrashItem", "Comforta_version2");
+         AV96AppVersions = new GXBaseCollection<SdtSDT_AppVersion>( context, "SDT_AppVersion", "Comforta_version2");
          AV98AppVersion = new SdtSDT_AppVersion(context);
          AV97MenuPage = new SdtSDT_AppVersion_PagesItem(context);
          AV95ContentPage = new SdtSDT_AppVersion_PagesItem(context);
          AV101DebugResults = new SdtSDT_DebugResults(context);
          AV129BC_Trn_Location = new SdtTrn_Location(context);
-         AV121SDT_MemoCategories = new GXBaseCollection<SdtSDT_MemoCategory>( context, "SDT_MemoCategory", "Comforta_version21");
+         AV121SDT_MemoCategories = new GXBaseCollection<SdtSDT_MemoCategory>( context, "SDT_MemoCategory", "Comforta_version2");
          AV122SDT_MemoCategory = new SdtSDT_MemoCategory(context);
          AV120SDT_Memo = new SdtSDT_Memo(context);
          /* GeneXus formulas. */

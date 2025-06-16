@@ -2,9 +2,9 @@ openapi: 3.0.0
 info:
   title: "API_ResidentService"
   description: "API Services"
-  version: "20250614062100"
+  version: "20250616060921"
 servers:
-  - url: http://localhost:8082/Comforta_version21DevelopmentNETPostgreSQL/api
+  - url: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/api
 paths:
   /auth/resident-login:
     post:
@@ -487,6 +487,31 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UploadMediaOutput"
+        404:
+          description: "Not found"
+
+  /media/upload/cropped:
+    post:
+      tags:
+        - API_ResidentService  
+      operationId: "API_ResidentService.UploadCroppedMedia"
+      summary: "UploadCroppedMedia"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UploadCroppedMediaInput"
+      
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UploadCroppedMediaOutput"
         404:
           description: "Not found"
 
@@ -2026,12 +2051,21 @@ components:
       description: GAM OAuth 2
       flows:
         password:          
-          tokenUrl: http://localhost:8082/Comforta_version21DevelopmentNETPostgreSQL/oauth/gam/v2.0/access_token
+          tokenUrl: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/oauth/gam/v2.0/access_token
           scopes: 
             fullcontrol: Full access
 
   schemas:
     UploadMediaOutput:
+      properties:
+        BC_Trn_Media:
+          description: "Trn_Media"
+          $ref: "#/components/schemas/Trn_Media"
+        error:
+          description: "SDT_Error"
+          $ref: "#/components/schemas/SDT_Error"
+
+    UploadCroppedMediaOutput:
       properties:
         BC_Trn_Media:
           description: "Trn_Media"
@@ -2335,8 +2369,8 @@ components:
     DebugAppVersionOutput:
       properties:
         DebugResults:
-          description: "SDT_Debug Result"
-          $ref: "#/components/schemas/SDT_DebugResult"
+          description: "SDT_Debug Results"
+          $ref: "#/components/schemas/SDT_DebugResults"
         error:
           description: "SDT_Error"
           $ref: "#/components/schemas/SDT_Error"
@@ -2439,6 +2473,18 @@ components:
 
 
     UploadMediaInput:  
+      properties:
+        MediaName:
+          type: "string"
+        MediaImageData:
+          type: "string"
+        MediaSize:
+          type: "integer"
+          format: "int64"
+        MediaType:
+          type: "string"
+
+    UploadCroppedMediaInput:  
       properties:
         MediaName:
           type: "string"
@@ -3796,19 +3842,19 @@ components:
 
       x-gx-level: "SDT_PageUrl"
 
-    SDT_DebugResult:
+    SDT_DebugResults:
       properties:
         Summary:
-          $ref: "#/components/schemas/SDT_DebugResult.Summary"
+          $ref: "#/components/schemas/SDT_DebugResults.Summary"
 
         Pages:
           type: array
           items:
             description: PagesItem
-            $ref: "#/components/schemas/SDT_DebugResult.Pages_PagesItem"
+            $ref: "#/components/schemas/SDT_DebugResults.Pages_PagesItem"
 
 
-    SDT_DebugResult.Summary:
+    SDT_DebugResults.Summary:
       properties:
         TotalUrls:
           description: "Total Urls"
@@ -3824,10 +3870,10 @@ components:
           format: "double"
 
 
-      x-gx-level: "SDT_DebugResult"
+      x-gx-level: "SDT_DebugResults"
 
 
-    SDT_DebugResult.Pages_PagesItem:
+    SDT_DebugResults.Pages_PagesItem:
       properties:
         Page:
           description: "Page"
@@ -3837,11 +3883,11 @@ components:
           type: array
           items:
             description: UrlListItem
-            $ref: "#/components/schemas/SDT_DebugResult.Pages.UrlList_UrlListItem"
+            $ref: "#/components/schemas/SDT_DebugResults.Pages.UrlList_UrlListItem"
 
-      x-gx-level: "SDT_DebugResult"
+      x-gx-level: "SDT_DebugResults"
 
-    SDT_DebugResult.Pages.UrlList_UrlListItem:
+    SDT_DebugResults.Pages.UrlList_UrlListItem:
       properties:
         Url:
           description: "Url"
@@ -3860,7 +3906,7 @@ components:
           type: "string"
 
 
-      x-gx-level: "SDT_DebugResult.Pages"
+      x-gx-level: "SDT_DebugResults.Pages"
 
     Trn_Location:
       properties:

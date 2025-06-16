@@ -1,9 +1,9 @@
 openapi: 3.0.0
 info:
   title: "Development"
-  version: "20250614062100"
+  version: "20250616060921"
 servers:
-  - url: http://localhost:8082/Comforta_version21DevelopmentNETPostgreSQL/rest
+  - url: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/rest
 paths:
   /Trn_AppVersionWWGetFilterData:
     post:
@@ -1186,7 +1186,7 @@ components:
       description: GAM OAuth 2
       flows:
         password:          
-          tokenUrl: http://localhost:8082/Comforta_version21DevelopmentNETPostgreSQL/oauth/gam/v2.0/access_token
+          tokenUrl: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/oauth/gam/v2.0/access_token
           scopes: 
             fullcontrol: Full access
   schemas:
@@ -2315,6 +2315,59 @@ components:
           description: "Affected Name"
           type: "string"
       x-gx-level: "SDT_DebugResult.Pages"
+    SDT_DebugResults:
+      properties:
+        Summary:
+          $ref: "#/components/schemas/SDT_DebugResults.Summary"
+        Pages:
+          type: array
+          items:
+            description: PagesItem
+            $ref: "#/components/schemas/SDT_DebugResults.Pages_PagesItem"
+    SDT_DebugResults.Summary:
+      properties:
+        TotalUrls:
+          description: "Total Urls"
+          type: "number"
+          format: "double"
+        SuccessCount:
+          description: "Success Count"
+          type: "number"
+          format: "double"
+        FailureCount:
+          description: "Failure Count"
+          type: "number"
+          format: "double"
+      x-gx-level: "SDT_DebugResults"
+    SDT_DebugResults.Pages_PagesItem:
+      properties:
+        Page:
+          description: "Page"
+          type: "string"
+        UrlList:
+          type: array
+          items:
+            description: UrlListItem
+            $ref: "#/components/schemas/SDT_DebugResults.Pages.UrlList_UrlListItem"
+      x-gx-level: "SDT_DebugResults"
+    SDT_DebugResults.Pages.UrlList_UrlListItem:
+      properties:
+        Url:
+          description: "Url"
+          type: "string"
+        StatusCode:
+          description: "Status Code"
+          type: "string"
+        StatusMessage:
+          description: "Status Message"
+          type: "string"
+        AffectedType:
+          description: "Affected Type"
+          type: "string"
+        AffectedName:
+          description: "Affected Name"
+          type: "string"
+      x-gx-level: "SDT_DebugResults.Pages"
     SDT_Error:
       properties:
         Status:
