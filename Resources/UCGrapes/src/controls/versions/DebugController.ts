@@ -33,7 +33,7 @@ export class DebugController {
     private async getUrls() {
         let pageUrls: { page: string; urls: { url: string; affectedType: string; affectedName?: string }[] }[] = [];
 
-        const activeVersion = await this.appVersions.getUpdatedActiveVersion();
+        const activeVersion = await this.appVersions.getActiveVersion();
         const pages = activeVersion?.Pages;
 
         for (const page of pages) {

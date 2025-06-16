@@ -48,13 +48,13 @@ export class AppVersionController {
         }
     }
 
-    async activateVersion(versionId: string): Promise<boolean> {
+    async activateVersion(versionId: string): Promise<any> {
         try {
             const result = await this.toolboxService.activateVersion(versionId);
             return result;
         } catch (error) {
             console.error("Version activation failed:", error);
-            return false;
+            return null;
         }
     }
 

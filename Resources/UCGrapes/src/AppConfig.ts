@@ -106,4 +106,8 @@ export class AppConfig {
     get isInitialized(): boolean {
       return this._isInitialized;
     }
+
+    public setInitialization(value: boolean) {
+      this._isInitialized = value;
+    }
 }

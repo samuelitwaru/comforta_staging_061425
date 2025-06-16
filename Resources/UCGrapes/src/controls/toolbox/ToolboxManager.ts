@@ -86,7 +86,7 @@ export class ToolboxManager {
   async savePages(publish = false) {
     try {
       const lastSavedStates = new Map<string, string>();
-      const activeVersion = await this.appVersions.getUpdatedActiveVersion();
+      const activeVersion = await this.appVersions.getActiveVersion();
       const pages = activeVersion.Pages;
       await Promise.all(
         pages.map(async (page: any) => {
@@ -322,10 +322,7 @@ export class ToolboxManager {
     }
   }
 
-  private restoreSelectedComponent(
-    editor: any,
-    selectedComponent: any | null
-  ) {
+  private restoreSelectedComponent(editor: any, selectedComponent: any | null) {
     if (!selectedComponent) return;
 
     setTimeout(() => {
@@ -338,10 +335,8 @@ export class ToolboxManager {
         let selectedComponentId;
         let newComponent;
         if (selectedComponent.is("info-cta-section")) {
-          selectedComponentId = selectedComponent.getId();   
-          newComponent = editor
-            .getWrapper()
-            .find(`#${selectedComponentId}`)[0];       
+          selectedComponentId = selectedComponent.getId();
+          newComponent = editor.getWrapper().find(`#${selectedComponentId}`)[0];
         } else {
           // it is a tile
           const tileSectionId = selectedComponent?.parent()?.getId();
@@ -350,8 +345,7 @@ export class ToolboxManager {
             .getWrapper()
             .find(`#${tileSectionId}`)[0];
           if (!newTileSection) return;
-          newComponent = newTileSection
-            .find(`.template-block`)[0]; 
+          newComponent = newTileSection.find(`.template-block`)[0];
         }
         if (newComponent) {
           editor.select(newComponent);

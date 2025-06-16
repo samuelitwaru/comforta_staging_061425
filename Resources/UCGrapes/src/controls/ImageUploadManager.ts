@@ -251,7 +251,10 @@ export class ImageUploadManager {
     }
   }
 
-  private async saveMultipleImages(images: Array<{ Id: string; Url: string }>, nextSectionId?: string) {
+  private async saveMultipleImages(
+    images: Array<{ Id: string; Url: string }>,
+    nextSectionId?: string
+  ) {
     await this.infoSectionManager.addMultipleImages(
       images,
       Boolean(this.infoId),
@@ -266,19 +269,25 @@ export class ImageUploadManager {
   ) {
     const selectedComponent = (globalThis as any).selectedComponent;
     if (!selectedComponent) return;
+    selectedComponent.getEl().style.removeProperty("background-color");
 
     const originalMediaUrl = encodeURI(image.Url);
     const croppedUrl = await this.createImageFromUrl(image.Url);
     const safeMediaUrl = encodeURI(croppedUrl || image.Url);
+
     const styleProperties: any = {
       "background-image": `url(${safeMediaUrl})`,
       "background-blend-mode": "overlay",
+      "background-color": "transparent",
     };
 
     if (this.currentPosition) {
+      console.log("this.currentPosition", this.currentPosition);
       styleProperties["background-size"] = "cover";
       styleProperties["background-position"] = "center";
-      styleProperties["background-color"] = `rgba(0, 0, 0, ${opacityValue})`;
+      styleProperties[
+        "background-color"
+      ] = `rgba(0, 0, 0, ${opacityValue}) !important`;
     }
 
     selectedComponent.addStyle(styleProperties);
@@ -288,59 +297,34 @@ export class ImageUploadManager {
     const pageData = (globalThis as any).pageData;
 
     if (pageData.PageType === "Information") {
-      this.infoSectionManager.updateInfoTileAttributes(
-        rowComponent.getId(),
-        tileWrapper.getId(),
-        "BGImageUrl",
-        safeMediaUrl
-      );
+      const rowId = rowComponent.getId();
+      const tileId = tileWrapper.getId();
 
-      this.infoSectionManager.updateInfoTileAttributes(
-        rowComponent.getId(),
-        tileWrapper.getId(),
-        "OriginalImageUrl",
-        originalMediaUrl
-      );
-
-      this.infoSectionManager.updateInfoTileAttributes(
-        rowComponent.getId(),
-        tileWrapper.getId(),
-        "Opacity",
-        opacityValue
-      );
+      const updates: Record<any, any> = {
+        BGImageUrl: safeMediaUrl,
+        OriginalImageUrl: originalMediaUrl,
+        Opacity: opacityValue,
+      };
 
       if (this.currentPosition) {
-        this.infoSectionManager.updateInfoTileAttributes(
-          rowComponent.getId(),
-          tileWrapper.getId(),
-          "BGSize",
-          this.currentPosition.backgroundSize
-        );
-        this.infoSectionManager.updateInfoTileAttributes(
-          rowComponent.getId(),
-          tileWrapper.getId(),
-          "BGPosition",
-          this.currentPosition.backgroundPosition
-        );
+        Object.assign(updates, {
+          BGSize: this.currentPosition.backgroundSize,
+          BGPosition: this.currentPosition.backgroundPosition,
+          Top: this.currentPosition.top,
+          Left: this.currentPosition.left,
+        });
+      }
 
+      for (const [key, value] of Object.entries(updates)) {
         this.infoSectionManager.updateInfoTileAttributes(
-          rowComponent.getId(),
-          tileWrapper.getId(),
-          "Top",
-          this.currentPosition.top
-        );
-        this.infoSectionManager.updateInfoTileAttributes(
-          rowComponent.getId(),
-          tileWrapper.getId(),
-          "Left",
-          this.currentPosition.left
+          rowId,
+          tileId,
+          key,
+          value
         );
       }
 
-      const tileAttributes = this.updateInfoTileAttributes(
-        rowComponent.getId(),
-        tileWrapper.getId()
-      );
+      const tileAttributes = this.updateInfoTileAttributes(rowId, tileId);
       const tileProperties = new TileProperties(
         selectedComponent,
         tileAttributes
@@ -425,7 +409,7 @@ export class ImageUploadManager {
     return content?.Images || [];
   }
 
-  public async handleFiles(files: FileList) {
+  public async handleFilesUpload(files: FileList) {
     const fileArray = Array.from(files);
     const newImages: { Id: string; Url: string }[] = [];
 
@@ -433,9 +417,12 @@ export class ImageUploadManager {
       if (file.type.startsWith("image/")) {
         try {
           const dataUrl = await this.readFileAsDataURL(file);
+          // check if file name has spaces, remove them
+          const fileName = this.cleanFileName(file.name);
+
           const newMedia: Media = {
             MediaId: Date.now().toString(),
-            MediaName: file.name,
+            MediaName: fileName,
             MediaUrl: dataUrl,
             MediaType: file.type,
             MediaSize: file.size,
@@ -502,6 +489,99 @@ export class ImageUploadManager {
       };
       reader.onerror = () => reject(reader.error);
       reader.readAsDataURL(file);
+    });
+  }
+
+  private cleanFileName(fileName: string): string {
+    const nameParts = fileName.split(".");
+    const extension = nameParts.pop();
+    const baseName = nameParts.join(".");
+
+    const sanitizedBase = baseName
+      .toLowerCase()
+      .replace(/\s+/g, "-") // Replace spaces with hyphens
+      .replace(/[()]/g, "") // Remove parentheses
+      .replace(/[^a-z0-9-_]/g, ""); // Remove other special characters
+
+    return `${sanitizedBase}.${extension}`;
+  }
+
+  public createFileList(files: File[]): FileList {
+    const dataTransfer = new DataTransfer();
+    files.forEach((file) => dataTransfer.items.add(file));
+    return dataTransfer.files;
+  }
+
+  public async compressLargeFiles(files: FileList): Promise<File[]> {
+    const maxSizeInBytes = 2 * 1024 * 1024; // 2MB
+    const processedFiles: File[] = [];
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+
+      if (file.size > maxSizeInBytes) {
+        const compressedFile = await this.compressImage(file, maxSizeInBytes);
+        processedFiles.push(compressedFile);
+      } else {
+        processedFiles.push(file);
+      }
+    }
+
+    return processedFiles;
+  }
+
+  private async compressImage(
+    file: File,
+    maxSizeInBytes: number
+  ): Promise<File> {
+    return new Promise((resolve) => {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d")!;
+      const img = new Image();
+
+      img.onload = () => {
+        let { width, height } = img;
+        const maxDimension = 1920; // Max width/height
+
+        if (width > height && width > maxDimension) {
+          height = (height * maxDimension) / width;
+          width = maxDimension;
+        } else if (height > maxDimension) {
+          width = (width * maxDimension) / height;
+          height = maxDimension;
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+
+        // Draw and compress
+        ctx.drawImage(img, 0, 0, width, height);
+
+        // Start with quality 0.9 and reduce until under size limit
+        let quality = 0.9;
+        const tryCompress = () => {
+          canvas.toBlob(
+            (blob) => {
+              if (blob && (blob.size <= maxSizeInBytes || quality <= 0.1)) {
+                const compressedFile = new File([blob], file.name, {
+                  type: file.type,
+                  lastModified: Date.now(),
+                });
+                resolve(compressedFile);
+              } else {
+                quality -= 0.1;
+                tryCompress();
+              }
+            },
+            file.type,
+            quality
+          );
+        };
+
+        tryCompress();
+      };
+
+      img.src = URL.createObjectURL(file);
     });
   }
 

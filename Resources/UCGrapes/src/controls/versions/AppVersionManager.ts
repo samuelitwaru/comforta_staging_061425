@@ -8,54 +8,59 @@ export class AppVersionManager {
   private config: AppConfig;
   toolboxService: any;
   themes: any[] = [];
-  appVersion: any = (globalThis as any).activeVersion;
+  appVersion: any;
 
   constructor() {
     this.config = AppConfig.getInstance();
+    this.initializeActiveVersion();
   }
 
-  // public async getActiveVersion() {
-  //   const toolboxService = new ToolBoxService(); // No need to reassign `this.toolboxService`
-  //   console.log("AppVersionManager: getActiveVersion called");
-  //   const appVersion = await toolboxService.getVersion();
-  //   const versions = await toolboxService.getVersions();
-    
-  //   (globalThis as any).activeVersion = 
-  //   appVersion.AppVersion
-  //   // versions?.AppVersions?.find((version: any) => version.IsActive) || null
+  private async initializeActiveVersion() {
+    try {
+      // Initialize from window.app.currentVersion if available
+      if ((window as any).app?.currentVersion) {
+        (globalThis as any).activeVersion = (window as any).app.currentVersion;
+        this.appVersion = (globalThis as any).activeVersion;
+        return;
+      }
 
-  //   return (globalThis as any).activeVersion;
-  // }
+      // Fallback to fetching from service
+      const toolboxService = new ToolBoxService();
+      const appVersion = await toolboxService.getVersion();
+      (globalThis as any).activeVersion = appVersion.AppVersion;
+      this.appVersion = (globalThis as any).activeVersion;
+    } catch (error) {
+      console.error('Failed to initialize active version:', error);
+      (globalThis as any).activeVersion = null;
+      this.appVersion = null;
+    }
+  }
 
   public async getCurrentVersion() {
     const versionController = new AppVersionController();
     const toolboxService = new ToolBoxService();
     const versions = await versionController.getVersions();
     const location = await toolboxService.getLocationData();
-    const cureentPublishedAppId = location.BC_Trn_Location.PublishedActiveAppVersionId;
-    console.log(location);
-    console.log(versions);
-    console.log(cureentPublishedAppId);
-    return versions.find((version: any) => version.AppVersionId == cureentPublishedAppId);
-    
+    const currentPublishedAppId = location.BC_Trn_Location.PublishedActiveAppVersionId;
+    return versions.find((version: any) => version.AppVersionId == currentPublishedAppId);
   }
 
-  public async getActiveVersion() {
-    (globalThis as any).activeVersion = (window as any).app.currentVersion;
+  public getActiveVersion() {
+    // Return the already initialized version
     return (globalThis as any).activeVersion;
   }
 
-  public async getUpdatedActiveVersion() {  
-    const toolboxService = new ToolBoxService(); //  
+  public async refreshActiveVersion() {
+    // Only refresh when explicitly needed
+    const toolboxService = new ToolBoxService();
     const appVersion = await toolboxService.getVersion();
-    (globalThis as any).activeVersion = appVersion.AppVersion
+    (globalThis as any).activeVersion = appVersion.AppVersion;
+    this.appVersion = (globalThis as any).activeVersion;
     return (globalThis as any).activeVersion;
   }
 
   public async refreshVersion() {
-    const toolboxService = new ToolBoxService(); //
-    const appVersion = await toolboxService.getVersion();
-    (globalThis as any).activeVersion = appVersion.AppVersion
+    await this.refreshActiveVersion();
   }
 
   public getPages() {
@@ -76,7 +81,7 @@ export class AppVersionManager {
 
   async getActiveVersionId() {
     const activeVersion = (globalThis as any).activeVersion;
-    return activeVersion.AppVersionId;
+    return activeVersion?.AppVersionId;
   }
 
   async updatePageTitle(pageTitle: string) {
@@ -100,11 +105,10 @@ export class AppVersionManager {
         const page = JSON.parse(data);
         page.PageName = pageTitle;
         localStorage.setItem(`data-${pageId}`, JSON.stringify(page)); 
-        this.refreshVersion();       
+        await this.refreshVersion();       
       }
     }
 
-    this.refreshVersion();
-    // await toolboxService.updatePageTitle(pageId, pageTitle);
+    await this.refreshVersion();
   }
 }

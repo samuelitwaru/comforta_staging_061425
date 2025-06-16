@@ -11,6 +11,7 @@ import { EditorEvents } from "../../controls/editor/EditorEvents";
 import { EditorManager } from "../../controls/editor/EditorManager";
 import { ThemeManager } from "../../controls/themes/ThemeManager";
 import { ThemeSelection } from "../components/ThemeSelection";
+import { App } from "../..";
 
 export class VersionSelectionView {
   private container: HTMLElement;
@@ -241,7 +242,7 @@ export class VersionSelectionView {
       // Activate version and reload if successful
       const activationResult = await this.versionController.activateVersion(version.AppVersionId);
       if (activationResult) {
-        this.reloadPage(activationResult);
+        this.reloadPage(activationResult.AppVersion);
       }
 
       this.closeSelection();
@@ -252,8 +253,11 @@ export class VersionSelectionView {
 
   private async reloadPage(appVersion: any) {
     // reload browser
-    window.location.reload();
-    // this.clearGlobalVariables();
+    // window.location.reload();
+    this.clearGlobalVariables();
+    App.createWithVersion(appVersion, appVersion?.ThemeId);
+    this.refreshVersionList();
+
     // (globalThis as any).activeVersion = appVersion.AppVersion; 
     // const editorEvents = new EditorEvents();   
     // editorEvents.clearAllEditors();
@@ -384,7 +388,7 @@ export class VersionSelectionView {
       const versionName = inputElement.value.trim();
 
       try {
-        let result = false;
+        let result;
 
         switch (action) {
           case "create":
@@ -406,7 +410,7 @@ export class VersionSelectionView {
 
         // Reload only for create and activate actions
         if (result && (action === "create" || action === "duplicate")) {
-          this.reloadPage(result);
+          this.reloadPage(result.AppVersion);
         }
       } catch (error) {
         console.error(`Error during ${action} operation:`, error);

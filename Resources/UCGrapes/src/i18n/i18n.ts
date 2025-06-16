@@ -75,6 +75,7 @@ export const i18n = new I18n({
         save: "Save",
         upload_message:
           "<p>Drag and drop or <a href='#' id='browseLink'>browse</a></p>",
+        upload_success_message: "The images have been published successfully.",
       },
       icon_category: {
         general: "Technical Services & Support",
@@ -210,6 +211,7 @@ export const i18n = new I18n({
         save: "Opslaan",
         upload_message:
           "<p>Sleep en plaats of <a href='#' id='browseLink'>blader</a></p>",
+        upload_success_message: "The images have been published successfully.",
       },
       icon_category: {
         general: "Technische diensten en ondersteuning",

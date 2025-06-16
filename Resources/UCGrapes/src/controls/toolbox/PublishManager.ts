@@ -92,8 +92,8 @@ export class PublishManager {
       e.preventDefault();
       modal.close();
       this.toolBoxManager.savePages(false).then(res => {
-        this.appVersions.getActiveVersion().then(res=>{
-          this.toolboxService.publishAppVersion(res.AppVersionId, input.checked)
+        const version = this.appVersions.getActiveVersion();
+          this.toolboxService.publishAppVersion(version.AppVersionId, input.checked)
           .then((res:any)=>{
             if(!res.message){
               modal.close()
@@ -101,8 +101,8 @@ export class PublishManager {
             }
           })
         })
-      })
-    });
+      });
+    
 
     cancelBtn.addEventListener("click", (e) => {
       e.preventDefault();

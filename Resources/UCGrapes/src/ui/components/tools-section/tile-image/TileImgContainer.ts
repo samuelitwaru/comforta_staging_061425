@@ -10,12 +10,12 @@ export class TileImgContainer {
   constructor() {
     this.container = document.createElement("div");
     this.init();
-   }
+  }
 
   init() {
     this.container.classList.add("tile-img-container");
     this.container.id = "tile-img-container";
-    
+
     this.container.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" width="14.5" height="16" viewBox="0 0 14.5 16">
       <g id="Icon_feather-trash-2" data-name="Icon feather-trash-2" transform="translate(0.5 0.5)">
@@ -30,43 +30,51 @@ export class TileImgContainer {
     let tileAttributes;
     this.container.addEventListener("click", (e) => {
       e.preventDefault();
+
       const selectedComponent = (globalThis as any).selectedComponent;
       if (!selectedComponent) return;
 
       const tileWrapper = selectedComponent.parent();
       const rowComponent = tileWrapper.parent();
-      tileAttributes = (globalThis as any).tileMapper.getTile(
-        rowComponent.getId(),
-        tileWrapper.getId()
-      );
 
-      const themeManager = new ThemeManager();      
+      const rowId = rowComponent.getId();
+      const tileId = tileWrapper.getId();
 
+      const tileMapper = (globalThis as any).tileMapper;
+      const tileAttributes = tileMapper.getTile(rowId, tileId);
+
+      const themeManager = new ThemeManager();
+      const themeColor = themeManager.getThemeColor(tileAttributes?.BGColor);
+
+      // Update selected component styles
       const currentStyles = selectedComponent.getStyle();
       delete currentStyles["background-image"];
-      currentStyles["background-color"] = themeManager.getThemeColor(tileAttributes?.BGColor);
-           
+      currentStyles["background-color"] = themeColor;
       selectedComponent.setStyle(currentStyles);
 
+      // Update actual element styles
       const el = selectedComponent.getEl();
-      el.style.backgroundImage = ''; 
-      el.style.backgroundColor = themeManager.getThemeColor(tileAttributes?.BGColor);
+      el.style.backgroundImage = "";
+      el.style.backgroundColor = themeColor;
 
+      // Update InfoSection
       const infoSectionManager = new InfoSectionManager();
-      infoSectionManager.updateInfoTileAttributes(
-        rowComponent.getId(),
-        tileWrapper.getId(),
-        "BGImageUrl",
-        ""
-      );
 
-      infoSectionManager.updateInfoTileAttributes(
-        rowComponent.getId(),
-        tileWrapper.getId(),
-        "Opacity",
-        "0"
-      );
+      const updates = {
+        BGImageUrl: "",
+        Opacity: "0",
+        BGPosition: "",
+        Top: "",
+        Left: "",
+        OriginalImageUrl: "",
+        BGSize: "",
+      };
 
+      for (const [key, value] of Object.entries(updates)) {
+        infoSectionManager.updateInfoTileAttributes(rowId, tileId, key, value);
+      }
+
+      // Hide UI elements
       this.container.style.display = "none";
 
       const slider = document.querySelector("#slider-wrapper") as HTMLElement;
@@ -76,9 +84,7 @@ export class TileImgContainer {
     });
   }
 
-
-   render(container: HTMLElement) {
-     container.appendChild(this.container);
-   }
-  
+  render(container: HTMLElement) {
+    container.appendChild(this.container);
+  }
 }

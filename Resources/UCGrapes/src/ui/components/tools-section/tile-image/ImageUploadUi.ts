@@ -31,9 +31,9 @@ export class ImageUploadUi {
 
     this.createModalHeader();
     this.createUploadArea();
+    this.createModalActions();
     this.createFileListElement();
     this.loadExistingImageAndFiles();
-    this.createModalActions();
   }
 
   /* UI Creation Methods */
@@ -179,7 +179,10 @@ export class ImageUploadUi {
 
   /* Image Editor Methods */
   public async displayImageEditor(dataUrl: string, file?: File) {
-    if (this.controller.getType === "info" || this.controller.getType === "cta") {
+    if (
+      this.controller.getType === "info" ||
+      this.controller.getType === "cta"
+    ) {
       return;
     }
 
@@ -187,9 +190,11 @@ export class ImageUploadUi {
       file = await this.controller.getFile(dataUrl);
     }
 
+    const decodedUrl = decodeURIComponent(decodeURIComponent(dataUrl));
+
     const image = {
       Id: randomIdGenerator(12),
-      Url: dataUrl,
+      Url: decodedUrl,
     };
 
     this.controller.addSelectedImage(image);
@@ -209,7 +214,7 @@ export class ImageUploadUi {
       height: "400px",
       overflow: "hidden",
       border: "1px solid #ccc",
-      backgroundImage: `url(${dataUrl})`,
+      backgroundImage: `url("${decodedUrl}")`,
       backgroundRepeat: "no-repeat",
       backgroundSize: "100% 100%",
     });
@@ -245,7 +250,7 @@ export class ImageUploadUi {
       const componentHeight = selectedComponentEl.clientHeight;
       aspectRatio = parseFloat((componentWidth / componentHeight).toFixed(2));
 
-      if (aspectRatio > 3) aspectRatio = 2.3
+      if (aspectRatio > 3) aspectRatio = 2.3;
 
       // aspectRatio = 1.5;
       let frameWidth = componentWidth * aspectRatio;
@@ -262,7 +267,9 @@ export class ImageUploadUi {
         frame.style.top = `${tile.Top}`;
       }
 
-      container.style.filter = `brightness(${tile?.Opacity ? (1 - (tile.Opacity) / 100) : 1})`;
+      container.style.filter = `brightness(${
+        tile?.Opacity ? 1 - tile.Opacity / 100 : 1
+      })`;
 
       frame.style.width = `${frameWidth}px`;
       frame.style.height = `${frameHeight}px`;
@@ -489,7 +496,9 @@ export class ImageUploadUi {
 
       this.opacityValue = opacityValue * 100;
 
-      const container = uploadArea.querySelector(".image-editor-container") as HTMLDivElement;
+      const container = uploadArea.querySelector(
+        ".image-editor-container"
+      ) as HTMLDivElement;
       if (!container) return;
 
       Object.assign(container.style, {
@@ -535,8 +544,13 @@ export class ImageUploadUi {
     }
 
     uploadArea.addEventListener("click", (e) => {
-      if (e.target === uploadArea) {
-        console.log("clicked");
+      const isValidTarget =
+        e.target === uploadArea ||
+        e.target === uploadText ||
+        (e.target as HTMLElement).closest("svg") ||
+        (e.target as HTMLElement).closest(".upload-text");
+
+      if (isValidTarget) {
         if (this.checkIfIsEditingMode()) return;
         fileInput.click();
       }
@@ -544,9 +558,28 @@ export class ImageUploadUi {
 
     fileInput.addEventListener("change", async () => {
       if (fileInput.files && fileInput.files.length > 0) {
-        const newImages = await this.controller.handleFiles(fileInput.files);
-        // newImages.forEach((image) => this.controller.addSelectedImage(image));
-        await this.loadMediaFiles();
+        this.showUploadSpinner();
+
+        const startTime = Date.now();
+        const minSpinnerDuration = 1000; // 1 second minimum
+
+        try {
+          await this.uploadImages(fileInput.files);
+
+          // Ensure spinner shows for minimum duration
+          const elapsedTime = Date.now() - startTime;
+          const remainingTime = Math.max(0, minSpinnerDuration - elapsedTime);
+
+          if (remainingTime > 0) {
+            await new Promise((resolve) => setTimeout(resolve, remainingTime));
+          }
+
+          this.removeSpinner();
+          this.showSuccessMessage();
+        } catch (error) {
+          console.error("Error uploading files:", error);
+          // Reset to original upload area on error
+        }
       }
     });
 
@@ -568,17 +601,114 @@ export class ImageUploadUi {
       uploadArea.classList.remove("drag-over");
 
       if (e.dataTransfer?.files && e.dataTransfer.files.length > 0) {
-        const newImages = await this.controller.handleFiles(
-          e.dataTransfer.files
-        );
-        // newImages.forEach((image) => this.controller.addSelectedImage(image));
-        await this.loadMediaFiles();
+        this.showUploadSpinner();
+
+        const startTime = Date.now();
+        const minSpinnerDuration = 1000; // 1 second minimum
+        try {
+          await this.uploadImages(e.dataTransfer.files);
+
+          // Ensure spinner shows for minimum duration
+          const elapsedTime = Date.now() - startTime;
+          const remainingTime = Math.max(0, minSpinnerDuration - elapsedTime);
+
+          if (remainingTime > 0) {
+            await new Promise((resolve) => setTimeout(resolve, remainingTime));
+          }
+          this.removeSpinner();
+          this.showSuccessMessage();
+        } catch (error) {
+          console.error("Error uploading files:", error);
+          // Reset to original upload area on error
+        }
       }
     });
   }
 
+  private async uploadImages(files: FileList) {
+    const processedFiles = await this.controller.compressLargeFiles(files);
+
+    const processedFileList = this.controller.createFileList(processedFiles);
+
+    await this.controller.handleFilesUpload(processedFileList);
+    await this.loadMediaFiles();
+  }
+
+  private showUploadSpinner() {
+    const uploadArea = this.modalContent.querySelector(
+      ".upload-area"
+    ) as HTMLElement;
+    if (uploadArea) {
+      uploadArea.innerHTML = `
+    <div class="upload-spinner" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+      <div style="
+        width: 35px; 
+        height: 35px; 
+        border: 3px solid #e3e3e3; 
+        border-top: 3px solid #5068a8; 
+        border-radius: 50%; 
+        animation: spin 0.8s linear infinite;
+      "></div>
+    </div>
+    <style>
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+  `;
+    }
+  }
+
+  private removeSpinner() {
+    const uploadArea = this.modalContent.querySelector(
+      ".upload-area"
+    ) as HTMLElement;
+    if (uploadArea) {
+      uploadArea.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="40.999" height="28.865" viewBox="0 0 40.999 28.865">
+      <path id="Path_1040" data-name="Path 1040" d="M21.924,11.025a3.459,3.459,0,0,0-3.287,3.608,3.459,3.459,0,0,0,3.287,3.608,3.459,3.459,0,0,0,3.287-3.608A3.459,3.459,0,0,0,21.924,11.025ZM36.716,21.849l-11.5,14.432-8.218-9.02L8.044,39.89h41Z" transform="translate(-8.044 -11.025)" fill="#afadad"></path>
+    </svg>
+    <div class="upload-text">
+      ${i18n.t("sidebar.image_upload.upload_message")}
+    </div>
+    <input type="file" id="fileInput" multiple="" accept="image/jpeg, image/jpg, image/png" style="display: none;">
+    `;
+      this.isEditingMode = false;
+    }
+  }
+
+  private showSuccessMessage() {
+    const uploadArea = this.modalContent.querySelector(
+      ".upload-area"
+    ) as HTMLElement;
+    if (uploadArea) {
+      const uploadText = uploadArea.querySelector(
+        ".upload-text"
+      ) as HTMLElement;
+
+      if (uploadText) {
+        // Create success message element
+        const successMessage = document.createElement("div");
+        successMessage.className = "success-message";
+        successMessage.style.cssText =
+          "color: #4CAF50; font-size: 14px; margin-top: 10px;";
+        successMessage.innerText = i18n.t(
+          "sidebar.image_upload.upload_success_message"
+        );
+
+        uploadText.insertAdjacentElement("afterend", successMessage);
+
+        setTimeout(() => {
+          if (successMessage && successMessage.parentNode) {
+            successMessage.remove();
+          }
+        }, 5000);
+      }
+    }
+  }
+
   private checkIfIsEditingMode() {
-    console.log("this.isEditingMode", this.isEditingMode);
     if (this.isEditingMode) return true;
     return false;
   }

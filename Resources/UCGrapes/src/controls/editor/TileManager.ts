@@ -121,7 +121,8 @@ export class TileManager {
         this.updateInfoTileRow(
           containerRowComponent.getId(),
           "add",
-          newTileComponent.getId()
+          newTileComponent.getId(),
+          index
         );
       } else {
         (globalThis as any).tileMapper.addTile(
@@ -182,14 +183,15 @@ export class TileManager {
   private updateInfoTileRow(
     tileRowId: any,
     method: "add" | "delete" = "add",
-    tileId: string
+    tileId: string,
+    index?: number
   ) {
     const infoContentMapper = new InfoContentMapper(this.pageId);
     const tileSection: InfoType | null =
       infoContentMapper.getInfoContent(tileRowId);
     if (tileSection) {
-      if (method === "add") {
-        tileSection.Tiles?.push({
+      if (method === "add" && index !== undefined) {
+        tileSection.Tiles?.splice(index + 1, 0, {
           Id: tileId,
           Name: "Title",
           Text: "Title",
@@ -199,8 +201,9 @@ export class TileManager {
             ObjectType: "",
             ObjectId: "",
             ObjectUrl: "",
+            FormId: 0
           },
-        });
+        });        
       } else if (method === "delete") {
         const tile = tileSection.Tiles?.find((tile: any) => tile.Id === tileId);
         if (tile) {

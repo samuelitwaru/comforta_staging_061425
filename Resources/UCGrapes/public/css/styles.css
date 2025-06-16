@@ -482,9 +482,9 @@ span#scroll-right:hover {
 }
 
 .appbar-title-container h1[contenteditable="true"]:empty:before {
-      content: attr(data-placeholder);
-      color: #9e9e9ec5;
-    }
+  content: attr(data-placeholder);
+  color: #9e9e9ec5;
+}
 
 .app-bar .appbar-title-container svg {
   width: 18px;
@@ -1636,7 +1636,9 @@ div#cta-selected-actions {
   min-height: 600px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-height: 90vh; /* Add this */
-  overflow-y: auto; /* Add this */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
   display: flex;
   flex-direction: column;
 }
@@ -1741,9 +1743,9 @@ div#cta-selected-actions {
 }
 
 .file-item img {
-  height: 110px;
-  width: 110px;
-  margin-right: 10px;
+  height: 90px;
+  width: 100%;
+  /* margin-right: 10px; */
   object-fit: cover;
 }
 
@@ -1820,15 +1822,14 @@ div#cta-selected-actions {
 }
 
 .modal-actions {
-  margin-top: 40px;
+  margin: 20px 0 40px;
   display: none;
   justify-content: flex-end;
   gap: 1em;
 }
 
 .modal-actions-slider {
-  margin-top: 40px;
-  /* display: none; */
+  margin: 10px 0 30px;
   margin-left: 76%;
   justify-content: flex-end;
   gap: 1em;
@@ -2677,8 +2678,8 @@ details .tb_debug_details-content {
 }
 
 .menu-container .menu-item:last-child:hover {
-    border-bottom-right-radius: 9px;
-    border-bottom-left-radius: 9px;
+  border-bottom-right-radius: 9px;
+  border-bottom-left-radius: 9px;
 }
 
 .menu-container .menu-item.expandable {
@@ -3216,10 +3217,13 @@ input[type="range"]::-webkit-slider-thumb {
 
 .file-list {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* Responsive grid */
-  gap: 10px; /* Spacing between images */
+  grid-template-columns: repeat(6, 1fr); /* Responsive grid */
+  gap: 20px 10px; /* Spacing between images */
   padding: 16px;
-  /* overflow: scroll; */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+  min-height: 300px;
 }
 
 .grid-image {
@@ -3450,7 +3454,7 @@ input[type="range"]::-webkit-slider-thumb {
   background-color: #b31412;
 }
 
-.ql-editor{
+.ql-editor {
   height: 250px;
   max-height: 250px;
   overflow: auto;

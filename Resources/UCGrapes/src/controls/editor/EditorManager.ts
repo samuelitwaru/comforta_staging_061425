@@ -38,25 +38,29 @@ export class EditorManager {
   }
 
   async init(newVersion?: any) {
-    const version = newVersion || await this.appVersion.getUpdatedActiveVersion();
+    const version = newVersion || await this.appVersion.getActiveVersion();
     (globalThis as any).activeVersion = version;
-    this.homepage = version?.Pages.find((page: any) => page.PageName === "Home");
-    const mainContainer = document.getElementById('main-content') as HTMLDivElement
-    mainContainer.innerHTML = ""
+    this.homepage = version?.Pages.find(
+      (page: any) => page.PageName === "Home"
+    );
+    const mainContainer = document.getElementById(
+      "main-content"
+    ) as HTMLDivElement;
+    mainContainer.innerHTML = "";
     this.setUpEditorFrame();
     this.setUpEditor();
-    this.editorEvents.activateEditor(`gjs-0`)
+    this.editorEvents.activateEditor(`gjs-0`);
   }
 
   setUpEditorFrame() {
     const frameList = new FrameList(`gjs-0`, this.homepage);
-    
+
     const thumbsContainer = document.createElement("div");
     thumbsContainer.style.justifyContent = "center";
     thumbsContainer.style.display = "flex";
     thumbsContainer.style.flexDirection = "row";
     thumbsContainer.style.alignItems = "center";
-    thumbsContainer.style.gap = "0.4rem"
+    thumbsContainer.style.gap = "0.4rem";
     thumbsContainer.className = "editor-thumbs-list";
     thumbsContainer.id = "editor-thumbs-list";
 
@@ -74,7 +78,7 @@ export class EditorManager {
     frameList.render(mainEditorSection);
     mainEditorSection.appendChild(thumbsContainer);
 
-    editorFrameArea.appendChild(mainEditorSection);    
+    editorFrameArea.appendChild(mainEditorSection);
 
     this.setClientWidth(frameList.container);
   }
@@ -94,7 +98,9 @@ export class EditorManager {
     await this.loadHomePage(editor);
     this.activateHomeEditor(`gjs-0`, editor);
 
-    const theme = this.themeManager.getThemeById((globalThis as any).activeVersion.ThemeId);
+    const theme = this.themeManager.getThemeById(
+      (globalThis as any).activeVersion.ThemeId
+    );
     this.themeManager.setTheme(theme);
   }
 
@@ -167,9 +173,11 @@ export class EditorManager {
   }
 
   activateHomeEditor(frameId: string, editor: any) {
-    const homeFrame = document.getElementById(`${frameId}-frame`) as HTMLElement;
+    const homeFrame = document.getElementById(
+      `${frameId}-frame`
+    ) as HTMLElement;
     homeFrame.classList.add("active-editor");
-  }  
+  }
 
   loadPageHistory(pageData: any) {
     const historyManager = new HistoryManager(pageData?.PageId);

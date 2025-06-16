@@ -21,15 +21,15 @@ export class TreeComponent {
     // this.addPageCreationEvent()
     this.appVersionManager = appVersionManager;
     this.toolboxService = new ToolBoxService();
-    this.appVersionManager.getUpdatedActiveVersion().then((res) => {
-      this.version = res;
-      this.pages = res.Pages;
-      this.homePage = res.Pages?.find((page: any) => page.PageName == "Home");
+    this.appVersionManager.getActiveVersion()
+      this.version = this.appVersionManager.getActiveVersion();
+      this.pages = this.version?.Pages;
+      this.homePage = this.version?.Pages?.find((page: any) => page.PageName == "Home");
       if (this.homePage) {
         this.clearMappings();
         this.createPageTree(this.homePage.PageId, "tree-container");
       }
-    });
+    
   }
 
   renderTitle() {

@@ -111,7 +111,7 @@ export class PageAttacher {
       tileAttributes = (globalThis as any).tileMapper.getTile(rowId, tileId);
     }
 
-    const version = await this.appVersionManager.getUpdatedActiveVersion();
+    const version = await this.appVersionManager.getActiveVersion();
     this.attachPage(page, version, tileAttributes, isNewPage);
 
     // set tile properties

@@ -344,7 +344,6 @@ export class JSONToGrapesJSInformation {
       contentHtml += firstSpacer;
       const contentArray = infoContent.map((content: any, index: number) => {
         const sectionHtml = this.generateInfoContent(content);
-        console.log('>>>', sectionHtml)
         return (
           sectionHtml +
           (index === infoContent.length - 1 ? lastSpacer : regularSpacer)

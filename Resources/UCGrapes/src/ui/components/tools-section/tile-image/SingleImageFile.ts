@@ -1,3 +1,4 @@
+import { display } from "html2canvas/dist/types/css/property-descriptors/display";
 import { ContentDataManager } from "../../../../controls/editor/ContentDataManager";
 import { TileProperties } from "../../../../controls/editor/TileProperties";
 import { ImageUploadManager } from "../../../../controls/ImageUploadManager";
@@ -7,6 +8,7 @@ import { Image, ImageType, InfoType, Media } from "../../../../types";
 import { ConfirmationBox } from "../../ConfirmationBox";
 import { ImageUpload } from "./ImageUpload";
 import { ImageUploadUi } from "./ImageUploadUi";
+import { zIndex } from "html2canvas/dist/types/css/property-descriptors/z-index";
 
 export class SingleImageFile {
   private readonly mediaFile: Media;
@@ -97,11 +99,13 @@ export class SingleImageFile {
 
   private initializeComponent(): void {
     const img = this.createPreviewImage();
-    const statusCheck = this.createStatusIcon();
+    const statusCheck = this.createImageCheckbox();
     const actionColumn = this.createActionColumn();
 
+    statusCheck.style.display = "none";
+
     this.container.appendChild(img);
-    this.container.appendChild(statusCheck);
+    actionColumn.prepend(statusCheck);
     this.container.appendChild(actionColumn);
 
     if (this.type !== "info") {
@@ -140,21 +144,22 @@ export class SingleImageFile {
     actionColumn.className = "action-column";
 
     Object.assign(actionColumn.style, {
-      position: "absolute",
-      top: "-16px",
-      right: "-4px",
       display: "flex",
       flexDirection: "row",
-      gap: "4px",
+      gap: "5px",
+      alignItems: "center",
+      width: "calc(100% + 10px)",
       zIndex: "3",
-      marginLeft: "50px",
+      position: "absolute",
+      top: "-16px",
+      left: "-5px"
     });
 
     if (this.type === "info") {
       actionColumn.appendChild(this.createImageCheckbox());
     }
 
-    actionColumn.appendChild(this.createReplaceButton());
+    // actionColumn.appendChild(this.createReplaceButton());
     actionColumn.appendChild(this.createDeleteButton());
 
     return actionColumn;
@@ -168,9 +173,6 @@ export class SingleImageFile {
     checkbox.title = "Select image";
 
     Object.assign(checkbox.style, {
-      position: "absolute",
-      left: "-70px",
-      top: "7px",
       fontSize: "25px",
       lineHeight: "0.8",
       backgroundColor: "rgba(255,255,255,0.95)",
@@ -216,7 +218,7 @@ export class SingleImageFile {
 
     addImage.addEventListener("click", (e) => {
       e.stopPropagation();
-      this.handleReplaceClick();
+      // this.handleReplaceClick();
     });
 
     return addImage;
@@ -237,6 +239,7 @@ export class SingleImageFile {
       justifyContent: "center",
       cursor: "pointer",
       border: "1px solid #5068a8",
+      marginLeft: "auto"
     });
 
     deleteSpan.addEventListener("click", (e) => {
@@ -345,14 +348,15 @@ export class SingleImageFile {
   }
 
   private clearVisualSelection(): void {
+    console.log('reached here')
     // Remove any selection-related classes
     this.container.classList.remove('selected', 'highlighted');
     
     // Hide status icon if visible
-    const statusIcon = this.container.querySelector('.status-icon') as HTMLElement;
-    if (statusIcon) {
-      statusIcon.style.display = 'none';
-    }
+    const statusIcons = this.container.querySelectorAll('.select-media-checkbox');
+    statusIcons.forEach((statusIcon) => {
+      (statusIcon as HTMLElement).style.display = 'none';
+    });
   }
 
   private dispatchSelectionEvent(action: 'selected' | 'unselected'): void {
@@ -407,7 +411,7 @@ export class SingleImageFile {
   private clearOtherSelections(): void {
     document.querySelectorAll(".file-item").forEach((element) => {
       element.classList.remove("selected");
-      const icon = element.querySelector(".status-icon") as HTMLElement;
+      const icon = element.querySelector(".select-media-checkbox") as HTMLElement;
       if (icon) {
         icon.style.display = "none";
       }
