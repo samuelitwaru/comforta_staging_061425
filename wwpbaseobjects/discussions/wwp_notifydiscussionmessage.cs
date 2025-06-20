@@ -145,8 +145,8 @@ namespace GeneXus.Programs.wwpbaseobjects.discussions {
          AV9WWPNotificationMetadataSDT = new SdtUSDTNotificationMetadata(context);
          AV27SDT_NotificationMetadata = new SdtSDT_NotificationMetadata(context);
          AV10WWPNotificationShortDescription = "";
-         AV29SDT_ReceptionistsToNotify = new GXBaseCollection<SdtSDT_ReceptionistToNotifiy_SDT_ReceptionistToNotifiyItem>( context, "SDT_ReceptionistToNotifiyItem", "Comforta_version21");
-         GXt_objcol_SdtSDT_ReceptionistToNotifiy_SDT_ReceptionistToNotifiyItem2 = new GXBaseCollection<SdtSDT_ReceptionistToNotifiy_SDT_ReceptionistToNotifiyItem>( context, "SDT_ReceptionistToNotifiyItem", "Comforta_version21");
+         AV29SDT_ReceptionistsToNotify = new GXBaseCollection<SdtSDT_ReceptionistToNotifiy_SDT_ReceptionistToNotifiyItem>( context, "SDT_ReceptionistToNotifiyItem", "Comforta_version2");
+         GXt_objcol_SdtSDT_ReceptionistToNotifiy_SDT_ReceptionistToNotifiyItem2 = new GXBaseCollection<SdtSDT_ReceptionistToNotifiy_SDT_ReceptionistToNotifiyItem>( context, "SDT_ReceptionistToNotifiyItem", "Comforta_version2");
          GXt_char1 = "";
          AV30SDT_ReceptionistToNotify = new SdtSDT_ReceptionistToNotifiy_SDT_ReceptionistToNotifiyItem(context);
          AV26ReceptionistsToNotify = new GxSimpleCollection<string>();

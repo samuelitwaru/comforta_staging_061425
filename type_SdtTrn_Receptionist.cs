@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
    [XmlRoot(ElementName = "Trn_Receptionist" )]
-   [XmlType(TypeName =  "Trn_Receptionist" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "Trn_Receptionist" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtTrn_Receptionist : GxSilentTrnSdt
    {
@@ -1034,7 +1034,7 @@ namespace GeneXus.Programs {
       private Guid gxTv_SdtTrn_Receptionist_Locationid_Z ;
    }
 
-   [DataContract(Name = @"Trn_Receptionist", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"Trn_Receptionist", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtTrn_Receptionist_RESTInterface : GxGenericCollectionItem<SdtTrn_Receptionist>
    {
@@ -1269,7 +1269,7 @@ namespace GeneXus.Programs {
       private string md5Hash ;
    }
 
-   [DataContract(Name = @"Trn_Receptionist", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"Trn_Receptionist", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtTrn_Receptionist_RESTLInterface : GxGenericCollectionItem<SdtTrn_Receptionist>
    {

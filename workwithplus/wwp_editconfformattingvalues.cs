@@ -1658,7 +1658,7 @@ namespace GeneXus.Programs.workwithplus {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256145235860", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202562016572147", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1674,7 +1674,7 @@ namespace GeneXus.Programs.workwithplus {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("workwithplus/wwp_editconfformattingvalues.js", "?20256145235860", false, true);
+         context.AddJavascriptSource("workwithplus/wwp_editconfformattingvalues.js", "?202562016572147", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/GridEmpowerer/GridEmpowererRender.js", "", false, true);
          /* End function include_jscripts */
@@ -1942,7 +1942,7 @@ namespace GeneXus.Programs.workwithplus {
 
       public override void initialize( )
       {
-         AV6ConfFormattingVariables = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWPConfFormattingVariable>( context, "WWPConfFormattingVariable", "Comforta_version21");
+         AV6ConfFormattingVariables = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWPConfFormattingVariable>( context, "WWPConfFormattingVariable", "Comforta_version2");
          wcpOAV7VarProgramName = "";
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";

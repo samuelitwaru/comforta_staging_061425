@@ -861,6 +861,7 @@ namespace GeneXus.Programs {
                Combo_managerphonecode_Selectalltext = cgiGet( "COMBO_MANAGERPHONECODE_Selectalltext");
                Combo_managerphonecode_Multiplevaluesseparator = cgiGet( "COMBO_MANAGERPHONECODE_Multiplevaluesseparator");
                Combo_managerphonecode_Addnewoptiontext = cgiGet( "COMBO_MANAGERPHONECODE_Addnewoptiontext");
+               Combo_managerphonecode_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "COMBO_MANAGERPHONECODE_Gxcontroltype"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
                /* Read variables values. */
                A22ManagerGivenName = cgiGet( edtManagerGivenName_Internalname);
                AssignAttri("", false, "A22ManagerGivenName", A22ManagerGivenName);
@@ -2811,7 +2812,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256145275111", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201701155", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2827,7 +2828,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("trn_manager.js", "?20256145275116", false, true);
+         context.AddJavascriptSource("trn_manager.js", "?20256201701158", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3612,6 +3613,7 @@ namespace GeneXus.Programs {
       private int edtManagerGAMGUID_Visible ;
       private int edtManagerGAMGUID_Enabled ;
       private int Combo_managerphonecode_Datalistupdateminimumcharacters ;
+      private int Combo_managerphonecode_Gxcontroltype ;
       private int idxLst ;
       private string sPrefix ;
       private string wcpOGx_mode ;

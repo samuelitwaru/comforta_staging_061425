@@ -62,7 +62,7 @@ namespace GeneXus.Programs {
 
       public void execute( out GXBaseCollection<SdtSDT_LocationDynamicForm_SDT_LocationDynamicFormItem> aP0_Gxm2rootcol )
       {
-         this.Gxm2rootcol = new GXBaseCollection<SdtSDT_LocationDynamicForm_SDT_LocationDynamicFormItem>( context, "SDT_LocationDynamicFormItem", "Comforta_version21") ;
+         this.Gxm2rootcol = new GXBaseCollection<SdtSDT_LocationDynamicForm_SDT_LocationDynamicFormItem>( context, "SDT_LocationDynamicFormItem", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP0_Gxm2rootcol=this.Gxm2rootcol;
@@ -76,7 +76,7 @@ namespace GeneXus.Programs {
 
       public void executeSubmit( out GXBaseCollection<SdtSDT_LocationDynamicForm_SDT_LocationDynamicFormItem> aP0_Gxm2rootcol )
       {
-         this.Gxm2rootcol = new GXBaseCollection<SdtSDT_LocationDynamicForm_SDT_LocationDynamicFormItem>( context, "SDT_LocationDynamicFormItem", "Comforta_version21") ;
+         this.Gxm2rootcol = new GXBaseCollection<SdtSDT_LocationDynamicForm_SDT_LocationDynamicFormItem>( context, "SDT_LocationDynamicFormItem", "Comforta_version2") ;
          SubmitImpl();
          aP0_Gxm2rootcol=this.Gxm2rootcol;
       }

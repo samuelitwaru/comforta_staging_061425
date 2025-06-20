@@ -23,7 +23,7 @@ using GeneXus.Programs;
 namespace GeneXus.Programs.wwpbaseobjects
 {
 	[XmlRoot(ElementName="WWPContext")]
-	[XmlType(TypeName="WWPContext" , Namespace="Comforta_version21" )]
+	[XmlType(TypeName="WWPContext" , Namespace="Comforta_version2" )]
 	[Serializable]
 	public class SdtWWPContext : GxUserType
 	{
@@ -1098,7 +1098,7 @@ namespace GeneXus.Programs.wwpbaseobjects
 	}
 	#region Rest interface
 	[GxJsonSerialization("default")]
-	[DataContract(Name=@"WWPContext", Namespace="Comforta_version21")]
+	[DataContract(Name=@"WWPContext", Namespace="Comforta_version2")]
 	public class SdtWWPContext_RESTInterface : GxGenericCollectionItem<SdtWWPContext>, System.Web.SessionState.IRequiresSessionState
 	{
 		public SdtWWPContext_RESTInterface( ) : base()

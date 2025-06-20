@@ -23,7 +23,7 @@ using System.Runtime.Serialization;
 namespace GeneXus.Programs
 {
 	[XmlRoot(ElementName="SDTLanguageResponseBody")]
-	[XmlType(TypeName="SDTLanguageResponseBody" , Namespace="Comforta_version21" )]
+	[XmlType(TypeName="SDTLanguageResponseBody" , Namespace="Comforta_version2" )]
 	[Serializable]
 	public class SdtSDTLanguageResponseBody : GxUserType
 	{
@@ -146,7 +146,7 @@ namespace GeneXus.Programs
 	}
 	#region Rest interface
 	[GxJsonSerialization("default")]
-	[DataContract(Name=@"SDTLanguageResponseBody", Namespace="Comforta_version21")]
+	[DataContract(Name=@"SDTLanguageResponseBody", Namespace="Comforta_version2")]
 	public class SdtSDTLanguageResponseBody_RESTInterface : GxGenericCollectionItem<SdtSDTLanguageResponseBody>, System.Web.SessionState.IRequiresSessionState
 	{
 		public SdtSDTLanguageResponseBody_RESTInterface( ) : base()

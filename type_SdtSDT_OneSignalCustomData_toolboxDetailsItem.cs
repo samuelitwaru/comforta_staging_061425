@@ -23,7 +23,7 @@ using System.Runtime.Serialization;
 namespace GeneXus.Programs
 {
 	[XmlRoot(ElementName="SDT_OneSignalCustomData.toolboxDetailsItem")]
-	[XmlType(TypeName="SDT_OneSignalCustomData.toolboxDetailsItem" , Namespace="Comforta_version21" )]
+	[XmlType(TypeName="SDT_OneSignalCustomData.toolboxDetailsItem" , Namespace="Comforta_version2" )]
 	[Serializable]
 	public class SdtSDT_OneSignalCustomData_toolboxDetailsItem : GxUserType
 	{
@@ -144,7 +144,7 @@ namespace GeneXus.Programs
 	}
 	#region Rest interface
 	[GxJsonSerialization("wrapped")]
-	[DataContract(Name=@"SDT_OneSignalCustomData.toolboxDetailsItem", Namespace="Comforta_version21")]
+	[DataContract(Name=@"SDT_OneSignalCustomData.toolboxDetailsItem", Namespace="Comforta_version2")]
 	public class SdtSDT_OneSignalCustomData_toolboxDetailsItem_RESTInterface : GxGenericCollectionItem<SdtSDT_OneSignalCustomData_toolboxDetailsItem>, System.Web.SessionState.IRequiresSessionState
 	{
 		public SdtSDT_OneSignalCustomData_toolboxDetailsItem_RESTInterface( ) : base()

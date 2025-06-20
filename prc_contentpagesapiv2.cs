@@ -49,7 +49,7 @@ namespace GeneXus.Programs {
       {
          this.AV2LocationId = aP0_LocationId;
          this.AV3OrganisationId = aP1_OrganisationId;
-         this.AV4SDT_ContentPageCollection = new GXBaseCollection<SdtSDT_ContentPage>( context, "SDT_ContentPage", "Comforta_version21") ;
+         this.AV4SDT_ContentPageCollection = new GXBaseCollection<SdtSDT_ContentPage>( context, "SDT_ContentPage", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP2_SDT_ContentPageCollection=this.AV4SDT_ContentPageCollection;
@@ -68,7 +68,7 @@ namespace GeneXus.Programs {
       {
          this.AV2LocationId = aP0_LocationId;
          this.AV3OrganisationId = aP1_OrganisationId;
-         this.AV4SDT_ContentPageCollection = new GXBaseCollection<SdtSDT_ContentPage>( context, "SDT_ContentPage", "Comforta_version21") ;
+         this.AV4SDT_ContentPageCollection = new GXBaseCollection<SdtSDT_ContentPage>( context, "SDT_ContentPage", "Comforta_version2") ;
          SubmitImpl();
          aP2_SDT_ContentPageCollection=this.AV4SDT_ContentPageCollection;
       }
@@ -97,7 +97,7 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV4SDT_ContentPageCollection = new GXBaseCollection<SdtSDT_ContentPage>( context, "SDT_ContentPage", "Comforta_version21");
+         AV4SDT_ContentPageCollection = new GXBaseCollection<SdtSDT_ContentPage>( context, "SDT_ContentPage", "Comforta_version2");
          /* GeneXus formulas. */
       }
 

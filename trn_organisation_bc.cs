@@ -108,7 +108,7 @@ namespace GeneXus.Programs {
                CheckExtendedTable013( ) ;
                if ( AnyError == 0 )
                {
-                  ZM013( 16) ;
+                  ZM013( 17) ;
                }
                CloseExtendedTableCursors013( ) ;
             }
@@ -137,17 +137,17 @@ namespace GeneXus.Programs {
             if (true) return;
          }
          AV11TrnContext.FromXml(AV12WebSession.Get("TrnContext"), null, "", "");
-         if ( ( StringUtil.StrCmp(AV11TrnContext.gxTpr_Transactionname, AV35Pgmname) == 0 ) && ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) )
+         if ( ( StringUtil.StrCmp(AV11TrnContext.gxTpr_Transactionname, AV36Pgmname) == 0 ) && ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) )
          {
-            AV36GXV1 = 1;
-            while ( AV36GXV1 <= AV11TrnContext.gxTpr_Attributes.Count )
+            AV37GXV1 = 1;
+            while ( AV37GXV1 <= AV11TrnContext.gxTpr_Attributes.Count )
             {
-               AV14TrnContextAtt = ((WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext_Attribute)AV11TrnContext.gxTpr_Attributes.Item(AV36GXV1));
+               AV14TrnContextAtt = ((WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext_Attribute)AV11TrnContext.gxTpr_Attributes.Item(AV37GXV1));
                if ( StringUtil.StrCmp(AV14TrnContextAtt.gxTpr_Attributename, "OrganisationTypeId") == 0 )
                {
                   AV13Insert_OrganisationTypeId = StringUtil.StrToGuid( AV14TrnContextAtt.gxTpr_Attributevalue);
                }
-               AV36GXV1 = (int)(AV36GXV1+1);
+               AV37GXV1 = (int)(AV37GXV1+1);
             }
          }
          if ( StringUtil.StrCmp(Gx_mode, "INS") == 0 )
@@ -172,7 +172,7 @@ namespace GeneXus.Programs {
 
       protected void ZM013( short GX_JID )
       {
-         if ( ( GX_JID == 15 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 16 ) || ( GX_JID == 0 ) )
          {
             Z17OrganisationPhone = A17OrganisationPhone;
             Z251OrganisationAddressZipCode = A251OrganisationAddressZipCode;
@@ -188,11 +188,11 @@ namespace GeneXus.Programs {
             Z305OrganisationAddressLine2 = A305OrganisationAddressLine2;
             Z19OrganisationTypeId = A19OrganisationTypeId;
          }
-         if ( ( GX_JID == 16 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 17 ) || ( GX_JID == 0 ) )
          {
             Z20OrganisationTypeName = A20OrganisationTypeName;
          }
-         if ( GX_JID == -15 )
+         if ( GX_JID == -16 )
          {
             Z11OrganisationId = A11OrganisationId;
             Z17OrganisationPhone = A17OrganisationPhone;
@@ -217,7 +217,7 @@ namespace GeneXus.Programs {
       protected void standaloneNotModal( )
       {
          AV31VatPattern = context.GetMessage( context.GetMessage( "[A-Za-z]{2}\\d{9}[A-Za-z]\\d{2}", ""), "");
-         AV35Pgmname = "Trn_Organisation_BC";
+         AV36Pgmname = "Trn_Organisation_BC";
       }
 
       protected void standaloneModal( )
@@ -247,7 +247,7 @@ namespace GeneXus.Programs {
             A20OrganisationTypeName = BC00015_A20OrganisationTypeName[0];
             A19OrganisationTypeId = BC00015_A19OrganisationTypeId[0];
             A506OrganisationLogo = BC00015_A506OrganisationLogo[0];
-            ZM013( -15) ;
+            ZM013( -16) ;
          }
          pr_default.close(3);
          OnLoadActions013( ) ;
@@ -255,15 +255,21 @@ namespace GeneXus.Programs {
 
       protected void OnLoadActions013( )
       {
-         GXt_char1 = A17OrganisationPhone;
-         new prc_concatenateintlphone(context ).execute(  A361OrganisationPhoneCode,  A362OrganisationPhoneNumber, out  GXt_char1) ;
-         A17OrganisationPhone = GXt_char1;
+         GXt_boolean1 = AV35OrganisationHasOwnBrand;
+         new prc_isorgnisationhasownbranding(context ).execute(  A11OrganisationId, out  GXt_boolean1) ;
+         AV35OrganisationHasOwnBrand = GXt_boolean1;
+         GXt_char2 = A17OrganisationPhone;
+         new prc_concatenateintlphone(context ).execute(  A361OrganisationPhoneCode,  A362OrganisationPhoneNumber, out  GXt_char2) ;
+         A17OrganisationPhone = GXt_char2;
          A251OrganisationAddressZipCode = StringUtil.Upper( A251OrganisationAddressZipCode);
       }
 
       protected void CheckExtendedTable013( )
       {
          standaloneModal( ) ;
+         GXt_boolean1 = AV35OrganisationHasOwnBrand;
+         new prc_isorgnisationhasownbranding(context ).execute(  A11OrganisationId, out  GXt_boolean1) ;
+         AV35OrganisationHasOwnBrand = GXt_boolean1;
          if ( ! ( GxRegex.IsMatch(A12OrganisationKvkNumber,"\\b\\d{8}\\b") ) )
          {
             GX_msglist.addItem(StringUtil.Format( context.GetMessage( "KvK number should contain 8 digits", ""), context.GetMessage( "Organisation Kvk Number", ""), "", "", "", "", "", "", "", ""), "OutOfRange", 1, "");
@@ -279,9 +285,9 @@ namespace GeneXus.Programs {
             GX_msglist.addItem(StringUtil.Format( context.GetMessage( "Invalid email pattern", ""), context.GetMessage( "Organisation Email", ""), "", "", "", "", "", "", "", ""), "OutOfRange", 1, "");
             AnyError = 1;
          }
-         GXt_char1 = A17OrganisationPhone;
-         new prc_concatenateintlphone(context ).execute(  A361OrganisationPhoneCode,  A362OrganisationPhoneNumber, out  GXt_char1) ;
-         A17OrganisationPhone = GXt_char1;
+         GXt_char2 = A17OrganisationPhone;
+         new prc_concatenateintlphone(context ).execute(  A361OrganisationPhoneCode,  A362OrganisationPhoneNumber, out  GXt_char2) ;
+         A17OrganisationPhone = GXt_char2;
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( A362OrganisationPhoneNumber)) && ! GxRegex.IsMatch(A362OrganisationPhoneNumber,context.GetMessage( "^\\d{9}$", "")) )
          {
             GX_msglist.addItem(context.GetMessage( "Phone contains 9 digits", ""), 1, "");
@@ -344,7 +350,7 @@ namespace GeneXus.Programs {
          pr_default.execute(1, new Object[] {n11OrganisationId, A11OrganisationId});
          if ( (pr_default.getStatus(1) != 101) )
          {
-            ZM013( 15) ;
+            ZM013( 16) ;
             RcdFound3 = 1;
             A11OrganisationId = BC00013_A11OrganisationId[0];
             n11OrganisationId = BC00013_n11OrganisationId[0];
@@ -617,6 +623,9 @@ namespace GeneXus.Programs {
          if ( AnyError == 0 )
          {
             /* Delete mode formulas */
+            GXt_boolean1 = AV35OrganisationHasOwnBrand;
+            new prc_isorgnisationhasownbranding(context ).execute(  A11OrganisationId, out  GXt_boolean1) ;
+            AV35OrganisationHasOwnBrand = GXt_boolean1;
             /* Using cursor BC000111 */
             pr_default.execute(9, new Object[] {A19OrganisationTypeId});
             A20OrganisationTypeName = BC000111_A20OrganisationTypeName[0];
@@ -818,6 +827,7 @@ namespace GeneXus.Programs {
       {
          A17OrganisationPhone = "";
          A251OrganisationAddressZipCode = "";
+         AV35OrganisationHasOwnBrand = false;
          A13OrganisationName = "";
          A12OrganisationKvkNumber = "";
          A16OrganisationEmail = "";
@@ -987,7 +997,7 @@ namespace GeneXus.Programs {
             Gx_mode = "UPD";
             Z11OrganisationId = A11OrganisationId;
          }
-         ZM013( -15) ;
+         ZM013( -16) ;
          OnLoadActions013( ) ;
          AddRow013( ) ;
          ScanKeyEnd013( ) ;
@@ -1016,7 +1026,7 @@ namespace GeneXus.Programs {
             Gx_mode = "UPD";
             Z11OrganisationId = A11OrganisationId;
          }
-         ZM013( -15) ;
+         ZM013( -16) ;
          OnLoadActions013( ) ;
          AddRow013( ) ;
          ScanKeyEnd013( ) ;
@@ -1407,7 +1417,7 @@ namespace GeneXus.Programs {
          AV12WebSession = context.GetSession();
          AV8WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          AV11TrnContext = new WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext(context);
-         AV35Pgmname = "";
+         AV36Pgmname = "";
          AV14TrnContextAtt = new WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext_Attribute(context);
          AV13Insert_OrganisationTypeId = Guid.Empty;
          Z17OrganisationPhone = "";
@@ -1461,7 +1471,7 @@ namespace GeneXus.Programs {
          BC00015_A20OrganisationTypeName = new string[] {""} ;
          BC00015_A19OrganisationTypeId = new Guid[] {Guid.Empty} ;
          BC00015_A506OrganisationLogo = new string[] {""} ;
-         GXt_char1 = "";
+         GXt_char2 = "";
          BC00014_A20OrganisationTypeName = new string[] {""} ;
          BC00016_A11OrganisationId = new Guid[] {Guid.Empty} ;
          BC00016_n11OrganisationId = new bool[] {false} ;
@@ -1592,7 +1602,7 @@ namespace GeneXus.Programs {
                }
             }
          );
-         AV35Pgmname = "Trn_Organisation_BC";
+         AV36Pgmname = "Trn_Organisation_BC";
          INITTRN();
          /* Execute Start event if defined. */
          /* Execute user event: Start */
@@ -1603,18 +1613,20 @@ namespace GeneXus.Programs {
       private short AnyError ;
       private short RcdFound3 ;
       private int trnEnded ;
-      private int AV36GXV1 ;
+      private int AV37GXV1 ;
       private string Gx_mode ;
       private string endTrnMsgTxt ;
       private string endTrnMsgCod ;
-      private string AV35Pgmname ;
+      private string AV36Pgmname ;
       private string Z17OrganisationPhone ;
       private string A17OrganisationPhone ;
-      private string GXt_char1 ;
+      private string GXt_char2 ;
       private string sMode3 ;
       private bool returnInSub ;
       private bool n11OrganisationId ;
+      private bool AV35OrganisationHasOwnBrand ;
       private bool Gx_longc ;
+      private bool GXt_boolean1 ;
       private string AV34successmsg ;
       private string Z251OrganisationAddressZipCode ;
       private string A251OrganisationAddressZipCode ;

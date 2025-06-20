@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
    [XmlRoot(ElementName = "UForm" )]
-   [XmlType(TypeName =  "UForm" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "UForm" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtUForm : GxSilentTrnSdt
    {
@@ -633,7 +633,7 @@ namespace GeneXus.Programs {
          get {
             if ( gxTv_SdtUForm_Element == null )
             {
-               gxTv_SdtUForm_Element = new GXBCLevelCollection<SdtUForm_Element>( context, "UForm.Element", "Comforta_version21");
+               gxTv_SdtUForm_Element = new GXBCLevelCollection<SdtUForm_Element>( context, "UForm.Element", "Comforta_version2");
             }
             return gxTv_SdtUForm_Element ;
          }
@@ -641,7 +641,7 @@ namespace GeneXus.Programs {
          set {
             if ( gxTv_SdtUForm_Element == null )
             {
-               gxTv_SdtUForm_Element = new GXBCLevelCollection<SdtUForm_Element>( context, "UForm.Element", "Comforta_version21");
+               gxTv_SdtUForm_Element = new GXBCLevelCollection<SdtUForm_Element>( context, "UForm.Element", "Comforta_version2");
             }
             sdtIsNull = 0;
             gxTv_SdtUForm_Element = value;
@@ -655,7 +655,7 @@ namespace GeneXus.Programs {
          get {
             if ( gxTv_SdtUForm_Element == null )
             {
-               gxTv_SdtUForm_Element = new GXBCLevelCollection<SdtUForm_Element>( context, "UForm.Element", "Comforta_version21");
+               gxTv_SdtUForm_Element = new GXBCLevelCollection<SdtUForm_Element>( context, "UForm.Element", "Comforta_version2");
             }
             sdtIsNull = 0;
             return gxTv_SdtUForm_Element ;
@@ -1176,7 +1176,7 @@ namespace GeneXus.Programs {
       private GXBCLevelCollection<SdtUForm_Element> gxTv_SdtUForm_Element=null ;
    }
 
-   [DataContract(Name = @"UForm", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"UForm", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtUForm_RESTInterface : GxGenericCollectionItem<SdtUForm>
    {
@@ -1436,7 +1436,7 @@ namespace GeneXus.Programs {
       private string md5Hash ;
    }
 
-   [DataContract(Name = @"UForm", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"UForm", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtUForm_RESTLInterface : GxGenericCollectionItem<SdtUForm>
    {

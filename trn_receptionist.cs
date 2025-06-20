@@ -870,6 +870,7 @@ namespace GeneXus.Programs {
                Combo_receptionistphonecode_Selectalltext = cgiGet( "COMBO_RECEPTIONISTPHONECODE_Selectalltext");
                Combo_receptionistphonecode_Multiplevaluesseparator = cgiGet( "COMBO_RECEPTIONISTPHONECODE_Multiplevaluesseparator");
                Combo_receptionistphonecode_Addnewoptiontext = cgiGet( "COMBO_RECEPTIONISTPHONECODE_Addnewoptiontext");
+               Combo_receptionistphonecode_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "COMBO_RECEPTIONISTPHONECODE_Gxcontroltype"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
                /* Read variables values. */
                dynLocationId.CurrentValue = cgiGet( dynLocationId_Internalname);
                A29LocationId = StringUtil.StrToGuid( cgiGet( dynLocationId_Internalname));
@@ -2774,7 +2775,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256145315345", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201714279", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2790,7 +2791,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("trn_receptionist.js", "?20256145315350", false, true);
+         context.AddJavascriptSource("trn_receptionist.js", "?20256201714281", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3634,6 +3635,7 @@ namespace GeneXus.Programs {
       private int edtReceptionistGAMGUID_Visible ;
       private int edtReceptionistGAMGUID_Enabled ;
       private int Combo_receptionistphonecode_Datalistupdateminimumcharacters ;
+      private int Combo_receptionistphonecode_Gxcontroltype ;
       private int idxLst ;
       private int gxdynajaxindex ;
       private string sPrefix ;

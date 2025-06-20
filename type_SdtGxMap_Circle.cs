@@ -23,7 +23,7 @@ using System.Runtime.Serialization;
 namespace GeneXus.Programs
 {
 	[XmlRoot(ElementName="GxMap.Circle")]
-	[XmlType(TypeName="GxMap.Circle" , Namespace="Comforta_version21" )]
+	[XmlType(TypeName="GxMap.Circle" , Namespace="Comforta_version2" )]
 	[Serializable]
 	public class SdtGxMap_Circle : GxUserType
 	{
@@ -306,7 +306,7 @@ namespace GeneXus.Programs
 	}
 	#region Rest interface
 	[GxJsonSerialization("wrapped")]
-	[DataContract(Name=@"GxMap.Circle", Namespace="Comforta_version21")]
+	[DataContract(Name=@"GxMap.Circle", Namespace="Comforta_version2")]
 	public class SdtGxMap_Circle_RESTInterface : GxGenericCollectionItem<SdtGxMap_Circle>, System.Web.SessionState.IRequiresSessionState
 	{
 		public SdtGxMap_Circle_RESTInterface( ) : base()

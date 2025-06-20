@@ -1248,7 +1248,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
             pr_default.close(0);
             if ( ! AV5HasErrors )
             {
-               AV22Validations = new GXBaseCollection<WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_Validation>( context, "WWP_DF_Validation", "Comforta_version21");
+               AV22Validations = new GXBaseCollection<WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_Validation>( context, "WWP_DF_Validation", "Comforta_version2");
                AV22Validations.FromJSonString(AV21WWPFormInstance.gxTpr_Wwpformvalidations, null);
                if ( AV22Validations.Count > 0 )
                {
@@ -1489,7 +1489,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          AV16WebSession.Set("WWPDynFormSetFocus", "T");
          if ( AV23HasConditionalSteps )
          {
-            AV18WizardSteps = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWizardSteps_WizardStepsItem>( context, "WizardStepsItem", "Comforta_version21");
+            AV18WizardSteps = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWizardSteps_WizardStepsItem>( context, "WizardStepsItem", "Comforta_version2");
             AV14IsCurrentStepAuxAssigned = false;
             AV23HasConditionalSteps = false;
             AssignAttri(sPrefix, false, "AV23HasConditionalSteps", AV23HasConditionalSteps);
@@ -1985,7 +1985,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256145251190", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202562016582150", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2001,7 +2001,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("workwithplus/dynamicforms/wwp_df_wizard_wc.js", "?20256145251194", false, true);
+         context.AddJavascriptSource("workwithplus/dynamicforms/wwp_df_wizard_wc.js", "?202562016582152", false, true);
          /* End function include_jscripts */
       }
 
@@ -2092,7 +2092,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          bodyStyle = "";
          GXKey = "";
          GXEncryptionTmp = "";
-         AV18WizardSteps = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWizardSteps_WizardStepsItem>( context, "WizardStepsItem", "Comforta_version21");
+         AV18WizardSteps = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWizardSteps_WizardStepsItem>( context, "WizardStepsItem", "Comforta_version2");
          A236WWPFormElementMetadata = "";
          A229WWPFormElementTitle = "";
          AV10CurrentStep = "";
@@ -2128,7 +2128,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          H00252_A206WWPFormId = new short[1] ;
          H00252_A210WWPFormElementId = new short[1] ;
          H00252_A212WWPFormElementOrderIndex = new short[1] ;
-         AV22Validations = new GXBaseCollection<WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_Validation>( context, "WWP_DF_Validation", "Comforta_version21");
+         AV22Validations = new GXBaseCollection<WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_Validation>( context, "WWP_DF_Validation", "Comforta_version2");
          AV32ResidentGUID = "";
          AV16WebSession = context.GetSession();
          AV36GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);

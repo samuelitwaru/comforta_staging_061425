@@ -23,7 +23,7 @@ using System.Runtime.Serialization;
 namespace GeneXus.Programs
 {
 	[XmlRoot(ElementName="GxMap.Polygon")]
-	[XmlType(TypeName="GxMap.Polygon" , Namespace="Comforta_version21" )]
+	[XmlType(TypeName="GxMap.Polygon" , Namespace="Comforta_version2" )]
 	[Serializable]
 	public class SdtGxMap_Polygon : GxUserType
 	{
@@ -305,7 +305,7 @@ namespace GeneXus.Programs
 	}
 	#region Rest interface
 	[GxJsonSerialization("wrapped")]
-	[DataContract(Name=@"GxMap.Polygon", Namespace="Comforta_version21")]
+	[DataContract(Name=@"GxMap.Polygon", Namespace="Comforta_version2")]
 	public class SdtGxMap_Polygon_RESTInterface : GxGenericCollectionItem<SdtGxMap_Polygon>, System.Web.SessionState.IRequiresSessionState
 	{
 		public SdtGxMap_Polygon_RESTInterface( ) : base()

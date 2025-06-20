@@ -66,6 +66,23 @@ export class InfoSectionPopup {
     ];
 
     sectionItems.sort((a, b) => a.label.localeCompare(b.label));
+
+    if (localStorage.getItem('copiedInfoSection')) {
+      sectionItems.push({
+        name: "Paste",
+        label: i18n.t("sidebar.action_list.paste_tile"),
+        handler: (sectionId?: string) => this.pasteCopiedSection(sectionId),
+      });
+    }
+
+    if (localStorage.getItem('copiedInfoSections')) {
+      sectionItems.push({
+        name: "Paste Selection",
+        label: i18n.t("sidebar.action_list.paste_selection"),
+        handler: (sectionId?: string) => this.pasteCopiedSelectionSections(sectionId),
+      });
+    }
+
     sectionItems?.forEach((item) => {
       const menuCategory = document.createElement("div");
       menuCategory.classList.add("menu-category");
@@ -163,6 +180,14 @@ export class InfoSectionPopup {
   addTile(sectionId?: string) {
     const tile = this.infoSectionUi.infoTileUi();
     this.controller.addTile(tile, sectionId);
+  }
+
+  pasteCopiedSection(sectionId?: string) {
+    this.controller.pasteTile(sectionId);
+  }
+
+  pasteCopiedSelectionSections(sectionId?: string) {
+    this.controller.pasteSelectedSections(sectionId);
   }
 
   addImage(sectionId?: string) {

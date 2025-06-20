@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
    [XmlRoot(ElementName = "Trn_AppNotification" )]
-   [XmlType(TypeName =  "Trn_AppNotification" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "Trn_AppNotification" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtTrn_AppNotification : GxSilentTrnSdt
    {
@@ -655,7 +655,7 @@ namespace GeneXus.Programs {
       private Guid gxTv_SdtTrn_AppNotification_Appnotificationid_Z ;
    }
 
-   [DataContract(Name = @"Trn_AppNotification", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"Trn_AppNotification", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtTrn_AppNotification_RESTInterface : GxGenericCollectionItem<SdtTrn_AppNotification>
    {
@@ -791,7 +791,7 @@ namespace GeneXus.Programs {
       private string md5Hash ;
    }
 
-   [DataContract(Name = @"Trn_AppNotification", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"Trn_AppNotification", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtTrn_AppNotification_RESTLInterface : GxGenericCollectionItem<SdtTrn_AppNotification>
    {

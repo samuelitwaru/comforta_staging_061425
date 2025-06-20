@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
    [XmlRoot(ElementName = "Trn_AppVersion" )]
-   [XmlType(TypeName =  "Trn_AppVersion" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "Trn_AppVersion" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtTrn_AppVersion : GxSilentTrnSdt
    {
@@ -497,7 +497,7 @@ namespace GeneXus.Programs {
          get {
             if ( gxTv_SdtTrn_AppVersion_Page == null )
             {
-               gxTv_SdtTrn_AppVersion_Page = new GXBCLevelCollection<SdtTrn_AppVersion_Page>( context, "Trn_AppVersion.Page", "Comforta_version21");
+               gxTv_SdtTrn_AppVersion_Page = new GXBCLevelCollection<SdtTrn_AppVersion_Page>( context, "Trn_AppVersion.Page", "Comforta_version2");
             }
             return gxTv_SdtTrn_AppVersion_Page ;
          }
@@ -505,7 +505,7 @@ namespace GeneXus.Programs {
          set {
             if ( gxTv_SdtTrn_AppVersion_Page == null )
             {
-               gxTv_SdtTrn_AppVersion_Page = new GXBCLevelCollection<SdtTrn_AppVersion_Page>( context, "Trn_AppVersion.Page", "Comforta_version21");
+               gxTv_SdtTrn_AppVersion_Page = new GXBCLevelCollection<SdtTrn_AppVersion_Page>( context, "Trn_AppVersion.Page", "Comforta_version2");
             }
             sdtIsNull = 0;
             gxTv_SdtTrn_AppVersion_Page = value;
@@ -519,7 +519,7 @@ namespace GeneXus.Programs {
          get {
             if ( gxTv_SdtTrn_AppVersion_Page == null )
             {
-               gxTv_SdtTrn_AppVersion_Page = new GXBCLevelCollection<SdtTrn_AppVersion_Page>( context, "Trn_AppVersion.Page", "Comforta_version21");
+               gxTv_SdtTrn_AppVersion_Page = new GXBCLevelCollection<SdtTrn_AppVersion_Page>( context, "Trn_AppVersion.Page", "Comforta_version2");
             }
             sdtIsNull = 0;
             return gxTv_SdtTrn_AppVersion_Page ;
@@ -1007,7 +1007,7 @@ namespace GeneXus.Programs {
       private GXBCLevelCollection<SdtTrn_AppVersion_Page> gxTv_SdtTrn_AppVersion_Page=null ;
    }
 
-   [DataContract(Name = @"Trn_AppVersion", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"Trn_AppVersion", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtTrn_AppVersion_RESTInterface : GxGenericCollectionItem<SdtTrn_AppVersion>
    {
@@ -1185,7 +1185,7 @@ namespace GeneXus.Programs {
       private string md5Hash ;
    }
 
-   [DataContract(Name = @"Trn_AppVersion", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"Trn_AppVersion", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtTrn_AppVersion_RESTLInterface : GxGenericCollectionItem<SdtTrn_AppVersion>
    {

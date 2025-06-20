@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs.wwpbaseobjects.discussions {
    [XmlRoot(ElementName = "WWP_DiscussionMessage" )]
-   [XmlType(TypeName =  "WWP_DiscussionMessage" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "WWP_DiscussionMessage" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtWWP_DiscussionMessage : GxSilentTrnSdt
    {
@@ -947,7 +947,7 @@ namespace GeneXus.Programs.wwpbaseobjects.discussions {
       private string gxTv_SdtWWP_DiscussionMessage_Wwpuserextendedphoto ;
    }
 
-   [DataContract(Name = @"WWPBaseObjects\Discussions\WWP_DiscussionMessage", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WWPBaseObjects\Discussions\WWP_DiscussionMessage", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_DiscussionMessage_RESTInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.discussions.SdtWWP_DiscussionMessage>
    {
@@ -1140,7 +1140,7 @@ namespace GeneXus.Programs.wwpbaseobjects.discussions {
       private string md5Hash ;
    }
 
-   [DataContract(Name = @"WWPBaseObjects\Discussions\WWP_DiscussionMessage", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WWPBaseObjects\Discussions\WWP_DiscussionMessage", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_DiscussionMessage_RESTLInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.discussions.SdtWWP_DiscussionMessage>
    {

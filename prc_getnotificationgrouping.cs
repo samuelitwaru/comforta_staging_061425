@@ -47,8 +47,8 @@ namespace GeneXus.Programs {
       public void execute( out GXBaseCollection<SdtSDT_NotificationGroup_SDT_NotificationGroupItem> aP0_SDT_NotificationGroupParentCollection ,
                            out GXBaseCollection<SdtSDT_NotificationGroup_SDT_NotificationGroupItem> aP1_SDT_NotificationGroupCollection )
       {
-         this.AV15SDT_NotificationGroupParentCollection = new GXBaseCollection<SdtSDT_NotificationGroup_SDT_NotificationGroupItem>( context, "SDT_NotificationGroupItem", "Comforta_version21") ;
-         this.AV12SDT_NotificationGroupCollection = new GXBaseCollection<SdtSDT_NotificationGroup_SDT_NotificationGroupItem>( context, "SDT_NotificationGroupItem", "Comforta_version21") ;
+         this.AV15SDT_NotificationGroupParentCollection = new GXBaseCollection<SdtSDT_NotificationGroup_SDT_NotificationGroupItem>( context, "SDT_NotificationGroupItem", "Comforta_version2") ;
+         this.AV12SDT_NotificationGroupCollection = new GXBaseCollection<SdtSDT_NotificationGroup_SDT_NotificationGroupItem>( context, "SDT_NotificationGroupItem", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP0_SDT_NotificationGroupParentCollection=this.AV15SDT_NotificationGroupParentCollection;
@@ -64,8 +64,8 @@ namespace GeneXus.Programs {
       public void executeSubmit( out GXBaseCollection<SdtSDT_NotificationGroup_SDT_NotificationGroupItem> aP0_SDT_NotificationGroupParentCollection ,
                                  out GXBaseCollection<SdtSDT_NotificationGroup_SDT_NotificationGroupItem> aP1_SDT_NotificationGroupCollection )
       {
-         this.AV15SDT_NotificationGroupParentCollection = new GXBaseCollection<SdtSDT_NotificationGroup_SDT_NotificationGroupItem>( context, "SDT_NotificationGroupItem", "Comforta_version21") ;
-         this.AV12SDT_NotificationGroupCollection = new GXBaseCollection<SdtSDT_NotificationGroup_SDT_NotificationGroupItem>( context, "SDT_NotificationGroupItem", "Comforta_version21") ;
+         this.AV15SDT_NotificationGroupParentCollection = new GXBaseCollection<SdtSDT_NotificationGroup_SDT_NotificationGroupItem>( context, "SDT_NotificationGroupItem", "Comforta_version2") ;
+         this.AV12SDT_NotificationGroupCollection = new GXBaseCollection<SdtSDT_NotificationGroup_SDT_NotificationGroupItem>( context, "SDT_NotificationGroupItem", "Comforta_version2") ;
          SubmitImpl();
          aP0_SDT_NotificationGroupParentCollection=this.AV15SDT_NotificationGroupParentCollection;
          aP1_SDT_NotificationGroupCollection=this.AV12SDT_NotificationGroupCollection;
@@ -182,8 +182,8 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV15SDT_NotificationGroupParentCollection = new GXBaseCollection<SdtSDT_NotificationGroup_SDT_NotificationGroupItem>( context, "SDT_NotificationGroupItem", "Comforta_version21");
-         AV12SDT_NotificationGroupCollection = new GXBaseCollection<SdtSDT_NotificationGroup_SDT_NotificationGroupItem>( context, "SDT_NotificationGroupItem", "Comforta_version21");
+         AV15SDT_NotificationGroupParentCollection = new GXBaseCollection<SdtSDT_NotificationGroup_SDT_NotificationGroupItem>( context, "SDT_NotificationGroupItem", "Comforta_version2");
+         AV12SDT_NotificationGroupCollection = new GXBaseCollection<SdtSDT_NotificationGroup_SDT_NotificationGroupItem>( context, "SDT_NotificationGroupItem", "Comforta_version2");
          AV27Udparg1 = "";
          P009V2_A112WWPUserExtendedId = new string[] {""} ;
          P009V2_n112WWPUserExtendedId = new bool[] {false} ;

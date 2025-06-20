@@ -1181,7 +1181,7 @@ namespace GeneXus.Programs {
          /* Execute user subroutine: 'SETACTIVEFILTER' */
          S132 ();
          if (returnInSub) return;
-         AV25WWP_SDTNotificationsData = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version21");
+         AV25WWP_SDTNotificationsData = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version2");
          GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1 = AV25WWP_SDTNotificationsData;
          new dp_getusernotifications(context ).execute(  "",  AV33MentionDefinitions,  "", out  GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1) ;
          AV25WWP_SDTNotificationsData = GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1;
@@ -1208,7 +1208,7 @@ namespace GeneXus.Programs {
          /* Execute user subroutine: 'SETACTIVEFILTER' */
          S132 ();
          if (returnInSub) return;
-         AV25WWP_SDTNotificationsData = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version21");
+         AV25WWP_SDTNotificationsData = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version2");
          GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1 = AV25WWP_SDTNotificationsData;
          new dp_getusernotifications(context ).execute(  "",  AV29DiscussionDefinitions,  "", out  GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1) ;
          AV25WWP_SDTNotificationsData = GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1;
@@ -1235,7 +1235,7 @@ namespace GeneXus.Programs {
          /* Execute user subroutine: 'SETACTIVEFILTER' */
          S132 ();
          if (returnInSub) return;
-         AV25WWP_SDTNotificationsData = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version21");
+         AV25WWP_SDTNotificationsData = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version2");
          GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1 = AV25WWP_SDTNotificationsData;
          new dp_getusernotifications(context ).execute(  "",  AV31FormDefinitions,  "", out  GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1) ;
          AV25WWP_SDTNotificationsData = GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1;
@@ -1262,7 +1262,7 @@ namespace GeneXus.Programs {
          /* Execute user subroutine: 'SETACTIVEFILTER' */
          S132 ();
          if (returnInSub) return;
-         AV25WWP_SDTNotificationsData = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version21");
+         AV25WWP_SDTNotificationsData = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version2");
          GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1 = AV25WWP_SDTNotificationsData;
          new dp_getusernotifications(context ).execute(  "",  AV27AgendaDefinitions,  "", out  GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1) ;
          AV25WWP_SDTNotificationsData = GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1;
@@ -1295,7 +1295,7 @@ namespace GeneXus.Programs {
          if ( StringUtil.StrCmp(AV37NotificationTypes, "UnRead") == 0 )
          {
             AV32isFilterByRead = false;
-            AV25WWP_SDTNotificationsData = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version21");
+            AV25WWP_SDTNotificationsData = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version2");
             GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1 = AV25WWP_SDTNotificationsData;
             new dp_getusernotifications(context ).execute(  "UnRead",  AV35NotificationDefinitionIdEmptyCollection,  "", out  GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1) ;
             AV25WWP_SDTNotificationsData = GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1;
@@ -1332,7 +1332,7 @@ namespace GeneXus.Programs {
          if ( StringUtil.StrCmp(AV37NotificationTypes, "Read") == 0 )
          {
             AV32isFilterByRead = true;
-            AV25WWP_SDTNotificationsData = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version21");
+            AV25WWP_SDTNotificationsData = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version2");
             GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1 = AV25WWP_SDTNotificationsData;
             new dp_getusernotifications(context ).execute(  AV37NotificationTypes,  AV35NotificationDefinitionIdEmptyCollection,  "", out  GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1) ;
             AV25WWP_SDTNotificationsData = GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1;
@@ -1340,7 +1340,7 @@ namespace GeneXus.Programs {
          else if ( StringUtil.StrCmp(AV37NotificationTypes, "UnRead") == 0 )
          {
             AV32isFilterByRead = false;
-            AV25WWP_SDTNotificationsData = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version21");
+            AV25WWP_SDTNotificationsData = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version2");
             GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1 = AV25WWP_SDTNotificationsData;
             new dp_getusernotifications(context ).execute(  AV37NotificationTypes,  AV35NotificationDefinitionIdEmptyCollection,  "", out  GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1) ;
             AV25WWP_SDTNotificationsData = GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1;
@@ -1371,7 +1371,7 @@ namespace GeneXus.Programs {
          new prc_logtofile(context ).execute(  context.GetMessage( "Notification *****", "")+AV26NotificationInfo.ToJSonString(false, true)) ;
          if ( StringUtil.Contains( AV26NotificationInfo.gxTpr_Id, "WebNotification") )
          {
-            AV25WWP_SDTNotificationsData = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version21");
+            AV25WWP_SDTNotificationsData = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version2");
             /* Execute user subroutine: 'GETNUMBEROFUNREADNOTIFICATIONS' */
             S112 ();
             if (returnInSub) return;
@@ -1414,7 +1414,7 @@ namespace GeneXus.Programs {
             AssignAttri("", false, "AV37NotificationTypes", AV37NotificationTypes);
             AV28CurrentNotficationGroupFilter = StringUtil.Lower( AV41SearchKey);
             AssignAttri("", false, "AV28CurrentNotficationGroupFilter", AV28CurrentNotficationGroupFilter);
-            AV25WWP_SDTNotificationsData = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version21");
+            AV25WWP_SDTNotificationsData = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version2");
             GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1 = AV25WWP_SDTNotificationsData;
             new dp_getusernotifications(context ).execute(  "",  AV35NotificationDefinitionIdEmptyCollection,  AV28CurrentNotficationGroupFilter, out  GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1) ;
             AV25WWP_SDTNotificationsData = GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1;
@@ -1608,7 +1608,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256145434773", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201793523", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1624,7 +1624,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wp_notificationdashboard.js", "?20256145434773", false, true);
+         context.AddJavascriptSource("wp_notificationdashboard.js", "?20256201793523", false, true);
          /* End function include_jscripts */
       }
 
@@ -1741,10 +1741,10 @@ namespace GeneXus.Programs {
          AV42SearchKeyValue = "";
          GXKey = "";
          AV28CurrentNotficationGroupFilter = "";
-         AV25WWP_SDTNotificationsData = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version21");
+         AV25WWP_SDTNotificationsData = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version2");
          AV35NotificationDefinitionIdEmptyCollection = new GxSimpleCollection<long>();
          AV26NotificationInfo = new GeneXus.Core.genexus.server.SdtNotificationInfo(context);
-         AV40WWP_SDTNotificationsData_UnRead = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version21");
+         AV40WWP_SDTNotificationsData_UnRead = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version2");
          GX_FocusControl = "";
          Form = new GXWebForm();
          sPrefix = "";
@@ -1770,8 +1770,8 @@ namespace GeneXus.Programs {
          AV38NumberOfUnRead = "";
          AV47ResidentTitle = "";
          GXt_char2 = "";
-         GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1 = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version21");
-         AV46DataOfNotifications = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version21");
+         GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem1 = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version2");
+         AV46DataOfNotifications = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version2");
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
          WebComp_Wcwc_notificationgrouping = new GeneXus.Http.GXNullWebComponent();

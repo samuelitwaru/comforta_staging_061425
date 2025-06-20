@@ -316,8 +316,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
          AV14GAMApplicationId = "";
          AV13GAMApplication = new GeneXus.Programs.genexussecurity.SdtGAMApplication(context);
          AV11Errors = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError>( context, "GeneXus.Programs.genexussecurity.SdtGAMError", "GeneXus.Programs");
-         AV27SecGAMFunctionalitiesToLoadCollection = new GXBaseCollection<WorkWithPlus.workwithplus_commongam.SdtSecGAMFunctionalitiesToLoad>( context, "SecGAMFunctionalitiesToLoad", "Comforta_version21");
-         GXt_objcol_SdtSecGAMFunctionalitiesToLoad1 = new GXBaseCollection<WorkWithPlus.workwithplus_commongam.SdtSecGAMFunctionalitiesToLoad>( context, "SecGAMFunctionalitiesToLoad", "Comforta_version21");
+         AV27SecGAMFunctionalitiesToLoadCollection = new GXBaseCollection<WorkWithPlus.workwithplus_commongam.SdtSecGAMFunctionalitiesToLoad>( context, "SecGAMFunctionalitiesToLoad", "Comforta_version2");
+         GXt_objcol_SdtSecGAMFunctionalitiesToLoad1 = new GXBaseCollection<WorkWithPlus.workwithplus_commongam.SdtSecGAMFunctionalitiesToLoad>( context, "SecGAMFunctionalitiesToLoad", "Comforta_version2");
          AV18GAMApplicationPermissions = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMApplicationPermission>( context, "GeneXus.Programs.genexussecurity.SdtGAMApplicationPermission", "GeneXus.Programs");
          AV16GAMApplicationPermissionFilter = new GeneXus.Programs.genexussecurity.SdtGAMApplicationPermissionFilter(context);
          AV21GAMRoleFilter = new GeneXus.Programs.genexussecurity.SdtGAMRoleFilter(context);

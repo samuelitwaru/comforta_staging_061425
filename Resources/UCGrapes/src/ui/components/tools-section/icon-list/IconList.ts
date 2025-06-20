@@ -11,7 +11,7 @@ export class IconList {
 
   constructor(themeManager: ThemeManager, iconsCategory: string, searchQuery: string = "") {
     this.themeManager = themeManager;
-    this.iconsCategory = iconsCategory;
+    this.iconsCategory = iconsCategory || "Technical Services & Support";
     this.init(searchQuery);
   }
 
@@ -23,11 +23,11 @@ export class IconList {
       themeIcons = this.searchIcons(searchQuery, themeIcons);
     }else {
       themeIcons = themeIcons.filter(
-        (icon) => icon.IconCategory === this.iconsCategory
+        (icon) => icon.IconCategory === this.iconsCategory 
       );
     }
-
     themeIcons.forEach((themeIcon) => {
+
         const icon = document.createElement("div");
         icon.classList.add("icon");
         icon.title = themeIcon.IconName;
@@ -98,7 +98,6 @@ export class IconList {
             selectedComponent,
             tileAttributes
           );
-
           tileProperties.setTileAttributes();
         });
 

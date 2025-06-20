@@ -80,7 +80,7 @@ namespace GeneXus.Programs {
                            out GXBaseCollection<SdtSDT_ReceptionistToNotifiy_SDT_ReceptionistToNotifiyItem> aP1_SDT_ReceptionistsToNotify )
       {
          this.AV10WWPUserExtendedId = aP0_WWPUserExtendedId;
-         this.AV15SDT_ReceptionistsToNotify = new GXBaseCollection<SdtSDT_ReceptionistToNotifiy_SDT_ReceptionistToNotifiyItem>( context, "SDT_ReceptionistToNotifiyItem", "Comforta_version21") ;
+         this.AV15SDT_ReceptionistsToNotify = new GXBaseCollection<SdtSDT_ReceptionistToNotifiy_SDT_ReceptionistToNotifiyItem>( context, "SDT_ReceptionistToNotifiyItem", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP1_SDT_ReceptionistsToNotify=this.AV15SDT_ReceptionistsToNotify;
@@ -96,7 +96,7 @@ namespace GeneXus.Programs {
                                  out GXBaseCollection<SdtSDT_ReceptionistToNotifiy_SDT_ReceptionistToNotifiyItem> aP1_SDT_ReceptionistsToNotify )
       {
          this.AV10WWPUserExtendedId = aP0_WWPUserExtendedId;
-         this.AV15SDT_ReceptionistsToNotify = new GXBaseCollection<SdtSDT_ReceptionistToNotifiy_SDT_ReceptionistToNotifiyItem>( context, "SDT_ReceptionistToNotifiyItem", "Comforta_version21") ;
+         this.AV15SDT_ReceptionistsToNotify = new GXBaseCollection<SdtSDT_ReceptionistToNotifiy_SDT_ReceptionistToNotifiyItem>( context, "SDT_ReceptionistToNotifiyItem", "Comforta_version2") ;
          SubmitImpl();
          aP1_SDT_ReceptionistsToNotify=this.AV15SDT_ReceptionistsToNotify;
       }
@@ -183,7 +183,7 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV15SDT_ReceptionistsToNotify = new GXBaseCollection<SdtSDT_ReceptionistToNotifiy_SDT_ReceptionistToNotifiyItem>( context, "SDT_ReceptionistToNotifiyItem", "Comforta_version21");
+         AV15SDT_ReceptionistsToNotify = new GXBaseCollection<SdtSDT_ReceptionistToNotifiy_SDT_ReceptionistToNotifiyItem>( context, "SDT_ReceptionistToNotifiyItem", "Comforta_version2");
          P009G2_A95ReceptionistGAMGUID = new string[] {""} ;
          P009G2_A29LocationId = new Guid[] {Guid.Empty} ;
          P009G2_A89ReceptionistId = new Guid[] {Guid.Empty} ;

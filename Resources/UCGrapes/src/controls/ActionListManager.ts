@@ -76,6 +76,14 @@ export class ActionListManager {
         },
       ],
       secondCategory,
+      [
+        {
+          id: "copy-tile-info",
+          label: i18n.t("tile.copy_tile"),
+          name: "Copy Tile",
+          action: () => this.copySelectedTileSection(),
+        },
+      ],
     ];
   }
 
@@ -118,7 +126,7 @@ export class ActionListManager {
       appVersion.AppVersionId,
       title
     );
-
+    console.log('res', res)
     if (!res.error.message) {
       const page = {
         PageId: res.MenuPage.PageId,
@@ -126,6 +134,7 @@ export class ActionListManager {
         TileName: res.MenuPage.PageName,
         PageType: res.MenuPage.PageType,
       };
+      console.log('page', page)
       this.pageAttacher.attachToTile(page, "Information", "Information", true);
     } else {
       console.error("error", res.error.message);
@@ -219,10 +228,75 @@ export class ActionListManager {
     new ChildEditor(childPage?.PageId, childPage).init(tileAttributes);
   }
 
+
+
   filterMenuItems(items: HTMLElement[], searchTerm: string): HTMLElement[] {
     return items.filter((item) => {
       const itemText = item.textContent?.toLowerCase() || "";
       return itemText.includes(searchTerm.toLowerCase());
     });
   }
+
+  /**
+   * Copies the selected tile and prepares it for pasting.
+   * This method should be called when the user selects a tile and clicks the copy button.
+   */
+  private copySelectedTileSection(): void {
+    const selectedComponent = (globalThis as any).selectedComponent;
+    const activePage = (globalThis as any).pageData;
+    let copiedStructure = {};
+    // console.log('copySelectedTile activePage', activePage);
+    if (!selectedComponent) {
+      console.error("No tile selected to copy.");
+      return;
+    }
+
+    // 1. Get the tile's unique ID
+    const tileParentId = selectedComponent.parent().parent().getId?.();
+    const tileId = selectedComponent.parent().getId?.();
+
+    if (!tileId) {
+      console.error("Selected tile does not have an ID.");
+      return;
+    }
+
+    // 2. Retrieve the tile structure from localStorage
+    const data: any = JSON.parse(
+      localStorage.getItem(`data-${activePage.PageId}`) || "{}"
+    );
+    // console.log('local storage key', `data-${activePage.PageId}`);
+    // console.log('copySelectedTile data', data);
+    if (data?.PageInfoStructure?.InfoContent) {
+      data.PageInfoStructure.InfoContent.forEach((infoContent: any) => {
+        if (infoContent?.InfoType === "TileRow" && infoContent?.InfoId === tileParentId) {
+          // get the structure of the selected tile
+          infoContent?.Tiles.forEach((tile: any) => {
+            if (tile.Id === tileId) {
+              // console.log('copySelectedTile infoContent', infoContent);
+              copiedStructure = tile;
+            }
+          });
+        } else if (infoContent?.InfoType === "Tile" && infoContent?.InfoId === tileId) {
+          // If the tile itself is directly in the PageInfoStructure
+          copiedStructure = infoContent;
+          // console.log('copySelectedTile infoContent tile', infoContent);
+          // No need to continue if we found the tile directly
+
+          return;
+
+        }
+      });
+    }
+
+    if (!copiedStructure) {
+      console.error("No structure found in localStorage for tile ID:", tileId);
+      return;
+    }
+
+    // Option B: Store in a dedicated localStorage key
+    localStorage.setItem('copiedInfoSection', JSON.stringify(copiedStructure));
+
+    // console.log("Tile copied:", tileId, copiedStructure);
+  }
 }
+

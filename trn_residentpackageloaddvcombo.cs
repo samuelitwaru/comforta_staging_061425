@@ -175,8 +175,8 @@ namespace GeneXus.Programs {
          AV17SelectedText = "";
          AV11Combo_Data = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item>( context, "Item", "");
          AV9WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
-         AV21GXV1 = new GXBaseCollection<SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem>( context, "SDT_ResidentProvisioningItem", "Comforta_version21");
-         GXt_objcol_SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem1 = new GXBaseCollection<SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem>( context, "SDT_ResidentProvisioningItem", "Comforta_version21");
+         AV21GXV1 = new GXBaseCollection<SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem>( context, "SDT_ResidentProvisioningItem", "Comforta_version2");
+         GXt_objcol_SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem1 = new GXBaseCollection<SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem>( context, "SDT_ResidentProvisioningItem", "Comforta_version2");
          AV20ResidentPackageModules_DPItem = new SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem(context);
          AV12Combo_DataItem = new WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item(context);
          P00B62_A527ResidentPackageId = new Guid[] {Guid.Empty} ;

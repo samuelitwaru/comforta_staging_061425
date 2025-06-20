@@ -23,7 +23,7 @@ using System.Runtime.Serialization;
 namespace GeneXus.Programs
 {
 	[XmlRoot(ElementName="WP_CreateOrganisationAndManagerData.Step3")]
-	[XmlType(TypeName="WP_CreateOrganisationAndManagerData.Step3" , Namespace="Comforta_version21" )]
+	[XmlType(TypeName="WP_CreateOrganisationAndManagerData.Step3" , Namespace="Comforta_version2" )]
 	[Serializable]
 	public class SdtWP_CreateOrganisationAndManagerData_Step3 : GxUserType
 	{
@@ -206,7 +206,7 @@ namespace GeneXus.Programs
 	}
 	#region Rest interface
 	[GxJsonSerialization("default")]
-	[DataContract(Name=@"WP_CreateOrganisationAndManagerData.Step3", Namespace="Comforta_version21")]
+	[DataContract(Name=@"WP_CreateOrganisationAndManagerData.Step3", Namespace="Comforta_version2")]
 	public class SdtWP_CreateOrganisationAndManagerData_Step3_RESTInterface : GxGenericCollectionItem<SdtWP_CreateOrganisationAndManagerData_Step3>, System.Web.SessionState.IRequiresSessionState
 	{
 		public SdtWP_CreateOrganisationAndManagerData_Step3_RESTInterface( ) : base()

@@ -48,7 +48,7 @@ namespace GeneXus.Programs {
                            out GXBaseCollection<SdtSDT_FileUploadData> aP1_SDT_FileUploadDataCollection )
       {
          this.AV10ProductServiceId = aP0_ProductServiceId;
-         this.AV13SDT_FileUploadDataCollection = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version21") ;
+         this.AV13SDT_FileUploadDataCollection = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP1_SDT_FileUploadDataCollection=this.AV13SDT_FileUploadDataCollection;
@@ -64,7 +64,7 @@ namespace GeneXus.Programs {
                                  out GXBaseCollection<SdtSDT_FileUploadData> aP1_SDT_FileUploadDataCollection )
       {
          this.AV10ProductServiceId = aP0_ProductServiceId;
-         this.AV13SDT_FileUploadDataCollection = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version21") ;
+         this.AV13SDT_FileUploadDataCollection = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version2") ;
          SubmitImpl();
          aP1_SDT_FileUploadDataCollection=this.AV13SDT_FileUploadDataCollection;
       }
@@ -111,7 +111,7 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV13SDT_FileUploadDataCollection = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version21");
+         AV13SDT_FileUploadDataCollection = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version2");
          P00F52_A609ServiceId = new Guid[] {Guid.Empty} ;
          P00F52_A40000ServiceImage_GXI = new string[] {""} ;
          P00F52_A608ServiceImageId = new Guid[] {Guid.Empty} ;

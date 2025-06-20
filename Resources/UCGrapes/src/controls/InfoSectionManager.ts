@@ -6,6 +6,8 @@ import { randomIdGenerator } from "../utils/helpers";
 import { InfoContentMapper } from "./editor/InfoContentMapper";
 import { AddInfoSectionButton } from "../ui/components/AddInfoSectionButton";
 import { CtaAttributes, InfoType } from "../types";
+import { JSONToGrapesJSMenu } from "./editor/JSONToGrapesJSMenu";
+import { ToolboxManager } from "./toolbox/ToolboxManager";
 
 export class InfoSectionManager {
   editor: any;
@@ -136,6 +138,7 @@ export class InfoSectionManager {
       }
     }
   }
+
   openContentEditModal(sectionId?: string) {
     const modalBody = document.createElement("div");
 
@@ -198,7 +201,7 @@ export class InfoSectionManager {
         ],
         clipboard: {
           matchers: [
-            [ 
+            [
               Node.ELEMENT_NODE,
               (node: Node, delta: any) => {
                 return delta.compose(new Delta().retain(delta.length(), {
@@ -219,7 +222,7 @@ export class InfoSectionManager {
                   video: false
                 }));
               }
-            ] 
+            ]
           ]
         }
       },
@@ -362,6 +365,78 @@ export class InfoSectionManager {
     }
   }
 
+  pasteTile(nextSectionId?: string) {
+    // 1. Get the copied tile structure from localStorage
+    const copiedTileRaw = localStorage.getItem('copiedInfoSection');
+    if (!copiedTileRaw) {
+      // console.error("No copied tile found in localStorage.");
+      return;
+    }
+
+    const copiedTile = JSON.parse(copiedTileRaw);
+    if (copiedTile?.InfoType === "TileRow") {
+      const pageId = (globalThis as any).currentPageId
+      if (copiedTile.Tiles && Array.isArray(copiedTile.Tiles)) {
+        copiedTile.Tiles.forEach((tile: any) => {
+          // Generate a new random ID for each 'Tile' element's 'Id' property
+          tile.Id = randomIdGenerator(8);
+        });
+      }
+      const newPastePayload = { ...copiedTile, InfoId: randomIdGenerator(15) };
+      const infoMapper = new InfoContentMapper(pageId);
+      infoMapper.pasteSingleInfoType(newPastePayload, nextSectionId);
+    } else if (copiedTile?.Action) {
+      // If the copied tile is a single tile (not a row)
+      const pageId = (globalThis as any).currentPageId
+      const infoMapper = new InfoContentMapper(pageId);
+
+      // create a new section for the dragged tile
+      const content: InfoType = {
+        InfoId: randomIdGenerator(15),
+        InfoType: "TileRow",
+        InfoValue: "",
+        Tiles: [{ ...copiedTile, Id: randomIdGenerator(8) }],
+      };
+
+      // console.log("Pasting single tile as a new row:", content);
+      infoMapper.pasteSingleInfoType(content, nextSectionId);
+
+      return;
+    } else {
+      // console.error("Copied tile structure is invalid.");
+      return;
+    }
+  }
+
+  pasteSelectedSections(nextSectionId?: string) {
+    // 1. Get the copied sections structure from localStorage
+    const copiedSectionsRaw = localStorage.getItem('copiedInfoSections');
+    if (!copiedSectionsRaw) {
+      // console.error("No copied sections found in localStorage.");
+      return;
+    }
+
+    const copiedSections = JSON.parse(copiedSectionsRaw);
+    // loop through each section and change their ids
+    copiedSections.forEach((section: any) => {
+      section.InfoId = randomIdGenerator(15);
+      if (section.Tiles && Array.isArray(section.Tiles)) {
+        section.Tiles.forEach((tile: any) => {
+          tile.Id = randomIdGenerator(8);
+        });
+      }
+    });
+
+    if (copiedSections) {
+      const pageId = (globalThis as any).currentPageId
+      const infoMapper = new InfoContentMapper(pageId);
+      infoMapper.pasteAllInfoSectionTypes(copiedSections, nextSectionId);
+    } else {
+      console.error("Copied tile structure is invalid.");
+      return;
+    }
+  }
+
   updateDescription(updatedDescription: string, infoId: string) {
     const descContainer = this.infoSectionUI.getDescription(
       updatedDescription,
@@ -410,7 +485,6 @@ export class InfoSectionManager {
   deleteInfoImageOrDesc(infoId: string) {
     const component = this.editor?.getWrapper().find(`#${infoId}`)[0];
     if (component) {
-      console.log('component deleteInfoImageOrDesc', component);
       component.remove();
       this.removeInfoMapper(infoId);
       this.removeConsecutivePlusButtons();
@@ -485,6 +559,7 @@ export class InfoSectionManager {
   }
 
   private addToMapper(infoType: InfoType) {
+    // console.log('addToMapper infoType', infoType);
     const pageId = (globalThis as any).currentPageId;
     const infoMapper = new InfoContentMapper(pageId);
     infoMapper.addInfoType(infoType);
@@ -584,7 +659,7 @@ export class InfoSectionManager {
     const remainingComponents = containerColumn.components().models;
     if (remainingComponents.length <= 1) {
       // Add the default blank plus button
-      const blankPlus = new AddInfoSectionButton(true).getHTML();
+      const blankPlus = new AddInfoSectionButton(false, true, true, false).getHTML();
       const newBtn = this.editor?.addComponents(blankPlus);
       containerColumn.append(newBtn);
 
@@ -595,6 +670,8 @@ export class InfoSectionManager {
       if (contentFrameContainer) {
         contentFrameContainer.addClass("empty-state");
         this.removeConsecutivePlusButtons();
+        // this.markFirstAndLastPlusButtons("first");
+        // this.markFirstAndLastPlusButtons("last");
       }
     }
   }

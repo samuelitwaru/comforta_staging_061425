@@ -126,7 +126,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
             getPrinter().setLineHeight(lineHeight);
             getPrinter().setM_top(M_top);
             getPrinter().setM_bot(M_bot);
-            AV86WWPFormElements = new GXBCLevelCollection<GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form_Element>( context, "WWP_Form.Element", "Comforta_version21");
+            AV86WWPFormElements = new GXBCLevelCollection<GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form_Element>( context, "WWP_Form.Element", "Comforta_version2");
             AV10WWPFormInstance.Load(AV89WWPFormInstanceId);
             AV88WWPFormId = AV10WWPFormInstance.gxTpr_Wwpformid;
             AV90WWPFormVersionNumber = AV10WWPFormInstance.gxTpr_Wwpformversionnumber;
@@ -219,7 +219,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
                   AV91PrintingPlainedGrid = (bool)(!AV38DisplayElementsPlain);
                   if ( ! AV38DisplayElementsPlain )
                   {
-                     AV87WWPFormElementsMultiples = new GXBCLevelCollection<GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form_Element>( context, "WWP_Form.Element", "Comforta_version21");
+                     AV87WWPFormElementsMultiples = new GXBCLevelCollection<GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form_Element>( context, "WWP_Form.Element", "Comforta_version2");
                      new GeneXus.Programs.workwithplus.dynamicforms.wwp_getelementsforreport(context ).execute(  AV10WWPFormInstance,  0,  AV81WWPFormElement.gxTpr_Wwpformelementid,  false, ref  AV87WWPFormElementsMultiples) ;
                   }
                   if ( AV38DisplayElementsPlain || ( AV87WWPFormElementsMultiples.Count > 0 ) )
@@ -894,7 +894,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
             AV11WWPFormInstanceElementId = (short)(AV58MultipleDataWWPFormInstanceElementId.GetNumeric(AV40i));
             if ( AV38DisplayElementsPlain )
             {
-               AV87WWPFormElementsMultiples = new GXBCLevelCollection<GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form_Element>( context, "WWP_Form.Element", "Comforta_version21");
+               AV87WWPFormElementsMultiples = new GXBCLevelCollection<GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form_Element>( context, "WWP_Form.Element", "Comforta_version2");
                new GeneXus.Programs.workwithplus.dynamicforms.wwp_getelementsforreport(context ).execute(  AV10WWPFormInstance,  AV11WWPFormInstanceElementId,  AV81WWPFormElement.gxTpr_Wwpformelementid,  true, ref  AV87WWPFormElementsMultiples) ;
             }
             AV109GXV4 = 1;
@@ -1016,7 +1016,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          GXKey = "";
          GXDecQS = "";
          gxfirstwebparm = "";
-         AV86WWPFormElements = new GXBCLevelCollection<GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form_Element>( context, "WWP_Form.Element", "Comforta_version21");
+         AV86WWPFormElements = new GXBCLevelCollection<GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form_Element>( context, "WWP_Form.Element", "Comforta_version2");
          AV10WWPFormInstance = new GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_FormInstance(context);
          AV93DynamicFormDescription = "";
          AV92DynamicFormNumber = "";
@@ -1030,7 +1030,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          AV76WWP_DF_LabelMetadata = new WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_LabelMetadata(context);
          AV80WWP_DF_StepMetadata = new WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_StepMetadata(context);
          AV78WWP_DF_MultipleMetadata = new WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_ElementsRepeaterMetadata(context);
-         AV87WWPFormElementsMultiples = new GXBCLevelCollection<GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form_Element>( context, "WWP_Form.Element", "Comforta_version21");
+         AV87WWPFormElementsMultiples = new GXBCLevelCollection<GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form_Element>( context, "WWP_Form.Element", "Comforta_version2");
          P004X2_A206WWPFormId = new short[1] ;
          P004X2_A207WWPFormVersionNumber = new short[1] ;
          P004X2_A215WWPFormInstanceElementId = new short[1] ;

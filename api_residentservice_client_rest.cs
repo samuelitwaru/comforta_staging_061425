@@ -2006,6 +2006,36 @@ namespace GeneXus.Programs {
          /* UpdatePageTitle Constructor */
       }
 
+      public void gxep_appdebug( GXBaseCollection<SdtSDT_PageUrl> aP0_PageUrlList ,
+                                 out SdtSDT_AppDebugResults aP1_SDT_DebugResults ,
+                                 out SdtSDT_Error aP2_error )
+      {
+         restCliAppDebug = new GXRestAPIClient();
+         if ( restLocation == null )
+         {
+            InitLocation();
+         }
+         restLocation.ResourceName = "/toolbox/v2/debug";
+         restCliAppDebug.Location = restLocation;
+         restCliAppDebug.HttpMethod = "POST";
+         restCliAppDebug.AddBodyVar("PageUrlList", aP0_PageUrlList);
+         restCliAppDebug.RestExecute();
+         if ( restCliAppDebug.ErrorCode != 0 )
+         {
+            gxProperties.ErrorCode = restCliAppDebug.ErrorCode;
+            gxProperties.ErrorMessage = restCliAppDebug.ErrorMessage;
+            gxProperties.StatusCode = restCliAppDebug.StatusCode;
+            aP1_SDT_DebugResults = new SdtSDT_AppDebugResults();
+            aP2_error = new SdtSDT_Error();
+         }
+         else
+         {
+            aP1_SDT_DebugResults = restCliAppDebug.GetBodySdt<SdtSDT_AppDebugResults>("SDT_DebugResults");
+            aP2_error = restCliAppDebug.GetBodySdt<SdtSDT_Error>("error");
+         }
+         /* AppDebug Constructor */
+      }
+
       public void gxep_updateproductserviceapi( Guid aP0_ProductServiceId ,
                                                 string aP1_ProductServiceDescription ,
                                                 string aP2_ProductServiceImageBase64 ,
@@ -2555,6 +2585,8 @@ namespace GeneXus.Programs {
          aP2_ContentPage = new SdtSDT_AppVersion_PagesItem();
          restCliDeletePageV2 = new GXRestAPIClient();
          restCliUpdatePageTitle = new GXRestAPIClient();
+         restCliAppDebug = new GXRestAPIClient();
+         aP1_SDT_DebugResults = new SdtSDT_AppDebugResults();
          restCliUpdateProductServiceAPI = new GXRestAPIClient();
          restCliDeleteProductServiceImageAPI = new GXRestAPIClient();
          restCliUpdateLocationAPI__get = new GXRestAPIClient();
@@ -2641,6 +2673,7 @@ namespace GeneXus.Programs {
       protected GXRestAPIClient restCliCreateServicePage ;
       protected GXRestAPIClient restCliDeletePageV2 ;
       protected GXRestAPIClient restCliUpdatePageTitle ;
+      protected GXRestAPIClient restCliAppDebug ;
       protected GXRestAPIClient restCliUpdateProductServiceAPI ;
       protected GXRestAPIClient restCliDeleteProductServiceImageAPI ;
       protected GXRestAPIClient restCliUpdateLocationAPI__get ;
@@ -2705,6 +2738,7 @@ namespace GeneXus.Programs {
       protected SdtSDT_AppVersion_PagesItem aP2_MenuPage ;
       protected SdtSDT_AppVersion_PagesItem aP5_MenuPage ;
       protected SdtSDT_AppVersion_PagesItem aP2_ContentPage ;
+      protected SdtSDT_AppDebugResults aP1_SDT_DebugResults ;
       protected SdtTrn_Location aP0_BC_Trn_Location ;
       protected SdtSDT_Error aP4_error ;
       protected GXBaseCollection<SdtSDT_MemoCategory> aP0_SDT_MemoCategories ;

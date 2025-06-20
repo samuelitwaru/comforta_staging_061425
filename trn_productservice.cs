@@ -1158,6 +1158,7 @@ namespace GeneXus.Programs {
                Combo_suppliergenid_Selectalltext = cgiGet( "COMBO_SUPPLIERGENID_Selectalltext");
                Combo_suppliergenid_Multiplevaluesseparator = cgiGet( "COMBO_SUPPLIERGENID_Multiplevaluesseparator");
                Combo_suppliergenid_Addnewoptiontext = cgiGet( "COMBO_SUPPLIERGENID_Addnewoptiontext");
+               Combo_suppliergenid_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "COMBO_SUPPLIERGENID_Gxcontroltype"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
                Combo_suppliergen_id_Objectcall = cgiGet( "COMBO_SUPPLIERGEN_ID_Objectcall");
                Combo_suppliergen_id_Class = cgiGet( "COMBO_SUPPLIERGEN_ID_Class");
                Combo_suppliergen_id_Icontype = cgiGet( "COMBO_SUPPLIERGEN_ID_Icontype");
@@ -1198,6 +1199,7 @@ namespace GeneXus.Programs {
                Combo_suppliergen_id_Selectalltext = cgiGet( "COMBO_SUPPLIERGEN_ID_Selectalltext");
                Combo_suppliergen_id_Multiplevaluesseparator = cgiGet( "COMBO_SUPPLIERGEN_ID_Multiplevaluesseparator");
                Combo_suppliergen_id_Addnewoptiontext = cgiGet( "COMBO_SUPPLIERGEN_ID_Addnewoptiontext");
+               Combo_suppliergen_id_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "COMBO_SUPPLIERGEN_ID_Gxcontroltype"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
                Combo_supplieragbid_Objectcall = cgiGet( "COMBO_SUPPLIERAGBID_Objectcall");
                Combo_supplieragbid_Class = cgiGet( "COMBO_SUPPLIERAGBID_Class");
                Combo_supplieragbid_Icontype = cgiGet( "COMBO_SUPPLIERAGBID_Icontype");
@@ -1238,6 +1240,7 @@ namespace GeneXus.Programs {
                Combo_supplieragbid_Selectalltext = cgiGet( "COMBO_SUPPLIERAGBID_Selectalltext");
                Combo_supplieragbid_Multiplevaluesseparator = cgiGet( "COMBO_SUPPLIERAGBID_Multiplevaluesseparator");
                Combo_supplieragbid_Addnewoptiontext = cgiGet( "COMBO_SUPPLIERAGBID_Addnewoptiontext");
+               Combo_supplieragbid_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "COMBO_SUPPLIERAGBID_Gxcontroltype"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
                Combo_supplieragb_id_Objectcall = cgiGet( "COMBO_SUPPLIERAGB_ID_Objectcall");
                Combo_supplieragb_id_Class = cgiGet( "COMBO_SUPPLIERAGB_ID_Class");
                Combo_supplieragb_id_Icontype = cgiGet( "COMBO_SUPPLIERAGB_ID_Icontype");
@@ -1278,6 +1281,7 @@ namespace GeneXus.Programs {
                Combo_supplieragb_id_Selectalltext = cgiGet( "COMBO_SUPPLIERAGB_ID_Selectalltext");
                Combo_supplieragb_id_Multiplevaluesseparator = cgiGet( "COMBO_SUPPLIERAGB_ID_Multiplevaluesseparator");
                Combo_supplieragb_id_Addnewoptiontext = cgiGet( "COMBO_SUPPLIERAGB_ID_Addnewoptiontext");
+               Combo_supplieragb_id_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "COMBO_SUPPLIERAGB_ID_Gxcontroltype"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
                Productservicedescription_Objectcall = cgiGet( "PRODUCTSERVICEDESCRIPTION_Objectcall");
                Productservicedescription_Class = cgiGet( "PRODUCTSERVICEDESCRIPTION_Class");
                Productservicedescription_Enabled = StringUtil.StrToBool( cgiGet( "PRODUCTSERVICEDESCRIPTION_Enabled"));
@@ -1727,7 +1731,7 @@ namespace GeneXus.Programs {
          GXt_objcol_guid1 = AV41PreferredGenSuppliers;
          new prc_getpreferredgensuppliers(context ).execute( ref  GXt_objcol_guid1) ;
          AV41PreferredGenSuppliers = GXt_objcol_guid1;
-         AV67UploadedFiles = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version21");
+         AV67UploadedFiles = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version2");
          divLayoutmaintable_Class = divLayoutmaintable_Class+" "+"EditForm";
          AssignProp("", false, divLayoutmaintable_Internalname, "Class", divLayoutmaintable_Class, true);
          new GeneXus.Programs.wwpbaseobjects.loadwwpcontext(context ).execute( out  AV19WWPContext) ;
@@ -3865,7 +3869,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256145305196", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201722038", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3881,7 +3885,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("trn_productservice.js", "?2025614530523", false, true);
+         context.AddJavascriptSource("trn_productservice.js", "?20256201722042", false, true);
          context.AddJavascriptSource("UserControls/UC_CustomImageUploadRender.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
@@ -4544,8 +4548,8 @@ namespace GeneXus.Programs {
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
          A58ProductServiceId = Guid.Empty;
-         AV67UploadedFiles = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version21");
-         AV68FilesToUpdate = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version21");
+         AV67UploadedFiles = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version2");
+         AV68FilesToUpdate = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version2");
          A11OrganisationId = Guid.Empty;
          A29LocationId = Guid.Empty;
          A42SupplierGenId = Guid.Empty;
@@ -4735,7 +4739,7 @@ namespace GeneXus.Programs {
          AV16TrnContext = new WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext(context);
          AV18WebSession = context.GetSession();
          AV17TrnContextAtt = new WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext_Attribute(context);
-         GXt_objcol_SdtSDT_FileUploadData3 = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version21");
+         GXt_objcol_SdtSDT_FileUploadData3 = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version2");
          AV61RoleName = "";
          AV63SDT_NotificationMetadata = new SdtSDT_NotificationMetadata(context);
          AV64WWPNotificationMetadataSDT = new SdtUSDTNotificationMetadata(context);
@@ -4981,9 +4985,13 @@ namespace GeneXus.Programs {
       private int imgProductServiceImage_Visible ;
       private int imgProductServiceImage_Enabled ;
       private int Combo_suppliergenid_Datalistupdateminimumcharacters ;
+      private int Combo_suppliergenid_Gxcontroltype ;
       private int Combo_suppliergen_id_Datalistupdateminimumcharacters ;
+      private int Combo_suppliergen_id_Gxcontroltype ;
       private int Combo_supplieragbid_Datalistupdateminimumcharacters ;
+      private int Combo_supplieragbid_Gxcontroltype ;
       private int Combo_supplieragb_id_Datalistupdateminimumcharacters ;
+      private int Combo_supplieragb_id_Gxcontroltype ;
       private int Productservicedescription_Color ;
       private int Productservicedescription_Coltitlecolor ;
       private int AV72GXV1 ;

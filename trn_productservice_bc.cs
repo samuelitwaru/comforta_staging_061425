@@ -129,7 +129,7 @@ namespace GeneXus.Programs {
          GXt_objcol_guid1 = AV41PreferredGenSuppliers;
          new prc_getpreferredgensuppliers(context ).execute( ref  GXt_objcol_guid1) ;
          AV41PreferredGenSuppliers = GXt_objcol_guid1;
-         AV67UploadedFiles = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version21");
+         AV67UploadedFiles = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version2");
          new GeneXus.Programs.wwpbaseobjects.loadwwpcontext(context ).execute( out  AV19WWPContext) ;
          /* Execute user subroutine: 'ATTRIBUTESSECURITYCODE' */
          S112 ();
@@ -1544,7 +1544,7 @@ namespace GeneXus.Programs {
          A11OrganisationId = Guid.Empty;
          AV41PreferredGenSuppliers = new GxSimpleCollection<Guid>();
          GXt_objcol_guid1 = new GxSimpleCollection<Guid>();
-         AV67UploadedFiles = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version21");
+         AV67UploadedFiles = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version2");
          AV19WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          AV16TrnContext = new WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext(context);
          AV18WebSession = context.GetSession();

@@ -1899,10 +1899,10 @@ namespace GeneXus.Programs {
          AV40Insert_PublishedActiveAppVersionId = Guid.Empty;
          AV32Insert_LocationThemeId = Guid.Empty;
          AV43Insert_ToolBoxLastUpdateReceptionistId = Guid.Empty;
-         AV41FilesToUpdate = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version21");
-         GXt_objcol_SdtSDT_FileUploadData1 = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version21");
+         AV41FilesToUpdate = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version2");
+         GXt_objcol_SdtSDT_FileUploadData1 = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version2");
          AV7LocationId = Guid.Empty;
-         AV42UploadedFiles = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version21");
+         AV42UploadedFiles = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version2");
          Z35LocationPhone = "";
          A35LocationPhone = "";
          Z329LocationZipCode = "";

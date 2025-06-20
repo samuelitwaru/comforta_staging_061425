@@ -1177,7 +1177,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025614539467", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201764571", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1193,7 +1193,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("home.js", "?2025614539470", false, true);
+         context.AddJavascriptSource("home.js", "?20256201764573", false, true);
          /* End function include_jscripts */
       }
 
@@ -1805,7 +1805,7 @@ namespace GeneXus.Programs {
       {
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
-         AV6HomeModulesSDT = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtHomeModulesSDT_HomeModulesSDTItem>( context, "HomeModulesSDTItem", "Comforta_version21");
+         AV6HomeModulesSDT = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtHomeModulesSDT_HomeModulesSDTItem>( context, "HomeModulesSDTItem", "Comforta_version2");
          sDynURL = "";
          FormProcess = "";
          bodyStyle = "";

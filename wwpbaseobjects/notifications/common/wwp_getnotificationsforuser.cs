@@ -62,7 +62,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
 
       public void execute( out GXBaseCollection<WorkWithPlus.workwithplus_notificationscommon.SdtWWP_SDTNotificationsData_WWP_SDTNotificationsDataItem> aP0_Gxm2rootcol )
       {
-         this.Gxm2rootcol = new GXBaseCollection<WorkWithPlus.workwithplus_notificationscommon.SdtWWP_SDTNotificationsData_WWP_SDTNotificationsDataItem>( context, "WWP_SDTNotificationsDataItem", "Comforta_version21") ;
+         this.Gxm2rootcol = new GXBaseCollection<WorkWithPlus.workwithplus_notificationscommon.SdtWWP_SDTNotificationsData_WWP_SDTNotificationsDataItem>( context, "WWP_SDTNotificationsDataItem", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP0_Gxm2rootcol=this.Gxm2rootcol;
@@ -76,7 +76,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
 
       public void executeSubmit( out GXBaseCollection<WorkWithPlus.workwithplus_notificationscommon.SdtWWP_SDTNotificationsData_WWP_SDTNotificationsDataItem> aP0_Gxm2rootcol )
       {
-         this.Gxm2rootcol = new GXBaseCollection<WorkWithPlus.workwithplus_notificationscommon.SdtWWP_SDTNotificationsData_WWP_SDTNotificationsDataItem>( context, "WWP_SDTNotificationsDataItem", "Comforta_version21") ;
+         this.Gxm2rootcol = new GXBaseCollection<WorkWithPlus.workwithplus_notificationscommon.SdtWWP_SDTNotificationsData_WWP_SDTNotificationsDataItem>( context, "WWP_SDTNotificationsDataItem", "Comforta_version2") ;
          SubmitImpl();
          aP0_Gxm2rootcol=this.Gxm2rootcol;
       }

@@ -23,7 +23,7 @@ using System.Runtime.Serialization;
 namespace GeneXus.Programs
 {
 	[XmlRoot(ElementName="SDT_ApiResidentFilledForms")]
-	[XmlType(TypeName="SDT_ApiResidentFilledForms" , Namespace="Comforta_version21" )]
+	[XmlType(TypeName="SDT_ApiResidentFilledForms" , Namespace="Comforta_version2" )]
 	[Serializable]
 	public class SdtSDT_ApiResidentFilledForms : GxUserType
 	{
@@ -301,7 +301,7 @@ namespace GeneXus.Programs
 	}
 	#region Rest interface
 	[GxJsonSerialization("default")]
-	[DataContract(Name=@"SDT_ApiResidentFilledForms", Namespace="Comforta_version21")]
+	[DataContract(Name=@"SDT_ApiResidentFilledForms", Namespace="Comforta_version2")]
 	public class SdtSDT_ApiResidentFilledForms_RESTInterface : GxGenericCollectionItem<SdtSDT_ApiResidentFilledForms>, System.Web.SessionState.IRequiresSessionState
 	{
 		public SdtSDT_ApiResidentFilledForms_RESTInterface( ) : base()

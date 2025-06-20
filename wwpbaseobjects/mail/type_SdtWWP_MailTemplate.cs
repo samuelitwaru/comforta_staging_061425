@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs.wwpbaseobjects.mail {
    [XmlRoot(ElementName = "WWP_MailTemplate" )]
-   [XmlType(TypeName =  "WWP_MailTemplate" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "WWP_MailTemplate" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtWWP_MailTemplate : GxSilentTrnSdt
    {
@@ -456,7 +456,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
       private string gxTv_SdtWWP_MailTemplate_Wwpmailtemplatesubject_Z ;
    }
 
-   [DataContract(Name = @"WWPBaseObjects\Mail\WWP_MailTemplate", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WWPBaseObjects\Mail\WWP_MailTemplate", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_MailTemplate_RESTInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.mail.SdtWWP_MailTemplate>
    {
@@ -590,7 +590,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
       private string md5Hash ;
    }
 
-   [DataContract(Name = @"WWPBaseObjects\Mail\WWP_MailTemplate", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WWPBaseObjects\Mail\WWP_MailTemplate", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_MailTemplate_RESTLInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.mail.SdtWWP_MailTemplate>
    {

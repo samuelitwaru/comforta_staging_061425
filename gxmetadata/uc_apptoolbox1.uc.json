@@ -8,11 +8,6 @@
 			"Name": "OnSave",
 			"On": "save",
 			"Parameters": ""
-		} ,
-		{
-			"Name": "addServiceButtonEvent",
-			"On": "addservicebuttonevent",
-			"Parameters": ""
 		} 
 	],
 	"Properties": [
@@ -139,24 +134,6 @@
 	],
 	"Methods": {
 		"Public": [
-			{
-				"Name": "SetProductToTile",
-				"Source": "		try {			console.log(this.app.ToolboxManager)			this.app.toolboxApp.toolboxManager.pageAttacher.attachNewServiceToTile(ProductServiceId)			}catch (e) {			console.error(e)		}			",
-				"Return": "",
-				"Parameters": [
-					 {
-						"Name": "ProductServiceId",
-						"Type": "ProductServiceId"
-					} 
-				]
-			} ,
-			{
-				"Name": "SetServiceCreationParentPageType",
-				"Source": "		this.ServiceCreationParentPageType = localStorage.getItem(\"ServiceCreationParentPageType\")			",
-				"Return": "",
-				"Parameters": [
-				]
-			} 
 		],
 		"Private": [
 		]
@@ -165,7 +142,7 @@
 		"AfterShow": [
 			{
 				"Name": "Start",
-				"Source": "   try {	   	this.d3 = d3;		const themes = this.BC_Trn_ThemeCollection.map(theme => {//			theme.CtaColor.map(ctaColor => {//				ctaColor.CtaColorName = ctaColor.CtaColorName//												.replace(\'ctaColor1\', \'CtaColorOne\').replace(\'ctaColor2\',\'CtaColorTwo\')//												.replace(\'ctaColor3\',\'CtaColorThree\').replace(\'ctaColor4\',\'CtaColorFour\')//												.replace(\'ctaColor5\',\'CtaColorFive\').replace(\'ctaColor6\',\'CtaColorSix\')//				return ctaColor//			})						console.log(theme.CtaColor)						let res = {			ThemeId: theme.Trn_ThemeId,			ThemeName: theme.Trn_ThemeName,			ThemeFontFamily: theme.Trn_ThemeFontFamily,			ThemeColors: {},			ThemeIcons: theme.Icon,			ThemeCtaColors: theme.CtaColor.sort((a, b) => a.CtaColorName.localeCompare(b.CtaColorName))			};						// Sort and map ThemeColors by ColorName			theme.Color			.sort((a, b) => a.ColorName.localeCompare(b.ColorName))			.forEach(color => {				res.ThemeColors[color.ColorName] = color.ColorCode;			});						// Sort ThemeCtaColors by CtaColorName			if (theme.CtaColor) {				res.ThemeCtaColors = [...theme.CtaColor].sort((a, b) => {					// Extract the number words from the names					const numWords = [\'One\', \'Two\', \'Three\', \'Four\', \'Five\', \'Six\'];					const aNum = numWords.indexOf(a.CtaColorName.replace(\'CtaColor\', \'\'));					const bNum = numWords.indexOf(b.CtaColorName.replace(\'CtaColor\', \'\'));					return aNum - bNum;				});			}						// Sort ThemeIcons by IconName			if (theme.Icon) {			res.ThemeIcons = [...theme.Icon].sort((a, b) => 				a.IconName.localeCompare(b.IconName)			);			}						return res;		});				if (typeof App !== \'undefined\') {			localStorage.clear();			this.app = new App(				this,				themes,				this.Suppliers,				this.SDT_ProductServiceCollection, 				this.SDT_DynamicFormsCollection, 				this.BC_Trn_MediaCollection,				this.Current_Theme,				this.Current_Version,				this.OrganisationLogo,				this.Current_Language,				this.addServiceButtonEvent			);			window.app = this.app		} else {			console.error(\"App class is not defined. Check if bundle.js is loaded.\");		}	}catch(e) {		console.log(e)	}",
+				"Source": "   try {	   	this.d3 = d3;		const themes = this.BC_Trn_ThemeCollection.map(theme => {						let res = {			ThemeId: theme.Trn_ThemeId,			ThemeName: theme.Trn_ThemeName,			ThemeFontFamily: theme.Trn_ThemeFontFamily,			ThemeColors: {},			ThemeIcons: theme.Icon,			ThemeCtaColors: theme.CtaColor.sort((a, b) => a.CtaColorName.localeCompare(b.CtaColorName))			};						// Sort and map ThemeColors by ColorName			theme.Color			.sort((a, b) => a.ColorName.localeCompare(b.ColorName))			.forEach(color => {				res.ThemeColors[color.ColorName] = color.ColorCode;			});						// Sort ThemeCtaColors by CtaColorName			if (theme.CtaColor) {				res.ThemeCtaColors = [...theme.CtaColor].sort((a, b) => {					// Extract the number words from the names					const numWords = [\'One\', \'Two\', \'Three\', \'Four\', \'Five\', \'Six\'];					const aNum = numWords.indexOf(a.CtaColorName.replace(\'CtaColor\', \'\'));					const bNum = numWords.indexOf(b.CtaColorName.replace(\'CtaColor\', \'\'));					return aNum - bNum;				});			}						// Sort ThemeIcons by IconName			if (theme.Icon) {			res.ThemeIcons = [...theme.Icon].sort((a, b) => 				a.IconName.localeCompare(b.IconName)			);			}						return res;		});				if (typeof App !== \'undefined\') {			localStorage.clear();			this.app = new App(				this,				themes,				this.Suppliers,				this.SDT_ProductServiceCollection, 				this.SDT_DynamicFormsCollection, 				this.BC_Trn_MediaCollection,				this.Current_Theme,				this.Current_Version,				this.OrganisationLogo,				this.Current_Language,				this.addServiceButtonEvent			);			window.app = this.app		} else {			console.error(\"App class is not defined. Check if bundle.js is loaded.\");		}	}catch(e) {		console.log(e)	}",
 				"AngularLocation": ""
 			} 
 		],

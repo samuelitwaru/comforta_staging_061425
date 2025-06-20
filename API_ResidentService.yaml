@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: "API_ResidentService"
   description: "API Services"
-  version: "20250620090611"
+  version: "20250620141731"
 servers:
   - url: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/api
 paths:
@@ -1689,6 +1689,31 @@ paths:
         404:
           description: "Not found"
 
+  /toolbox/v2/debug:
+    post:
+      tags:
+        - API_ResidentService  
+      operationId: "API_ResidentService.AppDebug"
+      summary: "Debug the appversion urls"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AppDebugInput"
+      
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AppDebugOutput"
+        404:
+          description: "Not found"
+
   /toolbox/v2/update-service:
     post:
       tags:
@@ -2341,6 +2366,15 @@ components:
           $ref: "#/components/schemas/SDT_Error"
 
 
+    AppDebugOutput:
+      properties:
+        SDT_DebugResults:
+          description: "SDT_App Debug Results"
+          $ref: "#/components/schemas/SDT_AppDebugResults"
+        error:
+          description: "SDT_Error"
+          $ref: "#/components/schemas/SDT_Error"
+
 
 
     UpdateLocationAPI__getOutput:
@@ -2717,6 +2751,14 @@ components:
           format: "uuid"
         PageName:
           type: "string"
+
+    AppDebugInput:  
+      properties:
+        PageUrlList:
+          description: "SDT_Page Url"
+          type: array
+          items:
+            $ref: "#/components/schemas/SDT_PageUrl"
 
     UpdateProductServiceAPIInput:  
       properties:
@@ -3780,6 +3822,100 @@ components:
 
 
       x-gx-level: "SDT_AppVersion"
+
+    SDT_PageUrl:
+      properties:
+        Page:
+          description: "Page"
+          type: "string"
+
+        Urls:
+          type: array
+          items:
+            description: UrlsItem
+            $ref: "#/components/schemas/SDT_PageUrl.Urls_UrlsItem"
+
+
+    SDT_PageUrl.Urls_UrlsItem:
+      properties:
+        Url:
+          description: "Url"
+          type: "string"
+        AffectedType:
+          description: "Affected Type"
+          type: "string"
+        AffectedName:
+          description: "Affected Name"
+          type: "string"
+
+
+      x-gx-level: "SDT_PageUrl"
+
+    SDT_AppDebugResults:
+      properties:
+        Summary:
+          $ref: "#/components/schemas/SDT_AppDebugResults.Summary"
+
+        Pages:
+          type: array
+          items:
+            description: PagesItem
+            $ref: "#/components/schemas/SDT_AppDebugResults.Pages_PagesItem"
+
+
+    SDT_AppDebugResults.Summary:
+      properties:
+        TotalUrls:
+          description: "Total Urls"
+          type: "number"
+          format: "double"
+        SuccessCount:
+          description: "Success Count"
+          type: "number"
+          format: "double"
+        FailureCount:
+          description: "Failure Count"
+          type: "number"
+          format: "double"
+
+
+      x-gx-level: "SDT_AppDebugResults"
+
+
+    SDT_AppDebugResults.Pages_PagesItem:
+      properties:
+        Page:
+          description: "Page"
+          type: "string"
+
+        UrlList:
+          type: array
+          items:
+            description: UrlListItem
+            $ref: "#/components/schemas/SDT_AppDebugResults.Pages.UrlList_UrlListItem"
+
+      x-gx-level: "SDT_AppDebugResults"
+
+    SDT_AppDebugResults.Pages.UrlList_UrlListItem:
+      properties:
+        Url:
+          description: "Url"
+          type: "string"
+        StatusCode:
+          description: "Status Code"
+          type: "string"
+        StatusMessage:
+          description: "Status Message"
+          type: "string"
+        AffectedType:
+          description: "Affected Type"
+          type: "string"
+        AffectedName:
+          description: "Affected Name"
+          type: "string"
+
+
+      x-gx-level: "SDT_AppDebugResults.Pages"
 
     Trn_Location:
       properties:

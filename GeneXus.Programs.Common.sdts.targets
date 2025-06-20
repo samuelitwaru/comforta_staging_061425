@@ -24,6 +24,10 @@
  	<Compile Include="$(WebDirectory)\type_SdtSDT_AgendaLocation.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_ApiListResponse.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_ApiResidentFilledForms.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtSDT_AppDebugResults.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtSDT_AppDebugResults_Summary.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtSDT_AppDebugResults_PagesItem.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtSDT_AppDebugResults_PagesItem_UrlListItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_AppPreviewVersion.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_AppPreviewVersion_SDT_Theme.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_AppPreviewVersion_SDT_Theme_IconsItem.cs" />
@@ -52,14 +56,6 @@
  	<Compile Include="$(WebDirectory)\type_SdtSDT_ContentPageV1_CtaItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_Country_SDT_CountryItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_CtaThemeColors.cs" />
- 	<Compile Include="$(WebDirectory)\type_SdtSDT_DebugResult.cs" />
- 	<Compile Include="$(WebDirectory)\type_SdtSDT_DebugResult_Summary.cs" />
- 	<Compile Include="$(WebDirectory)\type_SdtSDT_DebugResult_PagesItem.cs" />
- 	<Compile Include="$(WebDirectory)\type_SdtSDT_DebugResult_PagesItem_UrlListItem.cs" />
- 	<Compile Include="$(WebDirectory)\type_SdtSDT_DebugResults.cs" />
- 	<Compile Include="$(WebDirectory)\type_SdtSDT_DebugResults_Summary.cs" />
- 	<Compile Include="$(WebDirectory)\type_SdtSDT_DebugResults_PagesItem.cs" />
- 	<Compile Include="$(WebDirectory)\type_SdtSDT_DebugResults_PagesItem_UrlListItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_DiscussionTranslation.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_DynamicForms.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_DynamicFormTranslation.cs" />

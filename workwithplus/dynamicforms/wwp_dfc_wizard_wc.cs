@@ -1622,7 +1622,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
       {
          /* 'LOAD WIZARD WCS' Routine */
          returnInSub = false;
-         AV12WizardSteps = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWizardSteps_WizardStepsItem>( context, "WizardStepsItem", "Comforta_version21");
+         AV12WizardSteps = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWizardSteps_WizardStepsItem>( context, "WizardStepsItem", "Comforta_version2");
          AV5CurrentStepAux = "";
          AssignAttri(sPrefix, false, "AV5CurrentStepAux", AV5CurrentStepAux);
          AV27GXV5 = 1;
@@ -2088,7 +2088,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025614524527", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201658336", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2104,7 +2104,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("workwithplus/dynamicforms/wwp_dfc_wizard_wc.js", "?2025614524528", false, true);
+         context.AddJavascriptSource("workwithplus/dynamicforms/wwp_dfc_wizard_wc.js", "?20256201658336", false, true);
          context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
          context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
          context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
@@ -2254,7 +2254,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          bodyStyle = "";
          GXKey = "";
          GXEncryptionTmp = "";
-         AV12WizardSteps = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWizardSteps_WizardStepsItem>( context, "WizardStepsItem", "Comforta_version21");
+         AV12WizardSteps = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWizardSteps_WizardStepsItem>( context, "WizardStepsItem", "Comforta_version2");
          GX_FocusControl = "";
          WebComp_Wizardheader_Component = "";
          OldWizardheader = "";

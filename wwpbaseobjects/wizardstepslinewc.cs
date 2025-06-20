@@ -1380,7 +1380,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256145235870", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202562016572043", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1398,7 +1398,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          if ( nGXWrapped != 1 )
          {
-            context.AddJavascriptSource("wwpbaseobjects/wizardstepslinewc.js", "?20256145235870", false, true);
+            context.AddJavascriptSource("wwpbaseobjects/wizardstepslinewc.js", "?202562016572043", false, true);
          }
          /* End function include_jscripts */
       }
@@ -1578,7 +1578,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void initialize( )
       {
-         AV9WizardSteps = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWizardSteps_WizardStepsItem>( context, "WizardStepsItem", "Comforta_version21");
+         AV9WizardSteps = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWizardSteps_WizardStepsItem>( context, "WizardStepsItem", "Comforta_version2");
          wcpOAV12WebSessionKey = "";
          wcpOAV6CurrentStep = "";
          gxfirstwebparm = "";

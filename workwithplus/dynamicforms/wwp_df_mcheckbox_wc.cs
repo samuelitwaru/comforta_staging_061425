@@ -1843,7 +1843,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025614524749", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202562016572547", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1861,7 +1861,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
       {
          if ( nGXWrapped != 1 )
          {
-            context.AddJavascriptSource("workwithplus/dynamicforms/wwp_df_mcheckbox_wc.js", "?2025614524750", false, true);
+            context.AddJavascriptSource("workwithplus/dynamicforms/wwp_df_mcheckbox_wc.js", "?202562016572547", false, true);
          }
          /* End function include_jscripts */
       }
@@ -2249,7 +2249,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          AV9DataCellNameClass = "";
          FsRow = new GXWebRow();
          GXt_SdtWWP_FormInstance1 = new GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_FormInstance(context);
-         AV22Validations = new GXBaseCollection<WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_Validation>( context, "WWP_DF_Validation", "Comforta_version21");
+         AV22Validations = new GXBaseCollection<WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_Validation>( context, "WWP_DF_Validation", "Comforta_version2");
          AV21ThisValueStr = "";
          AV19Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus");
          AV18Message = new GeneXus.Utils.SdtMessages_Message(context);

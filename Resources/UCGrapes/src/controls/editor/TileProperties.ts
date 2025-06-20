@@ -169,32 +169,32 @@ export class TileProperties {
 
   private setTileIconProperties() {
     const tileIcon = this.tileAttributes?.Icon as string;
-    if (tileIcon) {
-      const categoryTitle = this.themeManager.getIconCategory(tileIcon);
-      this.themeManager.updateThemeIcons(categoryTitle);
-      if (!categoryTitle) return;
-      let categories: { name: string; label: string }[] = getIconCategories()
-      const category = categories.find((cat) => cat.name.toLowerCase() === categoryTitle.toLowerCase())
-      
-      if (!category) return
-      const categoryContainer = document.querySelector(
-        "#icon-categories-list"
-      ) as HTMLElement;
-      const allOptions = categoryContainer.querySelectorAll(".category-option");
-      allOptions.forEach((opt) => {
-        opt.classList.remove("selected");
-        if (opt.getAttribute("data-value") === categoryTitle) {
-          opt.classList.add("selected");
-          const selectedCategory = categoryContainer.querySelector(
-            ".selected-category-value"
-          ) as HTMLElement;
-          if (selectedCategory) {
-            selectedCategory.textContent = category.label;
-          }
-        }
-      });
-    }
+    
+    const categoryTitle = this.themeManager.getIconCategory(tileIcon);
+    this.themeManager.updateThemeIcons(categoryTitle);
+    if (!categoryTitle) return;
+    let categories: { name: string; label: string }[] = getIconCategories()
+    const category = categories.find((cat) => cat.name.toLowerCase() === categoryTitle.toLowerCase())
+    
+    if (!category) return
 
+    const categoryContainer = document.querySelector(
+      "#icon-categories-list"
+    ) as HTMLElement;
+    const allOptions = categoryContainer.querySelectorAll(".category-option");
+    allOptions.forEach((opt) => {
+      opt.classList.remove("selected");
+      if (opt.getAttribute("data-value") === categoryTitle) {
+        opt.classList.add("selected");
+        const selectedCategory = categoryContainer.querySelector(
+          ".selected-category-value"
+        ) as HTMLElement;
+        if (selectedCategory) {
+          selectedCategory.textContent = category.label;
+        }
+      }
+    });
+  
     const iconDiv = this.selectedComponent
       .getEl()
       .querySelector(".tile-icon") as HTMLElement;

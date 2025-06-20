@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
    [XmlRoot(ElementName = "Trn_SupplierDynamicForm" )]
-   [XmlType(TypeName =  "Trn_SupplierDynamicForm" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "Trn_SupplierDynamicForm" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtTrn_SupplierDynamicForm : GxSilentTrnSdt
    {
@@ -1179,7 +1179,7 @@ namespace GeneXus.Programs {
       private Guid gxTv_SdtTrn_SupplierDynamicForm_Suppliergenid_Z ;
    }
 
-   [DataContract(Name = @"Trn_SupplierDynamicForm", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"Trn_SupplierDynamicForm", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtTrn_SupplierDynamicForm_RESTInterface : GxGenericCollectionItem<SdtTrn_SupplierDynamicForm>
    {
@@ -1454,7 +1454,7 @@ namespace GeneXus.Programs {
       private string md5Hash ;
    }
 
-   [DataContract(Name = @"Trn_SupplierDynamicForm", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"Trn_SupplierDynamicForm", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtTrn_SupplierDynamicForm_RESTLInterface : GxGenericCollectionItem<SdtTrn_SupplierDynamicForm>
    {

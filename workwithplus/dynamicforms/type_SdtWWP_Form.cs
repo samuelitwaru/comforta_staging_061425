@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs.workwithplus.dynamicforms {
    [XmlRoot(ElementName = "WWP_Form" )]
-   [XmlType(TypeName =  "WWP_Form" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "WWP_Form" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtWWP_Form : GxSilentTrnSdt
    {
@@ -633,7 +633,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          get {
             if ( gxTv_SdtWWP_Form_Element == null )
             {
-               gxTv_SdtWWP_Form_Element = new GXBCLevelCollection<GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form_Element>( context, "WWP_Form.Element", "Comforta_version21");
+               gxTv_SdtWWP_Form_Element = new GXBCLevelCollection<GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form_Element>( context, "WWP_Form.Element", "Comforta_version2");
             }
             return gxTv_SdtWWP_Form_Element ;
          }
@@ -641,7 +641,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          set {
             if ( gxTv_SdtWWP_Form_Element == null )
             {
-               gxTv_SdtWWP_Form_Element = new GXBCLevelCollection<GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form_Element>( context, "WWP_Form.Element", "Comforta_version21");
+               gxTv_SdtWWP_Form_Element = new GXBCLevelCollection<GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form_Element>( context, "WWP_Form.Element", "Comforta_version2");
             }
             sdtIsNull = 0;
             gxTv_SdtWWP_Form_Element = value;
@@ -655,7 +655,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          get {
             if ( gxTv_SdtWWP_Form_Element == null )
             {
-               gxTv_SdtWWP_Form_Element = new GXBCLevelCollection<GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form_Element>( context, "WWP_Form.Element", "Comforta_version21");
+               gxTv_SdtWWP_Form_Element = new GXBCLevelCollection<GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form_Element>( context, "WWP_Form.Element", "Comforta_version2");
             }
             sdtIsNull = 0;
             return gxTv_SdtWWP_Form_Element ;
@@ -1176,7 +1176,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
       private GXBCLevelCollection<GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form_Element> gxTv_SdtWWP_Form_Element=null ;
    }
 
-   [DataContract(Name = @"WorkWithPlus\DynamicForms\WWP_Form", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WorkWithPlus\DynamicForms\WWP_Form", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_Form_RESTInterface : GxGenericCollectionItem<GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form>
    {
@@ -1436,7 +1436,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
       private string md5Hash ;
    }
 
-   [DataContract(Name = @"WorkWithPlus\DynamicForms\WWP_Form", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WorkWithPlus\DynamicForms\WWP_Form", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_Form_RESTLInterface : GxGenericCollectionItem<GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form>
    {

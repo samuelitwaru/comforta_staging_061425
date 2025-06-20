@@ -46,7 +46,7 @@ namespace GeneXus.Programs {
 
       public void execute( out GXBaseCollection<SdtSDT_MemoCategory> aP0_SDT_MemoCategories )
       {
-         this.AV9SDT_MemoCategories = new GXBaseCollection<SdtSDT_MemoCategory>( context, "SDT_MemoCategory", "Comforta_version21") ;
+         this.AV9SDT_MemoCategories = new GXBaseCollection<SdtSDT_MemoCategory>( context, "SDT_MemoCategory", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP0_SDT_MemoCategories=this.AV9SDT_MemoCategories;
@@ -60,7 +60,7 @@ namespace GeneXus.Programs {
 
       public void executeSubmit( out GXBaseCollection<SdtSDT_MemoCategory> aP0_SDT_MemoCategories )
       {
-         this.AV9SDT_MemoCategories = new GXBaseCollection<SdtSDT_MemoCategory>( context, "SDT_MemoCategory", "Comforta_version21") ;
+         this.AV9SDT_MemoCategories = new GXBaseCollection<SdtSDT_MemoCategory>( context, "SDT_MemoCategory", "Comforta_version2") ;
          SubmitImpl();
          aP0_SDT_MemoCategories=this.AV9SDT_MemoCategories;
       }
@@ -97,7 +97,7 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV9SDT_MemoCategories = new GXBaseCollection<SdtSDT_MemoCategory>( context, "SDT_MemoCategory", "Comforta_version21");
+         AV9SDT_MemoCategories = new GXBaseCollection<SdtSDT_MemoCategory>( context, "SDT_MemoCategory", "Comforta_version2");
          P00CS2_A542MemoCategoryId = new Guid[] {Guid.Empty} ;
          P00CS2_A543MemoCategoryName = new string[] {""} ;
          A542MemoCategoryId = Guid.Empty;

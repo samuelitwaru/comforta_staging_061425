@@ -83,7 +83,7 @@ namespace GeneXus.Programs {
       {
          this.AV20LocationId = aP0_LocationId;
          this.AV19OrganisationId = aP1_OrganisationId;
-         this.AV17SDT_ContentPageCollection = new GXBaseCollection<SdtSDT_ContentPage>( context, "SDT_ContentPage", "Comforta_version21") ;
+         this.AV17SDT_ContentPageCollection = new GXBaseCollection<SdtSDT_ContentPage>( context, "SDT_ContentPage", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP2_SDT_ContentPageCollection=this.AV17SDT_ContentPageCollection;
@@ -102,7 +102,7 @@ namespace GeneXus.Programs {
       {
          this.AV20LocationId = aP0_LocationId;
          this.AV19OrganisationId = aP1_OrganisationId;
-         this.AV17SDT_ContentPageCollection = new GXBaseCollection<SdtSDT_ContentPage>( context, "SDT_ContentPage", "Comforta_version21") ;
+         this.AV17SDT_ContentPageCollection = new GXBaseCollection<SdtSDT_ContentPage>( context, "SDT_ContentPage", "Comforta_version2") ;
          SubmitImpl();
          aP2_SDT_ContentPageCollection=this.AV17SDT_ContentPageCollection;
       }
@@ -146,7 +146,7 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV17SDT_ContentPageCollection = new GXBaseCollection<SdtSDT_ContentPage>( context, "SDT_ContentPage", "Comforta_version21");
+         AV17SDT_ContentPageCollection = new GXBaseCollection<SdtSDT_ContentPage>( context, "SDT_ContentPage", "Comforta_version2");
          P008P2_A429PageIsContentPage = new bool[] {false} ;
          P008P2_n429PageIsContentPage = new bool[] {false} ;
          P008P2_A11OrganisationId = new Guid[] {Guid.Empty} ;
@@ -161,7 +161,7 @@ namespace GeneXus.Programs {
          A397Trn_PageName = "";
          A420PageJsonContent = "";
          AV23SDT_ContentPageV1 = new SdtSDT_ContentPageV1(context);
-         AV24SDT_ContentPageV1Collection = new GXBaseCollection<SdtSDT_ContentPageV1>( context, "SDT_ContentPageV1", "Comforta_version21");
+         AV24SDT_ContentPageV1Collection = new GXBaseCollection<SdtSDT_ContentPageV1>( context, "SDT_ContentPageV1", "Comforta_version2");
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.aprc_contentpagesapi__default(),
             new Object[][] {
                 new Object[] {

@@ -36,7 +36,8 @@ export class ThemeManager {
   private readonly config: AppConfig;
   private _currentTheme: Theme | null = null;
   private _themes: Theme[] = [];
-  private readonly appVersionManager: AppVersionManager;
+  // private readonly appVersionManager: AppVersionManager;
+  public appVersionManager: AppVersionManager;
 
   constructor() {
     this.config = AppConfig.getInstance();
@@ -89,48 +90,56 @@ export class ThemeManager {
     if (this._currentTheme) {
       window.DynamicFormSubmitButtonColor =
         this._currentTheme.ThemeColors.backgroundColor;
-      if (window.DynamicFormSubmitButtons && window.DynamicFormSubmitButtons.length != 0) {
+      if (
+        window.DynamicFormSubmitButtons &&
+        window.DynamicFormSubmitButtons.length != 0
+      ) {
         window.DynamicFormSubmitButtons.forEach((button) => {
-          button.style.backgroundColor =
-          window.DynamicFormSubmitButtonColor;
-        });
-      }
-      
-      if(window.DynamicFormstepNumberBulletSelecteds) {
-        window.DynamicFormstepNumberBulletSelecteds.forEach((span: HTMLDivElement) => {
-          span.style.backgroundColor = window.DynamicFormSubmitButtonColor;
+          button.style.backgroundColor = window.DynamicFormSubmitButtonColor;
         });
       }
 
-      if(window.DynamicFormtableStepBulletCheckeds) {
-        window.DynamicFormtableStepBulletCheckeds.forEach((span: HTMLDivElement) => {
-          span.style.backgroundColor = window.DynamicFormSubmitButtonColor;
-        });
+      if (window.DynamicFormstepNumberBulletSelecteds) {
+        window.DynamicFormstepNumberBulletSelecteds.forEach(
+          (span: HTMLDivElement) => {
+            span.style.backgroundColor = window.DynamicFormSubmitButtonColor;
+          }
+        );
       }
 
-      if(window.DynamicFormFileInputButtons) {
+      if (window.DynamicFormtableStepBulletCheckeds) {
+        window.DynamicFormtableStepBulletCheckeds.forEach(
+          (span: HTMLDivElement) => {
+            span.style.backgroundColor = window.DynamicFormSubmitButtonColor;
+          }
+        );
+      }
+
+      if (window.DynamicFormFileInputButtons) {
         window.DynamicFormFileInputButtons.forEach((span: HTMLSpanElement) => {
           span.style.backgroundColor = window.DynamicFormSubmitButtonColor;
-          span.style.fontWeight = 'normal';
-          span.style.fontSize = '14px';
-          span.style.fontStyle = 'normal';
-          span.style.border = '0px';
-          span.style.borderRadius = '4px';
+          span.style.fontWeight = "normal";
+          span.style.fontSize = "14px";
+          span.style.fontStyle = "normal";
+          span.style.border = "0px";
+          span.style.borderRadius = "4px";
         });
       }
 
-      if(window.DynamicFormWizardNext) {
-        window.DynamicFormWizardNext.forEach((button:HTMLButtonElement) => {
+      if (window.DynamicFormWizardNext) {
+        window.DynamicFormWizardNext.forEach((button: HTMLButtonElement) => {
           button.style.backgroundColor = window.DynamicFormSubmitButtonColor;
-          button.style.border = '0px';
+          button.style.border = "0px";
         });
       }
 
-      if(window.DynamicFormWizardPrevious) {
-        window.DynamicFormWizardPrevious.forEach((button:HTMLButtonElement) => {
-          button.style.backgroundColor = window.DynamicFormSubmitButtonColor;
-          button.style.border = '0px';
-        });
+      if (window.DynamicFormWizardPrevious) {
+        window.DynamicFormWizardPrevious.forEach(
+          (button: HTMLButtonElement) => {
+            button.style.backgroundColor = window.DynamicFormSubmitButtonColor;
+            button.style.border = "0px";
+          }
+        );
       }
     }
   }
@@ -164,7 +173,7 @@ export class ThemeManager {
     }
   }
 
-  updateThemeIcons(categoryTitle: string = "General"): void {
+  updateThemeIcons(categoryTitle: string = "Technical Services & Support"): void {
     try {
       const menuPageSection = document.getElementById(
         "menu-page-section"

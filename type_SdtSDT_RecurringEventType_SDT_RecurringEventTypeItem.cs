@@ -23,7 +23,7 @@ using System.Runtime.Serialization;
 namespace GeneXus.Programs
 {
 	[XmlRoot(ElementName="SDT_RecurringEventTypeItem")]
-	[XmlType(TypeName="SDT_RecurringEventTypeItem" , Namespace="Comforta_version21" )]
+	[XmlType(TypeName="SDT_RecurringEventTypeItem" , Namespace="Comforta_version2" )]
 	[Serializable]
 	public class SdtSDT_RecurringEventType_SDT_RecurringEventTypeItem : GxUserType
 	{
@@ -146,7 +146,7 @@ namespace GeneXus.Programs
 	}
 	#region Rest interface
 	[GxJsonSerialization("wrapped")]
-	[DataContract(Name=@"SDT_RecurringEventTypeItem", Namespace="Comforta_version21")]
+	[DataContract(Name=@"SDT_RecurringEventTypeItem", Namespace="Comforta_version2")]
 	public class SdtSDT_RecurringEventType_SDT_RecurringEventTypeItem_RESTInterface : GxGenericCollectionItem<SdtSDT_RecurringEventType_SDT_RecurringEventTypeItem>, System.Web.SessionState.IRequiresSessionState
 	{
 		public SdtSDT_RecurringEventType_SDT_RecurringEventTypeItem_RESTInterface( ) : base()

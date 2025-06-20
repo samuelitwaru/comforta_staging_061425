@@ -838,7 +838,7 @@ namespace GeneXus.Programs {
       {
          /* Start Routine */
          returnInSub = false;
-         AV13WizardSteps = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWizardSteps_WizardStepsItem>( context, "WizardStepsItem", "Comforta_version21");
+         AV13WizardSteps = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWizardSteps_WizardStepsItem>( context, "WizardStepsItem", "Comforta_version2");
          AV13WizardSteps.Add(new WorkWithPlus.workwithplus_web.wwp_wizardgetstep(context).executeUdp(  "Step1",  context.GetMessage( "Organisation", ""),  context.GetMessage( "Organisation", ""),  false), 0);
          AV13WizardSteps.Add(new WorkWithPlus.workwithplus_web.wwp_wizardgetstep(context).executeUdp(  "Step2",  context.GetMessage( "Manager", ""),  context.GetMessage( "Manager", ""),  false), 0);
          AV13WizardSteps.Add(new WorkWithPlus.workwithplus_web.wwp_wizardgetstep(context).executeUdp(  "Step3",  context.GetMessage( "License", ""),  context.GetMessage( "License", ""),  false), 0);
@@ -1035,7 +1035,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256145401048", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201774685", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1051,7 +1051,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wp_createorganisationandmanager.js", "?20256145401049", false, true);
+         context.AddJavascriptSource("wp_createorganisationandmanager.js", "?20256201774685", false, true);
          /* End function include_jscripts */
       }
 
@@ -1131,7 +1131,7 @@ namespace GeneXus.Programs {
          sEvtType = "";
          GXDecQS = "";
          AV16Pgmname = "";
-         AV13WizardSteps = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWizardSteps_WizardStepsItem>( context, "WizardStepsItem", "Comforta_version21");
+         AV13WizardSteps = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWizardSteps_WizardStepsItem>( context, "WizardStepsItem", "Comforta_version2");
          AV12CurrentStepAux = "";
          AV7WebSession = context.GetSession();
          BackMsgLst = new msglist();

@@ -169,7 +169,6 @@ export class ToolBoxService {
   }
 
   async createInfoPage(appVersionId: string, pageName: string) {
-    console.log('appVersionId', appVersionId);
     const response = await this.fetchAPI("/api/toolbox/v2/create-info-page", {
       method: "POST",
       body: JSON.stringify({

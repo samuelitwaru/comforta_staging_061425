@@ -129,7 +129,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          }
          if ( ! AV11HasErrors )
          {
-            AV17Validations = new GXBaseCollection<WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_Validation>( context, "WWP_DF_Validation", "Comforta_version21");
+            AV17Validations = new GXBaseCollection<WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_Validation>( context, "WWP_DF_Validation", "Comforta_version2");
             AV17Validations.FromJSonString(AV18WWPFormInstance.gxTpr_Wwpformvalidations, null);
             if ( AV17Validations.Count > 0 )
             {
@@ -162,7 +162,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          AV19WWPFormInstanceElement = new GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_FormInstance_Element(context);
          AV9ElementMessages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus");
          AV14Message = new GeneXus.Utils.SdtMessages_Message(context);
-         AV17Validations = new GXBaseCollection<WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_Validation>( context, "WWP_DF_Validation", "Comforta_version21");
+         AV17Validations = new GXBaseCollection<WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_Validation>( context, "WWP_DF_Validation", "Comforta_version2");
          /* GeneXus formulas. */
       }
 

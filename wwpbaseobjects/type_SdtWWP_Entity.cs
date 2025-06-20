@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs.wwpbaseobjects {
    [XmlRoot(ElementName = "WWP_Entity" )]
-   [XmlType(TypeName =  "WWP_Entity" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "WWP_Entity" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtWWP_Entity : GxSilentTrnSdt
    {
@@ -321,7 +321,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string gxTv_SdtWWP_Entity_Wwpentityname_Z ;
    }
 
-   [DataContract(Name = @"WWPBaseObjects\WWP_Entity", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WWPBaseObjects\WWP_Entity", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_Entity_RESTInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.SdtWWP_Entity>
    {
@@ -402,7 +402,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string md5Hash ;
    }
 
-   [DataContract(Name = @"WWPBaseObjects\WWP_Entity", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WWPBaseObjects\WWP_Entity", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_Entity_RESTLInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.SdtWWP_Entity>
    {

@@ -1413,7 +1413,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256145235773", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202562016572035", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1429,7 +1429,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("wwpbaseobjects/notifications/common/wwp_masterpagenotificationswc.js", "?20256145235773", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/notifications/common/wwp_masterpagenotificationswc.js", "?202562016572035", false, true);
          /* End function include_jscripts */
       }
 
@@ -1866,7 +1866,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
          sPrefix = "";
-         AV6SDTNotificationsData = new GXBaseCollection<WorkWithPlus.workwithplus_notificationscommon.SdtWWP_SDTNotificationsData_WWP_SDTNotificationsDataItem>( context, "WWP_SDTNotificationsDataItem", "Comforta_version21");
+         AV6SDTNotificationsData = new GXBaseCollection<WorkWithPlus.workwithplus_notificationscommon.SdtWWP_SDTNotificationsData_WWP_SDTNotificationsDataItem>( context, "WWP_SDTNotificationsDataItem", "Comforta_version2");
          sDynURL = "";
          FormProcess = "";
          bodyStyle = "";
@@ -1885,7 +1885,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          EvtGridId = "";
          EvtRowId = "";
          sEvtType = "";
-         GXt_objcol_SdtWWP_SDTNotificationsData_WWP_SDTNotificationsDataItem1 = new GXBaseCollection<WorkWithPlus.workwithplus_notificationscommon.SdtWWP_SDTNotificationsData_WWP_SDTNotificationsDataItem>( context, "WWP_SDTNotificationsDataItem", "Comforta_version21");
+         GXt_objcol_SdtWWP_SDTNotificationsData_WWP_SDTNotificationsDataItem1 = new GXBaseCollection<WorkWithPlus.workwithplus_notificationscommon.SdtWWP_SDTNotificationsData_WWP_SDTNotificationsDataItem>( context, "WWP_SDTNotificationsDataItem", "Comforta_version2");
          GridsdtnotificationsdatasRow = new GXWebRow();
          GXEncryptionTmp = "";
          BackMsgLst = new msglist();

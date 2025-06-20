@@ -23,7 +23,7 @@ using System.Runtime.Serialization;
 namespace GeneXus.Programs
 {
 	[XmlRoot(ElementName="SDT_OrganisationDefinitions.ReceptionistDefinition.dutch")]
-	[XmlType(TypeName="SDT_OrganisationDefinitions.ReceptionistDefinition.dutch" , Namespace="Comforta_version21" )]
+	[XmlType(TypeName="SDT_OrganisationDefinitions.ReceptionistDefinition.dutch" , Namespace="Comforta_version2" )]
 	[Serializable]
 	public class SdtSDT_OrganisationDefinitions_ReceptionistDefinition_dutch : GxUserType
 	{
@@ -146,7 +146,7 @@ namespace GeneXus.Programs
 	}
 	#region Rest interface
 	[GxJsonSerialization("default")]
-	[DataContract(Name=@"SDT_OrganisationDefinitions.ReceptionistDefinition.dutch", Namespace="Comforta_version21")]
+	[DataContract(Name=@"SDT_OrganisationDefinitions.ReceptionistDefinition.dutch", Namespace="Comforta_version2")]
 	public class SdtSDT_OrganisationDefinitions_ReceptionistDefinition_dutch_RESTInterface : GxGenericCollectionItem<SdtSDT_OrganisationDefinitions_ReceptionistDefinition_dutch>, System.Web.SessionState.IRequiresSessionState
 	{
 		public SdtSDT_OrganisationDefinitions_ReceptionistDefinition_dutch_RESTInterface( ) : base()

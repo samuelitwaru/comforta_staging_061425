@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs.workwithplus.dynamicforms {
    [XmlRoot(ElementName = "WWP_Form.Element" )]
-   [XmlType(TypeName =  "WWP_Form.Element" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "WWP_Form.Element" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtWWP_Form_Element : GxSilentTrnSdt, IGxSilentTrnGridItem
    {
@@ -871,7 +871,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
       private string gxTv_SdtWWP_Form_Element_Wwpformelementreferenceid_Z ;
    }
 
-   [DataContract(Name = @"WorkWithPlus\DynamicForms\WWP_Form.Element", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WorkWithPlus\DynamicForms\WWP_Form.Element", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_Form_Element_RESTInterface : GxGenericCollectionItem<GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form_Element>
    {
@@ -1071,7 +1071,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
 
    }
 
-   [DataContract(Name = @"WorkWithPlus\DynamicForms\WWP_Form.Element", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WorkWithPlus\DynamicForms\WWP_Form.Element", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_Form_Element_RESTLInterface : GxGenericCollectionItem<GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form_Element>
    {

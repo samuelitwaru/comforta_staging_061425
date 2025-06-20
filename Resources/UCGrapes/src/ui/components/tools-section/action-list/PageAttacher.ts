@@ -19,36 +19,6 @@ export class PageAttacher {
     this.toolboxService = new ToolBoxService();
   }
 
-  async attachNewServiceToTile(serviceId: string) {
-    const services = await this.toolboxService.getServices();
-    const newService = services.find(
-      (service) => service.ProductServiceId == serviceId
-    );
-    if (newService) {
-      const page = {
-        PageId: serviceId,
-        PageName: newService.ProductServiceName,
-        TileName: newService.ProductServiceTileName,
-        PageType: "Content",
-      };
-      this.attachToTile(
-        page,
-        "Content",
-        i18n.t("sidebar.action_list.services")
-      );
-
-      // reload the action list container
-      const menuSection = document.getElementById(
-        "menu-page-section"
-      ) as HTMLElement;
-      const contentection = document.getElementById("content-page-section");
-      if (menuSection) menuSection.style.display = "block";
-      if (contentection) contentection.remove();
-      // const actionListContainer = new ActionSelectContainer();
-      // actionListContainer.render(menuSection);
-    }
-  }
-
   async attachToTile(
     page: ActionPage,
     categoryName: string,
@@ -111,7 +81,8 @@ export class PageAttacher {
       tileAttributes = (globalThis as any).tileMapper.getTile(rowId, tileId);
     }
 
-    const version = await this.appVersionManager.getActiveVersion();
+    const version = await this.appVersionManager.refreshActiveVersion();
+    
     this.attachPage(page, version, tileAttributes, isNewPage);
 
     // set tile properties
@@ -138,15 +109,7 @@ export class PageAttacher {
     this.removeOtherEditors();
     if (childPage) {
       new ChildEditor(page.PageId, childPage, isNewPage).init(tileAttributes);
-    } else {
-      this.toolboxService
-        .createServicePage(version.AppVersionId, selectedItemPageId)
-        .then((newPage: any) => {
-          new ChildEditor(newPage.ContentPage.PageId, newPage.ContentPage).init(
-            tileAttributes
-          );
-        });
-    }
+    } 
   }
 
   removeOtherEditors(): void {

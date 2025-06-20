@@ -349,7 +349,7 @@ namespace GeneXus.Programs {
          AV23SelectedText = "";
          AV15Combo_Data = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item>( context, "Item", "");
          AV9WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
-         AV33GXV1 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version21");
+         AV33GXV1 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
          AV30SupplierGenAddressCountry_DPItem = new SdtSDT_Country_SDT_CountryItem(context);
          AV16Combo_DataItem = new WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item(context);
          AV29ComboTitles = new GxSimpleCollection<string>();
@@ -363,13 +363,13 @@ namespace GeneXus.Programs {
          A254SupplierGenTypeName = "";
          P00684_A42SupplierGenId = new Guid[] {Guid.Empty} ;
          P00684_A253SupplierGenTypeId = new Guid[] {Guid.Empty} ;
-         AV39GXV4 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version21");
+         AV39GXV4 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
          AV32SupplierGenLandlineCode_DPItem = new SdtSDT_Country_SDT_CountryItem(context);
          P00685_A42SupplierGenId = new Guid[] {Guid.Empty} ;
          P00685_A605SupplierGenLandlineCode = new string[] {""} ;
          A605SupplierGenLandlineCode = "";
-         AV43GXV7 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version21");
-         GXt_objcol_SdtSDT_Country_SDT_CountryItem1 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version21");
+         AV43GXV7 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
+         GXt_objcol_SdtSDT_Country_SDT_CountryItem1 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
          AV31SupplierGenPhoneCode_DPItem = new SdtSDT_Country_SDT_CountryItem(context);
          P00686_A42SupplierGenId = new Guid[] {Guid.Empty} ;
          P00686_A353SupplierGenPhoneCode = new string[] {""} ;

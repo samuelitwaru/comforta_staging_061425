@@ -265,6 +265,7 @@ export class PageAppBar {
       this.resetTitle(true);
       this.refreshPage();
       this.updateSideBarTitle(this.title);
+      // TODO: ASK MARK
       this.updateAddNewInfoSectionVisibility();
       this.updateFrameContainerHoverState();
     }

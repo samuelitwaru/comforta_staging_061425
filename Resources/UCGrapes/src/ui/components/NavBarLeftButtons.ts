@@ -4,6 +4,7 @@ import { AppVersionManager } from "../../controls/versions/AppVersionManager";
 import { DebugController } from "../../controls/versions/DebugController";
 import { i18n } from "../../i18n/i18n";
 import { ToolBoxService } from "../../services/ToolBoxService";
+import { CopyPasteManager } from "../views/CopyPasteManager";
 import { ShareLinkView } from "../views/ShareLinkView";
 import { TrashView } from "../views/TrashView";
 import { VersionSelectionView } from "../views/VersionSelectionView";
@@ -15,10 +16,12 @@ export class NavbarLeftButtons {
   container: HTMLElement;
   appVersions: AppVersionManager;
   debugController: DebugController;
+  copyPasteManager: CopyPasteManager;
 
   constructor() {
     this.appVersions = new AppVersionManager();
     this.debugController = new DebugController();
+    this.copyPasteManager = new CopyPasteManager(".tb-container", ".mobile-frame.active-editor");
     this.container = document.getElementById(
       "navbar-buttons-left"
     ) as HTMLElement;
@@ -56,7 +59,6 @@ export class NavbarLeftButtons {
             <path d="M 11 3.810276031494141 C 10.8870096206665 3.810276031494141 10.67922973632812 3.845096588134766 10.55708980560303 4.078277587890625 L 2.862470626831055 18.76799774169922 C 2.74867057800293 18.9852466583252 2.823099136352539 19.16877746582031 2.877599716186523 19.25883674621582 C 2.932090759277344 19.34890747070312 3.060129165649414 19.49999618530273 3.305379867553711 19.49999618530273 L 18.69462013244629 19.49999618530273 C 18.93987083435059 19.49999618530273 19.06790924072266 19.34890747070312 19.12240028381348 19.25883674621582 C 19.17689895629883 19.16877746582031 19.25132942199707 18.9852466583252 19.13752937316895 18.76799774169922 L 11.44291973114014 4.078287124633789 C 11.32077026367188 3.845096588134766 11.1129903793335 3.810276031494141 11 3.810276031494141 M 10.99999618530273 2.310276031494141 C 11.698655128479 2.310276031494141 12.39731502532959 2.667606353759766 12.77165985107422 3.382266998291016 L 20.46627998352051 18.07198715209961 C 21.16382026672363 19.40365600585938 20.19791030883789 20.99999618530273 18.69462013244629 20.99999618530273 L 3.305379867553711 20.99999618530273 C 1.802089691162109 20.99999618530273 0.8361797332763672 19.40365600585938 1.533720016479492 18.07198715209961 L 9.228340148925781 3.382266998291016 C 9.602680206298828 2.667606353759766 10.30133724212646 2.310276031494141 10.99999618530273 2.310276031494141 Z" stroke="none" fill="#7c8791"/>
           </g>
         </svg>
-
     `;
 
     let shareButton = document.createElement("button")
@@ -64,7 +66,6 @@ export class NavbarLeftButtons {
     shareButton.innerHTML = shareButtonSvg;
     shareButton.classList.add("tb-icon-button")
 
-    
     const trashButtonSvg = `
     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
       width="20" height="24" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
@@ -83,11 +84,32 @@ export class NavbarLeftButtons {
     trashButton.innerHTML = trashButtonSvg;
     trashButton.classList.add("tb-icon-button");
 
+    // add button to initialize cropping window.
+    const copySelectorSvg = `
+      <svg id="copySelectButton" xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21">
+        <path id="selection" d="M2.516.052a3.074,3.074,0,0,0-2.5,2.8.936.936,0,0,0,.245.83.911.911,0,0,0,.957.257.955.955,0,0,0,.654-.917A1.172,1.172,0,0,1,3.021,1.869a1.024,1.024,0,0,0,.756-.352A.916.916,0,0,0,3.5.125,1.526,1.526,0,0,0,2.516.052m4.51,0a.954.954,0,0,0-.623.7.95.95,0,0,0,.335.907c.238.182.363.2,1.179.189.747-.012.747-.012.913-.11a1.141,1.141,0,0,0,.287-.263A.92.92,0,0,0,8.773.094c-.134-.071-.2-.078-.879-.086a3.352,3.352,0,0,0-.868.04m5.32,0a.983.983,0,0,0-.6.605.942.942,0,0,0,.43,1.086c.167.1.167.1.913.11a3.169,3.169,0,0,0,.9-.043.929.929,0,0,0,.365-1.52C14.1.036,14.031.018,13.214.008a3.358,3.358,0,0,0-.868.04m5.327,0a.922.922,0,0,0-.607,1.182.958.958,0,0,0,.911.638,1.172,1.172,0,0,1,1.157,1.154.958.958,0,0,0,.655.921.911.911,0,0,0,.957-.257.936.936,0,0,0,.245-.83,3.059,3.059,0,0,0-2.533-2.8,1.645,1.645,0,0,0-.785,0M.747,6.409a.9.9,0,0,0-.667.548C0,7.133,0,7.162.006,7.884c.013.827.03.9.264,1.136a.926.926,0,0,0,1.47-.188c.1-.167.1-.167.11-.912.013-.866-.013-1-.245-1.235a.942.942,0,0,0-.858-.277m19.147,0a.869.869,0,0,0-.5.282c-.225.232-.252.369-.239,1.23.012.745.012.745.11.912a.926.926,0,0,0,1.47.188c.234-.234.251-.308.264-1.136.01-.722.007-.751-.073-.927a.922.922,0,0,0-1.029-.548M.692,11.741a.953.953,0,0,0-.651.614A4.444,4.444,0,0,0,0,13.178c0,.664.005.714.083.88a.911.911,0,0,0,.844.557A.929.929,0,0,0,1.8,14a7.581,7.581,0,0,0,.015-1.653.956.956,0,0,0-1.126-.609m19.186-.016a.978.978,0,0,0-.682.589A6.852,6.852,0,0,0,19.2,14a.929.929,0,0,0,.876.612.911.911,0,0,0,.848-.566c.081-.177.083-.205.073-.927-.01-.653-.019-.763-.079-.882a.978.978,0,0,0-1.039-.515M.711,17.046a1.119,1.119,0,0,0-.516.335,1,1,0,0,0-.185.768,3.066,3.066,0,0,0,2.845,2.845.936.936,0,0,0,.829-.245.911.911,0,0,0,.257-.957.93.93,0,0,0-.884-.645,1.2,1.2,0,0,1-1.19-1.164.941.941,0,0,0-.521-.86,1.143,1.143,0,0,0-.636-.078m19.128,0a1,1,0,0,0-.617.513,2.261,2.261,0,0,0-.088.427,1.2,1.2,0,0,1-1.19,1.158.93.93,0,0,0-.884.645.911.911,0,0,0,.257.957.936.936,0,0,0,.829.245A3.081,3.081,0,0,0,20.683,19.3a2.754,2.754,0,0,0,.273-1.636.96.96,0,0,0-1.118-.615M7.012,19.2a.939.939,0,0,0-.622.882.911.911,0,0,0,.566.848c.177.081.205.083.927.073.827-.013.9-.03,1.136-.264a.837.837,0,0,0,.273-.657.811.811,0,0,0-.286-.671c-.236-.23-.365-.257-1.18-.254a4.508,4.508,0,0,0-.814.044m5.283.012a1.128,1.128,0,0,0-.517.485,1.03,1.03,0,0,0,.011.777,1.1,1.1,0,0,0,.449.45c.119.06.229.069.882.079.722.01.751.007.927-.073A.926.926,0,0,0,13.99,19.2a7.352,7.352,0,0,0-1.7.012" transform="translate(0 -0.003)" fill="#7c8791" fill-rule="evenodd"/>
+      </svg>
+    `;
+
+    let copySelectButton = document.createElement("button");
+    copySelectButton.setAttribute("title", i18n.t("navbar.copy_selection_label"));
+    copySelectButton.innerHTML = copySelectorSvg;
+    copySelectButton.classList.add("tb-icon-button");
+
+    copySelectButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      // Use the manager to show/toggle the overlay and snipping logic
+      this.copyPasteManager.toggle((selectionRect) => {
+        // console.log("Selected area:", selectionRect);
+      });
+    });
+
     const versionSelection = new VersionSelectionView();
-    
+
     versionSelection.render(this.container);
     this.container.appendChild(debugButton);
     this.container.appendChild(shareButton)
+    this.container.appendChild(copySelectButton);
     // this.container.appendChild(trashButton);
     // shareButton.render(this.container);
 

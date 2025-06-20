@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
    [XmlRoot(ElementName = "WWP_WebClient" )]
-   [XmlType(TypeName =  "WWP_WebClient" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "WWP_WebClient" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtWWP_WebClient : GxSilentTrnSdt
    {
@@ -741,7 +741,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       private string gxTv_SdtWWP_WebClient_Wwpwebclientbrowserversion ;
    }
 
-   [DataContract(Name = @"WWPBaseObjects\Notifications\Web\WWP_WebClient", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WWPBaseObjects\Notifications\Web\WWP_WebClient", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_WebClient_RESTInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.notifications.web.SdtWWP_WebClient>
    {
@@ -877,7 +877,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       private string md5Hash ;
    }
 
-   [DataContract(Name = @"WWPBaseObjects\Notifications\Web\WWP_WebClient", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WWPBaseObjects\Notifications\Web\WWP_WebClient", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_WebClient_RESTLInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.notifications.web.SdtWWP_WebClient>
    {

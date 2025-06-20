@@ -9,6 +9,8 @@ import { TileMapper } from "../editor/TileMapper";
 import { TreeComponent } from "../../ui/components/TreeComponent";
 import { HistoryManager } from "./HistoryManager";
 import { JSONToGrapesJSInformation } from "../editor/JSONToGrapesJSInformation";
+import { TreeViewSection } from "../../ui/components/tools-section/TreeViewSection";
+import { InfoSectionManager } from "../InfoSectionManager";
 
 export class ToolboxManager {
   appVersions: any;
@@ -39,6 +41,10 @@ export class ToolboxManager {
       "tools-section"
     ) as HTMLDivElement;
     if (toolSectionElement) toolSectionElement.style.display = "none";
+
+    const treeViewSection = new TreeViewSection();
+    // treeViewSection.render(sideBar);
+    treeViewSection.render(sideBar);
   }
 
   public setUpScrollButtons() {
@@ -288,6 +294,8 @@ export class ToolboxManager {
     const restoreState = () => {
       this.restoreScrollPosition(editor, scrollPosition);
       this.restoreSelectedComponent(editor, selectedComponent);
+      const infoSectionMapper = new InfoSectionManager();
+      infoSectionMapper.removeConsecutivePlusButtons(editor);
     };
 
     // for smooth restoration
@@ -337,6 +345,10 @@ export class ToolboxManager {
         if (selectedComponent.is("info-cta-section")) {
           selectedComponentId = selectedComponent.getId();
           newComponent = editor.getWrapper().find(`#${selectedComponentId}`)[0];
+          selectedComponentId = selectedComponent.getId();
+          newComponent = editor
+            .getWrapper()
+            .find(`#${selectedComponentId}`)[0];
         } else {
           // it is a tile
           const tileSectionId = selectedComponent?.parent()?.getId();
@@ -346,6 +358,8 @@ export class ToolboxManager {
             .find(`#${tileSectionId}`)[0];
           if (!newTileSection) return;
           newComponent = newTileSection.find(`.template-block`)[0];
+          newComponent = newTileSection
+            .find(`.template-block`)[0];
         }
         if (newComponent) {
           editor.select(newComponent);

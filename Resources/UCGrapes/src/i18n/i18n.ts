@@ -55,6 +55,7 @@ export const i18n = new I18n({
         cancel: "Cancel",
         delete: "Delete",
       },
+      copy_selection_label: "Copy Page Selection",
     },
     undo: "Undo",
     redo: "Redo",
@@ -95,6 +96,8 @@ export const i18n = new I18n({
         module: "Modules",
         content: "Content",
         call_to_action: "Call to Action",
+        paste_tile: "Paste Tile",
+        paste_selection: "Paste Selection",
       },
     },
     default: {
@@ -126,12 +129,15 @@ export const i18n = new I18n({
       services: "Services",
       edit_content: "Edit Content",
       save_button: "Save",
-      cancel_button: "Cancel"
+      cancel_button: "Cancel",
+      copy_tile: "Copy Tile",
     },
     messages: {
       success: {
         published: "App published successfully",
         page_created: "Page created successfully",
+        sections_copy_success: "Selected sections copied successfully.",
+        sections_cut_success: "Selected sections cut successfully."
       },
       error: {
         page_linking: "Page cannot be linked to itself",
@@ -142,6 +148,8 @@ export const i18n = new I18n({
         empty_version_name: "Version name is required.",
         existing_version_name: "A version with this name already exists.",
         long_version_name: "Version name cannot exceed 50 characters.",
+        sections_copy_error: "No valid selected sections to copy. Try again.",
+        sections_cut_error: "No valid selected sections to cut. Try again.",
       },
     },
     Messages: "Messages",
@@ -191,6 +199,7 @@ export const i18n = new I18n({
         create_new: "Nieuwe versie maken",
         duplicate: "Versie dupliceren",
       },
+      copy_selection_label: "Pagina selectie kopiëren",
     },
     undo: "Ongedaan maken",
     redo: "Opnieuw",
@@ -231,6 +240,8 @@ export const i18n = new I18n({
         module: "Modules",
         content: "Inhoud",
         call_to_action: "Call to Action",
+        paste_tile: "Tegel plakken",
+        paste_selection: "Selectie plakken",
       },
     },
     default: {
@@ -262,14 +273,15 @@ export const i18n = new I18n({
       information_page: "Nieuwe Pagina",
       edit_content: "Inhoud Bewerken",
       save_button: "Bevestig",
-      cancel_button: "Annuleer"
-
-
+      cancel_button: "Annuleer",
+      copy_tile: "Kopieer tegel",
     },
     messages: {
       success: {
         published: "App succesvol gepubliceerd",
         page_created: "Pagina succesvol aangemaakt",
+        sections_copy_success: "Geselecteerde secties succesvol gekopieerd.",
+        sections_cut_success: "Geselecteerde secties succesvol geknipt."
       },
       error: {
         page_linking: "Pagina kan niet aan zichzelf worden gekoppeld",
@@ -281,6 +293,8 @@ export const i18n = new I18n({
         empty_version_name: "Versienaam is verplicht.",
         existing_version_name: "Er bestaat al een versie met deze naam.",
         long_version_name: "Versienaam mag niet langer zijn dan 50 tekens.",
+        sections_copy_error: "Geen geldige geselecteerde secties om te kopiëren. Probeer het opnieuw.",
+        sections_cut_error: "Geen geldige geselecteerde secties om te knippen. Probeer het opnieuw.",
       },
     },
     Messages: "Berichten",

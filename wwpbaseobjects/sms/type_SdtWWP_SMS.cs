@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs.wwpbaseobjects.sms {
    [XmlRoot(ElementName = "WWP_SMS" )]
-   [XmlType(TypeName =  "WWP_SMS" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "WWP_SMS" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtWWP_SMS : GxSilentTrnSdt
    {
@@ -1192,7 +1192,7 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
       private string gxTv_SdtWWP_SMS_Wwpsmsdetail ;
    }
 
-   [DataContract(Name = @"WWPBaseObjects\SMS\WWP_SMS", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WWPBaseObjects\SMS\WWP_SMS", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_SMS_RESTInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.sms.SdtWWP_SMS>
    {
@@ -1395,7 +1395,7 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
       private string md5Hash ;
    }
 
-   [DataContract(Name = @"WWPBaseObjects\SMS\WWP_SMS", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WWPBaseObjects\SMS\WWP_SMS", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_SMS_RESTLInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.sms.SdtWWP_SMS>
    {

@@ -1,5 +1,5 @@
 /*
-				   File: type_SdtSDT_DebugResult_Summary
+				   File: type_SdtSDT_AppDebugResults_Summary
 			Description: Summary
 				 Author: Nemo 🐠 for C# (.NET) version 18.0.10.184260
 		   Program type: Callable routine
@@ -22,17 +22,17 @@ using System.Runtime.Serialization;
 
 namespace GeneXus.Programs
 {
-	[XmlRoot(ElementName="SDT_DebugResult.Summary")]
-	[XmlType(TypeName="SDT_DebugResult.Summary" , Namespace="Comforta_version21" )]
+	[XmlRoot(ElementName="SDT_AppDebugResults.Summary")]
+	[XmlType(TypeName="SDT_AppDebugResults.Summary" , Namespace="Comforta_version2" )]
 	[Serializable]
-	public class SdtSDT_DebugResult_Summary : GxUserType
+	public class SdtSDT_AppDebugResults_Summary : GxUserType
 	{
-		public SdtSDT_DebugResult_Summary( )
+		public SdtSDT_AppDebugResults_Summary( )
 		{
 			/* Constructor for serialization */
 		}
 
-		public SdtSDT_DebugResult_Summary(IGxContext context)
+		public SdtSDT_AppDebugResults_Summary(IGxContext context)
 		{
 			this.context = context;	
 			initialize();
@@ -76,20 +76,20 @@ namespace GeneXus.Programs
 		public string gxTpr_Totalurls_double
 		{
 			get {
-				return Convert.ToString(gxTv_SdtSDT_DebugResult_Summary_Totalurls, System.Globalization.CultureInfo.InvariantCulture);
+				return Convert.ToString(gxTv_SdtSDT_AppDebugResults_Summary_Totalurls, System.Globalization.CultureInfo.InvariantCulture);
 			}
 			set {
-				gxTv_SdtSDT_DebugResult_Summary_Totalurls = (decimal)(Convert.ToDecimal(value, System.Globalization.CultureInfo.InvariantCulture));
+				gxTv_SdtSDT_AppDebugResults_Summary_Totalurls = (decimal)(Convert.ToDecimal(value, System.Globalization.CultureInfo.InvariantCulture));
 			}
 		}
 		[XmlIgnore]
 		public decimal gxTpr_Totalurls
 		{
 			get {
-				return gxTv_SdtSDT_DebugResult_Summary_Totalurls; 
+				return gxTv_SdtSDT_AppDebugResults_Summary_Totalurls; 
 			}
 			set {
-				gxTv_SdtSDT_DebugResult_Summary_Totalurls = value;
+				gxTv_SdtSDT_AppDebugResults_Summary_Totalurls = value;
 				SetDirty("Totalurls");
 			}
 		}
@@ -101,20 +101,20 @@ namespace GeneXus.Programs
 		public string gxTpr_Successcount_double
 		{
 			get {
-				return Convert.ToString(gxTv_SdtSDT_DebugResult_Summary_Successcount, System.Globalization.CultureInfo.InvariantCulture);
+				return Convert.ToString(gxTv_SdtSDT_AppDebugResults_Summary_Successcount, System.Globalization.CultureInfo.InvariantCulture);
 			}
 			set {
-				gxTv_SdtSDT_DebugResult_Summary_Successcount = (decimal)(Convert.ToDecimal(value, System.Globalization.CultureInfo.InvariantCulture));
+				gxTv_SdtSDT_AppDebugResults_Summary_Successcount = (decimal)(Convert.ToDecimal(value, System.Globalization.CultureInfo.InvariantCulture));
 			}
 		}
 		[XmlIgnore]
 		public decimal gxTpr_Successcount
 		{
 			get {
-				return gxTv_SdtSDT_DebugResult_Summary_Successcount; 
+				return gxTv_SdtSDT_AppDebugResults_Summary_Successcount; 
 			}
 			set {
-				gxTv_SdtSDT_DebugResult_Summary_Successcount = value;
+				gxTv_SdtSDT_AppDebugResults_Summary_Successcount = value;
 				SetDirty("Successcount");
 			}
 		}
@@ -126,20 +126,20 @@ namespace GeneXus.Programs
 		public string gxTpr_Failurecount_double
 		{
 			get {
-				return Convert.ToString(gxTv_SdtSDT_DebugResult_Summary_Failurecount, System.Globalization.CultureInfo.InvariantCulture);
+				return Convert.ToString(gxTv_SdtSDT_AppDebugResults_Summary_Failurecount, System.Globalization.CultureInfo.InvariantCulture);
 			}
 			set {
-				gxTv_SdtSDT_DebugResult_Summary_Failurecount = (decimal)(Convert.ToDecimal(value, System.Globalization.CultureInfo.InvariantCulture));
+				gxTv_SdtSDT_AppDebugResults_Summary_Failurecount = (decimal)(Convert.ToDecimal(value, System.Globalization.CultureInfo.InvariantCulture));
 			}
 		}
 		[XmlIgnore]
 		public decimal gxTpr_Failurecount
 		{
 			get {
-				return gxTv_SdtSDT_DebugResult_Summary_Failurecount; 
+				return gxTv_SdtSDT_AppDebugResults_Summary_Failurecount; 
 			}
 			set {
-				gxTv_SdtSDT_DebugResult_Summary_Failurecount = value;
+				gxTv_SdtSDT_AppDebugResults_Summary_Failurecount = value;
 				SetDirty("Failurecount");
 			}
 		}
@@ -176,13 +176,13 @@ namespace GeneXus.Programs
 
 		#region Declaration
 
-		protected decimal gxTv_SdtSDT_DebugResult_Summary_Totalurls;
+		protected decimal gxTv_SdtSDT_AppDebugResults_Summary_Totalurls;
 		 
 
-		protected decimal gxTv_SdtSDT_DebugResult_Summary_Successcount;
+		protected decimal gxTv_SdtSDT_AppDebugResults_Summary_Successcount;
 		 
 
-		protected decimal gxTv_SdtSDT_DebugResult_Summary_Failurecount;
+		protected decimal gxTv_SdtSDT_AppDebugResults_Summary_Failurecount;
 		 
 
 
@@ -190,14 +190,14 @@ namespace GeneXus.Programs
 	}
 	#region Rest interface
 	[GxJsonSerialization("default")]
-	[DataContract(Name=@"SDT_DebugResult.Summary", Namespace="Comforta_version21")]
-	public class SdtSDT_DebugResult_Summary_RESTInterface : GxGenericCollectionItem<SdtSDT_DebugResult_Summary>, System.Web.SessionState.IRequiresSessionState
+	[DataContract(Name=@"SDT_AppDebugResults.Summary", Namespace="Comforta_version2")]
+	public class SdtSDT_AppDebugResults_Summary_RESTInterface : GxGenericCollectionItem<SdtSDT_AppDebugResults_Summary>, System.Web.SessionState.IRequiresSessionState
 	{
-		public SdtSDT_DebugResult_Summary_RESTInterface( ) : base()
+		public SdtSDT_AppDebugResults_Summary_RESTInterface( ) : base()
 		{	
 		}
 
-		public SdtSDT_DebugResult_Summary_RESTInterface( SdtSDT_DebugResult_Summary psdt ) : base(psdt)
+		public SdtSDT_AppDebugResults_Summary_RESTInterface( SdtSDT_AppDebugResults_Summary psdt ) : base(psdt)
 		{	
 		}
 
@@ -241,10 +241,10 @@ namespace GeneXus.Programs
 
 		#endregion
 
-		public SdtSDT_DebugResult_Summary sdt
+		public SdtSDT_AppDebugResults_Summary sdt
 		{
 			get { 
-				return (SdtSDT_DebugResult_Summary)Sdt;
+				return (SdtSDT_AppDebugResults_Summary)Sdt;
 			}
 			set { 
 				Sdt = value;
@@ -256,7 +256,7 @@ namespace GeneXus.Programs
 		{
 			if ( sdt == null )
 			{
-				sdt = new SdtSDT_DebugResult_Summary() ;
+				sdt = new SdtSDT_AppDebugResults_Summary() ;
 			}
 		}
 	}

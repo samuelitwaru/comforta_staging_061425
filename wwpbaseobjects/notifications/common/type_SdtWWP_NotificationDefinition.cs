@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
    [XmlRoot(ElementName = "WWP_NotificationDefinition" )]
-   [XmlType(TypeName =  "WWP_NotificationDefinition" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "WWP_NotificationDefinition" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtWWP_NotificationDefinition : GxSilentTrnSdt
    {
@@ -1034,7 +1034,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       private string gxTv_SdtWWP_NotificationDefinition_Wwpnotificationdefinitionsecfuncionality_Z ;
    }
 
-   [DataContract(Name = @"WWPBaseObjects\Notifications\Common\WWP_NotificationDefinition", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WWPBaseObjects\Notifications\Common\WWP_NotificationDefinition", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_NotificationDefinition_RESTInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_NotificationDefinition>
    {
@@ -1283,7 +1283,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       private string md5Hash ;
    }
 
-   [DataContract(Name = @"WWPBaseObjects\Notifications\Common\WWP_NotificationDefinition", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WWPBaseObjects\Notifications\Common\WWP_NotificationDefinition", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_NotificationDefinition_RESTLInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_NotificationDefinition>
    {

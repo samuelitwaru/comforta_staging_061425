@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
    [XmlRoot(ElementName = "Trn_DynamicTranslation" )]
-   [XmlType(TypeName =  "Trn_DynamicTranslation" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "Trn_DynamicTranslation" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtTrn_DynamicTranslation : GxSilentTrnSdt
    {
@@ -491,7 +491,7 @@ namespace GeneXus.Programs {
       private Guid gxTv_SdtTrn_DynamicTranslation_Dynamictranslationprimarykey_Z ;
    }
 
-   [DataContract(Name = @"Trn_DynamicTranslation", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"Trn_DynamicTranslation", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtTrn_DynamicTranslation_RESTInterface : GxGenericCollectionItem<SdtTrn_DynamicTranslation>
    {
@@ -626,7 +626,7 @@ namespace GeneXus.Programs {
       private string md5Hash ;
    }
 
-   [DataContract(Name = @"Trn_DynamicTranslation", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"Trn_DynamicTranslation", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtTrn_DynamicTranslation_RESTLInterface : GxGenericCollectionItem<SdtTrn_DynamicTranslation>
    {

@@ -54,7 +54,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
 
       public void execute( out GXBCCollection<GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_NotificationDefinition> aP0_Gxm3rootcol )
       {
-         this.Gxm3rootcol = new GXBCCollection<GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_NotificationDefinition>( context, "WWP_NotificationDefinition", "Comforta_version21") ;
+         this.Gxm3rootcol = new GXBCCollection<GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_NotificationDefinition>( context, "WWP_NotificationDefinition", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP0_Gxm3rootcol=this.Gxm3rootcol;
@@ -68,7 +68,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
 
       public void executeSubmit( out GXBCCollection<GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_NotificationDefinition> aP0_Gxm3rootcol )
       {
-         this.Gxm3rootcol = new GXBCCollection<GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_NotificationDefinition>( context, "WWP_NotificationDefinition", "Comforta_version21") ;
+         this.Gxm3rootcol = new GXBCCollection<GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_NotificationDefinition>( context, "WWP_NotificationDefinition", "Comforta_version2") ;
          SubmitImpl();
          aP0_Gxm3rootcol=this.Gxm3rootcol;
       }

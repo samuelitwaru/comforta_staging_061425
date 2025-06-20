@@ -83,7 +83,7 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         AV13SDT_AgendaLocationCollection = new GXBaseCollection<SdtSDT_AgendaLocation>( context, "SDT_AgendaLocation", "Comforta_version21");
+         AV13SDT_AgendaLocationCollection = new GXBaseCollection<SdtSDT_AgendaLocation>( context, "SDT_AgendaLocation", "Comforta_version2");
          AV23GXLvl4 = 0;
          /* Using cursor P008H2 */
          pr_default.execute(0, new Object[] {AV8ResidentId});
@@ -191,7 +191,7 @@ namespace GeneXus.Programs {
       public override void initialize( )
       {
          AV12SDT_AgendaLocationJson = "";
-         AV13SDT_AgendaLocationCollection = new GXBaseCollection<SdtSDT_AgendaLocation>( context, "SDT_AgendaLocation", "Comforta_version21");
+         AV13SDT_AgendaLocationCollection = new GXBaseCollection<SdtSDT_AgendaLocation>( context, "SDT_AgendaLocation", "Comforta_version2");
          P008H2_A71ResidentGUID = new string[] {""} ;
          P008H2_A62ResidentId = new Guid[] {Guid.Empty} ;
          P008H2_A29LocationId = new Guid[] {Guid.Empty} ;

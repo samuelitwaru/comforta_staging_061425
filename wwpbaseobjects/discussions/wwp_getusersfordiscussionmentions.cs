@@ -97,7 +97,7 @@ namespace GeneXus.Programs.wwpbaseobjects.discussions {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         AV12Options = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWPSuggestDataItem>( context, "WWPSuggestDataItem", "Comforta_version21");
+         AV12Options = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWPSuggestDataItem>( context, "WWPSuggestDataItem", "Comforta_version2");
          AV10MaxOptions = 5;
          AV9CheckDuplicated = false;
          /* Execute user subroutine: 'SEARCH USERS' */
@@ -183,7 +183,7 @@ namespace GeneXus.Programs.wwpbaseobjects.discussions {
       public override void initialize( )
       {
          AV13OptionsJson = "";
-         AV12Options = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWPSuggestDataItem>( context, "WWPSuggestDataItem", "Comforta_version21");
+         AV12Options = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWPSuggestDataItem>( context, "WWPSuggestDataItem", "Comforta_version2");
          lV14SearchTxt = "";
          P00402_A114WWPUserExtendedEmail = new string[] {""} ;
          P00402_A113WWPUserExtendedFullName = new string[] {""} ;

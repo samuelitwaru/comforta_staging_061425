@@ -69,7 +69,7 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         AV13FilesToInsert = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version21");
+         AV13FilesToInsert = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version2");
          AV15ImageIdsToKeep = (GxSimpleCollection<string>)(new GxSimpleCollection<string>());
          AV17OriginalImageIds = (GxSimpleCollection<string>)(new GxSimpleCollection<string>());
          AV26GXV1 = 1;
@@ -146,7 +146,7 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV13FilesToInsert = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version21");
+         AV13FilesToInsert = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version2");
          AV15ImageIdsToKeep = new GxSimpleCollection<string>();
          AV17OriginalImageIds = new GxSimpleCollection<string>();
          AV11file = new SdtSDT_FileUploadData(context);

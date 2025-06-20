@@ -54,7 +54,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public void execute( out GXBaseCollection<WorkWithPlus.workwithplus_commongam.SdtSecGAMFunctionalitiesToLoad> aP0_Gxm3rootcol )
       {
-         this.Gxm3rootcol = new GXBaseCollection<WorkWithPlus.workwithplus_commongam.SdtSecGAMFunctionalitiesToLoad>( context, "SecGAMFunctionalitiesToLoad", "Comforta_version21") ;
+         this.Gxm3rootcol = new GXBaseCollection<WorkWithPlus.workwithplus_commongam.SdtSecGAMFunctionalitiesToLoad>( context, "SecGAMFunctionalitiesToLoad", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP0_Gxm3rootcol=this.Gxm3rootcol;
@@ -68,7 +68,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public void executeSubmit( out GXBaseCollection<WorkWithPlus.workwithplus_commongam.SdtSecGAMFunctionalitiesToLoad> aP0_Gxm3rootcol )
       {
-         this.Gxm3rootcol = new GXBaseCollection<WorkWithPlus.workwithplus_commongam.SdtSecGAMFunctionalitiesToLoad>( context, "SecGAMFunctionalitiesToLoad", "Comforta_version21") ;
+         this.Gxm3rootcol = new GXBaseCollection<WorkWithPlus.workwithplus_commongam.SdtSecGAMFunctionalitiesToLoad>( context, "SecGAMFunctionalitiesToLoad", "Comforta_version2") ;
          SubmitImpl();
          aP0_Gxm3rootcol=this.Gxm3rootcol;
       }

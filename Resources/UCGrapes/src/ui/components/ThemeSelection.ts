@@ -91,7 +91,6 @@ export class ThemeSelection{
     }
 
     saveSelectedTheme(theme: Theme) {
-        console.log('(globalThis as any).activeVersion: >> ', (globalThis as any).activeVersion)
         const appVersionId = (globalThis as any).activeVersion.AppVersionId;
         const toolboxService = new ToolBoxService();
         toolboxService.updateAppVersionTheme(appVersionId, theme.ThemeId).then((res) => {

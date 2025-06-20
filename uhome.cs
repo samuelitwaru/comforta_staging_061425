@@ -1175,7 +1175,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256145514374", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202562017131471", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1191,7 +1191,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("uhome.js", "?20256145514378", false, true);
+         context.AddJavascriptSource("uhome.js", "?202562017131473", false, true);
          /* End function include_jscripts */
       }
 
@@ -1803,7 +1803,7 @@ namespace GeneXus.Programs {
       {
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
-         AV6HomeModulesSDT = new GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem>( context, "UHomeModulesSDTItem", "Comforta_version21");
+         AV6HomeModulesSDT = new GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem>( context, "UHomeModulesSDTItem", "Comforta_version2");
          sDynURL = "";
          FormProcess = "";
          bodyStyle = "";
@@ -1827,7 +1827,7 @@ namespace GeneXus.Programs {
          WebComp_Layoutprogressbarwc_Component = "";
          WebComp_Layoutprogresscirclewc_Component = "";
          AV13WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
-         GXt_objcol_SdtUHomeModulesSDT_UHomeModulesSDTItem1 = new GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem>( context, "UHomeModulesSDTItem", "Comforta_version21");
+         GXt_objcol_SdtUHomeModulesSDT_UHomeModulesSDTItem1 = new GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem>( context, "UHomeModulesSDTItem", "Comforta_version2");
          GridhomemodulessdtsRow = new GXWebRow();
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();

@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
    [XmlRoot(ElementName = "WWP_Subscription" )]
-   [XmlType(TypeName =  "WWP_Subscription" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "WWP_Subscription" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtWWP_Subscription : GxSilentTrnSdt
    {
@@ -886,7 +886,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       private string gxTv_SdtWWP_Subscription_Wwpsubscriptionentityrecorddescription_Z ;
    }
 
-   [DataContract(Name = @"WWPBaseObjects\Subscriptions\WWP_Subscription", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WWPBaseObjects\Subscriptions\WWP_Subscription", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_Subscription_RESTInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.subscriptions.SdtWWP_Subscription>
    {
@@ -1079,7 +1079,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       private string md5Hash ;
    }
 
-   [DataContract(Name = @"WWPBaseObjects\Subscriptions\WWP_Subscription", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WWPBaseObjects\Subscriptions\WWP_Subscription", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_Subscription_RESTLInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.subscriptions.SdtWWP_Subscription>
    {

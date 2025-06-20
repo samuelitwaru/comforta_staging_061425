@@ -109,7 +109,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         AV16Options = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWPSuggestDataItem>( context, "WWPSuggestDataItem", "Comforta_version21");
+         AV16Options = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWPSuggestDataItem>( context, "WWPSuggestDataItem", "Comforta_version2");
          GXt_SdtWWP_Form1 = AV21WWPForm;
          new GeneXus.Programs.workwithplus.dynamicforms.wwp_df_loadformdefinition(context ).execute(  AV20SessionId, out  GXt_SdtWWP_Form1) ;
          AV21WWPForm = GXt_SdtWWP_Form1;
@@ -185,7 +185,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
       public override void initialize( )
       {
          AV17OptionsJson = "";
-         AV16Options = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWPSuggestDataItem>( context, "WWPSuggestDataItem", "Comforta_version21");
+         AV16Options = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWPSuggestDataItem>( context, "WWPSuggestDataItem", "Comforta_version2");
          AV21WWPForm = new GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form(context);
          GXt_SdtWWP_Form1 = new GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form(context);
          AV11Element = new GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form_Element(context);

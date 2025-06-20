@@ -54,7 +54,7 @@ namespace GeneXus.Programs {
          this.AV16TitleFilter = aP1_TitleFilter;
          this.AV15LoadFromDate = aP2_LoadFromDate;
          this.AV10LoadToDate = aP3_LoadToDate;
-         this.AV14CalendarEvents = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item>( context, "Item", "Comforta_version21") ;
+         this.AV14CalendarEvents = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item>( context, "Item", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP4_CalendarEvents=this.AV14CalendarEvents;
@@ -79,7 +79,7 @@ namespace GeneXus.Programs {
          this.AV16TitleFilter = aP1_TitleFilter;
          this.AV15LoadFromDate = aP2_LoadFromDate;
          this.AV10LoadToDate = aP3_LoadToDate;
-         this.AV14CalendarEvents = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item>( context, "Item", "Comforta_version21") ;
+         this.AV14CalendarEvents = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item>( context, "Item", "Comforta_version2") ;
          SubmitImpl();
          aP4_CalendarEvents=this.AV14CalendarEvents;
       }
@@ -141,7 +141,7 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV14CalendarEvents = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item>( context, "Item", "Comforta_version21");
+         AV14CalendarEvents = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item>( context, "Item", "Comforta_version2");
          AV9RealLoadToDate = DateTime.MinValue;
          AV18Udparg1 = Guid.Empty;
          P008R2_A438AgendaCalendarRecurringType = new string[] {""} ;

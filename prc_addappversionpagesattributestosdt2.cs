@@ -50,7 +50,7 @@ namespace GeneXus.Programs {
       {
          this.AV11AppVersionId = aP0_AppVersionId;
          this.AV14PageIdCollection = aP1_PageIdCollection;
-         this.AV16SDT_InfoPageTranslationCollection = new GXBaseCollection<SdtSDT_InfoPageTranslation>( context, "SDT_InfoPageTranslation", "Comforta_version21") ;
+         this.AV16SDT_InfoPageTranslationCollection = new GXBaseCollection<SdtSDT_InfoPageTranslation>( context, "SDT_InfoPageTranslation", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP2_SDT_InfoPageTranslationCollection=this.AV16SDT_InfoPageTranslationCollection;
@@ -69,7 +69,7 @@ namespace GeneXus.Programs {
       {
          this.AV11AppVersionId = aP0_AppVersionId;
          this.AV14PageIdCollection = aP1_PageIdCollection;
-         this.AV16SDT_InfoPageTranslationCollection = new GXBaseCollection<SdtSDT_InfoPageTranslation>( context, "SDT_InfoPageTranslation", "Comforta_version21") ;
+         this.AV16SDT_InfoPageTranslationCollection = new GXBaseCollection<SdtSDT_InfoPageTranslation>( context, "SDT_InfoPageTranslation", "Comforta_version2") ;
          SubmitImpl();
          aP2_SDT_InfoPageTranslationCollection=this.AV16SDT_InfoPageTranslationCollection;
       }
@@ -118,7 +118,7 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV16SDT_InfoPageTranslationCollection = new GXBaseCollection<SdtSDT_InfoPageTranslation>( context, "SDT_InfoPageTranslation", "Comforta_version21");
+         AV16SDT_InfoPageTranslationCollection = new GXBaseCollection<SdtSDT_InfoPageTranslation>( context, "SDT_InfoPageTranslation", "Comforta_version2");
          A516PageId = Guid.Empty;
          A525PageType = "";
          A523AppVersionId = Guid.Empty;

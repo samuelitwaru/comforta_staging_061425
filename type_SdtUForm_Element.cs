@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
    [XmlRoot(ElementName = "UForm.Element" )]
-   [XmlType(TypeName =  "UForm.Element" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "UForm.Element" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtUForm_Element : GxSilentTrnSdt, IGxSilentTrnGridItem
    {
@@ -871,7 +871,7 @@ namespace GeneXus.Programs {
       private string gxTv_SdtUForm_Element_Wwpformelementreferenceid_Z ;
    }
 
-   [DataContract(Name = @"UForm.Element", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"UForm.Element", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtUForm_Element_RESTInterface : GxGenericCollectionItem<SdtUForm_Element>
    {
@@ -1071,7 +1071,7 @@ namespace GeneXus.Programs {
 
    }
 
-   [DataContract(Name = @"UForm.Element", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"UForm.Element", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtUForm_Element_RESTLInterface : GxGenericCollectionItem<SdtUForm_Element>
    {

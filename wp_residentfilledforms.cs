@@ -1162,7 +1162,7 @@ namespace GeneXus.Programs {
       {
          /* 'LOADGRIDSDT' Routine */
          returnInSub = false;
-         AV9SDT_ResidentFilledForms = new GXBaseCollection<SdtSDT_ResidentFilledForms_SDT_ResidentFilledFormsItem>( context, "SDT_ResidentFilledFormsItem", "Comforta_version21");
+         AV9SDT_ResidentFilledForms = new GXBaseCollection<SdtSDT_ResidentFilledForms_SDT_ResidentFilledFormsItem>( context, "SDT_ResidentFilledFormsItem", "Comforta_version2");
          gx_BV19 = true;
          pr_default.dynParam(0, new Object[]{ new Object[]{
                                               AV19FilterFullText ,
@@ -1292,7 +1292,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256145513816", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202562017131243", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1310,7 +1310,7 @@ namespace GeneXus.Programs {
          if ( nGXWrapped != 1 )
          {
             context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-            context.AddJavascriptSource("wp_residentfilledforms.js", "?20256145513817", false, true);
+            context.AddJavascriptSource("wp_residentfilledforms.js", "?202562017131244", false, true);
          }
          /* End function include_jscripts */
       }
@@ -1851,7 +1851,7 @@ namespace GeneXus.Programs {
          FormProcess = "";
          bodyStyle = "";
          GXKey = "";
-         AV9SDT_ResidentFilledForms = new GXBaseCollection<SdtSDT_ResidentFilledForms_SDT_ResidentFilledFormsItem>( context, "SDT_ResidentFilledFormsItem", "Comforta_version21");
+         AV9SDT_ResidentFilledForms = new GXBaseCollection<SdtSDT_ResidentFilledForms_SDT_ResidentFilledFormsItem>( context, "SDT_ResidentFilledFormsItem", "Comforta_version2");
          A112WWPUserExtendedId = "";
          A209WWPFormTitle = "";
          A239WWPFormInstanceDate = (DateTime)(DateTime.MinValue);

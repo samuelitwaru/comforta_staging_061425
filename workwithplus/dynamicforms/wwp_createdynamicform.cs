@@ -1813,7 +1813,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
             if ( ! AV8HasDeletedElements || ! StringUtil.Contains( AV7Element.ToJSonString(true, true), "\"Mode\":\"DLT\"") )
             {
                AV15VisibleCondition = new WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_ConditionExpression(context);
-               AV14Validations = new GXBaseCollection<WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_Validation>( context, "WWP_DF_Validation", "Comforta_version21");
+               AV14Validations = new GXBaseCollection<WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_Validation>( context, "WWP_DF_Validation", "Comforta_version2");
                if ( AV7Element.gxTpr_Wwpformelementtype == 1 )
                {
                   if ( AV7Element.gxTpr_Wwpformelementdatatype == 1 )
@@ -1882,7 +1882,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
                      GXt_char3 = AV35VarCharAux;
                      new GeneXus.Programs.workwithplus.dynamicforms.wwp_df_getavailablevariables(context ).execute(  AV13SessionId,  false,  AV7Element.gxTpr_Wwpformelementid,  9999,  "", out  GXt_char3) ;
                      AV35VarCharAux = GXt_char3;
-                     AV36AllPossibleReferenceIds = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWPSuggestDataItem>( context, "WWPSuggestDataItem", "Comforta_version21");
+                     AV36AllPossibleReferenceIds = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWPSuggestDataItem>( context, "WWPSuggestDataItem", "Comforta_version2");
                      AV36AllPossibleReferenceIds.FromJSonString(StringUtil.Lower( AV35VarCharAux), null);
                   }
                   if ( ! String.IsNullOrEmpty(StringUtil.RTrim( StringUtil.Trim( AV15VisibleCondition.gxTpr_Expression))) )
@@ -2042,7 +2042,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256145393327", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201771578", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2058,7 +2058,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("workwithplus/dynamicforms/wwp_createdynamicform.js", "?20256145393329", false, true);
+         context.AddJavascriptSource("workwithplus/dynamicforms/wwp_createdynamicform.js", "?20256201771579", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
@@ -2227,7 +2227,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          AV39ElementTitle = "";
          H001X3_A207WWPFormVersionNumber = new short[1] ;
          H001X3_A206WWPFormId = new short[1] ;
-         AV52SDT_DynamicFormTranslationCollection = new GXBaseCollection<SdtSDT_DynamicFormTranslation>( context, "SDT_DynamicFormTranslation", "Comforta_version21");
+         AV52SDT_DynamicFormTranslationCollection = new GXBaseCollection<SdtSDT_DynamicFormTranslation>( context, "SDT_DynamicFormTranslation", "Comforta_version2");
          AV54Trn_SupplierDynamicForm = new SdtTrn_SupplierDynamicForm(context);
          H001X4_A29LocationId = new Guid[] {Guid.Empty} ;
          H001X4_A11OrganisationId = new Guid[] {Guid.Empty} ;
@@ -2239,14 +2239,14 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          H001X5_A231WWPFormDate = new DateTime[] {DateTime.MinValue} ;
          H001X5_A207WWPFormVersionNumber = new short[1] ;
          AV31WWPFormDate = (DateTime)(DateTime.MinValue);
-         GXt_objcol_SdtSDT_DynamicFormTranslation4 = new GXBaseCollection<SdtSDT_DynamicFormTranslation>( context, "SDT_DynamicFormTranslation", "Comforta_version21");
+         GXt_objcol_SdtSDT_DynamicFormTranslation4 = new GXBaseCollection<SdtSDT_DynamicFormTranslation>( context, "SDT_DynamicFormTranslation", "Comforta_version2");
          H001X6_A29LocationId = new Guid[] {Guid.Empty} ;
          H001X6_A11OrganisationId = new Guid[] {Guid.Empty} ;
          GXt_SdtWWP_Form1 = new GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form(context);
          AV35VarCharAux = "";
-         AV34AllReferenceIds = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWPSuggestDataItem>( context, "WWPSuggestDataItem", "Comforta_version21");
+         AV34AllReferenceIds = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWPSuggestDataItem>( context, "WWPSuggestDataItem", "Comforta_version2");
          AV15VisibleCondition = new WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_ConditionExpression(context);
-         AV14Validations = new GXBaseCollection<WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_Validation>( context, "WWP_DF_Validation", "Comforta_version21");
+         AV14Validations = new GXBaseCollection<WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_Validation>( context, "WWP_DF_Validation", "Comforta_version2");
          AV17WWP_DF_BooleanMetadata = new WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_BooleanMetadata(context);
          AV18WWP_DF_CharMetadata = new WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_CharMetadata(context);
          AV24WWP_DF_NumericMetadata = new WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_NumericMetadata(context);
@@ -2256,7 +2256,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          AV23WWP_DF_MultipleMetadata = new WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_ElementsRepeaterMetadata(context);
          AV22WWP_DF_LabelMetadata = new WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_LabelMetadata(context);
          AV25WWP_DF_StepMetadata = new WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_StepMetadata(context);
-         AV36AllPossibleReferenceIds = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWPSuggestDataItem>( context, "WWPSuggestDataItem", "Comforta_version21");
+         AV36AllPossibleReferenceIds = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWPSuggestDataItem>( context, "WWPSuggestDataItem", "Comforta_version2");
          AV41VarCharList = new GxSimpleCollection<string>();
          AV38ConditionError = "";
          AV40Validation = new WorkWithPlus.workwithplus_dynamicforms.SdtWWP_DF_Validation(context);

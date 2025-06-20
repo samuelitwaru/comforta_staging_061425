@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs.wwpbaseobjects.mail {
    [XmlRoot(ElementName = "WWP_Mail.Attachments" )]
-   [XmlType(TypeName =  "WWP_Mail.Attachments" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "WWP_Mail.Attachments" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtWWP_Mail_Attachments : GxSilentTrnSdt, IGxSilentTrnGridItem
    {
@@ -306,7 +306,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
       private string gxTv_SdtWWP_Mail_Attachments_Wwpmailattachmentname_Z ;
    }
 
-   [DataContract(Name = @"WWPBaseObjects\Mail\WWP_Mail.Attachments", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WWPBaseObjects\Mail\WWP_Mail.Attachments", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_Mail_Attachments_RESTInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.mail.SdtWWP_Mail_Attachments>
    {
@@ -368,7 +368,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
 
    }
 
-   [DataContract(Name = @"WWPBaseObjects\Mail\WWP_Mail.Attachments", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WWPBaseObjects\Mail\WWP_Mail.Attachments", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_Mail_Attachments_RESTLInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.mail.SdtWWP_Mail_Attachments>
    {

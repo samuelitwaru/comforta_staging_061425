@@ -123,7 +123,7 @@ namespace GeneXus.Programs.general.ui {
          {
             disableOutput();
          }
-         context.AddJavascriptSource("general/ui/masterprompt.js", "?2025614538112", false, true);
+         context.AddJavascriptSource("general/ui/masterprompt.js", "?20256201762335", false, true);
          context.WriteHtmlTextNl( "</body>") ;
          context.WriteHtmlTextNl( "</html>") ;
          if ( context.isSpaRequest( ) )
@@ -506,7 +506,7 @@ namespace GeneXus.Programs.general.ui {
          idxLst = 1;
          while ( idxLst <= (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)(getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Jscriptsrc.Item(idxLst))), "?2025614538118", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)(getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Jscriptsrc.Item(idxLst))), "?20256201762338", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -523,7 +523,7 @@ namespace GeneXus.Programs.general.ui {
       {
          if ( nGXWrapped != 1 )
          {
-            context.AddJavascriptSource("general/ui/masterprompt.js", "?2025614538118", false, true);
+            context.AddJavascriptSource("general/ui/masterprompt.js", "?20256201762338", false, true);
          }
          /* End function include_jscripts */
       }

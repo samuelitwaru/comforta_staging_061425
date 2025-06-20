@@ -908,7 +908,7 @@ namespace GeneXus.Programs {
          returnInSub = false;
          new GeneXus.Programs.wwpbaseobjects.loadwwpcontext(context ).execute( out  AV21WWPContext) ;
          AV16OrganisationId = AV21WWPContext.gxTpr_Organisationid;
-         AV13WizardSteps = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWizardSteps_WizardStepsItem>( context, "WizardStepsItem", "Comforta_version21");
+         AV13WizardSteps = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWizardSteps_WizardStepsItem>( context, "WizardStepsItem", "Comforta_version2");
          AV13WizardSteps.Add(new WorkWithPlus.workwithplus_web.wwp_wizardgetstep(context).executeUdp(  "Step1",  context.GetMessage( "Service", ""),  " ",  false), 0);
          AV13WizardSteps.Add(new WorkWithPlus.workwithplus_web.wwp_wizardgetstep(context).executeUdp(  "Step2",  context.GetMessage( "Call To Action", ""),  " ",  false), 0);
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV11CurrentStep)) )
@@ -1113,7 +1113,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256145424391", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201784272", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1129,7 +1129,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wp_productservice.js", "?20256145424391", false, true);
+         context.AddJavascriptSource("wp_productservice.js", "?20256201784272", false, true);
          /* End function include_jscripts */
       }
 
@@ -1201,7 +1201,7 @@ namespace GeneXus.Programs {
          bodyStyle = "";
          GXKey = "";
          GXEncryptionTmp = "";
-         AV13WizardSteps = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWizardSteps_WizardStepsItem>( context, "WizardStepsItem", "Comforta_version21");
+         AV13WizardSteps = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWizardSteps_WizardStepsItem>( context, "WizardStepsItem", "Comforta_version2");
          AV12CurrentStepAux = "";
          GX_FocusControl = "";
          Form = new GXWebForm();

@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
    [XmlRoot(ElementName = "Trn_AgendaEventGroup" )]
-   [XmlType(TypeName =  "Trn_AgendaEventGroup" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "Trn_AgendaEventGroup" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtTrn_AgendaEventGroup : GxSilentTrnSdt
    {
@@ -1925,7 +1925,7 @@ namespace GeneXus.Programs {
       private Guid gxTv_SdtTrn_AgendaEventGroup_Medicalindicationid_Z ;
    }
 
-   [DataContract(Name = @"Trn_AgendaEventGroup", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"Trn_AgendaEventGroup", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtTrn_AgendaEventGroup_RESTInterface : GxGenericCollectionItem<SdtTrn_AgendaEventGroup>
    {
@@ -2342,7 +2342,7 @@ namespace GeneXus.Programs {
       private string md5Hash ;
    }
 
-   [DataContract(Name = @"Trn_AgendaEventGroup", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"Trn_AgendaEventGroup", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtTrn_AgendaEventGroup_RESTLInterface : GxGenericCollectionItem<SdtTrn_AgendaEventGroup>
    {

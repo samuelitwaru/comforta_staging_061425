@@ -68,7 +68,7 @@ namespace GeneXus.Programs {
          this.AV8type = aP0_type;
          this.AV9NotificationDefinitionIdCollection = aP1_NotificationDefinitionIdCollection;
          this.AV11searchKey = aP2_searchKey;
-         this.Gxm2rootcol = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version21") ;
+         this.Gxm2rootcol = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP3_Gxm2rootcol=this.Gxm2rootcol;
@@ -90,7 +90,7 @@ namespace GeneXus.Programs {
          this.AV8type = aP0_type;
          this.AV9NotificationDefinitionIdCollection = aP1_NotificationDefinitionIdCollection;
          this.AV11searchKey = aP2_searchKey;
-         this.Gxm2rootcol = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version21") ;
+         this.Gxm2rootcol = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version2") ;
          SubmitImpl();
          aP3_Gxm2rootcol=this.Gxm2rootcol;
       }

@@ -1598,7 +1598,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025614538090", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201762032", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1614,7 +1614,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("wp_createlocationandlicensestep2.js", "?2025614538091", false, true);
+         context.AddJavascriptSource("wp_createlocationandlicensestep2.js", "?20256201762032", false, true);
          context.AddJavascriptSource("UserControls/UC_ThemeSelectorRender.js", "", false, true);
          context.AddJavascriptSource("UserControls/UC_CtaThemeSelectorRender.js", "", false, true);
          context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
@@ -1751,7 +1751,7 @@ namespace GeneXus.Programs {
          bodyStyle = "";
          GXKey = "";
          GXEncryptionTmp = "";
-         AV25SDT_FileUploadData = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version21");
+         AV25SDT_FileUploadData = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version2");
          AV22SelectedBrandTheme = new SdtSDT_BrandThemeColors(context);
          AV23SelectedCtaTheme = new SdtSDT_CtaThemeColors(context);
          AV21WizardData = new SdtWP_CreateLocationAndLicenseData(context);

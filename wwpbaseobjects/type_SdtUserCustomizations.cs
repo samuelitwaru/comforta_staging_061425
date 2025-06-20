@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs.wwpbaseobjects {
    [XmlRoot(ElementName = "UserCustomizations" )]
-   [XmlType(TypeName =  "UserCustomizations" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "UserCustomizations" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtUserCustomizations : GxSilentTrnSdt
    {
@@ -354,7 +354,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string gxTv_SdtUserCustomizations_Usercustomizationskey_Z ;
    }
 
-   [DataContract(Name = @"WWPBaseObjects\UserCustomizations", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WWPBaseObjects\UserCustomizations", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtUserCustomizations_RESTInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.SdtUserCustomizations>
    {
@@ -448,7 +448,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string md5Hash ;
    }
 
-   [DataContract(Name = @"WWPBaseObjects\UserCustomizations", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WWPBaseObjects\UserCustomizations", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtUserCustomizations_RESTLInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.SdtUserCustomizations>
    {

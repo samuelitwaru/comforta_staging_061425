@@ -129,7 +129,6 @@ export class ActionInput {
     this.input.addEventListener("click", (e) => {
       if (this.ctaAttributes.CtaType === "Form") {
         e.preventDefault();
-        console.log('form clicked');
         this.openFormEditModal();
       }
     });

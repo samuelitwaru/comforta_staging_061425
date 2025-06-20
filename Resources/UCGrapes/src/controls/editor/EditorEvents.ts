@@ -539,6 +539,7 @@ export class EditorEvents {
   private processClick(e: MouseEvent, targetElement: Element): void {
     this.uiManager.activateEditor(this.frameId);
     this.uiManager.clearAllMenuContainers();
+    this.uiManager.clearAllDropDowns();
     (globalThis as any).eventTarget = targetElement;
 
     this.uiManager.handleTileManager(e);
@@ -595,18 +596,37 @@ export class EditorEvents {
     let sourceComponent: any;
     let destinationComponent: any;
 
-    this.editor.on("component:drag:start", (model: any) => {
+    // When drag starts
+    this.editor.on('component:drag:start', (model: any) => {
       sourceComponent = model.parent;
+      if (model.target.get('type') !== 'tile-wrapper') return;
+
+      const allTileContainers = this.editor.getWrapper().find('[data-gjs-type="info-tiles-section"]');
+      allTileContainers.forEach((container: any) => {
+        const tiles = container.components().filter((comp: any) => comp.get('type') === 'tile-wrapper');
+        const isSource = model.parent && model.parent.getId() === container.getId();
+        if (tiles.length >= 3 && !isSource) {
+          container.set('droppable', false);
+          container.addAttributes({ 'data-gjs-droppable': 'false' });
+        } else {
+          container.set('droppable', "[data-gjs-type='tile-wrapper']");
+          container.addAttributes({ 'data-gjs-droppable': "[data-gjs-type='tile-wrapper']" });
+        }
+      });
     });
 
     this.editor.on("component:drag:end", (model: any) => {
       if (this.resizeState.isResizing) return;
       destinationComponent = model.parent;
-      this.uiManager.handleDragEnd(
-        model,
-        sourceComponent,
-        destinationComponent
-      );
+
+      // reset droppable state for all tile containers
+      const allTileContainers = this.editor.getWrapper().find('[data-gjs-type="info-tiles-section"]');
+      allTileContainers.forEach((container: any) => {
+        container.set('droppable', "[data-gjs-type='tile-wrapper']");
+        container.addAttributes({ 'data-gjs-droppable': "[data-gjs-type='tile-wrapper']" });
+      });
+
+      this.uiManager.handleDragEnd(model, sourceComponent, destinationComponent);
     });
   }
 
@@ -622,6 +642,7 @@ export class EditorEvents {
   }
 
   private async handleComponentSelected(component: any): Promise<void> {
+    this.uiManager.clearAllDropDowns();
     this.setupGlobalComponentReferences(component);
 
     const componentType = this.determineComponentType(component);
@@ -702,7 +723,7 @@ export class EditorEvents {
         return (
           page.PageType === pageType &&
           page.PageLinkStructure?.WWPFormId ===
-            Number(ctaAttrs.Action?.ObjectId)
+          Number(ctaAttrs.Action?.ObjectId)
         );
       });
     } else if (pageType === "WebLink") {

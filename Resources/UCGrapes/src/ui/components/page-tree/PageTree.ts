@@ -85,7 +85,6 @@ export class PageTree {
                             })
                             ret.children.push(tile.Action.ObjectId)
                         } else if (tile.Action.ObjectId) {
-                            console.log('    tile:', tile.Action.ObjectType)
                             ret.children.push(tile.Action.ObjectId)
                         }
                     })

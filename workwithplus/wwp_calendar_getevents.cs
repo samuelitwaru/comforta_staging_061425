@@ -70,7 +70,7 @@ namespace GeneXus.Programs.workwithplus {
          this.AV8TitleFilter = aP1_TitleFilter;
          this.AV6LoadFromDate = aP2_LoadFromDate;
          this.AV7LoadToDate = aP3_LoadToDate;
-         this.Gxm2rootcol = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item>( context, "Item", "Comforta_version21") ;
+         this.Gxm2rootcol = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item>( context, "Item", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP4_Gxm2rootcol=this.Gxm2rootcol;
@@ -95,7 +95,7 @@ namespace GeneXus.Programs.workwithplus {
          this.AV8TitleFilter = aP1_TitleFilter;
          this.AV6LoadFromDate = aP2_LoadFromDate;
          this.AV7LoadToDate = aP3_LoadToDate;
-         this.Gxm2rootcol = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item>( context, "Item", "Comforta_version21") ;
+         this.Gxm2rootcol = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item>( context, "Item", "Comforta_version2") ;
          SubmitImpl();
          aP4_Gxm2rootcol=this.Gxm2rootcol;
       }
@@ -212,10 +212,10 @@ namespace GeneXus.Programs.workwithplus {
          P000E2_A272AgendaCalendarAllDay = new bool[] {false} ;
          A268AgendaCalendarId = Guid.Empty;
          Gxm1wwp_calendar_events = new WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item(context);
-         AV15GXV1 = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item>( context, "Item", "Comforta_version21");
+         AV15GXV1 = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item>( context, "Item", "Comforta_version2");
          AV10CalendarEvent = new WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item(context);
-         AV17GXV3 = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item>( context, "Item", "Comforta_version21");
-         GXt_objcol_SdtWWP_Calendar_Events_Item1 = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item>( context, "Item", "Comforta_version21");
+         AV17GXV3 = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item>( context, "Item", "Comforta_version2");
+         GXt_objcol_SdtWWP_Calendar_Events_Item1 = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item>( context, "Item", "Comforta_version2");
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.workwithplus.wwp_calendar_getevents__default(),
             new Object[][] {
                 new Object[] {

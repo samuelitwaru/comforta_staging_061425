@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
    [XmlRoot(ElementName = "Trn_EnvironmentVariable" )]
-   [XmlType(TypeName =  "Trn_EnvironmentVariable" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "Trn_EnvironmentVariable" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtTrn_EnvironmentVariable : GxSilentTrnSdt
    {
@@ -348,7 +348,7 @@ namespace GeneXus.Programs {
       private Guid gxTv_SdtTrn_EnvironmentVariable_Environmentvariableid_Z ;
    }
 
-   [DataContract(Name = @"Trn_EnvironmentVariable", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"Trn_EnvironmentVariable", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtTrn_EnvironmentVariable_RESTInterface : GxGenericCollectionItem<SdtTrn_EnvironmentVariable>
    {
@@ -442,7 +442,7 @@ namespace GeneXus.Programs {
       private string md5Hash ;
    }
 
-   [DataContract(Name = @"Trn_EnvironmentVariable", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"Trn_EnvironmentVariable", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtTrn_EnvironmentVariable_RESTLInterface : GxGenericCollectionItem<SdtTrn_EnvironmentVariable>
    {

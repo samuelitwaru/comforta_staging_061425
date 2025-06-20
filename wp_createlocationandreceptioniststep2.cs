@@ -2980,7 +2980,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025614539404", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201771427", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2996,7 +2996,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("wp_createlocationandreceptioniststep2.js", "?20256145394010", false, true);
+         context.AddJavascriptSource("wp_createlocationandreceptioniststep2.js", "?20256201771430", false, true);
          context.AddJavascriptSource("FileUpload/fileupload.min.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
@@ -3654,14 +3654,14 @@ namespace GeneXus.Programs {
          GXKey = "";
          GXEncryptionTmp = "";
          forbiddenHiddens = new GXProperties();
-         AV19SDT_Receptionists = new GXBaseCollection<SdtSDT_Receptionists_SDT_ReceptionistsItem>( context, "SDT_ReceptionistsItem", "Comforta_version21");
-         AV43UploadedFiles = new GXBaseCollection<SdtFileUploadData>( context, "FileUploadData", "Comforta_version21");
-         AV44FailedFiles = new GXBaseCollection<SdtFileUploadData>( context, "FileUploadData", "Comforta_version21");
+         AV19SDT_Receptionists = new GXBaseCollection<SdtSDT_Receptionists_SDT_ReceptionistsItem>( context, "SDT_ReceptionistsItem", "Comforta_version2");
+         AV43UploadedFiles = new GXBaseCollection<SdtFileUploadData>( context, "FileUploadData", "Comforta_version2");
+         AV44FailedFiles = new GXBaseCollection<SdtFileUploadData>( context, "FileUploadData", "Comforta_version2");
          AV32DDO_TitleSettingsIcons = new WorkWithPlus.workwithplus_web.SdtDVB_SDTDropDownOptionsTitleSettingsIcons(context);
          AV36ReceptionistPhoneCode_Data = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item>( context, "Item", "");
          AV11WizardData = new SdtWP_CreateLocationAndReceptionistData(context);
          AV61ImageFile2 = "";
-         AV66SDT_FileUploadData = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version21");
+         AV66SDT_FileUploadData = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version2");
          AV26Trn_Receptionist = new SdtTrn_Receptionist(context);
          AV23ErrorMessages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus");
          A93ReceptionistEmail = "";
@@ -3721,8 +3721,8 @@ namespace GeneXus.Programs {
          AV28Error = new GeneXus.Utils.SdtMessages_Message(context);
          GXt_char2 = "";
          AV56GAMErrorItem = new GeneXus.Programs.genexussecurity.SdtGAMError(context);
-         AV90GXV20 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version21");
-         GXt_objcol_SdtSDT_Country_SDT_CountryItem3 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version21");
+         AV90GXV20 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
+         GXt_objcol_SdtSDT_Country_SDT_CountryItem3 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
          AV37ReceptionistPhoneCode_DPItem = new SdtSDT_Country_SDT_CountryItem(context);
          AV29Combo_DataItem = new WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item(context);
          AV31ComboTitles = new GxSimpleCollection<string>();

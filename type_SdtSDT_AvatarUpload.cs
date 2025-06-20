@@ -23,7 +23,7 @@ using System.Runtime.Serialization;
 namespace GeneXus.Programs
 {
 	[XmlRoot(ElementName="SDT_AvatarUpload")]
-	[XmlType(TypeName="SDT_AvatarUpload" , Namespace="Comforta_version21" )]
+	[XmlType(TypeName="SDT_AvatarUpload" , Namespace="Comforta_version2" )]
 	[Serializable]
 	public class SdtSDT_AvatarUpload : GxUserType
 	{
@@ -121,7 +121,7 @@ namespace GeneXus.Programs
 	}
 	#region Rest interface
 	[GxJsonSerialization("default")]
-	[DataContract(Name=@"SDT_AvatarUpload", Namespace="Comforta_version21")]
+	[DataContract(Name=@"SDT_AvatarUpload", Namespace="Comforta_version2")]
 	public class SdtSDT_AvatarUpload_RESTInterface : GxGenericCollectionItem<SdtSDT_AvatarUpload>, System.Web.SessionState.IRequiresSessionState
 	{
 		public SdtSDT_AvatarUpload_RESTInterface( ) : base()

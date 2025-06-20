@@ -88,6 +88,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          AV8WWP_Form.Delete();
          if ( AV8WWP_Form.Success() )
          {
+            new prc_deleteformnotifications(context ).execute(  A206WWPFormId,  AV8WWP_Form.gxTpr_Wwpformreferencename) ;
             context.CommitDataStores("workwithplus.dynamicforms.wwp_df_deleteform",pr_default);
          }
          else

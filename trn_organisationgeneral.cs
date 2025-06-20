@@ -176,7 +176,7 @@ namespace GeneXus.Programs {
             if ( ( GxWebError == 0 ) && ! isAjaxCallMode( ) )
             {
                /* GeneXus formulas. */
-               AV21Pgmname = "Trn_OrganisationGeneral";
+               AV22Pgmname = "Trn_OrganisationGeneral";
                edtavOrganisationphonecode_description_Enabled = 0;
                AssignProp(sPrefix, false, edtavOrganisationphonecode_description_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavOrganisationphonecode_description_Enabled), 5, 0), true);
                edtavOrganisationaddresscountry_description_Enabled = 0;
@@ -599,9 +599,9 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 DataContentCell", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, divOrganisationlogo_cell_Internalname, 1, 0, "px", 0, "px", divOrganisationlogo_cell_Class, "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+imgOrganisationLogo_Internalname+"\"", "", "div");
+            GxWebStd.gx_div_start( context, "", imgOrganisationLogo_Visible, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+imgOrganisationLogo_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
             GxWebStd.gx_label_element( context, "", context.GetMessage( "Logo", ""), "col-sm-4 AttributeLabel", 1, true, "");
             /* Div Control */
@@ -611,7 +611,7 @@ namespace GeneXus.Programs {
             StyleString = "";
             A506OrganisationLogo_IsBlob = (bool)((String.IsNullOrEmpty(StringUtil.RTrim( A506OrganisationLogo))&&String.IsNullOrEmpty(StringUtil.RTrim( A40000OrganisationLogo_GXI)))||!String.IsNullOrEmpty(StringUtil.RTrim( A506OrganisationLogo)));
             sImgUrl = (String.IsNullOrEmpty(StringUtil.RTrim( A506OrganisationLogo)) ? A40000OrganisationLogo_GXI : context.PathToRelativeUrl( A506OrganisationLogo));
-            GxWebStd.gx_bitmap( context, imgOrganisationLogo_Internalname, sImgUrl, "", "", "", context.GetTheme( ), 1, 0, "", "", 0, -1, 0, "", 0, "", 0, 0, 0, "", "", StyleString, ClassString, "", "", "", "", "", "", "", 1, A506OrganisationLogo_IsBlob, true, context.GetImageSrcSet( sImgUrl), "HLP_Trn_OrganisationGeneral.htm");
+            GxWebStd.gx_bitmap( context, imgOrganisationLogo_Internalname, sImgUrl, "", "", "", context.GetTheme( ), imgOrganisationLogo_Visible, 0, "", "", 0, -1, 0, "", 0, "", 0, 0, 0, "", "", StyleString, ClassString, "", "", "", "", "", "", "", 1, A506OrganisationLogo_IsBlob, true, context.GetImageSrcSet( sImgUrl), "HLP_Trn_OrganisationGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1055,7 +1055,7 @@ namespace GeneXus.Programs {
       protected void initialize_formulas( )
       {
          /* GeneXus formulas. */
-         AV21Pgmname = "Trn_OrganisationGeneral";
+         AV22Pgmname = "Trn_OrganisationGeneral";
          edtavOrganisationphonecode_description_Enabled = 0;
          AssignProp(sPrefix, false, edtavOrganisationphonecode_description_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavOrganisationphonecode_description_Enabled), 5, 0), true);
          edtavOrganisationaddresscountry_description_Enabled = 0;
@@ -1123,7 +1123,7 @@ namespace GeneXus.Programs {
 
       protected void before_start_formulas( )
       {
-         AV21Pgmname = "Trn_OrganisationGeneral";
+         AV22Pgmname = "Trn_OrganisationGeneral";
          edtavOrganisationphonecode_description_Enabled = 0;
          AssignProp(sPrefix, false, edtavOrganisationphonecode_description_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavOrganisationphonecode_description_Enabled), 5, 0), true);
          edtavOrganisationaddresscountry_description_Enabled = 0;
@@ -1282,6 +1282,20 @@ namespace GeneXus.Programs {
             divOrganisationphone_cell_Class = "col-xs-12 DataContentCell";
             AssignProp(sPrefix, false, divOrganisationphone_cell_Internalname, "Class", divOrganisationphone_cell_Class, true);
          }
+         if ( ! ( ( AV21Organisationhasownbrand ) ) )
+         {
+            imgOrganisationLogo_Visible = 0;
+            AssignProp(sPrefix, false, imgOrganisationLogo_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(imgOrganisationLogo_Visible), 5, 0), true);
+            divOrganisationlogo_cell_Class = "Invisible";
+            AssignProp(sPrefix, false, divOrganisationlogo_cell_Internalname, "Class", divOrganisationlogo_cell_Class, true);
+         }
+         else
+         {
+            imgOrganisationLogo_Visible = 1;
+            AssignProp(sPrefix, false, imgOrganisationLogo_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(imgOrganisationLogo_Visible), 5, 0), true);
+            divOrganisationlogo_cell_Class = "col-xs-12 DataContentCell";
+            AssignProp(sPrefix, false, divOrganisationlogo_cell_Internalname, "Class", divOrganisationlogo_cell_Class, true);
+         }
          divUnnamedtable5_Visible = (((StringUtil.StrCmp(Gx_mode, "INS")==0)||(StringUtil.StrCmp(Gx_mode, "UPD")==0)) ? 1 : 0);
          AssignProp(sPrefix, false, divUnnamedtable5_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(divUnnamedtable5_Visible), 5, 0), true);
       }
@@ -1291,7 +1305,7 @@ namespace GeneXus.Programs {
          /* 'PREPARETRANSACTION' Routine */
          returnInSub = false;
          AV8TrnContext = new WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext(context);
-         AV8TrnContext.gxTpr_Callerobject = AV21Pgmname;
+         AV8TrnContext.gxTpr_Callerobject = AV22Pgmname;
          AV8TrnContext.gxTpr_Callerondelete = false;
          AV8TrnContext.gxTpr_Callerurl = AV11HTTPRequest.ScriptName+"?"+AV11HTTPRequest.QueryString;
          AV8TrnContext.gxTpr_Transactionname = "Trn_Organisation";
@@ -1499,7 +1513,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201223929", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202562016571933", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1515,7 +1529,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("trn_organisationgeneral.js", "?20256201223929", false, true);
+         context.AddJavascriptSource("trn_organisationgeneral.js", "?202562016571933", false, true);
          /* End function include_jscripts */
       }
 
@@ -1540,6 +1554,7 @@ namespace GeneXus.Programs {
          edtOrganisationPhone_Internalname = sPrefix+"ORGANISATIONPHONE";
          divOrganisationphone_cell_Internalname = sPrefix+"ORGANISATIONPHONE_CELL";
          imgOrganisationLogo_Internalname = sPrefix+"ORGANISATIONLOGO";
+         divOrganisationlogo_cell_Internalname = sPrefix+"ORGANISATIONLOGO_CELL";
          divUnnamedtable1_Internalname = sPrefix+"UNNAMEDTABLE1";
          grpUnnamedgroup2_Internalname = sPrefix+"UNNAMEDGROUP2";
          edtOrganisationAddressLine1_Internalname = sPrefix+"ORGANISATIONADDRESSLINE1";
@@ -1586,6 +1601,8 @@ namespace GeneXus.Programs {
          edtOrganisationAddressLine2_Enabled = 0;
          edtOrganisationAddressLine1_Jsonclick = "";
          edtOrganisationAddressLine1_Enabled = 0;
+         imgOrganisationLogo_Visible = 1;
+         divOrganisationlogo_cell_Class = "col-xs-12";
          edtOrganisationPhone_Jsonclick = "";
          edtOrganisationPhone_Enabled = 0;
          edtOrganisationPhone_Visible = 1;
@@ -1642,7 +1659,7 @@ namespace GeneXus.Programs {
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
          sPrefix = "";
-         AV21Pgmname = "";
+         AV22Pgmname = "";
          sDynURL = "";
          FormProcess = "";
          bodyStyle = "";
@@ -1713,9 +1730,9 @@ namespace GeneXus.Programs {
                }
             }
          );
-         AV21Pgmname = "Trn_OrganisationGeneral";
+         AV22Pgmname = "Trn_OrganisationGeneral";
          /* GeneXus formulas. */
-         AV21Pgmname = "Trn_OrganisationGeneral";
+         AV22Pgmname = "Trn_OrganisationGeneral";
          edtavOrganisationphonecode_description_Enabled = 0;
          edtavOrganisationaddresscountry_description_Enabled = 0;
       }
@@ -1740,6 +1757,7 @@ namespace GeneXus.Programs {
       private int edtOrganisationPhoneNumber_Enabled ;
       private int edtOrganisationPhone_Visible ;
       private int edtOrganisationPhone_Enabled ;
+      private int imgOrganisationLogo_Visible ;
       private int edtOrganisationAddressLine1_Enabled ;
       private int edtOrganisationAddressLine2_Enabled ;
       private int edtOrganisationAddressZipCode_Enabled ;
@@ -1753,7 +1771,7 @@ namespace GeneXus.Programs {
       private string sPrefix ;
       private string sCompPrefix ;
       private string sSFPrefix ;
-      private string AV21Pgmname ;
+      private string AV22Pgmname ;
       private string edtavOrganisationphonecode_description_Internalname ;
       private string edtavOrganisationaddresscountry_description_Internalname ;
       private string sDynURL ;
@@ -1793,6 +1811,8 @@ namespace GeneXus.Programs {
       private string gxphoneLink ;
       private string A17OrganisationPhone ;
       private string edtOrganisationPhone_Jsonclick ;
+      private string divOrganisationlogo_cell_Internalname ;
+      private string divOrganisationlogo_cell_Class ;
       private string imgOrganisationLogo_Internalname ;
       private string ClassString ;
       private string StyleString ;
@@ -1832,6 +1852,7 @@ namespace GeneXus.Programs {
       private bool returnInSub ;
       private bool AV14TempBoolean ;
       private bool GXt_boolean2 ;
+      private bool AV21Organisationhasownbrand ;
       private string AV17Combo_DataJson ;
       private string A13OrganisationName ;
       private string A20OrganisationTypeName ;

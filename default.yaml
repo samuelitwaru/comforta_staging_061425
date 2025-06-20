@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: "Development"
-  version: "20250620090611"
+  version: "20250620141731"
 servers:
   - url: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/rest
 paths:
@@ -2024,6 +2024,59 @@ components:
         FormFilledBy:
           description: "Form Filled By"
           type: "string"
+    SDT_AppDebugResults:
+      properties:
+        Summary:
+          $ref: "#/components/schemas/SDT_AppDebugResults.Summary"
+        Pages:
+          type: array
+          items:
+            description: PagesItem
+            $ref: "#/components/schemas/SDT_AppDebugResults.Pages_PagesItem"
+    SDT_AppDebugResults.Summary:
+      properties:
+        TotalUrls:
+          description: "Total Urls"
+          type: "number"
+          format: "double"
+        SuccessCount:
+          description: "Success Count"
+          type: "number"
+          format: "double"
+        FailureCount:
+          description: "Failure Count"
+          type: "number"
+          format: "double"
+      x-gx-level: "SDT_AppDebugResults"
+    SDT_AppDebugResults.Pages_PagesItem:
+      properties:
+        Page:
+          description: "Page"
+          type: "string"
+        UrlList:
+          type: array
+          items:
+            description: UrlListItem
+            $ref: "#/components/schemas/SDT_AppDebugResults.Pages.UrlList_UrlListItem"
+      x-gx-level: "SDT_AppDebugResults"
+    SDT_AppDebugResults.Pages.UrlList_UrlListItem:
+      properties:
+        Url:
+          description: "Url"
+          type: "string"
+        StatusCode:
+          description: "Status Code"
+          type: "string"
+        StatusMessage:
+          description: "Status Message"
+          type: "string"
+        AffectedType:
+          description: "Affected Type"
+          type: "string"
+        AffectedName:
+          description: "Affected Name"
+          type: "string"
+      x-gx-level: "SDT_AppDebugResults.Pages"
     SDT_AppVersion:
       properties:
         AppVersionId:
@@ -2262,112 +2315,6 @@ components:
           description: "Cta Button Img Url"
           type: "string"
       x-gx-level: "SDT_ContentPage"
-    SDT_DebugResult:
-      properties:
-        Summary:
-          $ref: "#/components/schemas/SDT_DebugResult.Summary"
-        Pages:
-          type: array
-          items:
-            description: PagesItem
-            $ref: "#/components/schemas/SDT_DebugResult.Pages_PagesItem"
-    SDT_DebugResult.Summary:
-      properties:
-        TotalUrls:
-          description: "Total Urls"
-          type: "number"
-          format: "double"
-        SuccessCount:
-          description: "Success Count"
-          type: "number"
-          format: "double"
-        FailureCount:
-          description: "Failure Count"
-          type: "number"
-          format: "double"
-      x-gx-level: "SDT_DebugResult"
-    SDT_DebugResult.Pages_PagesItem:
-      properties:
-        Page:
-          description: "Page"
-          type: "string"
-        UrlList:
-          type: array
-          items:
-            description: UrlListItem
-            $ref: "#/components/schemas/SDT_DebugResult.Pages.UrlList_UrlListItem"
-      x-gx-level: "SDT_DebugResult"
-    SDT_DebugResult.Pages.UrlList_UrlListItem:
-      properties:
-        Url:
-          description: "Url"
-          type: "string"
-        StatusCode:
-          description: "Status Code"
-          type: "string"
-        StatusMessage:
-          description: "Status Message"
-          type: "string"
-        AffectedType:
-          description: "Affected Type"
-          type: "string"
-        AffectedName:
-          description: "Affected Name"
-          type: "string"
-      x-gx-level: "SDT_DebugResult.Pages"
-    SDT_DebugResults:
-      properties:
-        Summary:
-          $ref: "#/components/schemas/SDT_DebugResults.Summary"
-        Pages:
-          type: array
-          items:
-            description: PagesItem
-            $ref: "#/components/schemas/SDT_DebugResults.Pages_PagesItem"
-    SDT_DebugResults.Summary:
-      properties:
-        TotalUrls:
-          description: "Total Urls"
-          type: "number"
-          format: "double"
-        SuccessCount:
-          description: "Success Count"
-          type: "number"
-          format: "double"
-        FailureCount:
-          description: "Failure Count"
-          type: "number"
-          format: "double"
-      x-gx-level: "SDT_DebugResults"
-    SDT_DebugResults.Pages_PagesItem:
-      properties:
-        Page:
-          description: "Page"
-          type: "string"
-        UrlList:
-          type: array
-          items:
-            description: UrlListItem
-            $ref: "#/components/schemas/SDT_DebugResults.Pages.UrlList_UrlListItem"
-      x-gx-level: "SDT_DebugResults"
-    SDT_DebugResults.Pages.UrlList_UrlListItem:
-      properties:
-        Url:
-          description: "Url"
-          type: "string"
-        StatusCode:
-          description: "Status Code"
-          type: "string"
-        StatusMessage:
-          description: "Status Message"
-          type: "string"
-        AffectedType:
-          description: "Affected Type"
-          type: "string"
-        AffectedName:
-          description: "Affected Name"
-          type: "string"
-      x-gx-level: "SDT_DebugResults.Pages"
     SDT_Error:
       properties:
         Status:

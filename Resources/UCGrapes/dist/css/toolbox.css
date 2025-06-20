@@ -1336,7 +1336,7 @@ img.content-page-block {
 
 .container-column-info .info-desc-content:hover,
 .container-column-info .info-image-section:hover {
-  cursor: default;
+  cursor: move;
 }
 
 [data-gjs-type="info-cta-section"].gjs-selected .tile-open-menu {
@@ -1410,6 +1410,8 @@ img.content-page-block {
   transition: 0.6s ease;
   border-radius: 0 3px 3px 0;
   user-select: none;
+  pointer-events: auto;
+  z-index: 1; /* Ensure buttons are above the images */
 }
 
 /* Position the "next button" to the right */
@@ -1471,4 +1473,35 @@ img.content-page-block {
 }
 .select-media-checkbox{
   position: absolute;
+}
+
+/* Make images ignore pointer events to enable dragging */
+.info-image-section img,
+.product-service-image {
+  pointer-events: none;
+}
+
+.copypaste-highlight {
+  outline: 2px solid #ffca6f !important;
+  background: rgba(255, 202, 111, 0.10) !important;
+  animation: copypastePulse 0.7s cubic-bezier(.4,0,.2,1);
+  transition: outline 0.2s, background 0.2s;
+}
+
+@keyframes copypastePulse {
+  0% {
+    outline-color: #ffca6f;
+    background: rgba(255, 202, 111, 0.00);
+    box-shadow: 0 0 0 0 rgba(255, 202, 111, 0.3);
+  }
+  60% {
+    outline-color: #ffb300;
+    background: rgba(255, 202, 111, 0.18);
+    box-shadow: 0 0 8px 4px rgba(255, 202, 111, 0.18);
+  }
+  100% {
+    outline-color: #ffca6f;
+    background: rgba(255, 202, 111, 0.10);
+    box-shadow: 0 0 0 0 rgba(255, 202, 111, 0.0);
+  }
 }

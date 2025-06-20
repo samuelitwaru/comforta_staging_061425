@@ -902,6 +902,7 @@ namespace GeneXus.Programs {
                Combo_supplieragbtypeid_Selectalltext = cgiGet( "COMBO_SUPPLIERAGBTYPEID_Selectalltext");
                Combo_supplieragbtypeid_Multiplevaluesseparator = cgiGet( "COMBO_SUPPLIERAGBTYPEID_Multiplevaluesseparator");
                Combo_supplieragbtypeid_Addnewoptiontext = cgiGet( "COMBO_SUPPLIERAGBTYPEID_Addnewoptiontext");
+               Combo_supplieragbtypeid_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "COMBO_SUPPLIERAGBTYPEID_Gxcontroltype"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
                Combo_supplieragbphonecode_Objectcall = cgiGet( "COMBO_SUPPLIERAGBPHONECODE_Objectcall");
                Combo_supplieragbphonecode_Class = cgiGet( "COMBO_SUPPLIERAGBPHONECODE_Class");
                Combo_supplieragbphonecode_Icontype = cgiGet( "COMBO_SUPPLIERAGBPHONECODE_Icontype");
@@ -942,6 +943,7 @@ namespace GeneXus.Programs {
                Combo_supplieragbphonecode_Selectalltext = cgiGet( "COMBO_SUPPLIERAGBPHONECODE_Selectalltext");
                Combo_supplieragbphonecode_Multiplevaluesseparator = cgiGet( "COMBO_SUPPLIERAGBPHONECODE_Multiplevaluesseparator");
                Combo_supplieragbphonecode_Addnewoptiontext = cgiGet( "COMBO_SUPPLIERAGBPHONECODE_Addnewoptiontext");
+               Combo_supplieragbphonecode_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "COMBO_SUPPLIERAGBPHONECODE_Gxcontroltype"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
                Combo_supplieragbaddresscountry_Objectcall = cgiGet( "COMBO_SUPPLIERAGBADDRESSCOUNTRY_Objectcall");
                Combo_supplieragbaddresscountry_Class = cgiGet( "COMBO_SUPPLIERAGBADDRESSCOUNTRY_Class");
                Combo_supplieragbaddresscountry_Icontype = cgiGet( "COMBO_SUPPLIERAGBADDRESSCOUNTRY_Icontype");
@@ -982,6 +984,7 @@ namespace GeneXus.Programs {
                Combo_supplieragbaddresscountry_Selectalltext = cgiGet( "COMBO_SUPPLIERAGBADDRESSCOUNTRY_Selectalltext");
                Combo_supplieragbaddresscountry_Multiplevaluesseparator = cgiGet( "COMBO_SUPPLIERAGBADDRESSCOUNTRY_Multiplevaluesseparator");
                Combo_supplieragbaddresscountry_Addnewoptiontext = cgiGet( "COMBO_SUPPLIERAGBADDRESSCOUNTRY_Addnewoptiontext");
+               Combo_supplieragbaddresscountry_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "COMBO_SUPPLIERAGBADDRESSCOUNTRY_Gxcontroltype"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
                /* Read variables values. */
                if ( StringUtil.StrCmp(cgiGet( edtSupplierAgbTypeId_Internalname), "") == 0 )
                {
@@ -3033,7 +3036,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256145293365", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025620171011", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3049,7 +3052,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("trn_supplieragb.js", "?20256145293370", false, true);
+         context.AddJavascriptSource("trn_supplieragb.js", "?2025620171013", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3686,8 +3689,11 @@ namespace GeneXus.Programs {
       private int edtSupplierAgbId_Visible ;
       private int edtSupplierAgbId_Enabled ;
       private int Combo_supplieragbtypeid_Datalistupdateminimumcharacters ;
+      private int Combo_supplieragbtypeid_Gxcontroltype ;
       private int Combo_supplieragbphonecode_Datalistupdateminimumcharacters ;
+      private int Combo_supplieragbphonecode_Gxcontroltype ;
       private int Combo_supplieragbaddresscountry_Datalistupdateminimumcharacters ;
+      private int Combo_supplieragbaddresscountry_Gxcontroltype ;
       private int AV32GXV1 ;
       private int idxLst ;
       private string sPrefix ;

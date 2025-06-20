@@ -38,7 +38,7 @@ namespace GeneXus.Programs {
 
       public void execute( out GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem> aP0_FilteredDashboardItems )
       {
-         this.AV10FilteredDashboardItems = new GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem>( context, "UHomeModulesSDTItem", "Comforta_version21") ;
+         this.AV10FilteredDashboardItems = new GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem>( context, "UHomeModulesSDTItem", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP0_FilteredDashboardItems=this.AV10FilteredDashboardItems;
@@ -52,7 +52,7 @@ namespace GeneXus.Programs {
 
       public void executeSubmit( out GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem> aP0_FilteredDashboardItems )
       {
-         this.AV10FilteredDashboardItems = new GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem>( context, "UHomeModulesSDTItem", "Comforta_version21") ;
+         this.AV10FilteredDashboardItems = new GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem>( context, "UHomeModulesSDTItem", "Comforta_version2") ;
          SubmitImpl();
          aP0_FilteredDashboardItems=this.AV10FilteredDashboardItems;
       }
@@ -115,12 +115,12 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV10FilteredDashboardItems = new GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem>( context, "UHomeModulesSDTItem", "Comforta_version21");
+         AV10FilteredDashboardItems = new GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem>( context, "UHomeModulesSDTItem", "Comforta_version2");
          AV11GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
          GXt_SdtGAMUser1 = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
          AV12UserRoleName = "";
-         AV9DashboardItems = new GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem>( context, "UHomeModulesSDTItem", "Comforta_version21");
-         GXt_objcol_SdtUHomeModulesSDT_UHomeModulesSDTItem2 = new GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem>( context, "UHomeModulesSDTItem", "Comforta_version21");
+         AV9DashboardItems = new GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem>( context, "UHomeModulesSDTItem", "Comforta_version2");
+         GXt_objcol_SdtUHomeModulesSDT_UHomeModulesSDTItem2 = new GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem>( context, "UHomeModulesSDTItem", "Comforta_version2");
          AV8DashboardItem = new SdtUHomeModulesSDT_UHomeModulesSDTItem(context);
          /* GeneXus formulas. */
       }

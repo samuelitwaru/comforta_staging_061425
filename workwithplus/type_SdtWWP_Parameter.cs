@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs.workwithplus {
    [XmlRoot(ElementName = "WWP_Parameter" )]
-   [XmlType(TypeName =  "WWP_Parameter" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "WWP_Parameter" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtWWP_Parameter : GxSilentTrnSdt
    {
@@ -534,7 +534,7 @@ namespace GeneXus.Programs.workwithplus {
       private string gxTv_SdtWWP_Parameter_Wwpparametervaluetrimmed_Z ;
    }
 
-   [DataContract(Name = @"WorkWithPlus\WWP_Parameter", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WorkWithPlus\WWP_Parameter", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_Parameter_RESTInterface : GxGenericCollectionItem<GeneXus.Programs.workwithplus.SdtWWP_Parameter>
    {
@@ -670,7 +670,7 @@ namespace GeneXus.Programs.workwithplus {
       private string md5Hash ;
    }
 
-   [DataContract(Name = @"WorkWithPlus\WWP_Parameter", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WorkWithPlus\WWP_Parameter", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_Parameter_RESTLInterface : GxGenericCollectionItem<GeneXus.Programs.workwithplus.SdtWWP_Parameter>
    {

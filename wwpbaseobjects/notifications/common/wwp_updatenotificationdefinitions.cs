@@ -159,8 +159,8 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       public override void initialize( )
       {
          AV16MailTemplatePath = "";
-         AV10WWP_NotificationDefinitionCollection = new GXBCCollection<GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_NotificationDefinition>( context, "WWP_NotificationDefinition", "Comforta_version21");
-         GXt_objcol_SdtWWP_NotificationDefinition1 = new GXBCCollection<GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_NotificationDefinition>( context, "WWP_NotificationDefinition", "Comforta_version21");
+         AV10WWP_NotificationDefinitionCollection = new GXBCCollection<GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_NotificationDefinition>( context, "WWP_NotificationDefinition", "Comforta_version2");
+         GXt_objcol_SdtWWP_NotificationDefinition1 = new GXBCCollection<GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_NotificationDefinition>( context, "WWP_NotificationDefinition", "Comforta_version2");
          AV11WWP_NotificationDefinition = new GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_NotificationDefinition(context);
          AV12WWP_NotificationDefinitionToUpdate = new GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_NotificationDefinition(context);
          AV15MailTemplate = new GeneXus.Programs.wwpbaseobjects.mail.SdtWWP_MailTemplate(context);

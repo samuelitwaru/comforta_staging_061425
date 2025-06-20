@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs.wwpbaseobjects {
    [XmlRoot(ElementName = "WWP_UserExtended" )]
-   [XmlType(TypeName =  "WWP_UserExtended" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "WWP_UserExtended" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtWWP_UserExtended : GxSilentTrnSdt
    {
@@ -1093,7 +1093,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string gxTv_SdtWWP_UserExtended_Wwpuserextendedphoto ;
    }
 
-   [DataContract(Name = @"WWPBaseObjects\WWP_UserExtended", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WWPBaseObjects\WWP_UserExtended", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_UserExtended_RESTInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.SdtWWP_UserExtended>
    {
@@ -1314,7 +1314,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string md5Hash ;
    }
 
-   [DataContract(Name = @"WWPBaseObjects\WWP_UserExtended", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WWPBaseObjects\WWP_UserExtended", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_UserExtended_RESTLInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.SdtWWP_UserExtended>
    {

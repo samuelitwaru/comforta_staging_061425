@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs.wwpbaseobjects.mail {
    [XmlRoot(ElementName = "WWP_Mail" )]
-   [XmlType(TypeName =  "WWP_Mail" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "WWP_Mail" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtWWP_Mail : GxSilentTrnSdt
    {
@@ -910,7 +910,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          get {
             if ( gxTv_SdtWWP_Mail_Attachments == null )
             {
-               gxTv_SdtWWP_Mail_Attachments = new GXBCLevelCollection<GeneXus.Programs.wwpbaseobjects.mail.SdtWWP_Mail_Attachments>( context, "WWP_Mail.Attachments", "Comforta_version21");
+               gxTv_SdtWWP_Mail_Attachments = new GXBCLevelCollection<GeneXus.Programs.wwpbaseobjects.mail.SdtWWP_Mail_Attachments>( context, "WWP_Mail.Attachments", "Comforta_version2");
             }
             return gxTv_SdtWWP_Mail_Attachments ;
          }
@@ -918,7 +918,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          set {
             if ( gxTv_SdtWWP_Mail_Attachments == null )
             {
-               gxTv_SdtWWP_Mail_Attachments = new GXBCLevelCollection<GeneXus.Programs.wwpbaseobjects.mail.SdtWWP_Mail_Attachments>( context, "WWP_Mail.Attachments", "Comforta_version21");
+               gxTv_SdtWWP_Mail_Attachments = new GXBCLevelCollection<GeneXus.Programs.wwpbaseobjects.mail.SdtWWP_Mail_Attachments>( context, "WWP_Mail.Attachments", "Comforta_version2");
             }
             sdtIsNull = 0;
             gxTv_SdtWWP_Mail_Attachments = value;
@@ -932,7 +932,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          get {
             if ( gxTv_SdtWWP_Mail_Attachments == null )
             {
-               gxTv_SdtWWP_Mail_Attachments = new GXBCLevelCollection<GeneXus.Programs.wwpbaseobjects.mail.SdtWWP_Mail_Attachments>( context, "WWP_Mail.Attachments", "Comforta_version21");
+               gxTv_SdtWWP_Mail_Attachments = new GXBCLevelCollection<GeneXus.Programs.wwpbaseobjects.mail.SdtWWP_Mail_Attachments>( context, "WWP_Mail.Attachments", "Comforta_version2");
             }
             sdtIsNull = 0;
             return gxTv_SdtWWP_Mail_Attachments ;
@@ -1576,7 +1576,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
       private GXBCLevelCollection<GeneXus.Programs.wwpbaseobjects.mail.SdtWWP_Mail_Attachments> gxTv_SdtWWP_Mail_Attachments=null ;
    }
 
-   [DataContract(Name = @"WWPBaseObjects\Mail\WWP_Mail", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WWPBaseObjects\Mail\WWP_Mail", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_Mail_RESTInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.mail.SdtWWP_Mail>
    {
@@ -1845,7 +1845,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
       private string md5Hash ;
    }
 
-   [DataContract(Name = @"WWPBaseObjects\Mail\WWP_Mail", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"WWPBaseObjects\Mail\WWP_Mail", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtWWP_Mail_RESTLInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.mail.SdtWWP_Mail>
    {

@@ -97,7 +97,6 @@ export class DebugController {
     }
 
     displayResults(results: DebugResults) {
-        console.log('results', results)
         const debugUIManager = new DebugUIManager(results);
         const debugDiv = document.getElementById("tb-debugging");
         if (debugDiv) {

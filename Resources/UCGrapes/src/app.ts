@@ -51,7 +51,8 @@ class ToolboxApp {
       // Check if click is on modal backdrop
       if (
         target.classList.contains("tb-modal") ||
-        target.classList.contains("popup-modal-link")
+        target.classList.contains("popup-modal-link")||
+        target.classList.contains("popup-modal")
       ) {
         target.style.display = "none";
       }

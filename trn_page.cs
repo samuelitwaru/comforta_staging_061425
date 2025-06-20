@@ -841,6 +841,7 @@ namespace GeneXus.Programs {
                Combo_locationid_Selectalltext = cgiGet( "COMBO_LOCATIONID_Selectalltext");
                Combo_locationid_Multiplevaluesseparator = cgiGet( "COMBO_LOCATIONID_Multiplevaluesseparator");
                Combo_locationid_Addnewoptiontext = cgiGet( "COMBO_LOCATIONID_Addnewoptiontext");
+               Combo_locationid_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "COMBO_LOCATIONID_Gxcontroltype"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
                Combo_productserviceid_Objectcall = cgiGet( "COMBO_PRODUCTSERVICEID_Objectcall");
                Combo_productserviceid_Class = cgiGet( "COMBO_PRODUCTSERVICEID_Class");
                Combo_productserviceid_Icontype = cgiGet( "COMBO_PRODUCTSERVICEID_Icontype");
@@ -881,6 +882,7 @@ namespace GeneXus.Programs {
                Combo_productserviceid_Selectalltext = cgiGet( "COMBO_PRODUCTSERVICEID_Selectalltext");
                Combo_productserviceid_Multiplevaluesseparator = cgiGet( "COMBO_PRODUCTSERVICEID_Multiplevaluesseparator");
                Combo_productserviceid_Addnewoptiontext = cgiGet( "COMBO_PRODUCTSERVICEID_Addnewoptiontext");
+               Combo_productserviceid_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "COMBO_PRODUCTSERVICEID_Gxcontroltype"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
                Combo_organisationid_Objectcall = cgiGet( "COMBO_ORGANISATIONID_Objectcall");
                Combo_organisationid_Class = cgiGet( "COMBO_ORGANISATIONID_Class");
                Combo_organisationid_Icontype = cgiGet( "COMBO_ORGANISATIONID_Icontype");
@@ -921,6 +923,7 @@ namespace GeneXus.Programs {
                Combo_organisationid_Selectalltext = cgiGet( "COMBO_ORGANISATIONID_Selectalltext");
                Combo_organisationid_Multiplevaluesseparator = cgiGet( "COMBO_ORGANISATIONID_Multiplevaluesseparator");
                Combo_organisationid_Addnewoptiontext = cgiGet( "COMBO_ORGANISATIONID_Addnewoptiontext");
+               Combo_organisationid_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "COMBO_ORGANISATIONID_Gxcontroltype"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
                /* Read variables values. */
                if ( StringUtil.StrCmp(cgiGet( edtTrn_PageId_Internalname), "") == 0 )
                {
@@ -3042,7 +3045,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256145361169", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025620175970", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3058,7 +3061,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("trn_page.js", "?20256145361174", false, true);
+         context.AddJavascriptSource("trn_page.js", "?2025620175973", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3776,8 +3779,11 @@ namespace GeneXus.Programs {
       private int edtavComboorganisationid_Visible ;
       private int edtavComboorganisationid_Enabled ;
       private int Combo_locationid_Datalistupdateminimumcharacters ;
+      private int Combo_locationid_Gxcontroltype ;
       private int Combo_productserviceid_Datalistupdateminimumcharacters ;
+      private int Combo_productserviceid_Gxcontroltype ;
       private int Combo_organisationid_Datalistupdateminimumcharacters ;
+      private int Combo_organisationid_Gxcontroltype ;
       private int AV36GXV1 ;
       private int idxLst ;
       private string sPrefix ;

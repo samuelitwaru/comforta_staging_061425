@@ -23,7 +23,7 @@ using System.Runtime.Serialization;
 namespace GeneXus.Programs
 {
 	[XmlRoot(ElementName="SDT_CtaThemeColors")]
-	[XmlType(TypeName="SDT_CtaThemeColors" , Namespace="Comforta_version21" )]
+	[XmlType(TypeName="SDT_CtaThemeColors" , Namespace="Comforta_version2" )]
 	[Serializable]
 	public class SdtSDT_CtaThemeColors : GxUserType
 	{
@@ -246,7 +246,7 @@ namespace GeneXus.Programs
 	}
 	#region Rest interface
 	[GxJsonSerialization("default")]
-	[DataContract(Name=@"SDT_CtaThemeColors", Namespace="Comforta_version21")]
+	[DataContract(Name=@"SDT_CtaThemeColors", Namespace="Comforta_version2")]
 	public class SdtSDT_CtaThemeColors_RESTInterface : GxGenericCollectionItem<SdtSDT_CtaThemeColors>, System.Web.SessionState.IRequiresSessionState
 	{
 		public SdtSDT_CtaThemeColors_RESTInterface( ) : base()

@@ -47,7 +47,7 @@ namespace GeneXus.Programs {
                            out GXBaseCollection<SdtSDT_ReceptionistToNotifiy_SDT_ReceptionistToNotifiyItem> aP1_SDT_ReceptionistsToNotify )
       {
          this.AV2WWPUserExtendedId = aP0_WWPUserExtendedId;
-         this.AV3SDT_ReceptionistsToNotify = new GXBaseCollection<SdtSDT_ReceptionistToNotifiy_SDT_ReceptionistToNotifiyItem>( context, "SDT_ReceptionistToNotifiyItem", "Comforta_version21") ;
+         this.AV3SDT_ReceptionistsToNotify = new GXBaseCollection<SdtSDT_ReceptionistToNotifiy_SDT_ReceptionistToNotifiyItem>( context, "SDT_ReceptionistToNotifiyItem", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP1_SDT_ReceptionistsToNotify=this.AV3SDT_ReceptionistsToNotify;
@@ -63,7 +63,7 @@ namespace GeneXus.Programs {
                                  out GXBaseCollection<SdtSDT_ReceptionistToNotifiy_SDT_ReceptionistToNotifiyItem> aP1_SDT_ReceptionistsToNotify )
       {
          this.AV2WWPUserExtendedId = aP0_WWPUserExtendedId;
-         this.AV3SDT_ReceptionistsToNotify = new GXBaseCollection<SdtSDT_ReceptionistToNotifiy_SDT_ReceptionistToNotifiyItem>( context, "SDT_ReceptionistToNotifiyItem", "Comforta_version21") ;
+         this.AV3SDT_ReceptionistsToNotify = new GXBaseCollection<SdtSDT_ReceptionistToNotifiy_SDT_ReceptionistToNotifiyItem>( context, "SDT_ReceptionistToNotifiyItem", "Comforta_version2") ;
          SubmitImpl();
          aP1_SDT_ReceptionistsToNotify=this.AV3SDT_ReceptionistsToNotify;
       }
@@ -92,7 +92,7 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV3SDT_ReceptionistsToNotify = new GXBaseCollection<SdtSDT_ReceptionistToNotifiy_SDT_ReceptionistToNotifiyItem>( context, "SDT_ReceptionistToNotifiyItem", "Comforta_version21");
+         AV3SDT_ReceptionistsToNotify = new GXBaseCollection<SdtSDT_ReceptionistToNotifiy_SDT_ReceptionistToNotifiyItem>( context, "SDT_ReceptionistToNotifiyItem", "Comforta_version2");
          /* GeneXus formulas. */
       }
 

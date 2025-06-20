@@ -190,7 +190,6 @@ namespace GeneXus.Programs {
                GXt_char1 = "";
                new prc_getthemecolorbyname(context ).execute(  AV15ThemeId,  AV14InfoContent.gxTpr_Ctaattributes.gxTpr_Ctabgcolor, out  GXt_char1) ;
                AV14InfoContent.gxTpr_Ctaattributes.gxTpr_Ctabgcolor = GXt_char1;
-               new prc_logtoserver(context ).execute(  context.GetMessage( "CTA: ", "")+AV14InfoContent.ToJSonString(false, true)) ;
             }
             else if ( StringUtil.StrCmp(AV14InfoContent.gxTpr_Infotype, "TileRow") == 0 )
             {

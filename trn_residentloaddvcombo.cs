@@ -445,7 +445,7 @@ namespace GeneXus.Programs {
          P006Q5_A62ResidentId = new Guid[] {Guid.Empty} ;
          P006Q5_A527ResidentPackageId = new Guid[] {Guid.Empty} ;
          P006Q5_n527ResidentPackageId = new bool[] {false} ;
-         AV54GXV1 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version21");
+         AV54GXV1 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
          AV39ResidentCountry_DPItem = new SdtSDT_Country_SDT_CountryItem(context);
          AV38ComboTitles = new GxSimpleCollection<string>();
          P006Q6_A11OrganisationId = new Guid[] {Guid.Empty} ;
@@ -453,15 +453,15 @@ namespace GeneXus.Programs {
          P006Q6_A62ResidentId = new Guid[] {Guid.Empty} ;
          P006Q6_A312ResidentCountry = new string[] {""} ;
          A312ResidentCountry = "";
-         AV58GXV4 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version21");
+         AV58GXV4 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
          AV41ResidentHomePhoneCode_DPItem = new SdtSDT_Country_SDT_CountryItem(context);
          P006Q7_A11OrganisationId = new Guid[] {Guid.Empty} ;
          P006Q7_A29LocationId = new Guid[] {Guid.Empty} ;
          P006Q7_A62ResidentId = new Guid[] {Guid.Empty} ;
          P006Q7_A431ResidentHomePhoneCode = new string[] {""} ;
          A431ResidentHomePhoneCode = "";
-         AV62GXV7 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version21");
-         GXt_objcol_SdtSDT_Country_SDT_CountryItem1 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version21");
+         AV62GXV7 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
+         GXt_objcol_SdtSDT_Country_SDT_CountryItem1 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
          AV40ResidentPhoneCode_DPItem = new SdtSDT_Country_SDT_CountryItem(context);
          P006Q8_A11OrganisationId = new Guid[] {Guid.Empty} ;
          P006Q8_A29LocationId = new Guid[] {Guid.Empty} ;

@@ -1,5 +1,5 @@
 /*
-				   File: type_SdtSDT_DebugResult_PagesItem_UrlListItem
+				   File: type_SdtSDT_AppDebugResults_PagesItem_UrlListItem
 			Description: UrlList
 				 Author: Nemo 🐠 for C# (.NET) version 18.0.10.184260
 		   Program type: Callable routine
@@ -22,27 +22,27 @@ using System.Runtime.Serialization;
 
 namespace GeneXus.Programs
 {
-	[XmlRoot(ElementName="SDT_DebugResult.PagesItem.UrlListItem")]
-	[XmlType(TypeName="SDT_DebugResult.PagesItem.UrlListItem" , Namespace="Comforta_version21" )]
+	[XmlRoot(ElementName="SDT_AppDebugResults.PagesItem.UrlListItem")]
+	[XmlType(TypeName="SDT_AppDebugResults.PagesItem.UrlListItem" , Namespace="Comforta_version2" )]
 	[Serializable]
-	public class SdtSDT_DebugResult_PagesItem_UrlListItem : GxUserType
+	public class SdtSDT_AppDebugResults_PagesItem_UrlListItem : GxUserType
 	{
-		public SdtSDT_DebugResult_PagesItem_UrlListItem( )
+		public SdtSDT_AppDebugResults_PagesItem_UrlListItem( )
 		{
 			/* Constructor for serialization */
-			gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Url = "";
+			gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Url = "";
 
-			gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Statuscode = "";
+			gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Statuscode = "";
 
-			gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Statusmessage = "";
+			gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Statusmessage = "";
 
-			gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Affectedtype = "";
+			gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Affectedtype = "";
 
-			gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Affectedname = "";
+			gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Affectedname = "";
 
 		}
 
-		public SdtSDT_DebugResult_PagesItem_UrlListItem(IGxContext context)
+		public SdtSDT_AppDebugResults_PagesItem_UrlListItem(IGxContext context)
 		{
 			this.context = context;	
 			initialize();
@@ -92,10 +92,10 @@ namespace GeneXus.Programs
 		public string gxTpr_Url
 		{
 			get {
-				return gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Url; 
+				return gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Url; 
 			}
 			set {
-				gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Url = value;
+				gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Url = value;
 				SetDirty("Url");
 			}
 		}
@@ -108,10 +108,10 @@ namespace GeneXus.Programs
 		public string gxTpr_Statuscode
 		{
 			get {
-				return gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Statuscode; 
+				return gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Statuscode; 
 			}
 			set {
-				gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Statuscode = value;
+				gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Statuscode = value;
 				SetDirty("Statuscode");
 			}
 		}
@@ -124,10 +124,10 @@ namespace GeneXus.Programs
 		public string gxTpr_Statusmessage
 		{
 			get {
-				return gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Statusmessage; 
+				return gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Statusmessage; 
 			}
 			set {
-				gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Statusmessage = value;
+				gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Statusmessage = value;
 				SetDirty("Statusmessage");
 			}
 		}
@@ -140,10 +140,10 @@ namespace GeneXus.Programs
 		public string gxTpr_Affectedtype
 		{
 			get {
-				return gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Affectedtype; 
+				return gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Affectedtype; 
 			}
 			set {
-				gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Affectedtype = value;
+				gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Affectedtype = value;
 				SetDirty("Affectedtype");
 			}
 		}
@@ -156,10 +156,10 @@ namespace GeneXus.Programs
 		public string gxTpr_Affectedname
 		{
 			get {
-				return gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Affectedname; 
+				return gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Affectedname; 
 			}
 			set {
-				gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Affectedname = value;
+				gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Affectedname = value;
 				SetDirty("Affectedname");
 			}
 		}
@@ -187,11 +187,11 @@ namespace GeneXus.Programs
 
 		public void initialize( )
 		{
-			gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Url = "";
-			gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Statuscode = "";
-			gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Statusmessage = "";
-			gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Affectedtype = "";
-			gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Affectedname = "";
+			gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Url = "";
+			gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Statuscode = "";
+			gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Statusmessage = "";
+			gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Affectedtype = "";
+			gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Affectedname = "";
 			return  ;
 		}
 
@@ -201,19 +201,19 @@ namespace GeneXus.Programs
 
 		#region Declaration
 
-		protected string gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Url;
+		protected string gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Url;
 		 
 
-		protected string gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Statuscode;
+		protected string gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Statuscode;
 		 
 
-		protected string gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Statusmessage;
+		protected string gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Statusmessage;
 		 
 
-		protected string gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Affectedtype;
+		protected string gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Affectedtype;
 		 
 
-		protected string gxTv_SdtSDT_DebugResult_PagesItem_UrlListItem_Affectedname;
+		protected string gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Affectedname;
 		 
 
 
@@ -221,14 +221,14 @@ namespace GeneXus.Programs
 	}
 	#region Rest interface
 	[GxJsonSerialization("wrapped")]
-	[DataContract(Name=@"SDT_DebugResult.PagesItem.UrlListItem", Namespace="Comforta_version21")]
-	public class SdtSDT_DebugResult_PagesItem_UrlListItem_RESTInterface : GxGenericCollectionItem<SdtSDT_DebugResult_PagesItem_UrlListItem>, System.Web.SessionState.IRequiresSessionState
+	[DataContract(Name=@"SDT_AppDebugResults.PagesItem.UrlListItem", Namespace="Comforta_version2")]
+	public class SdtSDT_AppDebugResults_PagesItem_UrlListItem_RESTInterface : GxGenericCollectionItem<SdtSDT_AppDebugResults_PagesItem_UrlListItem>, System.Web.SessionState.IRequiresSessionState
 	{
-		public SdtSDT_DebugResult_PagesItem_UrlListItem_RESTInterface( ) : base()
+		public SdtSDT_AppDebugResults_PagesItem_UrlListItem_RESTInterface( ) : base()
 		{	
 		}
 
-		public SdtSDT_DebugResult_PagesItem_UrlListItem_RESTInterface( SdtSDT_DebugResult_PagesItem_UrlListItem psdt ) : base(psdt)
+		public SdtSDT_AppDebugResults_PagesItem_UrlListItem_RESTInterface( SdtSDT_AppDebugResults_PagesItem_UrlListItem psdt ) : base(psdt)
 		{	
 		}
 
@@ -296,10 +296,10 @@ namespace GeneXus.Programs
 
 		#endregion
 
-		public SdtSDT_DebugResult_PagesItem_UrlListItem sdt
+		public SdtSDT_AppDebugResults_PagesItem_UrlListItem sdt
 		{
 			get { 
-				return (SdtSDT_DebugResult_PagesItem_UrlListItem)Sdt;
+				return (SdtSDT_AppDebugResults_PagesItem_UrlListItem)Sdt;
 			}
 			set { 
 				Sdt = value;
@@ -311,7 +311,7 @@ namespace GeneXus.Programs
 		{
 			if ( sdt == null )
 			{
-				sdt = new SdtSDT_DebugResult_PagesItem_UrlListItem() ;
+				sdt = new SdtSDT_AppDebugResults_PagesItem_UrlListItem() ;
 			}
 		}
 	}

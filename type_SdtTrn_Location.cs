@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
    [XmlRoot(ElementName = "Trn_Location" )]
-   [XmlType(TypeName =  "Trn_Location" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "Trn_Location" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtTrn_Location : GxSilentTrnSdt
    {
@@ -2774,7 +2774,7 @@ namespace GeneXus.Programs {
       private Guid gxTv_SdtTrn_Location_Toolboxlastupdatereceptionistid_Z ;
    }
 
-   [DataContract(Name = @"Trn_Location", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"Trn_Location", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtTrn_Location_RESTInterface : GxGenericCollectionItem<SdtTrn_Location>
    {
@@ -3246,7 +3246,7 @@ namespace GeneXus.Programs {
       private DateTime GXt_dtime1 ;
    }
 
-   [DataContract(Name = @"Trn_Location", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"Trn_Location", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtTrn_Location_RESTLInterface : GxGenericCollectionItem<SdtTrn_Location>
    {

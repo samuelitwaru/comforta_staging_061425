@@ -50,7 +50,7 @@ namespace GeneXus.Programs {
       {
          this.AV8WWPFormId = aP0_WWPFormId;
          this.AV9WWPFormVersionNumber = aP1_WWPFormVersionNumber;
-         this.AV11SDT_DynamicFormTranslationCollection = new GXBaseCollection<SdtSDT_DynamicFormTranslation>( context, "SDT_DynamicFormTranslation", "Comforta_version21") ;
+         this.AV11SDT_DynamicFormTranslationCollection = new GXBaseCollection<SdtSDT_DynamicFormTranslation>( context, "SDT_DynamicFormTranslation", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP1_WWPFormVersionNumber=this.AV9WWPFormVersionNumber;
@@ -70,7 +70,7 @@ namespace GeneXus.Programs {
       {
          this.AV8WWPFormId = aP0_WWPFormId;
          this.AV9WWPFormVersionNumber = aP1_WWPFormVersionNumber;
-         this.AV11SDT_DynamicFormTranslationCollection = new GXBaseCollection<SdtSDT_DynamicFormTranslation>( context, "SDT_DynamicFormTranslation", "Comforta_version21") ;
+         this.AV11SDT_DynamicFormTranslationCollection = new GXBaseCollection<SdtSDT_DynamicFormTranslation>( context, "SDT_DynamicFormTranslation", "Comforta_version2") ;
          SubmitImpl();
          aP1_WWPFormVersionNumber=this.AV9WWPFormVersionNumber;
          aP2_SDT_DynamicFormTranslationCollection=this.AV11SDT_DynamicFormTranslationCollection;
@@ -130,7 +130,7 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV11SDT_DynamicFormTranslationCollection = new GXBaseCollection<SdtSDT_DynamicFormTranslation>( context, "SDT_DynamicFormTranslation", "Comforta_version21");
+         AV11SDT_DynamicFormTranslationCollection = new GXBaseCollection<SdtSDT_DynamicFormTranslation>( context, "SDT_DynamicFormTranslation", "Comforta_version2");
          P00E42_A206WWPFormId = new short[1] ;
          P00E42_A207WWPFormVersionNumber = new short[1] ;
          P00E42_A209WWPFormTitle = new string[] {""} ;

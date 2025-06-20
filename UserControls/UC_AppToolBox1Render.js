@@ -84,7 +84,6 @@ function UC_AppToolBox1($) {
 	var partials = {  }; 
 	Mustache.parse(template);
 	var _iOnOnSave = 0; 
-	var _iOnaddServiceButtonEvent = 0; 
 	var $container;
 	this.show = function() {
 			$container = $(this.getContainerControl());
@@ -92,7 +91,6 @@ function UC_AppToolBox1($) {
 			// Raise before show scripts
 
 			_iOnOnSave = 0; 
-			_iOnaddServiceButtonEvent = 0; 
 
 			//if (this.IsPostBack)
 				this.setHtml(Mustache.render(template, this, partials));
@@ -101,12 +99,6 @@ function UC_AppToolBox1($) {
 			$(this.getContainerControl())
 				.find("[data-event='OnSave']")
 				.on('save', this.onOnSaveHandler.closure(this))
-				.each(function (i) {
-					this.setAttribute("data-items-index", i + 1);
-				}); 
-			$(this.getContainerControl())
-				.find("[data-event='addServiceButtonEvent']")
-				.on('addservicebuttonevent', this.onaddServiceButtonEventHandler.closure(this))
 				.each(function (i) {
 					this.setAttribute("data-items-index", i + 1);
 				}); 
@@ -122,15 +114,6 @@ function UC_AppToolBox1($) {
 			   try {
 				   	this.d3 = d3;
 					const themes = this.BC_Trn_ThemeCollection.map(theme => {
-			//			theme.CtaColor.map(ctaColor => {
-			//				ctaColor.CtaColorName = ctaColor.CtaColorName
-			//												.replace('ctaColor1', 'CtaColorOne').replace('ctaColor2','CtaColorTwo')
-			//												.replace('ctaColor3','CtaColorThree').replace('ctaColor4','CtaColorFour')
-			//												.replace('ctaColor5','CtaColorFive').replace('ctaColor6','CtaColorSix')
-			//				return ctaColor
-			//			})
-						
-						console.log(theme.CtaColor)
 						
 						let res = {
 						ThemeId: theme.Trn_ThemeId,
@@ -193,22 +176,6 @@ function UC_AppToolBox1($) {
 				}
 
 		}
-		this.SetProductToTile = function(ProductServiceId ) {
-
-					try {
-						console.log(this.app.ToolboxManager)
-						this.app.toolboxApp.toolboxManager.pageAttacher.attachNewServiceToTile(ProductServiceId)	
-					}catch (e) {
-						console.error(e)
-					}
-					
-				
-		}
-		this.SetServiceCreationParentPageType = function() {
-
-					this.ServiceCreationParentPageType = localStorage.getItem("ServiceCreationParentPageType")		
-				
-		}
 
 
 		this.onOnSaveHandler = function (e) {
@@ -239,37 +206,6 @@ function UC_AppToolBox1($) {
 
 			if (this.OnSave) {
 				this.OnSave();
-			}
-		} 
-
-		this.onaddServiceButtonEventHandler = function (e) {
-			if (e) {
-				var target = e.currentTarget;
-				e.preventDefault();
-				 
-				 this.SDT_PageCurrentIndex = (parseInt($(target).attr('data-items-index'), 10) || 1);  
-				 this.SDT_PagesCurrentIndex = (parseInt($(target).attr('data-items-index'), 10) || 1);  
-				 
-				 
-				 
-				 
-				 this.SDT_ProductServiceCollectionCurrentIndex = (parseInt($(target).attr('data-items-index'), 10) || 1);  
-				 this.SuppliersCurrentIndex = (parseInt($(target).attr('data-items-index'), 10) || 1);  
-				 this.SDT_DynamicFormsCollectionCurrentIndex = (parseInt($(target).attr('data-items-index'), 10) || 1);  
-				 this.BC_Trn_TemplateCollectionCurrentIndex = (parseInt($(target).attr('data-items-index'), 10) || 1);  
-				 this.BC_Trn_ThemeCollectionCurrentIndex = (parseInt($(target).attr('data-items-index'), 10) || 1);  
-				 this.BC_Trn_MediaCollectionCurrentIndex = (parseInt($(target).attr('data-items-index'), 10) || 1);  
-				 this.BC_Trn_LocationCurrentIndex = (parseInt($(target).attr('data-items-index'), 10) || 1);  
-				 
-				 this.Current_VersionCurrentIndex = (parseInt($(target).attr('data-items-index'), 10) || 1);  
-				 
-				 
-				 
-				 
-			}
-
-			if (this.addServiceButtonEvent) {
-				this.addServiceButtonEvent();
 			}
 		} 
 

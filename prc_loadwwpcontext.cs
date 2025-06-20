@@ -384,10 +384,10 @@ namespace GeneXus.Programs {
          A515OrganisationCtaTheme = "";
          A101OrganisationSettingLogo = "";
          A102OrganisationSettingFavicon = "";
-         AV13DashboardItems = new GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem>( context, "UHomeModulesSDTItem", "Comforta_version21");
-         GXt_objcol_SdtUHomeModulesSDT_UHomeModulesSDTItem1 = new GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem>( context, "UHomeModulesSDTItem", "Comforta_version21");
+         AV13DashboardItems = new GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem>( context, "UHomeModulesSDTItem", "Comforta_version2");
+         GXt_objcol_SdtUHomeModulesSDT_UHomeModulesSDTItem1 = new GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem>( context, "UHomeModulesSDTItem", "Comforta_version2");
          AV12DashboardItem = new SdtUHomeModulesSDT_UHomeModulesSDTItem(context);
-         AV14FilteredDashboardItems = new GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem>( context, "UHomeModulesSDTItem", "Comforta_version21");
+         AV14FilteredDashboardItems = new GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem>( context, "UHomeModulesSDTItem", "Comforta_version2");
          AV15FooterText = "";
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.prc_loadwwpcontext__default(),
             new Object[][] {
