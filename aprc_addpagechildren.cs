@@ -183,7 +183,7 @@ namespace GeneXus.Programs {
          P008L2_A29LocationId = new Guid[] {Guid.Empty} ;
          A392Trn_PageId = Guid.Empty;
          A424PageChildren = "";
-         AV23SDT_PageChildrenCollection = new GXBaseCollection<SdtSDT_PageChildren>( context, "SDT_PageChildren", "Comforta_version21");
+         AV23SDT_PageChildrenCollection = new GXBaseCollection<SdtSDT_PageChildren>( context, "SDT_PageChildren", "Comforta_version2");
          AV22SDT_PageChildren = new SdtSDT_PageChildren(context);
          AV25Child = new SdtTrn_Page(context);
          pr_datastore1 = new DataStoreProvider(context, new GeneXus.Programs.aprc_addpagechildren__datastore1(),

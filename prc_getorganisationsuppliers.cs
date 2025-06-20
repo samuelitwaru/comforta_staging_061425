@@ -48,7 +48,7 @@ namespace GeneXus.Programs {
                            out GXBCCollection<SdtTrn_SupplierGen> aP1_BC_Trn_GenSuppliers )
       {
          this.AV14OrganisationId = aP0_OrganisationId;
-         this.AV26BC_Trn_GenSuppliers = new GXBCCollection<SdtTrn_SupplierGen>( context, "Trn_SupplierGen", "Comforta_version21") ;
+         this.AV26BC_Trn_GenSuppliers = new GXBCCollection<SdtTrn_SupplierGen>( context, "Trn_SupplierGen", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP1_BC_Trn_GenSuppliers=this.AV26BC_Trn_GenSuppliers;
@@ -64,7 +64,7 @@ namespace GeneXus.Programs {
                                  out GXBCCollection<SdtTrn_SupplierGen> aP1_BC_Trn_GenSuppliers )
       {
          this.AV14OrganisationId = aP0_OrganisationId;
-         this.AV26BC_Trn_GenSuppliers = new GXBCCollection<SdtTrn_SupplierGen>( context, "Trn_SupplierGen", "Comforta_version21") ;
+         this.AV26BC_Trn_GenSuppliers = new GXBCCollection<SdtTrn_SupplierGen>( context, "Trn_SupplierGen", "Comforta_version2") ;
          SubmitImpl();
          aP1_BC_Trn_GenSuppliers=this.AV26BC_Trn_GenSuppliers;
       }
@@ -104,7 +104,7 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV26BC_Trn_GenSuppliers = new GXBCCollection<SdtTrn_SupplierGen>( context, "Trn_SupplierGen", "Comforta_version21");
+         AV26BC_Trn_GenSuppliers = new GXBCCollection<SdtTrn_SupplierGen>( context, "Trn_SupplierGen", "Comforta_version2");
          P00F82_A602SG_LocationSupplierOrganisatio = new Guid[] {Guid.Empty} ;
          P00F82_n602SG_LocationSupplierOrganisatio = new bool[] {false} ;
          P00F82_A601SG_OrganisationSupplierId = new Guid[] {Guid.Empty} ;

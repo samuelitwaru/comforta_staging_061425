@@ -9,19 +9,25 @@ export class IconList {
   private icons: HTMLElement[] = [];
   iconsCategory: string = "Technical Services & Support";
 
-  constructor(themeManager: ThemeManager, iconsCategory: string) {
+  constructor(themeManager: ThemeManager, iconsCategory: string, searchQuery: string = "") {
     this.themeManager = themeManager;
     this.iconsCategory = iconsCategory;
-    this.init();
+    this.init(searchQuery);
   }
 
-  init() {
+  init(searchQuery:string) {
     this.icons = [];
-    const themeIcons: ThemeIcon[] = this.themeManager.getActiveThemeIcons();
+    let themeIcons: ThemeIcon[] = this.themeManager.getActiveThemeIcons();
     // Filter icons by category and theme
-    themeIcons
-      .filter((icon) => icon.IconCategory === this.iconsCategory)
-      .forEach((themeIcon) => {
+    if (searchQuery) {
+      themeIcons = this.searchIcons(searchQuery, themeIcons);
+    }else {
+      themeIcons = themeIcons.filter(
+        (icon) => icon.IconCategory === this.iconsCategory
+      );
+    }
+
+    themeIcons.forEach((themeIcon) => {
         const icon = document.createElement("div");
         icon.classList.add("icon");
         icon.title = themeIcon.IconName;
@@ -98,6 +104,45 @@ export class IconList {
 
         this.icons.push(icon);
       });
+
+    
+  }
+
+  searchIcons(query:string, iconList: any[]) {
+      if (!query || !iconList || !Array.isArray(iconList)) return [];
+  
+      const normalizedQuery = query.trim().toLowerCase();
+      return iconList
+        .map((icon:any) => {
+          const name = icon.IconName?.toLowerCase() || "";
+          const tags = icon.IconTags?.split(",").map((tag:any) => tag.toLowerCase()) || [];
+  
+          let score = 0;
+  
+          // Exact match boost
+          if (name === normalizedQuery) score += 100;
+          if (tags.includes(normalizedQuery)) score += 80;
+  
+          // Partial match
+          if (name.includes(normalizedQuery)) score += 50;
+          for (const tag of tags) {
+            if (tag.includes(normalizedQuery)) score += 30;
+          }
+  
+          // Word-level match
+          const queryWords = normalizedQuery.split(/\s+/);
+          for (const word of queryWords) {
+            if (name.includes(word)) score += 20;
+            for (const tag of tags) {
+              if (tag.includes(word)) score += 10;
+            }
+          }
+  
+          return { ...icon, _score: score };
+        })
+        .filter(icon => icon._score > 0)
+        .sort((a, b) => b._score - a._score)
+        .map(({ _score, ...icon }) => icon); // remove internal score
   }
 
   render(container: HTMLElement) {

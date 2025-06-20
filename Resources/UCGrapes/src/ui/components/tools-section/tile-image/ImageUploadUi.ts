@@ -1,4 +1,3 @@
-// ImageUploadView.ts
 import { backgroundImage } from "html2canvas/dist/types/css/property-descriptors/background-image";
 import { ImageUploadManager } from "../../../../controls/ImageUploadManager";
 import { InfoSectionManager } from "../../../../controls/InfoSectionManager";
@@ -7,19 +6,44 @@ import { InfoType, Media, Tile } from "../../../../types";
 import { SingleImageFile } from "./SingleImageFile";
 import { backgroundRepeat } from "html2canvas/dist/types/css/property-descriptors/background-repeat";
 import { randomIdGenerator } from "../../../../utils/helpers";
+import { MultipleDeleteHandler } from "./MultipleDeleteHandler";
+import { ImageEditor } from "./ImageEditor";
 
 export class ImageUploadUi {
   private modalContent: HTMLElement;
   private controller: ImageUploadManager;
   private fileListElement: HTMLElement | null = null;
   private isEditingMode: boolean = false;
-  private opacityValue!: number;
+  public isInDeleteMode: boolean = false;
   private sectionId?: string;
+  private MultipleDeleteHandler: MultipleDeleteHandler;
+  private imageEditor: ImageEditor;
 
   constructor(controller: ImageUploadManager) {
     this.controller = controller;
     this.sectionId = controller.getSectionId;
     this.modalContent = document.createElement("div");
+    this.MultipleDeleteHandler = new MultipleDeleteHandler(
+      this.modalContent,
+      this.controller,
+      this.fileListElement,
+      this.refreshUploadArea.bind(this),
+      this.loadMediaFiles.bind(this)
+    );
+    this.imageEditor = new ImageEditor(this.controller, this.modalContent);
+    
+    // Set up callback for image editor
+    this.imageEditor.onUploadNewImage = () => {
+      this.isEditingMode = false;
+      this.MultipleDeleteHandler.clearSelection();
+      this.refreshUploadArea();
+
+      // Wait a bit longer to ensure DOM is updated and event listeners are attached
+      setTimeout(() => {
+        this.triggerFileInput();
+      }, 500);
+    };
+    
     this.init();
   }
 
@@ -27,14 +51,14 @@ export class ImageUploadUi {
     this.modalContent.innerHTML = "";
     this.modalContent.className = "tb-modal-content";
 
-    // console.log('ImageUploadUi this.sectionId', this.sectionId);
-
     this.createModalHeader();
     this.createUploadArea();
     this.createModalActions();
+    this.MultipleDeleteHandler.createMultipleDeleteElement();
     this.createFileListElement();
     this.loadExistingImageAndFiles();
   }
+
 
   /* UI Creation Methods */
   private createModalHeader() {
@@ -47,7 +71,7 @@ export class ImageUploadUi {
     const closeBtn = document.createElement("span");
     closeBtn.className = "close";
     closeBtn.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 21 21">
         <path id="Icon_material-close" data-name="Icon material-close" d="M28.5,9.615,26.385,7.5,18,15.885,9.615,7.5,7.5,9.615,15.885,18,7.5,26.385,9.615,28.5,18,20.115,26.385,28.5,28.5,26.385,20.115,18Z" transform="translate(-7.5 -7.5)" fill="#6a747f" opacity="0.54"></path>
       </svg>
     `;
@@ -78,6 +102,22 @@ export class ImageUploadUi {
     this.modalContent.appendChild(uploadArea);
   }
 
+  private triggerFileInput() {
+    // const fileInput = this.modalContent.querySelector('#fileInput') as HTMLInputElement;
+
+    const uploadArea = this.modalContent.querySelector(
+      ".upload-area"
+    ) as HTMLElement;
+
+    if (uploadArea) {
+      // this.setupDragAndDrop(uploadArea);
+      uploadArea.click();
+    }
+    // if (fileInput) {
+    //   fileInput.click();
+    // }
+  }
+
   private createFileListElement() {
     this.fileListElement = document.createElement("div");
     this.fileListElement.className = "file-list";
@@ -89,6 +129,9 @@ export class ImageUploadUi {
     this.fileListElement.appendChild(loadingElement);
 
     this.modalContent.appendChild(this.fileListElement);
+
+    // Update the multiple delete manager with the new file list element
+    this.MultipleDeleteHandler.updateFileListElement(this.fileListElement);
   }
 
   private createModalActions() {
@@ -112,7 +155,9 @@ export class ImageUploadUi {
     saveBtn.addEventListener("click", async (e) => {
       e.preventDefault();
       try {
-        await this.controller.handleSave(this.opacityValue, this.sectionId);
+        const opacityValue = this.imageEditor.getOpacityValue();
+        const sectionId = this.imageEditor.getSectionId();
+        await this.controller.handleSave(opacityValue, sectionId);
         this.closeModal();
       } catch (error) {
         console.error("Error saving images:", error);
@@ -137,28 +182,46 @@ export class ImageUploadUi {
   }
 
   public async loadExistingImageAndFiles() {
-    const backgroundImage = this.controller.getBackgroundImage();
-    if (backgroundImage) {
-      this.displayImageEditor(backgroundImage);
+    const backgroundImageUrl = this.controller.getBackgroundImage();
+    if (backgroundImageUrl) {
+      await this.loadMediaFiles(backgroundImageUrl);
+      return;
     }
     await this.loadMediaFiles();
   }
 
-  public async loadMediaFiles() {
+  public async loadMediaFiles(backgroundImageUrl?: string) {
     try {
       const media = await this.controller.loadMediaFiles();
+      const selectContainer = this.modalContent.querySelector(
+        "#multipleDelete"
+      ) as HTMLElement;
+
       if (this.fileListElement) {
         this.fileListElement.innerHTML = "";
+        this.fileListElement.removeAttribute("style");
+        selectContainer.style.display = "block";
 
         if (media.length > 0) {
-          media.forEach((item: Media) => {
+          let editorDisplayed = false;
+
+          for (const item of media) {
             const singleImageFile = new SingleImageFile(
               item,
               this.controller,
               this
             );
             singleImageFile.render(this.fileListElement as HTMLElement);
-          });
+
+            if (
+              !editorDisplayed &&
+              backgroundImageUrl &&
+              item.MediaUrl === backgroundImageUrl
+            ) {
+              await this.displayImageEditor(item);
+              editorDisplayed = true;
+            }
+          }
 
           const loadingElement = document.getElementById(
             "loading-media"
@@ -166,6 +229,14 @@ export class ImageUploadUi {
           if (loadingElement) {
             loadingElement.style.display = "none";
           }
+        } else {
+          if (selectContainer) {
+            selectContainer.style.display = "none";
+          }
+          this.fileListElement.innerHTML = `<span color="#6c6c6c">No images added</span>`;
+          this.fileListElement.style.display = "flex";
+          this.fileListElement.style.justifyContent = "center";
+          this.fileListElement.style.alignItems = "center";
         }
       }
     } catch (error) {
@@ -178,349 +249,14 @@ export class ImageUploadUi {
   }
 
   /* Image Editor Methods */
-  public async displayImageEditor(dataUrl: string, file?: File) {
-    if (
-      this.controller.getType === "info" ||
-      this.controller.getType === "cta"
-    ) {
-      return;
-    }
-
-    if (!file) {
-      file = await this.controller.getFile(dataUrl);
-    }
-
-    const decodedUrl = decodeURIComponent(decodeURIComponent(dataUrl));
-
-    const image = {
-      Id: randomIdGenerator(12),
-      Url: decodedUrl,
-    };
-
-    this.controller.addSelectedImage(image);
-
-    const uploadArea = this.modalContent.querySelector(
-      ".upload-area"
-    ) as HTMLElement;
-    if (uploadArea) {
-      uploadArea.innerHTML = "";
-    }
-
-    const imageContainer = document.createElement("div");
-    imageContainer.className = "image-editor-container";
-    Object.assign(imageContainer.style, {
-      position: "relative",
-      width: "100%",
-      height: "400px",
-      overflow: "hidden",
-      border: "1px solid #ccc",
-      backgroundImage: `url("${decodedUrl}")`,
-      backgroundRepeat: "no-repeat",
-      backgroundSize: "100% 100%",
-    });
-
-    const frame = document.createElement("div");
-    frame.id = "position-frame";
-    Object.assign(frame.style, {
-      position: "absolute",
-      border: "2px solid #5068a8",
-      backgroundColor: "rgba(80, 104, 168, 0.15)",
-      cursor: "move",
-    });
-
-    imageContainer.appendChild(frame);
-    if (uploadArea) {
-      uploadArea.appendChild(imageContainer);
-    }
-    this.setupPositionFrame(frame, imageContainer);
-    this.createOpacitySlider(uploadArea);
-    this.updateModalActions();
-
-    this.isEditingMode = true;
-  }
-
-  private setupPositionFrame(frame: HTMLElement, container: HTMLElement) {
-    const selectedComponent = (globalThis as any).selectedComponent;
-    let aspectRatio = 1;
-    let tile: Tile | undefined = this.getTile(selectedComponent);
-
-    if (selectedComponent) {
-      const selectedComponentEl = selectedComponent.getEl() as HTMLElement;
-      const componentWidth = selectedComponentEl.clientWidth;
-      const componentHeight = selectedComponentEl.clientHeight;
-      aspectRatio = parseFloat((componentWidth / componentHeight).toFixed(2));
-
-      if (aspectRatio > 3) aspectRatio = 2.3;
-
-      // aspectRatio = 1.5;
-      let frameWidth = componentWidth * aspectRatio;
-      let frameHeight = componentHeight * aspectRatio;
-
-      const containerWidth = container.clientWidth;
-      if (frameWidth > containerWidth) {
-        frameWidth = containerWidth;
-        frameHeight = containerWidth / aspectRatio;
+  public async displayImageEditor(mediaFile: Media, isSaved: boolean = true) {
+    const isEditingModeActive = await this.imageEditor.displayImageEditor(mediaFile);
+    if (isEditingModeActive) {
+      this.updateModalActions();
+      if (this.fileListElement && isSaved) {
+        this.imageEditor.selectCurrentTileImage(this.fileListElement);
       }
-
-      if (tile && tile.Left && tile.Top) {
-        frame.style.left = `${tile.Left}`;
-        frame.style.top = `${tile.Top}`;
-      }
-
-      container.style.filter = `brightness(${
-        tile?.Opacity ? 1 - tile.Opacity / 100 : 1
-      })`;
-
-      frame.style.width = `${frameWidth}px`;
-      frame.style.height = `${frameHeight}px`;
-    }
-
-    this.addResizeHandles(frame, container, aspectRatio);
-    this.addDragFunctionality(frame, container, aspectRatio);
-  }
-
-  private getTile(selectedComponent: any) {
-    let tile;
-    const infoContent: InfoType | null = this.controller.getInfoContent();
-    if (infoContent) {
-      const tileId = selectedComponent.parent().getId();
-      const tiles: Tile[] | undefined = infoContent?.Tiles;
-      if (tiles?.length) {
-        tile = tiles.find((t) => t.Id === tileId);
-      }
-    }
-
-    return tile;
-  }
-
-  private addResizeHandles(
-    frame: HTMLElement,
-    container: HTMLElement,
-    tileAspectRatio: number
-  ) {
-    const handles = ["top-left", "top-right", "bottom-left", "bottom-right"];
-    handles.forEach((handle) => {
-      const handleDiv = document.createElement("div");
-      handleDiv.className = `resize-handle ${handle}`;
-      Object.assign(handleDiv.style, {
-        position: "absolute",
-        width: "10px",
-        height: "10px",
-        backgroundColor: "#5068a8",
-        zIndex: "11",
-        cursor: "nw-resize",
-      });
-
-      if (handle.includes("top")) handleDiv.style.top = "-5px";
-      if (handle.includes("bottom")) handleDiv.style.bottom = "-5px";
-      if (handle.includes("left")) handleDiv.style.left = "-5px";
-      if (handle.includes("right")) handleDiv.style.right = "-5px";
-
-      frame.appendChild(handleDiv);
-      this.addResizeLogic(handleDiv, frame, handle, container, tileAspectRatio);
-    });
-  }
-
-  private addResizeLogic(
-    handleDiv: HTMLElement,
-    frame: HTMLElement,
-    handle: string,
-    container: HTMLElement,
-    tileAspectRatio: number
-  ) {
-    handleDiv.addEventListener("mousedown", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-
-      const startX = e.clientX;
-      const startY = e.clientY;
-      const startWidth = frame.offsetWidth;
-      const startHeight = frame.offsetHeight;
-      const startLeft = frame.offsetLeft;
-      const startTop = frame.offsetTop;
-      const containerWidth = container.offsetWidth;
-      const containerHeight = container.offsetHeight;
-      const aspectRatio = startWidth / startHeight;
-
-      const onMouseMove = (moveEvent: MouseEvent) => {
-        const dx = moveEvent.clientX - startX;
-        const dy = moveEvent.clientY - startY;
-
-        let newWidth = startWidth;
-        let newHeight = startHeight;
-        let newLeft = startLeft;
-        let newTop = startTop;
-
-        if (handle === "bottom-right") {
-          newWidth = Math.min(startWidth + dx, containerWidth - startLeft);
-          newHeight = newWidth / aspectRatio;
-        } else if (handle === "bottom-left") {
-          newWidth = Math.min(startWidth - dx, startLeft + startWidth);
-          newLeft = Math.max(startLeft + dx, 0);
-          newHeight = newWidth / aspectRatio;
-        } else if (handle === "top-right") {
-          newWidth = Math.min(startWidth + dx, containerWidth - startLeft);
-          newHeight = newWidth / aspectRatio;
-          newTop = Math.max(startTop + (startHeight - newHeight), 0);
-        } else if (handle === "top-left") {
-          newWidth = Math.min(startWidth - dx, startLeft + startWidth);
-          newLeft = Math.max(startLeft + dx, 0);
-          newHeight = newWidth / aspectRatio;
-          newTop = Math.max(startTop + (startHeight - newHeight), 0);
-        }
-
-        newWidth = Math.max(newWidth, 20);
-        newHeight = Math.max(newHeight, 20);
-
-        frame.style.width = `${newWidth}px`;
-        frame.style.height = `${newHeight}px`;
-        frame.style.left = `${newLeft}px`;
-        frame.style.top = `${newTop}px`;
-
-        this.controller.captureCurrentPosition(
-          frame,
-          container,
-          tileAspectRatio
-        );
-      };
-
-      const onMouseUp = () => {
-        document.removeEventListener("mousemove", onMouseMove);
-        document.removeEventListener("mouseup", onMouseUp);
-        this.controller.captureCurrentPosition(
-          frame,
-          container,
-          tileAspectRatio
-        );
-      };
-
-      document.addEventListener("mousemove", onMouseMove);
-      document.addEventListener("mouseup", onMouseUp);
-    });
-  }
-
-  private addDragFunctionality(
-    frame: HTMLElement,
-    container: HTMLElement,
-    tileAspectRatio: number
-  ) {
-    let isDragging = false;
-    let offsetX = 0;
-    let offsetY = 0;
-
-    frame.addEventListener("mousedown", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      isDragging = true;
-      offsetX = e.clientX - frame.getBoundingClientRect().left;
-      offsetY = e.clientY - frame.getBoundingClientRect().top;
-      document.body.style.userSelect = "none";
-    });
-
-    document.addEventListener("mousemove", (e) => {
-      if (isDragging) {
-        e.preventDefault();
-        e.stopPropagation();
-        const parentRect = container.getBoundingClientRect();
-
-        let newLeft = e.clientX - offsetX - parentRect.left;
-        let newTop = e.clientY - offsetY - parentRect.top;
-
-        if (newLeft < 0) newLeft = 0;
-        if (newLeft + frame.offsetWidth > parentRect.width) {
-          newLeft = parentRect.width - frame.offsetWidth;
-        }
-        if (newTop < 0) newTop = 0;
-        if (newTop + frame.offsetHeight > parentRect.height) {
-          newTop = parentRect.height - frame.offsetHeight;
-        }
-
-        frame.style.left = `${newLeft}px`;
-        frame.style.top = `${newTop}px`;
-
-        this.controller.captureCurrentPosition(
-          frame,
-          container,
-          tileAspectRatio
-        );
-      }
-    });
-
-    document.addEventListener("mouseup", (e) => {
-      if (isDragging) {
-        e.preventDefault();
-        e.stopPropagation();
-        isDragging = false;
-        document.body.style.userSelect = "auto";
-        this.controller.captureCurrentPosition(
-          frame,
-          container,
-          tileAspectRatio
-        );
-      }
-    });
-  }
-
-  private createOpacitySlider(uploadArea: HTMLElement) {
-    const selectedComponent = (globalThis as any).selectedComponent;
-    const modalFooter = document.createElement("div");
-    modalFooter.className = "modal-footer-slider";
-    const tile: Tile | undefined = this.getTile(selectedComponent);
-
-    const opacitySlider = document.createElement("input");
-    Object.assign(opacitySlider, {
-      type: "range",
-      min: "0",
-      max: "100",
-      step: "1",
-      value: tile?.Opacity || "0",
-    });
-    Object.assign(opacitySlider.style, {
-      width: "100%",
-      marginLeft: "32px",
-    });
-
-    const opacityLabel = document.createElement("span");
-    opacityLabel.innerText = `${opacitySlider.value}%`;
-    Object.assign(opacityLabel.style, {
-      fontSize: "14px",
-      color: "#333",
-    });
-
-    opacitySlider.addEventListener("input", () => {
-      const opacityValue = parseInt(opacitySlider.value, 10) / 100;
-      opacityLabel.innerText = `${opacitySlider.value}%`;
-
-      const selectedComponent = (globalThis as any).selectedComponent;
-      if (!selectedComponent) return;
-
-      this.opacityValue = opacityValue * 100;
-
-      const container = uploadArea.querySelector(
-        ".image-editor-container"
-      ) as HTMLDivElement;
-      if (!container) return;
-
-      Object.assign(container.style, {
-        opacity: "1",
-        filter: `brightness(${1 - opacityValue})`,
-      });
-    });
-
-    const sliderWrapper = document.createElement("div");
-    Object.assign(sliderWrapper.style, {
-      display: "flex",
-      alignItems: "center",
-      gap: "10px",
-    });
-
-    sliderWrapper.appendChild(opacitySlider);
-    sliderWrapper.appendChild(opacityLabel);
-    modalFooter.appendChild(sliderWrapper);
-    this.modalContent.appendChild(modalFooter);
-
-    if (uploadArea) {
-      uploadArea.appendChild(modalFooter);
+      this.isEditingMode = true;
     }
   }
 
@@ -558,15 +294,14 @@ export class ImageUploadUi {
 
     fileInput.addEventListener("change", async () => {
       if (fileInput.files && fileInput.files.length > 0) {
-        this.showUploadSpinner();
+        this.showUploadSpinner(fileInput.files.length);
 
         const startTime = Date.now();
-        const minSpinnerDuration = 1000; // 1 second minimum
+        const minSpinnerDuration = 1000;
 
         try {
           await this.uploadImages(fileInput.files);
 
-          // Ensure spinner shows for minimum duration
           const elapsedTime = Date.now() - startTime;
           const remainingTime = Math.max(0, minSpinnerDuration - elapsedTime);
 
@@ -574,11 +309,11 @@ export class ImageUploadUi {
             await new Promise((resolve) => setTimeout(resolve, remainingTime));
           }
 
-          this.removeSpinner();
+          this.refreshUploadArea();
           this.showSuccessMessage();
         } catch (error) {
           console.error("Error uploading files:", error);
-          // Reset to original upload area on error
+          this.refreshUploadArea();
         }
       }
     });
@@ -601,66 +336,149 @@ export class ImageUploadUi {
       uploadArea.classList.remove("drag-over");
 
       if (e.dataTransfer?.files && e.dataTransfer.files.length > 0) {
-        this.showUploadSpinner();
+        this.showUploadSpinner(e.dataTransfer.files.length);
 
         const startTime = Date.now();
-        const minSpinnerDuration = 1000; // 1 second minimum
+        const minSpinnerDuration = 1000;
         try {
           await this.uploadImages(e.dataTransfer.files);
 
-          // Ensure spinner shows for minimum duration
           const elapsedTime = Date.now() - startTime;
           const remainingTime = Math.max(0, minSpinnerDuration - elapsedTime);
 
           if (remainingTime > 0) {
             await new Promise((resolve) => setTimeout(resolve, remainingTime));
           }
-          this.removeSpinner();
+          this.refreshUploadArea();
           this.showSuccessMessage();
         } catch (error) {
           console.error("Error uploading files:", error);
-          // Reset to original upload area on error
+          this.refreshUploadArea();
         }
       }
     });
   }
 
   private async uploadImages(files: FileList) {
-    const processedFiles = await this.controller.compressLargeFiles(files);
+    const dataTransfer = new DataTransfer();
+    const totalFiles = files.length;
 
-    const processedFileList = this.controller.createFileList(processedFiles);
+    // Compression phase
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      this.updateProgress(i + 1, totalFiles, "compressing");
+      const compressedFile = await this.controller.compressLargeFile(file);
+      dataTransfer.items.add(compressedFile);
+    }
 
-    await this.controller.handleFilesUpload(processedFileList);
+    const fileArray = Array.from(dataTransfer.files);
+
+    // Upload phase
+    for (let i = 0; i < fileArray.length; i++) {
+      const file = fileArray[i];
+      this.updateProgress(i + 1, totalFiles, "uploading");
+      await this.controller.handleFileUpload(file);
+    }
+
     await this.loadMediaFiles();
   }
 
-  private showUploadSpinner() {
+  private updateProgress(
+    current: number,
+    total: number,
+    phase: "compressing" | "uploading"
+  ) {
+    const progressContainer = this.modalContent.querySelector(
+      ".progress-container"
+    );
+    if (!progressContainer) return;
+
+    const progressBar = progressContainer.querySelector(
+      ".progress-bar"
+    ) as HTMLElement;
+    const progressText = progressContainer.querySelector(
+      ".progress-text"
+    ) as HTMLElement;
+    const progressCounter = progressContainer.querySelector(
+      ".progress-counter"
+    ) as HTMLElement;
+
+    if (progressBar && progressText && progressCounter) {
+      const percentage = Math.round((current / total) * 100);
+      progressBar.style.width = `${percentage}%`;
+
+      const phaseText = phase === "compressing" ? "Preparing" : "Uploading";
+      progressText.textContent = `${phaseText} images...`;
+      progressCounter.textContent = `${current} / ${total}`;
+    }
+  }
+
+ private showUploadSpinner(fileCount: number = 1) {
     const uploadArea = this.modalContent.querySelector(
       ".upload-area"
     ) as HTMLElement;
     if (uploadArea) {
+      const showProgress = fileCount > 1;
+
       uploadArea.innerHTML = `
-    <div class="upload-spinner" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-      <div style="
-        width: 35px; 
-        height: 35px; 
-        border: 3px solid #e3e3e3; 
-        border-top: 3px solid #5068a8; 
-        border-radius: 50%; 
-        animation: spin 0.8s linear infinite;
-      "></div>
-    </div>
-    <style>
-      @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-    </style>
-  `;
+        <div class="upload-spinner" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          <div style="
+            width: 35px; 
+            height: 35px; 
+            border: 3px solid #e3e3e3; 
+            border-top: 3px solid #5068a8; 
+            border-radius: 50%; 
+            animation: spin 0.8s linear infinite;
+            margin-bottom: ${showProgress ? "20px" : "0px"};
+          "></div>
+          ${
+            showProgress
+              ? `
+            <div class="progress-container" style="width: 100%; max-width: 200px;">
+              <div class="progress-text" style="
+                font-size: 12px;
+                color: #666;
+                text-align: center;
+                margin-bottom: 8px;
+              ">Preparing images...</div>
+              
+              <div style="
+                width: 100%;
+                height: 8px;
+                background-color: #e3e3e3;
+                border-radius: 4px;
+                overflow: hidden;
+                margin-bottom: 8px;
+              ">
+                <div class="progress-bar" style="
+                  height: 100%;
+                  background-color: #5068a8;
+                  width: 0%;
+                  transition: width 0.3s ease;
+                "></div>
+              </div>
+              
+              <div class="progress-counter" style="
+                font-size: 11px;
+                color: #888;
+                text-align: center;
+                font-weight: 500;
+              ">0 / ${fileCount}</div>
+            </div>
+          `
+              : ""
+          }
+        </div>
+        <style>
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        </style>
+      `;
     }
   }
-
-  private removeSpinner() {
+  public refreshUploadArea() {
     const uploadArea = this.modalContent.querySelector(
       ".upload-area"
     ) as HTMLElement;
@@ -688,7 +506,6 @@ export class ImageUploadUi {
       ) as HTMLElement;
 
       if (uploadText) {
-        // Create success message element
         const successMessage = document.createElement("div");
         successMessage.className = "success-message";
         successMessage.style.cssText =
@@ -701,9 +518,16 @@ export class ImageUploadUi {
 
         setTimeout(() => {
           if (successMessage && successMessage.parentNode) {
-            successMessage.remove();
+            successMessage.style.transition = "opacity 0.5s ease-out";
+            successMessage.style.opacity = "0";
+
+            setTimeout(() => {
+              if (successMessage && successMessage.parentNode) {
+                successMessage.remove();
+              }
+            }, 500);
           }
-        }, 5000);
+        }, 4500);
       }
     }
   }

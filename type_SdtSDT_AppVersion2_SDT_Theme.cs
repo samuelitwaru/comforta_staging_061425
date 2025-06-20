@@ -23,7 +23,7 @@ using System.Runtime.Serialization;
 namespace GeneXus.Programs
 {
 	[XmlRoot(ElementName="SDT_AppVersion2.SDT_Theme")]
-	[XmlType(TypeName="SDT_AppVersion2.SDT_Theme" , Namespace="Comforta_version21" )]
+	[XmlType(TypeName="SDT_AppVersion2.SDT_Theme" , Namespace="Comforta_version2" )]
 	[Serializable]
 	public class SdtSDT_AppVersion2_SDT_Theme : GxUserType
 	{
@@ -332,7 +332,7 @@ namespace GeneXus.Programs
 	}
 	#region Rest interface
 	[GxJsonSerialization("default")]
-	[DataContract(Name=@"SDT_AppVersion2.SDT_Theme", Namespace="Comforta_version21")]
+	[DataContract(Name=@"SDT_AppVersion2.SDT_Theme", Namespace="Comforta_version2")]
 	public class SdtSDT_AppVersion2_SDT_Theme_RESTInterface : GxGenericCollectionItem<SdtSDT_AppVersion2_SDT_Theme>, System.Web.SessionState.IRequiresSessionState
 	{
 		public SdtSDT_AppVersion2_SDT_Theme_RESTInterface( ) : base()

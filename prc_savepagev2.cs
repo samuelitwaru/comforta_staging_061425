@@ -100,6 +100,7 @@ namespace GeneXus.Programs {
             cleanup();
             if (true) return;
          }
+         new prc_logtoserver(context ).execute(  context.GetMessage( "&PageStructure >> ", "")+AV16PageStructure) ;
          /* Using cursor P00BG2 */
          pr_default.execute(0, new Object[] {AV9AppVersionId});
          while ( (pr_default.getStatus(0) != 101) )
@@ -117,23 +118,15 @@ namespace GeneXus.Programs {
                O518PageStructure = A518PageStructure;
                O518PageStructure = A518PageStructure;
                A517PageName = AV15PageName;
-               if ( ( ( StringUtil.StrCmp(A525PageType, "Menu") == 0 ) ) || ( ( StringUtil.StrCmp(A525PageType, "MyLiving") == 0 ) ) || ( ( StringUtil.StrCmp(A525PageType, "MyService") == 0 ) ) || ( ( StringUtil.StrCmp(A525PageType, "MyCare") == 0 ) ) )
+               if ( StringUtil.StrCmp(A525PageType, "Information") == 0 )
                {
-                  AV19SDT_MenuPage.FromJSonString(AV16PageStructure, null);
-                  AV10CleanedPageStructure = AV19SDT_MenuPage.ToJSonString(false, true);
+                  AV22SDT_InfoContent.FromJSonString(AV16PageStructure, null);
+                  AV10CleanedPageStructure = AV22SDT_InfoContent.ToJSonString(false, true);
                }
                else
                {
-                  if ( StringUtil.StrCmp(A525PageType, "Information") == 0 )
-                  {
-                     AV22SDT_InfoContent.FromJSonString(AV16PageStructure, null);
-                     AV10CleanedPageStructure = AV22SDT_InfoContent.ToJSonString(false, true);
-                  }
-                  else
-                  {
-                     AV18SDT_ContentPage.FromJSonString(AV16PageStructure, null);
-                     AV10CleanedPageStructure = AV18SDT_ContentPage.ToJSonString(false, true);
-                  }
+                  AV18SDT_ContentPage.FromJSonString(AV16PageStructure, null);
+                  AV10CleanedPageStructure = AV18SDT_ContentPage.ToJSonString(false, true);
                }
                A518PageStructure = AV10CleanedPageStructure;
                if ( ! ( ( StringUtil.StrCmp(O518PageStructure, AV10CleanedPageStructure) == 0 ) ) )
@@ -186,9 +179,8 @@ namespace GeneXus.Programs {
          A525PageType = "";
          A518PageStructure = "";
          O518PageStructure = "";
-         AV19SDT_MenuPage = new SdtSDT_MenuPage(context);
-         AV10CleanedPageStructure = "";
          AV22SDT_InfoContent = new SdtSDT_InfoContent(context);
+         AV10CleanedPageStructure = "";
          AV18SDT_ContentPage = new SdtSDT_ContentPage(context);
          pr_datastore1 = new DataStoreProvider(context, new GeneXus.Programs.prc_savepagev2__datastore1(),
             new Object[][] {
@@ -237,7 +229,6 @@ namespace GeneXus.Programs {
       private string[] P00BG3_A517PageName ;
       private string[] P00BG3_A525PageType ;
       private string[] P00BG3_A518PageStructure ;
-      private SdtSDT_MenuPage AV19SDT_MenuPage ;
       private SdtSDT_InfoContent AV22SDT_InfoContent ;
       private SdtSDT_ContentPage AV18SDT_ContentPage ;
       private SdtSDT_Error aP5_SDT_Error ;

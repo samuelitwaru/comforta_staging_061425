@@ -186,6 +186,7 @@ export class DebugUIManager {
     }
     
     public buildDebugUI(): HTMLElement {
+        console.log('this.debugResults', this.debugResults)
         if (!this.debugResults || 
             !this.debugResults.Summary || 
             !this.debugResults.Pages || 
@@ -194,9 +195,9 @@ export class DebugUIManager {
             const emptyStateMessage = document.createElement('div');
             emptyStateMessage.classList.add('tb_debug_empty_state');
             emptyStateMessage.innerHTML = `
-                <div class="tb_debug_empty_icon">⚠️</div>
+                <div class="tb_debug_empty_icon" style="font-size: 50px">⚠️</div>
                 <h3>No Debug Results Available</h3>
-                <p>There are no debug results to display. Please run a debug scan first.</p>
+                <p>There are no debug results to display.</p>
             `;
             this.container.appendChild(emptyStateMessage);
         } else {

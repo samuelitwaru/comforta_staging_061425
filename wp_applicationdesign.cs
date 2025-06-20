@@ -1150,7 +1150,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256147121029", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025620125146", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1166,7 +1166,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wp_applicationdesign.js", "?20256147121032", false, true);
+         context.AddJavascriptSource("wp_applicationdesign.js", "?2025620125148", false, true);
          context.AddJavascriptSource("UserControls/UC_AppToolBox1Render.js", "", false, true);
          context.AddJavascriptSource("UserControls/UC_PreventAccessModalRender.js", "", false, true);
          /* End function include_jscripts */
@@ -1255,13 +1255,13 @@ namespace GeneXus.Programs {
          bodyStyle = "";
          GXKey = "";
          GXEncryptionTmp = "";
-         AV29SDT_Pages = new GXBaseCollection<SdtSDT_PageStructure>( context, "SDT_PageStructure", "Comforta_version21");
-         AV35SDT_ProductServiceCollection = new GXBaseCollection<SdtSDT_ProductService>( context, "SDT_ProductService", "Comforta_version21");
-         AV59Suppliers = new GXBCCollection<SdtTrn_SupplierGen>( context, "Trn_SupplierGen", "Comforta_version21");
-         AV44SDT_DynamicFormsCollection = new GXBaseCollection<SdtSDT_DynamicForms>( context, "SDT_DynamicForms", "Comforta_version21");
-         AV6BC_Trn_TemplateCollection = new GXBCCollection<SdtTrn_Template>( context, "Trn_Template", "Comforta_version21");
-         AV8BC_Trn_ThemeCollection = new GXBCCollection<SdtTrn_Theme>( context, "Trn_Theme", "Comforta_version21");
-         AV19BC_Trn_MediaCollection = new GXBCCollection<SdtTrn_Media>( context, "Trn_Media", "Comforta_version21");
+         AV29SDT_Pages = new GXBaseCollection<SdtSDT_PageStructure>( context, "SDT_PageStructure", "Comforta_version2");
+         AV35SDT_ProductServiceCollection = new GXBaseCollection<SdtSDT_ProductService>( context, "SDT_ProductService", "Comforta_version2");
+         AV59Suppliers = new GXBCCollection<SdtTrn_SupplierGen>( context, "Trn_SupplierGen", "Comforta_version2");
+         AV44SDT_DynamicFormsCollection = new GXBaseCollection<SdtSDT_DynamicForms>( context, "SDT_DynamicForms", "Comforta_version2");
+         AV6BC_Trn_TemplateCollection = new GXBCCollection<SdtTrn_Template>( context, "Trn_Template", "Comforta_version2");
+         AV8BC_Trn_ThemeCollection = new GXBCCollection<SdtTrn_Theme>( context, "Trn_Theme", "Comforta_version2");
+         AV19BC_Trn_MediaCollection = new GXBCCollection<SdtTrn_Media>( context, "Trn_Media", "Comforta_version2");
          AV42BC_Trn_Location = new SdtTrn_Location(context);
          AV57CurrentAppVersion = new SdtSDT_AppVersion(context);
          GX_FocusControl = "";
@@ -1332,7 +1332,7 @@ namespace GeneXus.Programs {
          AV18BC_Trn_Media = new SdtTrn_Media(context);
          AV53MediaPath = "";
          AV52File = new GxFile(context.GetPhysicalPath());
-         GXt_objcol_SdtTrn_Theme4 = new GXBCCollection<SdtTrn_Theme>( context, "Trn_Theme", "Comforta_version21");
+         GXt_objcol_SdtTrn_Theme4 = new GXBCCollection<SdtTrn_Theme>( context, "Trn_Theme", "Comforta_version2");
          AV58SDT_Error = new SdtSDT_Error(context);
          H005C8_A11OrganisationId = new Guid[] {Guid.Empty} ;
          H005C8_A584ActiveAppVersionId = new Guid[] {Guid.Empty} ;
@@ -1347,7 +1347,7 @@ namespace GeneXus.Programs {
          H005C10_A273Trn_ThemeId = new Guid[] {Guid.Empty} ;
          H005C11_A273Trn_ThemeId = new Guid[] {Guid.Empty} ;
          AV63PreviewLink = "";
-         GXt_objcol_SdtTrn_SupplierGen5 = new GXBCCollection<SdtTrn_SupplierGen>( context, "Trn_SupplierGen", "Comforta_version21");
+         GXt_objcol_SdtTrn_SupplierGen5 = new GXBCCollection<SdtTrn_SupplierGen>( context, "Trn_SupplierGen", "Comforta_version2");
          H005C12_A29LocationId = new Guid[] {Guid.Empty} ;
          H005C12_A392Trn_PageId = new Guid[] {Guid.Empty} ;
          H005C12_A397Trn_PageName = new string[] {""} ;

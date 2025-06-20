@@ -71,7 +71,7 @@ namespace GeneXus.Programs {
 
       public void execute( out GXBCCollection<SdtTrn_Theme> aP0_Gxm2rootcol )
       {
-         this.Gxm2rootcol = new GXBCCollection<SdtTrn_Theme>( context, "Trn_Theme", "Comforta_version21") ;
+         this.Gxm2rootcol = new GXBCCollection<SdtTrn_Theme>( context, "Trn_Theme", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP0_Gxm2rootcol=this.Gxm2rootcol;
@@ -85,7 +85,7 @@ namespace GeneXus.Programs {
 
       public void executeSubmit( out GXBCCollection<SdtTrn_Theme> aP0_Gxm2rootcol )
       {
-         this.Gxm2rootcol = new GXBCCollection<SdtTrn_Theme>( context, "Trn_Theme", "Comforta_version21") ;
+         this.Gxm2rootcol = new GXBCCollection<SdtTrn_Theme>( context, "Trn_Theme", "Comforta_version2") ;
          SubmitImpl();
          aP0_Gxm2rootcol=this.Gxm2rootcol;
       }

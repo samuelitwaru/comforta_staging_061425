@@ -10,6 +10,7 @@ export class IconListCategories {
   selectedCategory: HTMLSpanElement;
   private themeManager: ThemeManager;
   categoryTitle: string;
+  searchInput!: HTMLInputElement;
   // icons: string[];
 
   constructor(categoryTitle: string = "Technical Services & Support") {
@@ -29,6 +30,8 @@ export class IconListCategories {
     this.container.id = "icon-categories-list";
 
     this.selectionDiv.className = "tb-custom-category-selection";
+    this.selectionDiv.id = 'icon-category-select'
+    this.renderIconSearch();
 
     const openSelection = document.createElement("button");
     openSelection.className = "category-select-button";
@@ -53,10 +56,71 @@ export class IconListCategories {
     };
 
     this.selectionDiv.appendChild(openSelection);
-    this.container.appendChild(this.selectionDiv);
+    
+    const searchToggleButton = document.createElement("button")
+    searchToggleButton.className = 'icon-search-button'
+    searchToggleButton.innerHTML = `<i class="fas fa-search search-icon"></i>`
+    this.selectionDiv.append(searchToggleButton)
 
+    searchToggleButton.addEventListener('click', (event:MouseEvent) => {
+      event.preventDefault()
+      this.showIconSearch()
+    })
+
+    this.container.appendChild(this.selectionDiv);
+    this.showIconSelect()
     this.initializeCategoryOptions();
     this.loadThemeIcons(this.categoryTitle);
+
+  }
+
+  renderIconSearch() {
+    const searchDiv = document.createElement("div");
+    searchDiv.id = 'icon-search'
+    searchDiv.innerHTML = `
+      <i class="fas fa-search search-icon"></i>
+    `;
+    searchDiv.className = "icon-search-container tb-hide";
+    this.searchInput = document.createElement("input");
+    this.searchInput.type = "text";
+    this.searchInput.placeholder = "Search icons";
+    this.searchInput.className = "search-input";
+
+    const closeSearchButton = document.createElement("button");
+    closeSearchButton.className = "close-icon-search";
+    closeSearchButton.innerHTML = `<i class="fas fa-times"></i>`;
+    closeSearchButton.onclick = (e:any) => {
+      e.preventDefault();
+      // hide search div and clear input
+      this.searchInput.value = "";
+      this.loadThemeIcons(this.categoryTitle);
+      this.showIconSelect()
+    };
+
+    searchDiv.appendChild(this.searchInput);
+    searchDiv.appendChild(closeSearchButton);
+    this.container.appendChild(searchDiv);
+    this.searchInput.addEventListener("input", (e:any) => {
+      const query = (e.target as HTMLInputElement).value;
+      if (query) {
+        this.loadThemeIcons(this.categoryTitle, query);
+        return;
+      }
+    });
+  }
+
+  showIconSelect() {
+    const searchDiv = document.getElementById('icon-search')
+    const selectDiv = document.getElementById('icon-category-select')
+    searchDiv?.classList.add('tb-hide')
+    selectDiv?.classList.remove('tb-hide')
+  }
+  showIconSearch() {
+    const searchDiv = document.getElementById('icon-search')
+    const selectDiv = document.getElementById('icon-category-select')
+    selectDiv?.classList.add('tb-hide')
+    searchDiv?.classList.remove('tb-hide')
+    this.searchInput.focus()
   }
 
   initializeCategoryOptions() {
@@ -102,16 +166,16 @@ export class IconListCategories {
     }
   }
 
-  loadThemeIcons(iconsCategory: string) {
+  loadThemeIcons(iconsCategory: string, searchQuery: string = "") {
     document.querySelectorAll("#icons-list").forEach((el) => el.remove());
     const iconsList = document.createElement("div") as HTMLElement;
     iconsList.classList.add("icons-list");
     iconsList.id = "icons-list";
 
-    const themeIcons = new IconList(this.themeManager, iconsCategory || this.categoryTitle);
+    const themeIcons = new IconList(this.themeManager, iconsCategory || this.categoryTitle, searchQuery);
     themeIcons.render(iconsList);
 
-    this.container.appendChild(iconsList);
+    this.container.appendChild(iconsList); 
   }
 
   private handleOutsideClick(event: MouseEvent) {

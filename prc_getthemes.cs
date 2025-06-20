@@ -47,7 +47,7 @@ namespace GeneXus.Programs {
       public void execute( out GXBaseCollection<SdtSDT_Theme> aP0_SDT_ThemeCollection ,
                            out SdtSDT_Error aP1_SDT_Error )
       {
-         this.AV10SDT_ThemeCollection = new GXBaseCollection<SdtSDT_Theme>( context, "SDT_Theme", "Comforta_version21") ;
+         this.AV10SDT_ThemeCollection = new GXBaseCollection<SdtSDT_Theme>( context, "SDT_Theme", "Comforta_version2") ;
          this.AV12SDT_Error = new SdtSDT_Error(context) ;
          initialize();
          ExecuteImpl();
@@ -64,7 +64,7 @@ namespace GeneXus.Programs {
       public void executeSubmit( out GXBaseCollection<SdtSDT_Theme> aP0_SDT_ThemeCollection ,
                                  out SdtSDT_Error aP1_SDT_Error )
       {
-         this.AV10SDT_ThemeCollection = new GXBaseCollection<SdtSDT_Theme>( context, "SDT_Theme", "Comforta_version21") ;
+         this.AV10SDT_ThemeCollection = new GXBaseCollection<SdtSDT_Theme>( context, "SDT_Theme", "Comforta_version2") ;
          this.AV12SDT_Error = new SdtSDT_Error(context) ;
          SubmitImpl();
          aP0_SDT_ThemeCollection=this.AV10SDT_ThemeCollection;
@@ -147,7 +147,7 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV10SDT_ThemeCollection = new GXBaseCollection<SdtSDT_Theme>( context, "SDT_Theme", "Comforta_version21");
+         AV10SDT_ThemeCollection = new GXBaseCollection<SdtSDT_Theme>( context, "SDT_Theme", "Comforta_version2");
          AV12SDT_Error = new SdtSDT_Error(context);
          P00B72_A273Trn_ThemeId = new Guid[] {Guid.Empty} ;
          P00B72_A274Trn_ThemeName = new string[] {""} ;

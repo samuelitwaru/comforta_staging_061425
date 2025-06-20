@@ -635,16 +635,6 @@
 "Implementation":"Prc_UpdatePageTitle"
 },
 {
-"Verb":"POST",
-"PathRegexp":"toolbox/v2/debug",
-"Path":"toolbox/v2/debug",
-"Name":"debugappversion",
-"Bodystyle":"Wrapped",
-"VariableAlias": [],
-"ServiceMethod":"gxep_debugappversion",
-"Implementation":"Prc_DebugAppVersion"
-},
-{
 "PathRegexp":"toolbox/v2/update-service",
 "Path":"toolbox/v2/update-service",
 "Verb":"POST",

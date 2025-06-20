@@ -28,8 +28,8 @@ export class HistoryManager {
   addPage(pageId: string = this.currentPageId) {
     if (!this.pages[pageId]) {
       this.pages[pageId] = {
-        history: [], 
-        currentIndex: -1, 
+        history: [],
+        currentIndex: -1,
       };
     }
   }
@@ -55,13 +55,15 @@ export class HistoryManager {
       return this.currentState;
     }
 
+    // Truncate history if we're not at the end (due to undo operations)
     if (page.currentIndex < page.history.length - 1) {
       page.history = page.history.slice(0, page.currentIndex + 1);
     }
 
-    const currentState = page.history[page.currentIndex];
-    if (JSON.stringify(currentState) === JSON.stringify(newState)) {
-      return this.currentState;
+    // Compare with the LAST state in history (most recent)
+    const lastState = page.history[page.history.length - 1];
+    if (JSON.stringify(lastState) === JSON.stringify(newState)) {
+      return this.currentState; // Don't add duplicate state
     }
 
     page.history.push(JSON.parse(JSON.stringify(newState)));

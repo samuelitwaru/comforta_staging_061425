@@ -20,13 +20,12 @@ export class DebugController {
         try {
             const toolBoxService = new ToolBoxService();
             const response = await toolBoxService.debugApp(pageUrls);
-            if (response) {                
-                results = response.DebugResults;
+            if (response) {               
+                results = response.SDT_DebugResults;               
+                this.displayResults(results);
             }
         } catch (error) {
             console.error(error);
-        } finally {
-            this.displayResults(results);
         }
     }
 
@@ -98,6 +97,7 @@ export class DebugController {
     }
 
     displayResults(results: DebugResults) {
+        console.log('results', results)
         const debugUIManager = new DebugUIManager(results);
         const debugDiv = document.getElementById("tb-debugging");
         if (debugDiv) {

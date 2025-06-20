@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: "Development"
-  version: "20250616060921"
+  version: "20250620090611"
 servers:
   - url: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/rest
 paths:
@@ -2412,9 +2412,25 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/SDT_InfoImage_SDT_InfoImageItem"
+        Columns:
+          type: array
+          items:
+            description: ColumnsItem
+            $ref: "#/components/schemas/SDT_InfoContent.InfoContent.Columns_ColumnsItem"
         CtaAttributes:
           $ref: "#/components/schemas/SDT_InfoContent.InfoContent.CtaAttributes"
       x-gx-level: "SDT_InfoContent"
+    SDT_InfoContent.InfoContent.Columns_ColumnsItem:
+      properties:
+        ColId:
+          description: "Col Id"
+          type: "string"
+        Tiles:
+          description: "SDT_Info Tile"
+          type: array
+          items:
+            $ref: "#/components/schemas/SDT_InfoTile_SDT_InfoTileItem"
+      x-gx-level: "SDT_InfoContent.InfoContent"
     SDT_InfoContent.InfoContent.CtaAttributes:
       properties:
         CtaId:
@@ -3602,6 +3618,10 @@ components:
         IsCropped:
           description: "Is Cropped"
           type: "boolean"
+        CroppedOriginalMediaId:
+          description: "Cropped Original Media Id"
+          type: "string"
+          format: "uuid"
     WorkWithPlus.DynamicForms.WWP_FormInstance:
       properties:
         WWPFormInstanceId:

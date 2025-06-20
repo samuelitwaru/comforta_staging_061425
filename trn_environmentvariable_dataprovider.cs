@@ -45,7 +45,7 @@ namespace GeneXus.Programs {
 
       public void execute( out GXBCCollection<SdtTrn_EnvironmentVariable> aP0_ReturnValue )
       {
-         this.AV2ReturnValue = new GXBCCollection<SdtTrn_EnvironmentVariable>( context, "Trn_EnvironmentVariable", "Comforta_version21") ;
+         this.AV2ReturnValue = new GXBCCollection<SdtTrn_EnvironmentVariable>( context, "Trn_EnvironmentVariable", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP0_ReturnValue=this.AV2ReturnValue;
@@ -59,7 +59,7 @@ namespace GeneXus.Programs {
 
       public void executeSubmit( out GXBCCollection<SdtTrn_EnvironmentVariable> aP0_ReturnValue )
       {
-         this.AV2ReturnValue = new GXBCCollection<SdtTrn_EnvironmentVariable>( context, "Trn_EnvironmentVariable", "Comforta_version21") ;
+         this.AV2ReturnValue = new GXBCCollection<SdtTrn_EnvironmentVariable>( context, "Trn_EnvironmentVariable", "Comforta_version2") ;
          SubmitImpl();
          aP0_ReturnValue=this.AV2ReturnValue;
       }
@@ -88,7 +88,7 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV2ReturnValue = new GXBCCollection<SdtTrn_EnvironmentVariable>( context, "Trn_EnvironmentVariable", "Comforta_version21");
+         AV2ReturnValue = new GXBCCollection<SdtTrn_EnvironmentVariable>( context, "Trn_EnvironmentVariable", "Comforta_version2");
          /* GeneXus formulas. */
       }
 

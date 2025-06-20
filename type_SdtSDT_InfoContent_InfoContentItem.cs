@@ -23,7 +23,7 @@ using System.Runtime.Serialization;
 namespace GeneXus.Programs
 {
 	[XmlRoot(ElementName="SDT_InfoContent.InfoContentItem")]
-	[XmlType(TypeName="SDT_InfoContent.InfoContentItem" , Namespace="Comforta_version21" )]
+	[XmlType(TypeName="SDT_InfoContent.InfoContentItem" , Namespace="Comforta_version2" )]
 	[Serializable]
 	public class SdtSDT_InfoContent_InfoContentItem : GxUserType
 	{
@@ -78,6 +78,10 @@ namespace GeneXus.Programs
 			if (gxTv_SdtSDT_InfoContent_InfoContentItem_Images != null)
 			{
 				AddObjectProperty("Images", gxTv_SdtSDT_InfoContent_InfoContentItem_Images, false);
+			}
+			if (gxTv_SdtSDT_InfoContent_InfoContentItem_Columns != null)
+			{
+				AddObjectProperty("Columns", gxTv_SdtSDT_InfoContent_InfoContentItem_Columns, false);
 			}
 			if (gxTv_SdtSDT_InfoContent_InfoContentItem_Ctaattributes != null)
 			{
@@ -242,6 +246,43 @@ namespace GeneXus.Programs
 
 		}
 
+
+		[SoapElement(ElementName="Columns" )]
+		[XmlArray(ElementName="Columns"  )]
+		[XmlArrayItemAttribute(ElementName="ColumnsItem" , IsNullable=false )]
+		public GXBaseCollection<SdtSDT_InfoContent_InfoContentItem_ColumnsItem> gxTpr_Columns
+		{
+			get {
+				if ( gxTv_SdtSDT_InfoContent_InfoContentItem_Columns == null )
+				{
+					gxTv_SdtSDT_InfoContent_InfoContentItem_Columns = new GXBaseCollection<SdtSDT_InfoContent_InfoContentItem_ColumnsItem>( context, "SDT_InfoContent.InfoContentItem.ColumnsItem", "");
+				}
+				return gxTv_SdtSDT_InfoContent_InfoContentItem_Columns;
+			}
+			set {
+				gxTv_SdtSDT_InfoContent_InfoContentItem_Columns_N = false;
+				gxTv_SdtSDT_InfoContent_InfoContentItem_Columns = value;
+				SetDirty("Columns");
+			}
+		}
+
+		public void gxTv_SdtSDT_InfoContent_InfoContentItem_Columns_SetNull()
+		{
+			gxTv_SdtSDT_InfoContent_InfoContentItem_Columns_N = true;
+			gxTv_SdtSDT_InfoContent_InfoContentItem_Columns = null;
+		}
+
+		public bool gxTv_SdtSDT_InfoContent_InfoContentItem_Columns_IsNull()
+		{
+			return gxTv_SdtSDT_InfoContent_InfoContentItem_Columns == null;
+		}
+		public bool ShouldSerializegxTpr_Columns_GxSimpleCollection_Json()
+		{
+			return gxTv_SdtSDT_InfoContent_InfoContentItem_Columns != null && gxTv_SdtSDT_InfoContent_InfoContentItem_Columns.Count > 0;
+
+		}
+
+
 		[SoapElement(ElementName="CtaAttributes" )]
 		[XmlElement(ElementName="CtaAttributes" )]
 		public SdtSDT_InfoContent_InfoContentItem_CtaAttributes gxTpr_Ctaattributes
@@ -310,6 +351,9 @@ namespace GeneXus.Programs
 			gxTv_SdtSDT_InfoContent_InfoContentItem_Images_N = true;
 
 
+			gxTv_SdtSDT_InfoContent_InfoContentItem_Columns_N = true;
+
+
 			gxTv_SdtSDT_InfoContent_InfoContentItem_Ctaattributes_N = true;
 
 			return  ;
@@ -333,6 +377,9 @@ namespace GeneXus.Programs
 		protected GXBaseCollection<GeneXus.Programs.SdtSDT_InfoTile_SDT_InfoTileItem> gxTv_SdtSDT_InfoContent_InfoContentItem_Tiles = null;  
 		protected bool gxTv_SdtSDT_InfoContent_InfoContentItem_Images_N;
 		protected GXBaseCollection<GeneXus.Programs.SdtSDT_InfoImage_SDT_InfoImageItem> gxTv_SdtSDT_InfoContent_InfoContentItem_Images = null;  
+		protected bool gxTv_SdtSDT_InfoContent_InfoContentItem_Columns_N;
+		protected GXBaseCollection<SdtSDT_InfoContent_InfoContentItem_ColumnsItem> gxTv_SdtSDT_InfoContent_InfoContentItem_Columns = null; 
+
 		protected bool gxTv_SdtSDT_InfoContent_InfoContentItem_Ctaattributes_N;
 		protected SdtSDT_InfoContent_InfoContentItem_CtaAttributes gxTv_SdtSDT_InfoContent_InfoContentItem_Ctaattributes = null; 
 
@@ -342,7 +389,7 @@ namespace GeneXus.Programs
 	}
 	#region Rest interface
 	[GxJsonSerialization("wrapped")]
-	[DataContract(Name=@"SDT_InfoContent.InfoContentItem", Namespace="Comforta_version21")]
+	[DataContract(Name=@"SDT_InfoContent.InfoContentItem", Namespace="Comforta_version2")]
 	public class SdtSDT_InfoContent_InfoContentItem_RESTInterface : GxGenericCollectionItem<SdtSDT_InfoContent_InfoContentItem>, System.Web.SessionState.IRequiresSessionState
 	{
 		public SdtSDT_InfoContent_InfoContentItem_RESTInterface( ) : base()
@@ -420,7 +467,22 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="CtaAttributes", Order=5, EmitDefaultValue=false)]
+		[DataMember(Name="Columns", Order=5, EmitDefaultValue=false)]
+		public GxGenericCollection<SdtSDT_InfoContent_InfoContentItem_ColumnsItem_RESTInterface> gxTpr_Columns
+		{
+			get {
+				if (sdt.ShouldSerializegxTpr_Columns_GxSimpleCollection_Json())
+					return new GxGenericCollection<SdtSDT_InfoContent_InfoContentItem_ColumnsItem_RESTInterface>(sdt.gxTpr_Columns);
+				else
+					return null;
+
+			}
+			set {
+				value.LoadCollection(sdt.gxTpr_Columns);
+			}
+		}
+
+		[DataMember(Name="CtaAttributes", Order=6, EmitDefaultValue=false)]
 		public SdtSDT_InfoContent_InfoContentItem_CtaAttributes_RESTInterface gxTpr_Ctaattributes
 		{
 			get {

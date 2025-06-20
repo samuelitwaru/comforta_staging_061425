@@ -784,9 +784,16 @@ span#scroll-right:hover {
 }
 
 .tb-custom-category-selection {
+  display: flex;
   position: relative;
   width: 100%;
   margin-right: 10px;
+}
+
+.tb-custom-category-selection .icon-search-button {
+  outline: none;
+  border: none;
+  background: transparent;
 }
 
 .category-select-button {
@@ -1631,7 +1638,7 @@ div#cta-selected-actions {
 .tb-modal-content {
   background-color: white;
   border-radius: 6px;
-  padding: 40px;
+  padding: 20px 40px;
   width: 815px;
   min-height: 600px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -1647,12 +1654,13 @@ div#cta-selected-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .tb-modal-header h2 {
   margin: 0;
   color: #222f54;
+  font-size: 20px;
 }
 
 .close {
@@ -1665,7 +1673,7 @@ div#cta-selected-actions {
   position: relative;
   border: 2px dashed #ccc;
   border-radius: 8px;
-  padding: 40px 20px;
+  padding: 28px 16px;
   text-align: center;
   transition: all 0.3sease;
   margin-bottom: 20px;
@@ -1743,7 +1751,7 @@ div#cta-selected-actions {
 }
 
 .file-item img {
-  height: 90px;
+  height: 110px;
   width: 100%;
   /* margin-right: 10px; */
   object-fit: cover;
@@ -2500,6 +2508,14 @@ button.add-new-service i {
   flex-shrink: 0;
 }
 
+.tb_debug_dashboard .tb_debug_empty_state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
+
 details summary {
   cursor: pointer;
   display: flex;
@@ -3158,6 +3174,7 @@ canvas {
   width: 235px;
   height: 45px;
   margin-top: 20px;
+  margin-bottom: 16px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -3218,12 +3235,12 @@ input[type="range"]::-webkit-slider-thumb {
 .file-list {
   display: grid;
   grid-template-columns: repeat(6, 1fr); /* Responsive grid */
-  gap: 20px 10px; /* Spacing between images */
-  padding: 16px;
+  gap: 20px 8px; /* Spacing between images */
+  padding: 16px 8px;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #ccc transparent;
-  min-height: 300px;
+  max-height: 300px;
 }
 
 .grid-image {
@@ -3459,3 +3476,91 @@ input[type="range"]::-webkit-slider-thumb {
   max-height: 250px;
   overflow: auto;
 }
+
+.tb-modal .multiple-delete .checkbox-container {
+  margin-bottom: 8px;
+}
+
+.tb-modal .multiple-delete .checkbox-container .select-all-checkbox {
+  font-size: 20px;
+  line-height: 0.8;
+  background-color: rgba(255, 255, 255, 0.95);
+  color: rgb(80, 104, 168);
+  cursor: pointer;
+}
+
+.tb-modal .multiple-delete .checkbox-container label {
+  margin-left: 12px;
+  font-weight: 500;
+}
+
+.tb-modal .multiple-delete .checkbox-container .deselect-all {
+  display: none;
+  cursor: pointer;
+  margin-left: 10px;
+  color: #4b65b0;
+  text-decoration: underline;
+}
+
+.tb-modal .multiple-delete .checkbox-container .deselect-all {
+  display: none;
+  cursor: pointer;
+  margin-left: 10px;
+  color: #4b65b0;
+  text-decoration: underline;
+}
+
+.tb-modal .file-list .file-item .image-checkbox {
+  position: absolute;
+  top: -16px;
+  left: -4px;
+  z-index: 10;
+}
+
+.tb-modal .multiple-delete .checkbox-container .delete-images-button {
+  margin-right: auto;
+  float: right;
+  padding: 0;
+  margin-top: -5px;
+  cursor: pointer;
+  display: none;
+}
+
+.icon-search-container {
+  display: flex;
+  margin-top: 8px;
+  position: relative;
+  width: 100%;
+  gap: 0.5rem;
+  margin-bottom: 4px;
+}
+
+.icon-search-container input[type="text"] {
+  padding: 4px 4px 4px 30px !important;
+  border-radius: 6px !important;
+  width: 95% !important;
+  border: 1px solid #b4b9bd !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+  background-color: white !important;
+}
+
+.icon-search-container .search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #66666687;
+}
+
+.icon-search-container .close-icon-search {
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.tb-hide {
+  display: none;
+}
+

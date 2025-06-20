@@ -46,7 +46,7 @@ namespace GeneXus.Programs {
 
       public void execute( out GXBaseCollection<SdtSDT_Media> aP0_SDT_MediaCollection )
       {
-         this.AV9SDT_MediaCollection = new GXBaseCollection<SdtSDT_Media>( context, "SDT_Media", "Comforta_version21") ;
+         this.AV9SDT_MediaCollection = new GXBaseCollection<SdtSDT_Media>( context, "SDT_Media", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP0_SDT_MediaCollection=this.AV9SDT_MediaCollection;
@@ -60,7 +60,7 @@ namespace GeneXus.Programs {
 
       public void executeSubmit( out GXBaseCollection<SdtSDT_Media> aP0_SDT_MediaCollection )
       {
-         this.AV9SDT_MediaCollection = new GXBaseCollection<SdtSDT_Media>( context, "SDT_Media", "Comforta_version21") ;
+         this.AV9SDT_MediaCollection = new GXBaseCollection<SdtSDT_Media>( context, "SDT_Media", "Comforta_version2") ;
          SubmitImpl();
          aP0_SDT_MediaCollection=this.AV9SDT_MediaCollection;
       }
@@ -128,7 +128,7 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV9SDT_MediaCollection = new GXBaseCollection<SdtSDT_Media>( context, "SDT_Media", "Comforta_version21");
+         AV9SDT_MediaCollection = new GXBaseCollection<SdtSDT_Media>( context, "SDT_Media", "Comforta_version2");
          AV13Error = new SdtSDT_Error(context);
          AV17Udparg1 = Guid.Empty;
          P009M2_A29LocationId = new Guid[] {Guid.Empty} ;

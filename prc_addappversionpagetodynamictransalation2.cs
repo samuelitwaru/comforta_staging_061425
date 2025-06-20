@@ -760,7 +760,7 @@ namespace GeneXus.Programs {
       {
          AV9Language = "";
          AV12LanguageCode = "";
-         AV14SDT_TrnAttributesCollection = new GXBaseCollection<SdtSDT_TrnAttributes>( context, "SDT_TrnAttributes", "Comforta_version21");
+         AV14SDT_TrnAttributesCollection = new GXBaseCollection<SdtSDT_TrnAttributes>( context, "SDT_TrnAttributes", "Comforta_version2");
          AV34SDT_InfoPageTranslation = new SdtSDT_InfoPageTranslation(context);
          AV21SDT_InfoContent = new SdtSDT_InfoContent(context);
          P00GH2_A580DynamicTranslationPrimaryKey = new Guid[] {Guid.Empty} ;

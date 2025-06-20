@@ -592,8 +592,9 @@ namespace GeneXus.Programs {
                                            string aP1_MediaImageData ,
                                            int aP2_MediaSize ,
                                            string aP3_MediaType ,
-                                           out SdtTrn_Media aP4_BC_Trn_Media ,
-                                           out SdtSDT_Error aP5_error )
+                                           Guid aP4_CroppedOriginalMediaId ,
+                                           out SdtTrn_Media aP5_BC_Trn_Media ,
+                                           out SdtSDT_Error aP6_error )
       {
          restCliUploadCroppedMedia = new GXRestAPIClient();
          if ( restLocation == null )
@@ -607,19 +608,20 @@ namespace GeneXus.Programs {
          restCliUploadCroppedMedia.AddBodyVar("MediaImageData", (string)(aP1_MediaImageData));
          restCliUploadCroppedMedia.AddBodyVar("MediaSize", (int)(aP2_MediaSize));
          restCliUploadCroppedMedia.AddBodyVar("MediaType", (string)(aP3_MediaType));
+         restCliUploadCroppedMedia.AddBodyVar("CroppedOriginalMediaId", (Guid)(aP4_CroppedOriginalMediaId));
          restCliUploadCroppedMedia.RestExecute();
          if ( restCliUploadCroppedMedia.ErrorCode != 0 )
          {
             gxProperties.ErrorCode = restCliUploadCroppedMedia.ErrorCode;
             gxProperties.ErrorMessage = restCliUploadCroppedMedia.ErrorMessage;
             gxProperties.StatusCode = restCliUploadCroppedMedia.StatusCode;
-            aP4_BC_Trn_Media = new SdtTrn_Media();
-            aP5_error = new SdtSDT_Error();
+            aP5_BC_Trn_Media = new SdtTrn_Media();
+            aP6_error = new SdtSDT_Error();
          }
          else
          {
-            aP4_BC_Trn_Media = restCliUploadCroppedMedia.GetBodySdt<SdtTrn_Media>("BC_Trn_Media");
-            aP5_error = restCliUploadCroppedMedia.GetBodySdt<SdtSDT_Error>("error");
+            aP5_BC_Trn_Media = restCliUploadCroppedMedia.GetBodySdt<SdtTrn_Media>("BC_Trn_Media");
+            aP6_error = restCliUploadCroppedMedia.GetBodySdt<SdtSDT_Error>("error");
          }
          /* UploadCroppedMedia Constructor */
       }
@@ -1875,8 +1877,9 @@ namespace GeneXus.Programs {
                                        string aP1_PageName ,
                                        string aP2_Url ,
                                        short aP3_WWPFormId ,
-                                       out SdtSDT_AppVersion_PagesItem aP4_MenuPage ,
-                                       out SdtSDT_Error aP5_error )
+                                       string aP4_WWPFormReferenceName ,
+                                       out SdtSDT_AppVersion_PagesItem aP5_MenuPage ,
+                                       out SdtSDT_Error aP6_error )
       {
          restCliCreateLinkPage = new GXRestAPIClient();
          if ( restLocation == null )
@@ -1890,19 +1893,20 @@ namespace GeneXus.Programs {
          restCliCreateLinkPage.AddBodyVar("PageName", (string)(aP1_PageName));
          restCliCreateLinkPage.AddBodyVar("Url", (string)(aP2_Url));
          restCliCreateLinkPage.AddBodyVar("WWPFormId", (short)(aP3_WWPFormId));
+         restCliCreateLinkPage.AddBodyVar("WWPFormReferenceName", (string)(aP4_WWPFormReferenceName));
          restCliCreateLinkPage.RestExecute();
          if ( restCliCreateLinkPage.ErrorCode != 0 )
          {
             gxProperties.ErrorCode = restCliCreateLinkPage.ErrorCode;
             gxProperties.ErrorMessage = restCliCreateLinkPage.ErrorMessage;
             gxProperties.StatusCode = restCliCreateLinkPage.StatusCode;
-            aP4_MenuPage = new SdtSDT_AppVersion_PagesItem();
-            aP5_error = new SdtSDT_Error();
+            aP5_MenuPage = new SdtSDT_AppVersion_PagesItem();
+            aP6_error = new SdtSDT_Error();
          }
          else
          {
-            aP4_MenuPage = restCliCreateLinkPage.GetBodySdt<SdtSDT_AppVersion_PagesItem>("MenuPage");
-            aP5_error = restCliCreateLinkPage.GetBodySdt<SdtSDT_Error>("error");
+            aP5_MenuPage = restCliCreateLinkPage.GetBodySdt<SdtSDT_AppVersion_PagesItem>("MenuPage");
+            aP6_error = restCliCreateLinkPage.GetBodySdt<SdtSDT_Error>("error");
          }
          /* CreateLinkPage Constructor */
       }
@@ -2000,36 +2004,6 @@ namespace GeneXus.Programs {
             aP3_error = restCliUpdatePageTitle.GetBodySdt<SdtSDT_Error>("error");
          }
          /* UpdatePageTitle Constructor */
-      }
-
-      public void gxep_debugappversion( GXBaseCollection<SdtSDT_PageUrl> aP0_PageUrlList ,
-                                        out SdtSDT_DebugResults aP1_DebugResults ,
-                                        out SdtSDT_Error aP2_error )
-      {
-         restCliDebugAppVersion = new GXRestAPIClient();
-         if ( restLocation == null )
-         {
-            InitLocation();
-         }
-         restLocation.ResourceName = "/toolbox/v2/debug";
-         restCliDebugAppVersion.Location = restLocation;
-         restCliDebugAppVersion.HttpMethod = "POST";
-         restCliDebugAppVersion.AddBodyVar("PageUrlList", aP0_PageUrlList);
-         restCliDebugAppVersion.RestExecute();
-         if ( restCliDebugAppVersion.ErrorCode != 0 )
-         {
-            gxProperties.ErrorCode = restCliDebugAppVersion.ErrorCode;
-            gxProperties.ErrorMessage = restCliDebugAppVersion.ErrorMessage;
-            gxProperties.StatusCode = restCliDebugAppVersion.StatusCode;
-            aP1_DebugResults = new SdtSDT_DebugResults();
-            aP2_error = new SdtSDT_Error();
-         }
-         else
-         {
-            aP1_DebugResults = restCliDebugAppVersion.GetBodySdt<SdtSDT_DebugResults>("DebugResults");
-            aP2_error = restCliDebugAppVersion.GetBodySdt<SdtSDT_Error>("error");
-         }
-         /* DebugAppVersion Constructor */
       }
 
       public void gxep_updateproductserviceapi( Guid aP0_ProductServiceId ,
@@ -2504,6 +2478,8 @@ namespace GeneXus.Programs {
          aP4_BC_Trn_Media = new SdtTrn_Media();
          aP5_error = new SdtSDT_Error();
          restCliUploadCroppedMedia = new GXRestAPIClient();
+         aP5_BC_Trn_Media = new SdtTrn_Media();
+         aP6_error = new SdtSDT_Error();
          restCliDeleteMedia = new GXRestAPIClient();
          aP1_result = "";
          aP2_error = new SdtSDT_Error();
@@ -2574,13 +2550,11 @@ namespace GeneXus.Programs {
          aP2_MenuPage = new SdtSDT_AppVersion_PagesItem();
          restCliCreateInfoPage = new GXRestAPIClient();
          restCliCreateLinkPage = new GXRestAPIClient();
-         aP4_MenuPage = new SdtSDT_AppVersion_PagesItem();
+         aP5_MenuPage = new SdtSDT_AppVersion_PagesItem();
          restCliCreateServicePage = new GXRestAPIClient();
          aP2_ContentPage = new SdtSDT_AppVersion_PagesItem();
          restCliDeletePageV2 = new GXRestAPIClient();
          restCliUpdatePageTitle = new GXRestAPIClient();
-         restCliDebugAppVersion = new GXRestAPIClient();
-         aP1_DebugResults = new SdtSDT_DebugResults();
          restCliUpdateProductServiceAPI = new GXRestAPIClient();
          restCliDeleteProductServiceImageAPI = new GXRestAPIClient();
          restCliUpdateLocationAPI__get = new GXRestAPIClient();
@@ -2667,7 +2641,6 @@ namespace GeneXus.Programs {
       protected GXRestAPIClient restCliCreateServicePage ;
       protected GXRestAPIClient restCliDeletePageV2 ;
       protected GXRestAPIClient restCliUpdatePageTitle ;
-      protected GXRestAPIClient restCliDebugAppVersion ;
       protected GXRestAPIClient restCliUpdateProductServiceAPI ;
       protected GXRestAPIClient restCliDeleteProductServiceImageAPI ;
       protected GXRestAPIClient restCliUpdateLocationAPI__get ;
@@ -2700,6 +2673,8 @@ namespace GeneXus.Programs {
       protected string aP0_result ;
       protected SdtTrn_Media aP4_BC_Trn_Media ;
       protected SdtSDT_Error aP5_error ;
+      protected SdtTrn_Media aP5_BC_Trn_Media ;
+      protected SdtSDT_Error aP6_error ;
       protected string aP1_result ;
       protected SdtSDT_Error aP2_error ;
       protected GXBaseCollection<SdtSDT_Media> aP0_SDT_MediaCollection ;
@@ -2728,9 +2703,8 @@ namespace GeneXus.Programs {
       protected SdtSDT_AppVersion aP2_AppVersion ;
       protected SdtSDT_AppVersion aP1_AppVersion ;
       protected SdtSDT_AppVersion_PagesItem aP2_MenuPage ;
-      protected SdtSDT_AppVersion_PagesItem aP4_MenuPage ;
+      protected SdtSDT_AppVersion_PagesItem aP5_MenuPage ;
       protected SdtSDT_AppVersion_PagesItem aP2_ContentPage ;
-      protected SdtSDT_DebugResults aP1_DebugResults ;
       protected SdtTrn_Location aP0_BC_Trn_Location ;
       protected SdtSDT_Error aP4_error ;
       protected GXBaseCollection<SdtSDT_MemoCategory> aP0_SDT_MemoCategories ;

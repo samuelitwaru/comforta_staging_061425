@@ -123,7 +123,7 @@ namespace GeneXus.Programs {
             AV17RecordsToSkip = (short)(AV14PageSize*(AV13PageNumber-1));
          }
          AV20TotalRecords = (short)(A40000GXC1);
-         AV19SDT_Memos = new GXBaseCollection<SdtSDT_Memo>( context, "SDT_Memo", "Comforta_version21");
+         AV19SDT_Memos = new GXBaseCollection<SdtSDT_Memo>( context, "SDT_Memo", "Comforta_version2");
          GXPagingFrom3 = AV17RecordsToSkip;
          GXPagingTo3 = AV16RecordsPerPage;
          /* Using cursor P00D05 */
@@ -246,7 +246,7 @@ namespace GeneXus.Programs {
          AV12OrganisationId = Guid.Empty;
          P00D04_A40000GXC1 = new int[1] ;
          P00D04_n40000GXC1 = new bool[] {false} ;
-         AV19SDT_Memos = new GXBaseCollection<SdtSDT_Memo>( context, "SDT_Memo", "Comforta_version21");
+         AV19SDT_Memos = new GXBaseCollection<SdtSDT_Memo>( context, "SDT_Memo", "Comforta_version2");
          P00D05_A29LocationId = new Guid[] {Guid.Empty} ;
          P00D05_A529SG_OrganisationId = new Guid[] {Guid.Empty} ;
          P00D05_A11OrganisationId = new Guid[] {Guid.Empty} ;

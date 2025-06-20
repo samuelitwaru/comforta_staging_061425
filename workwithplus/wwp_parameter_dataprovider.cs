@@ -45,7 +45,7 @@ namespace GeneXus.Programs.workwithplus {
 
       public void execute( out GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter> aP0_ReturnValue )
       {
-         this.AV2ReturnValue = new GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter>( context, "WWP_Parameter", "Comforta_version21") ;
+         this.AV2ReturnValue = new GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter>( context, "WWP_Parameter", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP0_ReturnValue=this.AV2ReturnValue;
@@ -59,7 +59,7 @@ namespace GeneXus.Programs.workwithplus {
 
       public void executeSubmit( out GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter> aP0_ReturnValue )
       {
-         this.AV2ReturnValue = new GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter>( context, "WWP_Parameter", "Comforta_version21") ;
+         this.AV2ReturnValue = new GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter>( context, "WWP_Parameter", "Comforta_version2") ;
          SubmitImpl();
          aP0_ReturnValue=this.AV2ReturnValue;
       }
@@ -88,7 +88,7 @@ namespace GeneXus.Programs.workwithplus {
 
       public override void initialize( )
       {
-         AV2ReturnValue = new GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter>( context, "WWP_Parameter", "Comforta_version21");
+         AV2ReturnValue = new GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter>( context, "WWP_Parameter", "Comforta_version2");
          /* GeneXus formulas. */
       }
 

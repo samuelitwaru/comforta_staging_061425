@@ -695,34 +695,7 @@ namespace GeneXus.Programs {
                   AV24ThemeCtaColor = ((SdtTrn_Theme_CtaColor)AV21Theme.gxTpr_Ctacolor.Item(AV29GXV4));
                   AV18SDT_ThemeCtaColor = new SdtSDT_Theme_CtaColorsItem(context);
                   AV18SDT_ThemeCtaColor.gxTpr_Ctacolorid = AV24ThemeCtaColor.gxTpr_Ctacolorid;
-                  if ( StringUtil.StrCmp(AV24ThemeCtaColor.gxTpr_Ctacolorname, context.GetMessage( "ctaColor1", "")) == 0 )
-                  {
-                     AV18SDT_ThemeCtaColor.gxTpr_Ctacolorname = context.GetMessage( "CtaColorOne", "");
-                  }
-                  else if ( StringUtil.StrCmp(AV24ThemeCtaColor.gxTpr_Ctacolorname, context.GetMessage( "ctaColor2", "")) == 0 )
-                  {
-                     AV18SDT_ThemeCtaColor.gxTpr_Ctacolorname = context.GetMessage( "CtaColorTwo", "");
-                  }
-                  else if ( StringUtil.StrCmp(AV24ThemeCtaColor.gxTpr_Ctacolorname, context.GetMessage( "ctaColor3", "")) == 0 )
-                  {
-                     AV18SDT_ThemeCtaColor.gxTpr_Ctacolorname = context.GetMessage( "CtaColorThree", "");
-                  }
-                  else if ( StringUtil.StrCmp(AV24ThemeCtaColor.gxTpr_Ctacolorname, context.GetMessage( "ctaColor4", "")) == 0 )
-                  {
-                     AV18SDT_ThemeCtaColor.gxTpr_Ctacolorname = context.GetMessage( "CtaColorFour", "");
-                  }
-                  else if ( StringUtil.StrCmp(AV24ThemeCtaColor.gxTpr_Ctacolorname, context.GetMessage( "ctaColor5", "")) == 0 )
-                  {
-                     AV18SDT_ThemeCtaColor.gxTpr_Ctacolorname = context.GetMessage( "CtaColorFive", "");
-                  }
-                  else if ( StringUtil.StrCmp(AV24ThemeCtaColor.gxTpr_Ctacolorname, context.GetMessage( "ctaColor6", "")) == 0 )
-                  {
-                     AV18SDT_ThemeCtaColor.gxTpr_Ctacolorname = context.GetMessage( "CtaColorSix", "");
-                  }
-                  else
-                  {
-                     AV18SDT_ThemeCtaColor.gxTpr_Ctacolorname = AV24ThemeCtaColor.gxTpr_Ctacolorname;
-                  }
+                  AV18SDT_ThemeCtaColor.gxTpr_Ctacolorname = AV24ThemeCtaColor.gxTpr_Ctacolorname;
                   AV18SDT_ThemeCtaColor.gxTpr_Ctacolorcode = AV24ThemeCtaColor.gxTpr_Ctacolorcode;
                   AV14SDT_Theme.gxTpr_Ctacolors.Add(AV18SDT_ThemeCtaColor, 0);
                   AV29GXV4 = (int)(AV29GXV4+1);
@@ -785,7 +758,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256147121664", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201252463", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -803,7 +776,7 @@ namespace GeneXus.Programs {
          if ( nGXWrapped != 1 )
          {
             context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-            context.AddJavascriptSource("wp_apppreview.js", "?20256147121666", false, true);
+            context.AddJavascriptSource("wp_apppreview.js", "?20256201252464", false, true);
             context.AddJavascriptSource("UserControls/UC_AppPreviewRender.js", "", false, true);
          }
          /* End function include_jscripts */
@@ -902,8 +875,8 @@ namespace GeneXus.Programs {
          A273Trn_ThemeId = Guid.Empty;
          H00B04_A273Trn_ThemeId = new Guid[] {Guid.Empty} ;
          AV11Current_Theme = Guid.Empty;
-         AV20Themes = new GXBCCollection<SdtTrn_Theme>( context, "Trn_Theme", "Comforta_version21");
-         GXt_objcol_SdtTrn_Theme1 = new GXBCCollection<SdtTrn_Theme>( context, "Trn_Theme", "Comforta_version21");
+         AV20Themes = new GXBCCollection<SdtTrn_Theme>( context, "Trn_Theme", "Comforta_version2");
+         GXt_objcol_SdtTrn_Theme1 = new GXBCCollection<SdtTrn_Theme>( context, "Trn_Theme", "Comforta_version2");
          AV21Theme = new SdtTrn_Theme(context);
          AV14SDT_Theme = new SdtSDT_Theme(context);
          AV23ThemeColor = new SdtTrn_Theme_Color(context);

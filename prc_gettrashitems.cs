@@ -47,7 +47,7 @@ namespace GeneXus.Programs {
       public void execute( out GXBaseCollection<SdtSDT_TrashItem> aP0_SDT_TrashItems ,
                            out SdtSDT_Error aP1_SDT_Error )
       {
-         this.AV9SDT_TrashItems = new GXBaseCollection<SdtSDT_TrashItem>( context, "SDT_TrashItem", "Comforta_version21") ;
+         this.AV9SDT_TrashItems = new GXBaseCollection<SdtSDT_TrashItem>( context, "SDT_TrashItem", "Comforta_version2") ;
          this.AV15SDT_Error = new SdtSDT_Error(context) ;
          initialize();
          ExecuteImpl();
@@ -64,7 +64,7 @@ namespace GeneXus.Programs {
       public void executeSubmit( out GXBaseCollection<SdtSDT_TrashItem> aP0_SDT_TrashItems ,
                                  out SdtSDT_Error aP1_SDT_Error )
       {
-         this.AV9SDT_TrashItems = new GXBaseCollection<SdtSDT_TrashItem>( context, "SDT_TrashItem", "Comforta_version21") ;
+         this.AV9SDT_TrashItems = new GXBaseCollection<SdtSDT_TrashItem>( context, "SDT_TrashItem", "Comforta_version2") ;
          this.AV15SDT_Error = new SdtSDT_Error(context) ;
          SubmitImpl();
          aP0_SDT_TrashItems=this.AV9SDT_TrashItems;
@@ -155,7 +155,7 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV9SDT_TrashItems = new GXBaseCollection<SdtSDT_TrashItem>( context, "SDT_TrashItem", "Comforta_version21");
+         AV9SDT_TrashItems = new GXBaseCollection<SdtSDT_TrashItem>( context, "SDT_TrashItem", "Comforta_version2");
          AV15SDT_Error = new SdtSDT_Error(context);
          AV12LocationId = Guid.Empty;
          GXt_guid1 = Guid.Empty;

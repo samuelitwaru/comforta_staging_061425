@@ -1447,3 +1447,5 @@ Filled Out Forms=Ingevulde formulieren
 Filled by=Ingevuld door
 Types=Typen
 WC_Create Supplier Form=Maak leveranciersformulier aan
+Are you sure you want to re-send an invitation to this manager?=Weet u zeker dat u deze manager opnieuw een uitnodiging wilt sturen?
+Are you sure you want to re-send an invitation?=Weet u zeker dat u een uitnodiging opnieuw wilt verzenden?

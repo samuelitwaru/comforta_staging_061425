@@ -124,7 +124,7 @@ namespace GeneXus.Programs {
          }
          if ( AV13Trn_Resident.Success() )
          {
-            AV12SDT_ResidentNotification = new GXBaseCollection<SdtSDT_ResidentNotification>( context, "SDT_ResidentNotification", "Comforta_version21");
+            AV12SDT_ResidentNotification = new GXBaseCollection<SdtSDT_ResidentNotification>( context, "SDT_ResidentNotification", "Comforta_version2");
             AV19SDT_ApiListResponse = new SdtSDT_ApiListResponse(context);
             AV22TotalRecords = A40000GXC1;
             GXPagingFrom3 = AV18RecordsToSkip;
@@ -200,7 +200,7 @@ namespace GeneXus.Programs {
          AV13Trn_Resident = new SdtTrn_Resident(context);
          P009A4_A40000GXC1 = new int[1] ;
          P009A4_n40000GXC1 = new bool[] {false} ;
-         AV12SDT_ResidentNotification = new GXBaseCollection<SdtSDT_ResidentNotification>( context, "SDT_ResidentNotification", "Comforta_version21");
+         AV12SDT_ResidentNotification = new GXBaseCollection<SdtSDT_ResidentNotification>( context, "SDT_ResidentNotification", "Comforta_version2");
          AV19SDT_ApiListResponse = new SdtSDT_ApiListResponse(context);
          P009A5_A62ResidentId = new Guid[] {Guid.Empty} ;
          P009A5_A486AppNotificationId = new Guid[] {Guid.Empty} ;

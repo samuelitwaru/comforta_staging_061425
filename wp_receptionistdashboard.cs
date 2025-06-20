@@ -2547,7 +2547,7 @@ namespace GeneXus.Programs {
                GXt_SdtWWPDateRangePickerOptions10 = AV14WWPDateRangePickerOptions;
                new WorkWithPlus.workwithplus_web.wwp_geteventsforflatdate(context ).execute(  AV26EventsAux,  AV7DotsFromDate,  AV8DotsToDate,  Usercontrol1_Defaulteventstyle, out  GXt_SdtWWPDateRangePickerOptions10) ;
                AV14WWPDateRangePickerOptions = GXt_SdtWWPDateRangePickerOptions10;
-               AV26EventsAux = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item>( context, "Item", "Comforta_version21");
+               AV26EventsAux = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item>( context, "Item", "Comforta_version2");
             }
             else
             {
@@ -2926,7 +2926,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256146453232", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201252876", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2942,7 +2942,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wp_receptionistdashboard.js", "?20256146453233", false, true);
+         context.AddJavascriptSource("wp_receptionistdashboard.js", "?20256201252876", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
@@ -3570,8 +3570,8 @@ namespace GeneXus.Programs {
          AV11LoadedDotsToDate = DateTime.MinValue;
          AV12LoadedFromDate = DateTime.MinValue;
          AV13LoadedToDate = DateTime.MinValue;
-         AV25Events = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item>( context, "Item", "Comforta_version21");
-         AV70USDTNotificationsData = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version21");
+         AV25Events = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item>( context, "Item", "Comforta_version2");
+         AV70USDTNotificationsData = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version2");
          AV18Date = DateTime.MinValue;
          AV15CalendarEventId = "";
          sDynURL = "";
@@ -3615,17 +3615,17 @@ namespace GeneXus.Programs {
          AV53LocationId = Guid.Empty;
          AV73ResidentTitle = "";
          GXt_char2 = "";
-         AV9HomeSampleData = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtHomeSampleData_HomeSampleDataItem>( context, "HomeSampleDataItem", "Comforta_version21");
-         GXt_objcol_SdtHomeSampleData_HomeSampleDataItem4 = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtHomeSampleData_HomeSampleDataItem>( context, "HomeSampleDataItem", "Comforta_version21");
+         AV9HomeSampleData = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtHomeSampleData_HomeSampleDataItem>( context, "HomeSampleDataItem", "Comforta_version2");
+         GXt_objcol_SdtHomeSampleData_HomeSampleDataItem4 = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtHomeSampleData_HomeSampleDataItem>( context, "HomeSampleDataItem", "Comforta_version2");
          GridusdtnotificationsdatasRow = new GXWebRow();
          AV16CalendarEvents = new WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item(context);
          AV52Link = "";
-         GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem7 = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version21");
+         GXt_objcol_SdtUSDTNotificationsData_USDTNotificationsDataItem7 = new GXBaseCollection<SdtUSDTNotificationsData_USDTNotificationsDataItem>( context, "USDTNotificationsDataItem", "Comforta_version2");
          GXt_objcol_date9 = new GxSimpleCollection<DateTime>();
          AV7DotsFromDate = DateTime.MinValue;
          AV8DotsToDate = DateTime.MinValue;
-         AV26EventsAux = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item>( context, "Item", "Comforta_version21");
-         GXt_objcol_SdtWWP_Calendar_Events_Item8 = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item>( context, "Item", "Comforta_version21");
+         AV26EventsAux = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item>( context, "Item", "Comforta_version2");
+         GXt_objcol_SdtWWP_Calendar_Events_Item8 = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtWWP_Calendar_Events_Item>( context, "Item", "Comforta_version2");
          GXt_dtime5 = (DateTime)(DateTime.MinValue);
          AV14WWPDateRangePickerOptions = new WorkWithPlus.workwithplus_web.SdtWWPDateRangePickerOptions(context);
          GXt_SdtWWPDateRangePickerOptions10 = new WorkWithPlus.workwithplus_web.SdtWWPDateRangePickerOptions(context);

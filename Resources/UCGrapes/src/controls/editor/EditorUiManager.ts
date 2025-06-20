@@ -690,11 +690,11 @@ export class EditorUIManager {
 
     const alignment =
       window.innerWidth <= 1440
-        ? frames.length > 1
-          ? "center"
+        ? frames.length > 2
+          ? "right"
           : "center"
-        : frames.length > 3
-          ? "center"
+        : frames.length > 2
+          ? "right"
           : "center";
 
     scrollContainer.style.setProperty("justify-content", alignment);

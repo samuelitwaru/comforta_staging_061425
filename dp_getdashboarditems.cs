@@ -54,7 +54,7 @@ namespace GeneXus.Programs {
 
       public void execute( out GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem> aP0_Gxm2rootcol )
       {
-         this.Gxm2rootcol = new GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem>( context, "UHomeModulesSDTItem", "Comforta_version21") ;
+         this.Gxm2rootcol = new GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem>( context, "UHomeModulesSDTItem", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP0_Gxm2rootcol=this.Gxm2rootcol;
@@ -68,7 +68,7 @@ namespace GeneXus.Programs {
 
       public void executeSubmit( out GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem> aP0_Gxm2rootcol )
       {
-         this.Gxm2rootcol = new GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem>( context, "UHomeModulesSDTItem", "Comforta_version21") ;
+         this.Gxm2rootcol = new GXBaseCollection<SdtUHomeModulesSDT_UHomeModulesSDTItem>( context, "UHomeModulesSDTItem", "Comforta_version2") ;
          SubmitImpl();
          aP0_Gxm2rootcol=this.Gxm2rootcol;
       }

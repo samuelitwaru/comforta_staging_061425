@@ -21,11 +21,12 @@ export class SingleImageFile {
   private fileListContainer?: HTMLElement;
   private isCurrentlySelected: boolean = false;
   private controller: ImageUploadManager;
+  private checkbox: HTMLElement | null = null;
 
   constructor(
     mediaFile: Media,
     controller: ImageUploadManager,
-    imageUpload: ImageUploadUi,
+    imageUpload: ImageUploadUi
   ) {
     this.mediaFile = mediaFile;
     this.controller = controller;
@@ -99,18 +100,13 @@ export class SingleImageFile {
 
   private initializeComponent(): void {
     const img = this.createPreviewImage();
-    const statusCheck = this.createImageCheckbox();
     const actionColumn = this.createActionColumn();
 
-    statusCheck.style.display = "none";
-
     this.container.appendChild(img);
-    actionColumn.prepend(statusCheck);
     this.container.appendChild(actionColumn);
 
-    if (this.type !== "info") {
-      this.setupItemClickEvent(statusCheck);
-    }
+    // Setup click event for container to trigger checkbox selection
+    this.setupContainerClickEvent();
   }
 
   /* UI Creation Methods */
@@ -120,23 +116,6 @@ export class SingleImageFile {
     img.alt = this.mediaFile.MediaName;
     img.className = "preview-image";
     return img;
-  }
-
-  private createStatusIcon(): HTMLElement {
-    const statusCheck = document.createElement("span");
-    statusCheck.className = "status-icon";
-
-    Object.assign(statusCheck.style, {
-      position: "absolute",
-      top: "-11px",
-      left: "-8px",
-      width: "25px",
-      height: "25px",
-      zIndex: "4",
-      display: "none",
-    });
-
-    return statusCheck;
   }
 
   private createActionColumn(): HTMLElement {
@@ -152,82 +131,63 @@ export class SingleImageFile {
       zIndex: "3",
       position: "absolute",
       top: "-16px",
-      left: "-5px"
+      left: "-5px",
     });
 
-    if (this.type === "info") {
-      actionColumn.appendChild(this.createImageCheckbox());
+    this.checkbox = this.createImageCheckbox();
+    actionColumn.appendChild(this.checkbox);
+
+    if (this.type !== "info") {
+      this.checkbox.style.display = "none";
     }
 
-    // actionColumn.appendChild(this.createReplaceButton());
     actionColumn.appendChild(this.createDeleteButton());
 
     return actionColumn;
   }
 
-  private createImageCheckbox(): HTMLElement {
+  public createImageCheckbox(): HTMLElement {
     const checkbox = document.createElement("span");
     checkbox.setAttribute("role", "checkbox");
     checkbox.setAttribute("aria-label", "Select image");
     checkbox.setAttribute("tabindex", "0");
     checkbox.title = "Select image";
+    checkbox.className = "select-media-checkbox";
 
     Object.assign(checkbox.style, {
       fontSize: "25px",
       lineHeight: "0.8",
-      backgroundColor: "rgba(255,255,255,0.95)",
+      backgroundColor: "#fff",
       color: "#5068a8",
       cursor: "pointer",
+      borderRadius: "4px",
+      marginLeft: "2px",
     });
 
-    // Set initial visual state based on current selection
     this.updateCheckboxVisual(checkbox, this.isCurrentlySelected);
 
     checkbox.addEventListener("click", (e) => {
+      if (this.checkMultipleDeleteMode()) return;
       e.stopPropagation();
-      this.toggleImageSelection(checkbox);
+      this.handleCheckboxClick();
     });
 
     checkbox.addEventListener("keydown", (e) => {
       if (e.key === " " || e.key === "Enter") {
         e.preventDefault();
-        this.toggleImageSelection(checkbox);
+        this.handleCheckboxClick();
       }
     });
 
     return checkbox;
   }
 
-  private createReplaceButton(): HTMLElement {
-    const addImage = document.createElement("span");
-    addImage.className = "add-image";
-    addImage.title = "Replace image";
-
-    Object.assign(addImage.style, {
-      width: "33px",
-      height: "33px",
-      backgroundImage: "url('/Resources/UCGrapes/public/images/rotatenew.png')",
-      backgroundSize: "contain",
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "center",
-      cursor: "pointer",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    });
-
-    addImage.addEventListener("click", (e) => {
-      e.stopPropagation();
-      // this.handleReplaceClick();
-    });
-
-    return addImage;
-  }
-
   private createDeleteButton(): HTMLElement {
     const deleteSpan = document.createElement("span");
     deleteSpan.className = "delete-media fa-regular fa-trash-can";
     deleteSpan.title = "Delete image";
+
+    if (this.imageUpload.isInDeleteMode) deleteSpan.style.display = "none";
 
     Object.assign(deleteSpan.style, {
       width: "33px",
@@ -239,198 +199,155 @@ export class SingleImageFile {
       justifyContent: "center",
       cursor: "pointer",
       border: "1px solid #5068a8",
-      marginLeft: "auto"
+      marginLeft: "auto",
+      marginRight: "4px",
+      borderRadius: "50%",
     });
 
     deleteSpan.addEventListener("click", (e) => {
       e.stopPropagation();
+      if (this.checkMultipleDeleteMode()) return;
       this.deleteEvent();
     });
 
     return deleteSpan;
   }
 
-  /* Selection Handling Methods */
   private updateCheckboxVisual(checkbox: HTMLElement, isChecked: boolean): void {
-    checkbox.className = isChecked
-      ? "select-media-checkbox fa-solid fa-square-check selected-checkbox"
-      : "select-media-checkbox fa-regular fa-square";
+    checkbox.classList.remove(
+      "fa-solid", "fa-square-check", "selected-checkbox",
+      "fa-regular", "fa-square"
+    );
+
+    if (isChecked) {
+      checkbox.classList.add("fa-solid", "fa-square-check", "selected-checkbox");
+      checkbox.style.color = "#5068a8"; // Green for selected
+    } else {
+      checkbox.classList.add("fa-regular", "fa-square");
+      checkbox.style.color = "#5068a8"; // Default blue
+    }
+
     checkbox.setAttribute("aria-checked", String(isChecked));
   }
 
-  private toggleImageSelection(checkbox: HTMLElement): void {
-    const newState = !this.isCurrentlySelected;
-    
-    // Update internal state first
-    this.isCurrentlySelected = newState;
-    
-    // Update visual state
-    this.updateCheckboxVisual(checkbox, newState);
-
-    if (newState) {
-      // Handle select
-      this.handleImageSelect();
+  private handleCheckboxClick(): void {
+    if (this.type === "info") {
+      this.toggleImageSelection();
     } else {
-      // Handle unselect
-      this.handleImageUnselect();
+      this.handleSingleSelection();
     }
   }
 
-  private handleImageSelect(): void {
-    this.controller.addSelectedImage({
-      Id: this.mediaFile.MediaId,
-      Url: this.mediaFile.MediaUrl,
-    });
-
-    // Update localStorage if needed
-    if (this.type === "info" && this.infoId) {
-      this.updateStoredImageSelection(true);
-    }
-
-    // Dispatch custom event for other components to listen
-    this.dispatchSelectionEvent('selected');
+  private toggleImageSelection(): void {
+    const newState = !this.isCurrentlySelected;
+    this.setSelectionState(newState);
   }
 
-  private handleImageUnselect(): void {
-    // Remove from ImageUpload's selected images
-    this.controller.removeSelectedImage(this.mediaFile.MediaId);
+  private handleSingleSelection(): void {
+    // Clear other selections first
+    this.controller.clearSelectedImages();
+    this.clearOtherSelections();
 
-    // Update localStorage if needed
-    if (this.type === "info" && this.infoId) {
-      this.updateStoredImageSelection(false);
-    }
+    // Select this image
+    this.setSelectionState(true);
 
-    // Clear any visual selection indicators
-    this.clearVisualSelection();
-
-    // Dispatch custom event
-    this.dispatchSelectionEvent('unselected');
+    // Show image editor
+    this.imageUpload.displayImageEditor(this.mediaFile, false);
   }
 
-  private updateStoredImageSelection(isSelected: boolean): void {
-    try {
-      const pageId = (globalThis as any).currentPageId;
-      if (!pageId) return;
+  private setSelectionState(isSelected: boolean): void {
+    const wasSelected = this.isCurrentlySelected;
+    this.isCurrentlySelected = isSelected;
 
-      const storedData = localStorage.getItem(`data-${pageId}`);
-      if (!storedData) return;
-
-      const data = JSON.parse(storedData);
-      const content = data?.PageInfoStructure?.InfoContent?.find(
-        (content: InfoType) => content.InfoId === this.infoId
-      );
-
-      if (!content) return;
-
-      if (!content.Images) {
-        content.Images = [];
+    // Update checkbox visual
+    if (this.checkbox) {
+      this.updateCheckboxVisual(this.checkbox, isSelected);
+      
+      // Show/hide checkbox based on type and selection
+      if (this.type !== "info") {
+        this.checkbox.style.display = isSelected ? "block" : "none";
       }
+    }
 
-      const imageId = `id-${this.mediaFile.MediaId}`;
-      const existingImageIndex = content.Images.findIndex(
-        (img: Image) => img.InfoImageId === imageId
-      );
+    // Update container visual state
+    if (isSelected) {
+      this.container.classList.add("selected");
+    } else {
+      this.container.classList.remove("selected", "highlighted");
+    }
 
-      if (isSelected && existingImageIndex === -1) {
-        // Add to stored images
-        content.Images.push({
-          InfoImageId: imageId,
-          InfoImageUrl: this.mediaFile.MediaUrl,
-          // Add other required properties as needed
-        });
-      } else if (!isSelected && existingImageIndex !== -1) {
-        // Remove from stored images
-        content.Images.splice(existingImageIndex, 1);
-      }
-    } catch (error) {
-      console.error("Error updating stored image selection:", error);
+    // Handle controller state
+    if (isSelected) {
+      this.controller.addSelectedImage({
+        Id: this.mediaFile.MediaId,
+        Url: this.mediaFile.MediaUrl,
+      });
+      this.dispatchSelectionEvent("selected");
+    } else if (!isSelected) {
+      this.controller.removeSelectedImage(this.mediaFile.MediaId);
+      this.dispatchSelectionEvent("unselected");
     }
   }
 
-  private clearVisualSelection(): void {
-    console.log('reached here')
-    // Remove any selection-related classes
-    this.container.classList.remove('selected', 'highlighted');
-    
-    // Hide status icon if visible
-    const statusIcons = this.container.querySelectorAll('.select-media-checkbox');
-    statusIcons.forEach((statusIcon) => {
-      (statusIcon as HTMLElement).style.display = 'none';
-    });
-  }
-
-  private dispatchSelectionEvent(action: 'selected' | 'unselected'): void {
-    const event = new CustomEvent('imageSelectionChanged', {
+  private dispatchSelectionEvent(action: "selected" | "unselected"): void {
+    const event = new CustomEvent("imageSelectionChanged", {
       detail: {
         mediaId: this.mediaFile.MediaId,
         mediaUrl: this.mediaFile.MediaUrl,
         action: action,
-        isSelected: this.isCurrentlySelected
-      }
+        isSelected: this.isCurrentlySelected,
+      },
     });
-    
+
     this.container.dispatchEvent(event);
   }
 
-  /* Event Handlers */
-  private handleReplaceClick(): void {
-    this.controller.clearSelectedImages();
-    this.imageUpload.displayImageEditor(this.mediaFile.MediaUrl);
-    this.controller.addSelectedImage({
-      Id: this.mediaFile.MediaId,
-      Url: this.mediaFile.MediaUrl,
-    });
-    this.imageUpload.loadMediaFiles();
-  }
-
-  private setupItemClickEvent(statusCheck: HTMLElement): void {
-    this.container.addEventListener("click", () => {
-      this.handleItemClick(statusCheck);
+  private setupContainerClickEvent(): void {
+    this.container.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (this.checkMultipleDeleteMode()) return;
+      if ((e.target as HTMLElement).closest('.action-column')) {
+        return;
+      }
+      // Trigger checkbox behavior
+      this.handleCheckboxClick();
     });
   }
 
-  private handleItemClick(statusCheck: HTMLElement): void {
-    // this.hideFileList();
-    this.controller.clearSelectedImages();
-    this.imageUpload.displayImageEditor(this.mediaFile.MediaUrl);
-    this.controller.addSelectedImage({
-      Id: this.mediaFile.MediaId,
-      Url: this.mediaFile.MediaUrl,
-    });
-    this.clearOtherSelections();
-    this.showSelectionStatus(statusCheck);
-  }
-
-  private hideFileList(): void {
-    this.fileListContainer = document.getElementById("fileList") as HTMLElement;
-    if (this.fileListContainer) {
-      this.fileListContainer.style.display = "none";
+  private checkMultipleDeleteMode(): boolean {
+    const multipleDeleteToggle = document.getElementById("selectAllCheckbox") as HTMLInputElement;
+    
+    if (multipleDeleteToggle && multipleDeleteToggle.ariaChecked === "true") {
+        return true;
     }
+    
+    return false;
   }
 
   private clearOtherSelections(): void {
     document.querySelectorAll(".file-item").forEach((element) => {
-      element.classList.remove("selected");
-      const icon = element.querySelector(".select-media-checkbox") as HTMLElement;
-      if (icon) {
-        icon.style.display = "none";
+      if (element !== this.container) {
+        element.classList.remove("selected");
+        const checkbox = element.querySelector(".select-media-checkbox") as HTMLElement;
+        if (checkbox) {
+          // Reset other checkboxes
+          checkbox.classList.remove(
+            "fa-solid", "fa-square-check", "selected-checkbox"
+          );
+          checkbox.classList.add("fa-regular", "fa-square");
+          checkbox.style.color = "#5068a8";
+          
+          // Hide checkbox if not info type
+          const container = element.closest('.file-item') as HTMLElement;
+          if (container && !container.classList.contains('info-type')) {
+            checkbox.style.display = "none";
+          }
+        }
       }
     });
   }
 
-  private showSelectionStatus(statusCheck: HTMLElement): void {
-    Object.assign(statusCheck.style, {
-      backgroundImage: "url('/Resources/UCGrapes/public/images/check.png')",
-      backgroundSize: "contain",
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "center",
-      display: "block",
-    });
-
-    this.container.classList.add("selected");
-  }
-
-  private deleteEvent(): void {
+  public deleteEvent(): void {
     const confirmationBox = new ConfirmationBox(
       "Are you sure you want to delete this media file?",
       "Delete media",
@@ -442,11 +359,13 @@ export class SingleImageFile {
   private async handleDeleteConfirmation(): Promise<void> {
     try {
       if (this.isCurrentlySelected) {
-        this.handleImageUnselect();
+        this.setSelectionState(false);
       }
 
       await this.toolboxService.deleteMedia(this.mediaFile.MediaId);
       this.removeFromDOM();
+      this.imageUpload.loadMediaFiles();
+      this.imageUpload.refreshUploadArea();
     } catch (error) {
       console.error("Error deleting media:", error);
     }
@@ -457,23 +376,21 @@ export class SingleImageFile {
     mediaItem?.remove();
   }
 
+  /* Public Methods */
   public getElement(): HTMLElement {
     return this.container;
   }
 
   public render(container: HTMLElement): void {
+    // Add type class for easier identification
+    if (this.type === "info") {
+      this.container.classList.add("info-type");
+    }
     container.appendChild(this.container);
   }
 
   public unselectImage(): void {
-    if (this.isCurrentlySelected) {
-      const checkbox = this.container.querySelector('.select-media-checkbox') as HTMLElement;
-      if (checkbox) {
-        this.toggleImageSelection(checkbox);
-      } else {
-        this.handleImageUnselect();
-      }
-    }
+    this.setSelectionState(false);
   }
 
   public getSelectionState(): boolean {
@@ -481,13 +398,11 @@ export class SingleImageFile {
   }
 
   public selectImage(): void {
-    if (!this.isCurrentlySelected) {
-      const checkbox = this.container.querySelector('.select-media-checkbox') as HTMLElement;
-      if (checkbox) {
-        this.toggleImageSelection(checkbox);
-      } else {
-        this.handleImageSelect();
-      }
-    }
+    this.setSelectionState(true);
+  }
+
+  // Method to programmatically trigger checkbox click
+  public triggerSelection(): void {
+    this.handleCheckboxClick();
   }
 }

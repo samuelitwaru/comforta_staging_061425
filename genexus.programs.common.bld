@@ -14,12 +14,10 @@ GxModelInfoProvider.cs
 @genexus.programs.sdt.bld
 workwithplus\dynamicforms\type_SdtWWP_FormInstance.cs
 workwithplus\dynamicforms\type_SdtWWP_FormInstance_Element.cs
-type_SdtTrn_Memo.cs
 workwithplus\dynamicforms\type_SdtWWP_Form.cs
 workwithplus\dynamicforms\type_SdtWWP_Form_Element.cs
 type_SdtTrn_OrganisationType.cs
 type_SdtTrn_Manager.cs
-type_SdtTrn_Organisation.cs
 type_SdtTrn_SupplierAgb.cs
 type_SdtTrn_NetworkCompany.cs
 type_SdtTrn_NetworkIndividual.cs
@@ -43,7 +41,6 @@ wwpbaseobjects\discussions\type_SdtWWP_DiscussionMessage.cs
 wwpbaseobjects\type_SdtUserCustomizations.cs
 type_SdtTrn_SupplierAgbType.cs
 type_SdtTrn_SupplierGenType.cs
-type_SdtTrn_Media.cs
 type_SdtTrn_Template.cs
 type_SdtTrn_Device.cs
 type_SdtTrn_PreferredAgbSupplier.cs
@@ -65,10 +62,6 @@ type_SdtTrn_SupplierDynamicForm.cs
 type_SdtTrn_Location.cs
 type_SdtTrn_AgendaCalendar.cs
 type_SdtTrn_SupplierGen.cs
-type_SdtTrn_Theme.cs
-type_SdtTrn_Theme_Color.cs
-type_SdtTrn_Theme_CtaColor.cs
-type_SdtTrn_Theme_Icon.cs
 type_SdtTrn_Receptionist.cs
 type_SdtTrn_ProductService.cs
 type_SdtTrn_LocationDynamicForm.cs
@@ -77,6 +70,14 @@ type_SdtTrn_AppVersion.cs
 type_SdtTrn_AppVersion_Page.cs
 type_SdtTrn_Page.cs
 type_SdtTrn_ResidentPackage.cs
+type_SdtTrn_Theme.cs
+type_SdtTrn_Theme_Color.cs
+type_SdtTrn_Theme_CtaColor.cs
+type_SdtTrn_Theme_Icon.cs
+type_SdtTrn_Memo.cs
+type_SdtTrn_Media.cs
+type_SdtTrn_Organisation.cs
+type_SdtTrn_CroppedMedia.cs
 type_SdtQRCodeLibrary.cs
 type_SdtEO_Base64Image.cs
 type_SdtRandomStringGenerator.cs

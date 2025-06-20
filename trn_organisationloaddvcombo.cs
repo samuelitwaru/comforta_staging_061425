@@ -371,7 +371,7 @@ namespace GeneXus.Programs {
          AV24Combo_DataJson = "";
          AV9WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          AV14SearchTxt = "";
-         AV33GXV1 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version21");
+         AV33GXV1 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
          AV31OrganisationAddressCountry_DPItem = new SdtSDT_Country_SDT_CountryItem(context);
          AV16Combo_DataItem = new WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item(context);
          AV30ComboTitles = new GxSimpleCollection<string>();
@@ -391,8 +391,8 @@ namespace GeneXus.Programs {
          AV28OrganisationTypeId = Guid.Empty;
          P005W5_A19OrganisationTypeId = new Guid[] {Guid.Empty} ;
          P005W5_A20OrganisationTypeName = new string[] {""} ;
-         AV40GXV4 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version21");
-         GXt_objcol_SdtSDT_Country_SDT_CountryItem1 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version21");
+         AV40GXV4 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
+         GXt_objcol_SdtSDT_Country_SDT_CountryItem1 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
          AV32OrganisationPhoneCode_DPItem = new SdtSDT_Country_SDT_CountryItem(context);
          P005W6_A11OrganisationId = new Guid[] {Guid.Empty} ;
          P005W6_A361OrganisationPhoneCode = new string[] {""} ;

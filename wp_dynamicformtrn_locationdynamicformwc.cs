@@ -3905,7 +3905,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256145374926", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201245987", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3921,7 +3921,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("wp_dynamicformtrn_locationdynamicformwc.js", "?20256145374930", false, true);
+         context.AddJavascriptSource("wp_dynamicformtrn_locationdynamicformwc.js", "?20256201245989", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -4423,7 +4423,7 @@ namespace GeneXus.Programs {
          Dvelop_confirmpanel_useractiondelete_Cancelbuttoncaption = "WWP_ConfirmTextCancel";
          Dvelop_confirmpanel_useractiondelete_Nobuttoncaption = "WWP_ConfirmTextNo";
          Dvelop_confirmpanel_useractiondelete_Yesbuttoncaption = "WWP_ConfirmTextYes";
-         Dvelop_confirmpanel_useractiondelete_Confirmationtext = "Are you sure you want to delete form? All submitted responses will be deleted as well.";
+         Dvelop_confirmpanel_useractiondelete_Confirmationtext = "Are you sure you want to delete form? All submitted responses and form links in the application will be deleted as well.";
          Dvelop_confirmpanel_useractiondelete_Title = context.GetMessage( "Delete form", "");
          Dvelop_confirmpanel_useractioncopy_Confirmtype = "1";
          Dvelop_confirmpanel_useractioncopy_Yesbuttonposition = "left";

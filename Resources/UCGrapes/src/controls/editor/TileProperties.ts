@@ -181,7 +181,6 @@ export class TileProperties {
         "#icon-categories-list"
       ) as HTMLElement;
       const allOptions = categoryContainer.querySelectorAll(".category-option");
-      console.log(allOptions)
       allOptions.forEach((opt) => {
         opt.classList.remove("selected");
         if (opt.getAttribute("data-value") === categoryTitle) {
@@ -217,6 +216,7 @@ export class TileProperties {
       ) {
         iconElement.style.border = "2px solid #5068A8";
         const svgPath = iconElement.querySelector("svg path") as SVGPathElement;
+        iconElement.scrollIntoView()
         if (svgPath) {
           svgPath.setAttribute("fill", "#5068A8");
         }

@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
    [XmlRoot(ElementName = "Trn_Theme.Color" )]
-   [XmlType(TypeName =  "Trn_Theme.Color" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "Trn_Theme.Color" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtTrn_Theme_Color : GxSilentTrnSdt, IGxSilentTrnGridItem
    {
@@ -401,7 +401,7 @@ namespace GeneXus.Programs {
       private Guid gxTv_SdtTrn_Theme_Color_Colorid_Z ;
    }
 
-   [DataContract(Name = @"Trn_Theme.Color", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"Trn_Theme.Color", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtTrn_Theme_Color_RESTInterface : GxGenericCollectionItem<SdtTrn_Theme_Color>
    {
@@ -478,7 +478,7 @@ namespace GeneXus.Programs {
 
    }
 
-   [DataContract(Name = @"Trn_Theme.Color", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"Trn_Theme.Color", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtTrn_Theme_Color_RESTLInterface : GxGenericCollectionItem<SdtTrn_Theme_Color>
    {

@@ -96,7 +96,7 @@ namespace GeneXus.Programs {
             n40000GXC1 = false;
          }
          pr_default.close(0);
-         AV16SDT_ApiResidentFilledForms = new GXBaseCollection<SdtSDT_ApiResidentFilledForms>( context, "SDT_ApiResidentFilledForms", "Comforta_version21");
+         AV16SDT_ApiResidentFilledForms = new GXBaseCollection<SdtSDT_ApiResidentFilledForms>( context, "SDT_ApiResidentFilledForms", "Comforta_version2");
          AV24SDT_ApiListResponse = new SdtSDT_ApiListResponse(context);
          if ( ( AV18PageSize < 1 ) || ( AV19PageNumber < 1 ) )
          {
@@ -165,7 +165,7 @@ namespace GeneXus.Programs {
          AV11result = "";
          P00AV3_A40000GXC1 = new int[1] ;
          P00AV3_n40000GXC1 = new bool[] {false} ;
-         AV16SDT_ApiResidentFilledForms = new GXBaseCollection<SdtSDT_ApiResidentFilledForms>( context, "SDT_ApiResidentFilledForms", "Comforta_version21");
+         AV16SDT_ApiResidentFilledForms = new GXBaseCollection<SdtSDT_ApiResidentFilledForms>( context, "SDT_ApiResidentFilledForms", "Comforta_version2");
          AV24SDT_ApiListResponse = new SdtSDT_ApiListResponse(context);
          P00AV4_A112WWPUserExtendedId = new string[] {""} ;
          P00AV4_A239WWPFormInstanceDate = new DateTime[] {DateTime.MinValue} ;

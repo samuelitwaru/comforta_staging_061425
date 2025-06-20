@@ -185,7 +185,8 @@ export class ToolBoxService {
     appVersionId: string,
     pageName: string,
     url: string,
-    formId: any
+    formId: any,
+    FormReferenceName: any
   ) {
     const response = await this.fetchAPI("/api/toolbox/v2/create-link-page", {
       method: "POST",
@@ -194,6 +195,7 @@ export class ToolBoxService {
         pageName: pageName,
         url: url,
         WWPFormId: formId,
+        WWPFormReferenceName: FormReferenceName
       }),
     });
 
@@ -436,7 +438,8 @@ export class ToolBoxService {
     fileData: string,
     fileName: string,
     fileSize: number,
-    fileType: string
+    fileType: string,
+    parentId: string
   ) {
     if (!fileData) {
       throw new Error("Please select a file!");
@@ -454,6 +457,7 @@ export class ToolBoxService {
           MediaImageData: fileData,
           MediaSize: fileSize,
           MediaType: fileType,
+          CroppedOriginalMediaId: parentId,
         }),
       },
       true

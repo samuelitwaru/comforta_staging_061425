@@ -71,7 +71,7 @@ namespace GeneXus.Programs {
 
       public void execute( out GXBCCollection<SdtTrn_EnvironmentVariable> aP0_Gxm1rootcol )
       {
-         this.Gxm1rootcol = new GXBCCollection<SdtTrn_EnvironmentVariable>( context, "Trn_EnvironmentVariable", "Comforta_version21") ;
+         this.Gxm1rootcol = new GXBCCollection<SdtTrn_EnvironmentVariable>( context, "Trn_EnvironmentVariable", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP0_Gxm1rootcol=this.Gxm1rootcol;
@@ -85,7 +85,7 @@ namespace GeneXus.Programs {
 
       public void executeSubmit( out GXBCCollection<SdtTrn_EnvironmentVariable> aP0_Gxm1rootcol )
       {
-         this.Gxm1rootcol = new GXBCCollection<SdtTrn_EnvironmentVariable>( context, "Trn_EnvironmentVariable", "Comforta_version21") ;
+         this.Gxm1rootcol = new GXBCCollection<SdtTrn_EnvironmentVariable>( context, "Trn_EnvironmentVariable", "Comforta_version2") ;
          SubmitImpl();
          aP0_Gxm1rootcol=this.Gxm1rootcol;
       }

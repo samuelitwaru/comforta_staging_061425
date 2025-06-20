@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
    [XmlRoot(ElementName = "Trn_Theme.Icon" )]
-   [XmlType(TypeName =  "Trn_Theme.Icon" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "Trn_Theme.Icon" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtTrn_Theme_Icon : GxSilentTrnSdt, IGxSilentTrnGridItem
    {
@@ -75,6 +75,7 @@ namespace GeneXus.Programs {
          gxTv_SdtTrn_Theme_Icon_Iconid = sdt.gxTv_SdtTrn_Theme_Icon_Iconid ;
          gxTv_SdtTrn_Theme_Icon_Iconcategory = sdt.gxTv_SdtTrn_Theme_Icon_Iconcategory ;
          gxTv_SdtTrn_Theme_Icon_Iconname = sdt.gxTv_SdtTrn_Theme_Icon_Iconname ;
+         gxTv_SdtTrn_Theme_Icon_Icontags = sdt.gxTv_SdtTrn_Theme_Icon_Icontags ;
          gxTv_SdtTrn_Theme_Icon_Iconsvg = sdt.gxTv_SdtTrn_Theme_Icon_Iconsvg ;
          gxTv_SdtTrn_Theme_Icon_Mode = sdt.gxTv_SdtTrn_Theme_Icon_Mode ;
          gxTv_SdtTrn_Theme_Icon_Modified = sdt.gxTv_SdtTrn_Theme_Icon_Modified ;
@@ -103,6 +104,7 @@ namespace GeneXus.Programs {
          AddObjectProperty("IconId", gxTv_SdtTrn_Theme_Icon_Iconid, false, includeNonInitialized);
          AddObjectProperty("IconCategory", gxTv_SdtTrn_Theme_Icon_Iconcategory, false, includeNonInitialized);
          AddObjectProperty("IconName", gxTv_SdtTrn_Theme_Icon_Iconname, false, includeNonInitialized);
+         AddObjectProperty("IconTags", gxTv_SdtTrn_Theme_Icon_Icontags, false, includeNonInitialized);
          AddObjectProperty("IconSVG", gxTv_SdtTrn_Theme_Icon_Iconsvg, false, includeNonInitialized);
          if ( includeState )
          {
@@ -132,6 +134,11 @@ namespace GeneXus.Programs {
          {
             sdtIsNull = 0;
             gxTv_SdtTrn_Theme_Icon_Iconname = sdt.gxTv_SdtTrn_Theme_Icon_Iconname ;
+         }
+         if ( sdt.IsDirty("IconTags") )
+         {
+            sdtIsNull = 0;
+            gxTv_SdtTrn_Theme_Icon_Icontags = sdt.gxTv_SdtTrn_Theme_Icon_Icontags ;
          }
          if ( sdt.IsDirty("IconSVG") )
          {
@@ -188,6 +195,23 @@ namespace GeneXus.Programs {
             gxTv_SdtTrn_Theme_Icon_Iconname = value;
             gxTv_SdtTrn_Theme_Icon_Modified = 1;
             SetDirty("Iconname");
+         }
+
+      }
+
+      [  SoapElement( ElementName = "IconTags" )]
+      [  XmlElement( ElementName = "IconTags"   )]
+      public string gxTpr_Icontags
+      {
+         get {
+            return gxTv_SdtTrn_Theme_Icon_Icontags ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtTrn_Theme_Icon_Icontags = value;
+            gxTv_SdtTrn_Theme_Icon_Modified = 1;
+            SetDirty("Icontags");
          }
 
       }
@@ -401,6 +425,7 @@ namespace GeneXus.Programs {
          sdtIsNull = 1;
          gxTv_SdtTrn_Theme_Icon_Iconcategory = "";
          gxTv_SdtTrn_Theme_Icon_Iconname = "";
+         gxTv_SdtTrn_Theme_Icon_Icontags = "";
          gxTv_SdtTrn_Theme_Icon_Iconsvg = "";
          gxTv_SdtTrn_Theme_Icon_Mode = "";
          gxTv_SdtTrn_Theme_Icon_Iconid_Z = Guid.Empty;
@@ -418,6 +443,7 @@ namespace GeneXus.Programs {
       private short gxTv_SdtTrn_Theme_Icon_Modified ;
       private short gxTv_SdtTrn_Theme_Icon_Initialized ;
       private string gxTv_SdtTrn_Theme_Icon_Mode ;
+      private string gxTv_SdtTrn_Theme_Icon_Icontags ;
       private string gxTv_SdtTrn_Theme_Icon_Iconsvg ;
       private string gxTv_SdtTrn_Theme_Icon_Iconcategory ;
       private string gxTv_SdtTrn_Theme_Icon_Iconname ;
@@ -427,7 +453,7 @@ namespace GeneXus.Programs {
       private Guid gxTv_SdtTrn_Theme_Icon_Iconid_Z ;
    }
 
-   [DataContract(Name = @"Trn_Theme.Icon", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"Trn_Theme.Icon", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtTrn_Theme_Icon_RESTInterface : GxGenericCollectionItem<SdtTrn_Theme_Icon>
    {
@@ -481,7 +507,20 @@ namespace GeneXus.Programs {
 
       }
 
-      [DataMember( Name = "IconSVG" , Order = 3 )]
+      [DataMember( Name = "IconTags" , Order = 3 )]
+      public string gxTpr_Icontags
+      {
+         get {
+            return sdt.gxTpr_Icontags ;
+         }
+
+         set {
+            sdt.gxTpr_Icontags = value;
+         }
+
+      }
+
+      [DataMember( Name = "IconSVG" , Order = 4 )]
       public string gxTpr_Iconsvg
       {
          get {
@@ -517,7 +556,7 @@ namespace GeneXus.Programs {
 
    }
 
-   [DataContract(Name = @"Trn_Theme.Icon", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"Trn_Theme.Icon", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtTrn_Theme_Icon_RESTLInterface : GxGenericCollectionItem<SdtTrn_Theme_Icon>
    {

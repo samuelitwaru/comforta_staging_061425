@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
    [XmlRoot(ElementName = "Trn_Theme" )]
-   [XmlType(TypeName =  "Trn_Theme" , Namespace = "Comforta_version21" )]
+   [XmlType(TypeName =  "Trn_Theme" , Namespace = "Comforta_version2" )]
    [Serializable]
    public class SdtTrn_Theme : GxSilentTrnSdt
    {
@@ -392,7 +392,7 @@ namespace GeneXus.Programs {
          get {
             if ( gxTv_SdtTrn_Theme_Ctacolor == null )
             {
-               gxTv_SdtTrn_Theme_Ctacolor = new GXBCLevelCollection<SdtTrn_Theme_CtaColor>( context, "Trn_Theme.CtaColor", "Comforta_version21");
+               gxTv_SdtTrn_Theme_Ctacolor = new GXBCLevelCollection<SdtTrn_Theme_CtaColor>( context, "Trn_Theme.CtaColor", "Comforta_version2");
             }
             return gxTv_SdtTrn_Theme_Ctacolor ;
          }
@@ -400,7 +400,7 @@ namespace GeneXus.Programs {
          set {
             if ( gxTv_SdtTrn_Theme_Ctacolor == null )
             {
-               gxTv_SdtTrn_Theme_Ctacolor = new GXBCLevelCollection<SdtTrn_Theme_CtaColor>( context, "Trn_Theme.CtaColor", "Comforta_version21");
+               gxTv_SdtTrn_Theme_Ctacolor = new GXBCLevelCollection<SdtTrn_Theme_CtaColor>( context, "Trn_Theme.CtaColor", "Comforta_version2");
             }
             sdtIsNull = 0;
             gxTv_SdtTrn_Theme_Ctacolor = value;
@@ -414,7 +414,7 @@ namespace GeneXus.Programs {
          get {
             if ( gxTv_SdtTrn_Theme_Ctacolor == null )
             {
-               gxTv_SdtTrn_Theme_Ctacolor = new GXBCLevelCollection<SdtTrn_Theme_CtaColor>( context, "Trn_Theme.CtaColor", "Comforta_version21");
+               gxTv_SdtTrn_Theme_Ctacolor = new GXBCLevelCollection<SdtTrn_Theme_CtaColor>( context, "Trn_Theme.CtaColor", "Comforta_version2");
             }
             sdtIsNull = 0;
             return gxTv_SdtTrn_Theme_Ctacolor ;
@@ -452,7 +452,7 @@ namespace GeneXus.Programs {
          get {
             if ( gxTv_SdtTrn_Theme_Icon == null )
             {
-               gxTv_SdtTrn_Theme_Icon = new GXBCLevelCollection<SdtTrn_Theme_Icon>( context, "Trn_Theme.Icon", "Comforta_version21");
+               gxTv_SdtTrn_Theme_Icon = new GXBCLevelCollection<SdtTrn_Theme_Icon>( context, "Trn_Theme.Icon", "Comforta_version2");
             }
             return gxTv_SdtTrn_Theme_Icon ;
          }
@@ -460,7 +460,7 @@ namespace GeneXus.Programs {
          set {
             if ( gxTv_SdtTrn_Theme_Icon == null )
             {
-               gxTv_SdtTrn_Theme_Icon = new GXBCLevelCollection<SdtTrn_Theme_Icon>( context, "Trn_Theme.Icon", "Comforta_version21");
+               gxTv_SdtTrn_Theme_Icon = new GXBCLevelCollection<SdtTrn_Theme_Icon>( context, "Trn_Theme.Icon", "Comforta_version2");
             }
             sdtIsNull = 0;
             gxTv_SdtTrn_Theme_Icon = value;
@@ -474,7 +474,7 @@ namespace GeneXus.Programs {
          get {
             if ( gxTv_SdtTrn_Theme_Icon == null )
             {
-               gxTv_SdtTrn_Theme_Icon = new GXBCLevelCollection<SdtTrn_Theme_Icon>( context, "Trn_Theme.Icon", "Comforta_version21");
+               gxTv_SdtTrn_Theme_Icon = new GXBCLevelCollection<SdtTrn_Theme_Icon>( context, "Trn_Theme.Icon", "Comforta_version2");
             }
             sdtIsNull = 0;
             return gxTv_SdtTrn_Theme_Icon ;
@@ -512,7 +512,7 @@ namespace GeneXus.Programs {
          get {
             if ( gxTv_SdtTrn_Theme_Color == null )
             {
-               gxTv_SdtTrn_Theme_Color = new GXBCLevelCollection<SdtTrn_Theme_Color>( context, "Trn_Theme.Color", "Comforta_version21");
+               gxTv_SdtTrn_Theme_Color = new GXBCLevelCollection<SdtTrn_Theme_Color>( context, "Trn_Theme.Color", "Comforta_version2");
             }
             return gxTv_SdtTrn_Theme_Color ;
          }
@@ -520,7 +520,7 @@ namespace GeneXus.Programs {
          set {
             if ( gxTv_SdtTrn_Theme_Color == null )
             {
-               gxTv_SdtTrn_Theme_Color = new GXBCLevelCollection<SdtTrn_Theme_Color>( context, "Trn_Theme.Color", "Comforta_version21");
+               gxTv_SdtTrn_Theme_Color = new GXBCLevelCollection<SdtTrn_Theme_Color>( context, "Trn_Theme.Color", "Comforta_version2");
             }
             sdtIsNull = 0;
             gxTv_SdtTrn_Theme_Color = value;
@@ -534,7 +534,7 @@ namespace GeneXus.Programs {
          get {
             if ( gxTv_SdtTrn_Theme_Color == null )
             {
-               gxTv_SdtTrn_Theme_Color = new GXBCLevelCollection<SdtTrn_Theme_Color>( context, "Trn_Theme.Color", "Comforta_version21");
+               gxTv_SdtTrn_Theme_Color = new GXBCLevelCollection<SdtTrn_Theme_Color>( context, "Trn_Theme.Color", "Comforta_version2");
             }
             sdtIsNull = 0;
             return gxTv_SdtTrn_Theme_Color ;
@@ -846,7 +846,7 @@ namespace GeneXus.Programs {
       private GXBCLevelCollection<SdtTrn_Theme_Color> gxTv_SdtTrn_Theme_Color=null ;
    }
 
-   [DataContract(Name = @"Trn_Theme", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"Trn_Theme", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtTrn_Theme_RESTInterface : GxGenericCollectionItem<SdtTrn_Theme>
    {
@@ -1008,7 +1008,7 @@ namespace GeneXus.Programs {
       private string md5Hash ;
    }
 
-   [DataContract(Name = @"Trn_Theme", Namespace = "Comforta_version21")]
+   [DataContract(Name = @"Trn_Theme", Namespace = "Comforta_version2")]
    [GxJsonSerialization("default")]
    public class SdtTrn_Theme_RESTLInterface : GxGenericCollectionItem<SdtTrn_Theme>
    {

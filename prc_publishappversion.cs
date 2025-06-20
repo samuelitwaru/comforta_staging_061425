@@ -212,8 +212,8 @@ namespace GeneXus.Programs {
          A29LocationId = Guid.Empty;
          A584ActiveAppVersionId = Guid.Empty;
          A598PublishedActiveAppVersionId = Guid.Empty;
-         AV27SDT_InfoPageTranslationCollection = new GXBaseCollection<SdtSDT_InfoPageTranslation>( context, "SDT_InfoPageTranslation", "Comforta_version21");
-         GXt_objcol_SdtSDT_InfoPageTranslation1 = new GXBaseCollection<SdtSDT_InfoPageTranslation>( context, "SDT_InfoPageTranslation", "Comforta_version21");
+         AV27SDT_InfoPageTranslationCollection = new GXBaseCollection<SdtSDT_InfoPageTranslation>( context, "SDT_InfoPageTranslation", "Comforta_version2");
+         GXt_objcol_SdtSDT_InfoPageTranslation1 = new GXBaseCollection<SdtSDT_InfoPageTranslation>( context, "SDT_InfoPageTranslation", "Comforta_version2");
          AV19Title = "";
          AV20NotificationMessage = "";
          AV22ResidentIdCollectionEmpty = new GxSimpleCollection<Guid>();

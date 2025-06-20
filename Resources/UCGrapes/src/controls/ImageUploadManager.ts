@@ -78,8 +78,7 @@ export class ImageUploadManager {
   /* Position Management Methods */
   public captureCurrentPosition(
     frame: HTMLElement,
-    container: HTMLElement,
-    aspectRatio: number
+    container: HTMLElement
   ) {
     const frameRect = frame.getBoundingClientRect();
     const containerRect = container.getBoundingClientRect();
@@ -146,12 +145,12 @@ export class ImageUploadManager {
     return this.currentPosition;
   }
 
-  private async createImageFromUrl(imgUrl: string) {
+  private async createImageFromUrl(image: { Id: string; Url: string }) {
     if (!this.currentPosition || !this.imgFrame) return;
 
     const img = new Image();
     img.crossOrigin = "anonymous";
-    img.src = imgUrl;
+    img.src = image.Url;
 
     await new Promise<void>((resolve, reject) => {
       img.onload = () => resolve();
@@ -163,8 +162,8 @@ export class ImageUploadManager {
     if (!ctx) return;
 
     // Get the frame dimensions from currentPosition
-    const frameWidth = this.imgFrame.offsetWidth;
-    const frameHeight = this.imgFrame.offsetHeight;
+    const frameWidth = this.imgFrame.clientWidth;
+    const frameHeight = this.imgFrame.clientHeight;
 
     // Set canvas to the exact frame size
     canvas.width = frameWidth;
@@ -196,7 +195,6 @@ export class ImageUploadManager {
       frameWidth, // destination width
       frameHeight // destination height
     );
-
     // Apply brightness enhancement
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const data = imageData.data;
@@ -224,7 +222,8 @@ export class ImageUploadManager {
       newMedia.MediaUrl,
       newMedia.MediaName,
       newMedia.MediaSize,
-      newMedia.MediaType
+      newMedia.MediaType,
+      image.Id
     );
 
     return response.BC_Trn_Media.MediaUrl;
@@ -232,10 +231,8 @@ export class ImageUploadManager {
 
   /* Image Handling Methods */
   public async handleSave(opacityValue: number, nextSectionId?: string) {
-    // console.log('handleSave nextSectionId', nextSectionId);
     try {
       const selectedImages = this.getSelectedImages();
-
       if (this.saveCallback) {
         this.saveCallback(selectedImages);
       } else if (this.type === "info") {
@@ -272,7 +269,8 @@ export class ImageUploadManager {
     selectedComponent.getEl().style.removeProperty("background-color");
 
     const originalMediaUrl = encodeURI(image.Url);
-    const croppedUrl = await this.createImageFromUrl(image.Url);
+
+    const croppedUrl = await this.createImageFromUrl(image);
     const safeMediaUrl = encodeURI(croppedUrl || image.Url);
 
     const styleProperties: any = {
@@ -282,7 +280,6 @@ export class ImageUploadManager {
     };
 
     if (this.currentPosition) {
-      console.log("this.currentPosition", this.currentPosition);
       styleProperties["background-size"] = "cover";
       styleProperties["background-position"] = "center";
       styleProperties[
@@ -366,6 +363,21 @@ export class ImageUploadManager {
     }
   }
 
+  public async deleteImages(selectedImages: Set<string>) {
+    const imageIds: string[] = [...selectedImages];
+    if (!imageIds || imageIds.length === 0) return;
+
+    try {
+      const deletePromises = imageIds.map((id) =>
+        this.toolboxService.deleteMedia(id)
+      );
+      await Promise.all(deletePromises);
+    } catch (error) {
+      console.error("Error deleting images:", error);
+      throw error;
+    }
+  }
+
   private sortMediaBySelection(media: Media[]): Media[] {
     if (this.type !== "info" || !this.infoId) {
       return media;
@@ -409,43 +421,30 @@ export class ImageUploadManager {
     return content?.Images || [];
   }
 
-  public async handleFilesUpload(files: FileList) {
-    const fileArray = Array.from(files);
-    const newImages: { Id: string; Url: string }[] = [];
+  public async handleFileUpload(file: File) {
+    if (file.type.startsWith("image/")) {
+      try {
+        const dataUrl = await this.readFileAsDataURL(file);
+        const fileName = this.cleanFileName(file.name);
 
-    for (const file of fileArray) {
-      if (file.type.startsWith("image/")) {
-        try {
-          const dataUrl = await this.readFileAsDataURL(file);
-          // check if file name has spaces, remove them
-          const fileName = this.cleanFileName(file.name);
+        const newMedia: Media = {
+          MediaId: Date.now().toString(),
+          MediaName: fileName,
+          MediaUrl: dataUrl,
+          MediaType: file.type,
+          MediaSize: file.size,
+        };
 
-          const newMedia: Media = {
-            MediaId: Date.now().toString(),
-            MediaName: fileName,
-            MediaUrl: dataUrl,
-            MediaType: file.type,
-            MediaSize: file.size,
-          };
-
-          await this.toolboxService.uploadFile(
-            newMedia.MediaUrl,
-            newMedia.MediaName,
-            newMedia.MediaSize,
-            newMedia.MediaType
-          );
-
-          newImages.push({
-            Id: newMedia.MediaId,
-            Url: newMedia.MediaUrl,
-          });
-        } catch (error) {
-          console.error("Error processing file:", error);
-        }
+        await this.toolboxService.uploadFile(
+          newMedia.MediaUrl,
+          newMedia.MediaName,
+          newMedia.MediaSize,
+          newMedia.MediaType
+        );
+      } catch (error) {
+        console.error("Error processing file:", error);
       }
     }
-
-    return newImages;
   }
 
   public async getFile(url: string) {
@@ -493,17 +492,18 @@ export class ImageUploadManager {
   }
 
   private cleanFileName(fileName: string): string {
+    const randomSuffix = Math.floor(Math.random() * 10000);
     const nameParts = fileName.split(".");
-    const extension = nameParts.pop();
+    const extension = nameParts.length > 1 ? nameParts.pop() : "";
     const baseName = nameParts.join(".");
 
     const sanitizedBase = baseName
       .toLowerCase()
-      .replace(/\s+/g, "-") // Replace spaces with hyphens
-      .replace(/[()]/g, "") // Remove parentheses
-      .replace(/[^a-z0-9-_]/g, ""); // Remove other special characters
+      .replace(/\s+/g, "-") 
+      .replace(/[()]/g, "") 
+      .replace(/[^a-z0-9-_]/g, ""); 
 
-    return `${sanitizedBase}.${extension}`;
+    return `${sanitizedBase}-${randomSuffix}.${extension}`;
   }
 
   public createFileList(files: File[]): FileList {
@@ -512,22 +512,15 @@ export class ImageUploadManager {
     return dataTransfer.files;
   }
 
-  public async compressLargeFiles(files: FileList): Promise<File[]> {
+  public async compressLargeFile(file: File): Promise<File> {
     const maxSizeInBytes = 2 * 1024 * 1024; // 2MB
-    const processedFiles: File[] = [];
 
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-
-      if (file.size > maxSizeInBytes) {
-        const compressedFile = await this.compressImage(file, maxSizeInBytes);
-        processedFiles.push(compressedFile);
-      } else {
-        processedFiles.push(file);
-      }
+    if (file.size > maxSizeInBytes) {
+      const compressedFile = await this.compressImage(file, maxSizeInBytes);
+      return compressedFile;
     }
 
-    return processedFiles;
+    return file;
   }
 
   private async compressImage(

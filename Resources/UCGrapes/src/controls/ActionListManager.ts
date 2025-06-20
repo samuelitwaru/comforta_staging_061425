@@ -168,18 +168,31 @@ export class ActionListManager {
           page.PageLinkStructure.WWPFormId == form.PageId
         );
     });
+    const parsedUrl = new URL(form.PageUrl);
+    // Get the query parameters
+    const params = parsedUrl.searchParams;
+    // Extract values
+    const WWPFormReferenceName = params.get('WWPFormReferenceName');
+    //const WWPFormInstanceId = params.get('WWPFormInstanceId');
+    //const WWPDynamicFormMode = params.get('WWPDynamicFormMode');
+    // Output
+    console.log('ActionListManager');
+    console.log('WWPFormReferenceName:', WWPFormReferenceName);
+    //console.log('WWPFormInstanceId:', WWPFormInstanceId);
+    //console.log('WWPDynamicFormMode:', WWPDynamicFormMode);
     if (!childPage) {
       const appVersion = await this.appVersionManager.getActiveVersion();
       childPage = await this.toolboxService.createLinkPage(
         appVersion.AppVersionId,
         form.PageName,
         "",
-        form.PageId
+        form.PageId,
+        WWPFormReferenceName
       );
       childPage = childPage.MenuPage;
     }
 
-    const formUrl = `${baseURL}/utoolboxdynamicform.aspx?WWPFormId=${form.PageId}&WWPDynamicFormMode=DSP&DefaultFormType=&WWPFormType=0`;
+    const formUrl = `${baseURL}/utoolboxdynamicform.aspx?WWPFormId=${form.PageId}&WWPDynamicFormMode=DSP&DefaultFormType=&WWPFormType=0&WWPFormReferenceName=${WWPFormReferenceName}`;
     const updates = [
       ["Text", form.PageName],
       ["Name", form.PageName],

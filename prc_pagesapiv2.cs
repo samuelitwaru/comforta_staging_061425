@@ -52,7 +52,7 @@ namespace GeneXus.Programs {
          this.AV8LocationId = aP0_LocationId;
          this.AV9OrganisationId = aP1_OrganisationId;
          this.AV10UserId = aP2_UserId;
-         this.AV16SDT_MobilePageCollection = new GXBaseCollection<SdtSDT_MobilePage>( context, "SDT_MobilePage", "Comforta_version21") ;
+         this.AV16SDT_MobilePageCollection = new GXBaseCollection<SdtSDT_MobilePage>( context, "SDT_MobilePage", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP3_SDT_MobilePageCollection=this.AV16SDT_MobilePageCollection;
@@ -74,7 +74,7 @@ namespace GeneXus.Programs {
          this.AV8LocationId = aP0_LocationId;
          this.AV9OrganisationId = aP1_OrganisationId;
          this.AV10UserId = aP2_UserId;
-         this.AV16SDT_MobilePageCollection = new GXBaseCollection<SdtSDT_MobilePage>( context, "SDT_MobilePage", "Comforta_version21") ;
+         this.AV16SDT_MobilePageCollection = new GXBaseCollection<SdtSDT_MobilePage>( context, "SDT_MobilePage", "Comforta_version2") ;
          SubmitImpl();
          aP3_SDT_MobilePageCollection=this.AV16SDT_MobilePageCollection;
       }
@@ -194,8 +194,8 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV16SDT_MobilePageCollection = new GXBaseCollection<SdtSDT_MobilePage>( context, "SDT_MobilePage", "Comforta_version21");
-         AV11SDT_PageCollection = new GXBaseCollection<SdtSDT_Page>( context, "SDT_Page", "Comforta_version21");
+         AV16SDT_MobilePageCollection = new GXBaseCollection<SdtSDT_MobilePage>( context, "SDT_MobilePage", "Comforta_version2");
+         AV11SDT_PageCollection = new GXBaseCollection<SdtSDT_Page>( context, "SDT_Page", "Comforta_version2");
          P00DX2_A29LocationId = new Guid[] {Guid.Empty} ;
          P00DX2_n29LocationId = new bool[] {false} ;
          P00DX2_A598PublishedActiveAppVersionId = new Guid[] {Guid.Empty} ;

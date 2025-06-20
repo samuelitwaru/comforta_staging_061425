@@ -2,9 +2,9 @@ openapi: 3.0.0
 info:
   title: "API_ResidentService"
   description: "API Services"
-  version: "20250616060921"
+  version: "20250620090611"
 servers:
-  - url: https://staging.comforta.yukon.software/api
+  - url: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/api
 paths:
   /auth/resident-login:
     post:
@@ -1689,31 +1689,6 @@ paths:
         404:
           description: "Not found"
 
-  /toolbox/v2/debug:
-    post:
-      tags:
-        - API_ResidentService  
-      operationId: "API_ResidentService.DebugAppVersion"
-      summary: "Debug the appversion urls"
-      security: 
-        - oAuthGXGAM: []
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/DebugAppVersionInput"
-      
-      responses:
-        200:
-          description: "Successful operation"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DebugAppVersionOutput"
-        404:
-          description: "Not found"
-
   /toolbox/v2/update-service:
     post:
       tags:
@@ -2051,7 +2026,7 @@ components:
       description: GAM OAuth 2
       flows:
         password:          
-          tokenUrl: https://staging.comforta.yukon.software/oauth/gam/v2.0/access_token
+          tokenUrl: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/oauth/gam/v2.0/access_token
           scopes: 
             fullcontrol: Full access
 
@@ -2366,15 +2341,6 @@ components:
           $ref: "#/components/schemas/SDT_Error"
 
 
-    DebugAppVersionOutput:
-      properties:
-        DebugResults:
-          description: "SDT_Debug Results"
-          $ref: "#/components/schemas/SDT_DebugResults"
-        error:
-          description: "SDT_Error"
-          $ref: "#/components/schemas/SDT_Error"
-
 
 
     UpdateLocationAPI__getOutput:
@@ -2495,6 +2461,9 @@ components:
           format: "int64"
         MediaType:
           type: "string"
+        CroppedOriginalMediaId:
+          type: "string"
+          format: "uuid"
 
 
 
@@ -2717,6 +2686,8 @@ components:
         WWPFormId:
           type: "integer"
           format: "int32"
+        WWPFormReferenceName:
+          type: "string"
 
     CreateServicePageInput:  
       properties:
@@ -2746,14 +2717,6 @@ components:
           format: "uuid"
         PageName:
           type: "string"
-
-    DebugAppVersionInput:  
-      properties:
-        PageUrlList:
-          description: "SDT_Page Url"
-          type: array
-          items:
-            $ref: "#/components/schemas/SDT_PageUrl"
 
     UpdateProductServiceAPIInput:  
       properties:
@@ -3223,6 +3186,10 @@ components:
         IsCropped:
           description: "Is Cropped"
           type: "boolean"
+        CroppedOriginalMediaId:
+          description: "Cropped Original Media Id"
+          type: "string"
+          format: "uuid"
 
 
 
@@ -3814,100 +3781,6 @@ components:
 
       x-gx-level: "SDT_AppVersion"
 
-    SDT_PageUrl:
-      properties:
-        Page:
-          description: "Page"
-          type: "string"
-
-        Urls:
-          type: array
-          items:
-            description: UrlsItem
-            $ref: "#/components/schemas/SDT_PageUrl.Urls_UrlsItem"
-
-
-    SDT_PageUrl.Urls_UrlsItem:
-      properties:
-        Url:
-          description: "Url"
-          type: "string"
-        AffectedType:
-          description: "Affected Type"
-          type: "string"
-        AffectedName:
-          description: "Affected Name"
-          type: "string"
-
-
-      x-gx-level: "SDT_PageUrl"
-
-    SDT_DebugResults:
-      properties:
-        Summary:
-          $ref: "#/components/schemas/SDT_DebugResults.Summary"
-
-        Pages:
-          type: array
-          items:
-            description: PagesItem
-            $ref: "#/components/schemas/SDT_DebugResults.Pages_PagesItem"
-
-
-    SDT_DebugResults.Summary:
-      properties:
-        TotalUrls:
-          description: "Total Urls"
-          type: "number"
-          format: "double"
-        SuccessCount:
-          description: "Success Count"
-          type: "number"
-          format: "double"
-        FailureCount:
-          description: "Failure Count"
-          type: "number"
-          format: "double"
-
-
-      x-gx-level: "SDT_DebugResults"
-
-
-    SDT_DebugResults.Pages_PagesItem:
-      properties:
-        Page:
-          description: "Page"
-          type: "string"
-
-        UrlList:
-          type: array
-          items:
-            description: UrlListItem
-            $ref: "#/components/schemas/SDT_DebugResults.Pages.UrlList_UrlListItem"
-
-      x-gx-level: "SDT_DebugResults"
-
-    SDT_DebugResults.Pages.UrlList_UrlListItem:
-      properties:
-        Url:
-          description: "Url"
-          type: "string"
-        StatusCode:
-          description: "Status Code"
-          type: "string"
-        StatusMessage:
-          description: "Status Message"
-          type: "string"
-        AffectedType:
-          description: "Affected Type"
-          type: "string"
-        AffectedName:
-          description: "Affected Name"
-          type: "string"
-
-
-      x-gx-level: "SDT_DebugResults.Pages"
-
     Trn_Location:
       properties:
         LocationId:
@@ -4326,10 +4199,31 @@ components:
           items:
             $ref: "#/components/schemas/SDT_InfoImage_SDT_InfoImageItem"
 
+        Columns:
+          type: array
+          items:
+            description: ColumnsItem
+            $ref: "#/components/schemas/SDT_InfoContent.InfoContent.Columns_ColumnsItem"
+
         CtaAttributes:
           $ref: "#/components/schemas/SDT_InfoContent.InfoContent.CtaAttributes"
 
       x-gx-level: "SDT_InfoContent"
+
+    SDT_InfoContent.InfoContent.Columns_ColumnsItem:
+      properties:
+        ColId:
+          description: "Col Id"
+          type: "string"
+        Tiles:
+          description: "SDT_Info Tile"
+          type: array
+          items:
+            $ref: "#/components/schemas/SDT_InfoTile_SDT_InfoTileItem"
+
+
+      x-gx-level: "SDT_InfoContent.InfoContent"
+
 
     SDT_InfoContent.InfoContent.CtaAttributes:
       properties:

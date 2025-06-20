@@ -101,7 +101,7 @@ namespace GeneXus.Programs {
                   AV8InfoContentItem = new SdtSDT_InfoContent_InfoContentItem(context);
                   AV8InfoContentItem.gxTpr_Infoid = new SdtRandomStringGenerator(context).generate(15);
                   AV8InfoContentItem.gxTpr_Infotype = "TileRow";
-                  AV12SDT_InfoTile = new GXBaseCollection<SdtSDT_InfoTile_SDT_InfoTileItem>( context, "SDT_InfoTileItem", "Comforta_version21");
+                  AV12SDT_InfoTile = new GXBaseCollection<SdtSDT_InfoTile_SDT_InfoTileItem>( context, "SDT_InfoTileItem", "Comforta_version2");
                   AV21GXV2 = 1;
                   while ( AV21GXV2 <= AV9RowItem.gxTpr_Tiles.Count )
                   {
@@ -168,7 +168,7 @@ namespace GeneXus.Programs {
          AV13SDT_MenuPage = new SdtSDT_MenuPage(context);
          AV9RowItem = new SdtSDT_MenuPage_RowsItem(context);
          AV8InfoContentItem = new SdtSDT_InfoContent_InfoContentItem(context);
-         AV12SDT_InfoTile = new GXBaseCollection<SdtSDT_InfoTile_SDT_InfoTileItem>( context, "SDT_InfoTileItem", "Comforta_version21");
+         AV12SDT_InfoTile = new GXBaseCollection<SdtSDT_InfoTile_SDT_InfoTileItem>( context, "SDT_InfoTileItem", "Comforta_version2");
          AV14TileItem = new SdtSDT_MenuPage_RowsItem_TilesItem(context);
          AV16SDT_InfoTileItem = new SdtSDT_InfoTile_SDT_InfoTileItem(context);
          AV15HttpResponse = new GxHttpResponse( context);

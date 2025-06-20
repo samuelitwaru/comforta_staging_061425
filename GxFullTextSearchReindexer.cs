@@ -168,9 +168,6 @@ namespace GeneXus.Programs {
          obj = new SdtTrn_SupplierGen(context);
          trn = obj.getTransaction();
          result = trn.Reindex();
-         obj = new SdtTrn_Theme(context);
-         trn = obj.getTransaction();
-         result = trn.Reindex();
          obj = new SdtTrn_Receptionist(context);
          trn = obj.getTransaction();
          result = trn.Reindex();
@@ -190,6 +187,9 @@ namespace GeneXus.Programs {
          trn = obj.getTransaction();
          result = trn.Reindex();
          obj = new SdtTrn_ResidentPackage(context);
+         trn = obj.getTransaction();
+         result = trn.Reindex();
+         obj = new SdtTrn_Theme(context);
          trn = obj.getTransaction();
          result = trn.Reindex();
          return 1 ;

@@ -23,7 +23,7 @@ using System.Runtime.Serialization;
 namespace GeneXus.Programs
 {
 	[XmlRoot(ElementName="SDT_AppPreviewVersion.SDT_Theme.IconsItem")]
-	[XmlType(TypeName="SDT_AppPreviewVersion.SDT_Theme.IconsItem" , Namespace="Comforta_version21" )]
+	[XmlType(TypeName="SDT_AppPreviewVersion.SDT_Theme.IconsItem" , Namespace="Comforta_version2" )]
 	[Serializable]
 	public class SdtSDT_AppPreviewVersion_SDT_Theme_IconsItem : GxUserType
 	{
@@ -193,7 +193,7 @@ namespace GeneXus.Programs
 	}
 	#region Rest interface
 	[GxJsonSerialization("wrapped")]
-	[DataContract(Name=@"SDT_AppPreviewVersion.SDT_Theme.IconsItem", Namespace="Comforta_version21")]
+	[DataContract(Name=@"SDT_AppPreviewVersion.SDT_Theme.IconsItem", Namespace="Comforta_version2")]
 	public class SdtSDT_AppPreviewVersion_SDT_Theme_IconsItem_RESTInterface : GxGenericCollectionItem<SdtSDT_AppPreviewVersion_SDT_Theme_IconsItem>, System.Web.SessionState.IRequiresSessionState
 	{
 		public SdtSDT_AppPreviewVersion_SDT_Theme_IconsItem_RESTInterface( ) : base()

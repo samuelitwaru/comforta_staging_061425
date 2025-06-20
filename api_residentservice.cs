@@ -283,10 +283,6 @@ namespace GeneXus.Programs {
          {
             return GAMSecurityLevel.SecurityNone ;
          }
-         else if ( StringUtil.StrCmp(permissionMethod, "gxep_debugappversion") == 0 )
-         {
-            return GAMSecurityLevel.SecurityNone ;
-         }
          else if ( StringUtil.StrCmp(permissionMethod, "gxep_updateproductserviceapi") == 0 )
          {
             return GAMSecurityLevel.SecurityNone ;
@@ -519,21 +515,21 @@ namespace GeneXus.Programs {
       {
          /* Createappversion_Before Routine */
          returnInSub = false;
-         AV143EmptyGUID = Guid.Empty;
+         AV156EmptyGUID = Guid.Empty;
       }
 
       protected void E25012( )
       {
          /* Activateappversion_Before Routine */
          returnInSub = false;
-         AV143EmptyGUID = Guid.Empty;
+         AV156EmptyGUID = Guid.Empty;
       }
 
       protected void E26012( )
       {
          /* Getappversion_Before Routine */
          returnInSub = false;
-         AV143EmptyGUID = Guid.Empty;
+         AV156EmptyGUID = Guid.Empty;
       }
 
       public void gxep_loginwithqrcode( string aP0_secretKey ,
@@ -840,20 +836,22 @@ namespace GeneXus.Programs {
                                            string aP1_MediaImageData ,
                                            int aP2_MediaSize ,
                                            string aP3_MediaType ,
-                                           out SdtTrn_Media aP4_BC_Trn_Media ,
-                                           out SdtSDT_Error aP5_error )
+                                           Guid aP4_CroppedOriginalMediaId ,
+                                           out SdtTrn_Media aP5_BC_Trn_Media ,
+                                           out SdtSDT_Error aP6_error )
       {
          this.AV30MediaName = aP0_MediaName;
          this.AV32MediaImageData = aP1_MediaImageData;
          this.AV34MediaSize = aP2_MediaSize;
          this.AV35MediaType = aP3_MediaType;
+         this.AV157CroppedOriginalMediaId = aP4_CroppedOriginalMediaId;
          AV33BC_Trn_Media = new SdtTrn_Media(context);
          AV69error = new SdtSDT_Error(context);
          initialize();
          /* UploadCroppedMedia Constructor */
-         new prc_uploadcroppedmedia(context ).execute(  AV30MediaName,  AV32MediaImageData,  AV34MediaSize,  AV35MediaType, out  AV33BC_Trn_Media, out  AV69error) ;
-         aP4_BC_Trn_Media=this.AV33BC_Trn_Media;
-         aP5_error=this.AV69error;
+         new prc_uploadcroppedmedia(context ).execute(  AV30MediaName,  AV32MediaImageData,  AV34MediaSize,  AV35MediaType,  AV157CroppedOriginalMediaId, out  AV33BC_Trn_Media, out  AV69error) ;
+         aP5_BC_Trn_Media=this.AV33BC_Trn_Media;
+         aP6_error=this.AV69error;
       }
 
       public void gxep_deletemedia( Guid aP0_MediaId ,
@@ -864,7 +862,7 @@ namespace GeneXus.Programs {
          AV69error = new SdtSDT_Error(context);
          initialize();
          /* DeleteMedia Constructor */
-         new prc_deletemedia(context ).execute(  AV29MediaId, out  AV17result) ;
+         new prc_deletemedia(context ).execute(  AV29MediaId, out  AV17result, out  AV69error) ;
          aP1_result=this.AV17result;
          aP2_error=this.AV69error;
       }
@@ -953,8 +951,8 @@ namespace GeneXus.Programs {
          this.AV8userId = aP3_userId;
          initialize();
          /* PageAPI Constructor */
-         new prc_pageapiv2(context ).execute(  AV37PageId,  AV12locationId,  AV16organisationId,  AV8userId, out  AV56SDT_MobilePage) ;
-         aP4_SDT_MobilePage=this.AV56SDT_MobilePage;
+         new prc_pageapiv2(context ).execute(  AV37PageId,  AV12locationId,  AV16organisationId,  AV8userId, out  AV158SDT_MobilePage) ;
+         aP4_SDT_MobilePage=this.AV158SDT_MobilePage;
       }
 
       public void gxep_infopageapi( Guid aP0_PageId ,
@@ -1099,11 +1097,11 @@ namespace GeneXus.Programs {
          this.AV39PageGJSHtml = aP3_PageGJSHtml;
          this.AV40PageGJSJson = aP4_PageGJSJson;
          this.AV48PageIsPublished = aP5_PageIsPublished;
-         this.AV66IsNotifyResidents = aP6_IsNotifyResidents;
+         this.AV159IsNotifyResidents = aP6_IsNotifyResidents;
          AV69error = new SdtSDT_Error(context);
          initialize();
          /* UpdatePage Constructor */
-         new prc_updatepage(context ).execute( ref  AV37PageId, ref  AV43PageName, ref  AV41PageJsonContent, ref  AV39PageGJSHtml, ref  AV40PageGJSJson, ref  AV48PageIsPublished, ref  AV66IsNotifyResidents, out  AV17result, out  AV69error) ;
+         new prc_updatepage(context ).execute( ref  AV37PageId, ref  AV43PageName, ref  AV41PageJsonContent, ref  AV39PageGJSHtml, ref  AV40PageGJSJson, ref  AV48PageIsPublished, ref  AV159IsNotifyResidents, out  AV17result, out  AV69error) ;
          aP7_result=this.AV17result;
          aP8_error=this.AV69error;
       }
@@ -1114,11 +1112,11 @@ namespace GeneXus.Programs {
                                         out SdtSDT_Error aP3_error )
       {
          this.AV70PagesList = aP0_PagesList;
-         this.AV66IsNotifyResidents = aP1_IsNotifyResidents;
+         this.AV159IsNotifyResidents = aP1_IsNotifyResidents;
          AV69error = new SdtSDT_Error(context);
          initialize();
          /* UpdatePageBatch Constructor */
-         new prc_updatepagebatch(context ).execute( ref  AV70PagesList, ref  AV66IsNotifyResidents, out  AV17result, out  AV69error) ;
+         new prc_updatepagebatch(context ).execute( ref  AV70PagesList, ref  AV159IsNotifyResidents, out  AV17result, out  AV69error) ;
          aP2_result=this.AV17result;
          aP3_error=this.AV69error;
       }
@@ -1128,12 +1126,12 @@ namespace GeneXus.Programs {
                                        out string aP2_result ,
                                        out SdtSDT_Error aP3_error )
       {
-         this.AV44ParentPageId = aP0_ParentPageId;
-         this.AV45ChildPageId = aP1_ChildPageId;
+         this.AV160ParentPageId = aP0_ParentPageId;
+         this.AV161ChildPageId = aP1_ChildPageId;
          AV69error = new SdtSDT_Error(context);
          initialize();
          /* AddPageCildren Constructor */
-         new prc_addpagechildren(context ).execute(  AV44ParentPageId,  AV45ChildPageId, out  AV17result, out  AV69error) ;
+         new prc_addpagechildren(context ).execute(  AV160ParentPageId,  AV161ChildPageId, out  AV17result, out  AV69error) ;
          aP2_result=this.AV17result;
          aP3_error=this.AV69error;
       }
@@ -1170,8 +1168,8 @@ namespace GeneXus.Programs {
          this.AV16organisationId = aP1_organisationId;
          initialize();
          /* GetLocationTheme Constructor */
-         new prc_getlocationtheme(context ).execute( ref  AV12locationId, ref  AV16organisationId, out  AV54SDT_Theme) ;
-         aP2_SDT_Theme=this.AV54SDT_Theme;
+         new prc_getlocationtheme(context ).execute( ref  AV12locationId, ref  AV16organisationId, out  AV162SDT_Theme) ;
+         aP2_SDT_Theme=this.AV162SDT_Theme;
       }
 
       public void gxep_toolboxgetlocationtheme( out SdtSDT_LocationTheme aP0_SDT_LocationTheme ,
@@ -1191,8 +1189,8 @@ namespace GeneXus.Programs {
          AV69error = new SdtSDT_Error(context);
          initialize();
          /* GetThemes Constructor */
-         new prc_getthemes(context ).execute( out  AV88SDT_ThemeCollection, out  AV69error) ;
-         aP0_SDT_ThemeCollection=this.AV88SDT_ThemeCollection;
+         new prc_getthemes(context ).execute( out  AV163SDT_ThemeCollection, out  AV69error) ;
+         aP0_SDT_ThemeCollection=this.AV163SDT_ThemeCollection;
          aP1_error=this.AV69error;
       }
 
@@ -1266,7 +1264,7 @@ namespace GeneXus.Programs {
             return;
          }
          /* GetAppVersion Constructor */
-         new prc_getappversion(context ).execute( out  AV98AppVersion, out  AV69error,  AV143EmptyGUID) ;
+         new prc_getappversion(context ).execute( out  AV98AppVersion, out  AV69error,  AV156EmptyGUID) ;
          aP0_AppVersion=this.AV98AppVersion;
          aP1_error=this.AV69error;
       }
@@ -1298,7 +1296,7 @@ namespace GeneXus.Programs {
             return;
          }
          /* CreateAppVersion Constructor */
-         new prc_createappversion(context ).execute(  AV99AppVersionName,  AV100IsActive, out  AV98AppVersion, out  AV69error,  AV143EmptyGUID,  AV143EmptyGUID) ;
+         new prc_createappversion(context ).execute(  AV99AppVersionName,  AV100IsActive, out  AV98AppVersion, out  AV69error,  AV156EmptyGUID,  AV156EmptyGUID) ;
          aP2_AppVersion=this.AV98AppVersion;
          aP3_error=this.AV69error;
       }
@@ -1341,13 +1339,13 @@ namespace GeneXus.Programs {
                                               out SdtSDT_Error aP3_error )
       {
          this.AV92AppVersionId = aP0_AppVersionId;
-         this.AV53ThemeId = aP1_ThemeId;
-         AV54SDT_Theme = new SdtSDT_Theme(context);
+         this.AV164ThemeId = aP1_ThemeId;
+         AV162SDT_Theme = new SdtSDT_Theme(context);
          AV69error = new SdtSDT_Error(context);
          initialize();
          /* UpdateAppVersionTheme Constructor */
-         new prc_updateappversiontheme(context ).execute(  AV92AppVersionId,  AV53ThemeId, out  AV54SDT_Theme, out  AV69error) ;
-         aP2_SDT_Theme=this.AV54SDT_Theme;
+         new prc_updateappversiontheme(context ).execute(  AV92AppVersionId,  AV164ThemeId, out  AV162SDT_Theme, out  AV69error) ;
+         aP2_SDT_Theme=this.AV162SDT_Theme;
          aP3_error=this.AV69error;
       }
 
@@ -1376,7 +1374,7 @@ namespace GeneXus.Programs {
             return;
          }
          /* ActivateAppVersion Constructor */
-         new prc_activateappversion(context ).execute(  AV92AppVersionId, out  AV98AppVersion, out  AV69error,  AV143EmptyGUID) ;
+         new prc_activateappversion(context ).execute(  AV92AppVersionId, out  AV98AppVersion, out  AV69error,  AV156EmptyGUID) ;
          aP1_AppVersion=this.AV98AppVersion;
          aP2_error=this.AV69error;
       }
@@ -1404,12 +1402,12 @@ namespace GeneXus.Programs {
          this.AV92AppVersionId = aP0_AppVersionId;
          this.AV37PageId = aP1_PageId;
          this.AV43PageName = aP2_PageName;
-         this.AV91PageType = aP3_PageType;
-         this.AV90PageStructure = aP4_PageStructure;
+         this.AV165PageType = aP3_PageType;
+         this.AV166PageStructure = aP4_PageStructure;
          AV69error = new SdtSDT_Error(context);
          initialize();
          /* SavePageV2 Constructor */
-         new prc_savepagev2(context ).execute(  AV92AppVersionId,  AV37PageId,  AV43PageName,  AV91PageType,  AV90PageStructure, out  AV69error) ;
+         new prc_savepagev2(context ).execute(  AV92AppVersionId,  AV37PageId,  AV43PageName,  AV165PageType,  AV166PageStructure, out  AV69error) ;
          aP5_error=this.AV69error;
       }
 
@@ -1474,20 +1472,22 @@ namespace GeneXus.Programs {
                                        string aP1_PageName ,
                                        string aP2_Url ,
                                        short aP3_WWPFormId ,
-                                       out SdtSDT_AppVersion_PagesItem aP4_MenuPage ,
-                                       out SdtSDT_Error aP5_error )
+                                       string aP4_WWPFormReferenceName ,
+                                       out SdtSDT_AppVersion_PagesItem aP5_MenuPage ,
+                                       out SdtSDT_Error aP6_error )
       {
          this.AV92AppVersionId = aP0_AppVersionId;
          this.AV43PageName = aP1_PageName;
          this.AV137Url = aP2_Url;
          this.AV138WWPFormId = aP3_WWPFormId;
+         this.AV167WWPFormReferenceName = aP4_WWPFormReferenceName;
          AV97MenuPage = new SdtSDT_AppVersion_PagesItem(context);
          AV69error = new SdtSDT_Error(context);
          initialize();
          /* CreateLinkPage Constructor */
-         new prc_createlinkpage(context ).execute(  AV92AppVersionId,  AV43PageName,  AV137Url,  AV138WWPFormId, out  AV97MenuPage, out  AV69error) ;
-         aP4_MenuPage=this.AV97MenuPage;
-         aP5_error=this.AV69error;
+         new prc_createlinkpage(context ).execute(  AV92AppVersionId,  AV43PageName,  AV137Url,  AV138WWPFormId,  AV167WWPFormReferenceName, out  AV97MenuPage, out  AV69error) ;
+         aP5_MenuPage=this.AV97MenuPage;
+         aP6_error=this.AV69error;
       }
 
       public void gxep_createservicepage( Guid aP0_AppVersionId ,
@@ -1534,19 +1534,6 @@ namespace GeneXus.Programs {
          /* UpdatePageTitle Constructor */
          new prc_updatepagetitle(context ).execute(  AV92AppVersionId,  AV37PageId,  AV43PageName, out  AV69error) ;
          aP3_error=this.AV69error;
-      }
-
-      public void gxep_debugappversion( GXBaseCollection<SdtSDT_PageUrl> aP0_PageUrlList ,
-                                        out SdtSDT_DebugResults aP1_DebugResults ,
-                                        out SdtSDT_Error aP2_error )
-      {
-         this.AV134PageUrlList = aP0_PageUrlList;
-         AV69error = new SdtSDT_Error(context);
-         initialize();
-         /* DebugAppVersion Constructor */
-         new prc_debugappversion(context ).execute(  AV134PageUrlList, out  AV101DebugResults, out  AV69error) ;
-         aP1_DebugResults=this.AV101DebugResults;
-         aP2_error=this.AV69error;
       }
 
       public void gxep_updateproductserviceapi( Guid aP0_ProductServiceId ,
@@ -1655,14 +1642,14 @@ namespace GeneXus.Programs {
          this.AV111MemoEndDateTime = aP6_MemoEndDateTime;
          this.AV110MemoDuration = aP7_MemoDuration;
          this.AV114MemoRemoveDate = aP8_MemoRemoveDate;
-         this.AV125MemoBgColorCode = aP9_MemoBgColorCode;
-         this.AV126MemoForm = aP10_MemoForm;
-         this.AV144MemoType = aP11_MemoType;
-         this.AV145MemoName = aP12_MemoName;
-         this.AV146MemoLeftOffset = aP13_MemoLeftOffset;
-         this.AV147MemoTopOffset = aP14_MemoTopOffset;
-         this.AV148MemoTitleAngle = aP15_MemoTitleAngle;
-         this.AV149MemoTitleScale = aP16_MemoTitleScale;
+         this.AV168MemoBgColorCode = aP9_MemoBgColorCode;
+         this.AV169MemoForm = aP10_MemoForm;
+         this.AV170MemoType = aP11_MemoType;
+         this.AV171MemoName = aP12_MemoName;
+         this.AV172MemoLeftOffset = aP13_MemoLeftOffset;
+         this.AV173MemoTopOffset = aP14_MemoTopOffset;
+         this.AV174MemoTitleAngle = aP15_MemoTitleAngle;
+         this.AV175MemoTitleScale = aP16_MemoTitleScale;
          this.AV155MemoTextFontName = aP17_MemoTextFontName;
          this.AV153MemoTextAlignment = aP18_MemoTextAlignment;
          this.AV150MemoIsBold = aP19_MemoIsBold;
@@ -1672,7 +1659,7 @@ namespace GeneXus.Programs {
          AV69error = new SdtSDT_Error(context);
          initialize();
          /* CreateMemo Constructor */
-         new prc_creatememo(context ).execute(  AV55ResidentId,  AV116MemoTitle,  AV108MemoDescription,  AV113MemoImage,  AV109MemoDocument,  AV115MemoStartDateTime,  AV111MemoEndDateTime,  AV110MemoDuration,  AV114MemoRemoveDate,  AV125MemoBgColorCode,  AV126MemoForm,  AV144MemoType,  AV145MemoName,  AV146MemoLeftOffset,  AV147MemoTopOffset,  AV148MemoTitleAngle,  AV149MemoTitleScale,  AV155MemoTextFontName,  AV153MemoTextAlignment,  AV150MemoIsBold,  AV152MemoIsItalic,  AV151MemoIsCapitalized,  AV154MemoTextColor, out  AV69error) ;
+         new prc_creatememo(context ).execute(  AV55ResidentId,  AV116MemoTitle,  AV108MemoDescription,  AV113MemoImage,  AV109MemoDocument,  AV115MemoStartDateTime,  AV111MemoEndDateTime,  AV110MemoDuration,  AV114MemoRemoveDate,  AV168MemoBgColorCode,  AV169MemoForm,  AV170MemoType,  AV171MemoName,  AV172MemoLeftOffset,  AV173MemoTopOffset,  AV174MemoTitleAngle,  AV175MemoTitleScale,  AV155MemoTextFontName,  AV153MemoTextAlignment,  AV150MemoIsBold,  AV152MemoIsItalic,  AV151MemoIsCapitalized,  AV154MemoTextColor, out  AV69error) ;
          aP23_error=this.AV69error;
       }
 
@@ -1712,14 +1699,14 @@ namespace GeneXus.Programs {
          this.AV111MemoEndDateTime = aP7_MemoEndDateTime;
          this.AV110MemoDuration = aP8_MemoDuration;
          this.AV114MemoRemoveDate = aP9_MemoRemoveDate;
-         this.AV125MemoBgColorCode = aP10_MemoBgColorCode;
-         this.AV126MemoForm = aP11_MemoForm;
-         this.AV144MemoType = aP12_MemoType;
-         this.AV145MemoName = aP13_MemoName;
-         this.AV146MemoLeftOffset = aP14_MemoLeftOffset;
-         this.AV147MemoTopOffset = aP15_MemoTopOffset;
-         this.AV148MemoTitleAngle = aP16_MemoTitleAngle;
-         this.AV149MemoTitleScale = aP17_MemoTitleScale;
+         this.AV168MemoBgColorCode = aP10_MemoBgColorCode;
+         this.AV169MemoForm = aP11_MemoForm;
+         this.AV170MemoType = aP12_MemoType;
+         this.AV171MemoName = aP13_MemoName;
+         this.AV172MemoLeftOffset = aP14_MemoLeftOffset;
+         this.AV173MemoTopOffset = aP15_MemoTopOffset;
+         this.AV174MemoTitleAngle = aP16_MemoTitleAngle;
+         this.AV175MemoTitleScale = aP17_MemoTitleScale;
          this.AV155MemoTextFontName = aP18_MemoTextFontName;
          this.AV153MemoTextAlignment = aP19_MemoTextAlignment;
          this.AV150MemoIsBold = aP20_MemoIsBold;
@@ -1729,7 +1716,7 @@ namespace GeneXus.Programs {
          AV69error = new SdtSDT_Error(context);
          initialize();
          /* updateMemo Constructor */
-         new prc_updatememo(context ).execute(  AV112MemoId,  AV55ResidentId,  AV116MemoTitle,  AV108MemoDescription,  AV113MemoImage,  AV109MemoDocument,  AV115MemoStartDateTime,  AV111MemoEndDateTime,  AV110MemoDuration,  AV114MemoRemoveDate,  AV125MemoBgColorCode,  AV126MemoForm,  AV144MemoType,  AV145MemoName,  AV146MemoLeftOffset,  AV147MemoTopOffset,  AV148MemoTitleAngle,  AV149MemoTitleScale,  AV155MemoTextFontName,  AV153MemoTextAlignment,  AV150MemoIsBold,  AV152MemoIsItalic,  AV151MemoIsCapitalized,  AV154MemoTextColor, out  AV69error) ;
+         new prc_updatememo(context ).execute(  AV112MemoId,  AV55ResidentId,  AV116MemoTitle,  AV108MemoDescription,  AV113MemoImage,  AV109MemoDocument,  AV115MemoStartDateTime,  AV111MemoEndDateTime,  AV110MemoDuration,  AV114MemoRemoveDate,  AV168MemoBgColorCode,  AV169MemoForm,  AV170MemoType,  AV171MemoName,  AV172MemoLeftOffset,  AV173MemoTopOffset,  AV174MemoTitleAngle,  AV175MemoTitleScale,  AV155MemoTextFontName,  AV153MemoTextAlignment,  AV150MemoIsBold,  AV152MemoIsItalic,  AV151MemoIsCapitalized,  AV154MemoTextColor, out  AV69error) ;
          aP24_error=this.AV69error;
       }
 
@@ -1817,27 +1804,26 @@ namespace GeneXus.Programs {
          AV19SDT_Location = new SdtSDT_Location(context);
          AV42SDT_AgendaLocation = new GXBaseCollection<SdtSDT_AgendaLocation>( context, "SDT_AgendaLocation", "Comforta_version2");
          AV87SDT_ApiListResponse = new SdtSDT_ApiListResponse(context);
-         AV143EmptyGUID = Guid.Empty;
+         AV156EmptyGUID = Guid.Empty;
          AV33BC_Trn_Media = new SdtTrn_Media(context);
          AV69error = new SdtSDT_Error(context);
          AV64SDT_MediaCollection = new GXBaseCollection<SdtSDT_Media>( context, "SDT_Media", "Comforta_version2");
          AV27SDT_PageCollection = new GXBaseCollection<SdtSDT_Page>( context, "SDT_Page", "Comforta_version2");
          AV52SDT_MobilePageCollection = new GXBaseCollection<SdtSDT_MobilePage>( context, "SDT_MobilePage", "Comforta_version2");
          AV136SDT_InfoPage = new SdtSDT_InfoPage(context);
-         AV56SDT_MobilePage = new SdtSDT_MobilePage(context);
+         AV158SDT_MobilePage = new SdtSDT_MobilePage(context);
          AV51SDT_ContentPageCollection = new GXBaseCollection<SdtSDT_ContentPage>( context, "SDT_ContentPage", "Comforta_version2");
          AV47SDT_PageStructureCollection = new GXBaseCollection<SdtSDT_PageStructure>( context, "SDT_PageStructure", "Comforta_version2");
          AV50SDT_ProductService = new SdtSDT_ProductService(context);
          AV78SDT_ProductServiceCollection = new GXBaseCollection<SdtSDT_ProductService>( context, "SDT_ProductService", "Comforta_version2");
-         AV54SDT_Theme = new SdtSDT_Theme(context);
+         AV162SDT_Theme = new SdtSDT_Theme(context);
          AV62SDT_LocationTheme = new SdtSDT_LocationTheme(context);
-         AV88SDT_ThemeCollection = new GXBaseCollection<SdtSDT_Theme>( context, "SDT_Theme", "Comforta_version2");
+         AV163SDT_ThemeCollection = new GXBaseCollection<SdtSDT_Theme>( context, "SDT_Theme", "Comforta_version2");
          AV140TrashItems = new GXBaseCollection<SdtSDT_TrashItem>( context, "SDT_TrashItem", "Comforta_version2");
          AV96AppVersions = new GXBaseCollection<SdtSDT_AppVersion>( context, "SDT_AppVersion", "Comforta_version2");
          AV98AppVersion = new SdtSDT_AppVersion(context);
          AV97MenuPage = new SdtSDT_AppVersion_PagesItem(context);
          AV95ContentPage = new SdtSDT_AppVersion_PagesItem(context);
-         AV101DebugResults = new SdtSDT_DebugResults(context);
          AV129BC_Trn_Location = new SdtTrn_Location(context);
          AV121SDT_MemoCategories = new GXBaseCollection<SdtSDT_MemoCategory>( context, "SDT_MemoCategory", "Comforta_version2");
          AV122SDT_MemoCategory = new SdtSDT_MemoCategory(context);
@@ -1851,23 +1837,23 @@ namespace GeneXus.Programs {
       protected short AV138WWPFormId ;
       protected int AV34MediaSize ;
       protected decimal AV110MemoDuration ;
-      protected decimal AV146MemoLeftOffset ;
-      protected decimal AV147MemoTopOffset ;
-      protected decimal AV148MemoTitleAngle ;
-      protected decimal AV149MemoTitleScale ;
+      protected decimal AV172MemoLeftOffset ;
+      protected decimal AV173MemoTopOffset ;
+      protected decimal AV174MemoTitleAngle ;
+      protected decimal AV175MemoTitleScale ;
       protected string Gx_restmethod ;
       protected string AV10DeviceToken ;
       protected string AV9DeviceID ;
       protected string AV131Language ;
       protected string AV35MediaType ;
-      protected string AV126MemoForm ;
+      protected string AV169MemoForm ;
       protected string AV153MemoTextAlignment ;
       protected DateTime AV115MemoStartDateTime ;
       protected DateTime AV111MemoEndDateTime ;
       protected DateTime AV114MemoRemoveDate ;
       protected bool returnInSub ;
       protected bool AV48PageIsPublished ;
-      protected bool AV66IsNotifyResidents ;
+      protected bool AV159IsNotifyResidents ;
       protected bool AV100IsActive ;
       protected bool AV130Notify ;
       protected bool AV150MemoIsBold ;
@@ -1881,7 +1867,7 @@ namespace GeneXus.Programs {
       protected string AV41PageJsonContent ;
       protected string AV39PageGJSHtml ;
       protected string AV40PageGJSJson ;
-      protected string AV90PageStructure ;
+      protected string AV166PageStructure ;
       protected string AV139PageThumbnailData ;
       protected string AV103ProductServiceDescription ;
       protected string AV105ProductServiceImageBase64 ;
@@ -1907,28 +1893,30 @@ namespace GeneXus.Programs {
       protected string AV43PageName ;
       protected string AV142Type ;
       protected string AV99AppVersionName ;
-      protected string AV91PageType ;
+      protected string AV165PageType ;
       protected string AV137Url ;
+      protected string AV167WWPFormReferenceName ;
       protected string AV116MemoTitle ;
       protected string AV108MemoDescription ;
       protected string AV109MemoDocument ;
-      protected string AV125MemoBgColorCode ;
-      protected string AV144MemoType ;
-      protected string AV145MemoName ;
+      protected string AV168MemoBgColorCode ;
+      protected string AV170MemoType ;
+      protected string AV171MemoName ;
       protected string AV155MemoTextFontName ;
       protected string AV154MemoTextColor ;
-      protected Guid AV143EmptyGUID ;
+      protected Guid AV156EmptyGUID ;
       protected Guid AV16organisationId ;
       protected Guid AV12locationId ;
+      protected Guid AV157CroppedOriginalMediaId ;
       protected Guid AV29MediaId ;
       protected Guid AV37PageId ;
       protected Guid AV77FormId ;
-      protected Guid AV44ParentPageId ;
-      protected Guid AV45ChildPageId ;
+      protected Guid AV160ParentPageId ;
+      protected Guid AV161ChildPageId ;
       protected Guid AV49ProductServiceId ;
       protected Guid AV141TrashId ;
       protected Guid AV92AppVersionId ;
-      protected Guid AV53ThemeId ;
+      protected Guid AV164ThemeId ;
       protected Guid AV107MemoCategoryId ;
       protected Guid AV112MemoId ;
       protected IGxDataStore dsDataStore1 ;
@@ -1962,6 +1950,8 @@ namespace GeneXus.Programs {
       protected SdtTrn_Media aP4_BC_Trn_Media ;
       protected SdtSDT_Error AV69error ;
       protected SdtSDT_Error aP5_error ;
+      protected SdtTrn_Media aP5_BC_Trn_Media ;
+      protected SdtSDT_Error aP6_error ;
       protected string aP1_result ;
       protected SdtSDT_Error aP2_error ;
       protected GXBaseCollection<SdtSDT_Media> AV64SDT_MediaCollection ;
@@ -1973,7 +1963,7 @@ namespace GeneXus.Programs {
       protected GXBaseCollection<SdtSDT_MobilePage> aP3_SDT_MobilePageCollection ;
       protected SdtSDT_InfoPage AV136SDT_InfoPage ;
       protected SdtSDT_InfoPage aP3_SDT_InfoPage ;
-      protected SdtSDT_MobilePage AV56SDT_MobilePage ;
+      protected SdtSDT_MobilePage AV158SDT_MobilePage ;
       protected SdtSDT_MobilePage aP4_SDT_MobilePage ;
       protected SdtSDT_InfoPage aP4_SDT_InfoPage ;
       protected GXBaseCollection<SdtSDT_ContentPage> AV51SDT_ContentPageCollection ;
@@ -1992,11 +1982,11 @@ namespace GeneXus.Programs {
       protected SdtSDT_ProductService aP1_SDT_ProductService ;
       protected GXBaseCollection<SdtSDT_ProductService> AV78SDT_ProductServiceCollection ;
       protected GXBaseCollection<SdtSDT_ProductService> aP0_SDT_ProductServiceCollection ;
-      protected SdtSDT_Theme AV54SDT_Theme ;
+      protected SdtSDT_Theme AV162SDT_Theme ;
       protected SdtSDT_Theme aP2_SDT_Theme ;
       protected SdtSDT_LocationTheme AV62SDT_LocationTheme ;
       protected SdtSDT_LocationTheme aP0_SDT_LocationTheme ;
-      protected GXBaseCollection<SdtSDT_Theme> AV88SDT_ThemeCollection ;
+      protected GXBaseCollection<SdtSDT_Theme> AV163SDT_ThemeCollection ;
       protected GXBaseCollection<SdtSDT_Theme> aP0_SDT_ThemeCollection ;
       protected GXBaseCollection<SdtSDT_TrashItem> AV140TrashItems ;
       protected GXBaseCollection<SdtSDT_TrashItem> aP0_TrashItems ;
@@ -2008,12 +1998,9 @@ namespace GeneXus.Programs {
       protected SdtSDT_AppVersion aP1_AppVersion ;
       protected SdtSDT_AppVersion_PagesItem AV97MenuPage ;
       protected SdtSDT_AppVersion_PagesItem aP2_MenuPage ;
-      protected SdtSDT_AppVersion_PagesItem aP4_MenuPage ;
+      protected SdtSDT_AppVersion_PagesItem aP5_MenuPage ;
       protected SdtSDT_AppVersion_PagesItem AV95ContentPage ;
       protected SdtSDT_AppVersion_PagesItem aP2_ContentPage ;
-      protected GXBaseCollection<SdtSDT_PageUrl> AV134PageUrlList ;
-      protected SdtSDT_DebugResults AV101DebugResults ;
-      protected SdtSDT_DebugResults aP1_DebugResults ;
       protected SdtTrn_Location AV129BC_Trn_Location ;
       protected SdtTrn_Location aP0_BC_Trn_Location ;
       protected SdtSDT_Error aP4_error ;

@@ -49,7 +49,7 @@ namespace GeneXus.Programs {
       {
          this.AV2Trn_PageName = aP0_Trn_PageName;
          this.AV3SDT_Page = new SdtSDT_Page(context) ;
-         this.AV4SDT_PageCollection = new GXBaseCollection<SdtSDT_Page>( context, "SDT_Page", "Comforta_version21") ;
+         this.AV4SDT_PageCollection = new GXBaseCollection<SdtSDT_Page>( context, "SDT_Page", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP1_SDT_Page=this.AV3SDT_Page;
@@ -69,7 +69,7 @@ namespace GeneXus.Programs {
       {
          this.AV2Trn_PageName = aP0_Trn_PageName;
          this.AV3SDT_Page = new SdtSDT_Page(context) ;
-         this.AV4SDT_PageCollection = new GXBaseCollection<SdtSDT_Page>( context, "SDT_Page", "Comforta_version21") ;
+         this.AV4SDT_PageCollection = new GXBaseCollection<SdtSDT_Page>( context, "SDT_Page", "Comforta_version2") ;
          SubmitImpl();
          aP1_SDT_Page=this.AV3SDT_Page;
          aP2_SDT_PageCollection=this.AV4SDT_PageCollection;
@@ -101,7 +101,7 @@ namespace GeneXus.Programs {
       public override void initialize( )
       {
          AV3SDT_Page = new SdtSDT_Page(context);
-         AV4SDT_PageCollection = new GXBaseCollection<SdtSDT_Page>( context, "SDT_Page", "Comforta_version21");
+         AV4SDT_PageCollection = new GXBaseCollection<SdtSDT_Page>( context, "SDT_Page", "Comforta_version2");
          /* GeneXus formulas. */
       }
 

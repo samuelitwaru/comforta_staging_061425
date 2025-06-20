@@ -26,15 +26,36 @@ class ToolboxApp {
   initialise(): void {
     this.toolboxManager.setUpNavBar();
     this.toolboxManager.setUpSideBar();
+    this.removeModalListener();
     this.editor.init();
   }
 
   initialiseLocalisation() {
     if (this.config.currentLanguage == "Dutch") {
-      i18n.locale = "nl"
+      i18n.locale = "nl";
     } else {
-      i18n.locale = "en"
+      i18n.locale = "en";
     }
+  }
+
+  removeModalListener(): void {
+    document.addEventListener("click", (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      const modalContent = target.closest(".tb-modal-content, .modal-dialog");
+
+      if (modalContent) {
+        event.stopPropagation();
+        return;
+      }
+
+      // Check if click is on modal backdrop
+      if (
+        target.classList.contains("tb-modal") ||
+        target.classList.contains("popup-modal-link")
+      ) {
+        target.style.display = "none";
+      }
+    });
   }
 }
 

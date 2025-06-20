@@ -50,7 +50,7 @@ namespace GeneXus.Programs {
       {
          this.AV16OrganisationId = aP0_OrganisationId;
          this.AV26LocationId = aP1_LocationId;
-         this.AV23BC_Trn_ThemeCollection = new GXBCCollection<SdtTrn_Theme>( context, "Trn_Theme", "Comforta_version21") ;
+         this.AV23BC_Trn_ThemeCollection = new GXBCCollection<SdtTrn_Theme>( context, "Trn_Theme", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
          aP2_BC_Trn_ThemeCollection=this.AV23BC_Trn_ThemeCollection;
@@ -69,7 +69,7 @@ namespace GeneXus.Programs {
       {
          this.AV16OrganisationId = aP0_OrganisationId;
          this.AV26LocationId = aP1_LocationId;
-         this.AV23BC_Trn_ThemeCollection = new GXBCCollection<SdtTrn_Theme>( context, "Trn_Theme", "Comforta_version21") ;
+         this.AV23BC_Trn_ThemeCollection = new GXBCCollection<SdtTrn_Theme>( context, "Trn_Theme", "Comforta_version2") ;
          SubmitImpl();
          aP2_BC_Trn_ThemeCollection=this.AV23BC_Trn_ThemeCollection;
       }
@@ -202,7 +202,7 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV23BC_Trn_ThemeCollection = new GXBCCollection<SdtTrn_Theme>( context, "Trn_Theme", "Comforta_version21");
+         AV23BC_Trn_ThemeCollection = new GXBCCollection<SdtTrn_Theme>( context, "Trn_Theme", "Comforta_version2");
          P00C32_A576ThemeIsPredefined = new bool[] {false} ;
          P00C32_A274Trn_ThemeName = new string[] {""} ;
          P00C32_A273Trn_ThemeId = new Guid[] {Guid.Empty} ;
@@ -210,7 +210,7 @@ namespace GeneXus.Programs {
          A274Trn_ThemeName = "";
          A273Trn_ThemeId = Guid.Empty;
          AV22BC_Trn_Theme = new SdtTrn_Theme(context);
-         AV28Icons = new GXBCLevelCollection<SdtTrn_Theme_Icon>( context, "Trn_Theme.Icon", "Comforta_version21");
+         AV28Icons = new GXBCLevelCollection<SdtTrn_Theme_Icon>( context, "Trn_Theme.Icon", "Comforta_version2");
          P00C33_A584ActiveAppVersionId = new Guid[] {Guid.Empty} ;
          P00C33_n584ActiveAppVersionId = new bool[] {false} ;
          P00C33_A598PublishedActiveAppVersionId = new Guid[] {Guid.Empty} ;

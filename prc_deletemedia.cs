@@ -45,28 +45,35 @@ namespace GeneXus.Programs {
       }
 
       public void execute( Guid aP0_MediaId ,
-                           out string aP1_response )
+                           out string aP1_response ,
+                           out SdtSDT_Error aP2_Error )
       {
          this.AV8MediaId = aP0_MediaId;
          this.AV10response = "" ;
+         this.AV14Error = new SdtSDT_Error(context) ;
          initialize();
          ExecuteImpl();
          aP1_response=this.AV10response;
+         aP2_Error=this.AV14Error;
       }
 
-      public string executeUdp( Guid aP0_MediaId )
+      public SdtSDT_Error executeUdp( Guid aP0_MediaId ,
+                                      out string aP1_response )
       {
-         execute(aP0_MediaId, out aP1_response);
-         return AV10response ;
+         execute(aP0_MediaId, out aP1_response, out aP2_Error);
+         return AV14Error ;
       }
 
       public void executeSubmit( Guid aP0_MediaId ,
-                                 out string aP1_response )
+                                 out string aP1_response ,
+                                 out SdtSDT_Error aP2_Error )
       {
          this.AV8MediaId = aP0_MediaId;
          this.AV10response = "" ;
+         this.AV14Error = new SdtSDT_Error(context) ;
          SubmitImpl();
          aP1_response=this.AV10response;
+         aP2_Error=this.AV14Error;
       }
 
       protected override void ExecutePrivate( )
@@ -88,6 +95,9 @@ namespace GeneXus.Programs {
                GXT9L2 = 0;
                A413MediaId = P009L2_A413MediaId[0];
                A414MediaName = P009L2_A414MediaName[0];
+               GXt_char1 = "";
+               GXt_SdtSDT_Error2 = new SdtSDT_Error();
+               new prc_deletecroppedmedia(context ).execute(  AV8MediaId, out  GXt_char1, out  GXt_SdtSDT_Error2) ;
                /* Using cursor P009L3 */
                pr_default.execute(1, new Object[] {A413MediaId});
                pr_default.close(1);
@@ -130,6 +140,8 @@ namespace GeneXus.Programs {
          P009L2_A414MediaName = new string[] {""} ;
          A413MediaId = Guid.Empty;
          A414MediaName = "";
+         GXt_char1 = "";
+         GXt_SdtSDT_Error2 = new SdtSDT_Error(context);
          AV9File = new GxFile(context.GetPhysicalPath());
          pr_datastore1 = new DataStoreProvider(context, new GeneXus.Programs.prc_deletemedia__datastore1(),
             new Object[][] {
@@ -152,6 +164,7 @@ namespace GeneXus.Programs {
       }
 
       private short GXT9L2 ;
+      private string GXt_char1 ;
       private string AV10response ;
       private string A414MediaName ;
       private Guid AV8MediaId ;
@@ -164,7 +177,9 @@ namespace GeneXus.Programs {
       private IDataStoreProvider pr_default ;
       private Guid[] P009L2_A413MediaId ;
       private string[] P009L2_A414MediaName ;
+      private SdtSDT_Error GXt_SdtSDT_Error2 ;
       private string aP1_response ;
+      private SdtSDT_Error aP2_Error ;
       private IDataStoreProvider pr_datastore1 ;
       private IDataStoreProvider pr_gam ;
    }

@@ -126,6 +126,18 @@
                   </Property>
                 </Properties>
               </Field>
+              <Field name="IconTags" description="Icon Tags">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>LongVarChar</Value>
+                  </Property>
+                  <Property>
+                    <Name>Length</Name>
+                    <Value>2097152</Value>
+                  </Property>
+                </Properties>
+              </Field>
               <Field name="IconSVG" description="Icon SVG">
                 <Properties>
                   <Property>

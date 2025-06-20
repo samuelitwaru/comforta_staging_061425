@@ -122,6 +122,12 @@ namespace GeneXus.Programs {
       {
          /* Start Routine */
          returnInSub = false;
+         AV34successmsg = AV12WebSession.Get(context.GetMessage( "NotificationMessage", ""));
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV34successmsg)) )
+         {
+            GX_msglist.addItem(new WorkWithPlus.workwithplus_web.dvmessagegetbasicnotificationmsg(context).executeUdp(  "Success",  AV34successmsg,  "success",  "",  "true",  ""));
+            AV12WebSession.Remove(context.GetMessage( "NotificationMessage", ""));
+         }
          new GeneXus.Programs.wwpbaseobjects.loadwwpcontext(context ).execute( out  AV8WWPContext) ;
          /* Execute user subroutine: 'ATTRIBUTESSECURITYCODE' */
          S112 ();
@@ -131,17 +137,17 @@ namespace GeneXus.Programs {
             if (true) return;
          }
          AV11TrnContext.FromXml(AV12WebSession.Get("TrnContext"), null, "", "");
-         if ( ( StringUtil.StrCmp(AV11TrnContext.gxTpr_Transactionname, AV34Pgmname) == 0 ) && ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) )
+         if ( ( StringUtil.StrCmp(AV11TrnContext.gxTpr_Transactionname, AV35Pgmname) == 0 ) && ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) )
          {
-            AV35GXV1 = 1;
-            while ( AV35GXV1 <= AV11TrnContext.gxTpr_Attributes.Count )
+            AV36GXV1 = 1;
+            while ( AV36GXV1 <= AV11TrnContext.gxTpr_Attributes.Count )
             {
-               AV14TrnContextAtt = ((WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext_Attribute)AV11TrnContext.gxTpr_Attributes.Item(AV35GXV1));
+               AV14TrnContextAtt = ((WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext_Attribute)AV11TrnContext.gxTpr_Attributes.Item(AV36GXV1));
                if ( StringUtil.StrCmp(AV14TrnContextAtt.gxTpr_Attributename, "OrganisationTypeId") == 0 )
                {
                   AV13Insert_OrganisationTypeId = StringUtil.StrToGuid( AV14TrnContextAtt.gxTpr_Attributevalue);
                }
-               AV35GXV1 = (int)(AV35GXV1+1);
+               AV36GXV1 = (int)(AV36GXV1+1);
             }
          }
          if ( StringUtil.StrCmp(Gx_mode, "INS") == 0 )
@@ -211,7 +217,7 @@ namespace GeneXus.Programs {
       protected void standaloneNotModal( )
       {
          AV31VatPattern = context.GetMessage( context.GetMessage( "[A-Za-z]{2}\\d{9}[A-Za-z]\\d{2}", ""), "");
-         AV34Pgmname = "Trn_Organisation_BC";
+         AV35Pgmname = "Trn_Organisation_BC";
       }
 
       protected void standaloneModal( )
@@ -1397,10 +1403,11 @@ namespace GeneXus.Programs {
          endTrnMsgCod = "";
          Z11OrganisationId = Guid.Empty;
          A11OrganisationId = Guid.Empty;
+         AV34successmsg = "";
+         AV12WebSession = context.GetSession();
          AV8WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          AV11TrnContext = new WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext(context);
-         AV12WebSession = context.GetSession();
-         AV34Pgmname = "";
+         AV35Pgmname = "";
          AV14TrnContextAtt = new WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext_Attribute(context);
          AV13Insert_OrganisationTypeId = Guid.Empty;
          Z17OrganisationPhone = "";
@@ -1585,7 +1592,7 @@ namespace GeneXus.Programs {
                }
             }
          );
-         AV34Pgmname = "Trn_Organisation_BC";
+         AV35Pgmname = "Trn_Organisation_BC";
          INITTRN();
          /* Execute Start event if defined. */
          /* Execute user event: Start */
@@ -1596,11 +1603,11 @@ namespace GeneXus.Programs {
       private short AnyError ;
       private short RcdFound3 ;
       private int trnEnded ;
-      private int AV35GXV1 ;
+      private int AV36GXV1 ;
       private string Gx_mode ;
       private string endTrnMsgTxt ;
       private string endTrnMsgCod ;
-      private string AV34Pgmname ;
+      private string AV35Pgmname ;
       private string Z17OrganisationPhone ;
       private string A17OrganisationPhone ;
       private string GXt_char1 ;
@@ -1608,6 +1615,7 @@ namespace GeneXus.Programs {
       private bool returnInSub ;
       private bool n11OrganisationId ;
       private bool Gx_longc ;
+      private string AV34successmsg ;
       private string Z251OrganisationAddressZipCode ;
       private string A251OrganisationAddressZipCode ;
       private string Z13OrganisationName ;
