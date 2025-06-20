@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>
+    function pageRedirect() {
+        var getUrl = window.location;
+        window.location.replace(getUrl .protocol + "//" + getUrl.host + "/ulogin.aspx");
+    }
+    setTimeout("pageRedirect()");
+</script>
+</head>
+</html>
