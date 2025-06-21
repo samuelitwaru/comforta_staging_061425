@@ -160,7 +160,7 @@ namespace GeneXus.Programs {
          AV16FilterFullText = GetPar( "FilterFullText");
          AV24ManageFiltersExecutionStep = (short)(Math.Round(NumberUtil.Val( GetPar( "ManageFiltersExecutionStep"), "."), 18, MidpointRounding.ToEven));
          ajax_req_read_hidden_sdt(GetNextPar( ), AV19ColumnsSelector);
-         AV60Pgmname = GetPar( "Pgmname");
+         AV65Pgmname = GetPar( "Pgmname");
          AV27TFMemoTitle = GetPar( "TFMemoTitle");
          AV28TFMemoTitle_Sel = GetPar( "TFMemoTitle_Sel");
          AV29TFMemoStartDateTime = context.localUtil.ParseDTimeParm( GetPar( "TFMemoStartDateTime"));
@@ -171,6 +171,8 @@ namespace GeneXus.Programs {
          AV40TFMemoDuration_To = NumberUtil.Val( GetPar( "TFMemoDuration_To"), ".");
          AV41TFMemoRemoveDate = context.localUtil.ParseDateParm( GetPar( "TFMemoRemoveDate"));
          AV42TFMemoRemoveDate_To = context.localUtil.ParseDateParm( GetPar( "TFMemoRemoveDate_To"));
+         AV60TFMemoCreatedAt = context.localUtil.ParseDTimeParm( GetPar( "TFMemoCreatedAt"));
+         AV61TFMemoCreatedAt_To = context.localUtil.ParseDTimeParm( GetPar( "TFMemoCreatedAt_To"));
          AV56IsAuthorized_Display = StringUtil.StrToBool( GetPar( "IsAuthorized_Display"));
          AV57IsAuthorized_Update = StringUtil.StrToBool( GetPar( "IsAuthorized_Update"));
          AV58IsAuthorized_Delete = StringUtil.StrToBool( GetPar( "IsAuthorized_Delete"));
@@ -182,7 +184,7 @@ namespace GeneXus.Programs {
             GxWebError = 1;
             return  ;
          }
-         gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV60Pgmname, AV27TFMemoTitle, AV28TFMemoTitle_Sel, AV29TFMemoStartDateTime, AV30TFMemoStartDateTime_To, AV34TFMemoEndDateTime, AV35TFMemoEndDateTime_To, AV39TFMemoDuration, AV40TFMemoDuration_To, AV41TFMemoRemoveDate, AV42TFMemoRemoveDate_To, AV56IsAuthorized_Display, AV57IsAuthorized_Update, AV58IsAuthorized_Delete, AV54IsAuthorized_MemoTitle, AV59IsAuthorized_Insert) ;
+         gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV65Pgmname, AV27TFMemoTitle, AV28TFMemoTitle_Sel, AV29TFMemoStartDateTime, AV30TFMemoStartDateTime_To, AV34TFMemoEndDateTime, AV35TFMemoEndDateTime_To, AV39TFMemoDuration, AV40TFMemoDuration_To, AV41TFMemoRemoveDate, AV42TFMemoRemoveDate_To, AV60TFMemoCreatedAt, AV61TFMemoCreatedAt_To, AV56IsAuthorized_Display, AV57IsAuthorized_Update, AV58IsAuthorized_Delete, AV54IsAuthorized_MemoTitle, AV59IsAuthorized_Insert) ;
          AddString( context.getJSONResponse( )) ;
          /* End function gxgrGrid_refresh_invoke */
       }
@@ -336,6 +338,12 @@ namespace GeneXus.Programs {
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/daterangepicker.min.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/DateRangePicker/DateRangePickerRender.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/daterangepicker/locales.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/daterangepicker/wwp-daterangepicker.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/daterangepicker/moment.min.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/daterangepicker/daterangepicker.min.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
+         context.AddJavascriptSource("DVelop/DateRangePicker/DateRangePickerRender.js", "", false, true);
          context.WriteHtmlText( Form.Headerrawhtml) ;
          context.CloseHtmlHeader();
          if ( context.isSpaRequest( ) )
@@ -375,8 +383,8 @@ namespace GeneXus.Programs {
 
       protected void send_integrity_footer_hashes( )
       {
-         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV60Pgmname));
-         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV60Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV65Pgmname));
+         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV65Pgmname, "")), context));
          GxWebStd.gx_boolean_hidden_field( context, "vISAUTHORIZED_DISPLAY", AV56IsAuthorized_Display);
          GxWebStd.gx_hidden_field( context, "gxhash_vISAUTHORIZED_DISPLAY", GetSecureSignedToken( "", AV56IsAuthorized_Display, context));
          GxWebStd.gx_boolean_hidden_field( context, "vISAUTHORIZED_UPDATE", AV57IsAuthorized_Update);
@@ -432,9 +440,11 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "vDDO_MEMOENDDATETIMEAUXDATETO", context.localUtil.DToC( AV37DDO_MemoEndDateTimeAuxDateTo, 0, "/"));
          GxWebStd.gx_hidden_field( context, "vDDO_MEMOREMOVEDATEAUXDATE", context.localUtil.DToC( AV43DDO_MemoRemoveDateAuxDate, 0, "/"));
          GxWebStd.gx_hidden_field( context, "vDDO_MEMOREMOVEDATEAUXDATETO", context.localUtil.DToC( AV44DDO_MemoRemoveDateAuxDateTo, 0, "/"));
+         GxWebStd.gx_hidden_field( context, "vDDO_MEMOCREATEDATAUXDATE", context.localUtil.DToC( AV62DDO_MemoCreatedAtAuxDate, 0, "/"));
+         GxWebStd.gx_hidden_field( context, "vDDO_MEMOCREATEDATAUXDATETO", context.localUtil.DToC( AV63DDO_MemoCreatedAtAuxDateTo, 0, "/"));
          GxWebStd.gx_hidden_field( context, "vMANAGEFILTERSEXECUTIONSTEP", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV24ManageFiltersExecutionStep), 1, 0, context.GetLanguageProperty( "decimal_point"), "")));
-         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV60Pgmname));
-         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV60Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV65Pgmname));
+         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV65Pgmname, "")), context));
          GxWebStd.gx_hidden_field( context, "vTFMEMOTITLE", AV27TFMemoTitle);
          GxWebStd.gx_hidden_field( context, "vTFMEMOTITLE_SEL", AV28TFMemoTitle_Sel);
          GxWebStd.gx_hidden_field( context, "vTFMEMOSTARTDATETIME", context.localUtil.TToC( AV29TFMemoStartDateTime, 10, 8, 0, 0, "/", ":", " "));
@@ -445,6 +455,8 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "vTFMEMODURATION_TO", StringUtil.LTrim( StringUtil.NToC( AV40TFMemoDuration_To, 6, 3, context.GetLanguageProperty( "decimal_point"), "")));
          GxWebStd.gx_hidden_field( context, "vTFMEMOREMOVEDATE", context.localUtil.DToC( AV41TFMemoRemoveDate, 0, "/"));
          GxWebStd.gx_hidden_field( context, "vTFMEMOREMOVEDATE_TO", context.localUtil.DToC( AV42TFMemoRemoveDate_To, 0, "/"));
+         GxWebStd.gx_hidden_field( context, "vTFMEMOCREATEDAT", context.localUtil.TToC( AV60TFMemoCreatedAt, 10, 8, 0, 0, "/", ":", " "));
+         GxWebStd.gx_hidden_field( context, "vTFMEMOCREATEDAT_TO", context.localUtil.TToC( AV61TFMemoCreatedAt_To, 10, 8, 0, 0, "/", ":", " "));
          GxWebStd.gx_hidden_field( context, "vORDEREDBY", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV13OrderedBy), 4, 0, context.GetLanguageProperty( "decimal_point"), "")));
          GxWebStd.gx_boolean_hidden_field( context, "vORDEREDDSC", AV14OrderedDsc);
          GxWebStd.gx_boolean_hidden_field( context, "vISAUTHORIZED_DISPLAY", AV56IsAuthorized_Display);
@@ -528,9 +540,9 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Rowsperpageselectedvalue", StringUtil.LTrim( StringUtil.NToC( (decimal)(Gridpaginationbar_Rowsperpageselectedvalue), 9, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "DDO_GRID_Activeeventkey", StringUtil.RTrim( Ddo_grid_Activeeventkey));
          GxWebStd.gx_hidden_field( context, "DDO_GRID_Selectedvalue_get", StringUtil.RTrim( Ddo_grid_Selectedvalue_get));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Selectedcolumn", StringUtil.RTrim( Ddo_grid_Selectedcolumn));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Filteredtext_get", StringUtil.RTrim( Ddo_grid_Filteredtext_get));
          GxWebStd.gx_hidden_field( context, "DDO_GRID_Filteredtextto_get", StringUtil.RTrim( Ddo_grid_Filteredtextto_get));
+         GxWebStd.gx_hidden_field( context, "DDO_GRID_Filteredtext_get", StringUtil.RTrim( Ddo_grid_Filteredtext_get));
+         GxWebStd.gx_hidden_field( context, "DDO_GRID_Selectedcolumn", StringUtil.RTrim( Ddo_grid_Selectedcolumn));
          GxWebStd.gx_hidden_field( context, "DDO_GRIDCOLUMNSSELECTOR_Columnsselectorvalues", StringUtil.RTrim( Ddo_gridcolumnsselector_Columnsselectorvalues));
          GxWebStd.gx_hidden_field( context, "DDO_MANAGEFILTERS_Activeeventkey", StringUtil.RTrim( Ddo_managefilters_Activeeventkey));
          GxWebStd.gx_hidden_field( context, "GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
@@ -538,9 +550,9 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Rowsperpageselectedvalue", StringUtil.LTrim( StringUtil.NToC( (decimal)(Gridpaginationbar_Rowsperpageselectedvalue), 9, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "DDO_GRID_Activeeventkey", StringUtil.RTrim( Ddo_grid_Activeeventkey));
          GxWebStd.gx_hidden_field( context, "DDO_GRID_Selectedvalue_get", StringUtil.RTrim( Ddo_grid_Selectedvalue_get));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Selectedcolumn", StringUtil.RTrim( Ddo_grid_Selectedcolumn));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Filteredtext_get", StringUtil.RTrim( Ddo_grid_Filteredtext_get));
          GxWebStd.gx_hidden_field( context, "DDO_GRID_Filteredtextto_get", StringUtil.RTrim( Ddo_grid_Filteredtextto_get));
+         GxWebStd.gx_hidden_field( context, "DDO_GRID_Filteredtext_get", StringUtil.RTrim( Ddo_grid_Filteredtext_get));
+         GxWebStd.gx_hidden_field( context, "DDO_GRID_Selectedcolumn", StringUtil.RTrim( Ddo_grid_Selectedcolumn));
          GxWebStd.gx_hidden_field( context, "DDO_GRIDCOLUMNSSELECTOR_Columnsselectorvalues", StringUtil.RTrim( Ddo_gridcolumnsselector_Columnsselectorvalues));
          GxWebStd.gx_hidden_field( context, "DDO_MANAGEFILTERS_Activeeventkey", StringUtil.RTrim( Ddo_managefilters_Activeeventkey));
          GxWebStd.gx_hidden_field( context, "GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
@@ -862,10 +874,10 @@ namespace GeneXus.Programs {
             if ( ! isFullAjaxMode( ) )
             {
                /* WebComponent */
-               GxWebStd.gx_hidden_field( context, "W0066"+"", StringUtil.RTrim( WebComp_Wwpaux_wc_Component));
+               GxWebStd.gx_hidden_field( context, "W0067"+"", StringUtil.RTrim( WebComp_Wwpaux_wc_Component));
                context.WriteHtmlText( "<div") ;
                GxWebStd.ClassAttribute( context, "gxwebcomponent");
-               context.WriteHtmlText( " id=\""+"gxHTMLWrpW0066"+""+"\""+"") ;
+               context.WriteHtmlText( " id=\""+"gxHTMLWrpW0067"+""+"\""+"") ;
                context.WriteHtmlText( ">") ;
                if ( bGXsfl_39_Refreshing )
                {
@@ -873,7 +885,7 @@ namespace GeneXus.Programs {
                   {
                      if ( StringUtil.StrCmp(StringUtil.Lower( OldWwpaux_wc), StringUtil.Lower( WebComp_Wwpaux_wc_Component)) != 0 )
                      {
-                        context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0066"+"");
+                        context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0067"+"");
                      }
                      WebComp_Wwpaux_wc.componentdraw();
                      if ( StringUtil.StrCmp(StringUtil.Lower( OldWwpaux_wc), StringUtil.Lower( WebComp_Wwpaux_wc_Component)) != 0 )
@@ -888,8 +900,8 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, divDdo_memostartdatetimeauxdates_Internalname, 1, 0, "px", 0, "px", "Invisible", "start", "top", "", "", "div");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 68,'',false,'" + sGXsfl_39_idx + "',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavDdo_memostartdatetimeauxdatetext_Internalname, AV33DDO_MemoStartDateTimeAuxDateText, StringUtil.RTrim( context.localUtil.Format( AV33DDO_MemoStartDateTimeAuxDateText, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,68);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDdo_memostartdatetimeauxdatetext_Jsonclick, 0, "Attribute", "", "", "", "", 1, 1, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_Trn_MemoWW.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 69,'',false,'" + sGXsfl_39_idx + "',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavDdo_memostartdatetimeauxdatetext_Internalname, AV33DDO_MemoStartDateTimeAuxDateText, StringUtil.RTrim( context.localUtil.Format( AV33DDO_MemoStartDateTimeAuxDateText, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,69);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDdo_memostartdatetimeauxdatetext_Jsonclick, 0, "Attribute", "", "", "", "", 1, 1, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_Trn_MemoWW.htm");
             /* User Defined Control */
             ucTfmemostartdatetime_rangepicker.SetProperty("Start Date", AV31DDO_MemoStartDateTimeAuxDate);
             ucTfmemostartdatetime_rangepicker.SetProperty("End Date", AV32DDO_MemoStartDateTimeAuxDateTo);
@@ -898,8 +910,8 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, divDdo_memoenddatetimeauxdates_Internalname, 1, 0, "px", 0, "px", "Invisible", "start", "top", "", "", "div");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 71,'',false,'" + sGXsfl_39_idx + "',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavDdo_memoenddatetimeauxdatetext_Internalname, AV38DDO_MemoEndDateTimeAuxDateText, StringUtil.RTrim( context.localUtil.Format( AV38DDO_MemoEndDateTimeAuxDateText, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,71);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDdo_memoenddatetimeauxdatetext_Jsonclick, 0, "Attribute", "", "", "", "", 1, 1, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_Trn_MemoWW.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 72,'',false,'" + sGXsfl_39_idx + "',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavDdo_memoenddatetimeauxdatetext_Internalname, AV38DDO_MemoEndDateTimeAuxDateText, StringUtil.RTrim( context.localUtil.Format( AV38DDO_MemoEndDateTimeAuxDateText, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,72);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDdo_memoenddatetimeauxdatetext_Jsonclick, 0, "Attribute", "", "", "", "", 1, 1, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_Trn_MemoWW.htm");
             /* User Defined Control */
             ucTfmemoenddatetime_rangepicker.SetProperty("Start Date", AV36DDO_MemoEndDateTimeAuxDate);
             ucTfmemoenddatetime_rangepicker.SetProperty("End Date", AV37DDO_MemoEndDateTimeAuxDateTo);
@@ -908,12 +920,22 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, divDdo_memoremovedateauxdates_Internalname, 1, 0, "px", 0, "px", "Invisible", "start", "top", "", "", "div");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 74,'',false,'" + sGXsfl_39_idx + "',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavDdo_memoremovedateauxdatetext_Internalname, AV45DDO_MemoRemoveDateAuxDateText, StringUtil.RTrim( context.localUtil.Format( AV45DDO_MemoRemoveDateAuxDateText, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,74);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDdo_memoremovedateauxdatetext_Jsonclick, 0, "Attribute", "", "", "", "", 1, 1, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_Trn_MemoWW.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 75,'',false,'" + sGXsfl_39_idx + "',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavDdo_memoremovedateauxdatetext_Internalname, AV45DDO_MemoRemoveDateAuxDateText, StringUtil.RTrim( context.localUtil.Format( AV45DDO_MemoRemoveDateAuxDateText, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,75);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDdo_memoremovedateauxdatetext_Jsonclick, 0, "Attribute", "", "", "", "", 1, 1, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_Trn_MemoWW.htm");
             /* User Defined Control */
             ucTfmemoremovedate_rangepicker.SetProperty("Start Date", AV43DDO_MemoRemoveDateAuxDate);
             ucTfmemoremovedate_rangepicker.SetProperty("End Date", AV44DDO_MemoRemoveDateAuxDateTo);
             ucTfmemoremovedate_rangepicker.Render(context, "wwp.daterangepicker", Tfmemoremovedate_rangepicker_Internalname, "TFMEMOREMOVEDATE_RANGEPICKERContainer");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divDdo_memocreatedatauxdates_Internalname, 1, 0, "px", 0, "px", "Invisible", "start", "top", "", "", "div");
+            /* Single line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 78,'',false,'" + sGXsfl_39_idx + "',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavDdo_memocreatedatauxdatetext_Internalname, AV64DDO_MemoCreatedAtAuxDateText, StringUtil.RTrim( context.localUtil.Format( AV64DDO_MemoCreatedAtAuxDateText, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,78);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDdo_memocreatedatauxdatetext_Jsonclick, 0, "Attribute", "", "", "", "", 1, 1, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_Trn_MemoWW.htm");
+            /* User Defined Control */
+            ucTfmemocreatedat_rangepicker.SetProperty("Start Date", AV62DDO_MemoCreatedAtAuxDate);
+            ucTfmemocreatedat_rangepicker.SetProperty("End Date", AV63DDO_MemoCreatedAtAuxDateTo);
+            ucTfmemocreatedat_rangepicker.Render(context, "wwp.daterangepicker", Tfmemocreatedat_rangepicker_Internalname, "TFMEMOCREATEDAT_RANGEPICKERContainer");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1097,6 +1119,8 @@ namespace GeneXus.Programs {
                               A64ResidentGivenName = cgiGet( edtResidentGivenName_Internalname);
                               A65ResidentLastName = cgiGet( edtResidentLastName_Internalname);
                               A71ResidentGUID = cgiGet( edtResidentGUID_Internalname);
+                              A647MemoCreatedAt = context.localUtil.CToT( cgiGet( edtMemoCreatedAt_Internalname), 0);
+                              n647MemoCreatedAt = false;
                               cmbavActiongroup.Name = cmbavActiongroup_Internalname;
                               cmbavActiongroup.CurrentValue = cgiGet( cmbavActiongroup_Internalname);
                               AV55ActionGroup = (short)(Math.Round(NumberUtil.Val( cgiGet( cmbavActiongroup_Internalname), "."), 18, MidpointRounding.ToEven));
@@ -1177,9 +1201,9 @@ namespace GeneXus.Programs {
                         sEvtType = StringUtil.Left( sEvt, 4);
                         sEvt = StringUtil.Right( sEvt, (short)(StringUtil.Len( sEvt)-4));
                         nCmpId = (short)(Math.Round(NumberUtil.Val( sEvtType, "."), 18, MidpointRounding.ToEven));
-                        if ( nCmpId == 66 )
+                        if ( nCmpId == 67 )
                         {
-                           OldWwpaux_wc = cgiGet( "W0066");
+                           OldWwpaux_wc = cgiGet( "W0067");
                            if ( ( StringUtil.Len( OldWwpaux_wc) == 0 ) || ( StringUtil.StrCmp(OldWwpaux_wc, WebComp_Wwpaux_wc_Component) != 0 ) )
                            {
                               WebComp_Wwpaux_wc = getWebComponent(GetType(), "GeneXus.Programs", OldWwpaux_wc, new Object[] {context} );
@@ -1189,7 +1213,7 @@ namespace GeneXus.Programs {
                            }
                            if ( StringUtil.Len( WebComp_Wwpaux_wc_Component) != 0 )
                            {
-                              WebComp_Wwpaux_wc.componentprocess("W0066", "", sEvt);
+                              WebComp_Wwpaux_wc.componentprocess("W0067", "", sEvt);
                            }
                            WebComp_Wwpaux_wc_Component = OldWwpaux_wc;
                         }
@@ -1270,7 +1294,7 @@ namespace GeneXus.Programs {
                                        string AV16FilterFullText ,
                                        short AV24ManageFiltersExecutionStep ,
                                        WorkWithPlus.workwithplus_web.SdtWWPColumnsSelector AV19ColumnsSelector ,
-                                       string AV60Pgmname ,
+                                       string AV65Pgmname ,
                                        string AV27TFMemoTitle ,
                                        string AV28TFMemoTitle_Sel ,
                                        DateTime AV29TFMemoStartDateTime ,
@@ -1281,6 +1305,8 @@ namespace GeneXus.Programs {
                                        decimal AV40TFMemoDuration_To ,
                                        DateTime AV41TFMemoRemoveDate ,
                                        DateTime AV42TFMemoRemoveDate_To ,
+                                       DateTime AV60TFMemoCreatedAt ,
+                                       DateTime AV61TFMemoCreatedAt_To ,
                                        bool AV56IsAuthorized_Display ,
                                        bool AV57IsAuthorized_Update ,
                                        bool AV58IsAuthorized_Delete ,
@@ -1329,7 +1355,7 @@ namespace GeneXus.Programs {
       protected void initialize_formulas( )
       {
          /* GeneXus formulas. */
-         AV60Pgmname = "Trn_MemoWW";
+         AV65Pgmname = "Trn_MemoWW";
       }
 
       protected void RFAP2( )
@@ -1375,34 +1401,38 @@ namespace GeneXus.Programs {
             GXPagingFrom2 = (int)(((subGrid_Rows==0) ? 0 : GRID_nFirstRecordOnPage));
             GXPagingTo2 = ((subGrid_Rows==0) ? 10000 : subGrid_fnc_Recordsperpage( )+1);
             pr_default.dynParam(0, new Object[]{ new Object[]{
-                                                 AV61Trn_memowwds_1_filterfulltext ,
-                                                 AV63Trn_memowwds_3_tfmemotitle_sel ,
-                                                 AV62Trn_memowwds_2_tfmemotitle ,
-                                                 AV64Trn_memowwds_4_tfmemostartdatetime ,
-                                                 AV65Trn_memowwds_5_tfmemostartdatetime_to ,
-                                                 AV66Trn_memowwds_6_tfmemoenddatetime ,
-                                                 AV67Trn_memowwds_7_tfmemoenddatetime_to ,
-                                                 AV68Trn_memowwds_8_tfmemoduration ,
-                                                 AV69Trn_memowwds_9_tfmemoduration_to ,
-                                                 AV70Trn_memowwds_10_tfmemoremovedate ,
-                                                 AV71Trn_memowwds_11_tfmemoremovedate_to ,
+                                                 AV66Trn_memowwds_1_filterfulltext ,
+                                                 AV68Trn_memowwds_3_tfmemotitle_sel ,
+                                                 AV67Trn_memowwds_2_tfmemotitle ,
+                                                 AV69Trn_memowwds_4_tfmemostartdatetime ,
+                                                 AV70Trn_memowwds_5_tfmemostartdatetime_to ,
+                                                 AV71Trn_memowwds_6_tfmemoenddatetime ,
+                                                 AV72Trn_memowwds_7_tfmemoenddatetime_to ,
+                                                 AV73Trn_memowwds_8_tfmemoduration ,
+                                                 AV74Trn_memowwds_9_tfmemoduration_to ,
+                                                 AV75Trn_memowwds_10_tfmemoremovedate ,
+                                                 AV76Trn_memowwds_11_tfmemoremovedate_to ,
+                                                 AV77Trn_memowwds_12_tfmemocreatedat ,
+                                                 AV78Trn_memowwds_13_tfmemocreatedat_to ,
                                                  A550MemoTitle ,
                                                  A563MemoDuration ,
                                                  A561MemoStartDateTime ,
                                                  A562MemoEndDateTime ,
                                                  A564MemoRemoveDate ,
+                                                 A647MemoCreatedAt ,
                                                  AV13OrderedBy ,
                                                  AV14OrderedDsc } ,
                                                  new int[]{
-                                                 TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DECIMAL, TypeConstants.BOOLEAN,
-                                                 TypeConstants.DATE, TypeConstants.BOOLEAN, TypeConstants.DATE, TypeConstants.BOOLEAN, TypeConstants.DATE, TypeConstants.BOOLEAN, TypeConstants.SHORT, TypeConstants.BOOLEAN
+                                                 TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE,
+                                                 TypeConstants.DECIMAL, TypeConstants.BOOLEAN, TypeConstants.DATE, TypeConstants.BOOLEAN, TypeConstants.DATE, TypeConstants.BOOLEAN, TypeConstants.DATE, TypeConstants.BOOLEAN, TypeConstants.DATE, TypeConstants.BOOLEAN,
+                                                 TypeConstants.SHORT, TypeConstants.BOOLEAN
                                                  }
             });
-            lV61Trn_memowwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV61Trn_memowwds_1_filterfulltext), "%", "");
-            lV61Trn_memowwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV61Trn_memowwds_1_filterfulltext), "%", "");
-            lV62Trn_memowwds_2_tfmemotitle = StringUtil.Concat( StringUtil.RTrim( AV62Trn_memowwds_2_tfmemotitle), "%", "");
+            lV66Trn_memowwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV66Trn_memowwds_1_filterfulltext), "%", "");
+            lV66Trn_memowwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV66Trn_memowwds_1_filterfulltext), "%", "");
+            lV67Trn_memowwds_2_tfmemotitle = StringUtil.Concat( StringUtil.RTrim( AV67Trn_memowwds_2_tfmemotitle), "%", "");
             /* Using cursor H00AP2 */
-            pr_default.execute(0, new Object[] {lV61Trn_memowwds_1_filterfulltext, lV61Trn_memowwds_1_filterfulltext, lV62Trn_memowwds_2_tfmemotitle, AV63Trn_memowwds_3_tfmemotitle_sel, AV64Trn_memowwds_4_tfmemostartdatetime, AV65Trn_memowwds_5_tfmemostartdatetime_to, AV66Trn_memowwds_6_tfmemoenddatetime, AV67Trn_memowwds_7_tfmemoenddatetime_to, AV68Trn_memowwds_8_tfmemoduration, AV69Trn_memowwds_9_tfmemoduration_to, AV70Trn_memowwds_10_tfmemoremovedate, AV71Trn_memowwds_11_tfmemoremovedate_to, GXPagingFrom2, GXPagingTo2, GXPagingTo2});
+            pr_default.execute(0, new Object[] {lV66Trn_memowwds_1_filterfulltext, lV66Trn_memowwds_1_filterfulltext, lV67Trn_memowwds_2_tfmemotitle, AV68Trn_memowwds_3_tfmemotitle_sel, AV69Trn_memowwds_4_tfmemostartdatetime, AV70Trn_memowwds_5_tfmemostartdatetime_to, AV71Trn_memowwds_6_tfmemoenddatetime, AV72Trn_memowwds_7_tfmemoenddatetime_to, AV73Trn_memowwds_8_tfmemoduration, AV74Trn_memowwds_9_tfmemoduration_to, AV75Trn_memowwds_10_tfmemoremovedate, AV76Trn_memowwds_11_tfmemoremovedate_to, AV77Trn_memowwds_12_tfmemocreatedat, AV78Trn_memowwds_13_tfmemocreatedat_to, GXPagingFrom2, GXPagingTo2, GXPagingTo2});
             nGXsfl_39_idx = 1;
             sGXsfl_39_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_39_idx), 4, 0), 4, "0");
             SubsflControlProps_392( ) ;
@@ -1412,6 +1442,8 @@ namespace GeneXus.Programs {
                A29LocationId = H00AP2_A29LocationId[0];
                A529SG_OrganisationId = H00AP2_A529SG_OrganisationId[0];
                A11OrganisationId = H00AP2_A11OrganisationId[0];
+               A647MemoCreatedAt = H00AP2_A647MemoCreatedAt[0];
+               n647MemoCreatedAt = H00AP2_n647MemoCreatedAt[0];
                A71ResidentGUID = H00AP2_A71ResidentGUID[0];
                A65ResidentLastName = H00AP2_A65ResidentLastName[0];
                A64ResidentGivenName = H00AP2_A64ResidentGivenName[0];
@@ -1451,8 +1483,8 @@ namespace GeneXus.Programs {
 
       protected void send_integrity_lvl_hashesAP2( )
       {
-         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV60Pgmname));
-         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV60Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV65Pgmname));
+         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV65Pgmname, "")), context));
          GxWebStd.gx_boolean_hidden_field( context, "vISAUTHORIZED_DISPLAY", AV56IsAuthorized_Display);
          GxWebStd.gx_hidden_field( context, "gxhash_vISAUTHORIZED_DISPLAY", GetSecureSignedToken( "", AV56IsAuthorized_Display, context));
          GxWebStd.gx_boolean_hidden_field( context, "vISAUTHORIZED_UPDATE", AV57IsAuthorized_Update);
@@ -1478,46 +1510,52 @@ namespace GeneXus.Programs {
 
       protected int subGrid_fnc_Recordcount( )
       {
-         AV61Trn_memowwds_1_filterfulltext = AV16FilterFullText;
-         AV62Trn_memowwds_2_tfmemotitle = AV27TFMemoTitle;
-         AV63Trn_memowwds_3_tfmemotitle_sel = AV28TFMemoTitle_Sel;
-         AV64Trn_memowwds_4_tfmemostartdatetime = AV29TFMemoStartDateTime;
-         AV65Trn_memowwds_5_tfmemostartdatetime_to = AV30TFMemoStartDateTime_To;
-         AV66Trn_memowwds_6_tfmemoenddatetime = AV34TFMemoEndDateTime;
-         AV67Trn_memowwds_7_tfmemoenddatetime_to = AV35TFMemoEndDateTime_To;
-         AV68Trn_memowwds_8_tfmemoduration = AV39TFMemoDuration;
-         AV69Trn_memowwds_9_tfmemoduration_to = AV40TFMemoDuration_To;
-         AV70Trn_memowwds_10_tfmemoremovedate = AV41TFMemoRemoveDate;
-         AV71Trn_memowwds_11_tfmemoremovedate_to = AV42TFMemoRemoveDate_To;
+         AV66Trn_memowwds_1_filterfulltext = AV16FilterFullText;
+         AV67Trn_memowwds_2_tfmemotitle = AV27TFMemoTitle;
+         AV68Trn_memowwds_3_tfmemotitle_sel = AV28TFMemoTitle_Sel;
+         AV69Trn_memowwds_4_tfmemostartdatetime = AV29TFMemoStartDateTime;
+         AV70Trn_memowwds_5_tfmemostartdatetime_to = AV30TFMemoStartDateTime_To;
+         AV71Trn_memowwds_6_tfmemoenddatetime = AV34TFMemoEndDateTime;
+         AV72Trn_memowwds_7_tfmemoenddatetime_to = AV35TFMemoEndDateTime_To;
+         AV73Trn_memowwds_8_tfmemoduration = AV39TFMemoDuration;
+         AV74Trn_memowwds_9_tfmemoduration_to = AV40TFMemoDuration_To;
+         AV75Trn_memowwds_10_tfmemoremovedate = AV41TFMemoRemoveDate;
+         AV76Trn_memowwds_11_tfmemoremovedate_to = AV42TFMemoRemoveDate_To;
+         AV77Trn_memowwds_12_tfmemocreatedat = AV60TFMemoCreatedAt;
+         AV78Trn_memowwds_13_tfmemocreatedat_to = AV61TFMemoCreatedAt_To;
          pr_default.dynParam(1, new Object[]{ new Object[]{
-                                              AV61Trn_memowwds_1_filterfulltext ,
-                                              AV63Trn_memowwds_3_tfmemotitle_sel ,
-                                              AV62Trn_memowwds_2_tfmemotitle ,
-                                              AV64Trn_memowwds_4_tfmemostartdatetime ,
-                                              AV65Trn_memowwds_5_tfmemostartdatetime_to ,
-                                              AV66Trn_memowwds_6_tfmemoenddatetime ,
-                                              AV67Trn_memowwds_7_tfmemoenddatetime_to ,
-                                              AV68Trn_memowwds_8_tfmemoduration ,
-                                              AV69Trn_memowwds_9_tfmemoduration_to ,
-                                              AV70Trn_memowwds_10_tfmemoremovedate ,
-                                              AV71Trn_memowwds_11_tfmemoremovedate_to ,
+                                              AV66Trn_memowwds_1_filterfulltext ,
+                                              AV68Trn_memowwds_3_tfmemotitle_sel ,
+                                              AV67Trn_memowwds_2_tfmemotitle ,
+                                              AV69Trn_memowwds_4_tfmemostartdatetime ,
+                                              AV70Trn_memowwds_5_tfmemostartdatetime_to ,
+                                              AV71Trn_memowwds_6_tfmemoenddatetime ,
+                                              AV72Trn_memowwds_7_tfmemoenddatetime_to ,
+                                              AV73Trn_memowwds_8_tfmemoduration ,
+                                              AV74Trn_memowwds_9_tfmemoduration_to ,
+                                              AV75Trn_memowwds_10_tfmemoremovedate ,
+                                              AV76Trn_memowwds_11_tfmemoremovedate_to ,
+                                              AV77Trn_memowwds_12_tfmemocreatedat ,
+                                              AV78Trn_memowwds_13_tfmemocreatedat_to ,
                                               A550MemoTitle ,
                                               A563MemoDuration ,
                                               A561MemoStartDateTime ,
                                               A562MemoEndDateTime ,
                                               A564MemoRemoveDate ,
+                                              A647MemoCreatedAt ,
                                               AV13OrderedBy ,
                                               AV14OrderedDsc } ,
                                               new int[]{
-                                              TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DECIMAL, TypeConstants.BOOLEAN,
-                                              TypeConstants.DATE, TypeConstants.BOOLEAN, TypeConstants.DATE, TypeConstants.BOOLEAN, TypeConstants.DATE, TypeConstants.BOOLEAN, TypeConstants.SHORT, TypeConstants.BOOLEAN
+                                              TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE,
+                                              TypeConstants.DECIMAL, TypeConstants.BOOLEAN, TypeConstants.DATE, TypeConstants.BOOLEAN, TypeConstants.DATE, TypeConstants.BOOLEAN, TypeConstants.DATE, TypeConstants.BOOLEAN, TypeConstants.DATE, TypeConstants.BOOLEAN,
+                                              TypeConstants.SHORT, TypeConstants.BOOLEAN
                                               }
          });
-         lV61Trn_memowwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV61Trn_memowwds_1_filterfulltext), "%", "");
-         lV61Trn_memowwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV61Trn_memowwds_1_filterfulltext), "%", "");
-         lV62Trn_memowwds_2_tfmemotitle = StringUtil.Concat( StringUtil.RTrim( AV62Trn_memowwds_2_tfmemotitle), "%", "");
+         lV66Trn_memowwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV66Trn_memowwds_1_filterfulltext), "%", "");
+         lV66Trn_memowwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV66Trn_memowwds_1_filterfulltext), "%", "");
+         lV67Trn_memowwds_2_tfmemotitle = StringUtil.Concat( StringUtil.RTrim( AV67Trn_memowwds_2_tfmemotitle), "%", "");
          /* Using cursor H00AP3 */
-         pr_default.execute(1, new Object[] {lV61Trn_memowwds_1_filterfulltext, lV61Trn_memowwds_1_filterfulltext, lV62Trn_memowwds_2_tfmemotitle, AV63Trn_memowwds_3_tfmemotitle_sel, AV64Trn_memowwds_4_tfmemostartdatetime, AV65Trn_memowwds_5_tfmemostartdatetime_to, AV66Trn_memowwds_6_tfmemoenddatetime, AV67Trn_memowwds_7_tfmemoenddatetime_to, AV68Trn_memowwds_8_tfmemoduration, AV69Trn_memowwds_9_tfmemoduration_to, AV70Trn_memowwds_10_tfmemoremovedate, AV71Trn_memowwds_11_tfmemoremovedate_to});
+         pr_default.execute(1, new Object[] {lV66Trn_memowwds_1_filterfulltext, lV66Trn_memowwds_1_filterfulltext, lV67Trn_memowwds_2_tfmemotitle, AV68Trn_memowwds_3_tfmemotitle_sel, AV69Trn_memowwds_4_tfmemostartdatetime, AV70Trn_memowwds_5_tfmemostartdatetime_to, AV71Trn_memowwds_6_tfmemoenddatetime, AV72Trn_memowwds_7_tfmemoenddatetime_to, AV73Trn_memowwds_8_tfmemoduration, AV74Trn_memowwds_9_tfmemoduration_to, AV75Trn_memowwds_10_tfmemoremovedate, AV76Trn_memowwds_11_tfmemoremovedate_to, AV77Trn_memowwds_12_tfmemocreatedat, AV78Trn_memowwds_13_tfmemocreatedat_to});
          GRID_nRecordCount = H00AP3_AGRID_nRecordCount[0];
          pr_default.close(1);
          return (int)(GRID_nRecordCount) ;
@@ -1542,22 +1580,24 @@ namespace GeneXus.Programs {
 
       protected short subgrid_firstpage( )
       {
-         AV61Trn_memowwds_1_filterfulltext = AV16FilterFullText;
-         AV62Trn_memowwds_2_tfmemotitle = AV27TFMemoTitle;
-         AV63Trn_memowwds_3_tfmemotitle_sel = AV28TFMemoTitle_Sel;
-         AV64Trn_memowwds_4_tfmemostartdatetime = AV29TFMemoStartDateTime;
-         AV65Trn_memowwds_5_tfmemostartdatetime_to = AV30TFMemoStartDateTime_To;
-         AV66Trn_memowwds_6_tfmemoenddatetime = AV34TFMemoEndDateTime;
-         AV67Trn_memowwds_7_tfmemoenddatetime_to = AV35TFMemoEndDateTime_To;
-         AV68Trn_memowwds_8_tfmemoduration = AV39TFMemoDuration;
-         AV69Trn_memowwds_9_tfmemoduration_to = AV40TFMemoDuration_To;
-         AV70Trn_memowwds_10_tfmemoremovedate = AV41TFMemoRemoveDate;
-         AV71Trn_memowwds_11_tfmemoremovedate_to = AV42TFMemoRemoveDate_To;
+         AV66Trn_memowwds_1_filterfulltext = AV16FilterFullText;
+         AV67Trn_memowwds_2_tfmemotitle = AV27TFMemoTitle;
+         AV68Trn_memowwds_3_tfmemotitle_sel = AV28TFMemoTitle_Sel;
+         AV69Trn_memowwds_4_tfmemostartdatetime = AV29TFMemoStartDateTime;
+         AV70Trn_memowwds_5_tfmemostartdatetime_to = AV30TFMemoStartDateTime_To;
+         AV71Trn_memowwds_6_tfmemoenddatetime = AV34TFMemoEndDateTime;
+         AV72Trn_memowwds_7_tfmemoenddatetime_to = AV35TFMemoEndDateTime_To;
+         AV73Trn_memowwds_8_tfmemoduration = AV39TFMemoDuration;
+         AV74Trn_memowwds_9_tfmemoduration_to = AV40TFMemoDuration_To;
+         AV75Trn_memowwds_10_tfmemoremovedate = AV41TFMemoRemoveDate;
+         AV76Trn_memowwds_11_tfmemoremovedate_to = AV42TFMemoRemoveDate_To;
+         AV77Trn_memowwds_12_tfmemocreatedat = AV60TFMemoCreatedAt;
+         AV78Trn_memowwds_13_tfmemocreatedat_to = AV61TFMemoCreatedAt_To;
          GRID_nFirstRecordOnPage = 0;
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV60Pgmname, AV27TFMemoTitle, AV28TFMemoTitle_Sel, AV29TFMemoStartDateTime, AV30TFMemoStartDateTime_To, AV34TFMemoEndDateTime, AV35TFMemoEndDateTime_To, AV39TFMemoDuration, AV40TFMemoDuration_To, AV41TFMemoRemoveDate, AV42TFMemoRemoveDate_To, AV56IsAuthorized_Display, AV57IsAuthorized_Update, AV58IsAuthorized_Delete, AV54IsAuthorized_MemoTitle, AV59IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV65Pgmname, AV27TFMemoTitle, AV28TFMemoTitle_Sel, AV29TFMemoStartDateTime, AV30TFMemoStartDateTime_To, AV34TFMemoEndDateTime, AV35TFMemoEndDateTime_To, AV39TFMemoDuration, AV40TFMemoDuration_To, AV41TFMemoRemoveDate, AV42TFMemoRemoveDate_To, AV60TFMemoCreatedAt, AV61TFMemoCreatedAt_To, AV56IsAuthorized_Display, AV57IsAuthorized_Update, AV58IsAuthorized_Delete, AV54IsAuthorized_MemoTitle, AV59IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1565,17 +1605,19 @@ namespace GeneXus.Programs {
 
       protected short subgrid_nextpage( )
       {
-         AV61Trn_memowwds_1_filterfulltext = AV16FilterFullText;
-         AV62Trn_memowwds_2_tfmemotitle = AV27TFMemoTitle;
-         AV63Trn_memowwds_3_tfmemotitle_sel = AV28TFMemoTitle_Sel;
-         AV64Trn_memowwds_4_tfmemostartdatetime = AV29TFMemoStartDateTime;
-         AV65Trn_memowwds_5_tfmemostartdatetime_to = AV30TFMemoStartDateTime_To;
-         AV66Trn_memowwds_6_tfmemoenddatetime = AV34TFMemoEndDateTime;
-         AV67Trn_memowwds_7_tfmemoenddatetime_to = AV35TFMemoEndDateTime_To;
-         AV68Trn_memowwds_8_tfmemoduration = AV39TFMemoDuration;
-         AV69Trn_memowwds_9_tfmemoduration_to = AV40TFMemoDuration_To;
-         AV70Trn_memowwds_10_tfmemoremovedate = AV41TFMemoRemoveDate;
-         AV71Trn_memowwds_11_tfmemoremovedate_to = AV42TFMemoRemoveDate_To;
+         AV66Trn_memowwds_1_filterfulltext = AV16FilterFullText;
+         AV67Trn_memowwds_2_tfmemotitle = AV27TFMemoTitle;
+         AV68Trn_memowwds_3_tfmemotitle_sel = AV28TFMemoTitle_Sel;
+         AV69Trn_memowwds_4_tfmemostartdatetime = AV29TFMemoStartDateTime;
+         AV70Trn_memowwds_5_tfmemostartdatetime_to = AV30TFMemoStartDateTime_To;
+         AV71Trn_memowwds_6_tfmemoenddatetime = AV34TFMemoEndDateTime;
+         AV72Trn_memowwds_7_tfmemoenddatetime_to = AV35TFMemoEndDateTime_To;
+         AV73Trn_memowwds_8_tfmemoduration = AV39TFMemoDuration;
+         AV74Trn_memowwds_9_tfmemoduration_to = AV40TFMemoDuration_To;
+         AV75Trn_memowwds_10_tfmemoremovedate = AV41TFMemoRemoveDate;
+         AV76Trn_memowwds_11_tfmemoremovedate_to = AV42TFMemoRemoveDate_To;
+         AV77Trn_memowwds_12_tfmemocreatedat = AV60TFMemoCreatedAt;
+         AV78Trn_memowwds_13_tfmemocreatedat_to = AV61TFMemoCreatedAt_To;
          GRID_nRecordCount = subGrid_fnc_Recordcount( );
          if ( ( GRID_nRecordCount >= subGrid_fnc_Recordsperpage( ) ) && ( GRID_nEOF == 0 ) )
          {
@@ -1589,7 +1631,7 @@ namespace GeneXus.Programs {
          GridContainer.AddObjectProperty("GRID_nFirstRecordOnPage", GRID_nFirstRecordOnPage);
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV60Pgmname, AV27TFMemoTitle, AV28TFMemoTitle_Sel, AV29TFMemoStartDateTime, AV30TFMemoStartDateTime_To, AV34TFMemoEndDateTime, AV35TFMemoEndDateTime_To, AV39TFMemoDuration, AV40TFMemoDuration_To, AV41TFMemoRemoveDate, AV42TFMemoRemoveDate_To, AV56IsAuthorized_Display, AV57IsAuthorized_Update, AV58IsAuthorized_Delete, AV54IsAuthorized_MemoTitle, AV59IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV65Pgmname, AV27TFMemoTitle, AV28TFMemoTitle_Sel, AV29TFMemoStartDateTime, AV30TFMemoStartDateTime_To, AV34TFMemoEndDateTime, AV35TFMemoEndDateTime_To, AV39TFMemoDuration, AV40TFMemoDuration_To, AV41TFMemoRemoveDate, AV42TFMemoRemoveDate_To, AV60TFMemoCreatedAt, AV61TFMemoCreatedAt_To, AV56IsAuthorized_Display, AV57IsAuthorized_Update, AV58IsAuthorized_Delete, AV54IsAuthorized_MemoTitle, AV59IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return (short)(((GRID_nEOF==0) ? 0 : 2)) ;
@@ -1597,17 +1639,19 @@ namespace GeneXus.Programs {
 
       protected short subgrid_previouspage( )
       {
-         AV61Trn_memowwds_1_filterfulltext = AV16FilterFullText;
-         AV62Trn_memowwds_2_tfmemotitle = AV27TFMemoTitle;
-         AV63Trn_memowwds_3_tfmemotitle_sel = AV28TFMemoTitle_Sel;
-         AV64Trn_memowwds_4_tfmemostartdatetime = AV29TFMemoStartDateTime;
-         AV65Trn_memowwds_5_tfmemostartdatetime_to = AV30TFMemoStartDateTime_To;
-         AV66Trn_memowwds_6_tfmemoenddatetime = AV34TFMemoEndDateTime;
-         AV67Trn_memowwds_7_tfmemoenddatetime_to = AV35TFMemoEndDateTime_To;
-         AV68Trn_memowwds_8_tfmemoduration = AV39TFMemoDuration;
-         AV69Trn_memowwds_9_tfmemoduration_to = AV40TFMemoDuration_To;
-         AV70Trn_memowwds_10_tfmemoremovedate = AV41TFMemoRemoveDate;
-         AV71Trn_memowwds_11_tfmemoremovedate_to = AV42TFMemoRemoveDate_To;
+         AV66Trn_memowwds_1_filterfulltext = AV16FilterFullText;
+         AV67Trn_memowwds_2_tfmemotitle = AV27TFMemoTitle;
+         AV68Trn_memowwds_3_tfmemotitle_sel = AV28TFMemoTitle_Sel;
+         AV69Trn_memowwds_4_tfmemostartdatetime = AV29TFMemoStartDateTime;
+         AV70Trn_memowwds_5_tfmemostartdatetime_to = AV30TFMemoStartDateTime_To;
+         AV71Trn_memowwds_6_tfmemoenddatetime = AV34TFMemoEndDateTime;
+         AV72Trn_memowwds_7_tfmemoenddatetime_to = AV35TFMemoEndDateTime_To;
+         AV73Trn_memowwds_8_tfmemoduration = AV39TFMemoDuration;
+         AV74Trn_memowwds_9_tfmemoduration_to = AV40TFMemoDuration_To;
+         AV75Trn_memowwds_10_tfmemoremovedate = AV41TFMemoRemoveDate;
+         AV76Trn_memowwds_11_tfmemoremovedate_to = AV42TFMemoRemoveDate_To;
+         AV77Trn_memowwds_12_tfmemocreatedat = AV60TFMemoCreatedAt;
+         AV78Trn_memowwds_13_tfmemocreatedat_to = AV61TFMemoCreatedAt_To;
          if ( GRID_nFirstRecordOnPage >= subGrid_fnc_Recordsperpage( ) )
          {
             GRID_nFirstRecordOnPage = (long)(GRID_nFirstRecordOnPage-subGrid_fnc_Recordsperpage( ));
@@ -1619,7 +1663,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV60Pgmname, AV27TFMemoTitle, AV28TFMemoTitle_Sel, AV29TFMemoStartDateTime, AV30TFMemoStartDateTime_To, AV34TFMemoEndDateTime, AV35TFMemoEndDateTime_To, AV39TFMemoDuration, AV40TFMemoDuration_To, AV41TFMemoRemoveDate, AV42TFMemoRemoveDate_To, AV56IsAuthorized_Display, AV57IsAuthorized_Update, AV58IsAuthorized_Delete, AV54IsAuthorized_MemoTitle, AV59IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV65Pgmname, AV27TFMemoTitle, AV28TFMemoTitle_Sel, AV29TFMemoStartDateTime, AV30TFMemoStartDateTime_To, AV34TFMemoEndDateTime, AV35TFMemoEndDateTime_To, AV39TFMemoDuration, AV40TFMemoDuration_To, AV41TFMemoRemoveDate, AV42TFMemoRemoveDate_To, AV60TFMemoCreatedAt, AV61TFMemoCreatedAt_To, AV56IsAuthorized_Display, AV57IsAuthorized_Update, AV58IsAuthorized_Delete, AV54IsAuthorized_MemoTitle, AV59IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1627,17 +1671,19 @@ namespace GeneXus.Programs {
 
       protected short subgrid_lastpage( )
       {
-         AV61Trn_memowwds_1_filterfulltext = AV16FilterFullText;
-         AV62Trn_memowwds_2_tfmemotitle = AV27TFMemoTitle;
-         AV63Trn_memowwds_3_tfmemotitle_sel = AV28TFMemoTitle_Sel;
-         AV64Trn_memowwds_4_tfmemostartdatetime = AV29TFMemoStartDateTime;
-         AV65Trn_memowwds_5_tfmemostartdatetime_to = AV30TFMemoStartDateTime_To;
-         AV66Trn_memowwds_6_tfmemoenddatetime = AV34TFMemoEndDateTime;
-         AV67Trn_memowwds_7_tfmemoenddatetime_to = AV35TFMemoEndDateTime_To;
-         AV68Trn_memowwds_8_tfmemoduration = AV39TFMemoDuration;
-         AV69Trn_memowwds_9_tfmemoduration_to = AV40TFMemoDuration_To;
-         AV70Trn_memowwds_10_tfmemoremovedate = AV41TFMemoRemoveDate;
-         AV71Trn_memowwds_11_tfmemoremovedate_to = AV42TFMemoRemoveDate_To;
+         AV66Trn_memowwds_1_filterfulltext = AV16FilterFullText;
+         AV67Trn_memowwds_2_tfmemotitle = AV27TFMemoTitle;
+         AV68Trn_memowwds_3_tfmemotitle_sel = AV28TFMemoTitle_Sel;
+         AV69Trn_memowwds_4_tfmemostartdatetime = AV29TFMemoStartDateTime;
+         AV70Trn_memowwds_5_tfmemostartdatetime_to = AV30TFMemoStartDateTime_To;
+         AV71Trn_memowwds_6_tfmemoenddatetime = AV34TFMemoEndDateTime;
+         AV72Trn_memowwds_7_tfmemoenddatetime_to = AV35TFMemoEndDateTime_To;
+         AV73Trn_memowwds_8_tfmemoduration = AV39TFMemoDuration;
+         AV74Trn_memowwds_9_tfmemoduration_to = AV40TFMemoDuration_To;
+         AV75Trn_memowwds_10_tfmemoremovedate = AV41TFMemoRemoveDate;
+         AV76Trn_memowwds_11_tfmemoremovedate_to = AV42TFMemoRemoveDate_To;
+         AV77Trn_memowwds_12_tfmemocreatedat = AV60TFMemoCreatedAt;
+         AV78Trn_memowwds_13_tfmemocreatedat_to = AV61TFMemoCreatedAt_To;
          GRID_nRecordCount = subGrid_fnc_Recordcount( );
          if ( GRID_nRecordCount > subGrid_fnc_Recordsperpage( ) )
          {
@@ -1657,7 +1703,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV60Pgmname, AV27TFMemoTitle, AV28TFMemoTitle_Sel, AV29TFMemoStartDateTime, AV30TFMemoStartDateTime_To, AV34TFMemoEndDateTime, AV35TFMemoEndDateTime_To, AV39TFMemoDuration, AV40TFMemoDuration_To, AV41TFMemoRemoveDate, AV42TFMemoRemoveDate_To, AV56IsAuthorized_Display, AV57IsAuthorized_Update, AV58IsAuthorized_Delete, AV54IsAuthorized_MemoTitle, AV59IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV65Pgmname, AV27TFMemoTitle, AV28TFMemoTitle_Sel, AV29TFMemoStartDateTime, AV30TFMemoStartDateTime_To, AV34TFMemoEndDateTime, AV35TFMemoEndDateTime_To, AV39TFMemoDuration, AV40TFMemoDuration_To, AV41TFMemoRemoveDate, AV42TFMemoRemoveDate_To, AV60TFMemoCreatedAt, AV61TFMemoCreatedAt_To, AV56IsAuthorized_Display, AV57IsAuthorized_Update, AV58IsAuthorized_Delete, AV54IsAuthorized_MemoTitle, AV59IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1665,17 +1711,19 @@ namespace GeneXus.Programs {
 
       protected int subgrid_gotopage( int nPageNo )
       {
-         AV61Trn_memowwds_1_filterfulltext = AV16FilterFullText;
-         AV62Trn_memowwds_2_tfmemotitle = AV27TFMemoTitle;
-         AV63Trn_memowwds_3_tfmemotitle_sel = AV28TFMemoTitle_Sel;
-         AV64Trn_memowwds_4_tfmemostartdatetime = AV29TFMemoStartDateTime;
-         AV65Trn_memowwds_5_tfmemostartdatetime_to = AV30TFMemoStartDateTime_To;
-         AV66Trn_memowwds_6_tfmemoenddatetime = AV34TFMemoEndDateTime;
-         AV67Trn_memowwds_7_tfmemoenddatetime_to = AV35TFMemoEndDateTime_To;
-         AV68Trn_memowwds_8_tfmemoduration = AV39TFMemoDuration;
-         AV69Trn_memowwds_9_tfmemoduration_to = AV40TFMemoDuration_To;
-         AV70Trn_memowwds_10_tfmemoremovedate = AV41TFMemoRemoveDate;
-         AV71Trn_memowwds_11_tfmemoremovedate_to = AV42TFMemoRemoveDate_To;
+         AV66Trn_memowwds_1_filterfulltext = AV16FilterFullText;
+         AV67Trn_memowwds_2_tfmemotitle = AV27TFMemoTitle;
+         AV68Trn_memowwds_3_tfmemotitle_sel = AV28TFMemoTitle_Sel;
+         AV69Trn_memowwds_4_tfmemostartdatetime = AV29TFMemoStartDateTime;
+         AV70Trn_memowwds_5_tfmemostartdatetime_to = AV30TFMemoStartDateTime_To;
+         AV71Trn_memowwds_6_tfmemoenddatetime = AV34TFMemoEndDateTime;
+         AV72Trn_memowwds_7_tfmemoenddatetime_to = AV35TFMemoEndDateTime_To;
+         AV73Trn_memowwds_8_tfmemoduration = AV39TFMemoDuration;
+         AV74Trn_memowwds_9_tfmemoduration_to = AV40TFMemoDuration_To;
+         AV75Trn_memowwds_10_tfmemoremovedate = AV41TFMemoRemoveDate;
+         AV76Trn_memowwds_11_tfmemoremovedate_to = AV42TFMemoRemoveDate_To;
+         AV77Trn_memowwds_12_tfmemocreatedat = AV60TFMemoCreatedAt;
+         AV78Trn_memowwds_13_tfmemocreatedat_to = AV61TFMemoCreatedAt_To;
          if ( nPageNo > 0 )
          {
             GRID_nFirstRecordOnPage = (long)(subGrid_fnc_Recordsperpage( )*(nPageNo-1));
@@ -1687,7 +1735,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV60Pgmname, AV27TFMemoTitle, AV28TFMemoTitle_Sel, AV29TFMemoStartDateTime, AV30TFMemoStartDateTime_To, AV34TFMemoEndDateTime, AV35TFMemoEndDateTime_To, AV39TFMemoDuration, AV40TFMemoDuration_To, AV41TFMemoRemoveDate, AV42TFMemoRemoveDate_To, AV56IsAuthorized_Display, AV57IsAuthorized_Update, AV58IsAuthorized_Delete, AV54IsAuthorized_MemoTitle, AV59IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV65Pgmname, AV27TFMemoTitle, AV28TFMemoTitle_Sel, AV29TFMemoStartDateTime, AV30TFMemoStartDateTime_To, AV34TFMemoEndDateTime, AV35TFMemoEndDateTime_To, AV39TFMemoDuration, AV40TFMemoDuration_To, AV41TFMemoRemoveDate, AV42TFMemoRemoveDate_To, AV60TFMemoCreatedAt, AV61TFMemoCreatedAt_To, AV56IsAuthorized_Display, AV57IsAuthorized_Update, AV58IsAuthorized_Delete, AV54IsAuthorized_MemoTitle, AV59IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return (int)(0) ;
@@ -1695,7 +1743,7 @@ namespace GeneXus.Programs {
 
       protected void before_start_formulas( )
       {
-         AV60Pgmname = "Trn_MemoWW";
+         AV65Pgmname = "Trn_MemoWW";
          edtMemoId_Enabled = 0;
          edtMemoTitle_Enabled = 0;
          edtMemoDescription_Enabled = 0;
@@ -1710,6 +1758,7 @@ namespace GeneXus.Programs {
          edtResidentGivenName_Enabled = 0;
          edtResidentLastName_Enabled = 0;
          edtResidentGUID_Enabled = 0;
+         edtMemoCreatedAt_Enabled = 0;
          fix_multi_value_controls( ) ;
       }
 
@@ -1740,6 +1789,8 @@ namespace GeneXus.Programs {
             AV37DDO_MemoEndDateTimeAuxDateTo = context.localUtil.CToD( cgiGet( "vDDO_MEMOENDDATETIMEAUXDATETO"), 0);
             AV43DDO_MemoRemoveDateAuxDate = context.localUtil.CToD( cgiGet( "vDDO_MEMOREMOVEDATEAUXDATE"), 0);
             AV44DDO_MemoRemoveDateAuxDateTo = context.localUtil.CToD( cgiGet( "vDDO_MEMOREMOVEDATEAUXDATETO"), 0);
+            AV62DDO_MemoCreatedAtAuxDate = context.localUtil.CToD( cgiGet( "vDDO_MEMOCREATEDATAUXDATE"), 0);
+            AV63DDO_MemoCreatedAtAuxDateTo = context.localUtil.CToD( cgiGet( "vDDO_MEMOCREATEDATAUXDATETO"), 0);
             GRID_nFirstRecordOnPage = (long)(Math.Round(context.localUtil.CToN( cgiGet( "GRID_nFirstRecordOnPage"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
             GRID_nEOF = (short)(Math.Round(context.localUtil.CToN( cgiGet( "GRID_nEOF"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
             subGrid_Rows = (int)(Math.Round(context.localUtil.CToN( cgiGet( "GRID_Rows"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
@@ -1805,9 +1856,9 @@ namespace GeneXus.Programs {
             Gridpaginationbar_Rowsperpageselectedvalue = (int)(Math.Round(context.localUtil.CToN( cgiGet( "GRIDPAGINATIONBAR_Rowsperpageselectedvalue"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
             Ddo_grid_Activeeventkey = cgiGet( "DDO_GRID_Activeeventkey");
             Ddo_grid_Selectedvalue_get = cgiGet( "DDO_GRID_Selectedvalue_get");
-            Ddo_grid_Selectedcolumn = cgiGet( "DDO_GRID_Selectedcolumn");
-            Ddo_grid_Filteredtext_get = cgiGet( "DDO_GRID_Filteredtext_get");
             Ddo_grid_Filteredtextto_get = cgiGet( "DDO_GRID_Filteredtextto_get");
+            Ddo_grid_Filteredtext_get = cgiGet( "DDO_GRID_Filteredtext_get");
+            Ddo_grid_Selectedcolumn = cgiGet( "DDO_GRID_Selectedcolumn");
             Ddo_gridcolumnsselector_Columnsselectorvalues = cgiGet( "DDO_GRIDCOLUMNSSELECTOR_Columnsselectorvalues");
             Ddo_managefilters_Activeeventkey = cgiGet( "DDO_MANAGEFILTERS_Activeeventkey");
             subGrid_Rows = (int)(Math.Round(context.localUtil.CToN( cgiGet( "GRID_Rows"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
@@ -1821,6 +1872,8 @@ namespace GeneXus.Programs {
             AssignAttri("", false, "AV38DDO_MemoEndDateTimeAuxDateText", AV38DDO_MemoEndDateTimeAuxDateText);
             AV45DDO_MemoRemoveDateAuxDateText = cgiGet( edtavDdo_memoremovedateauxdatetext_Internalname);
             AssignAttri("", false, "AV45DDO_MemoRemoveDateAuxDateText", AV45DDO_MemoRemoveDateAuxDateText);
+            AV64DDO_MemoCreatedAtAuxDateText = cgiGet( edtavDdo_memocreatedatauxdatetext_Internalname);
+            AssignAttri("", false, "AV64DDO_MemoCreatedAtAuxDateText", AV64DDO_MemoCreatedAtAuxDateText);
             /* Read subfile selected row values. */
             nGXsfl_39_idx = (int)(Math.Round(context.localUtil.CToN( cgiGet( subGrid_Internalname+"_ROW"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
             sGXsfl_39_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_39_idx), 4, 0), 4, "0");
@@ -1849,6 +1902,8 @@ namespace GeneXus.Programs {
                A64ResidentGivenName = cgiGet( edtResidentGivenName_Internalname);
                A65ResidentLastName = cgiGet( edtResidentLastName_Internalname);
                A71ResidentGUID = cgiGet( edtResidentGUID_Internalname);
+               A647MemoCreatedAt = context.localUtil.CToT( cgiGet( edtMemoCreatedAt_Internalname));
+               n647MemoCreatedAt = false;
                cmbavActiongroup.Name = cmbavActiongroup_Internalname;
                cmbavActiongroup.CurrentValue = cgiGet( cmbavActiongroup_Internalname);
                AV55ActionGroup = (short)(Math.Round(NumberUtil.Val( cgiGet( cmbavActiongroup_Internalname), "."), 18, MidpointRounding.ToEven));
@@ -1891,6 +1946,7 @@ namespace GeneXus.Programs {
       {
          /* Start Routine */
          returnInSub = false;
+         this.executeUsercontrolMethod("", false, "TFMEMOCREATEDAT_RANGEPICKERContainer", "Attach", "", new Object[] {(string)edtavDdo_memocreatedatauxdatetext_Internalname});
          this.executeUsercontrolMethod("", false, "TFMEMOREMOVEDATE_RANGEPICKERContainer", "Attach", "", new Object[] {(string)edtavDdo_memoremovedateauxdatetext_Internalname});
          this.executeUsercontrolMethod("", false, "TFMEMOENDDATETIME_RANGEPICKERContainer", "Attach", "", new Object[] {(string)edtavDdo_memoenddatetimeauxdatetext_Internalname});
          this.executeUsercontrolMethod("", false, "TFMEMOSTARTDATETIME_RANGEPICKERContainer", "Attach", "", new Object[] {(string)edtavDdo_memostartdatetimeauxdatetext_Internalname});
@@ -1942,6 +1998,8 @@ namespace GeneXus.Programs {
          {
             AV13OrderedBy = 1;
             AssignAttri("", false, "AV13OrderedBy", StringUtil.LTrimStr( (decimal)(AV13OrderedBy), 4, 0));
+            AV14OrderedDsc = true;
+            AssignAttri("", false, "AV14OrderedDsc", AV14OrderedDsc);
             /* Execute user subroutine: 'SETDDOSORTEDSTATUS' */
             S142 ();
             if ( returnInSub )
@@ -2025,25 +2083,29 @@ namespace GeneXus.Programs {
          AssignProp("", false, edtMemoDuration_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtMemoDuration_Visible), 5, 0), !bGXsfl_39_Refreshing);
          edtMemoRemoveDate_Visible = (((WorkWithPlus.workwithplus_web.SdtWWPColumnsSelector_Column)AV19ColumnsSelector.gxTpr_Columns.Item(5)).gxTpr_Isvisible ? 1 : 0);
          AssignProp("", false, edtMemoRemoveDate_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtMemoRemoveDate_Visible), 5, 0), !bGXsfl_39_Refreshing);
+         edtMemoCreatedAt_Visible = (((WorkWithPlus.workwithplus_web.SdtWWPColumnsSelector_Column)AV19ColumnsSelector.gxTpr_Columns.Item(6)).gxTpr_Isvisible ? 1 : 0);
+         AssignProp("", false, edtMemoCreatedAt_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtMemoCreatedAt_Visible), 5, 0), !bGXsfl_39_Refreshing);
          AV50GridCurrentPage = subGrid_fnc_Currentpage( );
          AssignAttri("", false, "AV50GridCurrentPage", StringUtil.LTrimStr( (decimal)(AV50GridCurrentPage), 10, 0));
          AV51GridPageCount = subGrid_fnc_Pagecount( );
          AssignAttri("", false, "AV51GridPageCount", StringUtil.LTrimStr( (decimal)(AV51GridPageCount), 10, 0));
          GXt_char3 = AV52GridAppliedFilters;
-         new WorkWithPlus.workwithplus_web.wwp_getappliedfiltersdescription(context ).execute(  AV60Pgmname, out  GXt_char3) ;
+         new WorkWithPlus.workwithplus_web.wwp_getappliedfiltersdescription(context ).execute(  AV65Pgmname, out  GXt_char3) ;
          AV52GridAppliedFilters = GXt_char3;
          AssignAttri("", false, "AV52GridAppliedFilters", AV52GridAppliedFilters);
-         AV61Trn_memowwds_1_filterfulltext = AV16FilterFullText;
-         AV62Trn_memowwds_2_tfmemotitle = AV27TFMemoTitle;
-         AV63Trn_memowwds_3_tfmemotitle_sel = AV28TFMemoTitle_Sel;
-         AV64Trn_memowwds_4_tfmemostartdatetime = AV29TFMemoStartDateTime;
-         AV65Trn_memowwds_5_tfmemostartdatetime_to = AV30TFMemoStartDateTime_To;
-         AV66Trn_memowwds_6_tfmemoenddatetime = AV34TFMemoEndDateTime;
-         AV67Trn_memowwds_7_tfmemoenddatetime_to = AV35TFMemoEndDateTime_To;
-         AV68Trn_memowwds_8_tfmemoduration = AV39TFMemoDuration;
-         AV69Trn_memowwds_9_tfmemoduration_to = AV40TFMemoDuration_To;
-         AV70Trn_memowwds_10_tfmemoremovedate = AV41TFMemoRemoveDate;
-         AV71Trn_memowwds_11_tfmemoremovedate_to = AV42TFMemoRemoveDate_To;
+         AV66Trn_memowwds_1_filterfulltext = AV16FilterFullText;
+         AV67Trn_memowwds_2_tfmemotitle = AV27TFMemoTitle;
+         AV68Trn_memowwds_3_tfmemotitle_sel = AV28TFMemoTitle_Sel;
+         AV69Trn_memowwds_4_tfmemostartdatetime = AV29TFMemoStartDateTime;
+         AV70Trn_memowwds_5_tfmemostartdatetime_to = AV30TFMemoStartDateTime_To;
+         AV71Trn_memowwds_6_tfmemoenddatetime = AV34TFMemoEndDateTime;
+         AV72Trn_memowwds_7_tfmemoenddatetime_to = AV35TFMemoEndDateTime_To;
+         AV73Trn_memowwds_8_tfmemoduration = AV39TFMemoDuration;
+         AV74Trn_memowwds_9_tfmemoduration_to = AV40TFMemoDuration_To;
+         AV75Trn_memowwds_10_tfmemoremovedate = AV41TFMemoRemoveDate;
+         AV76Trn_memowwds_11_tfmemoremovedate_to = AV42TFMemoRemoveDate_To;
+         AV77Trn_memowwds_12_tfmemocreatedat = AV60TFMemoCreatedAt;
+         AV78Trn_memowwds_13_tfmemocreatedat_to = AV61TFMemoCreatedAt_To;
          /*  Sending Event outputs  */
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV19ColumnsSelector", AV19ColumnsSelector);
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV22ManageFiltersData", AV22ManageFiltersData);
@@ -2145,6 +2207,18 @@ namespace GeneXus.Programs {
                AV42TFMemoRemoveDate_To = context.localUtil.CToD( Ddo_grid_Filteredtextto_get, DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt")));
                AssignAttri("", false, "AV42TFMemoRemoveDate_To", context.localUtil.Format(AV42TFMemoRemoveDate_To, "99/99/99"));
             }
+            else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "MemoCreatedAt") == 0 )
+            {
+               AV60TFMemoCreatedAt = context.localUtil.CToT( Ddo_grid_Filteredtext_get, DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt")));
+               AssignAttri("", false, "AV60TFMemoCreatedAt", context.localUtil.TToC( AV60TFMemoCreatedAt, 8, 5, (short)(((StringUtil.StrCmp(context.GetLanguageProperty( "time_fmt"), "12")==0) ? 1 : 0)), (short)(DateTimeUtil.MapDateTimeFormat( context.GetLanguageProperty( "date_fmt"))), "/", ":", " "));
+               AV61TFMemoCreatedAt_To = context.localUtil.CToT( Ddo_grid_Filteredtextto_get, DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt")));
+               AssignAttri("", false, "AV61TFMemoCreatedAt_To", context.localUtil.TToC( AV61TFMemoCreatedAt_To, 8, 5, (short)(((StringUtil.StrCmp(context.GetLanguageProperty( "time_fmt"), "12")==0) ? 1 : 0)), (short)(DateTimeUtil.MapDateTimeFormat( context.GetLanguageProperty( "date_fmt"))), "/", ":", " "));
+               if ( ! (DateTime.MinValue==AV61TFMemoCreatedAt_To) )
+               {
+                  AV61TFMemoCreatedAt_To = context.localUtil.YMDHMSToT( (short)(DateTimeUtil.Year( AV61TFMemoCreatedAt_To)), (short)(DateTimeUtil.Month( AV61TFMemoCreatedAt_To)), (short)(DateTimeUtil.Day( AV61TFMemoCreatedAt_To)), 23, 59, 59);
+                  AssignAttri("", false, "AV61TFMemoCreatedAt_To", context.localUtil.TToC( AV61TFMemoCreatedAt_To, 8, 5, (short)(((StringUtil.StrCmp(context.GetLanguageProperty( "time_fmt"), "12")==0) ? 1 : 0)), (short)(DateTimeUtil.MapDateTimeFormat( context.GetLanguageProperty( "date_fmt"))), "/", ":", " "));
+               }
+            }
             subgrid_firstpage( ) ;
          }
          /*  Sending Event outputs  */
@@ -2236,7 +2310,7 @@ namespace GeneXus.Programs {
                if (true) return;
             }
             GXKey = Crypto.GetSiteKey( );
-            GXEncryptionTmp = "wwpbaseobjects.savefilteras.aspx"+UrlEncode(StringUtil.RTrim("Trn_MemoWWFilters")) + "," + UrlEncode(StringUtil.RTrim(AV60Pgmname+"GridState"));
+            GXEncryptionTmp = "wwpbaseobjects.savefilteras.aspx"+UrlEncode(StringUtil.RTrim("Trn_MemoWWFilters")) + "," + UrlEncode(StringUtil.RTrim(AV65Pgmname+"GridState"));
             context.PopUp(formatLink("wwpbaseobjects.savefilteras.aspx") + "?" + UriEncrypt64( GXEncryptionTmp+Crypto.CheckSum( GXEncryptionTmp, 6), GXKey), new Object[] {});
             AV24ManageFiltersExecutionStep = 2;
             AssignAttri("", false, "AV24ManageFiltersExecutionStep", StringUtil.Str( (decimal)(AV24ManageFiltersExecutionStep), 1, 0));
@@ -2269,7 +2343,7 @@ namespace GeneXus.Programs {
                   returnInSub = true;
                   if (true) return;
                }
-               new WorkWithPlus.workwithplus_web.savegridstate(context ).execute(  AV60Pgmname+"GridState",  AV23ManageFiltersXml) ;
+               new WorkWithPlus.workwithplus_web.savegridstate(context ).execute(  AV65Pgmname+"GridState",  AV23ManageFiltersXml) ;
                AV11GridState.FromXml(AV23ManageFiltersXml, null, "", "");
                AV13OrderedBy = AV11GridState.gxTpr_Orderedby;
                AssignAttri("", false, "AV13OrderedBy", StringUtil.LTrimStr( (decimal)(AV13OrderedBy), 4, 0));
@@ -2383,12 +2457,12 @@ namespace GeneXus.Programs {
          if ( StringUtil.Len( WebComp_Wwpaux_wc_Component) != 0 )
          {
             WebComp_Wwpaux_wc.setjustcreated();
-            WebComp_Wwpaux_wc.componentprepare(new Object[] {(string)"W0066",(string)"",(string)"Trn_Memo",(short)1,(string)"",(string)""});
+            WebComp_Wwpaux_wc.componentprepare(new Object[] {(string)"W0067",(string)"",(string)"Trn_Memo",(short)1,(string)"",(string)""});
             WebComp_Wwpaux_wc.componentbind(new Object[] {(string)"",(string)"",(string)"",(string)""});
          }
          if ( isFullAjaxMode( ) || isAjaxCallMode( ) && bDynCreated_Wwpaux_wc )
          {
-            context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0066"+"");
+            context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0067"+"");
             WebComp_Wwpaux_wc.componentdraw();
             context.httpAjaxContext.ajax_rspEndCmp();
          }
@@ -2413,6 +2487,7 @@ namespace GeneXus.Programs {
          new WorkWithPlus.workwithplus_web.wwp_columnsselector_add(context ).execute( ref  AV19ColumnsSelector,  "MemoEndDateTime",  "",  "Date Time",  true,  "") ;
          new WorkWithPlus.workwithplus_web.wwp_columnsselector_add(context ).execute( ref  AV19ColumnsSelector,  "MemoDuration",  "",  "Duration",  true,  "") ;
          new WorkWithPlus.workwithplus_web.wwp_columnsselector_add(context ).execute( ref  AV19ColumnsSelector,  "MemoRemoveDate",  "",  "Remove Date",  true,  "") ;
+         new WorkWithPlus.workwithplus_web.wwp_columnsselector_add(context ).execute( ref  AV19ColumnsSelector,  "MemoCreatedAt",  "",  "Created At",  true,  "") ;
          GXt_char3 = AV18UserCustomValue;
          new WorkWithPlus.workwithplus_web.loadcolumnsselectorstate(context ).execute(  "Trn_MemoWWColumnsSelector", out  GXt_char3) ;
          AV18UserCustomValue = GXt_char3;
@@ -2494,6 +2569,10 @@ namespace GeneXus.Programs {
          AssignAttri("", false, "AV41TFMemoRemoveDate", context.localUtil.Format(AV41TFMemoRemoveDate, "99/99/99"));
          AV42TFMemoRemoveDate_To = DateTime.MinValue;
          AssignAttri("", false, "AV42TFMemoRemoveDate_To", context.localUtil.Format(AV42TFMemoRemoveDate_To, "99/99/99"));
+         AV60TFMemoCreatedAt = (DateTime)(DateTime.MinValue);
+         AssignAttri("", false, "AV60TFMemoCreatedAt", context.localUtil.TToC( AV60TFMemoCreatedAt, 8, 5, (short)(((StringUtil.StrCmp(context.GetLanguageProperty( "time_fmt"), "12")==0) ? 1 : 0)), (short)(DateTimeUtil.MapDateTimeFormat( context.GetLanguageProperty( "date_fmt"))), "/", ":", " "));
+         AV61TFMemoCreatedAt_To = (DateTime)(DateTime.MinValue);
+         AssignAttri("", false, "AV61TFMemoCreatedAt_To", context.localUtil.TToC( AV61TFMemoCreatedAt_To, 8, 5, (short)(((StringUtil.StrCmp(context.GetLanguageProperty( "time_fmt"), "12")==0) ? 1 : 0)), (short)(DateTimeUtil.MapDateTimeFormat( context.GetLanguageProperty( "date_fmt"))), "/", ":", " "));
          Ddo_grid_Selectedvalue_set = "";
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "SelectedValue_set", Ddo_grid_Selectedvalue_set);
          Ddo_grid_Filteredtext_set = "";
@@ -2560,13 +2639,13 @@ namespace GeneXus.Programs {
       {
          /* 'LOADGRIDSTATE' Routine */
          returnInSub = false;
-         if ( StringUtil.StrCmp(AV21Session.Get(AV60Pgmname+"GridState"), "") == 0 )
+         if ( StringUtil.StrCmp(AV21Session.Get(AV65Pgmname+"GridState"), "") == 0 )
          {
-            AV11GridState.FromXml(new WorkWithPlus.workwithplus_web.loadgridstate(context).executeUdp(  AV60Pgmname+"GridState"), null, "", "");
+            AV11GridState.FromXml(new WorkWithPlus.workwithplus_web.loadgridstate(context).executeUdp(  AV65Pgmname+"GridState"), null, "", "");
          }
          else
          {
-            AV11GridState.FromXml(AV21Session.Get(AV60Pgmname+"GridState"), null, "", "");
+            AV11GridState.FromXml(AV21Session.Get(AV65Pgmname+"GridState"), null, "", "");
          }
          AV13OrderedBy = AV11GridState.gxTpr_Orderedby;
          AssignAttri("", false, "AV13OrderedBy", StringUtil.LTrimStr( (decimal)(AV13OrderedBy), 4, 0));
@@ -2598,10 +2677,10 @@ namespace GeneXus.Programs {
       {
          /* 'LOADREGFILTERSSTATE' Routine */
          returnInSub = false;
-         AV72GXV1 = 1;
-         while ( AV72GXV1 <= AV11GridState.gxTpr_Filtervalues.Count )
+         AV79GXV1 = 1;
+         while ( AV79GXV1 <= AV11GridState.gxTpr_Filtervalues.Count )
          {
-            AV12GridStateFilterValue = ((WorkWithPlus.workwithplus_web.SdtWWPGridState_FilterValue)AV11GridState.gxTpr_Filtervalues.Item(AV72GXV1));
+            AV12GridStateFilterValue = ((WorkWithPlus.workwithplus_web.SdtWWPGridState_FilterValue)AV11GridState.gxTpr_Filtervalues.Item(AV79GXV1));
             if ( StringUtil.StrCmp(AV12GridStateFilterValue.gxTpr_Name, "FILTERFULLTEXT") == 0 )
             {
                AV16FilterFullText = AV12GridStateFilterValue.gxTpr_Value;
@@ -2653,17 +2732,28 @@ namespace GeneXus.Programs {
                AV42TFMemoRemoveDate_To = context.localUtil.CToD( AV12GridStateFilterValue.gxTpr_Valueto, DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt")));
                AssignAttri("", false, "AV42TFMemoRemoveDate_To", context.localUtil.Format(AV42TFMemoRemoveDate_To, "99/99/99"));
             }
-            AV72GXV1 = (int)(AV72GXV1+1);
+            else if ( StringUtil.StrCmp(AV12GridStateFilterValue.gxTpr_Name, "TFMEMOCREATEDAT") == 0 )
+            {
+               AV60TFMemoCreatedAt = context.localUtil.CToT( AV12GridStateFilterValue.gxTpr_Value, DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt")));
+               AssignAttri("", false, "AV60TFMemoCreatedAt", context.localUtil.TToC( AV60TFMemoCreatedAt, 8, 5, (short)(((StringUtil.StrCmp(context.GetLanguageProperty( "time_fmt"), "12")==0) ? 1 : 0)), (short)(DateTimeUtil.MapDateTimeFormat( context.GetLanguageProperty( "date_fmt"))), "/", ":", " "));
+               AV61TFMemoCreatedAt_To = context.localUtil.CToT( AV12GridStateFilterValue.gxTpr_Valueto, DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt")));
+               AssignAttri("", false, "AV61TFMemoCreatedAt_To", context.localUtil.TToC( AV61TFMemoCreatedAt_To, 8, 5, (short)(((StringUtil.StrCmp(context.GetLanguageProperty( "time_fmt"), "12")==0) ? 1 : 0)), (short)(DateTimeUtil.MapDateTimeFormat( context.GetLanguageProperty( "date_fmt"))), "/", ":", " "));
+               AV62DDO_MemoCreatedAtAuxDate = DateTimeUtil.ResetTime(AV60TFMemoCreatedAt);
+               AssignAttri("", false, "AV62DDO_MemoCreatedAtAuxDate", context.localUtil.Format(AV62DDO_MemoCreatedAtAuxDate, "99/99/99"));
+               AV63DDO_MemoCreatedAtAuxDateTo = DateTimeUtil.ResetTime(AV61TFMemoCreatedAt_To);
+               AssignAttri("", false, "AV63DDO_MemoCreatedAtAuxDateTo", context.localUtil.Format(AV63DDO_MemoCreatedAtAuxDateTo, "99/99/99"));
+            }
+            AV79GXV1 = (int)(AV79GXV1+1);
          }
          GXt_char3 = "";
          new WorkWithPlus.workwithplus_web.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV28TFMemoTitle_Sel)),  AV28TFMemoTitle_Sel, out  GXt_char3) ;
-         Ddo_grid_Selectedvalue_set = GXt_char3+"||||";
+         Ddo_grid_Selectedvalue_set = GXt_char3+"|||||";
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "SelectedValue_set", Ddo_grid_Selectedvalue_set);
          GXt_char3 = "";
          new WorkWithPlus.workwithplus_web.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV27TFMemoTitle)),  AV27TFMemoTitle, out  GXt_char3) ;
-         Ddo_grid_Filteredtext_set = GXt_char3+"|"+((DateTime.MinValue==AV29TFMemoStartDateTime) ? "" : context.localUtil.DToC( AV31DDO_MemoStartDateTimeAuxDate, (short)(DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt"))), "/"))+"|"+((DateTime.MinValue==AV34TFMemoEndDateTime) ? "" : context.localUtil.DToC( AV36DDO_MemoEndDateTimeAuxDate, (short)(DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt"))), "/"))+"|"+((Convert.ToDecimal(0)==AV39TFMemoDuration) ? "" : StringUtil.Str( AV39TFMemoDuration, 6, 3))+"|"+((DateTime.MinValue==AV41TFMemoRemoveDate) ? "" : context.localUtil.DToC( AV41TFMemoRemoveDate, (short)(DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt"))), "/"));
+         Ddo_grid_Filteredtext_set = GXt_char3+"|"+((DateTime.MinValue==AV29TFMemoStartDateTime) ? "" : context.localUtil.DToC( AV31DDO_MemoStartDateTimeAuxDate, (short)(DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt"))), "/"))+"|"+((DateTime.MinValue==AV34TFMemoEndDateTime) ? "" : context.localUtil.DToC( AV36DDO_MemoEndDateTimeAuxDate, (short)(DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt"))), "/"))+"|"+((Convert.ToDecimal(0)==AV39TFMemoDuration) ? "" : StringUtil.Str( AV39TFMemoDuration, 6, 3))+"|"+((DateTime.MinValue==AV41TFMemoRemoveDate) ? "" : context.localUtil.DToC( AV41TFMemoRemoveDate, (short)(DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt"))), "/"))+"|"+((DateTime.MinValue==AV60TFMemoCreatedAt) ? "" : context.localUtil.DToC( AV62DDO_MemoCreatedAtAuxDate, (short)(DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt"))), "/"));
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "FilteredText_set", Ddo_grid_Filteredtext_set);
-         Ddo_grid_Filteredtextto_set = "|"+((DateTime.MinValue==AV30TFMemoStartDateTime_To) ? "" : context.localUtil.DToC( AV32DDO_MemoStartDateTimeAuxDateTo, (short)(DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt"))), "/"))+"|"+((DateTime.MinValue==AV35TFMemoEndDateTime_To) ? "" : context.localUtil.DToC( AV37DDO_MemoEndDateTimeAuxDateTo, (short)(DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt"))), "/"))+"|"+((Convert.ToDecimal(0)==AV40TFMemoDuration_To) ? "" : StringUtil.Str( AV40TFMemoDuration_To, 6, 3))+"|"+((DateTime.MinValue==AV42TFMemoRemoveDate_To) ? "" : context.localUtil.DToC( AV42TFMemoRemoveDate_To, (short)(DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt"))), "/"));
+         Ddo_grid_Filteredtextto_set = "|"+((DateTime.MinValue==AV30TFMemoStartDateTime_To) ? "" : context.localUtil.DToC( AV32DDO_MemoStartDateTimeAuxDateTo, (short)(DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt"))), "/"))+"|"+((DateTime.MinValue==AV35TFMemoEndDateTime_To) ? "" : context.localUtil.DToC( AV37DDO_MemoEndDateTimeAuxDateTo, (short)(DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt"))), "/"))+"|"+((Convert.ToDecimal(0)==AV40TFMemoDuration_To) ? "" : StringUtil.Str( AV40TFMemoDuration_To, 6, 3))+"|"+((DateTime.MinValue==AV42TFMemoRemoveDate_To) ? "" : context.localUtil.DToC( AV42TFMemoRemoveDate_To, (short)(DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt"))), "/"))+"|"+((DateTime.MinValue==AV61TFMemoCreatedAt_To) ? "" : context.localUtil.DToC( AV63DDO_MemoCreatedAtAuxDateTo, (short)(DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt"))), "/"));
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "FilteredTextTo_set", Ddo_grid_Filteredtextto_set);
       }
 
@@ -2671,7 +2761,7 @@ namespace GeneXus.Programs {
       {
          /* 'SAVEGRIDSTATE' Routine */
          returnInSub = false;
-         AV11GridState.FromXml(AV21Session.Get(AV60Pgmname+"GridState"), null, "", "");
+         AV11GridState.FromXml(AV21Session.Get(AV65Pgmname+"GridState"), null, "", "");
          AV11GridState.gxTpr_Orderedby = AV13OrderedBy;
          AV11GridState.gxTpr_Ordereddsc = AV14OrderedDsc;
          AV11GridState.gxTpr_Filtervalues.Clear();
@@ -2681,9 +2771,10 @@ namespace GeneXus.Programs {
          new WorkWithPlus.workwithplus_web.wwp_gridstateaddfiltervalue(context ).execute( ref  AV11GridState,  "TFMEMOENDDATETIME",  context.GetMessage( "Date Time", ""),  !((DateTime.MinValue==AV34TFMemoEndDateTime)&&(DateTime.MinValue==AV35TFMemoEndDateTime_To)),  0,  StringUtil.Trim( context.localUtil.TToC( AV34TFMemoEndDateTime, 8, 5, (short)(((StringUtil.StrCmp(context.GetLanguageProperty( "time_fmt"), "12")==0) ? 1 : 0)), (short)(DateTimeUtil.MapDateTimeFormat( context.GetLanguageProperty( "date_fmt"))), "/", ":", " ")),  ((DateTime.MinValue==AV34TFMemoEndDateTime) ? "" : StringUtil.Trim( context.localUtil.Format( AV34TFMemoEndDateTime, "99/99/99 99:99"))),  true,  StringUtil.Trim( context.localUtil.TToC( AV35TFMemoEndDateTime_To, 8, 5, (short)(((StringUtil.StrCmp(context.GetLanguageProperty( "time_fmt"), "12")==0) ? 1 : 0)), (short)(DateTimeUtil.MapDateTimeFormat( context.GetLanguageProperty( "date_fmt"))), "/", ":", " ")),  ((DateTime.MinValue==AV35TFMemoEndDateTime_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV35TFMemoEndDateTime_To, "99/99/99 99:99")))) ;
          new WorkWithPlus.workwithplus_web.wwp_gridstateaddfiltervalue(context ).execute( ref  AV11GridState,  "TFMEMODURATION",  context.GetMessage( "Duration", ""),  !((Convert.ToDecimal(0)==AV39TFMemoDuration)&&(Convert.ToDecimal(0)==AV40TFMemoDuration_To)),  0,  StringUtil.Trim( StringUtil.Str( AV39TFMemoDuration, 6, 3)),  ((Convert.ToDecimal(0)==AV39TFMemoDuration) ? "" : StringUtil.Trim( context.localUtil.Format( AV39TFMemoDuration, "Z9.999"))),  true,  StringUtil.Trim( StringUtil.Str( AV40TFMemoDuration_To, 6, 3)),  ((Convert.ToDecimal(0)==AV40TFMemoDuration_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV40TFMemoDuration_To, "Z9.999")))) ;
          new WorkWithPlus.workwithplus_web.wwp_gridstateaddfiltervalue(context ).execute( ref  AV11GridState,  "TFMEMOREMOVEDATE",  context.GetMessage( "Remove Date", ""),  !((DateTime.MinValue==AV41TFMemoRemoveDate)&&(DateTime.MinValue==AV42TFMemoRemoveDate_To)),  0,  StringUtil.Trim( context.localUtil.DToC( AV41TFMemoRemoveDate, (short)(DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt"))), "/")),  ((DateTime.MinValue==AV41TFMemoRemoveDate) ? "" : StringUtil.Trim( context.localUtil.Format( AV41TFMemoRemoveDate, "99/99/99"))),  true,  StringUtil.Trim( context.localUtil.DToC( AV42TFMemoRemoveDate_To, (short)(DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt"))), "/")),  ((DateTime.MinValue==AV42TFMemoRemoveDate_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV42TFMemoRemoveDate_To, "99/99/99")))) ;
+         new WorkWithPlus.workwithplus_web.wwp_gridstateaddfiltervalue(context ).execute( ref  AV11GridState,  "TFMEMOCREATEDAT",  context.GetMessage( "Created At", ""),  !((DateTime.MinValue==AV60TFMemoCreatedAt)&&(DateTime.MinValue==AV61TFMemoCreatedAt_To)),  0,  StringUtil.Trim( context.localUtil.TToC( AV60TFMemoCreatedAt, 8, 5, (short)(((StringUtil.StrCmp(context.GetLanguageProperty( "time_fmt"), "12")==0) ? 1 : 0)), (short)(DateTimeUtil.MapDateTimeFormat( context.GetLanguageProperty( "date_fmt"))), "/", ":", " ")),  ((DateTime.MinValue==AV60TFMemoCreatedAt) ? "" : StringUtil.Trim( context.localUtil.Format( AV60TFMemoCreatedAt, "99/99/99 99:99"))),  true,  StringUtil.Trim( context.localUtil.TToC( AV61TFMemoCreatedAt_To, 8, 5, (short)(((StringUtil.StrCmp(context.GetLanguageProperty( "time_fmt"), "12")==0) ? 1 : 0)), (short)(DateTimeUtil.MapDateTimeFormat( context.GetLanguageProperty( "date_fmt"))), "/", ":", " ")),  ((DateTime.MinValue==AV61TFMemoCreatedAt_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV61TFMemoCreatedAt_To, "99/99/99 99:99")))) ;
          AV11GridState.gxTpr_Pagesize = StringUtil.Str( (decimal)(subGrid_Rows), 10, 0);
          AV11GridState.gxTpr_Currentpage = (short)(subGrid_fnc_Currentpage( ));
-         new WorkWithPlus.workwithplus_web.savegridstate(context ).execute(  AV60Pgmname+"GridState",  AV11GridState.ToXml(false, true, "", "")) ;
+         new WorkWithPlus.workwithplus_web.savegridstate(context ).execute(  AV65Pgmname+"GridState",  AV11GridState.ToXml(false, true, "", "")) ;
       }
 
       protected void S122( )
@@ -2691,7 +2782,7 @@ namespace GeneXus.Programs {
          /* 'PREPARETRANSACTION' Routine */
          returnInSub = false;
          AV9TrnContext = new WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext(context);
-         AV9TrnContext.gxTpr_Callerobject = AV60Pgmname;
+         AV9TrnContext.gxTpr_Callerobject = AV65Pgmname;
          AV9TrnContext.gxTpr_Callerondelete = true;
          AV9TrnContext.gxTpr_Callerurl = AV8HTTPRequest.ScriptName+"?"+AV8HTTPRequest.QueryString;
          AV9TrnContext.gxTpr_Transactionname = "Trn_Memo";
@@ -2732,6 +2823,7 @@ namespace GeneXus.Programs {
          AddStyleSheetFile("DVelop/Shared/daterangepicker/daterangepicker.css", "");
          AddStyleSheetFile("DVelop/Shared/daterangepicker/daterangepicker.css", "");
          AddStyleSheetFile("DVelop/Shared/daterangepicker/daterangepicker.css", "");
+         AddStyleSheetFile("DVelop/Shared/daterangepicker/daterangepicker.css", "");
          AddStyleSheetFile("calendar-system.css", "");
          AddThemeStyleSheetFile("", context.GetTheme( )+".css", "?"+GetCacheInvalidationToken( ));
          if ( ! ( WebComp_Wwpaux_wc == null ) )
@@ -2749,7 +2841,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201715143", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256216292413", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2765,7 +2857,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("trn_memoww.js", "?20256201715146", false, true);
+         context.AddJavascriptSource("trn_memoww.js", "?20256216292416", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2783,6 +2875,12 @@ namespace GeneXus.Programs {
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/GridEmpowerer/GridEmpowererRender.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/daterangepicker/locales.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/daterangepicker/wwp-daterangepicker.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/daterangepicker/moment.min.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/daterangepicker/daterangepicker.min.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
+         context.AddJavascriptSource("DVelop/DateRangePicker/DateRangePickerRender.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/locales.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/wwp-daterangepicker.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/moment.min.js", "", false, true);
@@ -2820,6 +2918,7 @@ namespace GeneXus.Programs {
          edtResidentGivenName_Internalname = "RESIDENTGIVENNAME_"+sGXsfl_39_idx;
          edtResidentLastName_Internalname = "RESIDENTLASTNAME_"+sGXsfl_39_idx;
          edtResidentGUID_Internalname = "RESIDENTGUID_"+sGXsfl_39_idx;
+         edtMemoCreatedAt_Internalname = "MEMOCREATEDAT_"+sGXsfl_39_idx;
          cmbavActiongroup_Internalname = "vACTIONGROUP_"+sGXsfl_39_idx;
       }
 
@@ -2839,6 +2938,7 @@ namespace GeneXus.Programs {
          edtResidentGivenName_Internalname = "RESIDENTGIVENNAME_"+sGXsfl_39_fel_idx;
          edtResidentLastName_Internalname = "RESIDENTLASTNAME_"+sGXsfl_39_fel_idx;
          edtResidentGUID_Internalname = "RESIDENTGUID_"+sGXsfl_39_fel_idx;
+         edtMemoCreatedAt_Internalname = "MEMOCREATEDAT_"+sGXsfl_39_fel_idx;
          cmbavActiongroup_Internalname = "vACTIONGROUP_"+sGXsfl_39_fel_idx;
       }
 
@@ -3033,9 +3133,17 @@ namespace GeneXus.Programs {
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
+               context.WriteHtmlText( "<td valign=\"middle\" align=\""+"end"+"\""+" style=\""+((edtMemoCreatedAt_Visible==0) ? "display:none;" : "")+"\">") ;
+            }
+            /* Single line edit */
+            ROClassString = "Attribute";
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtMemoCreatedAt_Internalname,context.localUtil.TToC( A647MemoCreatedAt, 10, 8, (short)(((StringUtil.StrCmp(context.GetLanguageProperty( "time_fmt"), "12")==0) ? 1 : 0)), (short)(DateTimeUtil.MapDateTimeFormat( context.GetLanguageProperty( "date_fmt"))), "/", ":", " "),context.localUtil.Format( A647MemoCreatedAt, "99/99/99 99:99"),(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtMemoCreatedAt_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtMemoCreatedAt_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)17,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            /* Subfile cell */
+            if ( GridContainer.GetWrapped() == 1 )
+            {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"end"+"\""+" style=\""+""+"\">") ;
             }
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 54,'',false,'" + sGXsfl_39_idx + "',39)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 55,'',false,'" + sGXsfl_39_idx + "',39)\"";
             if ( ( cmbavActiongroup.ItemCount == 0 ) && isAjaxCallMode( ) )
             {
                GXCCtl = "vACTIONGROUP_" + sGXsfl_39_idx;
@@ -3048,7 +3156,7 @@ namespace GeneXus.Programs {
                }
             }
             /* ComboBox */
-            GridRow.AddColumnProperties("combobox", 2, isAjaxCallMode( ), new Object[] {(GXCombobox)cmbavActiongroup,(string)cmbavActiongroup_Internalname,StringUtil.Trim( StringUtil.Str( (decimal)(AV55ActionGroup), 4, 0)),(short)1,(string)cmbavActiongroup_Jsonclick,(short)5,"'"+""+"'"+",false,"+"'"+"EVACTIONGROUP.CLICK."+sGXsfl_39_idx+"'",(string)"int",(string)"",(short)-1,(short)1,(short)0,(short)0,(short)0,(string)"px",(short)0,(string)"px",(string)"",(string)cmbavActiongroup_Class,(string)"WWActionGroupColumn",(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,54);\"",(string)"",(bool)true,(short)0});
+            GridRow.AddColumnProperties("combobox", 2, isAjaxCallMode( ), new Object[] {(GXCombobox)cmbavActiongroup,(string)cmbavActiongroup_Internalname,StringUtil.Trim( StringUtil.Str( (decimal)(AV55ActionGroup), 4, 0)),(short)1,(string)cmbavActiongroup_Jsonclick,(short)5,"'"+""+"'"+",false,"+"'"+"EVACTIONGROUP.CLICK."+sGXsfl_39_idx+"'",(string)"int",(string)"",(short)-1,(short)1,(short)0,(short)0,(short)0,(string)"px",(short)0,(string)"px",(string)"",(string)cmbavActiongroup_Class,(string)"WWActionGroupColumn",(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,55);\"",(string)"",(bool)true,(short)0});
             cmbavActiongroup.CurrentValue = StringUtil.Trim( StringUtil.Str( (decimal)(AV55ActionGroup), 4, 0));
             AssignProp("", false, cmbavActiongroup_Internalname, "Values", (string)(cmbavActiongroup.ToJavascriptSource()), !bGXsfl_39_Refreshing);
             send_integrity_lvl_hashesAP2( ) ;
@@ -3163,6 +3271,9 @@ namespace GeneXus.Programs {
             context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+"display:none;"+""+"\" "+">") ;
             context.SendWebValue( "") ;
             context.WriteHtmlTextNl( "</th>") ;
+            context.WriteHtmlText( "<th align=\""+"end"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((edtMemoCreatedAt_Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
+            context.SendWebValue( context.GetMessage( "Created At", "")) ;
+            context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlText( "<th align=\""+"end"+"\" "+" nowrap=\"nowrap\" "+" class=\""+cmbavActiongroup_Class+"\" "+" style=\""+""+""+"\" "+">") ;
             context.SendWebValue( "") ;
             context.WriteHtmlTextNl( "</th>") ;
@@ -3238,6 +3349,10 @@ namespace GeneXus.Programs {
             GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( A71ResidentGUID));
             GridContainer.AddColumnProperties(GridColumn);
             GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( context.localUtil.TToC( A647MemoCreatedAt, 10, 8, (short)(((StringUtil.StrCmp(context.GetLanguageProperty( "time_fmt"), "12")==0) ? 1 : 0)), (short)(DateTimeUtil.MapDateTimeFormat( context.GetLanguageProperty( "date_fmt"))), "/", ":", " ")));
+            GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtMemoCreatedAt_Visible), 5, 0, ".", "")));
+            GridContainer.AddColumnProperties(GridColumn);
+            GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
             GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.LTrim( StringUtil.NToC( (decimal)(AV55ActionGroup), 4, 0, ".", ""))));
             GridColumn.AddObjectProperty("Class", StringUtil.RTrim( cmbavActiongroup_Class));
             GridContainer.AddColumnProperties(GridColumn);
@@ -3277,6 +3392,7 @@ namespace GeneXus.Programs {
          edtResidentGivenName_Internalname = "RESIDENTGIVENNAME";
          edtResidentLastName_Internalname = "RESIDENTLASTNAME";
          edtResidentGUID_Internalname = "RESIDENTGUID";
+         edtMemoCreatedAt_Internalname = "MEMOCREATEDAT";
          cmbavActiongroup_Internalname = "vACTIONGROUP";
          Gridpaginationbar_Internalname = "GRIDPAGINATIONBAR";
          divGridtablewithpaginationbar_Internalname = "GRIDTABLEWITHPAGINATIONBAR";
@@ -3295,6 +3411,9 @@ namespace GeneXus.Programs {
          edtavDdo_memoremovedateauxdatetext_Internalname = "vDDO_MEMOREMOVEDATEAUXDATETEXT";
          Tfmemoremovedate_rangepicker_Internalname = "TFMEMOREMOVEDATE_RANGEPICKER";
          divDdo_memoremovedateauxdates_Internalname = "DDO_MEMOREMOVEDATEAUXDATES";
+         edtavDdo_memocreatedatauxdatetext_Internalname = "vDDO_MEMOCREATEDATAUXDATETEXT";
+         Tfmemocreatedat_rangepicker_Internalname = "TFMEMOCREATEDAT_RANGEPICKER";
+         divDdo_memocreatedatauxdates_Internalname = "DDO_MEMOCREATEDATAUXDATES";
          divHtml_bottomauxiliarcontrols_Internalname = "HTML_BOTTOMAUXILIARCONTROLS";
          divLayoutmaintable_Internalname = "LAYOUTMAINTABLE";
          Form.Internalname = "FORM";
@@ -3315,6 +3434,7 @@ namespace GeneXus.Programs {
          subGrid_Header = "";
          cmbavActiongroup_Jsonclick = "";
          cmbavActiongroup_Class = "ConvertToDDO";
+         edtMemoCreatedAt_Jsonclick = "";
          edtResidentGUID_Jsonclick = "";
          edtResidentLastName_Jsonclick = "";
          edtResidentGivenName_Jsonclick = "";
@@ -3332,11 +3452,13 @@ namespace GeneXus.Programs {
          edtMemoId_Jsonclick = "";
          subGrid_Class = "GridWithPaginationBar WorkWithSelection WorkWith";
          subGrid_Backcolorstyle = 0;
+         edtMemoCreatedAt_Visible = -1;
          edtMemoRemoveDate_Visible = -1;
          edtMemoDuration_Visible = -1;
          edtMemoEndDateTime_Visible = -1;
          edtMemoStartDateTime_Visible = -1;
          edtMemoTitle_Visible = -1;
+         edtMemoCreatedAt_Enabled = 0;
          edtResidentGUID_Enabled = 0;
          edtResidentLastName_Enabled = 0;
          edtResidentGivenName_Enabled = 0;
@@ -3352,6 +3474,7 @@ namespace GeneXus.Programs {
          edtMemoTitle_Enabled = 0;
          edtMemoId_Enabled = 0;
          subGrid_Sortable = 0;
+         edtavDdo_memocreatedatauxdatetext_Jsonclick = "";
          edtavDdo_memoremovedateauxdatetext_Jsonclick = "";
          edtavDdo_memoenddatetimeauxdatetext_Jsonclick = "";
          edtavDdo_memostartdatetimeauxdatetext_Jsonclick = "";
@@ -3368,16 +3491,16 @@ namespace GeneXus.Programs {
          Ddo_gridcolumnsselector_Caption = context.GetMessage( "WWP_EditColumnsCaption", "");
          Ddo_gridcolumnsselector_Icon = "fas fa-cog";
          Ddo_gridcolumnsselector_Icontype = "FontIcon";
-         Ddo_grid_Format = "|||6.3|";
+         Ddo_grid_Format = "|||6.3||";
          Ddo_grid_Datalistproc = "Trn_MemoWWGetFilterData";
-         Ddo_grid_Datalisttype = "Dynamic||||";
-         Ddo_grid_Includedatalist = "T||||";
-         Ddo_grid_Filterisrange = "|P|P|T|P";
-         Ddo_grid_Filtertype = "Character|Date|Date|Numeric|Date";
+         Ddo_grid_Datalisttype = "Dynamic|||||";
+         Ddo_grid_Includedatalist = "T|||||";
+         Ddo_grid_Filterisrange = "|P|P|T|P|P";
+         Ddo_grid_Filtertype = "Character|Date|Date|Numeric|Date|Date";
          Ddo_grid_Includefilter = "T";
          Ddo_grid_Includesortasc = "T";
-         Ddo_grid_Columnssortvalues = "1|2|3|4|5";
-         Ddo_grid_Columnids = "1:MemoTitle|5:MemoStartDateTime|6:MemoEndDateTime|7:MemoDuration|8:MemoRemoveDate";
+         Ddo_grid_Columnssortvalues = "2|3|4|5|6|1";
+         Ddo_grid_Columnids = "1:MemoTitle|5:MemoStartDateTime|6:MemoEndDateTime|7:MemoDuration|8:MemoRemoveDate|14:MemoCreatedAt";
          Ddo_grid_Gridinternalname = "";
          Ddc_subscriptions_Titlecontrolidtoreplace = "";
          Ddc_subscriptions_Cls = "ColumnsSelector";
@@ -3426,23 +3549,23 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV60Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFMemoTitle","fld":"vTFMEMOTITLE"},{"av":"AV28TFMemoTitle_Sel","fld":"vTFMEMOTITLE_SEL"},{"av":"AV29TFMemoStartDateTime","fld":"vTFMEMOSTARTDATETIME","pic":"99/99/99 99:99"},{"av":"AV30TFMemoStartDateTime_To","fld":"vTFMEMOSTARTDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV34TFMemoEndDateTime","fld":"vTFMEMOENDDATETIME","pic":"99/99/99 99:99"},{"av":"AV35TFMemoEndDateTime_To","fld":"vTFMEMOENDDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV39TFMemoDuration","fld":"vTFMEMODURATION","pic":"Z9.999"},{"av":"AV40TFMemoDuration_To","fld":"vTFMEMODURATION_TO","pic":"Z9.999"},{"av":"AV41TFMemoRemoveDate","fld":"vTFMEMOREMOVEDATE"},{"av":"AV42TFMemoRemoveDate_To","fld":"vTFMEMOREMOVEDATE_TO"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV54IsAuthorized_MemoTitle","fld":"vISAUTHORIZED_MEMOTITLE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true}]""");
-         setEventMetadata("REFRESH",""","oparms":[{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtMemoTitle_Visible","ctrl":"MEMOTITLE","prop":"Visible"},{"av":"edtMemoStartDateTime_Visible","ctrl":"MEMOSTARTDATETIME","prop":"Visible"},{"av":"edtMemoEndDateTime_Visible","ctrl":"MEMOENDDATETIME","prop":"Visible"},{"av":"edtMemoDuration_Visible","ctrl":"MEMODURATION","prop":"Visible"},{"av":"edtMemoRemoveDate_Visible","ctrl":"MEMOREMOVEDATE","prop":"Visible"},{"av":"AV50GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV51GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV52GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"ctrl":"BTNSUBSCRIPTIONS","prop":"Visible"},{"av":"AV22ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV11GridState","fld":"vGRIDSTATE"}]}""");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","""{"handler":"E12AP2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV60Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFMemoTitle","fld":"vTFMEMOTITLE"},{"av":"AV28TFMemoTitle_Sel","fld":"vTFMEMOTITLE_SEL"},{"av":"AV29TFMemoStartDateTime","fld":"vTFMEMOSTARTDATETIME","pic":"99/99/99 99:99"},{"av":"AV30TFMemoStartDateTime_To","fld":"vTFMEMOSTARTDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV34TFMemoEndDateTime","fld":"vTFMEMOENDDATETIME","pic":"99/99/99 99:99"},{"av":"AV35TFMemoEndDateTime_To","fld":"vTFMEMOENDDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV39TFMemoDuration","fld":"vTFMEMODURATION","pic":"Z9.999"},{"av":"AV40TFMemoDuration_To","fld":"vTFMEMODURATION_TO","pic":"Z9.999"},{"av":"AV41TFMemoRemoveDate","fld":"vTFMEMOREMOVEDATE"},{"av":"AV42TFMemoRemoveDate_To","fld":"vTFMEMOREMOVEDATE_TO"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV54IsAuthorized_MemoTitle","fld":"vISAUTHORIZED_MEMOTITLE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Gridpaginationbar_Selectedpage","ctrl":"GRIDPAGINATIONBAR","prop":"SelectedPage"}]}""");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","""{"handler":"E13AP2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV60Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFMemoTitle","fld":"vTFMEMOTITLE"},{"av":"AV28TFMemoTitle_Sel","fld":"vTFMEMOTITLE_SEL"},{"av":"AV29TFMemoStartDateTime","fld":"vTFMEMOSTARTDATETIME","pic":"99/99/99 99:99"},{"av":"AV30TFMemoStartDateTime_To","fld":"vTFMEMOSTARTDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV34TFMemoEndDateTime","fld":"vTFMEMOENDDATETIME","pic":"99/99/99 99:99"},{"av":"AV35TFMemoEndDateTime_To","fld":"vTFMEMOENDDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV39TFMemoDuration","fld":"vTFMEMODURATION","pic":"Z9.999"},{"av":"AV40TFMemoDuration_To","fld":"vTFMEMODURATION_TO","pic":"Z9.999"},{"av":"AV41TFMemoRemoveDate","fld":"vTFMEMOREMOVEDATE"},{"av":"AV42TFMemoRemoveDate_To","fld":"vTFMEMOREMOVEDATE_TO"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV54IsAuthorized_MemoTitle","fld":"vISAUTHORIZED_MEMOTITLE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Gridpaginationbar_Rowsperpageselectedvalue","ctrl":"GRIDPAGINATIONBAR","prop":"RowsPerPageSelectedValue"}]""");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV65Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFMemoTitle","fld":"vTFMEMOTITLE"},{"av":"AV28TFMemoTitle_Sel","fld":"vTFMEMOTITLE_SEL"},{"av":"AV29TFMemoStartDateTime","fld":"vTFMEMOSTARTDATETIME","pic":"99/99/99 99:99"},{"av":"AV30TFMemoStartDateTime_To","fld":"vTFMEMOSTARTDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV34TFMemoEndDateTime","fld":"vTFMEMOENDDATETIME","pic":"99/99/99 99:99"},{"av":"AV35TFMemoEndDateTime_To","fld":"vTFMEMOENDDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV39TFMemoDuration","fld":"vTFMEMODURATION","pic":"Z9.999"},{"av":"AV40TFMemoDuration_To","fld":"vTFMEMODURATION_TO","pic":"Z9.999"},{"av":"AV41TFMemoRemoveDate","fld":"vTFMEMOREMOVEDATE"},{"av":"AV42TFMemoRemoveDate_To","fld":"vTFMEMOREMOVEDATE_TO"},{"av":"AV60TFMemoCreatedAt","fld":"vTFMEMOCREATEDAT","pic":"99/99/99 99:99"},{"av":"AV61TFMemoCreatedAt_To","fld":"vTFMEMOCREATEDAT_TO","pic":"99/99/99 99:99"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV54IsAuthorized_MemoTitle","fld":"vISAUTHORIZED_MEMOTITLE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true}]""");
+         setEventMetadata("REFRESH",""","oparms":[{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtMemoTitle_Visible","ctrl":"MEMOTITLE","prop":"Visible"},{"av":"edtMemoStartDateTime_Visible","ctrl":"MEMOSTARTDATETIME","prop":"Visible"},{"av":"edtMemoEndDateTime_Visible","ctrl":"MEMOENDDATETIME","prop":"Visible"},{"av":"edtMemoDuration_Visible","ctrl":"MEMODURATION","prop":"Visible"},{"av":"edtMemoRemoveDate_Visible","ctrl":"MEMOREMOVEDATE","prop":"Visible"},{"av":"edtMemoCreatedAt_Visible","ctrl":"MEMOCREATEDAT","prop":"Visible"},{"av":"AV50GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV51GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV52GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"ctrl":"BTNSUBSCRIPTIONS","prop":"Visible"},{"av":"AV22ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV11GridState","fld":"vGRIDSTATE"}]}""");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","""{"handler":"E12AP2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV65Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFMemoTitle","fld":"vTFMEMOTITLE"},{"av":"AV28TFMemoTitle_Sel","fld":"vTFMEMOTITLE_SEL"},{"av":"AV29TFMemoStartDateTime","fld":"vTFMEMOSTARTDATETIME","pic":"99/99/99 99:99"},{"av":"AV30TFMemoStartDateTime_To","fld":"vTFMEMOSTARTDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV34TFMemoEndDateTime","fld":"vTFMEMOENDDATETIME","pic":"99/99/99 99:99"},{"av":"AV35TFMemoEndDateTime_To","fld":"vTFMEMOENDDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV39TFMemoDuration","fld":"vTFMEMODURATION","pic":"Z9.999"},{"av":"AV40TFMemoDuration_To","fld":"vTFMEMODURATION_TO","pic":"Z9.999"},{"av":"AV41TFMemoRemoveDate","fld":"vTFMEMOREMOVEDATE"},{"av":"AV42TFMemoRemoveDate_To","fld":"vTFMEMOREMOVEDATE_TO"},{"av":"AV60TFMemoCreatedAt","fld":"vTFMEMOCREATEDAT","pic":"99/99/99 99:99"},{"av":"AV61TFMemoCreatedAt_To","fld":"vTFMEMOCREATEDAT_TO","pic":"99/99/99 99:99"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV54IsAuthorized_MemoTitle","fld":"vISAUTHORIZED_MEMOTITLE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Gridpaginationbar_Selectedpage","ctrl":"GRIDPAGINATIONBAR","prop":"SelectedPage"}]}""");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","""{"handler":"E13AP2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV65Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFMemoTitle","fld":"vTFMEMOTITLE"},{"av":"AV28TFMemoTitle_Sel","fld":"vTFMEMOTITLE_SEL"},{"av":"AV29TFMemoStartDateTime","fld":"vTFMEMOSTARTDATETIME","pic":"99/99/99 99:99"},{"av":"AV30TFMemoStartDateTime_To","fld":"vTFMEMOSTARTDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV34TFMemoEndDateTime","fld":"vTFMEMOENDDATETIME","pic":"99/99/99 99:99"},{"av":"AV35TFMemoEndDateTime_To","fld":"vTFMEMOENDDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV39TFMemoDuration","fld":"vTFMEMODURATION","pic":"Z9.999"},{"av":"AV40TFMemoDuration_To","fld":"vTFMEMODURATION_TO","pic":"Z9.999"},{"av":"AV41TFMemoRemoveDate","fld":"vTFMEMOREMOVEDATE"},{"av":"AV42TFMemoRemoveDate_To","fld":"vTFMEMOREMOVEDATE_TO"},{"av":"AV60TFMemoCreatedAt","fld":"vTFMEMOCREATEDAT","pic":"99/99/99 99:99"},{"av":"AV61TFMemoCreatedAt_To","fld":"vTFMEMOCREATEDAT_TO","pic":"99/99/99 99:99"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV54IsAuthorized_MemoTitle","fld":"vISAUTHORIZED_MEMOTITLE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Gridpaginationbar_Rowsperpageselectedvalue","ctrl":"GRIDPAGINATIONBAR","prop":"RowsPerPageSelectedValue"}]""");
          setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE",""","oparms":[{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"}]}""");
-         setEventMetadata("DDO_GRID.ONOPTIONCLICKED","""{"handler":"E15AP2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV60Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFMemoTitle","fld":"vTFMEMOTITLE"},{"av":"AV28TFMemoTitle_Sel","fld":"vTFMEMOTITLE_SEL"},{"av":"AV29TFMemoStartDateTime","fld":"vTFMEMOSTARTDATETIME","pic":"99/99/99 99:99"},{"av":"AV30TFMemoStartDateTime_To","fld":"vTFMEMOSTARTDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV34TFMemoEndDateTime","fld":"vTFMEMOENDDATETIME","pic":"99/99/99 99:99"},{"av":"AV35TFMemoEndDateTime_To","fld":"vTFMEMOENDDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV39TFMemoDuration","fld":"vTFMEMODURATION","pic":"Z9.999"},{"av":"AV40TFMemoDuration_To","fld":"vTFMEMODURATION_TO","pic":"Z9.999"},{"av":"AV41TFMemoRemoveDate","fld":"vTFMEMOREMOVEDATE"},{"av":"AV42TFMemoRemoveDate_To","fld":"vTFMEMOREMOVEDATE_TO"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV54IsAuthorized_MemoTitle","fld":"vISAUTHORIZED_MEMOTITLE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Ddo_grid_Activeeventkey","ctrl":"DDO_GRID","prop":"ActiveEventKey"},{"av":"Ddo_grid_Selectedvalue_get","ctrl":"DDO_GRID","prop":"SelectedValue_get"},{"av":"Ddo_grid_Selectedcolumn","ctrl":"DDO_GRID","prop":"SelectedColumn"},{"av":"Ddo_grid_Filteredtext_get","ctrl":"DDO_GRID","prop":"FilteredText_get"},{"av":"Ddo_grid_Filteredtextto_get","ctrl":"DDO_GRID","prop":"FilteredTextTo_get"}]""");
-         setEventMetadata("DDO_GRID.ONOPTIONCLICKED",""","oparms":[{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV27TFMemoTitle","fld":"vTFMEMOTITLE"},{"av":"AV28TFMemoTitle_Sel","fld":"vTFMEMOTITLE_SEL"},{"av":"AV29TFMemoStartDateTime","fld":"vTFMEMOSTARTDATETIME","pic":"99/99/99 99:99"},{"av":"AV30TFMemoStartDateTime_To","fld":"vTFMEMOSTARTDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV34TFMemoEndDateTime","fld":"vTFMEMOENDDATETIME","pic":"99/99/99 99:99"},{"av":"AV35TFMemoEndDateTime_To","fld":"vTFMEMOENDDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV39TFMemoDuration","fld":"vTFMEMODURATION","pic":"Z9.999"},{"av":"AV40TFMemoDuration_To","fld":"vTFMEMODURATION_TO","pic":"Z9.999"},{"av":"AV41TFMemoRemoveDate","fld":"vTFMEMOREMOVEDATE"},{"av":"AV42TFMemoRemoveDate_To","fld":"vTFMEMOREMOVEDATE_TO"},{"av":"Ddo_grid_Sortedstatus","ctrl":"DDO_GRID","prop":"SortedStatus"}]}""");
+         setEventMetadata("DDO_GRID.ONOPTIONCLICKED","""{"handler":"E15AP2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV65Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFMemoTitle","fld":"vTFMEMOTITLE"},{"av":"AV28TFMemoTitle_Sel","fld":"vTFMEMOTITLE_SEL"},{"av":"AV29TFMemoStartDateTime","fld":"vTFMEMOSTARTDATETIME","pic":"99/99/99 99:99"},{"av":"AV30TFMemoStartDateTime_To","fld":"vTFMEMOSTARTDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV34TFMemoEndDateTime","fld":"vTFMEMOENDDATETIME","pic":"99/99/99 99:99"},{"av":"AV35TFMemoEndDateTime_To","fld":"vTFMEMOENDDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV39TFMemoDuration","fld":"vTFMEMODURATION","pic":"Z9.999"},{"av":"AV40TFMemoDuration_To","fld":"vTFMEMODURATION_TO","pic":"Z9.999"},{"av":"AV41TFMemoRemoveDate","fld":"vTFMEMOREMOVEDATE"},{"av":"AV42TFMemoRemoveDate_To","fld":"vTFMEMOREMOVEDATE_TO"},{"av":"AV60TFMemoCreatedAt","fld":"vTFMEMOCREATEDAT","pic":"99/99/99 99:99"},{"av":"AV61TFMemoCreatedAt_To","fld":"vTFMEMOCREATEDAT_TO","pic":"99/99/99 99:99"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV54IsAuthorized_MemoTitle","fld":"vISAUTHORIZED_MEMOTITLE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Ddo_grid_Activeeventkey","ctrl":"DDO_GRID","prop":"ActiveEventKey"},{"av":"Ddo_grid_Selectedvalue_get","ctrl":"DDO_GRID","prop":"SelectedValue_get"},{"av":"Ddo_grid_Filteredtextto_get","ctrl":"DDO_GRID","prop":"FilteredTextTo_get"},{"av":"Ddo_grid_Filteredtext_get","ctrl":"DDO_GRID","prop":"FilteredText_get"},{"av":"Ddo_grid_Selectedcolumn","ctrl":"DDO_GRID","prop":"SelectedColumn"}]""");
+         setEventMetadata("DDO_GRID.ONOPTIONCLICKED",""","oparms":[{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV60TFMemoCreatedAt","fld":"vTFMEMOCREATEDAT","pic":"99/99/99 99:99"},{"av":"AV61TFMemoCreatedAt_To","fld":"vTFMEMOCREATEDAT_TO","pic":"99/99/99 99:99"},{"av":"AV41TFMemoRemoveDate","fld":"vTFMEMOREMOVEDATE"},{"av":"AV42TFMemoRemoveDate_To","fld":"vTFMEMOREMOVEDATE_TO"},{"av":"AV39TFMemoDuration","fld":"vTFMEMODURATION","pic":"Z9.999"},{"av":"AV40TFMemoDuration_To","fld":"vTFMEMODURATION_TO","pic":"Z9.999"},{"av":"AV34TFMemoEndDateTime","fld":"vTFMEMOENDDATETIME","pic":"99/99/99 99:99"},{"av":"AV35TFMemoEndDateTime_To","fld":"vTFMEMOENDDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV29TFMemoStartDateTime","fld":"vTFMEMOSTARTDATETIME","pic":"99/99/99 99:99"},{"av":"AV30TFMemoStartDateTime_To","fld":"vTFMEMOSTARTDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV27TFMemoTitle","fld":"vTFMEMOTITLE"},{"av":"AV28TFMemoTitle_Sel","fld":"vTFMEMOTITLE_SEL"},{"av":"Ddo_grid_Sortedstatus","ctrl":"DDO_GRID","prop":"SortedStatus"}]}""");
          setEventMetadata("GRID.LOAD","""{"handler":"E20AP2","iparms":[{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV54IsAuthorized_MemoTitle","fld":"vISAUTHORIZED_MEMOTITLE","hsh":true},{"av":"A549MemoId","fld":"MEMOID","hsh":true}]""");
          setEventMetadata("GRID.LOAD",""","oparms":[{"av":"cmbavActiongroup"},{"av":"AV55ActionGroup","fld":"vACTIONGROUP","pic":"ZZZ9"},{"av":"edtMemoTitle_Link","ctrl":"MEMOTITLE","prop":"Link"}]}""");
-         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED","""{"handler":"E16AP2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV60Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFMemoTitle","fld":"vTFMEMOTITLE"},{"av":"AV28TFMemoTitle_Sel","fld":"vTFMEMOTITLE_SEL"},{"av":"AV29TFMemoStartDateTime","fld":"vTFMEMOSTARTDATETIME","pic":"99/99/99 99:99"},{"av":"AV30TFMemoStartDateTime_To","fld":"vTFMEMOSTARTDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV34TFMemoEndDateTime","fld":"vTFMEMOENDDATETIME","pic":"99/99/99 99:99"},{"av":"AV35TFMemoEndDateTime_To","fld":"vTFMEMOENDDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV39TFMemoDuration","fld":"vTFMEMODURATION","pic":"Z9.999"},{"av":"AV40TFMemoDuration_To","fld":"vTFMEMODURATION_TO","pic":"Z9.999"},{"av":"AV41TFMemoRemoveDate","fld":"vTFMEMOREMOVEDATE"},{"av":"AV42TFMemoRemoveDate_To","fld":"vTFMEMOREMOVEDATE_TO"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV54IsAuthorized_MemoTitle","fld":"vISAUTHORIZED_MEMOTITLE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Ddo_gridcolumnsselector_Columnsselectorvalues","ctrl":"DDO_GRIDCOLUMNSSELECTOR","prop":"ColumnsSelectorValues"}]""");
-         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED",""","oparms":[{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"edtMemoTitle_Visible","ctrl":"MEMOTITLE","prop":"Visible"},{"av":"edtMemoStartDateTime_Visible","ctrl":"MEMOSTARTDATETIME","prop":"Visible"},{"av":"edtMemoEndDateTime_Visible","ctrl":"MEMOENDDATETIME","prop":"Visible"},{"av":"edtMemoDuration_Visible","ctrl":"MEMODURATION","prop":"Visible"},{"av":"edtMemoRemoveDate_Visible","ctrl":"MEMOREMOVEDATE","prop":"Visible"},{"av":"AV50GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV51GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV52GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"ctrl":"BTNSUBSCRIPTIONS","prop":"Visible"},{"av":"AV22ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV11GridState","fld":"vGRIDSTATE"}]}""");
-         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED","""{"handler":"E11AP2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV60Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFMemoTitle","fld":"vTFMEMOTITLE"},{"av":"AV28TFMemoTitle_Sel","fld":"vTFMEMOTITLE_SEL"},{"av":"AV29TFMemoStartDateTime","fld":"vTFMEMOSTARTDATETIME","pic":"99/99/99 99:99"},{"av":"AV30TFMemoStartDateTime_To","fld":"vTFMEMOSTARTDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV34TFMemoEndDateTime","fld":"vTFMEMOENDDATETIME","pic":"99/99/99 99:99"},{"av":"AV35TFMemoEndDateTime_To","fld":"vTFMEMOENDDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV39TFMemoDuration","fld":"vTFMEMODURATION","pic":"Z9.999"},{"av":"AV40TFMemoDuration_To","fld":"vTFMEMODURATION_TO","pic":"Z9.999"},{"av":"AV41TFMemoRemoveDate","fld":"vTFMEMOREMOVEDATE"},{"av":"AV42TFMemoRemoveDate_To","fld":"vTFMEMOREMOVEDATE_TO"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV54IsAuthorized_MemoTitle","fld":"vISAUTHORIZED_MEMOTITLE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Ddo_managefilters_Activeeventkey","ctrl":"DDO_MANAGEFILTERS","prop":"ActiveEventKey"},{"av":"AV11GridState","fld":"vGRIDSTATE"},{"av":"AV31DDO_MemoStartDateTimeAuxDate","fld":"vDDO_MEMOSTARTDATETIMEAUXDATE"},{"av":"AV36DDO_MemoEndDateTimeAuxDate","fld":"vDDO_MEMOENDDATETIMEAUXDATE"},{"av":"AV32DDO_MemoStartDateTimeAuxDateTo","fld":"vDDO_MEMOSTARTDATETIMEAUXDATETO"},{"av":"AV37DDO_MemoEndDateTimeAuxDateTo","fld":"vDDO_MEMOENDDATETIMEAUXDATETO"}]""");
-         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",""","oparms":[{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV11GridState","fld":"vGRIDSTATE"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV27TFMemoTitle","fld":"vTFMEMOTITLE"},{"av":"AV28TFMemoTitle_Sel","fld":"vTFMEMOTITLE_SEL"},{"av":"AV29TFMemoStartDateTime","fld":"vTFMEMOSTARTDATETIME","pic":"99/99/99 99:99"},{"av":"AV30TFMemoStartDateTime_To","fld":"vTFMEMOSTARTDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV34TFMemoEndDateTime","fld":"vTFMEMOENDDATETIME","pic":"99/99/99 99:99"},{"av":"AV35TFMemoEndDateTime_To","fld":"vTFMEMOENDDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV39TFMemoDuration","fld":"vTFMEMODURATION","pic":"Z9.999"},{"av":"AV40TFMemoDuration_To","fld":"vTFMEMODURATION_TO","pic":"Z9.999"},{"av":"AV41TFMemoRemoveDate","fld":"vTFMEMOREMOVEDATE"},{"av":"AV42TFMemoRemoveDate_To","fld":"vTFMEMOREMOVEDATE_TO"},{"av":"Ddo_grid_Selectedvalue_set","ctrl":"DDO_GRID","prop":"SelectedValue_set"},{"av":"Ddo_grid_Filteredtext_set","ctrl":"DDO_GRID","prop":"FilteredText_set"},{"av":"Ddo_grid_Filteredtextto_set","ctrl":"DDO_GRID","prop":"FilteredTextTo_set"},{"av":"Ddo_grid_Sortedstatus","ctrl":"DDO_GRID","prop":"SortedStatus"},{"av":"AV36DDO_MemoEndDateTimeAuxDate","fld":"vDDO_MEMOENDDATETIMEAUXDATE"},{"av":"AV37DDO_MemoEndDateTimeAuxDateTo","fld":"vDDO_MEMOENDDATETIMEAUXDATETO"},{"av":"AV31DDO_MemoStartDateTimeAuxDate","fld":"vDDO_MEMOSTARTDATETIMEAUXDATE"},{"av":"AV32DDO_MemoStartDateTimeAuxDateTo","fld":"vDDO_MEMOSTARTDATETIMEAUXDATETO"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtMemoTitle_Visible","ctrl":"MEMOTITLE","prop":"Visible"},{"av":"edtMemoStartDateTime_Visible","ctrl":"MEMOSTARTDATETIME","prop":"Visible"},{"av":"edtMemoEndDateTime_Visible","ctrl":"MEMOENDDATETIME","prop":"Visible"},{"av":"edtMemoDuration_Visible","ctrl":"MEMODURATION","prop":"Visible"},{"av":"edtMemoRemoveDate_Visible","ctrl":"MEMOREMOVEDATE","prop":"Visible"},{"av":"AV50GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV51GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV52GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"ctrl":"BTNSUBSCRIPTIONS","prop":"Visible"},{"av":"AV22ManageFiltersData","fld":"vMANAGEFILTERSDATA"}]}""");
-         setEventMetadata("VACTIONGROUP.CLICK","""{"handler":"E21AP2","iparms":[{"av":"cmbavActiongroup"},{"av":"AV55ActionGroup","fld":"vACTIONGROUP","pic":"ZZZ9"},{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV60Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFMemoTitle","fld":"vTFMEMOTITLE"},{"av":"AV28TFMemoTitle_Sel","fld":"vTFMEMOTITLE_SEL"},{"av":"AV29TFMemoStartDateTime","fld":"vTFMEMOSTARTDATETIME","pic":"99/99/99 99:99"},{"av":"AV30TFMemoStartDateTime_To","fld":"vTFMEMOSTARTDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV34TFMemoEndDateTime","fld":"vTFMEMOENDDATETIME","pic":"99/99/99 99:99"},{"av":"AV35TFMemoEndDateTime_To","fld":"vTFMEMOENDDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV39TFMemoDuration","fld":"vTFMEMODURATION","pic":"Z9.999"},{"av":"AV40TFMemoDuration_To","fld":"vTFMEMODURATION_TO","pic":"Z9.999"},{"av":"AV41TFMemoRemoveDate","fld":"vTFMEMOREMOVEDATE"},{"av":"AV42TFMemoRemoveDate_To","fld":"vTFMEMOREMOVEDATE_TO"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV54IsAuthorized_MemoTitle","fld":"vISAUTHORIZED_MEMOTITLE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"A549MemoId","fld":"MEMOID","hsh":true}]""");
-         setEventMetadata("VACTIONGROUP.CLICK",""","oparms":[{"av":"cmbavActiongroup"},{"av":"AV55ActionGroup","fld":"vACTIONGROUP","pic":"ZZZ9"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtMemoTitle_Visible","ctrl":"MEMOTITLE","prop":"Visible"},{"av":"edtMemoStartDateTime_Visible","ctrl":"MEMOSTARTDATETIME","prop":"Visible"},{"av":"edtMemoEndDateTime_Visible","ctrl":"MEMOENDDATETIME","prop":"Visible"},{"av":"edtMemoDuration_Visible","ctrl":"MEMODURATION","prop":"Visible"},{"av":"edtMemoRemoveDate_Visible","ctrl":"MEMOREMOVEDATE","prop":"Visible"},{"av":"AV50GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV51GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV52GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"ctrl":"BTNSUBSCRIPTIONS","prop":"Visible"},{"av":"AV22ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV11GridState","fld":"vGRIDSTATE"}]}""");
-         setEventMetadata("'DOINSERT'","""{"handler":"E17AP2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV60Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFMemoTitle","fld":"vTFMEMOTITLE"},{"av":"AV28TFMemoTitle_Sel","fld":"vTFMEMOTITLE_SEL"},{"av":"AV29TFMemoStartDateTime","fld":"vTFMEMOSTARTDATETIME","pic":"99/99/99 99:99"},{"av":"AV30TFMemoStartDateTime_To","fld":"vTFMEMOSTARTDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV34TFMemoEndDateTime","fld":"vTFMEMOENDDATETIME","pic":"99/99/99 99:99"},{"av":"AV35TFMemoEndDateTime_To","fld":"vTFMEMOENDDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV39TFMemoDuration","fld":"vTFMEMODURATION","pic":"Z9.999"},{"av":"AV40TFMemoDuration_To","fld":"vTFMEMODURATION_TO","pic":"Z9.999"},{"av":"AV41TFMemoRemoveDate","fld":"vTFMEMOREMOVEDATE"},{"av":"AV42TFMemoRemoveDate_To","fld":"vTFMEMOREMOVEDATE_TO"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV54IsAuthorized_MemoTitle","fld":"vISAUTHORIZED_MEMOTITLE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"A549MemoId","fld":"MEMOID","hsh":true}]""");
-         setEventMetadata("'DOINSERT'",""","oparms":[{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtMemoTitle_Visible","ctrl":"MEMOTITLE","prop":"Visible"},{"av":"edtMemoStartDateTime_Visible","ctrl":"MEMOSTARTDATETIME","prop":"Visible"},{"av":"edtMemoEndDateTime_Visible","ctrl":"MEMOENDDATETIME","prop":"Visible"},{"av":"edtMemoDuration_Visible","ctrl":"MEMODURATION","prop":"Visible"},{"av":"edtMemoRemoveDate_Visible","ctrl":"MEMOREMOVEDATE","prop":"Visible"},{"av":"AV50GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV51GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV52GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"ctrl":"BTNSUBSCRIPTIONS","prop":"Visible"},{"av":"AV22ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV11GridState","fld":"vGRIDSTATE"}]}""");
+         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED","""{"handler":"E16AP2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV65Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFMemoTitle","fld":"vTFMEMOTITLE"},{"av":"AV28TFMemoTitle_Sel","fld":"vTFMEMOTITLE_SEL"},{"av":"AV29TFMemoStartDateTime","fld":"vTFMEMOSTARTDATETIME","pic":"99/99/99 99:99"},{"av":"AV30TFMemoStartDateTime_To","fld":"vTFMEMOSTARTDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV34TFMemoEndDateTime","fld":"vTFMEMOENDDATETIME","pic":"99/99/99 99:99"},{"av":"AV35TFMemoEndDateTime_To","fld":"vTFMEMOENDDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV39TFMemoDuration","fld":"vTFMEMODURATION","pic":"Z9.999"},{"av":"AV40TFMemoDuration_To","fld":"vTFMEMODURATION_TO","pic":"Z9.999"},{"av":"AV41TFMemoRemoveDate","fld":"vTFMEMOREMOVEDATE"},{"av":"AV42TFMemoRemoveDate_To","fld":"vTFMEMOREMOVEDATE_TO"},{"av":"AV60TFMemoCreatedAt","fld":"vTFMEMOCREATEDAT","pic":"99/99/99 99:99"},{"av":"AV61TFMemoCreatedAt_To","fld":"vTFMEMOCREATEDAT_TO","pic":"99/99/99 99:99"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV54IsAuthorized_MemoTitle","fld":"vISAUTHORIZED_MEMOTITLE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Ddo_gridcolumnsselector_Columnsselectorvalues","ctrl":"DDO_GRIDCOLUMNSSELECTOR","prop":"ColumnsSelectorValues"}]""");
+         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED",""","oparms":[{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"edtMemoTitle_Visible","ctrl":"MEMOTITLE","prop":"Visible"},{"av":"edtMemoStartDateTime_Visible","ctrl":"MEMOSTARTDATETIME","prop":"Visible"},{"av":"edtMemoEndDateTime_Visible","ctrl":"MEMOENDDATETIME","prop":"Visible"},{"av":"edtMemoDuration_Visible","ctrl":"MEMODURATION","prop":"Visible"},{"av":"edtMemoRemoveDate_Visible","ctrl":"MEMOREMOVEDATE","prop":"Visible"},{"av":"edtMemoCreatedAt_Visible","ctrl":"MEMOCREATEDAT","prop":"Visible"},{"av":"AV50GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV51GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV52GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"ctrl":"BTNSUBSCRIPTIONS","prop":"Visible"},{"av":"AV22ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV11GridState","fld":"vGRIDSTATE"}]}""");
+         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED","""{"handler":"E11AP2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV65Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFMemoTitle","fld":"vTFMEMOTITLE"},{"av":"AV28TFMemoTitle_Sel","fld":"vTFMEMOTITLE_SEL"},{"av":"AV29TFMemoStartDateTime","fld":"vTFMEMOSTARTDATETIME","pic":"99/99/99 99:99"},{"av":"AV30TFMemoStartDateTime_To","fld":"vTFMEMOSTARTDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV34TFMemoEndDateTime","fld":"vTFMEMOENDDATETIME","pic":"99/99/99 99:99"},{"av":"AV35TFMemoEndDateTime_To","fld":"vTFMEMOENDDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV39TFMemoDuration","fld":"vTFMEMODURATION","pic":"Z9.999"},{"av":"AV40TFMemoDuration_To","fld":"vTFMEMODURATION_TO","pic":"Z9.999"},{"av":"AV41TFMemoRemoveDate","fld":"vTFMEMOREMOVEDATE"},{"av":"AV42TFMemoRemoveDate_To","fld":"vTFMEMOREMOVEDATE_TO"},{"av":"AV60TFMemoCreatedAt","fld":"vTFMEMOCREATEDAT","pic":"99/99/99 99:99"},{"av":"AV61TFMemoCreatedAt_To","fld":"vTFMEMOCREATEDAT_TO","pic":"99/99/99 99:99"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV54IsAuthorized_MemoTitle","fld":"vISAUTHORIZED_MEMOTITLE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Ddo_managefilters_Activeeventkey","ctrl":"DDO_MANAGEFILTERS","prop":"ActiveEventKey"},{"av":"AV11GridState","fld":"vGRIDSTATE"},{"av":"AV31DDO_MemoStartDateTimeAuxDate","fld":"vDDO_MEMOSTARTDATETIMEAUXDATE"},{"av":"AV36DDO_MemoEndDateTimeAuxDate","fld":"vDDO_MEMOENDDATETIMEAUXDATE"},{"av":"AV62DDO_MemoCreatedAtAuxDate","fld":"vDDO_MEMOCREATEDATAUXDATE"},{"av":"AV32DDO_MemoStartDateTimeAuxDateTo","fld":"vDDO_MEMOSTARTDATETIMEAUXDATETO"},{"av":"AV37DDO_MemoEndDateTimeAuxDateTo","fld":"vDDO_MEMOENDDATETIMEAUXDATETO"},{"av":"AV63DDO_MemoCreatedAtAuxDateTo","fld":"vDDO_MEMOCREATEDATAUXDATETO"}]""");
+         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",""","oparms":[{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV11GridState","fld":"vGRIDSTATE"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV27TFMemoTitle","fld":"vTFMEMOTITLE"},{"av":"AV28TFMemoTitle_Sel","fld":"vTFMEMOTITLE_SEL"},{"av":"AV29TFMemoStartDateTime","fld":"vTFMEMOSTARTDATETIME","pic":"99/99/99 99:99"},{"av":"AV30TFMemoStartDateTime_To","fld":"vTFMEMOSTARTDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV34TFMemoEndDateTime","fld":"vTFMEMOENDDATETIME","pic":"99/99/99 99:99"},{"av":"AV35TFMemoEndDateTime_To","fld":"vTFMEMOENDDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV39TFMemoDuration","fld":"vTFMEMODURATION","pic":"Z9.999"},{"av":"AV40TFMemoDuration_To","fld":"vTFMEMODURATION_TO","pic":"Z9.999"},{"av":"AV41TFMemoRemoveDate","fld":"vTFMEMOREMOVEDATE"},{"av":"AV42TFMemoRemoveDate_To","fld":"vTFMEMOREMOVEDATE_TO"},{"av":"AV60TFMemoCreatedAt","fld":"vTFMEMOCREATEDAT","pic":"99/99/99 99:99"},{"av":"AV61TFMemoCreatedAt_To","fld":"vTFMEMOCREATEDAT_TO","pic":"99/99/99 99:99"},{"av":"Ddo_grid_Selectedvalue_set","ctrl":"DDO_GRID","prop":"SelectedValue_set"},{"av":"Ddo_grid_Filteredtext_set","ctrl":"DDO_GRID","prop":"FilteredText_set"},{"av":"Ddo_grid_Filteredtextto_set","ctrl":"DDO_GRID","prop":"FilteredTextTo_set"},{"av":"Ddo_grid_Sortedstatus","ctrl":"DDO_GRID","prop":"SortedStatus"},{"av":"AV62DDO_MemoCreatedAtAuxDate","fld":"vDDO_MEMOCREATEDATAUXDATE"},{"av":"AV63DDO_MemoCreatedAtAuxDateTo","fld":"vDDO_MEMOCREATEDATAUXDATETO"},{"av":"AV36DDO_MemoEndDateTimeAuxDate","fld":"vDDO_MEMOENDDATETIMEAUXDATE"},{"av":"AV37DDO_MemoEndDateTimeAuxDateTo","fld":"vDDO_MEMOENDDATETIMEAUXDATETO"},{"av":"AV31DDO_MemoStartDateTimeAuxDate","fld":"vDDO_MEMOSTARTDATETIMEAUXDATE"},{"av":"AV32DDO_MemoStartDateTimeAuxDateTo","fld":"vDDO_MEMOSTARTDATETIMEAUXDATETO"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtMemoTitle_Visible","ctrl":"MEMOTITLE","prop":"Visible"},{"av":"edtMemoStartDateTime_Visible","ctrl":"MEMOSTARTDATETIME","prop":"Visible"},{"av":"edtMemoEndDateTime_Visible","ctrl":"MEMOENDDATETIME","prop":"Visible"},{"av":"edtMemoDuration_Visible","ctrl":"MEMODURATION","prop":"Visible"},{"av":"edtMemoRemoveDate_Visible","ctrl":"MEMOREMOVEDATE","prop":"Visible"},{"av":"edtMemoCreatedAt_Visible","ctrl":"MEMOCREATEDAT","prop":"Visible"},{"av":"AV50GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV51GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV52GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"ctrl":"BTNSUBSCRIPTIONS","prop":"Visible"},{"av":"AV22ManageFiltersData","fld":"vMANAGEFILTERSDATA"}]}""");
+         setEventMetadata("VACTIONGROUP.CLICK","""{"handler":"E21AP2","iparms":[{"av":"cmbavActiongroup"},{"av":"AV55ActionGroup","fld":"vACTIONGROUP","pic":"ZZZ9"},{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV65Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFMemoTitle","fld":"vTFMEMOTITLE"},{"av":"AV28TFMemoTitle_Sel","fld":"vTFMEMOTITLE_SEL"},{"av":"AV29TFMemoStartDateTime","fld":"vTFMEMOSTARTDATETIME","pic":"99/99/99 99:99"},{"av":"AV30TFMemoStartDateTime_To","fld":"vTFMEMOSTARTDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV34TFMemoEndDateTime","fld":"vTFMEMOENDDATETIME","pic":"99/99/99 99:99"},{"av":"AV35TFMemoEndDateTime_To","fld":"vTFMEMOENDDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV39TFMemoDuration","fld":"vTFMEMODURATION","pic":"Z9.999"},{"av":"AV40TFMemoDuration_To","fld":"vTFMEMODURATION_TO","pic":"Z9.999"},{"av":"AV41TFMemoRemoveDate","fld":"vTFMEMOREMOVEDATE"},{"av":"AV42TFMemoRemoveDate_To","fld":"vTFMEMOREMOVEDATE_TO"},{"av":"AV60TFMemoCreatedAt","fld":"vTFMEMOCREATEDAT","pic":"99/99/99 99:99"},{"av":"AV61TFMemoCreatedAt_To","fld":"vTFMEMOCREATEDAT_TO","pic":"99/99/99 99:99"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV54IsAuthorized_MemoTitle","fld":"vISAUTHORIZED_MEMOTITLE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"A549MemoId","fld":"MEMOID","hsh":true}]""");
+         setEventMetadata("VACTIONGROUP.CLICK",""","oparms":[{"av":"cmbavActiongroup"},{"av":"AV55ActionGroup","fld":"vACTIONGROUP","pic":"ZZZ9"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtMemoTitle_Visible","ctrl":"MEMOTITLE","prop":"Visible"},{"av":"edtMemoStartDateTime_Visible","ctrl":"MEMOSTARTDATETIME","prop":"Visible"},{"av":"edtMemoEndDateTime_Visible","ctrl":"MEMOENDDATETIME","prop":"Visible"},{"av":"edtMemoDuration_Visible","ctrl":"MEMODURATION","prop":"Visible"},{"av":"edtMemoRemoveDate_Visible","ctrl":"MEMOREMOVEDATE","prop":"Visible"},{"av":"edtMemoCreatedAt_Visible","ctrl":"MEMOCREATEDAT","prop":"Visible"},{"av":"AV50GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV51GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV52GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"ctrl":"BTNSUBSCRIPTIONS","prop":"Visible"},{"av":"AV22ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV11GridState","fld":"vGRIDSTATE"}]}""");
+         setEventMetadata("'DOINSERT'","""{"handler":"E17AP2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV65Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFMemoTitle","fld":"vTFMEMOTITLE"},{"av":"AV28TFMemoTitle_Sel","fld":"vTFMEMOTITLE_SEL"},{"av":"AV29TFMemoStartDateTime","fld":"vTFMEMOSTARTDATETIME","pic":"99/99/99 99:99"},{"av":"AV30TFMemoStartDateTime_To","fld":"vTFMEMOSTARTDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV34TFMemoEndDateTime","fld":"vTFMEMOENDDATETIME","pic":"99/99/99 99:99"},{"av":"AV35TFMemoEndDateTime_To","fld":"vTFMEMOENDDATETIME_TO","pic":"99/99/99 99:99"},{"av":"AV39TFMemoDuration","fld":"vTFMEMODURATION","pic":"Z9.999"},{"av":"AV40TFMemoDuration_To","fld":"vTFMEMODURATION_TO","pic":"Z9.999"},{"av":"AV41TFMemoRemoveDate","fld":"vTFMEMOREMOVEDATE"},{"av":"AV42TFMemoRemoveDate_To","fld":"vTFMEMOREMOVEDATE_TO"},{"av":"AV60TFMemoCreatedAt","fld":"vTFMEMOCREATEDAT","pic":"99/99/99 99:99"},{"av":"AV61TFMemoCreatedAt_To","fld":"vTFMEMOCREATEDAT_TO","pic":"99/99/99 99:99"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV54IsAuthorized_MemoTitle","fld":"vISAUTHORIZED_MEMOTITLE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"A549MemoId","fld":"MEMOID","hsh":true}]""");
+         setEventMetadata("'DOINSERT'",""","oparms":[{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtMemoTitle_Visible","ctrl":"MEMOTITLE","prop":"Visible"},{"av":"edtMemoStartDateTime_Visible","ctrl":"MEMOSTARTDATETIME","prop":"Visible"},{"av":"edtMemoEndDateTime_Visible","ctrl":"MEMOENDDATETIME","prop":"Visible"},{"av":"edtMemoDuration_Visible","ctrl":"MEMODURATION","prop":"Visible"},{"av":"edtMemoRemoveDate_Visible","ctrl":"MEMOREMOVEDATE","prop":"Visible"},{"av":"edtMemoCreatedAt_Visible","ctrl":"MEMOCREATEDAT","prop":"Visible"},{"av":"AV50GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV51GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV52GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV56IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV57IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV58IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV59IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"ctrl":"BTNSUBSCRIPTIONS","prop":"Visible"},{"av":"AV22ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV11GridState","fld":"vGRIDSTATE"}]}""");
          setEventMetadata("DDC_SUBSCRIPTIONS.ONLOADCOMPONENT","""{"handler":"E14AP2","iparms":[]""");
          setEventMetadata("DDC_SUBSCRIPTIONS.ONLOADCOMPONENT",""","oparms":[{"ctrl":"WWPAUX_WC"}]}""");
          setEventMetadata("VALID_RESIDENTID","""{"handler":"Valid_Residentid","iparms":[]}""");
@@ -3464,16 +3587,16 @@ namespace GeneXus.Programs {
          Gridpaginationbar_Selectedpage = "";
          Ddo_grid_Activeeventkey = "";
          Ddo_grid_Selectedvalue_get = "";
-         Ddo_grid_Selectedcolumn = "";
-         Ddo_grid_Filteredtext_get = "";
          Ddo_grid_Filteredtextto_get = "";
+         Ddo_grid_Filteredtext_get = "";
+         Ddo_grid_Selectedcolumn = "";
          Ddo_gridcolumnsselector_Columnsselectorvalues = "";
          Ddo_managefilters_Activeeventkey = "";
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
          AV16FilterFullText = "";
          AV19ColumnsSelector = new WorkWithPlus.workwithplus_web.SdtWWPColumnsSelector(context);
-         AV60Pgmname = "";
+         AV65Pgmname = "";
          AV27TFMemoTitle = "";
          AV28TFMemoTitle_Sel = "";
          AV29TFMemoStartDateTime = (DateTime)(DateTime.MinValue);
@@ -3482,6 +3605,8 @@ namespace GeneXus.Programs {
          AV35TFMemoEndDateTime_To = (DateTime)(DateTime.MinValue);
          AV41TFMemoRemoveDate = DateTime.MinValue;
          AV42TFMemoRemoveDate_To = DateTime.MinValue;
+         AV60TFMemoCreatedAt = (DateTime)(DateTime.MinValue);
+         AV61TFMemoCreatedAt_To = (DateTime)(DateTime.MinValue);
          sDynURL = "";
          FormProcess = "";
          bodyStyle = "";
@@ -3495,6 +3620,8 @@ namespace GeneXus.Programs {
          AV37DDO_MemoEndDateTimeAuxDateTo = DateTime.MinValue;
          AV43DDO_MemoRemoveDateAuxDate = DateTime.MinValue;
          AV44DDO_MemoRemoveDateAuxDateTo = DateTime.MinValue;
+         AV62DDO_MemoCreatedAtAuxDate = DateTime.MinValue;
+         AV63DDO_MemoCreatedAtAuxDateTo = DateTime.MinValue;
          AV11GridState = new WorkWithPlus.workwithplus_web.SdtWWPGridState(context);
          Ddo_grid_Caption = "";
          Ddo_grid_Filteredtext_set = "";
@@ -3530,6 +3657,8 @@ namespace GeneXus.Programs {
          ucTfmemoenddatetime_rangepicker = new GXUserControl();
          AV45DDO_MemoRemoveDateAuxDateText = "";
          ucTfmemoremovedate_rangepicker = new GXUserControl();
+         AV64DDO_MemoCreatedAtAuxDateText = "";
+         ucTfmemocreatedat_rangepicker = new GXUserControl();
          sEvt = "";
          EvtGridId = "";
          EvtRowId = "";
@@ -3547,21 +3676,26 @@ namespace GeneXus.Programs {
          A64ResidentGivenName = "";
          A65ResidentLastName = "";
          A71ResidentGUID = "";
-         lV61Trn_memowwds_1_filterfulltext = "";
-         lV62Trn_memowwds_2_tfmemotitle = "";
-         AV61Trn_memowwds_1_filterfulltext = "";
-         AV63Trn_memowwds_3_tfmemotitle_sel = "";
-         AV62Trn_memowwds_2_tfmemotitle = "";
-         AV64Trn_memowwds_4_tfmemostartdatetime = (DateTime)(DateTime.MinValue);
-         AV65Trn_memowwds_5_tfmemostartdatetime_to = (DateTime)(DateTime.MinValue);
-         AV66Trn_memowwds_6_tfmemoenddatetime = (DateTime)(DateTime.MinValue);
-         AV67Trn_memowwds_7_tfmemoenddatetime_to = (DateTime)(DateTime.MinValue);
-         AV70Trn_memowwds_10_tfmemoremovedate = DateTime.MinValue;
-         AV71Trn_memowwds_11_tfmemoremovedate_to = DateTime.MinValue;
+         A647MemoCreatedAt = (DateTime)(DateTime.MinValue);
+         lV66Trn_memowwds_1_filterfulltext = "";
+         lV67Trn_memowwds_2_tfmemotitle = "";
+         AV66Trn_memowwds_1_filterfulltext = "";
+         AV68Trn_memowwds_3_tfmemotitle_sel = "";
+         AV67Trn_memowwds_2_tfmemotitle = "";
+         AV69Trn_memowwds_4_tfmemostartdatetime = (DateTime)(DateTime.MinValue);
+         AV70Trn_memowwds_5_tfmemostartdatetime_to = (DateTime)(DateTime.MinValue);
+         AV71Trn_memowwds_6_tfmemoenddatetime = (DateTime)(DateTime.MinValue);
+         AV72Trn_memowwds_7_tfmemoenddatetime_to = (DateTime)(DateTime.MinValue);
+         AV75Trn_memowwds_10_tfmemoremovedate = DateTime.MinValue;
+         AV76Trn_memowwds_11_tfmemoremovedate_to = DateTime.MinValue;
+         AV77Trn_memowwds_12_tfmemocreatedat = (DateTime)(DateTime.MinValue);
+         AV78Trn_memowwds_13_tfmemocreatedat_to = (DateTime)(DateTime.MinValue);
          H00AP2_A528SG_LocationId = new Guid[] {Guid.Empty} ;
          H00AP2_A29LocationId = new Guid[] {Guid.Empty} ;
          H00AP2_A529SG_OrganisationId = new Guid[] {Guid.Empty} ;
          H00AP2_A11OrganisationId = new Guid[] {Guid.Empty} ;
+         H00AP2_A647MemoCreatedAt = new DateTime[] {DateTime.MinValue} ;
+         H00AP2_n647MemoCreatedAt = new bool[] {false} ;
          H00AP2_A71ResidentGUID = new string[] {""} ;
          H00AP2_A65ResidentLastName = new string[] {""} ;
          H00AP2_A64ResidentGivenName = new string[] {""} ;
@@ -3612,9 +3746,9 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.trn_memoww__default(),
             new Object[][] {
                 new Object[] {
-               H00AP2_A528SG_LocationId, H00AP2_A29LocationId, H00AP2_A529SG_OrganisationId, H00AP2_A11OrganisationId, H00AP2_A71ResidentGUID, H00AP2_A65ResidentLastName, H00AP2_A64ResidentGivenName, H00AP2_A72ResidentSalutation, H00AP2_A62ResidentId, H00AP2_A564MemoRemoveDate,
-               H00AP2_n564MemoRemoveDate, H00AP2_A563MemoDuration, H00AP2_n563MemoDuration, H00AP2_A562MemoEndDateTime, H00AP2_n562MemoEndDateTime, H00AP2_A561MemoStartDateTime, H00AP2_n561MemoStartDateTime, H00AP2_A553MemoDocument, H00AP2_n553MemoDocument, H00AP2_A552MemoImage,
-               H00AP2_n552MemoImage, H00AP2_A551MemoDescription, H00AP2_A550MemoTitle, H00AP2_A549MemoId
+               H00AP2_A528SG_LocationId, H00AP2_A29LocationId, H00AP2_A529SG_OrganisationId, H00AP2_A11OrganisationId, H00AP2_A647MemoCreatedAt, H00AP2_n647MemoCreatedAt, H00AP2_A71ResidentGUID, H00AP2_A65ResidentLastName, H00AP2_A64ResidentGivenName, H00AP2_A72ResidentSalutation,
+               H00AP2_A62ResidentId, H00AP2_A564MemoRemoveDate, H00AP2_n564MemoRemoveDate, H00AP2_A563MemoDuration, H00AP2_n563MemoDuration, H00AP2_A562MemoEndDateTime, H00AP2_n562MemoEndDateTime, H00AP2_A561MemoStartDateTime, H00AP2_n561MemoStartDateTime, H00AP2_A553MemoDocument,
+               H00AP2_n553MemoDocument, H00AP2_A552MemoImage, H00AP2_n552MemoImage, H00AP2_A551MemoDescription, H00AP2_A550MemoTitle, H00AP2_A549MemoId
                }
                , new Object[] {
                H00AP3_AGRID_nRecordCount
@@ -3622,9 +3756,9 @@ namespace GeneXus.Programs {
             }
          );
          WebComp_Wwpaux_wc = new GeneXus.Http.GXNullWebComponent();
-         AV60Pgmname = "Trn_MemoWW";
+         AV65Pgmname = "Trn_MemoWW";
          /* GeneXus formulas. */
-         AV60Pgmname = "Trn_MemoWW";
+         AV65Pgmname = "Trn_MemoWW";
       }
 
       private short GRID_nEOF ;
@@ -3671,13 +3805,15 @@ namespace GeneXus.Programs {
       private int edtResidentGivenName_Enabled ;
       private int edtResidentLastName_Enabled ;
       private int edtResidentGUID_Enabled ;
+      private int edtMemoCreatedAt_Enabled ;
       private int edtMemoTitle_Visible ;
       private int edtMemoStartDateTime_Visible ;
       private int edtMemoEndDateTime_Visible ;
       private int edtMemoDuration_Visible ;
       private int edtMemoRemoveDate_Visible ;
+      private int edtMemoCreatedAt_Visible ;
       private int AV49PageToGo ;
-      private int AV72GXV1 ;
+      private int AV79GXV1 ;
       private int idxLst ;
       private int subGrid_Backcolor ;
       private int subGrid_Allbackcolor ;
@@ -3693,20 +3829,20 @@ namespace GeneXus.Programs {
       private decimal AV39TFMemoDuration ;
       private decimal AV40TFMemoDuration_To ;
       private decimal A563MemoDuration ;
-      private decimal AV68Trn_memowwds_8_tfmemoduration ;
-      private decimal AV69Trn_memowwds_9_tfmemoduration_to ;
+      private decimal AV73Trn_memowwds_8_tfmemoduration ;
+      private decimal AV74Trn_memowwds_9_tfmemoduration_to ;
       private string Gridpaginationbar_Selectedpage ;
       private string Ddo_grid_Activeeventkey ;
       private string Ddo_grid_Selectedvalue_get ;
-      private string Ddo_grid_Selectedcolumn ;
-      private string Ddo_grid_Filteredtext_get ;
       private string Ddo_grid_Filteredtextto_get ;
+      private string Ddo_grid_Filteredtext_get ;
+      private string Ddo_grid_Selectedcolumn ;
       private string Ddo_gridcolumnsselector_Columnsselectorvalues ;
       private string Ddo_managefilters_Activeeventkey ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string sGXsfl_39_idx="0001" ;
-      private string AV60Pgmname ;
+      private string AV65Pgmname ;
       private string sDynURL ;
       private string FormProcess ;
       private string bodyStyle ;
@@ -3803,6 +3939,10 @@ namespace GeneXus.Programs {
       private string edtavDdo_memoremovedateauxdatetext_Internalname ;
       private string edtavDdo_memoremovedateauxdatetext_Jsonclick ;
       private string Tfmemoremovedate_rangepicker_Internalname ;
+      private string divDdo_memocreatedatauxdates_Internalname ;
+      private string edtavDdo_memocreatedatauxdatetext_Internalname ;
+      private string edtavDdo_memocreatedatauxdatetext_Jsonclick ;
+      private string Tfmemocreatedat_rangepicker_Internalname ;
       private string sEvt ;
       private string EvtGridId ;
       private string EvtRowId ;
@@ -3822,6 +3962,7 @@ namespace GeneXus.Programs {
       private string edtResidentGivenName_Internalname ;
       private string edtResidentLastName_Internalname ;
       private string edtResidentGUID_Internalname ;
+      private string edtMemoCreatedAt_Internalname ;
       private string cmbavActiongroup_Internalname ;
       private string cmbavActiongroup_Class ;
       private string edtMemoTitle_Link ;
@@ -3846,18 +3987,24 @@ namespace GeneXus.Programs {
       private string edtResidentGivenName_Jsonclick ;
       private string edtResidentLastName_Jsonclick ;
       private string edtResidentGUID_Jsonclick ;
+      private string edtMemoCreatedAt_Jsonclick ;
       private string cmbavActiongroup_Jsonclick ;
       private string subGrid_Header ;
       private DateTime AV29TFMemoStartDateTime ;
       private DateTime AV30TFMemoStartDateTime_To ;
       private DateTime AV34TFMemoEndDateTime ;
       private DateTime AV35TFMemoEndDateTime_To ;
+      private DateTime AV60TFMemoCreatedAt ;
+      private DateTime AV61TFMemoCreatedAt_To ;
       private DateTime A561MemoStartDateTime ;
       private DateTime A562MemoEndDateTime ;
-      private DateTime AV64Trn_memowwds_4_tfmemostartdatetime ;
-      private DateTime AV65Trn_memowwds_5_tfmemostartdatetime_to ;
-      private DateTime AV66Trn_memowwds_6_tfmemoenddatetime ;
-      private DateTime AV67Trn_memowwds_7_tfmemoenddatetime_to ;
+      private DateTime A647MemoCreatedAt ;
+      private DateTime AV69Trn_memowwds_4_tfmemostartdatetime ;
+      private DateTime AV70Trn_memowwds_5_tfmemostartdatetime_to ;
+      private DateTime AV71Trn_memowwds_6_tfmemoenddatetime ;
+      private DateTime AV72Trn_memowwds_7_tfmemoenddatetime_to ;
+      private DateTime AV77Trn_memowwds_12_tfmemocreatedat ;
+      private DateTime AV78Trn_memowwds_13_tfmemocreatedat_to ;
       private DateTime AV41TFMemoRemoveDate ;
       private DateTime AV42TFMemoRemoveDate_To ;
       private DateTime AV31DDO_MemoStartDateTimeAuxDate ;
@@ -3866,9 +4013,11 @@ namespace GeneXus.Programs {
       private DateTime AV37DDO_MemoEndDateTimeAuxDateTo ;
       private DateTime AV43DDO_MemoRemoveDateAuxDate ;
       private DateTime AV44DDO_MemoRemoveDateAuxDateTo ;
+      private DateTime AV62DDO_MemoCreatedAtAuxDate ;
+      private DateTime AV63DDO_MemoCreatedAtAuxDateTo ;
       private DateTime A564MemoRemoveDate ;
-      private DateTime AV70Trn_memowwds_10_tfmemoremovedate ;
-      private DateTime AV71Trn_memowwds_11_tfmemoremovedate_to ;
+      private DateTime AV75Trn_memowwds_10_tfmemoremovedate ;
+      private DateTime AV76Trn_memowwds_11_tfmemoremovedate_to ;
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
       private bool AV14OrderedDsc ;
@@ -3894,6 +4043,7 @@ namespace GeneXus.Programs {
       private bool n562MemoEndDateTime ;
       private bool n563MemoDuration ;
       private bool n564MemoRemoveDate ;
+      private bool n647MemoCreatedAt ;
       private bool gxdyncontrolsrefreshing ;
       private bool returnInSub ;
       private bool gx_refresh_fired ;
@@ -3910,17 +4060,18 @@ namespace GeneXus.Programs {
       private string AV33DDO_MemoStartDateTimeAuxDateText ;
       private string AV38DDO_MemoEndDateTimeAuxDateText ;
       private string AV45DDO_MemoRemoveDateAuxDateText ;
+      private string AV64DDO_MemoCreatedAtAuxDateText ;
       private string A550MemoTitle ;
       private string A551MemoDescription ;
       private string A553MemoDocument ;
       private string A64ResidentGivenName ;
       private string A65ResidentLastName ;
       private string A71ResidentGUID ;
-      private string lV61Trn_memowwds_1_filterfulltext ;
-      private string lV62Trn_memowwds_2_tfmemotitle ;
-      private string AV61Trn_memowwds_1_filterfulltext ;
-      private string AV63Trn_memowwds_3_tfmemotitle_sel ;
-      private string AV62Trn_memowwds_2_tfmemotitle ;
+      private string lV66Trn_memowwds_1_filterfulltext ;
+      private string lV67Trn_memowwds_2_tfmemotitle ;
+      private string AV66Trn_memowwds_1_filterfulltext ;
+      private string AV68Trn_memowwds_3_tfmemotitle_sel ;
+      private string AV67Trn_memowwds_2_tfmemotitle ;
       private Guid A549MemoId ;
       private Guid A62ResidentId ;
       private Guid A528SG_LocationId ;
@@ -3941,6 +4092,7 @@ namespace GeneXus.Programs {
       private GXUserControl ucTfmemostartdatetime_rangepicker ;
       private GXUserControl ucTfmemoenddatetime_rangepicker ;
       private GXUserControl ucTfmemoremovedate_rangepicker ;
+      private GXUserControl ucTfmemocreatedat_rangepicker ;
       private GxHttpRequest AV8HTTPRequest ;
       private GXWebForm Form ;
       private IGxDataStore dsDataStore1 ;
@@ -3957,6 +4109,8 @@ namespace GeneXus.Programs {
       private Guid[] H00AP2_A29LocationId ;
       private Guid[] H00AP2_A529SG_OrganisationId ;
       private Guid[] H00AP2_A11OrganisationId ;
+      private DateTime[] H00AP2_A647MemoCreatedAt ;
+      private bool[] H00AP2_n647MemoCreatedAt ;
       private string[] H00AP2_A71ResidentGUID ;
       private string[] H00AP2_A65ResidentLastName ;
       private string[] H00AP2_A64ResidentGivenName ;
@@ -3993,165 +4147,192 @@ namespace GeneXus.Programs {
    public class trn_memoww__default : DataStoreHelperBase, IDataStoreHelper
    {
       protected Object[] conditional_H00AP2( IGxContext context ,
-                                             string AV61Trn_memowwds_1_filterfulltext ,
-                                             string AV63Trn_memowwds_3_tfmemotitle_sel ,
-                                             string AV62Trn_memowwds_2_tfmemotitle ,
-                                             DateTime AV64Trn_memowwds_4_tfmemostartdatetime ,
-                                             DateTime AV65Trn_memowwds_5_tfmemostartdatetime_to ,
-                                             DateTime AV66Trn_memowwds_6_tfmemoenddatetime ,
-                                             DateTime AV67Trn_memowwds_7_tfmemoenddatetime_to ,
-                                             decimal AV68Trn_memowwds_8_tfmemoduration ,
-                                             decimal AV69Trn_memowwds_9_tfmemoduration_to ,
-                                             DateTime AV70Trn_memowwds_10_tfmemoremovedate ,
-                                             DateTime AV71Trn_memowwds_11_tfmemoremovedate_to ,
+                                             string AV66Trn_memowwds_1_filterfulltext ,
+                                             string AV68Trn_memowwds_3_tfmemotitle_sel ,
+                                             string AV67Trn_memowwds_2_tfmemotitle ,
+                                             DateTime AV69Trn_memowwds_4_tfmemostartdatetime ,
+                                             DateTime AV70Trn_memowwds_5_tfmemostartdatetime_to ,
+                                             DateTime AV71Trn_memowwds_6_tfmemoenddatetime ,
+                                             DateTime AV72Trn_memowwds_7_tfmemoenddatetime_to ,
+                                             decimal AV73Trn_memowwds_8_tfmemoduration ,
+                                             decimal AV74Trn_memowwds_9_tfmemoduration_to ,
+                                             DateTime AV75Trn_memowwds_10_tfmemoremovedate ,
+                                             DateTime AV76Trn_memowwds_11_tfmemoremovedate_to ,
+                                             DateTime AV77Trn_memowwds_12_tfmemocreatedat ,
+                                             DateTime AV78Trn_memowwds_13_tfmemocreatedat_to ,
                                              string A550MemoTitle ,
                                              decimal A563MemoDuration ,
                                              DateTime A561MemoStartDateTime ,
                                              DateTime A562MemoEndDateTime ,
                                              DateTime A564MemoRemoveDate ,
+                                             DateTime A647MemoCreatedAt ,
                                              short AV13OrderedBy ,
                                              bool AV14OrderedDsc )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
-         short[] GXv_int5 = new short[15];
+         short[] GXv_int5 = new short[17];
          Object[] GXv_Object6 = new Object[2];
          string sSelectString;
          string sFromString;
          string sOrderString;
-         sSelectString = " T1.SG_LocationId, T2.LocationId, T1.SG_OrganisationId, T2.OrganisationId, T2.ResidentGUID, T2.ResidentLastName, T2.ResidentGivenName, T2.ResidentSalutation, T1.ResidentId, T1.MemoRemoveDate, T1.MemoDuration, T1.MemoEndDateTime, T1.MemoStartDateTime, T1.MemoDocument, T1.MemoImage, T1.MemoDescription, T1.MemoTitle, T1.MemoId";
+         sSelectString = " T1.SG_LocationId, T2.LocationId, T1.SG_OrganisationId, T2.OrganisationId, T1.MemoCreatedAt, T2.ResidentGUID, T2.ResidentLastName, T2.ResidentGivenName, T2.ResidentSalutation, T1.ResidentId, T1.MemoRemoveDate, T1.MemoDuration, T1.MemoEndDateTime, T1.MemoStartDateTime, T1.MemoDocument, T1.MemoImage, T1.MemoDescription, T1.MemoTitle, T1.MemoId";
          sFromString = " FROM (Trn_Memo T1 INNER JOIN Trn_Resident T2 ON T2.ResidentId = T1.ResidentId AND T2.LocationId = T1.SG_LocationId AND T2.OrganisationId = T1.SG_OrganisationId)";
          sOrderString = "";
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV61Trn_memowwds_1_filterfulltext)) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV66Trn_memowwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T1.MemoTitle) like '%' || LOWER(:lV61Trn_memowwds_1_filterfulltext)) or ( SUBSTR(TO_CHAR(T1.MemoDuration,'90.999'), 2) like '%' || :lV61Trn_memowwds_1_filterfulltext))");
+            AddWhere(sWhereString, "(( LOWER(T1.MemoTitle) like '%' || LOWER(:lV66Trn_memowwds_1_filterfulltext)) or ( SUBSTR(TO_CHAR(T1.MemoDuration,'90.999'), 2) like '%' || :lV66Trn_memowwds_1_filterfulltext))");
          }
          else
          {
             GXv_int5[0] = 1;
             GXv_int5[1] = 1;
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV63Trn_memowwds_3_tfmemotitle_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV62Trn_memowwds_2_tfmemotitle)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV68Trn_memowwds_3_tfmemotitle_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV67Trn_memowwds_2_tfmemotitle)) ) )
          {
-            AddWhere(sWhereString, "(T1.MemoTitle like :lV62Trn_memowwds_2_tfmemotitle)");
+            AddWhere(sWhereString, "(T1.MemoTitle like :lV67Trn_memowwds_2_tfmemotitle)");
          }
          else
          {
             GXv_int5[2] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV63Trn_memowwds_3_tfmemotitle_sel)) && ! ( StringUtil.StrCmp(AV63Trn_memowwds_3_tfmemotitle_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV68Trn_memowwds_3_tfmemotitle_sel)) && ! ( StringUtil.StrCmp(AV68Trn_memowwds_3_tfmemotitle_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T1.MemoTitle = ( :AV63Trn_memowwds_3_tfmemotitle_sel))");
+            AddWhere(sWhereString, "(T1.MemoTitle = ( :AV68Trn_memowwds_3_tfmemotitle_sel))");
          }
          else
          {
             GXv_int5[3] = 1;
          }
-         if ( StringUtil.StrCmp(AV63Trn_memowwds_3_tfmemotitle_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV68Trn_memowwds_3_tfmemotitle_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T1.MemoTitle))=0))");
          }
-         if ( ! (DateTime.MinValue==AV64Trn_memowwds_4_tfmemostartdatetime) )
+         if ( ! (DateTime.MinValue==AV69Trn_memowwds_4_tfmemostartdatetime) )
          {
-            AddWhere(sWhereString, "(T1.MemoStartDateTime >= :AV64Trn_memowwds_4_tfmemostartdatetime)");
+            AddWhere(sWhereString, "(T1.MemoStartDateTime >= :AV69Trn_memowwds_4_tfmemostartdatetime)");
          }
          else
          {
             GXv_int5[4] = 1;
          }
-         if ( ! (DateTime.MinValue==AV65Trn_memowwds_5_tfmemostartdatetime_to) )
+         if ( ! (DateTime.MinValue==AV70Trn_memowwds_5_tfmemostartdatetime_to) )
          {
-            AddWhere(sWhereString, "(T1.MemoStartDateTime <= :AV65Trn_memowwds_5_tfmemostartdatetime_to)");
+            AddWhere(sWhereString, "(T1.MemoStartDateTime <= :AV70Trn_memowwds_5_tfmemostartdatetime_to)");
          }
          else
          {
             GXv_int5[5] = 1;
          }
-         if ( ! (DateTime.MinValue==AV66Trn_memowwds_6_tfmemoenddatetime) )
+         if ( ! (DateTime.MinValue==AV71Trn_memowwds_6_tfmemoenddatetime) )
          {
-            AddWhere(sWhereString, "(T1.MemoEndDateTime >= :AV66Trn_memowwds_6_tfmemoenddatetime)");
+            AddWhere(sWhereString, "(T1.MemoEndDateTime >= :AV71Trn_memowwds_6_tfmemoenddatetime)");
          }
          else
          {
             GXv_int5[6] = 1;
          }
-         if ( ! (DateTime.MinValue==AV67Trn_memowwds_7_tfmemoenddatetime_to) )
+         if ( ! (DateTime.MinValue==AV72Trn_memowwds_7_tfmemoenddatetime_to) )
          {
-            AddWhere(sWhereString, "(T1.MemoEndDateTime <= :AV67Trn_memowwds_7_tfmemoenddatetime_to)");
+            AddWhere(sWhereString, "(T1.MemoEndDateTime <= :AV72Trn_memowwds_7_tfmemoenddatetime_to)");
          }
          else
          {
             GXv_int5[7] = 1;
          }
-         if ( ! (Convert.ToDecimal(0)==AV68Trn_memowwds_8_tfmemoduration) )
+         if ( ! (Convert.ToDecimal(0)==AV73Trn_memowwds_8_tfmemoduration) )
          {
-            AddWhere(sWhereString, "(T1.MemoDuration >= :AV68Trn_memowwds_8_tfmemoduration)");
+            AddWhere(sWhereString, "(T1.MemoDuration >= :AV73Trn_memowwds_8_tfmemoduration)");
          }
          else
          {
             GXv_int5[8] = 1;
          }
-         if ( ! (Convert.ToDecimal(0)==AV69Trn_memowwds_9_tfmemoduration_to) )
+         if ( ! (Convert.ToDecimal(0)==AV74Trn_memowwds_9_tfmemoduration_to) )
          {
-            AddWhere(sWhereString, "(T1.MemoDuration <= :AV69Trn_memowwds_9_tfmemoduration_to)");
+            AddWhere(sWhereString, "(T1.MemoDuration <= :AV74Trn_memowwds_9_tfmemoduration_to)");
          }
          else
          {
             GXv_int5[9] = 1;
          }
-         if ( ! (DateTime.MinValue==AV70Trn_memowwds_10_tfmemoremovedate) )
+         if ( ! (DateTime.MinValue==AV75Trn_memowwds_10_tfmemoremovedate) )
          {
-            AddWhere(sWhereString, "(T1.MemoRemoveDate >= :AV70Trn_memowwds_10_tfmemoremovedate)");
+            AddWhere(sWhereString, "(T1.MemoRemoveDate >= :AV75Trn_memowwds_10_tfmemoremovedate)");
          }
          else
          {
             GXv_int5[10] = 1;
          }
-         if ( ! (DateTime.MinValue==AV71Trn_memowwds_11_tfmemoremovedate_to) )
+         if ( ! (DateTime.MinValue==AV76Trn_memowwds_11_tfmemoremovedate_to) )
          {
-            AddWhere(sWhereString, "(T1.MemoRemoveDate <= :AV71Trn_memowwds_11_tfmemoremovedate_to)");
+            AddWhere(sWhereString, "(T1.MemoRemoveDate <= :AV76Trn_memowwds_11_tfmemoremovedate_to)");
          }
          else
          {
             GXv_int5[11] = 1;
          }
+         if ( ! (DateTime.MinValue==AV77Trn_memowwds_12_tfmemocreatedat) )
+         {
+            AddWhere(sWhereString, "(T1.MemoCreatedAt >= :AV77Trn_memowwds_12_tfmemocreatedat)");
+         }
+         else
+         {
+            GXv_int5[12] = 1;
+         }
+         if ( ! (DateTime.MinValue==AV78Trn_memowwds_13_tfmemocreatedat_to) )
+         {
+            AddWhere(sWhereString, "(T1.MemoCreatedAt <= :AV78Trn_memowwds_13_tfmemocreatedat_to)");
+         }
+         else
+         {
+            GXv_int5[13] = 1;
+         }
          if ( ( AV13OrderedBy == 1 ) && ! AV14OrderedDsc )
          {
-            sOrderString += " ORDER BY T1.MemoTitle, T1.MemoId";
+            sOrderString += " ORDER BY T1.MemoCreatedAt, T1.MemoId";
          }
          else if ( ( AV13OrderedBy == 1 ) && ( AV14OrderedDsc ) )
          {
-            sOrderString += " ORDER BY T1.MemoTitle DESC, T1.MemoId";
+            sOrderString += " ORDER BY T1.MemoCreatedAt DESC, T1.MemoId";
          }
          else if ( ( AV13OrderedBy == 2 ) && ! AV14OrderedDsc )
          {
-            sOrderString += " ORDER BY T1.MemoStartDateTime, T1.MemoId";
+            sOrderString += " ORDER BY T1.MemoTitle, T1.MemoId";
          }
          else if ( ( AV13OrderedBy == 2 ) && ( AV14OrderedDsc ) )
          {
-            sOrderString += " ORDER BY T1.MemoStartDateTime DESC, T1.MemoId";
+            sOrderString += " ORDER BY T1.MemoTitle DESC, T1.MemoId";
          }
          else if ( ( AV13OrderedBy == 3 ) && ! AV14OrderedDsc )
          {
-            sOrderString += " ORDER BY T1.MemoEndDateTime, T1.MemoId";
+            sOrderString += " ORDER BY T1.MemoStartDateTime, T1.MemoId";
          }
          else if ( ( AV13OrderedBy == 3 ) && ( AV14OrderedDsc ) )
          {
-            sOrderString += " ORDER BY T1.MemoEndDateTime DESC, T1.MemoId";
+            sOrderString += " ORDER BY T1.MemoStartDateTime DESC, T1.MemoId";
          }
          else if ( ( AV13OrderedBy == 4 ) && ! AV14OrderedDsc )
          {
-            sOrderString += " ORDER BY T1.MemoDuration, T1.MemoId";
+            sOrderString += " ORDER BY T1.MemoEndDateTime, T1.MemoId";
          }
          else if ( ( AV13OrderedBy == 4 ) && ( AV14OrderedDsc ) )
          {
-            sOrderString += " ORDER BY T1.MemoDuration DESC, T1.MemoId";
+            sOrderString += " ORDER BY T1.MemoEndDateTime DESC, T1.MemoId";
          }
          else if ( ( AV13OrderedBy == 5 ) && ! AV14OrderedDsc )
          {
-            sOrderString += " ORDER BY T1.MemoRemoveDate, T1.MemoId";
+            sOrderString += " ORDER BY T1.MemoDuration, T1.MemoId";
          }
          else if ( ( AV13OrderedBy == 5 ) && ( AV14OrderedDsc ) )
+         {
+            sOrderString += " ORDER BY T1.MemoDuration DESC, T1.MemoId";
+         }
+         else if ( ( AV13OrderedBy == 6 ) && ! AV14OrderedDsc )
+         {
+            sOrderString += " ORDER BY T1.MemoRemoveDate, T1.MemoId";
+         }
+         else if ( ( AV13OrderedBy == 6 ) && ( AV14OrderedDsc ) )
          {
             sOrderString += " ORDER BY T1.MemoRemoveDate DESC, T1.MemoId";
          }
@@ -4166,122 +4347,141 @@ namespace GeneXus.Programs {
       }
 
       protected Object[] conditional_H00AP3( IGxContext context ,
-                                             string AV61Trn_memowwds_1_filterfulltext ,
-                                             string AV63Trn_memowwds_3_tfmemotitle_sel ,
-                                             string AV62Trn_memowwds_2_tfmemotitle ,
-                                             DateTime AV64Trn_memowwds_4_tfmemostartdatetime ,
-                                             DateTime AV65Trn_memowwds_5_tfmemostartdatetime_to ,
-                                             DateTime AV66Trn_memowwds_6_tfmemoenddatetime ,
-                                             DateTime AV67Trn_memowwds_7_tfmemoenddatetime_to ,
-                                             decimal AV68Trn_memowwds_8_tfmemoduration ,
-                                             decimal AV69Trn_memowwds_9_tfmemoduration_to ,
-                                             DateTime AV70Trn_memowwds_10_tfmemoremovedate ,
-                                             DateTime AV71Trn_memowwds_11_tfmemoremovedate_to ,
+                                             string AV66Trn_memowwds_1_filterfulltext ,
+                                             string AV68Trn_memowwds_3_tfmemotitle_sel ,
+                                             string AV67Trn_memowwds_2_tfmemotitle ,
+                                             DateTime AV69Trn_memowwds_4_tfmemostartdatetime ,
+                                             DateTime AV70Trn_memowwds_5_tfmemostartdatetime_to ,
+                                             DateTime AV71Trn_memowwds_6_tfmemoenddatetime ,
+                                             DateTime AV72Trn_memowwds_7_tfmemoenddatetime_to ,
+                                             decimal AV73Trn_memowwds_8_tfmemoduration ,
+                                             decimal AV74Trn_memowwds_9_tfmemoduration_to ,
+                                             DateTime AV75Trn_memowwds_10_tfmemoremovedate ,
+                                             DateTime AV76Trn_memowwds_11_tfmemoremovedate_to ,
+                                             DateTime AV77Trn_memowwds_12_tfmemocreatedat ,
+                                             DateTime AV78Trn_memowwds_13_tfmemocreatedat_to ,
                                              string A550MemoTitle ,
                                              decimal A563MemoDuration ,
                                              DateTime A561MemoStartDateTime ,
                                              DateTime A562MemoEndDateTime ,
                                              DateTime A564MemoRemoveDate ,
+                                             DateTime A647MemoCreatedAt ,
                                              short AV13OrderedBy ,
                                              bool AV14OrderedDsc )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
-         short[] GXv_int7 = new short[12];
+         short[] GXv_int7 = new short[14];
          Object[] GXv_Object8 = new Object[2];
          scmdbuf = "SELECT COUNT(*) FROM (Trn_Memo T1 INNER JOIN Trn_Resident T2 ON T2.ResidentId = T1.ResidentId AND T2.LocationId = T1.SG_LocationId AND T2.OrganisationId = T1.SG_OrganisationId)";
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV61Trn_memowwds_1_filterfulltext)) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV66Trn_memowwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T1.MemoTitle) like '%' || LOWER(:lV61Trn_memowwds_1_filterfulltext)) or ( SUBSTR(TO_CHAR(T1.MemoDuration,'90.999'), 2) like '%' || :lV61Trn_memowwds_1_filterfulltext))");
+            AddWhere(sWhereString, "(( LOWER(T1.MemoTitle) like '%' || LOWER(:lV66Trn_memowwds_1_filterfulltext)) or ( SUBSTR(TO_CHAR(T1.MemoDuration,'90.999'), 2) like '%' || :lV66Trn_memowwds_1_filterfulltext))");
          }
          else
          {
             GXv_int7[0] = 1;
             GXv_int7[1] = 1;
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV63Trn_memowwds_3_tfmemotitle_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV62Trn_memowwds_2_tfmemotitle)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV68Trn_memowwds_3_tfmemotitle_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV67Trn_memowwds_2_tfmemotitle)) ) )
          {
-            AddWhere(sWhereString, "(T1.MemoTitle like :lV62Trn_memowwds_2_tfmemotitle)");
+            AddWhere(sWhereString, "(T1.MemoTitle like :lV67Trn_memowwds_2_tfmemotitle)");
          }
          else
          {
             GXv_int7[2] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV63Trn_memowwds_3_tfmemotitle_sel)) && ! ( StringUtil.StrCmp(AV63Trn_memowwds_3_tfmemotitle_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV68Trn_memowwds_3_tfmemotitle_sel)) && ! ( StringUtil.StrCmp(AV68Trn_memowwds_3_tfmemotitle_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T1.MemoTitle = ( :AV63Trn_memowwds_3_tfmemotitle_sel))");
+            AddWhere(sWhereString, "(T1.MemoTitle = ( :AV68Trn_memowwds_3_tfmemotitle_sel))");
          }
          else
          {
             GXv_int7[3] = 1;
          }
-         if ( StringUtil.StrCmp(AV63Trn_memowwds_3_tfmemotitle_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV68Trn_memowwds_3_tfmemotitle_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T1.MemoTitle))=0))");
          }
-         if ( ! (DateTime.MinValue==AV64Trn_memowwds_4_tfmemostartdatetime) )
+         if ( ! (DateTime.MinValue==AV69Trn_memowwds_4_tfmemostartdatetime) )
          {
-            AddWhere(sWhereString, "(T1.MemoStartDateTime >= :AV64Trn_memowwds_4_tfmemostartdatetime)");
+            AddWhere(sWhereString, "(T1.MemoStartDateTime >= :AV69Trn_memowwds_4_tfmemostartdatetime)");
          }
          else
          {
             GXv_int7[4] = 1;
          }
-         if ( ! (DateTime.MinValue==AV65Trn_memowwds_5_tfmemostartdatetime_to) )
+         if ( ! (DateTime.MinValue==AV70Trn_memowwds_5_tfmemostartdatetime_to) )
          {
-            AddWhere(sWhereString, "(T1.MemoStartDateTime <= :AV65Trn_memowwds_5_tfmemostartdatetime_to)");
+            AddWhere(sWhereString, "(T1.MemoStartDateTime <= :AV70Trn_memowwds_5_tfmemostartdatetime_to)");
          }
          else
          {
             GXv_int7[5] = 1;
          }
-         if ( ! (DateTime.MinValue==AV66Trn_memowwds_6_tfmemoenddatetime) )
+         if ( ! (DateTime.MinValue==AV71Trn_memowwds_6_tfmemoenddatetime) )
          {
-            AddWhere(sWhereString, "(T1.MemoEndDateTime >= :AV66Trn_memowwds_6_tfmemoenddatetime)");
+            AddWhere(sWhereString, "(T1.MemoEndDateTime >= :AV71Trn_memowwds_6_tfmemoenddatetime)");
          }
          else
          {
             GXv_int7[6] = 1;
          }
-         if ( ! (DateTime.MinValue==AV67Trn_memowwds_7_tfmemoenddatetime_to) )
+         if ( ! (DateTime.MinValue==AV72Trn_memowwds_7_tfmemoenddatetime_to) )
          {
-            AddWhere(sWhereString, "(T1.MemoEndDateTime <= :AV67Trn_memowwds_7_tfmemoenddatetime_to)");
+            AddWhere(sWhereString, "(T1.MemoEndDateTime <= :AV72Trn_memowwds_7_tfmemoenddatetime_to)");
          }
          else
          {
             GXv_int7[7] = 1;
          }
-         if ( ! (Convert.ToDecimal(0)==AV68Trn_memowwds_8_tfmemoduration) )
+         if ( ! (Convert.ToDecimal(0)==AV73Trn_memowwds_8_tfmemoduration) )
          {
-            AddWhere(sWhereString, "(T1.MemoDuration >= :AV68Trn_memowwds_8_tfmemoduration)");
+            AddWhere(sWhereString, "(T1.MemoDuration >= :AV73Trn_memowwds_8_tfmemoduration)");
          }
          else
          {
             GXv_int7[8] = 1;
          }
-         if ( ! (Convert.ToDecimal(0)==AV69Trn_memowwds_9_tfmemoduration_to) )
+         if ( ! (Convert.ToDecimal(0)==AV74Trn_memowwds_9_tfmemoduration_to) )
          {
-            AddWhere(sWhereString, "(T1.MemoDuration <= :AV69Trn_memowwds_9_tfmemoduration_to)");
+            AddWhere(sWhereString, "(T1.MemoDuration <= :AV74Trn_memowwds_9_tfmemoduration_to)");
          }
          else
          {
             GXv_int7[9] = 1;
          }
-         if ( ! (DateTime.MinValue==AV70Trn_memowwds_10_tfmemoremovedate) )
+         if ( ! (DateTime.MinValue==AV75Trn_memowwds_10_tfmemoremovedate) )
          {
-            AddWhere(sWhereString, "(T1.MemoRemoveDate >= :AV70Trn_memowwds_10_tfmemoremovedate)");
+            AddWhere(sWhereString, "(T1.MemoRemoveDate >= :AV75Trn_memowwds_10_tfmemoremovedate)");
          }
          else
          {
             GXv_int7[10] = 1;
          }
-         if ( ! (DateTime.MinValue==AV71Trn_memowwds_11_tfmemoremovedate_to) )
+         if ( ! (DateTime.MinValue==AV76Trn_memowwds_11_tfmemoremovedate_to) )
          {
-            AddWhere(sWhereString, "(T1.MemoRemoveDate <= :AV71Trn_memowwds_11_tfmemoremovedate_to)");
+            AddWhere(sWhereString, "(T1.MemoRemoveDate <= :AV76Trn_memowwds_11_tfmemoremovedate_to)");
          }
          else
          {
             GXv_int7[11] = 1;
+         }
+         if ( ! (DateTime.MinValue==AV77Trn_memowwds_12_tfmemocreatedat) )
+         {
+            AddWhere(sWhereString, "(T1.MemoCreatedAt >= :AV77Trn_memowwds_12_tfmemocreatedat)");
+         }
+         else
+         {
+            GXv_int7[12] = 1;
+         }
+         if ( ! (DateTime.MinValue==AV78Trn_memowwds_13_tfmemocreatedat_to) )
+         {
+            AddWhere(sWhereString, "(T1.MemoCreatedAt <= :AV78Trn_memowwds_13_tfmemocreatedat_to)");
+         }
+         else
+         {
+            GXv_int7[13] = 1;
          }
          scmdbuf += sWhereString;
          if ( ( AV13OrderedBy == 1 ) && ! AV14OrderedDsc )
@@ -4324,6 +4524,14 @@ namespace GeneXus.Programs {
          {
             scmdbuf += "";
          }
+         else if ( ( AV13OrderedBy == 6 ) && ! AV14OrderedDsc )
+         {
+            scmdbuf += "";
+         }
+         else if ( ( AV13OrderedBy == 6 ) && ( AV14OrderedDsc ) )
+         {
+            scmdbuf += "";
+         }
          else if ( true )
          {
             scmdbuf += "";
@@ -4340,9 +4548,9 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_H00AP2(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (DateTime)dynConstraints[3] , (DateTime)dynConstraints[4] , (DateTime)dynConstraints[5] , (DateTime)dynConstraints[6] , (decimal)dynConstraints[7] , (decimal)dynConstraints[8] , (DateTime)dynConstraints[9] , (DateTime)dynConstraints[10] , (string)dynConstraints[11] , (decimal)dynConstraints[12] , (DateTime)dynConstraints[13] , (DateTime)dynConstraints[14] , (DateTime)dynConstraints[15] , (short)dynConstraints[16] , (bool)dynConstraints[17] );
+                     return conditional_H00AP2(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (DateTime)dynConstraints[3] , (DateTime)dynConstraints[4] , (DateTime)dynConstraints[5] , (DateTime)dynConstraints[6] , (decimal)dynConstraints[7] , (decimal)dynConstraints[8] , (DateTime)dynConstraints[9] , (DateTime)dynConstraints[10] , (DateTime)dynConstraints[11] , (DateTime)dynConstraints[12] , (string)dynConstraints[13] , (decimal)dynConstraints[14] , (DateTime)dynConstraints[15] , (DateTime)dynConstraints[16] , (DateTime)dynConstraints[17] , (DateTime)dynConstraints[18] , (short)dynConstraints[19] , (bool)dynConstraints[20] );
                case 1 :
-                     return conditional_H00AP3(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (DateTime)dynConstraints[3] , (DateTime)dynConstraints[4] , (DateTime)dynConstraints[5] , (DateTime)dynConstraints[6] , (decimal)dynConstraints[7] , (decimal)dynConstraints[8] , (DateTime)dynConstraints[9] , (DateTime)dynConstraints[10] , (string)dynConstraints[11] , (decimal)dynConstraints[12] , (DateTime)dynConstraints[13] , (DateTime)dynConstraints[14] , (DateTime)dynConstraints[15] , (short)dynConstraints[16] , (bool)dynConstraints[17] );
+                     return conditional_H00AP3(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (DateTime)dynConstraints[3] , (DateTime)dynConstraints[4] , (DateTime)dynConstraints[5] , (DateTime)dynConstraints[6] , (decimal)dynConstraints[7] , (decimal)dynConstraints[8] , (DateTime)dynConstraints[9] , (DateTime)dynConstraints[10] , (DateTime)dynConstraints[11] , (DateTime)dynConstraints[12] , (string)dynConstraints[13] , (decimal)dynConstraints[14] , (DateTime)dynConstraints[15] , (DateTime)dynConstraints[16] , (DateTime)dynConstraints[17] , (DateTime)dynConstraints[18] , (short)dynConstraints[19] , (bool)dynConstraints[20] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -4363,36 +4571,40 @@ namespace GeneXus.Programs {
        {
           Object[] prmH00AP2;
           prmH00AP2 = new Object[] {
-          new ParDef("lV61Trn_memowwds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV61Trn_memowwds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV62Trn_memowwds_2_tfmemotitle",GXType.VarChar,100,0) ,
-          new ParDef("AV63Trn_memowwds_3_tfmemotitle_sel",GXType.VarChar,100,0) ,
-          new ParDef("AV64Trn_memowwds_4_tfmemostartdatetime",GXType.DateTime,8,5) ,
-          new ParDef("AV65Trn_memowwds_5_tfmemostartdatetime_to",GXType.DateTime,8,5) ,
-          new ParDef("AV66Trn_memowwds_6_tfmemoenddatetime",GXType.DateTime,8,5) ,
-          new ParDef("AV67Trn_memowwds_7_tfmemoenddatetime_to",GXType.DateTime,8,5) ,
-          new ParDef("AV68Trn_memowwds_8_tfmemoduration",GXType.Number,6,3) ,
-          new ParDef("AV69Trn_memowwds_9_tfmemoduration_to",GXType.Number,6,3) ,
-          new ParDef("AV70Trn_memowwds_10_tfmemoremovedate",GXType.Date,8,0) ,
-          new ParDef("AV71Trn_memowwds_11_tfmemoremovedate_to",GXType.Date,8,0) ,
+          new ParDef("lV66Trn_memowwds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV66Trn_memowwds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV67Trn_memowwds_2_tfmemotitle",GXType.VarChar,100,0) ,
+          new ParDef("AV68Trn_memowwds_3_tfmemotitle_sel",GXType.VarChar,100,0) ,
+          new ParDef("AV69Trn_memowwds_4_tfmemostartdatetime",GXType.DateTime,8,5) ,
+          new ParDef("AV70Trn_memowwds_5_tfmemostartdatetime_to",GXType.DateTime,8,5) ,
+          new ParDef("AV71Trn_memowwds_6_tfmemoenddatetime",GXType.DateTime,8,5) ,
+          new ParDef("AV72Trn_memowwds_7_tfmemoenddatetime_to",GXType.DateTime,8,5) ,
+          new ParDef("AV73Trn_memowwds_8_tfmemoduration",GXType.Number,6,3) ,
+          new ParDef("AV74Trn_memowwds_9_tfmemoduration_to",GXType.Number,6,3) ,
+          new ParDef("AV75Trn_memowwds_10_tfmemoremovedate",GXType.Date,8,0) ,
+          new ParDef("AV76Trn_memowwds_11_tfmemoremovedate_to",GXType.Date,8,0) ,
+          new ParDef("AV77Trn_memowwds_12_tfmemocreatedat",GXType.DateTime,8,5) ,
+          new ParDef("AV78Trn_memowwds_13_tfmemocreatedat_to",GXType.DateTime,8,5) ,
           new ParDef("GXPagingFrom2",GXType.Int32,9,0) ,
           new ParDef("GXPagingTo2",GXType.Int32,9,0) ,
           new ParDef("GXPagingTo2",GXType.Int32,9,0)
           };
           Object[] prmH00AP3;
           prmH00AP3 = new Object[] {
-          new ParDef("lV61Trn_memowwds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV61Trn_memowwds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV62Trn_memowwds_2_tfmemotitle",GXType.VarChar,100,0) ,
-          new ParDef("AV63Trn_memowwds_3_tfmemotitle_sel",GXType.VarChar,100,0) ,
-          new ParDef("AV64Trn_memowwds_4_tfmemostartdatetime",GXType.DateTime,8,5) ,
-          new ParDef("AV65Trn_memowwds_5_tfmemostartdatetime_to",GXType.DateTime,8,5) ,
-          new ParDef("AV66Trn_memowwds_6_tfmemoenddatetime",GXType.DateTime,8,5) ,
-          new ParDef("AV67Trn_memowwds_7_tfmemoenddatetime_to",GXType.DateTime,8,5) ,
-          new ParDef("AV68Trn_memowwds_8_tfmemoduration",GXType.Number,6,3) ,
-          new ParDef("AV69Trn_memowwds_9_tfmemoduration_to",GXType.Number,6,3) ,
-          new ParDef("AV70Trn_memowwds_10_tfmemoremovedate",GXType.Date,8,0) ,
-          new ParDef("AV71Trn_memowwds_11_tfmemoremovedate_to",GXType.Date,8,0)
+          new ParDef("lV66Trn_memowwds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV66Trn_memowwds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV67Trn_memowwds_2_tfmemotitle",GXType.VarChar,100,0) ,
+          new ParDef("AV68Trn_memowwds_3_tfmemotitle_sel",GXType.VarChar,100,0) ,
+          new ParDef("AV69Trn_memowwds_4_tfmemostartdatetime",GXType.DateTime,8,5) ,
+          new ParDef("AV70Trn_memowwds_5_tfmemostartdatetime_to",GXType.DateTime,8,5) ,
+          new ParDef("AV71Trn_memowwds_6_tfmemoenddatetime",GXType.DateTime,8,5) ,
+          new ParDef("AV72Trn_memowwds_7_tfmemoenddatetime_to",GXType.DateTime,8,5) ,
+          new ParDef("AV73Trn_memowwds_8_tfmemoduration",GXType.Number,6,3) ,
+          new ParDef("AV74Trn_memowwds_9_tfmemoduration_to",GXType.Number,6,3) ,
+          new ParDef("AV75Trn_memowwds_10_tfmemoremovedate",GXType.Date,8,0) ,
+          new ParDef("AV76Trn_memowwds_11_tfmemoremovedate_to",GXType.Date,8,0) ,
+          new ParDef("AV77Trn_memowwds_12_tfmemocreatedat",GXType.DateTime,8,5) ,
+          new ParDef("AV78Trn_memowwds_13_tfmemocreatedat_to",GXType.DateTime,8,5)
           };
           def= new CursorDef[] {
               new CursorDef("H00AP2", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00AP2,11, GxCacheFrequency.OFF ,true,false )
@@ -4412,26 +4624,28 @@ namespace GeneXus.Programs {
                 ((Guid[]) buf[1])[0] = rslt.getGuid(2);
                 ((Guid[]) buf[2])[0] = rslt.getGuid(3);
                 ((Guid[]) buf[3])[0] = rslt.getGuid(4);
-                ((string[]) buf[4])[0] = rslt.getVarchar(5);
-                ((string[]) buf[5])[0] = rslt.getVarchar(6);
-                ((string[]) buf[6])[0] = rslt.getVarchar(7);
-                ((string[]) buf[7])[0] = rslt.getString(8, 20);
-                ((Guid[]) buf[8])[0] = rslt.getGuid(9);
-                ((DateTime[]) buf[9])[0] = rslt.getGXDate(10);
-                ((bool[]) buf[10])[0] = rslt.wasNull(10);
-                ((decimal[]) buf[11])[0] = rslt.getDecimal(11);
+                ((DateTime[]) buf[4])[0] = rslt.getGXDateTime(5);
+                ((bool[]) buf[5])[0] = rslt.wasNull(5);
+                ((string[]) buf[6])[0] = rslt.getVarchar(6);
+                ((string[]) buf[7])[0] = rslt.getVarchar(7);
+                ((string[]) buf[8])[0] = rslt.getVarchar(8);
+                ((string[]) buf[9])[0] = rslt.getString(9, 20);
+                ((Guid[]) buf[10])[0] = rslt.getGuid(10);
+                ((DateTime[]) buf[11])[0] = rslt.getGXDate(11);
                 ((bool[]) buf[12])[0] = rslt.wasNull(11);
-                ((DateTime[]) buf[13])[0] = rslt.getGXDateTime(12);
+                ((decimal[]) buf[13])[0] = rslt.getDecimal(12);
                 ((bool[]) buf[14])[0] = rslt.wasNull(12);
                 ((DateTime[]) buf[15])[0] = rslt.getGXDateTime(13);
                 ((bool[]) buf[16])[0] = rslt.wasNull(13);
-                ((string[]) buf[17])[0] = rslt.getVarchar(14);
+                ((DateTime[]) buf[17])[0] = rslt.getGXDateTime(14);
                 ((bool[]) buf[18])[0] = rslt.wasNull(14);
-                ((string[]) buf[19])[0] = rslt.getLongVarchar(15);
+                ((string[]) buf[19])[0] = rslt.getVarchar(15);
                 ((bool[]) buf[20])[0] = rslt.wasNull(15);
-                ((string[]) buf[21])[0] = rslt.getVarchar(16);
-                ((string[]) buf[22])[0] = rslt.getVarchar(17);
-                ((Guid[]) buf[23])[0] = rslt.getGuid(18);
+                ((string[]) buf[21])[0] = rslt.getLongVarchar(16);
+                ((bool[]) buf[22])[0] = rslt.wasNull(16);
+                ((string[]) buf[23])[0] = rslt.getVarchar(17);
+                ((string[]) buf[24])[0] = rslt.getVarchar(18);
+                ((Guid[]) buf[25])[0] = rslt.getGuid(19);
                 return;
              case 1 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);

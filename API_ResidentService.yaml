@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: "API_ResidentService"
   description: "API Services"
-  version: "20250620141731"
+  version: "20250621033619"
 servers:
   - url: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/api
 paths:

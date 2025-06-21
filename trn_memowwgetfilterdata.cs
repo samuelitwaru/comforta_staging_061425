@@ -164,10 +164,10 @@ namespace GeneXus.Programs {
          {
             AV36GridState.FromXml(AV34Session.Get("Trn_MemoWWGridState"), null, "", "");
          }
-         AV46GXV1 = 1;
-         while ( AV46GXV1 <= AV36GridState.gxTpr_Filtervalues.Count )
+         AV48GXV1 = 1;
+         while ( AV48GXV1 <= AV36GridState.gxTpr_Filtervalues.Count )
          {
-            AV37GridStateFilterValue = ((WorkWithPlus.workwithplus_web.SdtWWPGridState_FilterValue)AV36GridState.gxTpr_Filtervalues.Item(AV46GXV1));
+            AV37GridStateFilterValue = ((WorkWithPlus.workwithplus_web.SdtWWPGridState_FilterValue)AV36GridState.gxTpr_Filtervalues.Item(AV48GXV1));
             if ( StringUtil.StrCmp(AV37GridStateFilterValue.gxTpr_Name, "FILTERFULLTEXT") == 0 )
             {
                AV45FilterFullText = AV37GridStateFilterValue.gxTpr_Value;
@@ -200,7 +200,12 @@ namespace GeneXus.Programs {
                AV21TFMemoRemoveDate = context.localUtil.CToD( AV37GridStateFilterValue.gxTpr_Value, DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt")));
                AV22TFMemoRemoveDate_To = context.localUtil.CToD( AV37GridStateFilterValue.gxTpr_Valueto, DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt")));
             }
-            AV46GXV1 = (int)(AV46GXV1+1);
+            else if ( StringUtil.StrCmp(AV37GridStateFilterValue.gxTpr_Name, "TFMEMOCREATEDAT") == 0 )
+            {
+               AV46TFMemoCreatedAt = context.localUtil.CToT( AV37GridStateFilterValue.gxTpr_Value, DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt")));
+               AV47TFMemoCreatedAt_To = context.localUtil.CToT( AV37GridStateFilterValue.gxTpr_Valueto, DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt")));
+            }
+            AV48GXV1 = (int)(AV48GXV1+1);
          }
       }
 
@@ -210,48 +215,55 @@ namespace GeneXus.Programs {
          returnInSub = false;
          AV13TFMemoTitle = AV23SearchTxt;
          AV14TFMemoTitle_Sel = "";
-         AV48Trn_memowwds_1_filterfulltext = AV45FilterFullText;
-         AV49Trn_memowwds_2_tfmemotitle = AV13TFMemoTitle;
-         AV50Trn_memowwds_3_tfmemotitle_sel = AV14TFMemoTitle_Sel;
-         AV51Trn_memowwds_4_tfmemostartdatetime = AV15TFMemoStartDateTime;
-         AV52Trn_memowwds_5_tfmemostartdatetime_to = AV16TFMemoStartDateTime_To;
-         AV53Trn_memowwds_6_tfmemoenddatetime = AV17TFMemoEndDateTime;
-         AV54Trn_memowwds_7_tfmemoenddatetime_to = AV18TFMemoEndDateTime_To;
-         AV55Trn_memowwds_8_tfmemoduration = AV19TFMemoDuration;
-         AV56Trn_memowwds_9_tfmemoduration_to = AV20TFMemoDuration_To;
-         AV57Trn_memowwds_10_tfmemoremovedate = AV21TFMemoRemoveDate;
-         AV58Trn_memowwds_11_tfmemoremovedate_to = AV22TFMemoRemoveDate_To;
+         AV50Trn_memowwds_1_filterfulltext = AV45FilterFullText;
+         AV51Trn_memowwds_2_tfmemotitle = AV13TFMemoTitle;
+         AV52Trn_memowwds_3_tfmemotitle_sel = AV14TFMemoTitle_Sel;
+         AV53Trn_memowwds_4_tfmemostartdatetime = AV15TFMemoStartDateTime;
+         AV54Trn_memowwds_5_tfmemostartdatetime_to = AV16TFMemoStartDateTime_To;
+         AV55Trn_memowwds_6_tfmemoenddatetime = AV17TFMemoEndDateTime;
+         AV56Trn_memowwds_7_tfmemoenddatetime_to = AV18TFMemoEndDateTime_To;
+         AV57Trn_memowwds_8_tfmemoduration = AV19TFMemoDuration;
+         AV58Trn_memowwds_9_tfmemoduration_to = AV20TFMemoDuration_To;
+         AV59Trn_memowwds_10_tfmemoremovedate = AV21TFMemoRemoveDate;
+         AV60Trn_memowwds_11_tfmemoremovedate_to = AV22TFMemoRemoveDate_To;
+         AV61Trn_memowwds_12_tfmemocreatedat = AV46TFMemoCreatedAt;
+         AV62Trn_memowwds_13_tfmemocreatedat_to = AV47TFMemoCreatedAt_To;
          pr_default.dynParam(0, new Object[]{ new Object[]{
-                                              AV48Trn_memowwds_1_filterfulltext ,
-                                              AV50Trn_memowwds_3_tfmemotitle_sel ,
-                                              AV49Trn_memowwds_2_tfmemotitle ,
-                                              AV51Trn_memowwds_4_tfmemostartdatetime ,
-                                              AV52Trn_memowwds_5_tfmemostartdatetime_to ,
-                                              AV53Trn_memowwds_6_tfmemoenddatetime ,
-                                              AV54Trn_memowwds_7_tfmemoenddatetime_to ,
-                                              AV55Trn_memowwds_8_tfmemoduration ,
-                                              AV56Trn_memowwds_9_tfmemoduration_to ,
-                                              AV57Trn_memowwds_10_tfmemoremovedate ,
-                                              AV58Trn_memowwds_11_tfmemoremovedate_to ,
+                                              AV50Trn_memowwds_1_filterfulltext ,
+                                              AV52Trn_memowwds_3_tfmemotitle_sel ,
+                                              AV51Trn_memowwds_2_tfmemotitle ,
+                                              AV53Trn_memowwds_4_tfmemostartdatetime ,
+                                              AV54Trn_memowwds_5_tfmemostartdatetime_to ,
+                                              AV55Trn_memowwds_6_tfmemoenddatetime ,
+                                              AV56Trn_memowwds_7_tfmemoenddatetime_to ,
+                                              AV57Trn_memowwds_8_tfmemoduration ,
+                                              AV58Trn_memowwds_9_tfmemoduration_to ,
+                                              AV59Trn_memowwds_10_tfmemoremovedate ,
+                                              AV60Trn_memowwds_11_tfmemoremovedate_to ,
+                                              AV61Trn_memowwds_12_tfmemocreatedat ,
+                                              AV62Trn_memowwds_13_tfmemocreatedat_to ,
                                               A550MemoTitle ,
                                               A563MemoDuration ,
                                               A561MemoStartDateTime ,
                                               A562MemoEndDateTime ,
-                                              A564MemoRemoveDate } ,
+                                              A564MemoRemoveDate ,
+                                              A647MemoCreatedAt } ,
                                               new int[]{
-                                              TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DECIMAL, TypeConstants.BOOLEAN,
-                                              TypeConstants.DATE, TypeConstants.BOOLEAN, TypeConstants.DATE, TypeConstants.BOOLEAN, TypeConstants.DATE, TypeConstants.BOOLEAN
+                                              TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE,
+                                              TypeConstants.DECIMAL, TypeConstants.BOOLEAN, TypeConstants.DATE, TypeConstants.BOOLEAN, TypeConstants.DATE, TypeConstants.BOOLEAN, TypeConstants.DATE, TypeConstants.BOOLEAN, TypeConstants.DATE, TypeConstants.BOOLEAN
                                               }
          });
-         lV48Trn_memowwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV48Trn_memowwds_1_filterfulltext), "%", "");
-         lV48Trn_memowwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV48Trn_memowwds_1_filterfulltext), "%", "");
-         lV49Trn_memowwds_2_tfmemotitle = StringUtil.Concat( StringUtil.RTrim( AV49Trn_memowwds_2_tfmemotitle), "%", "");
+         lV50Trn_memowwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV50Trn_memowwds_1_filterfulltext), "%", "");
+         lV50Trn_memowwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV50Trn_memowwds_1_filterfulltext), "%", "");
+         lV51Trn_memowwds_2_tfmemotitle = StringUtil.Concat( StringUtil.RTrim( AV51Trn_memowwds_2_tfmemotitle), "%", "");
          /* Using cursor P00CJ2 */
-         pr_default.execute(0, new Object[] {lV48Trn_memowwds_1_filterfulltext, lV48Trn_memowwds_1_filterfulltext, lV49Trn_memowwds_2_tfmemotitle, AV50Trn_memowwds_3_tfmemotitle_sel, AV51Trn_memowwds_4_tfmemostartdatetime, AV52Trn_memowwds_5_tfmemostartdatetime_to, AV53Trn_memowwds_6_tfmemoenddatetime, AV54Trn_memowwds_7_tfmemoenddatetime_to, AV55Trn_memowwds_8_tfmemoduration, AV56Trn_memowwds_9_tfmemoduration_to, AV57Trn_memowwds_10_tfmemoremovedate, AV58Trn_memowwds_11_tfmemoremovedate_to});
+         pr_default.execute(0, new Object[] {lV50Trn_memowwds_1_filterfulltext, lV50Trn_memowwds_1_filterfulltext, lV51Trn_memowwds_2_tfmemotitle, AV52Trn_memowwds_3_tfmemotitle_sel, AV53Trn_memowwds_4_tfmemostartdatetime, AV54Trn_memowwds_5_tfmemostartdatetime_to, AV55Trn_memowwds_6_tfmemoenddatetime, AV56Trn_memowwds_7_tfmemoenddatetime_to, AV57Trn_memowwds_8_tfmemoduration, AV58Trn_memowwds_9_tfmemoduration_to, AV59Trn_memowwds_10_tfmemoremovedate, AV60Trn_memowwds_11_tfmemoremovedate_to, AV61Trn_memowwds_12_tfmemocreatedat, AV62Trn_memowwds_13_tfmemocreatedat_to});
          while ( (pr_default.getStatus(0) != 101) )
          {
             BRKCJ2 = false;
             A550MemoTitle = P00CJ2_A550MemoTitle[0];
+            A647MemoCreatedAt = P00CJ2_A647MemoCreatedAt[0];
+            n647MemoCreatedAt = P00CJ2_n647MemoCreatedAt[0];
             A564MemoRemoveDate = P00CJ2_A564MemoRemoveDate[0];
             n564MemoRemoveDate = P00CJ2_n564MemoRemoveDate[0];
             A563MemoDuration = P00CJ2_A563MemoDuration[0];
@@ -326,22 +338,29 @@ namespace GeneXus.Programs {
          AV18TFMemoEndDateTime_To = (DateTime)(DateTime.MinValue);
          AV21TFMemoRemoveDate = DateTime.MinValue;
          AV22TFMemoRemoveDate_To = DateTime.MinValue;
-         AV48Trn_memowwds_1_filterfulltext = "";
-         AV49Trn_memowwds_2_tfmemotitle = "";
-         AV50Trn_memowwds_3_tfmemotitle_sel = "";
-         AV51Trn_memowwds_4_tfmemostartdatetime = (DateTime)(DateTime.MinValue);
-         AV52Trn_memowwds_5_tfmemostartdatetime_to = (DateTime)(DateTime.MinValue);
-         AV53Trn_memowwds_6_tfmemoenddatetime = (DateTime)(DateTime.MinValue);
-         AV54Trn_memowwds_7_tfmemoenddatetime_to = (DateTime)(DateTime.MinValue);
-         AV57Trn_memowwds_10_tfmemoremovedate = DateTime.MinValue;
-         AV58Trn_memowwds_11_tfmemoremovedate_to = DateTime.MinValue;
-         lV48Trn_memowwds_1_filterfulltext = "";
-         lV49Trn_memowwds_2_tfmemotitle = "";
+         AV46TFMemoCreatedAt = (DateTime)(DateTime.MinValue);
+         AV47TFMemoCreatedAt_To = (DateTime)(DateTime.MinValue);
+         AV50Trn_memowwds_1_filterfulltext = "";
+         AV51Trn_memowwds_2_tfmemotitle = "";
+         AV52Trn_memowwds_3_tfmemotitle_sel = "";
+         AV53Trn_memowwds_4_tfmemostartdatetime = (DateTime)(DateTime.MinValue);
+         AV54Trn_memowwds_5_tfmemostartdatetime_to = (DateTime)(DateTime.MinValue);
+         AV55Trn_memowwds_6_tfmemoenddatetime = (DateTime)(DateTime.MinValue);
+         AV56Trn_memowwds_7_tfmemoenddatetime_to = (DateTime)(DateTime.MinValue);
+         AV59Trn_memowwds_10_tfmemoremovedate = DateTime.MinValue;
+         AV60Trn_memowwds_11_tfmemoremovedate_to = DateTime.MinValue;
+         AV61Trn_memowwds_12_tfmemocreatedat = (DateTime)(DateTime.MinValue);
+         AV62Trn_memowwds_13_tfmemocreatedat_to = (DateTime)(DateTime.MinValue);
+         lV50Trn_memowwds_1_filterfulltext = "";
+         lV51Trn_memowwds_2_tfmemotitle = "";
          A550MemoTitle = "";
          A561MemoStartDateTime = (DateTime)(DateTime.MinValue);
          A562MemoEndDateTime = (DateTime)(DateTime.MinValue);
          A564MemoRemoveDate = DateTime.MinValue;
+         A647MemoCreatedAt = (DateTime)(DateTime.MinValue);
          P00CJ2_A550MemoTitle = new string[] {""} ;
+         P00CJ2_A647MemoCreatedAt = new DateTime[] {DateTime.MinValue} ;
+         P00CJ2_n647MemoCreatedAt = new bool[] {false} ;
          P00CJ2_A564MemoRemoveDate = new DateTime[] {DateTime.MinValue} ;
          P00CJ2_n564MemoRemoveDate = new bool[] {false} ;
          P00CJ2_A563MemoDuration = new decimal[1] ;
@@ -356,7 +375,8 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.trn_memowwgetfilterdata__default(),
             new Object[][] {
                 new Object[] {
-               P00CJ2_A550MemoTitle, P00CJ2_A564MemoRemoveDate, P00CJ2_n564MemoRemoveDate, P00CJ2_A563MemoDuration, P00CJ2_n563MemoDuration, P00CJ2_A562MemoEndDateTime, P00CJ2_n562MemoEndDateTime, P00CJ2_A561MemoStartDateTime, P00CJ2_n561MemoStartDateTime, P00CJ2_A549MemoId
+               P00CJ2_A550MemoTitle, P00CJ2_A647MemoCreatedAt, P00CJ2_n647MemoCreatedAt, P00CJ2_A564MemoRemoveDate, P00CJ2_n564MemoRemoveDate, P00CJ2_A563MemoDuration, P00CJ2_n563MemoDuration, P00CJ2_A562MemoEndDateTime, P00CJ2_n562MemoEndDateTime, P00CJ2_A561MemoStartDateTime,
+               P00CJ2_n561MemoStartDateTime, P00CJ2_A549MemoId
                }
             }
          );
@@ -366,30 +386,36 @@ namespace GeneXus.Programs {
       private short AV26MaxItems ;
       private short AV25PageIndex ;
       private short AV24SkipItems ;
-      private int AV46GXV1 ;
+      private int AV48GXV1 ;
       private long AV33count ;
       private decimal AV19TFMemoDuration ;
       private decimal AV20TFMemoDuration_To ;
-      private decimal AV55Trn_memowwds_8_tfmemoduration ;
-      private decimal AV56Trn_memowwds_9_tfmemoduration_to ;
+      private decimal AV57Trn_memowwds_8_tfmemoduration ;
+      private decimal AV58Trn_memowwds_9_tfmemoduration_to ;
       private decimal A563MemoDuration ;
       private DateTime AV15TFMemoStartDateTime ;
       private DateTime AV16TFMemoStartDateTime_To ;
       private DateTime AV17TFMemoEndDateTime ;
       private DateTime AV18TFMemoEndDateTime_To ;
-      private DateTime AV51Trn_memowwds_4_tfmemostartdatetime ;
-      private DateTime AV52Trn_memowwds_5_tfmemostartdatetime_to ;
-      private DateTime AV53Trn_memowwds_6_tfmemoenddatetime ;
-      private DateTime AV54Trn_memowwds_7_tfmemoenddatetime_to ;
+      private DateTime AV46TFMemoCreatedAt ;
+      private DateTime AV47TFMemoCreatedAt_To ;
+      private DateTime AV53Trn_memowwds_4_tfmemostartdatetime ;
+      private DateTime AV54Trn_memowwds_5_tfmemostartdatetime_to ;
+      private DateTime AV55Trn_memowwds_6_tfmemoenddatetime ;
+      private DateTime AV56Trn_memowwds_7_tfmemoenddatetime_to ;
+      private DateTime AV61Trn_memowwds_12_tfmemocreatedat ;
+      private DateTime AV62Trn_memowwds_13_tfmemocreatedat_to ;
       private DateTime A561MemoStartDateTime ;
       private DateTime A562MemoEndDateTime ;
+      private DateTime A647MemoCreatedAt ;
       private DateTime AV21TFMemoRemoveDate ;
       private DateTime AV22TFMemoRemoveDate_To ;
-      private DateTime AV57Trn_memowwds_10_tfmemoremovedate ;
-      private DateTime AV58Trn_memowwds_11_tfmemoremovedate_to ;
+      private DateTime AV59Trn_memowwds_10_tfmemoremovedate ;
+      private DateTime AV60Trn_memowwds_11_tfmemoremovedate_to ;
       private DateTime A564MemoRemoveDate ;
       private bool returnInSub ;
       private bool BRKCJ2 ;
+      private bool n647MemoCreatedAt ;
       private bool n564MemoRemoveDate ;
       private bool n563MemoDuration ;
       private bool n562MemoEndDateTime ;
@@ -404,11 +430,11 @@ namespace GeneXus.Programs {
       private string AV45FilterFullText ;
       private string AV13TFMemoTitle ;
       private string AV14TFMemoTitle_Sel ;
-      private string AV48Trn_memowwds_1_filterfulltext ;
-      private string AV49Trn_memowwds_2_tfmemotitle ;
-      private string AV50Trn_memowwds_3_tfmemotitle_sel ;
-      private string lV48Trn_memowwds_1_filterfulltext ;
-      private string lV49Trn_memowwds_2_tfmemotitle ;
+      private string AV50Trn_memowwds_1_filterfulltext ;
+      private string AV51Trn_memowwds_2_tfmemotitle ;
+      private string AV52Trn_memowwds_3_tfmemotitle_sel ;
+      private string lV50Trn_memowwds_1_filterfulltext ;
+      private string lV51Trn_memowwds_2_tfmemotitle ;
       private string A550MemoTitle ;
       private string AV28Option ;
       private Guid A549MemoId ;
@@ -424,6 +450,8 @@ namespace GeneXus.Programs {
       private WorkWithPlus.workwithplus_web.SdtWWPGridState_FilterValue AV37GridStateFilterValue ;
       private IDataStoreProvider pr_default ;
       private string[] P00CJ2_A550MemoTitle ;
+      private DateTime[] P00CJ2_A647MemoCreatedAt ;
+      private bool[] P00CJ2_n647MemoCreatedAt ;
       private DateTime[] P00CJ2_A564MemoRemoveDate ;
       private bool[] P00CJ2_n564MemoRemoveDate ;
       private decimal[] P00CJ2_A563MemoDuration ;
@@ -441,120 +469,139 @@ namespace GeneXus.Programs {
    public class trn_memowwgetfilterdata__default : DataStoreHelperBase, IDataStoreHelper
    {
       protected Object[] conditional_P00CJ2( IGxContext context ,
-                                             string AV48Trn_memowwds_1_filterfulltext ,
-                                             string AV50Trn_memowwds_3_tfmemotitle_sel ,
-                                             string AV49Trn_memowwds_2_tfmemotitle ,
-                                             DateTime AV51Trn_memowwds_4_tfmemostartdatetime ,
-                                             DateTime AV52Trn_memowwds_5_tfmemostartdatetime_to ,
-                                             DateTime AV53Trn_memowwds_6_tfmemoenddatetime ,
-                                             DateTime AV54Trn_memowwds_7_tfmemoenddatetime_to ,
-                                             decimal AV55Trn_memowwds_8_tfmemoduration ,
-                                             decimal AV56Trn_memowwds_9_tfmemoduration_to ,
-                                             DateTime AV57Trn_memowwds_10_tfmemoremovedate ,
-                                             DateTime AV58Trn_memowwds_11_tfmemoremovedate_to ,
+                                             string AV50Trn_memowwds_1_filterfulltext ,
+                                             string AV52Trn_memowwds_3_tfmemotitle_sel ,
+                                             string AV51Trn_memowwds_2_tfmemotitle ,
+                                             DateTime AV53Trn_memowwds_4_tfmemostartdatetime ,
+                                             DateTime AV54Trn_memowwds_5_tfmemostartdatetime_to ,
+                                             DateTime AV55Trn_memowwds_6_tfmemoenddatetime ,
+                                             DateTime AV56Trn_memowwds_7_tfmemoenddatetime_to ,
+                                             decimal AV57Trn_memowwds_8_tfmemoduration ,
+                                             decimal AV58Trn_memowwds_9_tfmemoduration_to ,
+                                             DateTime AV59Trn_memowwds_10_tfmemoremovedate ,
+                                             DateTime AV60Trn_memowwds_11_tfmemoremovedate_to ,
+                                             DateTime AV61Trn_memowwds_12_tfmemocreatedat ,
+                                             DateTime AV62Trn_memowwds_13_tfmemocreatedat_to ,
                                              string A550MemoTitle ,
                                              decimal A563MemoDuration ,
                                              DateTime A561MemoStartDateTime ,
                                              DateTime A562MemoEndDateTime ,
-                                             DateTime A564MemoRemoveDate )
+                                             DateTime A564MemoRemoveDate ,
+                                             DateTime A647MemoCreatedAt )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
-         short[] GXv_int1 = new short[12];
+         short[] GXv_int1 = new short[14];
          Object[] GXv_Object2 = new Object[2];
-         scmdbuf = "SELECT MemoTitle, MemoRemoveDate, MemoDuration, MemoEndDateTime, MemoStartDateTime, MemoId FROM Trn_Memo";
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV48Trn_memowwds_1_filterfulltext)) )
+         scmdbuf = "SELECT MemoTitle, MemoCreatedAt, MemoRemoveDate, MemoDuration, MemoEndDateTime, MemoStartDateTime, MemoId FROM Trn_Memo";
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV50Trn_memowwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(MemoTitle) like '%' || LOWER(:lV48Trn_memowwds_1_filterfulltext)) or ( SUBSTR(TO_CHAR(MemoDuration,'90.999'), 2) like '%' || :lV48Trn_memowwds_1_filterfulltext))");
+            AddWhere(sWhereString, "(( LOWER(MemoTitle) like '%' || LOWER(:lV50Trn_memowwds_1_filterfulltext)) or ( SUBSTR(TO_CHAR(MemoDuration,'90.999'), 2) like '%' || :lV50Trn_memowwds_1_filterfulltext))");
          }
          else
          {
             GXv_int1[0] = 1;
             GXv_int1[1] = 1;
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV50Trn_memowwds_3_tfmemotitle_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV49Trn_memowwds_2_tfmemotitle)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV52Trn_memowwds_3_tfmemotitle_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV51Trn_memowwds_2_tfmemotitle)) ) )
          {
-            AddWhere(sWhereString, "(MemoTitle like :lV49Trn_memowwds_2_tfmemotitle)");
+            AddWhere(sWhereString, "(MemoTitle like :lV51Trn_memowwds_2_tfmemotitle)");
          }
          else
          {
             GXv_int1[2] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV50Trn_memowwds_3_tfmemotitle_sel)) && ! ( StringUtil.StrCmp(AV50Trn_memowwds_3_tfmemotitle_sel, context.GetMessage( "<#Empty#>", "")) == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV52Trn_memowwds_3_tfmemotitle_sel)) && ! ( StringUtil.StrCmp(AV52Trn_memowwds_3_tfmemotitle_sel, context.GetMessage( "<#Empty#>", "")) == 0 ) )
          {
-            AddWhere(sWhereString, "(MemoTitle = ( :AV50Trn_memowwds_3_tfmemotitle_sel))");
+            AddWhere(sWhereString, "(MemoTitle = ( :AV52Trn_memowwds_3_tfmemotitle_sel))");
          }
          else
          {
             GXv_int1[3] = 1;
          }
-         if ( StringUtil.StrCmp(AV50Trn_memowwds_3_tfmemotitle_sel, context.GetMessage( "<#Empty#>", "")) == 0 )
+         if ( StringUtil.StrCmp(AV52Trn_memowwds_3_tfmemotitle_sel, context.GetMessage( "<#Empty#>", "")) == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from MemoTitle))=0))");
          }
-         if ( ! (DateTime.MinValue==AV51Trn_memowwds_4_tfmemostartdatetime) )
+         if ( ! (DateTime.MinValue==AV53Trn_memowwds_4_tfmemostartdatetime) )
          {
-            AddWhere(sWhereString, "(MemoStartDateTime >= :AV51Trn_memowwds_4_tfmemostartdatetime)");
+            AddWhere(sWhereString, "(MemoStartDateTime >= :AV53Trn_memowwds_4_tfmemostartdatetime)");
          }
          else
          {
             GXv_int1[4] = 1;
          }
-         if ( ! (DateTime.MinValue==AV52Trn_memowwds_5_tfmemostartdatetime_to) )
+         if ( ! (DateTime.MinValue==AV54Trn_memowwds_5_tfmemostartdatetime_to) )
          {
-            AddWhere(sWhereString, "(MemoStartDateTime <= :AV52Trn_memowwds_5_tfmemostartdatetime_to)");
+            AddWhere(sWhereString, "(MemoStartDateTime <= :AV54Trn_memowwds_5_tfmemostartdatetime_to)");
          }
          else
          {
             GXv_int1[5] = 1;
          }
-         if ( ! (DateTime.MinValue==AV53Trn_memowwds_6_tfmemoenddatetime) )
+         if ( ! (DateTime.MinValue==AV55Trn_memowwds_6_tfmemoenddatetime) )
          {
-            AddWhere(sWhereString, "(MemoEndDateTime >= :AV53Trn_memowwds_6_tfmemoenddatetime)");
+            AddWhere(sWhereString, "(MemoEndDateTime >= :AV55Trn_memowwds_6_tfmemoenddatetime)");
          }
          else
          {
             GXv_int1[6] = 1;
          }
-         if ( ! (DateTime.MinValue==AV54Trn_memowwds_7_tfmemoenddatetime_to) )
+         if ( ! (DateTime.MinValue==AV56Trn_memowwds_7_tfmemoenddatetime_to) )
          {
-            AddWhere(sWhereString, "(MemoEndDateTime <= :AV54Trn_memowwds_7_tfmemoenddatetime_to)");
+            AddWhere(sWhereString, "(MemoEndDateTime <= :AV56Trn_memowwds_7_tfmemoenddatetime_to)");
          }
          else
          {
             GXv_int1[7] = 1;
          }
-         if ( ! (Convert.ToDecimal(0)==AV55Trn_memowwds_8_tfmemoduration) )
+         if ( ! (Convert.ToDecimal(0)==AV57Trn_memowwds_8_tfmemoduration) )
          {
-            AddWhere(sWhereString, "(MemoDuration >= :AV55Trn_memowwds_8_tfmemoduration)");
+            AddWhere(sWhereString, "(MemoDuration >= :AV57Trn_memowwds_8_tfmemoduration)");
          }
          else
          {
             GXv_int1[8] = 1;
          }
-         if ( ! (Convert.ToDecimal(0)==AV56Trn_memowwds_9_tfmemoduration_to) )
+         if ( ! (Convert.ToDecimal(0)==AV58Trn_memowwds_9_tfmemoduration_to) )
          {
-            AddWhere(sWhereString, "(MemoDuration <= :AV56Trn_memowwds_9_tfmemoduration_to)");
+            AddWhere(sWhereString, "(MemoDuration <= :AV58Trn_memowwds_9_tfmemoduration_to)");
          }
          else
          {
             GXv_int1[9] = 1;
          }
-         if ( ! (DateTime.MinValue==AV57Trn_memowwds_10_tfmemoremovedate) )
+         if ( ! (DateTime.MinValue==AV59Trn_memowwds_10_tfmemoremovedate) )
          {
-            AddWhere(sWhereString, "(MemoRemoveDate >= :AV57Trn_memowwds_10_tfmemoremovedate)");
+            AddWhere(sWhereString, "(MemoRemoveDate >= :AV59Trn_memowwds_10_tfmemoremovedate)");
          }
          else
          {
             GXv_int1[10] = 1;
          }
-         if ( ! (DateTime.MinValue==AV58Trn_memowwds_11_tfmemoremovedate_to) )
+         if ( ! (DateTime.MinValue==AV60Trn_memowwds_11_tfmemoremovedate_to) )
          {
-            AddWhere(sWhereString, "(MemoRemoveDate <= :AV58Trn_memowwds_11_tfmemoremovedate_to)");
+            AddWhere(sWhereString, "(MemoRemoveDate <= :AV60Trn_memowwds_11_tfmemoremovedate_to)");
          }
          else
          {
             GXv_int1[11] = 1;
+         }
+         if ( ! (DateTime.MinValue==AV61Trn_memowwds_12_tfmemocreatedat) )
+         {
+            AddWhere(sWhereString, "(MemoCreatedAt >= :AV61Trn_memowwds_12_tfmemocreatedat)");
+         }
+         else
+         {
+            GXv_int1[12] = 1;
+         }
+         if ( ! (DateTime.MinValue==AV62Trn_memowwds_13_tfmemocreatedat_to) )
+         {
+            AddWhere(sWhereString, "(MemoCreatedAt <= :AV62Trn_memowwds_13_tfmemocreatedat_to)");
+         }
+         else
+         {
+            GXv_int1[13] = 1;
          }
          scmdbuf += sWhereString;
          scmdbuf += " ORDER BY MemoTitle";
@@ -570,7 +617,7 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_P00CJ2(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (DateTime)dynConstraints[3] , (DateTime)dynConstraints[4] , (DateTime)dynConstraints[5] , (DateTime)dynConstraints[6] , (decimal)dynConstraints[7] , (decimal)dynConstraints[8] , (DateTime)dynConstraints[9] , (DateTime)dynConstraints[10] , (string)dynConstraints[11] , (decimal)dynConstraints[12] , (DateTime)dynConstraints[13] , (DateTime)dynConstraints[14] , (DateTime)dynConstraints[15] );
+                     return conditional_P00CJ2(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (DateTime)dynConstraints[3] , (DateTime)dynConstraints[4] , (DateTime)dynConstraints[5] , (DateTime)dynConstraints[6] , (decimal)dynConstraints[7] , (decimal)dynConstraints[8] , (DateTime)dynConstraints[9] , (DateTime)dynConstraints[10] , (DateTime)dynConstraints[11] , (DateTime)dynConstraints[12] , (string)dynConstraints[13] , (decimal)dynConstraints[14] , (DateTime)dynConstraints[15] , (DateTime)dynConstraints[16] , (DateTime)dynConstraints[17] , (DateTime)dynConstraints[18] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -590,18 +637,20 @@ namespace GeneXus.Programs {
        {
           Object[] prmP00CJ2;
           prmP00CJ2 = new Object[] {
-          new ParDef("lV48Trn_memowwds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV48Trn_memowwds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV49Trn_memowwds_2_tfmemotitle",GXType.VarChar,100,0) ,
-          new ParDef("AV50Trn_memowwds_3_tfmemotitle_sel",GXType.VarChar,100,0) ,
-          new ParDef("AV51Trn_memowwds_4_tfmemostartdatetime",GXType.DateTime,8,5) ,
-          new ParDef("AV52Trn_memowwds_5_tfmemostartdatetime_to",GXType.DateTime,8,5) ,
-          new ParDef("AV53Trn_memowwds_6_tfmemoenddatetime",GXType.DateTime,8,5) ,
-          new ParDef("AV54Trn_memowwds_7_tfmemoenddatetime_to",GXType.DateTime,8,5) ,
-          new ParDef("AV55Trn_memowwds_8_tfmemoduration",GXType.Number,6,3) ,
-          new ParDef("AV56Trn_memowwds_9_tfmemoduration_to",GXType.Number,6,3) ,
-          new ParDef("AV57Trn_memowwds_10_tfmemoremovedate",GXType.Date,8,0) ,
-          new ParDef("AV58Trn_memowwds_11_tfmemoremovedate_to",GXType.Date,8,0)
+          new ParDef("lV50Trn_memowwds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV50Trn_memowwds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV51Trn_memowwds_2_tfmemotitle",GXType.VarChar,100,0) ,
+          new ParDef("AV52Trn_memowwds_3_tfmemotitle_sel",GXType.VarChar,100,0) ,
+          new ParDef("AV53Trn_memowwds_4_tfmemostartdatetime",GXType.DateTime,8,5) ,
+          new ParDef("AV54Trn_memowwds_5_tfmemostartdatetime_to",GXType.DateTime,8,5) ,
+          new ParDef("AV55Trn_memowwds_6_tfmemoenddatetime",GXType.DateTime,8,5) ,
+          new ParDef("AV56Trn_memowwds_7_tfmemoenddatetime_to",GXType.DateTime,8,5) ,
+          new ParDef("AV57Trn_memowwds_8_tfmemoduration",GXType.Number,6,3) ,
+          new ParDef("AV58Trn_memowwds_9_tfmemoduration_to",GXType.Number,6,3) ,
+          new ParDef("AV59Trn_memowwds_10_tfmemoremovedate",GXType.Date,8,0) ,
+          new ParDef("AV60Trn_memowwds_11_tfmemoremovedate_to",GXType.Date,8,0) ,
+          new ParDef("AV61Trn_memowwds_12_tfmemocreatedat",GXType.DateTime,8,5) ,
+          new ParDef("AV62Trn_memowwds_13_tfmemocreatedat_to",GXType.DateTime,8,5)
           };
           def= new CursorDef[] {
               new CursorDef("P00CJ2", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CJ2,100, GxCacheFrequency.OFF ,true,false )
@@ -617,15 +666,17 @@ namespace GeneXus.Programs {
        {
              case 0 :
                 ((string[]) buf[0])[0] = rslt.getVarchar(1);
-                ((DateTime[]) buf[1])[0] = rslt.getGXDate(2);
+                ((DateTime[]) buf[1])[0] = rslt.getGXDateTime(2);
                 ((bool[]) buf[2])[0] = rslt.wasNull(2);
-                ((decimal[]) buf[3])[0] = rslt.getDecimal(3);
+                ((DateTime[]) buf[3])[0] = rslt.getGXDate(3);
                 ((bool[]) buf[4])[0] = rslt.wasNull(3);
-                ((DateTime[]) buf[5])[0] = rslt.getGXDateTime(4);
+                ((decimal[]) buf[5])[0] = rslt.getDecimal(4);
                 ((bool[]) buf[6])[0] = rslt.wasNull(4);
                 ((DateTime[]) buf[7])[0] = rslt.getGXDateTime(5);
                 ((bool[]) buf[8])[0] = rslt.wasNull(5);
-                ((Guid[]) buf[9])[0] = rslt.getGuid(6);
+                ((DateTime[]) buf[9])[0] = rslt.getGXDateTime(6);
+                ((bool[]) buf[10])[0] = rslt.wasNull(6);
+                ((Guid[]) buf[11])[0] = rslt.getGuid(7);
                 return;
        }
     }

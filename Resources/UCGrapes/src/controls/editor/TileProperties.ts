@@ -1,7 +1,7 @@
 import { i18n } from "../../i18n/i18n";
 import { Tile } from "../../types";
 import { ActionInput } from "../../ui/components/tools-section/content-section/ActionInput";
-import { getIconCategories, rgbToHex } from "../../utils/helpers";
+import { capitalizeWords, getIconCategories, rgbToHex } from "../../utils/helpers";
 import { ThemeManager } from "../themes/ThemeManager";
 
 export class TileProperties {
@@ -169,13 +169,16 @@ export class TileProperties {
 
   private setTileIconProperties() {
     const tileIcon = this.tileAttributes?.Icon as string;
+    let capitalizedTileIcon = ""
+    if (tileIcon) {
+      capitalizedTileIcon = capitalizeWords(tileIcon.replace(/-/g,' ').replace(/_/g,' '))
+    }
     
     const categoryTitle = this.themeManager.getIconCategory(tileIcon);
     this.themeManager.updateThemeIcons(categoryTitle);
     if (!categoryTitle) return;
     let categories: { name: string; label: string }[] = getIconCategories()
     const category = categories.find((cat) => cat.name.toLowerCase() === categoryTitle.toLowerCase())
-    
     if (!category) return
 
     const categoryContainer = document.querySelector(
@@ -194,24 +197,21 @@ export class TileProperties {
         }
       }
     });
-  
     const iconDiv = this.selectedComponent
       .getEl()
       .querySelector(".tile-icon") as HTMLElement;
-    const selectedTileIcon = iconDiv?.getAttribute("title") ?? "";
-
+    let selectedTileIcon = iconDiv?.getAttribute("title") ?? "";
+    selectedTileIcon = capitalizeWords(selectedTileIcon.replace(/-/g,' ').replace(/_/g,' '))
     const sideBarIconsDiv = document.querySelector(
       "#icons-list"
     ) as HTMLDivElement;
     const sidebarIcons = sideBarIconsDiv.querySelectorAll(".icon");
-
     sidebarIcons.forEach((icon) => {
       const iconElement = icon as HTMLElement;
       const iconTitle = iconElement.getAttribute("title") ?? "";
-
       if (
         tileIcon &&
-        iconTitle === tileIcon &&
+        iconTitle === capitalizedTileIcon &&
         iconTitle === selectedTileIcon
       ) {
         iconElement.style.border = "2px solid #5068A8";

@@ -98,6 +98,7 @@ namespace GeneXus.Programs {
          state.Add("gxTpr_Memoisitalic_Z");
          state.Add("gxTpr_Memoiscapitalized_Z");
          state.Add("gxTpr_Memotextcolor_Z");
+         state.Add("gxTpr_Memocreatedat_Z_Nullable");
          state.Add("gxTpr_Memoimage_N");
          state.Add("gxTpr_Memodocument_N");
          state.Add("gxTpr_Memostartdatetime_N");
@@ -105,6 +106,7 @@ namespace GeneXus.Programs {
          state.Add("gxTpr_Memoduration_N");
          state.Add("gxTpr_Memoremovedate_N");
          state.Add("gxTpr_Memobgcolorcode_N");
+         state.Add("gxTpr_Memocreatedat_N");
          return state ;
       }
 
@@ -142,6 +144,7 @@ namespace GeneXus.Programs {
          gxTv_SdtTrn_Memo_Memoisitalic = sdt.gxTv_SdtTrn_Memo_Memoisitalic ;
          gxTv_SdtTrn_Memo_Memoiscapitalized = sdt.gxTv_SdtTrn_Memo_Memoiscapitalized ;
          gxTv_SdtTrn_Memo_Memotextcolor = sdt.gxTv_SdtTrn_Memo_Memotextcolor ;
+         gxTv_SdtTrn_Memo_Memocreatedat = sdt.gxTv_SdtTrn_Memo_Memocreatedat ;
          gxTv_SdtTrn_Memo_Mode = sdt.gxTv_SdtTrn_Memo_Mode ;
          gxTv_SdtTrn_Memo_Initialized = sdt.gxTv_SdtTrn_Memo_Initialized ;
          gxTv_SdtTrn_Memo_Memoid_Z = sdt.gxTv_SdtTrn_Memo_Memoid_Z ;
@@ -173,6 +176,7 @@ namespace GeneXus.Programs {
          gxTv_SdtTrn_Memo_Memoisitalic_Z = sdt.gxTv_SdtTrn_Memo_Memoisitalic_Z ;
          gxTv_SdtTrn_Memo_Memoiscapitalized_Z = sdt.gxTv_SdtTrn_Memo_Memoiscapitalized_Z ;
          gxTv_SdtTrn_Memo_Memotextcolor_Z = sdt.gxTv_SdtTrn_Memo_Memotextcolor_Z ;
+         gxTv_SdtTrn_Memo_Memocreatedat_Z = sdt.gxTv_SdtTrn_Memo_Memocreatedat_Z ;
          gxTv_SdtTrn_Memo_Memoimage_N = sdt.gxTv_SdtTrn_Memo_Memoimage_N ;
          gxTv_SdtTrn_Memo_Memodocument_N = sdt.gxTv_SdtTrn_Memo_Memodocument_N ;
          gxTv_SdtTrn_Memo_Memostartdatetime_N = sdt.gxTv_SdtTrn_Memo_Memostartdatetime_N ;
@@ -180,6 +184,7 @@ namespace GeneXus.Programs {
          gxTv_SdtTrn_Memo_Memoduration_N = sdt.gxTv_SdtTrn_Memo_Memoduration_N ;
          gxTv_SdtTrn_Memo_Memoremovedate_N = sdt.gxTv_SdtTrn_Memo_Memoremovedate_N ;
          gxTv_SdtTrn_Memo_Memobgcolorcode_N = sdt.gxTv_SdtTrn_Memo_Memobgcolorcode_N ;
+         gxTv_SdtTrn_Memo_Memocreatedat_N = sdt.gxTv_SdtTrn_Memo_Memocreatedat_N ;
          return  ;
       }
 
@@ -282,6 +287,27 @@ namespace GeneXus.Programs {
          AddObjectProperty("MemoIsItalic", gxTv_SdtTrn_Memo_Memoisitalic, false, includeNonInitialized);
          AddObjectProperty("MemoIsCapitalized", gxTv_SdtTrn_Memo_Memoiscapitalized, false, includeNonInitialized);
          AddObjectProperty("MemoTextColor", gxTv_SdtTrn_Memo_Memotextcolor, false, includeNonInitialized);
+         datetime_STZ = gxTv_SdtTrn_Memo_Memocreatedat;
+         sDateCnv = "";
+         sNumToPad = StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Year( datetime_STZ)), 10, 0));
+         sDateCnv += StringUtil.Substring( "0000", 1, 4-StringUtil.Len( sNumToPad)) + sNumToPad;
+         sDateCnv += "-";
+         sNumToPad = StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Month( datetime_STZ)), 10, 0));
+         sDateCnv += StringUtil.Substring( "00", 1, 2-StringUtil.Len( sNumToPad)) + sNumToPad;
+         sDateCnv += "-";
+         sNumToPad = StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Day( datetime_STZ)), 10, 0));
+         sDateCnv += StringUtil.Substring( "00", 1, 2-StringUtil.Len( sNumToPad)) + sNumToPad;
+         sDateCnv += "T";
+         sNumToPad = StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Hour( datetime_STZ)), 10, 0));
+         sDateCnv += StringUtil.Substring( "00", 1, 2-StringUtil.Len( sNumToPad)) + sNumToPad;
+         sDateCnv += ":";
+         sNumToPad = StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Minute( datetime_STZ)), 10, 0));
+         sDateCnv += StringUtil.Substring( "00", 1, 2-StringUtil.Len( sNumToPad)) + sNumToPad;
+         sDateCnv += ":";
+         sNumToPad = StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Second( datetime_STZ)), 10, 0));
+         sDateCnv += StringUtil.Substring( "00", 1, 2-StringUtil.Len( sNumToPad)) + sNumToPad;
+         AddObjectProperty("MemoCreatedAt", sDateCnv, false, includeNonInitialized);
+         AddObjectProperty("MemoCreatedAt_N", gxTv_SdtTrn_Memo_Memocreatedat_N, false, includeNonInitialized);
          if ( includeState )
          {
             AddObjectProperty("Mode", gxTv_SdtTrn_Memo_Mode, false, includeNonInitialized);
@@ -362,6 +388,26 @@ namespace GeneXus.Programs {
             AddObjectProperty("MemoIsItalic_Z", gxTv_SdtTrn_Memo_Memoisitalic_Z, false, includeNonInitialized);
             AddObjectProperty("MemoIsCapitalized_Z", gxTv_SdtTrn_Memo_Memoiscapitalized_Z, false, includeNonInitialized);
             AddObjectProperty("MemoTextColor_Z", gxTv_SdtTrn_Memo_Memotextcolor_Z, false, includeNonInitialized);
+            datetime_STZ = gxTv_SdtTrn_Memo_Memocreatedat_Z;
+            sDateCnv = "";
+            sNumToPad = StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Year( datetime_STZ)), 10, 0));
+            sDateCnv += StringUtil.Substring( "0000", 1, 4-StringUtil.Len( sNumToPad)) + sNumToPad;
+            sDateCnv += "-";
+            sNumToPad = StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Month( datetime_STZ)), 10, 0));
+            sDateCnv += StringUtil.Substring( "00", 1, 2-StringUtil.Len( sNumToPad)) + sNumToPad;
+            sDateCnv += "-";
+            sNumToPad = StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Day( datetime_STZ)), 10, 0));
+            sDateCnv += StringUtil.Substring( "00", 1, 2-StringUtil.Len( sNumToPad)) + sNumToPad;
+            sDateCnv += "T";
+            sNumToPad = StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Hour( datetime_STZ)), 10, 0));
+            sDateCnv += StringUtil.Substring( "00", 1, 2-StringUtil.Len( sNumToPad)) + sNumToPad;
+            sDateCnv += ":";
+            sNumToPad = StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Minute( datetime_STZ)), 10, 0));
+            sDateCnv += StringUtil.Substring( "00", 1, 2-StringUtil.Len( sNumToPad)) + sNumToPad;
+            sDateCnv += ":";
+            sNumToPad = StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Second( datetime_STZ)), 10, 0));
+            sDateCnv += StringUtil.Substring( "00", 1, 2-StringUtil.Len( sNumToPad)) + sNumToPad;
+            AddObjectProperty("MemoCreatedAt_Z", sDateCnv, false, includeNonInitialized);
             AddObjectProperty("MemoImage_N", gxTv_SdtTrn_Memo_Memoimage_N, false, includeNonInitialized);
             AddObjectProperty("MemoDocument_N", gxTv_SdtTrn_Memo_Memodocument_N, false, includeNonInitialized);
             AddObjectProperty("MemoStartDateTime_N", gxTv_SdtTrn_Memo_Memostartdatetime_N, false, includeNonInitialized);
@@ -369,6 +415,7 @@ namespace GeneXus.Programs {
             AddObjectProperty("MemoDuration_N", gxTv_SdtTrn_Memo_Memoduration_N, false, includeNonInitialized);
             AddObjectProperty("MemoRemoveDate_N", gxTv_SdtTrn_Memo_Memoremovedate_N, false, includeNonInitialized);
             AddObjectProperty("MemoBgColorCode_N", gxTv_SdtTrn_Memo_Memobgcolorcode_N, false, includeNonInitialized);
+            AddObjectProperty("MemoCreatedAt_N", gxTv_SdtTrn_Memo_Memocreatedat_N, false, includeNonInitialized);
          }
          return  ;
       }
@@ -532,6 +579,12 @@ namespace GeneXus.Programs {
             sdtIsNull = 0;
             gxTv_SdtTrn_Memo_Memotextcolor = sdt.gxTv_SdtTrn_Memo_Memotextcolor ;
          }
+         if ( sdt.IsDirty("MemoCreatedAt") )
+         {
+            gxTv_SdtTrn_Memo_Memocreatedat_N = (short)(sdt.gxTv_SdtTrn_Memo_Memocreatedat_N);
+            sdtIsNull = 0;
+            gxTv_SdtTrn_Memo_Memocreatedat = sdt.gxTv_SdtTrn_Memo_Memocreatedat ;
+         }
          return  ;
       }
 
@@ -577,6 +630,7 @@ namespace GeneXus.Programs {
                this.gxTv_SdtTrn_Memo_Memoisitalic_Z_SetNull( );
                this.gxTv_SdtTrn_Memo_Memoiscapitalized_Z_SetNull( );
                this.gxTv_SdtTrn_Memo_Memotextcolor_Z_SetNull( );
+               this.gxTv_SdtTrn_Memo_Memocreatedat_Z_SetNull( );
             }
             gxTv_SdtTrn_Memo_Memoid = value;
             SetDirty("Memoid");
@@ -1204,6 +1258,56 @@ namespace GeneXus.Programs {
             SetDirty("Memotextcolor");
          }
 
+      }
+
+      [  SoapElement( ElementName = "MemoCreatedAt" )]
+      [  XmlElement( ElementName = "MemoCreatedAt"  , IsNullable=true )]
+      public string gxTpr_Memocreatedat_Nullable
+      {
+         get {
+            if ( gxTv_SdtTrn_Memo_Memocreatedat == DateTime.MinValue)
+               return null;
+            return new GxDatetimeString(gxTv_SdtTrn_Memo_Memocreatedat).value ;
+         }
+
+         set {
+            gxTv_SdtTrn_Memo_Memocreatedat_N = 0;
+            sdtIsNull = 0;
+            if (String.IsNullOrEmpty(value) || value == GxDatetimeString.NullValue )
+               gxTv_SdtTrn_Memo_Memocreatedat = DateTime.MinValue;
+            else
+               gxTv_SdtTrn_Memo_Memocreatedat = DateTime.Parse( value);
+         }
+
+      }
+
+      [XmlIgnore]
+      public DateTime gxTpr_Memocreatedat
+      {
+         get {
+            return gxTv_SdtTrn_Memo_Memocreatedat ;
+         }
+
+         set {
+            gxTv_SdtTrn_Memo_Memocreatedat_N = 0;
+            sdtIsNull = 0;
+            gxTv_SdtTrn_Memo_Memocreatedat = value;
+            SetDirty("Memocreatedat");
+         }
+
+      }
+
+      public void gxTv_SdtTrn_Memo_Memocreatedat_SetNull( )
+      {
+         gxTv_SdtTrn_Memo_Memocreatedat_N = 1;
+         gxTv_SdtTrn_Memo_Memocreatedat = (DateTime)(DateTime.MinValue);
+         SetDirty("Memocreatedat");
+         return  ;
+      }
+
+      public bool gxTv_SdtTrn_Memo_Memocreatedat_IsNull( )
+      {
+         return (gxTv_SdtTrn_Memo_Memocreatedat_N==1) ;
       }
 
       [  SoapElement( ElementName = "Mode" )]
@@ -2131,6 +2235,53 @@ namespace GeneXus.Programs {
          return false ;
       }
 
+      [  SoapElement( ElementName = "MemoCreatedAt_Z" )]
+      [  XmlElement( ElementName = "MemoCreatedAt_Z"  , IsNullable=true )]
+      public string gxTpr_Memocreatedat_Z_Nullable
+      {
+         get {
+            if ( gxTv_SdtTrn_Memo_Memocreatedat_Z == DateTime.MinValue)
+               return null;
+            return new GxDatetimeString(gxTv_SdtTrn_Memo_Memocreatedat_Z).value ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            if (String.IsNullOrEmpty(value) || value == GxDatetimeString.NullValue )
+               gxTv_SdtTrn_Memo_Memocreatedat_Z = DateTime.MinValue;
+            else
+               gxTv_SdtTrn_Memo_Memocreatedat_Z = DateTime.Parse( value);
+         }
+
+      }
+
+      [XmlIgnore]
+      public DateTime gxTpr_Memocreatedat_Z
+      {
+         get {
+            return gxTv_SdtTrn_Memo_Memocreatedat_Z ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtTrn_Memo_Memocreatedat_Z = value;
+            SetDirty("Memocreatedat_Z");
+         }
+
+      }
+
+      public void gxTv_SdtTrn_Memo_Memocreatedat_Z_SetNull( )
+      {
+         gxTv_SdtTrn_Memo_Memocreatedat_Z = (DateTime)(DateTime.MinValue);
+         SetDirty("Memocreatedat_Z");
+         return  ;
+      }
+
+      public bool gxTv_SdtTrn_Memo_Memocreatedat_Z_IsNull( )
+      {
+         return false ;
+      }
+
       [  SoapElement( ElementName = "MemoImage_N" )]
       [  XmlElement( ElementName = "MemoImage_N"   )]
       public short gxTpr_Memoimage_N
@@ -2327,6 +2478,34 @@ namespace GeneXus.Programs {
          return false ;
       }
 
+      [  SoapElement( ElementName = "MemoCreatedAt_N" )]
+      [  XmlElement( ElementName = "MemoCreatedAt_N"   )]
+      public short gxTpr_Memocreatedat_N
+      {
+         get {
+            return gxTv_SdtTrn_Memo_Memocreatedat_N ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtTrn_Memo_Memocreatedat_N = value;
+            SetDirty("Memocreatedat_N");
+         }
+
+      }
+
+      public void gxTv_SdtTrn_Memo_Memocreatedat_N_SetNull( )
+      {
+         gxTv_SdtTrn_Memo_Memocreatedat_N = 0;
+         SetDirty("Memocreatedat_N");
+         return  ;
+      }
+
+      public bool gxTv_SdtTrn_Memo_Memocreatedat_N_IsNull( )
+      {
+         return false ;
+      }
+
       [XmlIgnore]
       private static GXTypeInfo _typeProps;
       protected override GXTypeInfo TypeInfo
@@ -2366,6 +2545,7 @@ namespace GeneXus.Programs {
          gxTv_SdtTrn_Memo_Memotextfontname = "";
          gxTv_SdtTrn_Memo_Memotextalignment = "";
          gxTv_SdtTrn_Memo_Memotextcolor = "";
+         gxTv_SdtTrn_Memo_Memocreatedat = (DateTime)(DateTime.MinValue);
          gxTv_SdtTrn_Memo_Mode = "";
          gxTv_SdtTrn_Memo_Memoid_Z = Guid.Empty;
          gxTv_SdtTrn_Memo_Memotitle_Z = "";
@@ -2388,6 +2568,7 @@ namespace GeneXus.Programs {
          gxTv_SdtTrn_Memo_Memotextfontname_Z = "";
          gxTv_SdtTrn_Memo_Memotextalignment_Z = "";
          gxTv_SdtTrn_Memo_Memotextcolor_Z = "";
+         gxTv_SdtTrn_Memo_Memocreatedat_Z = (DateTime)(DateTime.MinValue);
          datetime_STZ = (DateTime)(DateTime.MinValue);
          sDateCnv = "";
          sNumToPad = "";
@@ -2414,6 +2595,7 @@ namespace GeneXus.Programs {
       private short gxTv_SdtTrn_Memo_Memoduration_N ;
       private short gxTv_SdtTrn_Memo_Memoremovedate_N ;
       private short gxTv_SdtTrn_Memo_Memobgcolorcode_N ;
+      private short gxTv_SdtTrn_Memo_Memocreatedat_N ;
       private decimal gxTv_SdtTrn_Memo_Memoduration ;
       private decimal gxTv_SdtTrn_Memo_Memoleftoffset ;
       private decimal gxTv_SdtTrn_Memo_Memotopoffset ;
@@ -2435,8 +2617,10 @@ namespace GeneXus.Programs {
       private string sNumToPad ;
       private DateTime gxTv_SdtTrn_Memo_Memostartdatetime ;
       private DateTime gxTv_SdtTrn_Memo_Memoenddatetime ;
+      private DateTime gxTv_SdtTrn_Memo_Memocreatedat ;
       private DateTime gxTv_SdtTrn_Memo_Memostartdatetime_Z ;
       private DateTime gxTv_SdtTrn_Memo_Memoenddatetime_Z ;
+      private DateTime gxTv_SdtTrn_Memo_Memocreatedat_Z ;
       private DateTime datetime_STZ ;
       private DateTime gxTv_SdtTrn_Memo_Memoremovedate ;
       private DateTime gxTv_SdtTrn_Memo_Memoremovedate_Z ;
@@ -2910,6 +3094,20 @@ namespace GeneXus.Programs {
 
       }
 
+      [DataMember( Name = "MemoCreatedAt" , Order = 30 )]
+      [GxSeudo()]
+      public string gxTpr_Memocreatedat
+      {
+         get {
+            return DateTimeUtil.TToC2( sdt.gxTpr_Memocreatedat, (IGxContext)(context)) ;
+         }
+
+         set {
+            sdt.gxTpr_Memocreatedat = DateTimeUtil.CToT2( value, (IGxContext)(context));
+         }
+
+      }
+
       public SdtTrn_Memo sdt
       {
          get {
@@ -2931,7 +3129,7 @@ namespace GeneXus.Programs {
          }
       }
 
-      [DataMember( Name = "gx_md5_hash", Order = 30 )]
+      [DataMember( Name = "gx_md5_hash", Order = 31 )]
       public string Hash
       {
          get {

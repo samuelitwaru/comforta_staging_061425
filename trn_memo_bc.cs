@@ -108,7 +108,7 @@ namespace GeneXus.Programs {
                CheckExtendedTable1P100( ) ;
                if ( AnyError == 0 )
                {
-                  ZM1P100( 10) ;
+                  ZM1P100( 11) ;
                }
                CloseExtendedTableCursors1P100( ) ;
             }
@@ -124,12 +124,12 @@ namespace GeneXus.Programs {
          returnInSub = false;
          new GeneXus.Programs.wwpbaseobjects.loadwwpcontext(context ).execute( out  AV8WWPContext) ;
          AV11TrnContext.FromXml(AV12WebSession.Get("TrnContext"), null, "", "");
-         if ( ( StringUtil.StrCmp(AV11TrnContext.gxTpr_Transactionname, AV31Pgmname) == 0 ) && ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) )
+         if ( ( StringUtil.StrCmp(AV11TrnContext.gxTpr_Transactionname, AV32Pgmname) == 0 ) && ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) )
          {
-            AV32GXV1 = 1;
-            while ( AV32GXV1 <= AV11TrnContext.gxTpr_Attributes.Count )
+            AV33GXV1 = 1;
+            while ( AV33GXV1 <= AV11TrnContext.gxTpr_Attributes.Count )
             {
-               AV15TrnContextAtt = ((WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext_Attribute)AV11TrnContext.gxTpr_Attributes.Item(AV32GXV1));
+               AV15TrnContextAtt = ((WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext_Attribute)AV11TrnContext.gxTpr_Attributes.Item(AV33GXV1));
                if ( StringUtil.StrCmp(AV15TrnContextAtt.gxTpr_Attributename, "ResidentId") == 0 )
                {
                   AV26Insert_ResidentId = StringUtil.StrToGuid( AV15TrnContextAtt.gxTpr_Attributevalue);
@@ -142,7 +142,7 @@ namespace GeneXus.Programs {
                {
                   AV30Insert_SG_LocationId = StringUtil.StrToGuid( AV15TrnContextAtt.gxTpr_Attributevalue);
                }
-               AV32GXV1 = (int)(AV32GXV1+1);
+               AV33GXV1 = (int)(AV33GXV1+1);
             }
          }
       }
@@ -155,7 +155,7 @@ namespace GeneXus.Programs {
 
       protected void ZM1P100( short GX_JID )
       {
-         if ( ( GX_JID == 9 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 10 ) || ( GX_JID == 0 ) )
          {
             Z550MemoTitle = A550MemoTitle;
             Z551MemoDescription = A551MemoDescription;
@@ -178,18 +178,19 @@ namespace GeneXus.Programs {
             Z640MemoIsItalic = A640MemoIsItalic;
             Z641MemoIsCapitalized = A641MemoIsCapitalized;
             Z642MemoTextColor = A642MemoTextColor;
+            Z647MemoCreatedAt = A647MemoCreatedAt;
             Z62ResidentId = A62ResidentId;
             Z528SG_LocationId = A528SG_LocationId;
             Z529SG_OrganisationId = A529SG_OrganisationId;
          }
-         if ( ( GX_JID == 10 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 11 ) || ( GX_JID == 0 ) )
          {
             Z72ResidentSalutation = A72ResidentSalutation;
             Z64ResidentGivenName = A64ResidentGivenName;
             Z65ResidentLastName = A65ResidentLastName;
             Z71ResidentGUID = A71ResidentGUID;
          }
-         if ( GX_JID == -9 )
+         if ( GX_JID == -10 )
          {
             Z549MemoId = A549MemoId;
             Z550MemoTitle = A550MemoTitle;
@@ -214,6 +215,7 @@ namespace GeneXus.Programs {
             Z640MemoIsItalic = A640MemoIsItalic;
             Z641MemoIsCapitalized = A641MemoIsCapitalized;
             Z642MemoTextColor = A642MemoTextColor;
+            Z647MemoCreatedAt = A647MemoCreatedAt;
             Z62ResidentId = A62ResidentId;
             Z528SG_LocationId = A528SG_LocationId;
             Z529SG_OrganisationId = A529SG_OrganisationId;
@@ -228,7 +230,8 @@ namespace GeneXus.Programs {
 
       protected void standaloneNotModal( )
       {
-         AV31Pgmname = "Trn_Memo_BC";
+         AV32Pgmname = "Trn_Memo_BC";
+         Gx_BScreen = 0;
       }
 
       protected void standaloneModal( )
@@ -236,6 +239,11 @@ namespace GeneXus.Programs {
          if ( IsIns( )  && (Guid.Empty==A549MemoId) )
          {
             A549MemoId = Guid.NewGuid( );
+         }
+         if ( IsIns( )  && (DateTime.MinValue==A647MemoCreatedAt) && ( Gx_BScreen == 0 ) )
+         {
+            A647MemoCreatedAt = DateTimeUtil.Now( context);
+            n647MemoCreatedAt = false;
          }
          if ( ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) && ( Gx_BScreen == 0 ) )
          {
@@ -284,10 +292,12 @@ namespace GeneXus.Programs {
             A640MemoIsItalic = BC001P5_A640MemoIsItalic[0];
             A641MemoIsCapitalized = BC001P5_A641MemoIsCapitalized[0];
             A642MemoTextColor = BC001P5_A642MemoTextColor[0];
+            A647MemoCreatedAt = BC001P5_A647MemoCreatedAt[0];
+            n647MemoCreatedAt = BC001P5_n647MemoCreatedAt[0];
             A62ResidentId = BC001P5_A62ResidentId[0];
             A528SG_LocationId = BC001P5_A528SG_LocationId[0];
             A529SG_OrganisationId = BC001P5_A529SG_OrganisationId[0];
-            ZM1P100( -9) ;
+            ZM1P100( -10) ;
          }
          pr_default.close(3);
          OnLoadActions1P100( ) ;
@@ -349,7 +359,7 @@ namespace GeneXus.Programs {
          pr_default.execute(1, new Object[] {A549MemoId});
          if ( (pr_default.getStatus(1) != 101) )
          {
-            ZM1P100( 9) ;
+            ZM1P100( 10) ;
             RcdFound100 = 1;
             A549MemoId = BC001P3_A549MemoId[0];
             A550MemoTitle = BC001P3_A550MemoTitle[0];
@@ -381,6 +391,8 @@ namespace GeneXus.Programs {
             A640MemoIsItalic = BC001P3_A640MemoIsItalic[0];
             A641MemoIsCapitalized = BC001P3_A641MemoIsCapitalized[0];
             A642MemoTextColor = BC001P3_A642MemoTextColor[0];
+            A647MemoCreatedAt = BC001P3_A647MemoCreatedAt[0];
+            n647MemoCreatedAt = BC001P3_n647MemoCreatedAt[0];
             A62ResidentId = BC001P3_A62ResidentId[0];
             A528SG_LocationId = BC001P3_A528SG_LocationId[0];
             A529SG_OrganisationId = BC001P3_A529SG_OrganisationId[0];
@@ -466,7 +478,7 @@ namespace GeneXus.Programs {
             {
                Gx_longc = true;
             }
-            if ( Gx_longc || ( StringUtil.StrCmp(Z642MemoTextColor, BC001P2_A642MemoTextColor[0]) != 0 ) || ( Z62ResidentId != BC001P2_A62ResidentId[0] ) || ( Z528SG_LocationId != BC001P2_A528SG_LocationId[0] ) || ( Z529SG_OrganisationId != BC001P2_A529SG_OrganisationId[0] ) )
+            if ( Gx_longc || ( StringUtil.StrCmp(Z642MemoTextColor, BC001P2_A642MemoTextColor[0]) != 0 ) || ( Z647MemoCreatedAt != BC001P2_A647MemoCreatedAt[0] ) || ( Z62ResidentId != BC001P2_A62ResidentId[0] ) || ( Z528SG_LocationId != BC001P2_A528SG_LocationId[0] ) || ( Z529SG_OrganisationId != BC001P2_A529SG_OrganisationId[0] ) )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_waschg", new   object[]  {"Trn_Memo"}), "RecordWasChanged", 1, "");
                AnyError = 1;
@@ -495,7 +507,7 @@ namespace GeneXus.Programs {
                   if ( AnyError == 0 )
                   {
                      /* Using cursor BC001P7 */
-                     pr_default.execute(5, new Object[] {A549MemoId, A550MemoTitle, A551MemoDescription, n552MemoImage, A552MemoImage, n553MemoDocument, A553MemoDocument, n561MemoStartDateTime, A561MemoStartDateTime, n562MemoEndDateTime, A562MemoEndDateTime, n563MemoDuration, A563MemoDuration, n564MemoRemoveDate, A564MemoRemoveDate, n566MemoBgColorCode, A566MemoBgColorCode, A567MemoForm, A624MemoType, A625MemoName, A626MemoLeftOffset, A627MemoTopOffset, A628MemoTitleAngle, A629MemoTitleScale, A637MemoTextFontName, A638MemoTextAlignment, A639MemoIsBold, A640MemoIsItalic, A641MemoIsCapitalized, A642MemoTextColor, A62ResidentId, A528SG_LocationId, A529SG_OrganisationId});
+                     pr_default.execute(5, new Object[] {A549MemoId, A550MemoTitle, A551MemoDescription, n552MemoImage, A552MemoImage, n553MemoDocument, A553MemoDocument, n561MemoStartDateTime, A561MemoStartDateTime, n562MemoEndDateTime, A562MemoEndDateTime, n563MemoDuration, A563MemoDuration, n564MemoRemoveDate, A564MemoRemoveDate, n566MemoBgColorCode, A566MemoBgColorCode, A567MemoForm, A624MemoType, A625MemoName, A626MemoLeftOffset, A627MemoTopOffset, A628MemoTitleAngle, A629MemoTitleScale, A637MemoTextFontName, A638MemoTextAlignment, A639MemoIsBold, A640MemoIsItalic, A641MemoIsCapitalized, A642MemoTextColor, n647MemoCreatedAt, A647MemoCreatedAt, A62ResidentId, A528SG_LocationId, A529SG_OrganisationId});
                      pr_default.close(5);
                      pr_default.SmartCacheProvider.SetUpdated("Trn_Memo");
                      if ( (pr_default.getStatus(5) == 1) )
@@ -550,7 +562,7 @@ namespace GeneXus.Programs {
                   if ( AnyError == 0 )
                   {
                      /* Using cursor BC001P8 */
-                     pr_default.execute(6, new Object[] {A550MemoTitle, A551MemoDescription, n552MemoImage, A552MemoImage, n553MemoDocument, A553MemoDocument, n561MemoStartDateTime, A561MemoStartDateTime, n562MemoEndDateTime, A562MemoEndDateTime, n563MemoDuration, A563MemoDuration, n564MemoRemoveDate, A564MemoRemoveDate, n566MemoBgColorCode, A566MemoBgColorCode, A567MemoForm, A624MemoType, A625MemoName, A626MemoLeftOffset, A627MemoTopOffset, A628MemoTitleAngle, A629MemoTitleScale, A637MemoTextFontName, A638MemoTextAlignment, A639MemoIsBold, A640MemoIsItalic, A641MemoIsCapitalized, A642MemoTextColor, A62ResidentId, A528SG_LocationId, A529SG_OrganisationId, A549MemoId});
+                     pr_default.execute(6, new Object[] {A550MemoTitle, A551MemoDescription, n552MemoImage, A552MemoImage, n553MemoDocument, A553MemoDocument, n561MemoStartDateTime, A561MemoStartDateTime, n562MemoEndDateTime, A562MemoEndDateTime, n563MemoDuration, A563MemoDuration, n564MemoRemoveDate, A564MemoRemoveDate, n566MemoBgColorCode, A566MemoBgColorCode, A567MemoForm, A624MemoType, A625MemoName, A626MemoLeftOffset, A627MemoTopOffset, A628MemoTitleAngle, A629MemoTitleScale, A637MemoTextFontName, A638MemoTextAlignment, A639MemoIsBold, A640MemoIsItalic, A641MemoIsCapitalized, A642MemoTextColor, n647MemoCreatedAt, A647MemoCreatedAt, A62ResidentId, A528SG_LocationId, A529SG_OrganisationId, A549MemoId});
                      pr_default.close(6);
                      pr_default.SmartCacheProvider.SetUpdated("Trn_Memo");
                      if ( (pr_default.getStatus(6) == 103) )
@@ -720,6 +732,8 @@ namespace GeneXus.Programs {
             A640MemoIsItalic = BC001P11_A640MemoIsItalic[0];
             A641MemoIsCapitalized = BC001P11_A641MemoIsCapitalized[0];
             A642MemoTextColor = BC001P11_A642MemoTextColor[0];
+            A647MemoCreatedAt = BC001P11_A647MemoCreatedAt[0];
+            n647MemoCreatedAt = BC001P11_n647MemoCreatedAt[0];
             A62ResidentId = BC001P11_A62ResidentId[0];
             A528SG_LocationId = BC001P11_A528SG_LocationId[0];
             A529SG_OrganisationId = BC001P11_A529SG_OrganisationId[0];
@@ -778,6 +792,8 @@ namespace GeneXus.Programs {
             A640MemoIsItalic = BC001P11_A640MemoIsItalic[0];
             A641MemoIsCapitalized = BC001P11_A641MemoIsCapitalized[0];
             A642MemoTextColor = BC001P11_A642MemoTextColor[0];
+            A647MemoCreatedAt = BC001P11_A647MemoCreatedAt[0];
+            n647MemoCreatedAt = BC001P11_n647MemoCreatedAt[0];
             A62ResidentId = BC001P11_A62ResidentId[0];
             A528SG_LocationId = BC001P11_A528SG_LocationId[0];
             A529SG_OrganisationId = BC001P11_A529SG_OrganisationId[0];
@@ -878,6 +894,8 @@ namespace GeneXus.Programs {
          A640MemoIsItalic = false;
          A641MemoIsCapitalized = false;
          A642MemoTextColor = "";
+         A647MemoCreatedAt = DateTimeUtil.Now( context);
+         n647MemoCreatedAt = false;
          Z550MemoTitle = "";
          Z551MemoDescription = "";
          Z553MemoDocument = "";
@@ -899,6 +917,7 @@ namespace GeneXus.Programs {
          Z640MemoIsItalic = false;
          Z641MemoIsCapitalized = false;
          Z642MemoTextColor = "";
+         Z647MemoCreatedAt = (DateTime)(DateTime.MinValue);
          Z62ResidentId = Guid.Empty;
          Z528SG_LocationId = Guid.Empty;
          Z529SG_OrganisationId = Guid.Empty;
@@ -912,6 +931,8 @@ namespace GeneXus.Programs {
 
       protected void StandaloneModalInsert( )
       {
+         A647MemoCreatedAt = i647MemoCreatedAt;
+         n647MemoCreatedAt = false;
       }
 
       protected bool IsIns( )
@@ -966,6 +987,7 @@ namespace GeneXus.Programs {
          obj100.gxTpr_Memoisitalic = A640MemoIsItalic;
          obj100.gxTpr_Memoiscapitalized = A641MemoIsCapitalized;
          obj100.gxTpr_Memotextcolor = A642MemoTextColor;
+         obj100.gxTpr_Memocreatedat = A647MemoCreatedAt;
          obj100.gxTpr_Memoid = A549MemoId;
          obj100.gxTpr_Memoid_Z = Z549MemoId;
          obj100.gxTpr_Memotitle_Z = Z550MemoTitle;
@@ -996,6 +1018,7 @@ namespace GeneXus.Programs {
          obj100.gxTpr_Memoisitalic_Z = Z640MemoIsItalic;
          obj100.gxTpr_Memoiscapitalized_Z = Z641MemoIsCapitalized;
          obj100.gxTpr_Memotextcolor_Z = Z642MemoTextColor;
+         obj100.gxTpr_Memocreatedat_Z = Z647MemoCreatedAt;
          obj100.gxTpr_Memoimage_N = (short)(Convert.ToInt16(n552MemoImage));
          obj100.gxTpr_Memodocument_N = (short)(Convert.ToInt16(n553MemoDocument));
          obj100.gxTpr_Memostartdatetime_N = (short)(Convert.ToInt16(n561MemoStartDateTime));
@@ -1003,6 +1026,7 @@ namespace GeneXus.Programs {
          obj100.gxTpr_Memoduration_N = (short)(Convert.ToInt16(n563MemoDuration));
          obj100.gxTpr_Memoremovedate_N = (short)(Convert.ToInt16(n564MemoRemoveDate));
          obj100.gxTpr_Memobgcolorcode_N = (short)(Convert.ToInt16(n566MemoBgColorCode));
+         obj100.gxTpr_Memocreatedat_N = (short)(Convert.ToInt16(n647MemoCreatedAt));
          obj100.gxTpr_Mode = Gx_mode;
          return  ;
       }
@@ -1053,6 +1077,11 @@ namespace GeneXus.Programs {
          A640MemoIsItalic = obj100.gxTpr_Memoisitalic;
          A641MemoIsCapitalized = obj100.gxTpr_Memoiscapitalized;
          A642MemoTextColor = obj100.gxTpr_Memotextcolor;
+         if ( forceLoad == 1 )
+         {
+            A647MemoCreatedAt = obj100.gxTpr_Memocreatedat;
+            n647MemoCreatedAt = false;
+         }
          A549MemoId = obj100.gxTpr_Memoid;
          Z549MemoId = obj100.gxTpr_Memoid_Z;
          Z550MemoTitle = obj100.gxTpr_Memotitle_Z;
@@ -1083,6 +1112,7 @@ namespace GeneXus.Programs {
          Z640MemoIsItalic = obj100.gxTpr_Memoisitalic_Z;
          Z641MemoIsCapitalized = obj100.gxTpr_Memoiscapitalized_Z;
          Z642MemoTextColor = obj100.gxTpr_Memotextcolor_Z;
+         Z647MemoCreatedAt = obj100.gxTpr_Memocreatedat_Z;
          n552MemoImage = (bool)(Convert.ToBoolean(obj100.gxTpr_Memoimage_N));
          n553MemoDocument = (bool)(Convert.ToBoolean(obj100.gxTpr_Memodocument_N));
          n561MemoStartDateTime = (bool)(Convert.ToBoolean(obj100.gxTpr_Memostartdatetime_N));
@@ -1090,6 +1120,7 @@ namespace GeneXus.Programs {
          n563MemoDuration = (bool)(Convert.ToBoolean(obj100.gxTpr_Memoduration_N));
          n564MemoRemoveDate = (bool)(Convert.ToBoolean(obj100.gxTpr_Memoremovedate_N));
          n566MemoBgColorCode = (bool)(Convert.ToBoolean(obj100.gxTpr_Memobgcolorcode_N));
+         n647MemoCreatedAt = (bool)(Convert.ToBoolean(obj100.gxTpr_Memocreatedat_N));
          Gx_mode = obj100.gxTpr_Mode;
          return  ;
       }
@@ -1112,7 +1143,7 @@ namespace GeneXus.Programs {
             Gx_mode = "UPD";
             Z549MemoId = A549MemoId;
          }
-         ZM1P100( -9) ;
+         ZM1P100( -10) ;
          OnLoadActions1P100( ) ;
          AddRow1P100( ) ;
          ScanKeyEnd1P100( ) ;
@@ -1141,7 +1172,7 @@ namespace GeneXus.Programs {
             Gx_mode = "UPD";
             Z549MemoId = A549MemoId;
          }
-         ZM1P100( -9) ;
+         ZM1P100( -10) ;
          OnLoadActions1P100( ) ;
          AddRow1P100( ) ;
          ScanKeyEnd1P100( ) ;
@@ -1529,7 +1560,7 @@ namespace GeneXus.Programs {
          AV8WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          AV11TrnContext = new WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext(context);
          AV12WebSession = context.GetSession();
-         AV31Pgmname = "";
+         AV32Pgmname = "";
          AV15TrnContextAtt = new WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext_Attribute(context);
          AV26Insert_ResidentId = Guid.Empty;
          AV29Insert_SG_OrganisationId = Guid.Empty;
@@ -1560,6 +1591,8 @@ namespace GeneXus.Programs {
          A638MemoTextAlignment = "";
          Z642MemoTextColor = "";
          A642MemoTextColor = "";
+         Z647MemoCreatedAt = (DateTime)(DateTime.MinValue);
+         A647MemoCreatedAt = (DateTime)(DateTime.MinValue);
          Z62ResidentId = Guid.Empty;
          A62ResidentId = Guid.Empty;
          Z528SG_LocationId = Guid.Empty;
@@ -1616,6 +1649,8 @@ namespace GeneXus.Programs {
          BC001P5_A640MemoIsItalic = new bool[] {false} ;
          BC001P5_A641MemoIsCapitalized = new bool[] {false} ;
          BC001P5_A642MemoTextColor = new string[] {""} ;
+         BC001P5_A647MemoCreatedAt = new DateTime[] {DateTime.MinValue} ;
+         BC001P5_n647MemoCreatedAt = new bool[] {false} ;
          BC001P5_A62ResidentId = new Guid[] {Guid.Empty} ;
          BC001P5_A528SG_LocationId = new Guid[] {Guid.Empty} ;
          BC001P5_A529SG_OrganisationId = new Guid[] {Guid.Empty} ;
@@ -1656,6 +1691,8 @@ namespace GeneXus.Programs {
          BC001P3_A640MemoIsItalic = new bool[] {false} ;
          BC001P3_A641MemoIsCapitalized = new bool[] {false} ;
          BC001P3_A642MemoTextColor = new string[] {""} ;
+         BC001P3_A647MemoCreatedAt = new DateTime[] {DateTime.MinValue} ;
+         BC001P3_n647MemoCreatedAt = new bool[] {false} ;
          BC001P3_A62ResidentId = new Guid[] {Guid.Empty} ;
          BC001P3_A528SG_LocationId = new Guid[] {Guid.Empty} ;
          BC001P3_A529SG_OrganisationId = new Guid[] {Guid.Empty} ;
@@ -1690,6 +1727,8 @@ namespace GeneXus.Programs {
          BC001P2_A640MemoIsItalic = new bool[] {false} ;
          BC001P2_A641MemoIsCapitalized = new bool[] {false} ;
          BC001P2_A642MemoTextColor = new string[] {""} ;
+         BC001P2_A647MemoCreatedAt = new DateTime[] {DateTime.MinValue} ;
+         BC001P2_n647MemoCreatedAt = new bool[] {false} ;
          BC001P2_A62ResidentId = new Guid[] {Guid.Empty} ;
          BC001P2_A528SG_LocationId = new Guid[] {Guid.Empty} ;
          BC001P2_A529SG_OrganisationId = new Guid[] {Guid.Empty} ;
@@ -1733,9 +1772,12 @@ namespace GeneXus.Programs {
          BC001P11_A640MemoIsItalic = new bool[] {false} ;
          BC001P11_A641MemoIsCapitalized = new bool[] {false} ;
          BC001P11_A642MemoTextColor = new string[] {""} ;
+         BC001P11_A647MemoCreatedAt = new DateTime[] {DateTime.MinValue} ;
+         BC001P11_n647MemoCreatedAt = new bool[] {false} ;
          BC001P11_A62ResidentId = new Guid[] {Guid.Empty} ;
          BC001P11_A528SG_LocationId = new Guid[] {Guid.Empty} ;
          BC001P11_A529SG_OrganisationId = new Guid[] {Guid.Empty} ;
+         i647MemoCreatedAt = (DateTime)(DateTime.MinValue);
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
          pr_datastore1 = new DataStoreProvider(context, new GeneXus.Programs.trn_memo_bc__datastore1(),
@@ -1752,13 +1794,13 @@ namespace GeneXus.Programs {
                BC001P2_A549MemoId, BC001P2_A550MemoTitle, BC001P2_A551MemoDescription, BC001P2_A552MemoImage, BC001P2_n552MemoImage, BC001P2_A553MemoDocument, BC001P2_n553MemoDocument, BC001P2_A561MemoStartDateTime, BC001P2_n561MemoStartDateTime, BC001P2_A562MemoEndDateTime,
                BC001P2_n562MemoEndDateTime, BC001P2_A563MemoDuration, BC001P2_n563MemoDuration, BC001P2_A564MemoRemoveDate, BC001P2_n564MemoRemoveDate, BC001P2_A566MemoBgColorCode, BC001P2_n566MemoBgColorCode, BC001P2_A567MemoForm, BC001P2_A624MemoType, BC001P2_A625MemoName,
                BC001P2_A626MemoLeftOffset, BC001P2_A627MemoTopOffset, BC001P2_A628MemoTitleAngle, BC001P2_A629MemoTitleScale, BC001P2_A637MemoTextFontName, BC001P2_A638MemoTextAlignment, BC001P2_A639MemoIsBold, BC001P2_A640MemoIsItalic, BC001P2_A641MemoIsCapitalized, BC001P2_A642MemoTextColor,
-               BC001P2_A62ResidentId, BC001P2_A528SG_LocationId, BC001P2_A529SG_OrganisationId
+               BC001P2_A647MemoCreatedAt, BC001P2_n647MemoCreatedAt, BC001P2_A62ResidentId, BC001P2_A528SG_LocationId, BC001P2_A529SG_OrganisationId
                }
                , new Object[] {
                BC001P3_A549MemoId, BC001P3_A550MemoTitle, BC001P3_A551MemoDescription, BC001P3_A552MemoImage, BC001P3_n552MemoImage, BC001P3_A553MemoDocument, BC001P3_n553MemoDocument, BC001P3_A561MemoStartDateTime, BC001P3_n561MemoStartDateTime, BC001P3_A562MemoEndDateTime,
                BC001P3_n562MemoEndDateTime, BC001P3_A563MemoDuration, BC001P3_n563MemoDuration, BC001P3_A564MemoRemoveDate, BC001P3_n564MemoRemoveDate, BC001P3_A566MemoBgColorCode, BC001P3_n566MemoBgColorCode, BC001P3_A567MemoForm, BC001P3_A624MemoType, BC001P3_A625MemoName,
                BC001P3_A626MemoLeftOffset, BC001P3_A627MemoTopOffset, BC001P3_A628MemoTitleAngle, BC001P3_A629MemoTitleScale, BC001P3_A637MemoTextFontName, BC001P3_A638MemoTextAlignment, BC001P3_A639MemoIsBold, BC001P3_A640MemoIsItalic, BC001P3_A641MemoIsCapitalized, BC001P3_A642MemoTextColor,
-               BC001P3_A62ResidentId, BC001P3_A528SG_LocationId, BC001P3_A529SG_OrganisationId
+               BC001P3_A647MemoCreatedAt, BC001P3_n647MemoCreatedAt, BC001P3_A62ResidentId, BC001P3_A528SG_LocationId, BC001P3_A529SG_OrganisationId
                }
                , new Object[] {
                BC001P4_A29LocationId, BC001P4_A11OrganisationId, BC001P4_A72ResidentSalutation, BC001P4_A64ResidentGivenName, BC001P4_A65ResidentLastName, BC001P4_A71ResidentGUID
@@ -1767,7 +1809,8 @@ namespace GeneXus.Programs {
                BC001P5_A29LocationId, BC001P5_A11OrganisationId, BC001P5_A549MemoId, BC001P5_A550MemoTitle, BC001P5_A551MemoDescription, BC001P5_A552MemoImage, BC001P5_n552MemoImage, BC001P5_A553MemoDocument, BC001P5_n553MemoDocument, BC001P5_A561MemoStartDateTime,
                BC001P5_n561MemoStartDateTime, BC001P5_A562MemoEndDateTime, BC001P5_n562MemoEndDateTime, BC001P5_A563MemoDuration, BC001P5_n563MemoDuration, BC001P5_A564MemoRemoveDate, BC001P5_n564MemoRemoveDate, BC001P5_A72ResidentSalutation, BC001P5_A64ResidentGivenName, BC001P5_A65ResidentLastName,
                BC001P5_A71ResidentGUID, BC001P5_A566MemoBgColorCode, BC001P5_n566MemoBgColorCode, BC001P5_A567MemoForm, BC001P5_A624MemoType, BC001P5_A625MemoName, BC001P5_A626MemoLeftOffset, BC001P5_A627MemoTopOffset, BC001P5_A628MemoTitleAngle, BC001P5_A629MemoTitleScale,
-               BC001P5_A637MemoTextFontName, BC001P5_A638MemoTextAlignment, BC001P5_A639MemoIsBold, BC001P5_A640MemoIsItalic, BC001P5_A641MemoIsCapitalized, BC001P5_A642MemoTextColor, BC001P5_A62ResidentId, BC001P5_A528SG_LocationId, BC001P5_A529SG_OrganisationId
+               BC001P5_A637MemoTextFontName, BC001P5_A638MemoTextAlignment, BC001P5_A639MemoIsBold, BC001P5_A640MemoIsItalic, BC001P5_A641MemoIsCapitalized, BC001P5_A642MemoTextColor, BC001P5_A647MemoCreatedAt, BC001P5_n647MemoCreatedAt, BC001P5_A62ResidentId, BC001P5_A528SG_LocationId,
+               BC001P5_A529SG_OrganisationId
                }
                , new Object[] {
                BC001P6_A549MemoId
@@ -1785,13 +1828,20 @@ namespace GeneXus.Programs {
                BC001P11_A29LocationId, BC001P11_A11OrganisationId, BC001P11_A549MemoId, BC001P11_A550MemoTitle, BC001P11_A551MemoDescription, BC001P11_A552MemoImage, BC001P11_n552MemoImage, BC001P11_A553MemoDocument, BC001P11_n553MemoDocument, BC001P11_A561MemoStartDateTime,
                BC001P11_n561MemoStartDateTime, BC001P11_A562MemoEndDateTime, BC001P11_n562MemoEndDateTime, BC001P11_A563MemoDuration, BC001P11_n563MemoDuration, BC001P11_A564MemoRemoveDate, BC001P11_n564MemoRemoveDate, BC001P11_A72ResidentSalutation, BC001P11_A64ResidentGivenName, BC001P11_A65ResidentLastName,
                BC001P11_A71ResidentGUID, BC001P11_A566MemoBgColorCode, BC001P11_n566MemoBgColorCode, BC001P11_A567MemoForm, BC001P11_A624MemoType, BC001P11_A625MemoName, BC001P11_A626MemoLeftOffset, BC001P11_A627MemoTopOffset, BC001P11_A628MemoTitleAngle, BC001P11_A629MemoTitleScale,
-               BC001P11_A637MemoTextFontName, BC001P11_A638MemoTextAlignment, BC001P11_A639MemoIsBold, BC001P11_A640MemoIsItalic, BC001P11_A641MemoIsCapitalized, BC001P11_A642MemoTextColor, BC001P11_A62ResidentId, BC001P11_A528SG_LocationId, BC001P11_A529SG_OrganisationId
+               BC001P11_A637MemoTextFontName, BC001P11_A638MemoTextAlignment, BC001P11_A639MemoIsBold, BC001P11_A640MemoIsItalic, BC001P11_A641MemoIsCapitalized, BC001P11_A642MemoTextColor, BC001P11_A647MemoCreatedAt, BC001P11_n647MemoCreatedAt, BC001P11_A62ResidentId, BC001P11_A528SG_LocationId,
+               BC001P11_A529SG_OrganisationId
                }
             }
          );
          Z549MemoId = Guid.NewGuid( );
          A549MemoId = Guid.NewGuid( );
-         AV31Pgmname = "Trn_Memo_BC";
+         AV32Pgmname = "Trn_Memo_BC";
+         Z647MemoCreatedAt = DateTimeUtil.Now( context);
+         n647MemoCreatedAt = false;
+         A647MemoCreatedAt = DateTimeUtil.Now( context);
+         n647MemoCreatedAt = false;
+         i647MemoCreatedAt = DateTimeUtil.Now( context);
+         n647MemoCreatedAt = false;
          INITTRN();
          /* Execute Start event if defined. */
          /* Execute user event: Start */
@@ -1803,7 +1853,7 @@ namespace GeneXus.Programs {
       private short Gx_BScreen ;
       private short RcdFound100 ;
       private int trnEnded ;
-      private int AV32GXV1 ;
+      private int AV33GXV1 ;
       private decimal Z563MemoDuration ;
       private decimal A563MemoDuration ;
       private decimal Z626MemoLeftOffset ;
@@ -1817,7 +1867,7 @@ namespace GeneXus.Programs {
       private string Gx_mode ;
       private string endTrnMsgTxt ;
       private string endTrnMsgCod ;
-      private string AV31Pgmname ;
+      private string AV32Pgmname ;
       private string Z567MemoForm ;
       private string A567MemoForm ;
       private string Z638MemoTextAlignment ;
@@ -1829,6 +1879,9 @@ namespace GeneXus.Programs {
       private DateTime A561MemoStartDateTime ;
       private DateTime Z562MemoEndDateTime ;
       private DateTime A562MemoEndDateTime ;
+      private DateTime Z647MemoCreatedAt ;
+      private DateTime A647MemoCreatedAt ;
+      private DateTime i647MemoCreatedAt ;
       private DateTime Z564MemoRemoveDate ;
       private DateTime A564MemoRemoveDate ;
       private bool returnInSub ;
@@ -1838,6 +1891,7 @@ namespace GeneXus.Programs {
       private bool A640MemoIsItalic ;
       private bool Z641MemoIsCapitalized ;
       private bool A641MemoIsCapitalized ;
+      private bool n647MemoCreatedAt ;
       private bool n552MemoImage ;
       private bool n553MemoDocument ;
       private bool n561MemoStartDateTime ;
@@ -1929,6 +1983,8 @@ namespace GeneXus.Programs {
       private bool[] BC001P5_A640MemoIsItalic ;
       private bool[] BC001P5_A641MemoIsCapitalized ;
       private string[] BC001P5_A642MemoTextColor ;
+      private DateTime[] BC001P5_A647MemoCreatedAt ;
+      private bool[] BC001P5_n647MemoCreatedAt ;
       private Guid[] BC001P5_A62ResidentId ;
       private Guid[] BC001P5_A528SG_LocationId ;
       private Guid[] BC001P5_A529SG_OrganisationId ;
@@ -1969,6 +2025,8 @@ namespace GeneXus.Programs {
       private bool[] BC001P3_A640MemoIsItalic ;
       private bool[] BC001P3_A641MemoIsCapitalized ;
       private string[] BC001P3_A642MemoTextColor ;
+      private DateTime[] BC001P3_A647MemoCreatedAt ;
+      private bool[] BC001P3_n647MemoCreatedAt ;
       private Guid[] BC001P3_A62ResidentId ;
       private Guid[] BC001P3_A528SG_LocationId ;
       private Guid[] BC001P3_A529SG_OrganisationId ;
@@ -2002,6 +2060,8 @@ namespace GeneXus.Programs {
       private bool[] BC001P2_A640MemoIsItalic ;
       private bool[] BC001P2_A641MemoIsCapitalized ;
       private string[] BC001P2_A642MemoTextColor ;
+      private DateTime[] BC001P2_A647MemoCreatedAt ;
+      private bool[] BC001P2_n647MemoCreatedAt ;
       private Guid[] BC001P2_A62ResidentId ;
       private Guid[] BC001P2_A528SG_LocationId ;
       private Guid[] BC001P2_A529SG_OrganisationId ;
@@ -2045,6 +2105,8 @@ namespace GeneXus.Programs {
       private bool[] BC001P11_A640MemoIsItalic ;
       private bool[] BC001P11_A641MemoIsCapitalized ;
       private string[] BC001P11_A642MemoTextColor ;
+      private DateTime[] BC001P11_A647MemoCreatedAt ;
+      private bool[] BC001P11_n647MemoCreatedAt ;
       private Guid[] BC001P11_A62ResidentId ;
       private Guid[] BC001P11_A528SG_LocationId ;
       private Guid[] BC001P11_A529SG_OrganisationId ;
@@ -2190,6 +2252,7 @@ public class trn_memo_bc__default : DataStoreHelperBase, IDataStoreHelper
        new ParDef("MemoIsItalic",GXType.Boolean,4,0) ,
        new ParDef("MemoIsCapitalized",GXType.Boolean,4,0) ,
        new ParDef("MemoTextColor",GXType.VarChar,40,0) ,
+       new ParDef("MemoCreatedAt",GXType.DateTime,8,5){Nullable=true} ,
        new ParDef("ResidentId",GXType.UniqueIdentifier,36,0) ,
        new ParDef("SG_LocationId",GXType.UniqueIdentifier,36,0) ,
        new ParDef("SG_OrganisationId",GXType.UniqueIdentifier,36,0)
@@ -2218,6 +2281,7 @@ public class trn_memo_bc__default : DataStoreHelperBase, IDataStoreHelper
        new ParDef("MemoIsItalic",GXType.Boolean,4,0) ,
        new ParDef("MemoIsCapitalized",GXType.Boolean,4,0) ,
        new ParDef("MemoTextColor",GXType.VarChar,40,0) ,
+       new ParDef("MemoCreatedAt",GXType.DateTime,8,5){Nullable=true} ,
        new ParDef("ResidentId",GXType.UniqueIdentifier,36,0) ,
        new ParDef("SG_LocationId",GXType.UniqueIdentifier,36,0) ,
        new ParDef("SG_OrganisationId",GXType.UniqueIdentifier,36,0) ,
@@ -2238,16 +2302,16 @@ public class trn_memo_bc__default : DataStoreHelperBase, IDataStoreHelper
        new ParDef("MemoId",GXType.UniqueIdentifier,36,0)
        };
        def= new CursorDef[] {
-           new CursorDef("BC001P2", "SELECT MemoId, MemoTitle, MemoDescription, MemoImage, MemoDocument, MemoStartDateTime, MemoEndDateTime, MemoDuration, MemoRemoveDate, MemoBgColorCode, MemoForm, MemoType, MemoName, MemoLeftOffset, MemoTopOffset, MemoTitleAngle, MemoTitleScale, MemoTextFontName, MemoTextAlignment, MemoIsBold, MemoIsItalic, MemoIsCapitalized, MemoTextColor, ResidentId, SG_LocationId, SG_OrganisationId FROM Trn_Memo WHERE MemoId = :MemoId  FOR UPDATE OF Trn_Memo",true, GxErrorMask.GX_NOMASK, false, this,prmBC001P2,1, GxCacheFrequency.OFF ,true,false )
-          ,new CursorDef("BC001P3", "SELECT MemoId, MemoTitle, MemoDescription, MemoImage, MemoDocument, MemoStartDateTime, MemoEndDateTime, MemoDuration, MemoRemoveDate, MemoBgColorCode, MemoForm, MemoType, MemoName, MemoLeftOffset, MemoTopOffset, MemoTitleAngle, MemoTitleScale, MemoTextFontName, MemoTextAlignment, MemoIsBold, MemoIsItalic, MemoIsCapitalized, MemoTextColor, ResidentId, SG_LocationId, SG_OrganisationId FROM Trn_Memo WHERE MemoId = :MemoId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC001P3,1, GxCacheFrequency.OFF ,true,false )
+           new CursorDef("BC001P2", "SELECT MemoId, MemoTitle, MemoDescription, MemoImage, MemoDocument, MemoStartDateTime, MemoEndDateTime, MemoDuration, MemoRemoveDate, MemoBgColorCode, MemoForm, MemoType, MemoName, MemoLeftOffset, MemoTopOffset, MemoTitleAngle, MemoTitleScale, MemoTextFontName, MemoTextAlignment, MemoIsBold, MemoIsItalic, MemoIsCapitalized, MemoTextColor, MemoCreatedAt, ResidentId, SG_LocationId, SG_OrganisationId FROM Trn_Memo WHERE MemoId = :MemoId  FOR UPDATE OF Trn_Memo",true, GxErrorMask.GX_NOMASK, false, this,prmBC001P2,1, GxCacheFrequency.OFF ,true,false )
+          ,new CursorDef("BC001P3", "SELECT MemoId, MemoTitle, MemoDescription, MemoImage, MemoDocument, MemoStartDateTime, MemoEndDateTime, MemoDuration, MemoRemoveDate, MemoBgColorCode, MemoForm, MemoType, MemoName, MemoLeftOffset, MemoTopOffset, MemoTitleAngle, MemoTitleScale, MemoTextFontName, MemoTextAlignment, MemoIsBold, MemoIsItalic, MemoIsCapitalized, MemoTextColor, MemoCreatedAt, ResidentId, SG_LocationId, SG_OrganisationId FROM Trn_Memo WHERE MemoId = :MemoId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC001P3,1, GxCacheFrequency.OFF ,true,false )
           ,new CursorDef("BC001P4", "SELECT LocationId, OrganisationId, ResidentSalutation, ResidentGivenName, ResidentLastName, ResidentGUID FROM Trn_Resident WHERE ResidentId = :ResidentId AND LocationId = :SG_LocationId AND OrganisationId = :SG_OrganisationId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC001P4,1, GxCacheFrequency.OFF ,true,false )
-          ,new CursorDef("BC001P5", "SELECT T2.LocationId, T2.OrganisationId, TM1.MemoId, TM1.MemoTitle, TM1.MemoDescription, TM1.MemoImage, TM1.MemoDocument, TM1.MemoStartDateTime, TM1.MemoEndDateTime, TM1.MemoDuration, TM1.MemoRemoveDate, T2.ResidentSalutation, T2.ResidentGivenName, T2.ResidentLastName, T2.ResidentGUID, TM1.MemoBgColorCode, TM1.MemoForm, TM1.MemoType, TM1.MemoName, TM1.MemoLeftOffset, TM1.MemoTopOffset, TM1.MemoTitleAngle, TM1.MemoTitleScale, TM1.MemoTextFontName, TM1.MemoTextAlignment, TM1.MemoIsBold, TM1.MemoIsItalic, TM1.MemoIsCapitalized, TM1.MemoTextColor, TM1.ResidentId, TM1.SG_LocationId, TM1.SG_OrganisationId FROM (Trn_Memo TM1 INNER JOIN Trn_Resident T2 ON T2.ResidentId = TM1.ResidentId AND T2.LocationId = TM1.SG_LocationId AND T2.OrganisationId = TM1.SG_OrganisationId) WHERE TM1.MemoId = :MemoId ORDER BY TM1.MemoId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC001P5,100, GxCacheFrequency.OFF ,true,false )
+          ,new CursorDef("BC001P5", "SELECT T2.LocationId, T2.OrganisationId, TM1.MemoId, TM1.MemoTitle, TM1.MemoDescription, TM1.MemoImage, TM1.MemoDocument, TM1.MemoStartDateTime, TM1.MemoEndDateTime, TM1.MemoDuration, TM1.MemoRemoveDate, T2.ResidentSalutation, T2.ResidentGivenName, T2.ResidentLastName, T2.ResidentGUID, TM1.MemoBgColorCode, TM1.MemoForm, TM1.MemoType, TM1.MemoName, TM1.MemoLeftOffset, TM1.MemoTopOffset, TM1.MemoTitleAngle, TM1.MemoTitleScale, TM1.MemoTextFontName, TM1.MemoTextAlignment, TM1.MemoIsBold, TM1.MemoIsItalic, TM1.MemoIsCapitalized, TM1.MemoTextColor, TM1.MemoCreatedAt, TM1.ResidentId, TM1.SG_LocationId, TM1.SG_OrganisationId FROM (Trn_Memo TM1 INNER JOIN Trn_Resident T2 ON T2.ResidentId = TM1.ResidentId AND T2.LocationId = TM1.SG_LocationId AND T2.OrganisationId = TM1.SG_OrganisationId) WHERE TM1.MemoId = :MemoId ORDER BY TM1.MemoId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC001P5,100, GxCacheFrequency.OFF ,true,false )
           ,new CursorDef("BC001P6", "SELECT MemoId FROM Trn_Memo WHERE MemoId = :MemoId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC001P6,1, GxCacheFrequency.OFF ,true,false )
-          ,new CursorDef("BC001P7", "SAVEPOINT gxupdate;INSERT INTO Trn_Memo(MemoId, MemoTitle, MemoDescription, MemoImage, MemoDocument, MemoStartDateTime, MemoEndDateTime, MemoDuration, MemoRemoveDate, MemoBgColorCode, MemoForm, MemoType, MemoName, MemoLeftOffset, MemoTopOffset, MemoTitleAngle, MemoTitleScale, MemoTextFontName, MemoTextAlignment, MemoIsBold, MemoIsItalic, MemoIsCapitalized, MemoTextColor, ResidentId, SG_LocationId, SG_OrganisationId) VALUES(:MemoId, :MemoTitle, :MemoDescription, :MemoImage, :MemoDocument, :MemoStartDateTime, :MemoEndDateTime, :MemoDuration, :MemoRemoveDate, :MemoBgColorCode, :MemoForm, :MemoType, :MemoName, :MemoLeftOffset, :MemoTopOffset, :MemoTitleAngle, :MemoTitleScale, :MemoTextFontName, :MemoTextAlignment, :MemoIsBold, :MemoIsItalic, :MemoIsCapitalized, :MemoTextColor, :ResidentId, :SG_LocationId, :SG_OrganisationId);RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT,prmBC001P7)
-          ,new CursorDef("BC001P8", "SAVEPOINT gxupdate;UPDATE Trn_Memo SET MemoTitle=:MemoTitle, MemoDescription=:MemoDescription, MemoImage=:MemoImage, MemoDocument=:MemoDocument, MemoStartDateTime=:MemoStartDateTime, MemoEndDateTime=:MemoEndDateTime, MemoDuration=:MemoDuration, MemoRemoveDate=:MemoRemoveDate, MemoBgColorCode=:MemoBgColorCode, MemoForm=:MemoForm, MemoType=:MemoType, MemoName=:MemoName, MemoLeftOffset=:MemoLeftOffset, MemoTopOffset=:MemoTopOffset, MemoTitleAngle=:MemoTitleAngle, MemoTitleScale=:MemoTitleScale, MemoTextFontName=:MemoTextFontName, MemoTextAlignment=:MemoTextAlignment, MemoIsBold=:MemoIsBold, MemoIsItalic=:MemoIsItalic, MemoIsCapitalized=:MemoIsCapitalized, MemoTextColor=:MemoTextColor, ResidentId=:ResidentId, SG_LocationId=:SG_LocationId, SG_OrganisationId=:SG_OrganisationId  WHERE MemoId = :MemoId;RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK,prmBC001P8)
+          ,new CursorDef("BC001P7", "SAVEPOINT gxupdate;INSERT INTO Trn_Memo(MemoId, MemoTitle, MemoDescription, MemoImage, MemoDocument, MemoStartDateTime, MemoEndDateTime, MemoDuration, MemoRemoveDate, MemoBgColorCode, MemoForm, MemoType, MemoName, MemoLeftOffset, MemoTopOffset, MemoTitleAngle, MemoTitleScale, MemoTextFontName, MemoTextAlignment, MemoIsBold, MemoIsItalic, MemoIsCapitalized, MemoTextColor, MemoCreatedAt, ResidentId, SG_LocationId, SG_OrganisationId) VALUES(:MemoId, :MemoTitle, :MemoDescription, :MemoImage, :MemoDocument, :MemoStartDateTime, :MemoEndDateTime, :MemoDuration, :MemoRemoveDate, :MemoBgColorCode, :MemoForm, :MemoType, :MemoName, :MemoLeftOffset, :MemoTopOffset, :MemoTitleAngle, :MemoTitleScale, :MemoTextFontName, :MemoTextAlignment, :MemoIsBold, :MemoIsItalic, :MemoIsCapitalized, :MemoTextColor, :MemoCreatedAt, :ResidentId, :SG_LocationId, :SG_OrganisationId);RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT,prmBC001P7)
+          ,new CursorDef("BC001P8", "SAVEPOINT gxupdate;UPDATE Trn_Memo SET MemoTitle=:MemoTitle, MemoDescription=:MemoDescription, MemoImage=:MemoImage, MemoDocument=:MemoDocument, MemoStartDateTime=:MemoStartDateTime, MemoEndDateTime=:MemoEndDateTime, MemoDuration=:MemoDuration, MemoRemoveDate=:MemoRemoveDate, MemoBgColorCode=:MemoBgColorCode, MemoForm=:MemoForm, MemoType=:MemoType, MemoName=:MemoName, MemoLeftOffset=:MemoLeftOffset, MemoTopOffset=:MemoTopOffset, MemoTitleAngle=:MemoTitleAngle, MemoTitleScale=:MemoTitleScale, MemoTextFontName=:MemoTextFontName, MemoTextAlignment=:MemoTextAlignment, MemoIsBold=:MemoIsBold, MemoIsItalic=:MemoIsItalic, MemoIsCapitalized=:MemoIsCapitalized, MemoTextColor=:MemoTextColor, MemoCreatedAt=:MemoCreatedAt, ResidentId=:ResidentId, SG_LocationId=:SG_LocationId, SG_OrganisationId=:SG_OrganisationId  WHERE MemoId = :MemoId;RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK,prmBC001P8)
           ,new CursorDef("BC001P9", "SAVEPOINT gxupdate;DELETE FROM Trn_Memo  WHERE MemoId = :MemoId;RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK,prmBC001P9)
           ,new CursorDef("BC001P10", "SELECT ResidentSalutation, ResidentGivenName, ResidentLastName, ResidentGUID FROM Trn_Resident WHERE ResidentId = :ResidentId AND LocationId = :SG_LocationId AND OrganisationId = :SG_OrganisationId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC001P10,1, GxCacheFrequency.OFF ,true,false )
-          ,new CursorDef("BC001P11", "SELECT T2.LocationId, T2.OrganisationId, TM1.MemoId, TM1.MemoTitle, TM1.MemoDescription, TM1.MemoImage, TM1.MemoDocument, TM1.MemoStartDateTime, TM1.MemoEndDateTime, TM1.MemoDuration, TM1.MemoRemoveDate, T2.ResidentSalutation, T2.ResidentGivenName, T2.ResidentLastName, T2.ResidentGUID, TM1.MemoBgColorCode, TM1.MemoForm, TM1.MemoType, TM1.MemoName, TM1.MemoLeftOffset, TM1.MemoTopOffset, TM1.MemoTitleAngle, TM1.MemoTitleScale, TM1.MemoTextFontName, TM1.MemoTextAlignment, TM1.MemoIsBold, TM1.MemoIsItalic, TM1.MemoIsCapitalized, TM1.MemoTextColor, TM1.ResidentId, TM1.SG_LocationId, TM1.SG_OrganisationId FROM (Trn_Memo TM1 INNER JOIN Trn_Resident T2 ON T2.ResidentId = TM1.ResidentId AND T2.LocationId = TM1.SG_LocationId AND T2.OrganisationId = TM1.SG_OrganisationId) WHERE TM1.MemoId = :MemoId ORDER BY TM1.MemoId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC001P11,100, GxCacheFrequency.OFF ,true,false )
+          ,new CursorDef("BC001P11", "SELECT T2.LocationId, T2.OrganisationId, TM1.MemoId, TM1.MemoTitle, TM1.MemoDescription, TM1.MemoImage, TM1.MemoDocument, TM1.MemoStartDateTime, TM1.MemoEndDateTime, TM1.MemoDuration, TM1.MemoRemoveDate, T2.ResidentSalutation, T2.ResidentGivenName, T2.ResidentLastName, T2.ResidentGUID, TM1.MemoBgColorCode, TM1.MemoForm, TM1.MemoType, TM1.MemoName, TM1.MemoLeftOffset, TM1.MemoTopOffset, TM1.MemoTitleAngle, TM1.MemoTitleScale, TM1.MemoTextFontName, TM1.MemoTextAlignment, TM1.MemoIsBold, TM1.MemoIsItalic, TM1.MemoIsCapitalized, TM1.MemoTextColor, TM1.MemoCreatedAt, TM1.ResidentId, TM1.SG_LocationId, TM1.SG_OrganisationId FROM (Trn_Memo TM1 INNER JOIN Trn_Resident T2 ON T2.ResidentId = TM1.ResidentId AND T2.LocationId = TM1.SG_LocationId AND T2.OrganisationId = TM1.SG_OrganisationId) WHERE TM1.MemoId = :MemoId ORDER BY TM1.MemoId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC001P11,100, GxCacheFrequency.OFF ,true,false )
        };
     }
  }
@@ -2289,9 +2353,11 @@ public class trn_memo_bc__default : DataStoreHelperBase, IDataStoreHelper
              ((bool[]) buf[27])[0] = rslt.getBool(21);
              ((bool[]) buf[28])[0] = rslt.getBool(22);
              ((string[]) buf[29])[0] = rslt.getVarchar(23);
-             ((Guid[]) buf[30])[0] = rslt.getGuid(24);
-             ((Guid[]) buf[31])[0] = rslt.getGuid(25);
-             ((Guid[]) buf[32])[0] = rslt.getGuid(26);
+             ((DateTime[]) buf[30])[0] = rslt.getGXDateTime(24);
+             ((bool[]) buf[31])[0] = rslt.wasNull(24);
+             ((Guid[]) buf[32])[0] = rslt.getGuid(25);
+             ((Guid[]) buf[33])[0] = rslt.getGuid(26);
+             ((Guid[]) buf[34])[0] = rslt.getGuid(27);
              return;
           case 1 :
              ((Guid[]) buf[0])[0] = rslt.getGuid(1);
@@ -2324,9 +2390,11 @@ public class trn_memo_bc__default : DataStoreHelperBase, IDataStoreHelper
              ((bool[]) buf[27])[0] = rslt.getBool(21);
              ((bool[]) buf[28])[0] = rslt.getBool(22);
              ((string[]) buf[29])[0] = rslt.getVarchar(23);
-             ((Guid[]) buf[30])[0] = rslt.getGuid(24);
-             ((Guid[]) buf[31])[0] = rslt.getGuid(25);
-             ((Guid[]) buf[32])[0] = rslt.getGuid(26);
+             ((DateTime[]) buf[30])[0] = rslt.getGXDateTime(24);
+             ((bool[]) buf[31])[0] = rslt.wasNull(24);
+             ((Guid[]) buf[32])[0] = rslt.getGuid(25);
+             ((Guid[]) buf[33])[0] = rslt.getGuid(26);
+             ((Guid[]) buf[34])[0] = rslt.getGuid(27);
              return;
           case 2 :
              ((Guid[]) buf[0])[0] = rslt.getGuid(1);
@@ -2373,9 +2441,11 @@ public class trn_memo_bc__default : DataStoreHelperBase, IDataStoreHelper
              ((bool[]) buf[33])[0] = rslt.getBool(27);
              ((bool[]) buf[34])[0] = rslt.getBool(28);
              ((string[]) buf[35])[0] = rslt.getVarchar(29);
-             ((Guid[]) buf[36])[0] = rslt.getGuid(30);
-             ((Guid[]) buf[37])[0] = rslt.getGuid(31);
-             ((Guid[]) buf[38])[0] = rslt.getGuid(32);
+             ((DateTime[]) buf[36])[0] = rslt.getGXDateTime(30);
+             ((bool[]) buf[37])[0] = rslt.wasNull(30);
+             ((Guid[]) buf[38])[0] = rslt.getGuid(31);
+             ((Guid[]) buf[39])[0] = rslt.getGuid(32);
+             ((Guid[]) buf[40])[0] = rslt.getGuid(33);
              return;
           case 4 :
              ((Guid[]) buf[0])[0] = rslt.getGuid(1);
@@ -2423,9 +2493,11 @@ public class trn_memo_bc__default : DataStoreHelperBase, IDataStoreHelper
              ((bool[]) buf[33])[0] = rslt.getBool(27);
              ((bool[]) buf[34])[0] = rslt.getBool(28);
              ((string[]) buf[35])[0] = rslt.getVarchar(29);
-             ((Guid[]) buf[36])[0] = rslt.getGuid(30);
-             ((Guid[]) buf[37])[0] = rslt.getGuid(31);
-             ((Guid[]) buf[38])[0] = rslt.getGuid(32);
+             ((DateTime[]) buf[36])[0] = rslt.getGXDateTime(30);
+             ((bool[]) buf[37])[0] = rslt.wasNull(30);
+             ((Guid[]) buf[38])[0] = rslt.getGuid(31);
+             ((Guid[]) buf[39])[0] = rslt.getGuid(32);
+             ((Guid[]) buf[40])[0] = rslt.getGuid(33);
              return;
     }
  }

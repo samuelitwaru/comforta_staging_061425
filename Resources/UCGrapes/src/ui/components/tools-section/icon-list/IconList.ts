@@ -3,6 +3,7 @@ import { InfoSectionManager } from "../../../../controls/InfoSectionManager";
 import { ThemeManager } from "../../../../controls/themes/ThemeManager";
 import { InfoType, ThemeIcon } from "../../../../types";
 import { DefaultAttributes } from "../../../../utils/default-attributes";
+import { capitalizeWords } from "../../../../utils/helpers";
 
 export class IconList {
   private themeManager: ThemeManager;
@@ -27,10 +28,9 @@ export class IconList {
       );
     }
     themeIcons.forEach((themeIcon) => {
-
         const icon = document.createElement("div");
         icon.classList.add("icon");
-        icon.title = themeIcon.IconName;
+        icon.title = capitalizeWords(themeIcon.IconName.replace(/-/g,' ').replace(/_/g,' '));
         icon.innerHTML = `${themeIcon.IconSVG}`;
 
         icon.addEventListener("click", (e) => {

@@ -1,13 +1,2 @@
-ALTER TABLE Trn_Media ALTER COLUMN MediaId DROP DEFAULT;
-ALTER TABLE Trn_Media ALTER COLUMN LocationId DROP DEFAULT;
-CREATE TABLE GXA0076 (MediaId CHAR(36) NOT NULL , MediaName VARCHAR(100) NOT NULL , MediaImage BYTEA , MediaImage_GXI VARCHAR(2048) , MediaSize integer NOT NULL , MediaType CHAR(20) NOT NULL , MediaUrl VARCHAR(1000) NOT NULL , LocationId CHAR(36) NOT NULL , MediaDateTime timestamp without time zone , IsCropped BOOLEAN NOT NULL , CroppedOriginalMediaId CHAR(36) );
-Run conversion program for table Trn_Media;
-DROP TABLE Trn_Media CASCADE;
-ALTER TABLE GXA0076 RENAME TO Trn_Media;
-ALTER TABLE Trn_Media ADD CONSTRAINT Trn_Media_pkey PRIMARY KEY(MediaId);
-
-CREATE TABLE Trn_CroppedMedia (CroppedMediaId CHAR(36) NOT NULL , MediaId CHAR(36) NOT NULL , CroppedMediaName VARCHAR(100) NOT NULL , PRIMARY KEY(CroppedMediaId));
-CREATE INDEX ITRN_CROPPEDMEDIA1 ON Trn_CroppedMedia (MediaId );
-
-ALTER TABLE Trn_CroppedMedia ADD CONSTRAINT ITRN_CROPPEDMEDIA1 FOREIGN KEY (MediaId) REFERENCES Trn_Media (MediaId);
+ALTER TABLE Trn_Memo ADD MemoCreatedAt timestamp without time zone;
 

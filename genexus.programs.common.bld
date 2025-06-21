@@ -14,7 +14,6 @@ GxModelInfoProvider.cs
 @genexus.programs.sdt.bld
 workwithplus\dynamicforms\type_SdtWWP_FormInstance.cs
 workwithplus\dynamicforms\type_SdtWWP_FormInstance_Element.cs
-type_SdtTrn_Memo.cs
 workwithplus\dynamicforms\type_SdtWWP_Form.cs
 workwithplus\dynamicforms\type_SdtWWP_Form_Element.cs
 type_SdtTrn_OrganisationType.cs
@@ -29,7 +28,6 @@ type_SdtTrn_NetworkIndividual.cs
 type_SdtTrn_ProductService.cs
 type_SdtTrn_ResidentType.cs
 type_SdtTrn_MedicalIndication.cs
-type_SdtTrn_Resident.cs
 type_SdtTrn_OrganisationSetting.cs
 workwithplus\type_SdtWWP_Parameter.cs
 wwpbaseobjects\type_SdtWWP_UserExtended.cs
@@ -49,10 +47,6 @@ wwpbaseobjects\type_SdtUserCustomizations.cs
 type_SdtTrn_SupplierAgbType.cs
 type_SdtTrn_SupplierGenType.cs
 type_SdtTrn_AgendaCalendar.cs
-type_SdtTrn_Theme.cs
-type_SdtTrn_Theme_Color.cs
-type_SdtTrn_Theme_CtaColor.cs
-type_SdtTrn_Theme_Icon.cs
 type_SdtTrn_Media.cs
 type_SdtTrn_Device.cs
 type_SdtTrn_Template.cs
@@ -78,6 +72,12 @@ type_SdtTrn_LocationImage.cs
 type_SdtTrn_EnvironmentVariable.cs
 type_SdtTrn_SupplierDynamicForm.cs
 type_SdtTrn_CroppedMedia.cs
+type_SdtTrn_Memo.cs
+type_SdtTrn_Resident.cs
+type_SdtTrn_Theme.cs
+type_SdtTrn_Theme_Color.cs
+type_SdtTrn_Theme_CtaColor.cs
+type_SdtTrn_Theme_Icon.cs
 type_SdtQRCodeLibrary.cs
 type_SdtEO_Base64Image.cs
 type_SdtRandomStringGenerator.cs
