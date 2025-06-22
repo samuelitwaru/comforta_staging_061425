@@ -81,9 +81,21 @@ namespace GeneXus.Programs {
                pr_default.close(1);
                pr_default.SmartCacheProvider.SetUpdated("WWP_WebNotification");
                /* End optimized DELETE. */
+               /* Optimized DELETE. */
                /* Using cursor P00GU4 */
                pr_default.execute(2, new Object[] {n127WWPNotificationId, A127WWPNotificationId});
                pr_default.close(2);
+               pr_default.SmartCacheProvider.SetUpdated("WWP_SMS");
+               /* End optimized DELETE. */
+               /* Optimized DELETE. */
+               /* Using cursor P00GU5 */
+               pr_default.execute(3, new Object[] {n127WWPNotificationId, A127WWPNotificationId});
+               pr_default.close(3);
+               pr_default.SmartCacheProvider.SetUpdated("WWP_Mail");
+               /* End optimized DELETE. */
+               /* Using cursor P00GU6 */
+               pr_default.execute(4, new Object[] {n127WWPNotificationId, A127WWPNotificationId});
+               pr_default.close(4);
                pr_default.SmartCacheProvider.SetUpdated("WWP_Notification");
                pr_default.readNext(0);
             }
@@ -120,6 +132,10 @@ namespace GeneXus.Programs {
                }
                , new Object[] {
                }
+               , new Object[] {
+               }
+               , new Object[] {
+               }
             }
          );
          /* GeneXus formulas. */
@@ -151,6 +167,8 @@ namespace GeneXus.Programs {
           new ForEachCursor(def[0])
          ,new UpdateCursor(def[1])
          ,new UpdateCursor(def[2])
+         ,new UpdateCursor(def[3])
+         ,new UpdateCursor(def[4])
        };
     }
 
@@ -171,10 +189,20 @@ namespace GeneXus.Programs {
           prmP00GU4 = new Object[] {
           new ParDef("WWPNotificationId",GXType.Int64,10,0){Nullable=true}
           };
+          Object[] prmP00GU5;
+          prmP00GU5 = new Object[] {
+          new ParDef("WWPNotificationId",GXType.Int64,10,0){Nullable=true}
+          };
+          Object[] prmP00GU6;
+          prmP00GU6 = new Object[] {
+          new ParDef("WWPNotificationId",GXType.Int64,10,0){Nullable=true}
+          };
           def= new CursorDef[] {
               new CursorDef("P00GU2", "SELECT WWPNotificationId, WWPNotificationLink, WWPNotificationCreated FROM WWP_Notification WHERE POSITION(RTRIM(:AV10ReferenceSearchKey) IN WWPNotificationLink) >= 1 ORDER BY WWPNotificationCreated DESC  FOR UPDATE OF WWP_Notification",true, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00GU2,1, GxCacheFrequency.OFF ,true,false )
              ,new CursorDef("P00GU3", "DELETE FROM WWP_WebNotification  WHERE WWPNotificationId = :WWPNotificationId", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK,prmP00GU3)
-             ,new CursorDef("P00GU4", "SAVEPOINT gxupdate;DELETE FROM WWP_Notification  WHERE WWPNotificationId = :WWPNotificationId;RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK,prmP00GU4)
+             ,new CursorDef("P00GU4", "DELETE FROM WWP_SMS  WHERE WWPNotificationId = :WWPNotificationId", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK,prmP00GU4)
+             ,new CursorDef("P00GU5", "DELETE FROM WWP_Mail  WHERE WWPNotificationId = :WWPNotificationId", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK,prmP00GU5)
+             ,new CursorDef("P00GU6", "SAVEPOINT gxupdate;DELETE FROM WWP_Notification  WHERE WWPNotificationId = :WWPNotificationId;RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK,prmP00GU6)
           };
        }
     }

@@ -42,9 +42,9 @@ export class ToolboxManager {
     ) as HTMLDivElement;
     if (toolSectionElement) toolSectionElement.style.display = "none";
 
-    const treeViewSection = new TreeViewSection();
+    // const treeViewSection = new TreeViewSection();
     // treeViewSection.render(sideBar);
-    treeViewSection.render(sideBar);
+    // treeViewSection.render(sideBar);
   }
 
   public setUpScrollButtons() {

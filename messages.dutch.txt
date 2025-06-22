@@ -1449,3 +1449,7 @@ Types=Typen
 WC_Create Supplier Form=Maak leveranciersformulier aan
 Are you sure you want to re-send an invitation to this manager?=Weet u zeker dat u deze manager opnieuw een uitnodiging wilt sturen?
 Are you sure you want to re-send an invitation?=Weet u zeker dat u een uitnodiging opnieuw wilt verzenden?
+Are you sure you want to delete event?=Weet je zeker dat je dit evenement wilt verwijderen?
+Confirm delete action=Bevestig verwijderactie.
+All associated data will be deleted.=Alle gekoppelde gegevens zullen worden verwijderd.
+Manage License=Licentie beheren

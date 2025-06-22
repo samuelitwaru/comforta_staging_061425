@@ -461,7 +461,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 CellMarginBottom20", "start", "top", "", "", "div");
             /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblInstructiondutchtextblock_Internalname, lblInstructiondutchtextblock_Caption, "", "", lblInstructiondutchtextblock_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "GroupTitle", 0, "", 1, 1, 0, 0, "HLP_WP_OrganisationDefinitions.htm");
+            GxWebStd.gx_label_ctrl( context, lblInstructiondutchtextblock_Internalname, lblInstructiondutchtextblock_Caption, "", "", lblInstructiondutchtextblock_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "WLGroupTitle", 0, "", 1, 1, 0, 0, "HLP_WP_OrganisationDefinitions.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
@@ -480,16 +480,27 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-2", "start", "top", "", "", "div");
-            /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblTermlabel_Internalname, " ", "", "", lblTermlabel_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "AttributeWeightBold", 0, "", 1, 1, 0, 0, "HLP_WP_OrganisationDefinitions.htm");
+            wb_table1_35_BR2( true) ;
+         }
+         else
+         {
+            wb_table1_35_BR2( false) ;
+         }
+         return  ;
+      }
+
+      protected void wb_table1_35_BR2e( bool wbgen )
+      {
+         if ( wbgen )
+         {
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-4", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-4", "start", "top", "", "", "div");
             /* Text block */
             GxWebStd.gx_label_ctrl( context, lblSingulardutchtxtlabel_Internalname, lblSingulardutchtxtlabel_Caption, "", "", lblSingulardutchtxtlabel_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "AttributeWeightBold", 0, "", 1, 1, 0, 0, "HLP_WP_OrganisationDefinitions.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-6", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-4 col-sm-6", "start", "top", "", "", "div");
             /* Text block */
             GxWebStd.gx_label_ctrl( context, lblPluraldutchtextblock_Internalname, lblPluraldutchtextblock_Caption, "", "", lblPluraldutchtextblock_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "AttributeWeightBold", 0, "", 1, 1, 0, 0, "HLP_WP_OrganisationDefinitions.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -508,7 +519,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-2", "end", "top", "", "", "div");
             /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblReceptionistnllabel_Internalname, lblReceptionistnllabel_Caption, "", "", lblReceptionistnllabel_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "AttributeWeightBold", 0, "", 1, 1, 0, 0, "HLP_WP_OrganisationDefinitions.htm");
+            GxWebStd.gx_label_ctrl( context, lblReceptionistnllabel_Internalname, lblReceptionistnllabel_Caption, "", "", lblReceptionistnllabel_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "AttributeWeightBold TextOverflow", 0, "", 1, 1, 0, 0, "HLP_WP_OrganisationDefinitions.htm");
             GxWebStd.gx_div_end( context, "end", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-4 DataContentCell", "start", "top", "", "", "div");
@@ -517,8 +528,8 @@ namespace GeneXus.Programs {
             /* Attribute/Variable Label */
             GxWebStd.gx_label_element( context, edtavReceptionistsingularnl_Internalname, context.GetMessage( "Receptionist Singular Nl", ""), "col-sm-3 AttributeLabel", 0, true, "");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 48,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavReceptionistsingularnl_Internalname, AV37ReceptionistSingularNl, StringUtil.RTrim( context.localUtil.Format( AV37ReceptionistSingularNl, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,48);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavReceptionistsingularnl_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavReceptionistsingularnl_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_WP_OrganisationDefinitions.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 51,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavReceptionistsingularnl_Internalname, AV37ReceptionistSingularNl, StringUtil.RTrim( context.localUtil.Format( AV37ReceptionistSingularNl, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,51);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavReceptionistsingularnl_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavReceptionistsingularnl_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_WP_OrganisationDefinitions.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
@@ -528,8 +539,8 @@ namespace GeneXus.Programs {
             /* Attribute/Variable Label */
             GxWebStd.gx_label_element( context, edtavReceptionistpluralnl_Internalname, context.GetMessage( "Receptionist Plural Nl", ""), "col-sm-3 AttributeLabel", 0, true, "");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 51,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavReceptionistpluralnl_Internalname, AV38ReceptionistPluralNl, StringUtil.RTrim( context.localUtil.Format( AV38ReceptionistPluralNl, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,51);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavReceptionistpluralnl_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavReceptionistpluralnl_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_WP_OrganisationDefinitions.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 54,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavReceptionistpluralnl_Internalname, AV38ReceptionistPluralNl, StringUtil.RTrim( context.localUtil.Format( AV38ReceptionistPluralNl, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,54);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavReceptionistpluralnl_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavReceptionistpluralnl_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_WP_OrganisationDefinitions.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -547,7 +558,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-2", "end", "top", "", "", "div");
             /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblResidentnllabel_Internalname, lblResidentnllabel_Caption, "", "", lblResidentnllabel_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "AttributeWeightBold", 0, "", 1, 1, 0, 0, "HLP_WP_OrganisationDefinitions.htm");
+            GxWebStd.gx_label_ctrl( context, lblResidentnllabel_Internalname, lblResidentnllabel_Caption, "", "", lblResidentnllabel_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "AttributeWeightBold TextOverflow", 0, "", 1, 1, 0, 0, "HLP_WP_OrganisationDefinitions.htm");
             GxWebStd.gx_div_end( context, "end", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-4 DataContentCell", "start", "top", "", "", "div");
@@ -556,8 +567,8 @@ namespace GeneXus.Programs {
             /* Attribute/Variable Label */
             GxWebStd.gx_label_element( context, edtavResidentsingularnl_Internalname, context.GetMessage( "Resident Singular Nl", ""), "col-sm-3 AttributeLabel", 0, true, "");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 60,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavResidentsingularnl_Internalname, AV35ResidentSingularNl, StringUtil.RTrim( context.localUtil.Format( AV35ResidentSingularNl, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,60);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavResidentsingularnl_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavResidentsingularnl_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_WP_OrganisationDefinitions.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 63,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavResidentsingularnl_Internalname, AV35ResidentSingularNl, StringUtil.RTrim( context.localUtil.Format( AV35ResidentSingularNl, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,63);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavResidentsingularnl_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavResidentsingularnl_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_WP_OrganisationDefinitions.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
@@ -567,8 +578,8 @@ namespace GeneXus.Programs {
             /* Attribute/Variable Label */
             GxWebStd.gx_label_element( context, edtavResidentpluralnl_Internalname, context.GetMessage( "Resident Plural Nl", ""), "col-sm-3 AttributeLabel", 0, true, "");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 63,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavResidentpluralnl_Internalname, AV36ResidentPluralNl, StringUtil.RTrim( context.localUtil.Format( AV36ResidentPluralNl, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,63);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavResidentpluralnl_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavResidentpluralnl_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_WP_OrganisationDefinitions.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 66,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavResidentpluralnl_Internalname, AV36ResidentPluralNl, StringUtil.RTrim( context.localUtil.Format( AV36ResidentPluralNl, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,66);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavResidentpluralnl_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavResidentpluralnl_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_WP_OrganisationDefinitions.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -614,7 +625,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 CellMarginBottom20", "start", "top", "", "", "div");
             /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblInstructionengtextblock_Internalname, lblInstructionengtextblock_Caption, "", "", lblInstructionengtextblock_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "GroupTitle", 0, "", 1, 1, 0, 0, "HLP_WP_OrganisationDefinitions.htm");
+            GxWebStd.gx_label_ctrl( context, lblInstructionengtextblock_Internalname, lblInstructionengtextblock_Caption, "", "", lblInstructionengtextblock_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "WLGroupTitle", 0, "", 1, 1, 0, 0, "HLP_WP_OrganisationDefinitions.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
@@ -633,8 +644,19 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-2", "start", "top", "", "", "div");
-            /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblTermlabel2_Internalname, " ", "", "", lblTermlabel2_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "AttributeWeightBold", 0, "", 1, 1, 0, 0, "HLP_WP_OrganisationDefinitions.htm");
+            wb_table2_89_BR2( true) ;
+         }
+         else
+         {
+            wb_table2_89_BR2( false) ;
+         }
+         return  ;
+      }
+
+      protected void wb_table2_89_BR2e( bool wbgen )
+      {
+         if ( wbgen )
+         {
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-4", "start", "top", "", "", "div");
@@ -661,7 +683,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-2", "end", "top", "", "", "div");
             /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblReceptionistenglabel_Internalname, context.GetMessage( "Receptionist Name", ""), "", "", lblReceptionistenglabel_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "AttributeWeightBold", 0, "", 1, 1, 0, 0, "HLP_WP_OrganisationDefinitions.htm");
+            GxWebStd.gx_label_ctrl( context, lblReceptionistenglabel_Internalname, context.GetMessage( "Receptionist Name", ""), "", "", lblReceptionistenglabel_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "AttributeWeightBold TextOverflow", 0, "", 1, 1, 0, 0, "HLP_WP_OrganisationDefinitions.htm");
             GxWebStd.gx_div_end( context, "end", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-4 DataContentCell", "start", "top", "", "", "div");
@@ -670,8 +692,8 @@ namespace GeneXus.Programs {
             /* Attribute/Variable Label */
             GxWebStd.gx_label_element( context, edtavReceptionistsingulareng_Internalname, context.GetMessage( "Receptionist Singular Eng", ""), "col-sm-3 AttributeLabel", 0, true, "");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 99,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavReceptionistsingulareng_Internalname, AV33ReceptionistSingularEng, StringUtil.RTrim( context.localUtil.Format( AV33ReceptionistSingularEng, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,99);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavReceptionistsingulareng_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavReceptionistsingulareng_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_WP_OrganisationDefinitions.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 105,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavReceptionistsingulareng_Internalname, AV33ReceptionistSingularEng, StringUtil.RTrim( context.localUtil.Format( AV33ReceptionistSingularEng, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,105);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavReceptionistsingulareng_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavReceptionistsingulareng_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_WP_OrganisationDefinitions.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
@@ -681,8 +703,8 @@ namespace GeneXus.Programs {
             /* Attribute/Variable Label */
             GxWebStd.gx_label_element( context, edtavReceptionistpluraleng_Internalname, context.GetMessage( "Receptionist Plural Eng", ""), "col-sm-3 AttributeLabel", 0, true, "");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 102,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavReceptionistpluraleng_Internalname, AV34ReceptionistPluralEng, StringUtil.RTrim( context.localUtil.Format( AV34ReceptionistPluralEng, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,102);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavReceptionistpluraleng_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavReceptionistpluraleng_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_WP_OrganisationDefinitions.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 108,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavReceptionistpluraleng_Internalname, AV34ReceptionistPluralEng, StringUtil.RTrim( context.localUtil.Format( AV34ReceptionistPluralEng, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,108);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavReceptionistpluraleng_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavReceptionistpluraleng_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_WP_OrganisationDefinitions.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -700,7 +722,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-2", "end", "top", "", "", "div");
             /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblResidentenglabel_Internalname, context.GetMessage( "Resident Name", ""), "", "", lblResidentenglabel_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "AttributeWeightBold", 0, "", 1, 1, 0, 0, "HLP_WP_OrganisationDefinitions.htm");
+            GxWebStd.gx_label_ctrl( context, lblResidentenglabel_Internalname, context.GetMessage( "Resident Name", ""), "", "", lblResidentenglabel_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "AttributeWeightBold TextOverflow", 0, "", 1, 1, 0, 0, "HLP_WP_OrganisationDefinitions.htm");
             GxWebStd.gx_div_end( context, "end", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-4 DataContentCell", "start", "top", "", "", "div");
@@ -709,8 +731,8 @@ namespace GeneXus.Programs {
             /* Attribute/Variable Label */
             GxWebStd.gx_label_element( context, edtavResidentsingulareng_Internalname, context.GetMessage( "Resident Singular Eng", ""), "col-sm-3 AttributeLabel", 0, true, "");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 111,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavResidentsingulareng_Internalname, AV31ResidentSingularEng, StringUtil.RTrim( context.localUtil.Format( AV31ResidentSingularEng, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,111);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavResidentsingulareng_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavResidentsingulareng_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_WP_OrganisationDefinitions.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 117,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavResidentsingulareng_Internalname, AV31ResidentSingularEng, StringUtil.RTrim( context.localUtil.Format( AV31ResidentSingularEng, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,117);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavResidentsingulareng_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavResidentsingulareng_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_WP_OrganisationDefinitions.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
@@ -720,8 +742,8 @@ namespace GeneXus.Programs {
             /* Attribute/Variable Label */
             GxWebStd.gx_label_element( context, edtavResidentpluraleng_Internalname, context.GetMessage( "Resident Plural Eng", ""), "col-sm-3 AttributeLabel", 0, true, "");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 114,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavResidentpluraleng_Internalname, AV32ResidentPluralEng, StringUtil.RTrim( context.localUtil.Format( AV32ResidentPluralEng, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,114);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavResidentpluraleng_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavResidentpluraleng_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_WP_OrganisationDefinitions.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 120,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavResidentpluraleng_Internalname, AV32ResidentPluralEng, StringUtil.RTrim( context.localUtil.Format( AV32ResidentPluralEng, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,120);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavResidentpluraleng_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavResidentpluraleng_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_WP_OrganisationDefinitions.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -749,14 +771,14 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-action-group CellMarginTop10", "start", "top", " "+"data-gx-actiongroup-type=\"toolbar\""+" ", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 119,'',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 125,'',false,'',0)\"";
             ClassString = "ButtonMaterial";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtnenter_Internalname, "", context.GetMessage( "GX_BtnEnter", ""), bttBtnenter_Jsonclick, 5, context.GetMessage( "GX_BtnEnter", ""), "", StyleString, ClassString, 1, 1, "standard", "'"+""+"'"+",false,"+"'"+"EENTER."+"'", TempTags, "", context.GetButtonType( ), "HLP_WP_OrganisationDefinitions.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 121,'',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 127,'',false,'',0)\"";
             ClassString = "ButtonMaterialDefault";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtncancel_Internalname, "", context.GetMessage( "GX_BtnCancel", ""), bttBtncancel_Jsonclick, 1, context.GetMessage( "GX_BtnCancel", ""), "", StyleString, ClassString, 1, 1, "standard", "'"+""+"'"+",false,"+"'"+"ECANCEL."+"'", TempTags, "", context.GetButtonType( ), "HLP_WP_OrganisationDefinitions.htm");
@@ -1090,9 +1112,9 @@ namespace GeneXus.Programs {
                if (returnInSub) return;
             }
          }
-         lblInstructionengtextblock_Caption = "Customize the system terms with words that better fit your organization's terminology.";
+         lblInstructionengtextblock_Caption = "Customize the system settings with wording that better fit your organisation's vocabulary.";
          AssignProp("", false, lblInstructionengtextblock_Internalname, "Caption", lblInstructionengtextblock_Caption, true);
-         lblInstructiondutchtextblock_Caption = "Pas de systeemtermen aan met woorden die beter passen bij de terminologie van uw organisatie.";
+         lblInstructiondutchtextblock_Caption = "Pas de systeeminstellingen zodat deze beter past  bij de bedrijfstaal van uw organisatie.";
          AssignProp("", false, lblInstructiondutchtextblock_Internalname, "Caption", lblInstructiondutchtextblock_Caption, true);
          lblReceptionistnllabel_Caption = "Naam Receptionist";
          AssignProp("", false, lblReceptionistnllabel_Internalname, "Caption", lblReceptionistnllabel_Caption, true);
@@ -1188,6 +1210,52 @@ namespace GeneXus.Programs {
          returnInSub = false;
       }
 
+      protected void wb_table2_89_BR2( bool wbgen )
+      {
+         if ( wbgen )
+         {
+            /* Table start */
+            sStyleString = "";
+            GxWebStd.gx_table_start( context, tblTable2_Internalname, tblTable2_Internalname, "", "Table", 0, "", "", 1, 2, sStyleString, "", "", 0);
+            context.WriteHtmlText( "<tr>") ;
+            context.WriteHtmlText( "<td>") ;
+            /* Text block */
+            GxWebStd.gx_label_ctrl( context, lblTermlabel2_Internalname, " ", "", "", lblTermlabel2_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "AttributeWeightBold", 0, "", 1, 1, 0, 0, "HLP_WP_OrganisationDefinitions.htm");
+            context.WriteHtmlText( "</td>") ;
+            context.WriteHtmlText( "</tr>") ;
+            /* End of table */
+            context.WriteHtmlText( "</table>") ;
+            wb_table2_89_BR2e( true) ;
+         }
+         else
+         {
+            wb_table2_89_BR2e( false) ;
+         }
+      }
+
+      protected void wb_table1_35_BR2( bool wbgen )
+      {
+         if ( wbgen )
+         {
+            /* Table start */
+            sStyleString = "";
+            GxWebStd.gx_table_start( context, tblTable1_Internalname, tblTable1_Internalname, "", "Table", 0, "", "", 1, 2, sStyleString, "", "", 0);
+            context.WriteHtmlText( "<tr>") ;
+            context.WriteHtmlText( "<td>") ;
+            /* Text block */
+            GxWebStd.gx_label_ctrl( context, lblTermlabel_Internalname, " ", "", "", lblTermlabel_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "AttributeWeightBold", 0, "", 1, 1, 0, 0, "HLP_WP_OrganisationDefinitions.htm");
+            context.WriteHtmlText( "</td>") ;
+            context.WriteHtmlText( "</tr>") ;
+            /* End of table */
+            context.WriteHtmlText( "</table>") ;
+            wb_table1_35_BR2e( true) ;
+         }
+         else
+         {
+            wb_table1_35_BR2e( false) ;
+         }
+      }
+
       public override void setparameters( Object[] obj )
       {
          createObjects();
@@ -1227,7 +1295,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202562017154512", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256226404732", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1243,7 +1311,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wp_organisationdefinitions.js", "?202562017154513", false, true);
+         context.AddJavascriptSource("wp_organisationdefinitions.js", "?20256226404732", false, true);
          context.AddJavascriptSource("web-extension/gx-web-extensions.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/HistoryManager.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/json2005.js", "", false, true);
@@ -1263,6 +1331,7 @@ namespace GeneXus.Programs {
          lblDutchtab_title_Internalname = "DUTCHTAB_TITLE";
          lblInstructiondutchtextblock_Internalname = "INSTRUCTIONDUTCHTEXTBLOCK";
          lblTermlabel_Internalname = "TERMLABEL";
+         tblTable1_Internalname = "TABLE1";
          lblSingulardutchtxtlabel_Internalname = "SINGULARDUTCHTXTLABEL";
          lblPluraldutchtextblock_Internalname = "PLURALDUTCHTEXTBLOCK";
          divFlextable1_Internalname = "FLEXTABLE1";
@@ -1281,6 +1350,7 @@ namespace GeneXus.Programs {
          lblEnglishtab_title_Internalname = "ENGLISHTAB_TITLE";
          lblInstructionengtextblock_Internalname = "INSTRUCTIONENGTEXTBLOCK";
          lblTermlabel2_Internalname = "TERMLABEL2";
+         tblTable2_Internalname = "TABLE2";
          lblSingulartxtlabel2_Internalname = "SINGULARTXTLABEL2";
          lblPluraltextblock2_Internalname = "PLURALTEXTBLOCK2";
          divFlextable1eng_Internalname = "FLEXTABLE1ENG";
@@ -1391,7 +1461,6 @@ namespace GeneXus.Programs {
          ucGxuitabspanel_tabs = new GXUserControl();
          lblDutchtab_title_Jsonclick = "";
          lblInstructiondutchtextblock_Jsonclick = "";
-         lblTermlabel_Jsonclick = "";
          lblSingulardutchtxtlabel_Jsonclick = "";
          lblPluraldutchtextblock_Jsonclick = "";
          lblReceptionistnllabel_Jsonclick = "";
@@ -1403,7 +1472,6 @@ namespace GeneXus.Programs {
          AV36ResidentPluralNl = "";
          lblEnglishtab_title_Jsonclick = "";
          lblInstructionengtextblock_Jsonclick = "";
-         lblTermlabel2_Jsonclick = "";
          lblSingulartxtlabel2_Jsonclick = "";
          lblPluraltextblock2_Jsonclick = "";
          lblReceptionistenglabel_Jsonclick = "";
@@ -1425,6 +1493,9 @@ namespace GeneXus.Programs {
          A11OrganisationId = Guid.Empty;
          A100OrganisationSettingid = Guid.Empty;
          AV19Message = new GeneXus.Utils.SdtMessages_Message(context);
+         sStyleString = "";
+         lblTermlabel2_Jsonclick = "";
+         lblTermlabel_Jsonclick = "";
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
          pr_datastore1 = new DataStoreProvider(context, new GeneXus.Programs.wp_organisationdefinitions__datastore1(),
@@ -1490,8 +1561,6 @@ namespace GeneXus.Programs {
       private string lblInstructiondutchtextblock_Jsonclick ;
       private string divReceptionisttable_Internalname ;
       private string divFlextable1_Internalname ;
-      private string lblTermlabel_Internalname ;
-      private string lblTermlabel_Jsonclick ;
       private string lblSingulardutchtxtlabel_Internalname ;
       private string lblSingulardutchtxtlabel_Caption ;
       private string lblSingulardutchtxtlabel_Jsonclick ;
@@ -1525,8 +1594,6 @@ namespace GeneXus.Programs {
       private string lblInstructionengtextblock_Jsonclick ;
       private string divReceptionisttableeng_Internalname ;
       private string divFlextable1eng_Internalname ;
-      private string lblTermlabel2_Internalname ;
-      private string lblTermlabel2_Jsonclick ;
       private string lblSingulartxtlabel2_Internalname ;
       private string lblSingulartxtlabel2_Jsonclick ;
       private string lblPluraltextblock2_Internalname ;
@@ -1554,6 +1621,13 @@ namespace GeneXus.Programs {
       private string EvtRowId ;
       private string sEvtType ;
       private string AV28language ;
+      private string sStyleString ;
+      private string tblTable2_Internalname ;
+      private string lblTermlabel2_Internalname ;
+      private string lblTermlabel2_Jsonclick ;
+      private string tblTable1_Internalname ;
+      private string lblTermlabel_Internalname ;
+      private string lblTermlabel_Jsonclick ;
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
       private bool Gxuitabspanel_tabs_Historymanagement ;

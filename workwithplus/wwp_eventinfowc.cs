@@ -2647,7 +2647,7 @@ namespace GeneXus.Programs.workwithplus {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202562016571684", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256226405346", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2663,7 +2663,7 @@ namespace GeneXus.Programs.workwithplus {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("workwithplus/wwp_eventinfowc.js", "?202562016571684", false, true);
+         context.AddJavascriptSource("workwithplus/wwp_eventinfowc.js", "?20256226405346", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/ConfirmPanel/BootstrapConfirmPanelRender.js", "", false, true);
@@ -2856,7 +2856,8 @@ namespace GeneXus.Programs.workwithplus {
          setEventMetadata("'DOUACANCEL'","""{"handler":"E114T1","iparms":[]}""");
          setEventMetadata("'DOUAUPDATE'","""{"handler":"E164T2","iparms":[]""");
          setEventMetadata("'DOUAUPDATE'",""","oparms":[{"av":"Gx_mode","fld":"vMODE","pic":"@!"}]}""");
-         setEventMetadata("'DOUADELETE'","""{"handler":"E124T1","iparms":[]}""");
+         setEventMetadata("'DOUADELETE'","""{"handler":"E124T1","iparms":[]""");
+         setEventMetadata("'DOUADELETE'",""","oparms":[{"av":"Dvelop_confirmpanel_uadelete_Confirmationtext","ctrl":"DVELOP_CONFIRMPANEL_UADELETE","prop":"ConfirmationText"}]}""");
          setEventMetadata("DVELOP_CONFIRMPANEL_UADELETE.CLOSE","""{"handler":"E134T2","iparms":[{"av":"Dvelop_confirmpanel_uadelete_Result","ctrl":"DVELOP_CONFIRMPANEL_UADELETE","prop":"Result"},{"av":"AV8CalendarEventId","fld":"vCALENDAREVENTID"}]}""");
          setEventMetadata("VENDDATE.CONTROLVALUECHANGED","""{"handler":"E174T2","iparms":[{"av":"AV12CurrentDate","fld":"vCURRENTDATE"},{"av":"AV16EndDate","fld":"vENDDATE"},{"av":"AV27FixStartDate","fld":"vFIXSTARTDATE"},{"av":"AV17FromTime","fld":"vFROMTIME","pic":"99:99"},{"av":"AV19ToTime","fld":"vTOTIME","pic":"99:99"},{"av":"AV28FixStartTime","fld":"vFIXSTARTTIME"},{"av":"AV14DisabledDays","fld":"vDISABLEDDAYS","hsh":true}]""");
          setEventMetadata("VENDDATE.CONTROLVALUECHANGED",""","oparms":[{"av":"AV27FixStartDate","fld":"vFIXSTARTDATE"},{"av":"AV12CurrentDate","fld":"vCURRENTDATE"},{"av":"AV16EndDate","fld":"vENDDATE"},{"av":"AV17FromTime","fld":"vFROMTIME","pic":"99:99"},{"av":"AV19ToTime","fld":"vTOTIME","pic":"99:99"},{"ctrl":"BTNENTER","prop":"Enabled"}]}""");

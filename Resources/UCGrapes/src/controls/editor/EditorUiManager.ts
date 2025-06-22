@@ -443,7 +443,7 @@ export class EditorUIManager {
 
     //log (globalThis as any).currentPageId
 
-    new TreeViewSection().refresh();
+    // new TreeViewSection().refresh();
 
     // const treeViewSection = new TreeViewSection();
     // treeViewSection.init();
