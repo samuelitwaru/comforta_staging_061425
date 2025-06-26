@@ -315,15 +315,32 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "Section", "start", "top", " "+"data-gx-base-lib=\"bootstrapv3\""+" "+"data-abstract-form"+" ", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divMaintable_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, divLayoutmaintable_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "Center", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divTablemain_Internalname, 1, 0, "px", 0, "px", "TableMain", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             ClassString = "ErrorViewer";
             StyleString = "";
             GxWebStd.gx_msg_list( context, "", context.GX_msglist.DisplayMode, StyleString, ClassString, "", "false");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 CellMarginTop", "Center", "top", "", "", "div");
+            /* Text block */
+            GxWebStd.gx_label_ctrl( context, lblTbback_Internalname, context.GetMessage( "WWP_GAM_Back", ""), "", "", lblTbback_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlockTitleWWP", 0, "", 1, 1, 0, 0, "HLP_GAMExampleSSOLogin.htm");
             GxWebStd.gx_div_end( context, "Center", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -611,12 +628,12 @@ namespace GeneXus.Programs {
       {
          /* 'DISPLAYMESSAGES' Routine */
          returnInSub = false;
-         AV31GXV1 = 1;
-         while ( AV31GXV1 <= AV30GAMErrorCollection.Count )
+         AV32GXV1 = 1;
+         while ( AV32GXV1 <= AV30GAMErrorCollection.Count )
          {
-            AV29GAMError = ((GeneXus.Programs.genexussecurity.SdtGAMError)AV30GAMErrorCollection.Item(AV31GXV1));
+            AV29GAMError = ((GeneXus.Programs.genexussecurity.SdtGAMError)AV30GAMErrorCollection.Item(AV32GXV1));
             GX_msglist.addItem(AV29GAMError.gxTpr_Message);
-            AV31GXV1 = (int)(AV31GXV1+1);
+            AV32GXV1 = (int)(AV32GXV1+1);
          }
       }
 
@@ -669,7 +686,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201765663", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256231350928", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -687,7 +704,7 @@ namespace GeneXus.Programs {
          if ( nGXWrapped != 1 )
          {
             context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-            context.AddJavascriptSource("gamexamplessologin.js", "?20256201765665", false, true);
+            context.AddJavascriptSource("gamexamplessologin.js", "?20256231350936", false, true);
          }
          /* End function include_jscripts */
       }
@@ -699,7 +716,9 @@ namespace GeneXus.Programs {
 
       protected void init_default_properties( )
       {
-         divMaintable_Internalname = "MAINTABLE";
+         lblTbback_Internalname = "TBBACK";
+         divTablemain_Internalname = "TABLEMAIN";
+         divLayoutmaintable_Internalname = "LAYOUTMAINTABLE";
          Form.Internalname = "FORM";
       }
 
@@ -750,6 +769,7 @@ namespace GeneXus.Programs {
          sPrefix = "";
          ClassString = "";
          StyleString = "";
+         lblTbback_Jsonclick = "";
          Form = new GXWebForm();
          sEvt = "";
          EvtGridId = "";
@@ -771,7 +791,7 @@ namespace GeneXus.Programs {
       private short wbEnd ;
       private short wbStart ;
       private short nDonePA ;
-      private int AV31GXV1 ;
+      private int AV32GXV1 ;
       private int idxLst ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
@@ -781,9 +801,12 @@ namespace GeneXus.Programs {
       private string GXKey ;
       private string GX_FocusControl ;
       private string sPrefix ;
-      private string divMaintable_Internalname ;
+      private string divLayoutmaintable_Internalname ;
+      private string divTablemain_Internalname ;
       private string ClassString ;
       private string StyleString ;
+      private string lblTbback_Internalname ;
+      private string lblTbback_Jsonclick ;
       private string sEvt ;
       private string EvtGridId ;
       private string EvtRowId ;

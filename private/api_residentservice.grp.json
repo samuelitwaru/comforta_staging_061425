@@ -545,6 +545,16 @@
 "Implementation":"Prc_DeleteAppVersion"
 },
 {
+"PathRegexp":"toolbox/translate-appversion",
+"Path":"toolbox/translate-appversion",
+"Verb":"POST",
+"Name":"translateappversion",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_translateappversion",
+"Implementation":"Prc_TranslateAppVersionLanguages"
+},
+{
 "Verb":"POST",
 "PathRegexp":"toolbox/v2/save-page",
 "Path":"toolbox/v2/save-page",

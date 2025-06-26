@@ -1529,9 +1529,10 @@ namespace GeneXus.Programs {
       }
 
       public void gxep_createappversion( string aP0_AppVersionName ,
-                                         bool aP1_IsActive ,
-                                         out SdtSDT_AppVersion aP2_AppVersion ,
-                                         out SdtSDT_Error aP3_error )
+                                         string aP1_AppVersionLanguage ,
+                                         bool aP2_IsActive ,
+                                         out SdtSDT_AppVersion aP3_AppVersion ,
+                                         out SdtSDT_Error aP4_error )
       {
          restCliCreateAppVersion = new GXRestAPIClient();
          if ( restLocation == null )
@@ -1542,20 +1543,21 @@ namespace GeneXus.Programs {
          restCliCreateAppVersion.Location = restLocation;
          restCliCreateAppVersion.HttpMethod = "POST";
          restCliCreateAppVersion.AddBodyVar("AppVersionName", (string)(aP0_AppVersionName));
-         restCliCreateAppVersion.AddBodyVar("IsActive", aP1_IsActive);
+         restCliCreateAppVersion.AddBodyVar("AppVersionLanguage", (string)(aP1_AppVersionLanguage));
+         restCliCreateAppVersion.AddBodyVar("IsActive", aP2_IsActive);
          restCliCreateAppVersion.RestExecute();
          if ( restCliCreateAppVersion.ErrorCode != 0 )
          {
             gxProperties.ErrorCode = restCliCreateAppVersion.ErrorCode;
             gxProperties.ErrorMessage = restCliCreateAppVersion.ErrorMessage;
             gxProperties.StatusCode = restCliCreateAppVersion.StatusCode;
-            aP2_AppVersion = new SdtSDT_AppVersion();
-            aP3_error = new SdtSDT_Error();
+            aP3_AppVersion = new SdtSDT_AppVersion();
+            aP4_error = new SdtSDT_Error();
          }
          else
          {
-            aP2_AppVersion = restCliCreateAppVersion.GetBodySdt<SdtSDT_AppVersion>("AppVersion");
-            aP3_error = restCliCreateAppVersion.GetBodySdt<SdtSDT_Error>("error");
+            aP3_AppVersion = restCliCreateAppVersion.GetBodySdt<SdtSDT_AppVersion>("AppVersion");
+            aP4_error = restCliCreateAppVersion.GetBodySdt<SdtSDT_Error>("error");
          }
          /* CreateAppVersion Constructor */
       }
@@ -1714,6 +1716,39 @@ namespace GeneXus.Programs {
             aP2_error = restCliDeleteAppVersion.GetBodySdt<SdtSDT_Error>("error");
          }
          /* DeleteAppVersion Constructor */
+      }
+
+      public void gxep_translateappversion( Guid aP0_AppVersionId ,
+                                            Guid aP1_ActivePageId ,
+                                            string aP2_languageFrom ,
+                                            GxSimpleCollection<string> aP3_LanguageToCollection ,
+                                            out SdtSDT_Error aP4_error )
+      {
+         restCliTranslateAppVersion = new GXRestAPIClient();
+         if ( restLocation == null )
+         {
+            InitLocation();
+         }
+         restLocation.ResourceName = "toolbox/translate-appversion/";
+         restCliTranslateAppVersion.Location = restLocation;
+         restCliTranslateAppVersion.HttpMethod = "POST";
+         restCliTranslateAppVersion.AddBodyVar("AppVersionId", (Guid)(aP0_AppVersionId));
+         restCliTranslateAppVersion.AddBodyVar("ActivePageId", (Guid)(aP1_ActivePageId));
+         restCliTranslateAppVersion.AddBodyVar("languageFrom", (string)(aP2_languageFrom));
+         restCliTranslateAppVersion.AddBodyVar("LanguageToCollection", aP3_LanguageToCollection);
+         restCliTranslateAppVersion.RestExecute();
+         if ( restCliTranslateAppVersion.ErrorCode != 0 )
+         {
+            gxProperties.ErrorCode = restCliTranslateAppVersion.ErrorCode;
+            gxProperties.ErrorMessage = restCliTranslateAppVersion.ErrorMessage;
+            gxProperties.StatusCode = restCliTranslateAppVersion.StatusCode;
+            aP4_error = new SdtSDT_Error();
+         }
+         else
+         {
+            aP4_error = restCliTranslateAppVersion.GetBodySdt<SdtSDT_Error>("error");
+         }
+         /* TranslateAppVersion Constructor */
       }
 
       public void gxep_savepagev2( Guid aP0_AppVersionId ,
@@ -2566,13 +2601,16 @@ namespace GeneXus.Programs {
          restCliGetAppVersion = new GXRestAPIClient();
          aP0_AppVersion = new SdtSDT_AppVersion();
          restCliCreateAppVersion = new GXRestAPIClient();
-         aP2_AppVersion = new SdtSDT_AppVersion();
+         aP3_AppVersion = new SdtSDT_AppVersion();
+         aP4_error = new SdtSDT_Error();
          restCliCopyAppVersion = new GXRestAPIClient();
+         aP2_AppVersion = new SdtSDT_AppVersion();
          restCliUpdateAppVersion = new GXRestAPIClient();
          restCliUpdateAppVersionTheme = new GXRestAPIClient();
          restCliActivateAppVersion = new GXRestAPIClient();
          aP1_AppVersion = new SdtSDT_AppVersion();
          restCliDeleteAppVersion = new GXRestAPIClient();
+         restCliTranslateAppVersion = new GXRestAPIClient();
          restCliSavePageV2 = new GXRestAPIClient();
          restCliSavePageThumbnail = new GXRestAPIClient();
          restCliPublishAppVersion = new GXRestAPIClient();
@@ -2592,7 +2630,6 @@ namespace GeneXus.Programs {
          restCliUpdateLocationAPI__get = new GXRestAPIClient();
          aP0_BC_Trn_Location = new SdtTrn_Location();
          restCliUpdateLocationAPI__post = new GXRestAPIClient();
-         aP4_error = new SdtSDT_Error();
          restCliGetMemoCategories = new GXRestAPIClient();
          aP0_SDT_MemoCategories = new GXBaseCollection<SdtSDT_MemoCategory>();
          restCliGetMemoCategory = new GXRestAPIClient();
@@ -2664,6 +2701,7 @@ namespace GeneXus.Programs {
       protected GXRestAPIClient restCliUpdateAppVersionTheme ;
       protected GXRestAPIClient restCliActivateAppVersion ;
       protected GXRestAPIClient restCliDeleteAppVersion ;
+      protected GXRestAPIClient restCliTranslateAppVersion ;
       protected GXRestAPIClient restCliSavePageV2 ;
       protected GXRestAPIClient restCliSavePageThumbnail ;
       protected GXRestAPIClient restCliPublishAppVersion ;
@@ -2733,6 +2771,8 @@ namespace GeneXus.Programs {
       protected GXBaseCollection<SdtSDT_TrashItem> aP0_TrashItems ;
       protected GXBaseCollection<SdtSDT_AppVersion> aP0_AppVersions ;
       protected SdtSDT_AppVersion aP0_AppVersion ;
+      protected SdtSDT_AppVersion aP3_AppVersion ;
+      protected SdtSDT_Error aP4_error ;
       protected SdtSDT_AppVersion aP2_AppVersion ;
       protected SdtSDT_AppVersion aP1_AppVersion ;
       protected SdtSDT_AppVersion_PagesItem aP2_MenuPage ;
@@ -2740,7 +2780,6 @@ namespace GeneXus.Programs {
       protected SdtSDT_AppVersion_PagesItem aP2_ContentPage ;
       protected SdtSDT_AppDebugResults aP1_SDT_DebugResults ;
       protected SdtTrn_Location aP0_BC_Trn_Location ;
-      protected SdtSDT_Error aP4_error ;
       protected GXBaseCollection<SdtSDT_MemoCategory> aP0_SDT_MemoCategories ;
       protected SdtSDT_MemoCategory aP1_SDT_MemoCategory ;
       protected SdtSDT_Error aP23_error ;

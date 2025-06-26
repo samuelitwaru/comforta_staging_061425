@@ -1,26 +1,18 @@
 import { ContentDataUi } from "./ContentDataUi";
-import { ContentMapper } from "./ContentMapper";
 import { CtaButtonProperties } from "./CtaButtonProperties";
 import { InfoContentMapper } from "./InfoContentMapper";
 import { TileManager } from "./TileManager";
 import { TileMapper } from "./TileMapper";
 import { TileProperties } from "./TileProperties";
-import { TileUpdate } from "./TileUpdate";
 import { ChildEditor } from "./ChildEditor";
 import { ActionListPopUp } from "../../ui/views/ActionListPopUp";
 import { InfoSectionPopup } from "../../ui/views/InfoSectionPopup";
-import { ContentSection } from "../../ui/components/tools-section/ContentSection";
-import { ActionSelectContainer } from "../../ui/components/tools-section/action-list/ActionSelectContainer";
 import { ToolboxManager } from "../toolbox/ToolboxManager";
-import { InfoType } from "../../types";
-import { svg } from "d3";
+import { InfoType, Tile } from "../../types";
 import { InfoSectionManager } from "../InfoSectionManager";
 import { AddInfoSectionButton } from "../../ui/components/AddInfoSectionButton";
 import { AppVersionManager } from "../versions/AppVersionManager";
-import { TreeViewSection } from "../../ui/components/tools-section/TreeViewSection";
-import { drop } from "lodash";
-import { randomIdGenerator } from "../../utils/helpers";
-import { InfoSectionUI } from "../../ui/views/InfoSectionUI";
+import { i18n } from "../../i18n/i18n";
 
 export class EditorUIManager {
   editor: any;
@@ -170,18 +162,12 @@ export class EditorUIManager {
       })();
 
       if (!sectionContainer) {
-        console.warn("No parent info-section-spacing-container found.");
+        // If no section container is found, exit the function
         return;
       }
 
       // Find the next div with class starting with 'info' and ending with 'section'
       const nextSectionId = this.getNextInfoSectionId(sectionContainer);
-
-      if (nextSectionId) {
-        console.log("Found next sectionId:", nextSectionId);
-      } else {
-        console.warn("No matching info section found below.");
-      }
 
       // Proceed with your logic (menu rendering, iframe positioning, etc.)
       const mobileFrame = document.getElementById(
@@ -254,12 +240,12 @@ export class EditorUIManager {
       // Move to the next sibling
       nextElement = nextElement.nextElementSibling;
     }
-    return '';
+    return "";
   }
 
   handleDragEnd(model: any, sourceComponent: any, destinationComponent: any) {
     this.activateEditor(this.frameId);
-    let parentEl = destinationComponent.getEl();
+    const parentEl = destinationComponent.getEl();
 
     // manage plus button sections
     const containerColumn = this.editor
@@ -285,7 +271,9 @@ export class EditorUIManager {
 
       // handle tile drag scenarios
       // 1. Check if the dragged element is a tile.
-      const isTile = modalElement && modalElement.getAttribute('data-gjs-type') === 'tile-wrapper';
+      const isTile =
+        modalElement &&
+        modalElement.getAttribute("data-gjs-type") === "tile-wrapper";
 
       if (isTile) {
         const targetId = model.target.getId();
@@ -295,13 +283,21 @@ export class EditorUIManager {
         const infoContentMapper = new InfoContentMapper(this.pageId);
 
         // Check if the parent is a tile container
-        const isTileContainerParent = parentEl.getAttribute("data-gjs-type") === "info-tiles-section";
+        const isTileContainerParent =
+          parentEl.getAttribute("data-gjs-type") === "info-tiles-section";
         if (isTileContainerParent) {
           // If the parent is a tile container, update the tile in the both parents
-          infoContentMapper.handleDragAndDropToExistingTileArea(targetId, sourceParentId, destinationId, destinationRowIndex);
+          infoContentMapper.handleDragAndDropToExistingTileArea(
+            targetId,
+            sourceParentId,
+            destinationId,
+            destinationRowIndex
+          );
         } else {
           // Find the index of the target element in the components array
-          let targetIndex = components.findIndex((comp: any) => comp.getId() === modelId);
+          const targetIndex = components.findIndex(
+            (comp: any) => comp.getId() === modelId
+          );
           let nearestSection = null;
           // Go upwards from targetIndex - 1 to 0, looking for a section whose data-gjs-type matches "info-*-section"
           for (let i = targetIndex - 1; i >= 0; i--) {
@@ -315,34 +311,40 @@ export class EditorUIManager {
           }
 
           // if dragged to the first item at the top of the container, nearestSection will be null
-          const nearestSectionId = nearestSection ? nearestSection.getId() : null;
-          infoContentMapper.handleDragAndDropToNewTileArea(targetId, sourceParentId, nearestSectionId);
+          const nearestSectionId = nearestSection
+            ? nearestSection.getId()
+            : null;
+          infoContentMapper.handleDragAndDropToNewTileArea(
+            targetId,
+            sourceParentId,
+            nearestSectionId
+          );
         }
       } else {
-
-        if (
-          parentEl &&
-          parentEl.classList.contains("container-column-info")
-        ) {
-
+        if (parentEl && parentEl.classList.contains("container-column-info")) {
           // Same logic for info content rows
           const siblings = Array.from(parentEl.children).filter(
             (el) =>
-              !(el as Element).classList.contains("info-section-spacing-container")
+              !(el as Element).classList.contains(
+                "info-section-spacing-container"
+              )
           );
           const modelEl = model.target.getEl();
           const filteredIndex = siblings.findIndex((el) => el === modelEl);
 
           const infoContentMapper = new InfoContentMapper(this.pageId);
-          infoContentMapper.moveContentRow(modelEl.getAttribute("id"), filteredIndex);
+          infoContentMapper.moveContentRow(
+            modelEl.getAttribute("id"),
+            filteredIndex
+          );
         }
       }
 
       // Clean up redundant plus buttons
       const infoSectionManager = new InfoSectionManager();
       infoSectionManager.removeConsecutivePlusButtons();
-      infoSectionManager.markFirstAndLastPlusButtons('first');
-      infoSectionManager.markFirstAndLastPlusButtons('last');
+      infoSectionManager.markFirstAndLastPlusButtons("first");
+      infoSectionManager.markFirstAndLastPlusButtons("last");
     }
   }
 
@@ -415,7 +417,7 @@ export class EditorUIManager {
     const currentPageId = mobileFrame.dataset.pageid;
     const currentPage = this.appVersionManager
       .getPages()
-      ?.find((page: any) => page.PageId == currentPageId);
+      ?.find((page: any) => page.PageId === currentPageId);
     this.pageData = currentPage;
     const framelist = document.querySelectorAll(".mobile-frame");
     framelist.forEach((frame: any) => {
@@ -462,15 +464,21 @@ export class EditorUIManager {
     if (!this.pageData) return;
 
     if (
-      this.pageData?.PageType == "Information" &&
+      this.pageData?.PageType === "Information" &&
       this.pageData?.PageInfoStructure.InfoContent
     ) {
       this.pageData.PageInfoStructure.InfoContent.forEach((info: any) => {
-        if (info.InfoType == "TileRow") {
-          info.Tiles?.forEach((tile: any) => {
-            listHTML += `<li>${tile.Text}</li>`
-          })
-        } else if (info.InfoType == "Cta" && info.CtaAttributes.Action) {
+        if (info.InfoType === "TileRow") {
+          info.Tiles?.forEach((tile: Tile) => {
+            if (
+              tile.Text !== i18n.t("tile.title") &&
+              tile.Text !== "Titel" &&
+              tile.Text !== "Title"
+            ) {
+              listHTML += `<li>${tile.Text}</li>`;
+            }
+          });
+        } else if (info.InfoType === "Cta" && info.CtaAttributes.Action) {
           const objectType = info.CtaAttributes.Action.ObjectType;
           if (["DynamicForm", "WebLink"].includes(objectType)) {
             listHTML += `<li>${info.CtaAttributes.CtaLabel}</li>`;
@@ -479,7 +487,7 @@ export class EditorUIManager {
       });
     }
     pageInfoSection.innerHTML = `
-      <h5>${listHTML ? "Linked Pages" : ""}</h5>
+      <h5>${listHTML ? i18n.t("sidebar.linked_pages") : ""}</h5>
       <ul>
         ${listHTML}
       </ul>
@@ -543,7 +551,6 @@ export class EditorUIManager {
       const menuSection = document.getElementById(
         "menu-page-section"
       ) as HTMLElement;
-      const contentection = document.getElementById("content-page-section");
       if (menuSection) menuSection.style.display = "block";
       // if (contentection) contentection.remove();
     } else toolSection.style.display = "none";
@@ -633,7 +640,7 @@ export class EditorUIManager {
     if (buttonLayoutContainer) buttonLayoutContainer.style.display = "flex";
     const contentSection = document.querySelector("#content-page-section");
     const colorItems = contentSection?.querySelectorAll(".color-item > input");
-    colorItems?.forEach((input: any) => (input.checked = false));
+    colorItems?.forEach((input: any) => { input.checked = false; });
 
     const buttonLabel = contentSection?.querySelector(".cta-action-input");
     if (buttonLabel) buttonLabel.remove();
@@ -645,12 +652,6 @@ export class EditorUIManager {
     const rowComponent = tileWrapper.parent();
     let tileAttributes;
 
-    const isTile = selectedComponent.getClasses().includes("template-block");
-    const isCta = [
-      "img-button-container",
-      "plain-button-container",
-      "cta-container-child",
-    ].some((cls) => selectedComponent.getClasses().includes(cls));
 
     if (this.pageData.PageType === "Information") {
       const tileInfoSectionAttributes: InfoType = (
@@ -755,17 +756,9 @@ export class EditorUIManager {
   }
 
   activateNavigators(): any {
-    const leftNavigator = document.querySelector(
-      ".page-navigator-left"
-    ) as HTMLElement;
-    const rightNavigator = document.querySelector(
-      ".page-navigator-right"
-    ) as HTMLElement;
     const scrollContainer = document.getElementById(
       "child-container"
     ) as HTMLElement;
-    const prevButton = document.getElementById("scroll-left") as HTMLElement;
-    const nextButton = document.getElementById("scroll-right") as HTMLElement;
     const frames = document.querySelectorAll("#child-container .mobile-frame");
     const menuContainer = document.querySelector(
       ".menu-container"
@@ -773,10 +766,6 @@ export class EditorUIManager {
 
     // Show navigation buttons only when content overflows
     const menuWidth = menuContainer ? menuContainer.clientWidth : 0;
-    const totalFramesWidth =
-      Array.from(frames).reduce((sum, frame) => sum + frame.clientWidth, 0) +
-      menuWidth;
-    const containerWidth = scrollContainer.clientWidth;
 
     const alignment =
       window.innerWidth <= 1440
@@ -821,7 +810,7 @@ export class EditorUIManager {
     ) as HTMLDivElement;
 
     if (!pageTitle || !editHeader || !saveChange || !titleDiv) {
-      console.warn("resetTitleFromDOM: Required elements not found in DOM");
+      // Required elements not found, exit the function
       return;
     }
 

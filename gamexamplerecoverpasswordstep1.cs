@@ -221,17 +221,17 @@ namespace GeneXus.Programs {
          {
             bodyStyle += "-moz-opacity:0;opacity:0;";
          }
-         context.WriteHtmlText( " "+"class=\"form-horizontal Form\""+" "+ "style='"+bodyStyle+"'") ;
+         context.WriteHtmlText( " "+"class=\"form-horizontal FormBackgroundImage\""+" "+ "style='"+bodyStyle+"'") ;
          context.WriteHtmlText( FormProcess+">") ;
          context.skipLines(1);
          GXKey = Crypto.GetSiteKey( );
          GXEncryptionTmp = "gamexamplerecoverpasswordstep1.aspx"+UrlEncode(StringUtil.RTrim(AV7IDP_State));
-         context.WriteHtmlTextNl( "<form id=\"MAINFORM\" autocomplete=\"off\" name=\"MAINFORM\" method=\"post\" tabindex=-1  class=\"form-horizontal Form\" data-gx-class=\"form-horizontal Form\" novalidate action=\""+formatLink("gamexamplerecoverpasswordstep1.aspx") + "?" + UriEncrypt64( GXEncryptionTmp+Crypto.CheckSum( GXEncryptionTmp, 6), GXKey)+"\">") ;
+         context.WriteHtmlTextNl( "<form id=\"MAINFORM\" autocomplete=\"off\" name=\"MAINFORM\" method=\"post\" tabindex=-1  class=\"form-horizontal FormBackgroundImage\" data-gx-class=\"form-horizontal FormBackgroundImage\" novalidate action=\""+formatLink("gamexamplerecoverpasswordstep1.aspx") + "?" + UriEncrypt64( GXEncryptionTmp+Crypto.CheckSum( GXEncryptionTmp, 6), GXKey)+"\">") ;
          GxWebStd.gx_hidden_field( context, "_EventName", "");
          GxWebStd.gx_hidden_field( context, "_EventGridId", "");
          GxWebStd.gx_hidden_field( context, "_EventRowId", "");
          context.WriteHtmlText( "<div style=\"height:0;overflow:hidden\"><input type=\"submit\" title=\"submit\"  disabled></div>") ;
-         AssignProp("", false, "FORM", "Class", "form-horizontal Form", true);
+         AssignProp("", false, "FORM", "Class", "form-horizontal FormBackgroundImage", true);
          toggleJsOutput = isJsOutputEnabled( );
          if ( context.isSpaRequest( ) )
          {
@@ -315,89 +315,100 @@ namespace GeneXus.Programs {
          {
             RenderHtmlHeaders( ) ;
             RenderHtmlOpenForm( ) ;
+            GxWebStd.gx_msg_list( context, "", context.GX_msglist.DisplayMode, "", "", "", "false");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "Section", "start", "top", " "+"data-gx-base-lib=\"bootstrapv3\""+" "+"data-abstract-form"+" ", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divMaintable_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, divLayoutmaintable_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divTablemain_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 CellMarginLoginImageLeft", "Center", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divTablecontent_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 CellPaddingLogin", "Center", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divTableresetstep1_Internalname, 1, 0, "px", 0, "px", "TableLoginTransparency", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "Center", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, divTablecontainer_Internalname, 1, 0, "px", 0, "px", "table-login stack-top-xxl", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 stack-bottom-xxl", "Center", "top", "", "", "div");
-            /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblTitle_Internalname, context.GetMessage( "GAM_Recover", ""), "", "", lblTitle_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "Title", 0, "", 1, 1, 0, 0, "HLP_GAMExampleRecoverPasswordStep1.htm");
-            GxWebStd.gx_div_end( context, "Center", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 stack-bottom-l", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtavUsername_Internalname+"\"", "", "div");
-            /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, edtavUsername_Internalname, context.GetMessage( "GAM_User", ""), "col-xs-12 AttributeLabel", 1, true, "");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 gx-attribute", "start", "top", "", "", "div");
-            /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 14,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavUsername_Internalname, AV11UserName, StringUtil.RTrim( context.localUtil.Format( AV11UserName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,14);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", context.GetMessage( "GAM_EmailorUsername", ""), edtavUsername_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavUsername_Enabled, 1, "text", "", 60, "chr", 1, "row", 100, 0, 0, 0, 0, 0, 0, true, "GeneXusSecurityCommon\\GAMUserIdentification", "start", true, "", "HLP_GAMExampleRecoverPasswordStep1.htm");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "Center", "top", "", "", "div");
-            ClassString = "ErrorViewer";
-            StyleString = "";
-            GxWebStd.gx_msg_list( context, "", context.GX_msglist.DisplayMode, StyleString, ClassString, "", "false");
-            GxWebStd.gx_div_end( context, "Center", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 stack-bottom-xxl", "Center", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 20,'',false,'',0)\"";
-            ClassString = "Button button-primary";
-            StyleString = "";
-            GxWebStd.gx_button_ctrl( context, bttEnter_Internalname, "", context.GetMessage( "GAM_Confirm", ""), bttEnter_Jsonclick, 5, context.GetMessage( "GAM_Confirm", ""), "", StyleString, ClassString, 1, 1, "standard", "'"+""+"'"+",false,"+"'"+"EENTER."+"'", TempTags, "", context.GetButtonType( ), "HLP_GAMExampleRecoverPasswordStep1.htm");
-            GxWebStd.gx_div_end( context, "Center", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-8", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, divTableback_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-2", "end", "top", "", "", "div");
             /* Static images/pictures */
-            ClassString = "Image" + " " + ((StringUtil.StrCmp(imgImage1_gximage, "")==0) ? "GX_Image_GeneXusUnanimo_arrow_left_Class" : "GX_Image_"+imgImage1_gximage+"_Class");
+            ClassString = "Image" + " " + ((StringUtil.StrCmp(imgHeaderoriginal_gximage, "")==0) ? "GX_Image_ComfortaLogo_Class" : "GX_Image_"+imgHeaderoriginal_gximage+"_Class");
             StyleString = "";
-            sImgUrl = (string)(context.GetImagePath( "0e9084a3-4c7e-41d3-b17b-5fb61ea2e505", "", context.GetTheme( )));
-            GxWebStd.gx_bitmap( context, imgImage1_Internalname, sImgUrl, "", "", "", context.GetTheme( ), 1, 1, "", "", 0, 0, 0, "px", 0, "px", 0, 0, 0, "", "", StyleString, ClassString, "", "", "", "", " "+"data-gx-image"+" ", "", "", 1, false, false, context.GetImageSrcSet( sImgUrl), "HLP_GAMExampleRecoverPasswordStep1.htm");
-            GxWebStd.gx_div_end( context, "end", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-10", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 28,'',false,'',0)\"";
-            ClassString = "Button button-secondary";
-            StyleString = "";
-            GxWebStd.gx_button_ctrl( context, bttGoback_Internalname, "", context.GetMessage( "GAM_BacktoLogin", ""), bttGoback_Jsonclick, 5, context.GetMessage( "GAM_BacktoLogin", ""), "", StyleString, ClassString, 1, 1, "standard", "'"+""+"'"+",false,"+"'"+"E\\'GOBACK\\'."+"'", TempTags, "", context.GetButtonType( ), "HLP_GAMExampleRecoverPasswordStep1.htm");
+            sImgUrl = (string)(context.GetImagePath( "2f7c9247-c2e5-4f23-9059-2fa189584da0", "", context.GetTheme( )));
+            GxWebStd.gx_bitmap( context, imgHeaderoriginal_Internalname, sImgUrl, "", "", "", context.GetTheme( ), 1, 1, "", "", 0, 0, 0, "px", 0, "px", 0, 0, 0, "", "", StyleString, ClassString, "", "", "", "", " "+"data-gx-image"+" ", "", "", 1, false, false, context.GetImageSrcSet( sImgUrl), "HLP_GAMExampleRecoverPasswordStep1.htm");
+            GxWebStd.gx_div_end( context, "Center", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 CellMarginTop", "Center", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divUnnamedtable1_Internalname, 1, 0, "px", 0, "px", "AutoWidth", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divCurrentrepositorycell_Internalname, 1, 0, "px", 0, "px", "col-xs-12 TextBlockTitleWWP", "Center", "top", "", "", "div");
+            /* Text block */
+            GxWebStd.gx_label_ctrl( context, lblCurrentrepository_Internalname, context.GetMessage( "Add recovery email", ""), "", "", lblCurrentrepository_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "DataDescriptionLogin", 0, "", 1, 1, 0, 0, "HLP_GAMExampleRecoverPasswordStep1.htm");
+            GxWebStd.gx_div_end( context, "Center", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 DataContentCellLogin CellPaddingLogin", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
+            /* Attribute/Variable Label */
+            GxWebStd.gx_label_element( context, edtavUsername_Internalname, context.GetMessage( "User Name", ""), "col-sm-3 AttributeLoginImageLeftLabel", 0, true, "");
+            /* Single line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 25,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavUsername_Internalname, AV11UserName, StringUtil.RTrim( context.localUtil.Format( AV11UserName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,25);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", context.GetMessage( "WWP_GAM_Email", ""), edtavUsername_Jsonclick, 0, "AttributeLoginImageLeft", "", "", "", "", 1, edtavUsername_Enabled, 1, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, 0, 0, true, "GeneXusSecurityCommon\\GAMUserIdentification", "start", true, "", "HLP_GAMExampleRecoverPasswordStep1.htm");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 DataContentCellLogin CellPaddingLogin", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divActions_Internalname, 1, 0, "px", 0, "px", "CellMarginTop", "start", "top", " "+"data-gx-flex"+" ", "flex-direction:column;justify-content:flex-end;", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "", "start", "top", "", "align-self:center;", "div");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 30,'',false,'',0)\"";
+            ClassString = "ButtonMaterial ButtonLogin";
+            StyleString = "";
+            GxWebStd.gx_button_ctrl( context, bttBtnenter_Internalname, "", context.GetMessage( "GX_BtnEnter", ""), bttBtnenter_Jsonclick, 5, context.GetMessage( "GX_BtnEnter", ""), "", StyleString, ClassString, 1, 1, "standard", "'"+""+"'"+",false,"+"'"+"EENTER."+"'", TempTags, "", context.GetButtonType( ), "HLP_GAMExampleRecoverPasswordStep1.htm");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "CellMarginTop", "start", "top", "", "flex-grow:1;align-self:center;", "div");
+            /* Text block */
+            GxWebStd.gx_label_ctrl( context, lblBacktologin_Internalname, context.GetMessage( "WWP_GAM_BackLogin", ""), "", "", lblBacktologin_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "DataDescriptionLogin", 0, "", 1, 1, 0, 0, "HLP_GAMExampleRecoverPasswordStep1.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "Center", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "Center", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "Center", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -459,6 +470,13 @@ namespace GeneXus.Programs {
                            context.wbHandled = 1;
                            dynload_actions( ) ;
                         }
+                        else if ( StringUtil.StrCmp(sEvt, "START") == 0 )
+                        {
+                           context.wbHandled = 1;
+                           dynload_actions( ) ;
+                           /* Execute user event: Start */
+                           E110V2 ();
+                        }
                         else if ( StringUtil.StrCmp(sEvt, "ENTER") == 0 )
                         {
                            context.wbHandled = 1;
@@ -468,7 +486,7 @@ namespace GeneXus.Programs {
                               if ( ! Rfr0gs )
                               {
                                  /* Execute user event: Enter */
-                                 E110V2 ();
+                                 E120V2 ();
                               }
                               dynload_actions( ) ;
                            }
@@ -478,14 +496,14 @@ namespace GeneXus.Programs {
                            context.wbHandled = 1;
                            dynload_actions( ) ;
                            /* Execute user event: 'GoBack' */
-                           E120V2 ();
+                           E130V2 ();
                         }
                         else if ( StringUtil.StrCmp(sEvt, "LOAD") == 0 )
                         {
                            context.wbHandled = 1;
                            dynload_actions( ) ;
                            /* Execute user event: Load */
-                           E130V2 ();
+                           E140V2 ();
                            /* No code required for Cancel button. It is implemented as the Reset button. */
                         }
                         else if ( StringUtil.StrCmp(sEvt, "LSCR") == 0 )
@@ -634,7 +652,7 @@ namespace GeneXus.Programs {
          if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
          {
             /* Execute user event: Load */
-            E130V2 ();
+            E140V2 ();
             WB0V0( ) ;
          }
       }
@@ -654,6 +672,10 @@ namespace GeneXus.Programs {
       {
          /* Before Start, stand alone formulas. */
          before_start_formulas( ) ;
+         /* Execute Start event if defined. */
+         context.wbGlbDoneStart = 0;
+         /* Execute user event: Start */
+         E110V2 ();
          context.wbGlbDoneStart = 1;
          /* After Start, stand alone formulas. */
          if ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 )
@@ -673,14 +695,27 @@ namespace GeneXus.Programs {
          }
       }
 
-      public void GXEnter( )
+      protected void GXStart( )
       {
-         /* Execute user event: Enter */
+         /* Execute user event: Start */
          E110V2 ();
          if (returnInSub) return;
       }
 
       protected void E110V2( )
+      {
+         /* Start Routine */
+         returnInSub = false;
+      }
+
+      public void GXEnter( )
+      {
+         /* Execute user event: Enter */
+         E120V2 ();
+         if (returnInSub) return;
+      }
+
+      protected void E120V2( )
       {
          /* Enter Routine */
          returnInSub = false;
@@ -717,7 +752,7 @@ namespace GeneXus.Programs {
          /*  Sending Event outputs  */
       }
 
-      protected void E120V2( )
+      protected void E130V2( )
       {
          /* 'GoBack' Routine */
          returnInSub = false;
@@ -740,12 +775,12 @@ namespace GeneXus.Programs {
       {
          /* 'DISPLAYMESSAGES' Routine */
          returnInSub = false;
-         AV36GXV1 = 1;
-         while ( AV36GXV1 <= AV35GAMErrorCollection.Count )
+         AV37GXV1 = 1;
+         while ( AV37GXV1 <= AV35GAMErrorCollection.Count )
          {
-            AV34GAMError = ((GeneXus.Programs.genexussecurity.SdtGAMError)AV35GAMErrorCollection.Item(AV36GXV1));
+            AV34GAMError = ((GeneXus.Programs.genexussecurity.SdtGAMError)AV35GAMErrorCollection.Item(AV37GXV1));
             GX_msglist.addItem(AV34GAMError.gxTpr_Message);
-            AV36GXV1 = (int)(AV36GXV1+1);
+            AV37GXV1 = (int)(AV37GXV1+1);
          }
       }
 
@@ -753,7 +788,7 @@ namespace GeneXus.Programs {
       {
       }
 
-      protected void E130V2( )
+      protected void E140V2( )
       {
          /* Load Routine */
          returnInSub = false;
@@ -800,7 +835,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201763926", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256258421280", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -816,7 +851,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamexamplerecoverpasswordstep1.js", "?20256201763930", false, true);
+         context.AddJavascriptSource("gamexamplerecoverpasswordstep1.js", "?20256258421283", false, true);
          /* End function include_jscripts */
       }
 
@@ -827,14 +862,18 @@ namespace GeneXus.Programs {
 
       protected void init_default_properties( )
       {
-         lblTitle_Internalname = "TITLE";
+         imgHeaderoriginal_Internalname = "HEADERORIGINAL";
+         lblCurrentrepository_Internalname = "CURRENTREPOSITORY";
+         divCurrentrepositorycell_Internalname = "CURRENTREPOSITORYCELL";
          edtavUsername_Internalname = "vUSERNAME";
-         bttEnter_Internalname = "ENTER";
-         imgImage1_Internalname = "IMAGE1";
-         bttGoback_Internalname = "GOBACK";
-         divTableback_Internalname = "TABLEBACK";
-         divTablecontainer_Internalname = "TABLECONTAINER";
-         divMaintable_Internalname = "MAINTABLE";
+         bttBtnenter_Internalname = "BTNENTER";
+         lblBacktologin_Internalname = "BACKTOLOGIN";
+         divActions_Internalname = "ACTIONS";
+         divUnnamedtable1_Internalname = "UNNAMEDTABLE1";
+         divTableresetstep1_Internalname = "TABLERESETSTEP1";
+         divTablecontent_Internalname = "TABLECONTENT";
+         divTablemain_Internalname = "TABLEMAIN";
+         divLayoutmaintable_Internalname = "LAYOUTMAINTABLE";
          Form.Internalname = "FORM";
       }
 
@@ -848,7 +887,6 @@ namespace GeneXus.Programs {
          init_default_properties( ) ;
          edtavUsername_Jsonclick = "";
          edtavUsername_Enabled = 1;
-         context.GX_msglist.DisplayMode = 1;
          if ( context.isSpaRequest( ) )
          {
             enableJsOutput();
@@ -863,9 +901,9 @@ namespace GeneXus.Programs {
       public override void InitializeDynEvents( )
       {
          setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV10UserAuthTypeName","fld":"vUSERAUTHTYPENAME","hsh":true}]}""");
-         setEventMetadata("ENTER","""{"handler":"E110V2","iparms":[{"av":"AV10UserAuthTypeName","fld":"vUSERAUTHTYPENAME","hsh":true},{"av":"AV11UserName","fld":"vUSERNAME"},{"av":"AV7IDP_State","fld":"vIDP_STATE"}]""");
+         setEventMetadata("ENTER","""{"handler":"E120V2","iparms":[{"av":"AV10UserAuthTypeName","fld":"vUSERAUTHTYPENAME","hsh":true},{"av":"AV11UserName","fld":"vUSERNAME"},{"av":"AV7IDP_State","fld":"vIDP_STATE"}]""");
          setEventMetadata("ENTER",""","oparms":[{"av":"edtavUsername_Enabled","ctrl":"vUSERNAME","prop":"Enabled"}]}""");
-         setEventMetadata("'GOBACK'","""{"handler":"E120V2","iparms":[{"av":"AV7IDP_State","fld":"vIDP_STATE"}]""");
+         setEventMetadata("'GOBACK'","""{"handler":"E130V2","iparms":[{"av":"AV7IDP_State","fld":"vIDP_STATE"}]""");
          setEventMetadata("'GOBACK'",""","oparms":[{"av":"AV7IDP_State","fld":"vIDP_STATE"}]}""");
          return  ;
       }
@@ -892,15 +930,15 @@ namespace GeneXus.Programs {
          AV10UserAuthTypeName = "";
          GX_FocusControl = "";
          sPrefix = "";
-         lblTitle_Jsonclick = "";
+         ClassString = "";
+         imgHeaderoriginal_gximage = "";
+         StyleString = "";
+         sImgUrl = "";
+         lblCurrentrepository_Jsonclick = "";
          TempTags = "";
          AV11UserName = "";
-         ClassString = "";
-         StyleString = "";
-         bttEnter_Jsonclick = "";
-         imgImage1_gximage = "";
-         sImgUrl = "";
-         bttGoback_Jsonclick = "";
+         bttBtnenter_Jsonclick = "";
+         lblBacktologin_Jsonclick = "";
          Form = new GXWebForm();
          sEvt = "";
          EvtGridId = "";
@@ -926,7 +964,7 @@ namespace GeneXus.Programs {
       private short nDonePA ;
       private short nGXWrapped ;
       private int edtavUsername_Enabled ;
-      private int AV36GXV1 ;
+      private int AV37GXV1 ;
       private int idxLst ;
       private string AV7IDP_State ;
       private string wcpOAV7IDP_State ;
@@ -940,23 +978,27 @@ namespace GeneXus.Programs {
       private string AV10UserAuthTypeName ;
       private string GX_FocusControl ;
       private string sPrefix ;
-      private string divMaintable_Internalname ;
-      private string divTablecontainer_Internalname ;
-      private string lblTitle_Internalname ;
-      private string lblTitle_Jsonclick ;
+      private string divLayoutmaintable_Internalname ;
+      private string divTablemain_Internalname ;
+      private string divTablecontent_Internalname ;
+      private string divTableresetstep1_Internalname ;
+      private string ClassString ;
+      private string imgHeaderoriginal_gximage ;
+      private string StyleString ;
+      private string sImgUrl ;
+      private string imgHeaderoriginal_Internalname ;
+      private string divUnnamedtable1_Internalname ;
+      private string divCurrentrepositorycell_Internalname ;
+      private string lblCurrentrepository_Internalname ;
+      private string lblCurrentrepository_Jsonclick ;
       private string edtavUsername_Internalname ;
       private string TempTags ;
       private string edtavUsername_Jsonclick ;
-      private string ClassString ;
-      private string StyleString ;
-      private string bttEnter_Internalname ;
-      private string bttEnter_Jsonclick ;
-      private string divTableback_Internalname ;
-      private string imgImage1_gximage ;
-      private string sImgUrl ;
-      private string imgImage1_Internalname ;
-      private string bttGoback_Internalname ;
-      private string bttGoback_Jsonclick ;
+      private string divActions_Internalname ;
+      private string bttBtnenter_Internalname ;
+      private string bttBtnenter_Jsonclick ;
+      private string lblBacktologin_Internalname ;
+      private string lblBacktologin_Jsonclick ;
       private string sEvt ;
       private string EvtGridId ;
       private string EvtRowId ;

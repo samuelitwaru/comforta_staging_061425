@@ -1033,6 +1033,7 @@ namespace GeneXus.Programs {
                Imageuploaduc_Isreadonlymode = cgiGet( "IMAGEUPLOADUC_Isreadonlymode");
                Imageuploaduc_Maxfilesize = cgiGet( "IMAGEUPLOADUC_Maxfilesize");
                Imageuploaduc_Visible = StringUtil.StrToBool( cgiGet( "IMAGEUPLOADUC_Visible"));
+               Imageuploaduc_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "IMAGEUPLOADUC_Gxcontroltype"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
                Locationdescription_Objectcall = cgiGet( "LOCATIONDESCRIPTION_Objectcall");
                Locationdescription_Class = cgiGet( "LOCATIONDESCRIPTION_Class");
                Locationdescription_Enabled = StringUtil.StrToBool( cgiGet( "LOCATIONDESCRIPTION_Enabled"));
@@ -3680,7 +3681,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201705058", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202562313454420", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3696,7 +3697,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("trn_location.js", "?20256201705061", false, true);
+         context.AddJavascriptSource("trn_location.js", "?202562313454425", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -4554,6 +4555,7 @@ namespace GeneXus.Programs {
       private int imgLocationImage_Enabled ;
       private int Combo_locationphonecode_Datalistupdateminimumcharacters ;
       private int Combo_locationphonecode_Gxcontroltype ;
+      private int Imageuploaduc_Gxcontroltype ;
       private int Locationdescription_Coltitlecolor ;
       private int Combo_locationcountry_Datalistupdateminimumcharacters ;
       private int Combo_locationcountry_Gxcontroltype ;

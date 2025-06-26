@@ -55,7 +55,6 @@ export class ChildEditor {
       }
     };
     let converter;
-    console.log(this.pageData)
     if (
       this.pageData?.PageType === "Menu" ||
       this.pageData?.PageType === "MyLiving" ||
@@ -85,7 +84,7 @@ export class ChildEditor {
           "Missing URL for WebLink/DynamicForm page:",
           this.pageData
         );
-        urlPageEditor.initialise("htps://www.example.com"); 
+        urlPageEditor.initialise("htps://www.example.com");
       }
     } else if (this.pageData?.PageType === "Map") {
       const mapsPageEditor = new MapsPageEditor(childEditor);
@@ -98,12 +97,18 @@ export class ChildEditor {
       calendarEditor.load();
     }
 
-    this.editorEvents.init(childEditor, this.pageData, editorId, false, this.isNewPage);
+    this.editorEvents.init(
+      childEditor,
+      this.pageData,
+      editorId,
+      false,
+      this.isNewPage
+    );
     this.editorManager.finalizeEditorSetup(childEditor);
     this.themeManager.applyTheme(this.themeManager.currentTheme);
     this.updatePositions();
   }
-
+  
   createNewEditor(editorId: string) {
     const frameContainer = document.getElementById(
       "child-container"
@@ -117,10 +122,7 @@ export class ChildEditor {
     );
 
     newEditor.render(frameContainer);
-
   }
-
-  
 
   getEditorId(): number {
     let id = 0;
@@ -161,11 +163,6 @@ export class ChildEditor {
       </div>
       `);
     }
-  }
-
-  private updateFrame() {
-    this.editorEvents.removeOtherEditors();
-    this.editorEvents.activateNavigators();
   }
 
   private updatePositions() {

@@ -50,17 +50,17 @@ export class InfoSectionPopup {
       },
       {
         name: "Tile",
-        label: "Tile",
+        label: i18n.t("sidebar.action_list.tile"),
         handler: (sectionId: string | undefined) => this.addTile(sectionId),
       },
       {
         name: "Image",
-        label: "Image",
+        label: i18n.t("sidebar.action_list.image"),
         handler: (sectionId?: string) => this.addImage(sectionId),
       },
       {
         name: "Description",
-        label: "Description",
+        label: i18n.t("sidebar.action_list.description"),
         handler: (sectionId?: string) => this.addDescription(sectionId),
       },
     ];
@@ -231,7 +231,7 @@ export class InfoSectionPopup {
     this.menuContainer.style.top = "";
     this.menuContainer.style.right = "";
     this.menuContainer.style.bottom = "";
-    this.menuContainer.style.width = "120px";
+    this.menuContainer.style.width = "max-content";
 
     const spaceBelow = containerHeight - relTriggerBottom;
     const spaceAbove = relTriggerTop;
@@ -267,35 +267,35 @@ export class InfoSectionPopup {
     const itemsList = [
       {
         id: "add-address",
-        label: "Address",
+        label: i18n.t("sidebar.action_list.dropdown.address"),
         type: "Map",
         name: "",
-        handler: (service: any) => service.handleWebLinks(),
+        handler: (service: any) => service.handleAddress(),
       },
       {
         id: "add-email",
-        label: "Email",
+        label: i18n.t("sidebar.action_list.dropdown.email"),
         type: "Email",
         name: "",
         handler: (service: any) => service.handleEmail(),
       },
       {
         id: "add-form",
-        label: "Form",
+        label: i18n.t("sidebar.action_list.dropdown.form"),
         type: "Form",
         name: "",
         handler: (service: any) => service.handleForm(),
       },
       {
         id: "add-phone",
-        label: "Phone",
+        label: i18n.t("sidebar.action_list.dropdown.phone"),
         type: "Phone",
         name: "",
         handler: (service: any) => service.handlePhone(),
       },
       {
         id: "add-web-link",
-        label: "Web link",
+        label: i18n.t("sidebar.action_list.dropdown.weblink"),
         type: "WebLink",
         name: "",
         handler: (service: any) => service.handleWebLinks(),

@@ -9,6 +9,7 @@ import { ConfirmationBox } from "../../ConfirmationBox";
 import { ImageUpload } from "./ImageUpload";
 import { ImageUploadUi } from "./ImageUploadUi";
 import { zIndex } from "html2canvas/dist/types/css/property-descriptors/z-index";
+import { i18n } from "../../../../i18n/i18n";
 
 export class SingleImageFile {
   private readonly mediaFile: Media;
@@ -151,7 +152,7 @@ export class SingleImageFile {
     checkbox.setAttribute("role", "checkbox");
     checkbox.setAttribute("aria-label", "Select image");
     checkbox.setAttribute("tabindex", "0");
-    checkbox.title = "Select image";
+    checkbox.title = i18n.t("sidebar.image_upload.select_image");
     checkbox.className = "select-media-checkbox";
 
     Object.assign(checkbox.style, {
@@ -185,7 +186,7 @@ export class SingleImageFile {
   private createDeleteButton(): HTMLElement {
     const deleteSpan = document.createElement("span");
     deleteSpan.className = "delete-media fa-regular fa-trash-can";
-    deleteSpan.title = "Delete image";
+    deleteSpan.title = i18n.t("sidebar.image_upload.delete_image_title");
 
     if (this.imageUpload.isInDeleteMode) deleteSpan.style.display = "none";
 
@@ -366,6 +367,7 @@ export class SingleImageFile {
       this.removeFromDOM();
       this.imageUpload.loadMediaFiles();
       this.imageUpload.refreshUploadArea();
+      await this.controller.refreshEditorPages();
     } catch (error) {
       console.error("Error deleting media:", error);
     }

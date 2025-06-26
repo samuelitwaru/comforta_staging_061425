@@ -1,12 +1,10 @@
 import { AppConfig } from "../AppConfig";
 import { LoadingManager } from "../controls/LoadingManager";
 import { Theme } from "../types";
-import { environment } from "../utils/env";
-
 
 export const baseURL =
   window.location.origin +
-  (window.location.origin.startsWith("http://localhost") ? environment : "");
+  (window.location.origin.startsWith("http://localhost") ? process.env.ENVIRONMENT : "");
 
 export class ToolBoxService {
   private config: AppConfig;
@@ -24,6 +22,7 @@ export class ToolBoxService {
     this.services = this.config.services;
     this.forms = (window as any).app.forms;
     this.loadingManager = new LoadingManager(this.preloaderEl);
+    // console.log("object :>> ", this.activateVersion);
   }
   // Helper method to handle API calls
   async fetchAPI(endpoint: string, options = {}, skipLoading = false) {
@@ -47,15 +46,15 @@ export class ToolBoxService {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (data?.error && data.error?.Message == "Not Authenticated") {
-        location.reload()
+        location.reload();
       }
 
       return await data;
     } catch (error) {
-      console.error(`API Error (${endpoint}):`, error);
+      // console.error(`API Error (${endpoint}):`, error);
       throw error;
     } finally {
       if (!skipLoading) {
@@ -80,28 +79,21 @@ export class ToolBoxService {
   }
 
   async getVersions() {
-    const response = await this.fetchAPI(
-      "/api/toolbox/v2/appversions",
-      {},
-      true
-    );
+    const response = await this.fetchAPI("/api/toolbox/v2/appversions", {}, true);
     return response;
   }
 
   async getVersion() {
-    const response = await this.fetchAPI(
-      "/api/toolbox/v2/appversion",
-      {},
-      true
-    );
+    const response = await this.fetchAPI("/api/toolbox/v2/appversion", {}, true);
     return response;
   }
 
-  async createVersion(versionName: any) {
+  async createVersion(versionName: any, versionLanguage: string) {
     const response = await this.fetchAPI("/api/toolbox/v2/create-appversion", {
       method: "POST",
       body: JSON.stringify({
         AppVersionName: versionName,
+        AppVersionLanguage: versionLanguage,
       }),
     });
 
@@ -133,15 +125,12 @@ export class ToolBoxService {
   }
 
   async activateVersion(versionId: any) {
-    const response = await this.fetchAPI(
-      "/api/toolbox/v2/activate-appversion",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          AppVersionId: versionId,
-        }),
-      }
-    );
+    const response = await this.fetchAPI("/api/toolbox/v2/activate-appversion", {
+      method: "POST",
+      body: JSON.stringify({
+        AppVersionId: versionId,
+      }),
+    });
 
     return response;
   }
@@ -154,7 +143,6 @@ export class ToolBoxService {
       }),
     });
   }
-  
 
   async createMenuPage(appVersionId: string, pageName: string) {
     const response = await this.fetchAPI("/api/toolbox/v2/create-menu-page", {
@@ -194,7 +182,7 @@ export class ToolBoxService {
         pageName: pageName,
         url: url,
         WWPFormId: formId,
-        WWPFormReferenceName: FormReferenceName
+        WWPFormReferenceName: FormReferenceName,
       }),
     });
 
@@ -202,30 +190,24 @@ export class ToolBoxService {
   }
 
   async createServicePage(appVersionId: string, productServiceId: string) {
-    const response = await this.fetchAPI(
-      "/api/toolbox/v2/create-service-page",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          appVersionId: appVersionId,
-          ProductServiceId: productServiceId,
-        }),
-      }
-    );
+    const response = await this.fetchAPI("/api/toolbox/v2/create-service-page", {
+      method: "POST",
+      body: JSON.stringify({
+        appVersionId: appVersionId,
+        ProductServiceId: productServiceId,
+      }),
+    });
     return response;
   }
 
   async createContentPage(appVersionId: string, pageName: string) {
-    const response = await this.fetchAPI(
-      "/api/toolbox/v2/create-content-page",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          appVersionId: appVersionId,
-          PageName: pageName,
-        }),
-      }
-    );
+    const response = await this.fetchAPI("/api/toolbox/v2/create-content-page", {
+      method: "POST",
+      body: JSON.stringify({
+        appVersionId: appVersionId,
+        PageName: pageName,
+      }),
+    });
     return response;
   }
 
@@ -301,11 +283,7 @@ export class ToolBoxService {
 
   // get forms of a supplier
   async getSupplierForms(supplierId: string | number) {
-    return await this.fetchAPI(
-      `/api/toolbox/v2/supplier-forms?Supplierid=${supplierId}`,
-      {},
-      true
-    );
+    return await this.fetchAPI(`/api/toolbox/v2/supplier-forms?Supplierid=${supplierId}`, {}, true);
   }
 
   async getSinglePage(pageId: string | number) {
@@ -318,6 +296,16 @@ export class ToolBoxService {
       body: JSON.stringify({
         AppVersionId: appVersionId,
         PageId: pageId,
+      }),
+    });
+  }
+
+  async getTranslatedVersion(appVersionId: string, selectedLanguageCode: string) {
+    return await this.fetchAPI("/api/toolbox/V2/get-translated-version", {
+      method: "POST",
+      body: JSON.stringify({
+        AppVersionId: appVersionId,
+        LanguageCode: selectedLanguageCode,
       }),
     });
   }
@@ -355,10 +343,7 @@ export class ToolBoxService {
     });
   }
 
-  async addPageChild(
-    childPageId: string | number,
-    currentPageId: string | number
-  ) {
+  async addPageChild(childPageId: string | number, currentPageId: string | number) {
     return await this.fetchAPI("/api/toolbox/add-page-children", {
       method: "POST",
       body: JSON.stringify({
@@ -387,11 +372,40 @@ export class ToolBoxService {
     return await this.fetchAPI("/api/toolbox/location-theme");
   }
 
-  async updateAppVersionTheme(appVersionId:string, themeId: string) {
-    
+  async updateAppVersionTheme(appVersionId: string, themeId: string) {
     return await this.fetchAPI("/api/toolbox/update-appversion-theme", {
       method: "POST",
-      body: JSON.stringify({ AppVersionId:appVersionId, ThemeId: themeId }),
+      body: JSON.stringify({ AppVersionId: appVersionId, ThemeId: themeId }),
+    });
+  }
+
+  //translate Appversion
+  async TranslateAppVersion(appVersionId: string, LanguageFrom: string, LanguageTo: string) {
+    return await this.fetchAPI("/api/toolbox/translate-appversion", {
+      method: "POST",
+      body: JSON.stringify({
+        AppVersionId: appVersionId,
+        LanguageFrom: LanguageFrom,
+        LanguageTo: LanguageTo,
+      }),
+    });
+  }
+
+  //translate languages for Appversion
+  async TranslateAppVersionLanguages(
+    activeVersionId: string,
+    activePageId: string,
+    LanguageFrom: string,
+    LanguagesTo: string[]
+  ) {
+    return await this.fetchAPI("/api/toolbox/translate-appversion", {
+      method: "POST",
+      body: JSON.stringify({
+        AppVersionId: activeVersionId,
+        ActivePageId: activePageId,
+        LanguageFrom: LanguageFrom,
+        LanguageToCollection: LanguagesTo,
+      }),
     });
   }
 
@@ -405,12 +419,7 @@ export class ToolBoxService {
     return await this.fetchAPI(`/api/media/delete?MediaId=${mediaId}`);
   }
 
-  async uploadFile(
-    fileData: string,
-    fileName: string,
-    fileSize: number,
-    fileType: string
-  ) {
+  async uploadFile(fileData: string, fileName: string, fileSize: number, fileType: string) {
     if (!fileData) {
       throw new Error("Please select a file!");
     }

@@ -1,3 +1,4 @@
+trn_icon
 trn_croppedmedia
 trn_environmentvariable
 trn_supplierdynamicform
@@ -59,6 +60,10 @@ trn_location
 trn_manager
 trn_organisationtype
 trn_organisation
+trn_icongeneral
+trn_iconww
+trn_iconview
+trn_memocategorytrn_memowc
 wp_organisationdefinitions
 trn_environmentvariablegeneral
 trn_environmentvariableww
@@ -94,7 +99,6 @@ wp_createlocationandlicensestep1
 wp_managelocationbranding
 wp_createlocationandlicense
 trn_memogeneral
-trn_memocategorytrn_memowc
 trn_memocategorygeneral
 trn_memoww
 trn_memoview
@@ -387,6 +391,7 @@ gamexamplechangepassword
 gamhome
 gamexamplenotauthorized
 gamexamplelogin
+gamexamplelogin
 gx00o0
 gx00m0
 gx00h0
@@ -398,6 +403,7 @@ gx0050
 gx0040
 general\ui\masterprompt
 general\ui\masterunanimosidebar
+trn_iconwwgetfilterdata
 aprc_uploadcroppedmedia
 aprc_copyappversiontolocation
 trn_environmentvariablewwgetfilterdata
@@ -430,7 +436,6 @@ aprc_changeuserpassword
 aprc_createpermissions
 aprc_getlocationreceptioniststonotify
 aprc_contentpageapi
-trn_pageloaddvcombo
 workwithplus\dynamicforms\wwp_formwwgetfilterdata
 aprc_productserviceapi
 aprc_contentpagesapi

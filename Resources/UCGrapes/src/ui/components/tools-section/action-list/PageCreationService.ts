@@ -34,126 +34,130 @@ export class PageCreationService {
   }
 
   handlePhone() {
-    this.createFormAndModal("phone-form", "Add Phone Number", "Phone", [
+    this.createFormAndModal("phone-form", i18n.t("cta_modal_forms.phone.modal_title"), "Phone", [
       {
-        label: "Phone Number",
+        label: i18n.t("cta_modal_forms.phone.field_placeholder"),
         type: "tel",
         id: "field_value",
-        placeholder: "123-456-7890",
+        placeholder: i18n.t("cta_modal_forms.phone.field_placeholder"),
         required: true,
-        errorMessage: "Please enter a valid phone number",
+        errorMessage: i18n.t("cta_modal_forms.field_error_message"),
         validate: (value: string) => this.formModalService.isValidPhone(value),
       },
       {
-        label: "Label",
+        label: i18n.t("cta_modal_forms.label"),
         type: "text",
         id: "field_label",
-        placeholder: "Call us now",
+        placeholder: i18n.t("cta_modal_forms.phone.label_placeholder"),
         required: true,
-        errorMessage: "Please enter a label for your phone tile",
+        errorMessage: i18n.t("cta_modal_forms.label_error_message"),
         minLength: 2,
       },
     ]);
   }
 
   handleEmail() {
-    this.createFormAndModal("email-form", "Add Email Address", "Email", [
+    this.createFormAndModal("email-form", i18n.t("cta_modal_forms.email.modal_title"), "Email", [
       {
-        label: "Email Address",
+        label: i18n.t("cta_modal_forms.email.field_label"),
         type: "email",
         id: "field_value",
-        placeholder: "example@example.com",
+        placeholder: i18n.t("cta_modal_forms.email.field_placeholder"),
         required: true,
-        errorMessage: "Please enter a valid email address",
+        errorMessage: i18n.t("cta_modal_forms.field_error_message"),
         validate: (value: string) => this.formModalService.isValidEmail(value),
       },
       {
-        label: "Label",
+        label: i18n.t("cta_modal_forms.label"),
         type: "text",
         id: "field_label",
-        placeholder: "Get in touch",
+        placeholder: i18n.t("cta_modal_forms.email.label_placeholder"),
         required: true,
-        errorMessage: "Please enter a label for email tile",
+        errorMessage: i18n.t("cta_modal_forms.label_error_message"),
         minLength: 2,
       },
     ]);
   }
 
   handleForm() {
-    this.createFormAndModal("form-form", "Add Form", "Form", [
+    this.createFormAndModal("form-form", i18n.t("cta_modal_forms.form.modal_title"), "Form", [
       {
-        label: "Form Url",
+        label: i18n.t("cta_modal_forms.form.field_placeholder"),
         type: "url",
         id: "field_value",
-        placeholder: "https://example.com",
+        placeholder: i18n.t("cta_modal_forms.form.field_placeholder"),
         required: true,
         hidden: true,
-        errorMessage: "Please select a form",
+        errorMessage: i18n.t("cta_modal_forms.field_error_message"),
         validate: (value: string) => this.formModalService.isValidUrl(value),
       },
       {
-        label: "Form ID",
+        label: i18n.t("cta_modal_forms.form.field_placeholder"),
         type: "number",
         id: "field_id",
         required: false,
         hidden: true,
-        errorMessage: "Please select a form",
+        errorMessage: i18n.t("cta_modal_forms.label_error_message"),
         validate: (value: string) => this.formModalService.isValidUrl(value),
       },
       {
-        label: "Label",
+        label: i18n.t("cta_modal_forms.label"),
         type: "text",
         id: "field_label",
-        placeholder: "Fill Form",
+        placeholder: i18n.t("cta_modal_forms.form.label_placeholder"),
         required: true,
-        errorMessage: "Please enter a label for your form",
+        errorMessage: i18n.t("cta_modal_forms.label_error_message"),
         minLength: 5,
       },
     ]);
   }
 
   handleWebLinks() {    
-    this.createFormAndModal("web-link-form", "Add Web Link", "WebLink", [
-      {
-        label: "Link Url",
-        type: "url",
-        id: "field_value",
-        placeholder: "https://example.com",
-        required: true,
-        errorMessage: "Please enter a valid URL",
-        validate: (value: string) => this.formModalService.isValidUrl(value),
-      },
-      {
-        label: "Label",
-        type: "text",
-        id: "field_label",
-        placeholder: "Example Link",
-        required: true,
-        errorMessage: "Please enter a label for your link",
-        minLength: 5,
-      },
-    ]);
+    this.createFormAndModal(
+      "web-link-form",
+      i18n.t("cta_modal_forms.web_link.modal_title"),
+      "WebLink",
+      [
+        {
+          label: i18n.t("cta_modal_forms.web_link.field_placeholder"),
+          type: "url",
+          id: "field_value",
+          placeholder: i18n.t("cta_modal_forms.web_link.field_placeholder"),
+          required: true,
+          errorMessage: i18n.t("cta_modal_forms.field_error_message"),
+          validate: (value: string) => this.formModalService.isValidUrl(value),
+        },
+        {
+          label: i18n.t("cta_modal_forms.label"),
+          type: "text",
+          id: "field_label",
+          placeholder: i18n.t("cta_modal_forms.web_link.label_placeholder"),
+          required: true,
+          errorMessage: i18n.t("cta_modal_forms.label_error_message"),
+          minLength: 5,
+        },
+      ]
+    );
   }
 
   handleAddress() {
-    this.createFormAndModal("address-form", "Add Address", "Map", [
+    this.createFormAndModal("address-form", i18n.t("cta_modal_forms.address.modal_title"), "Map", [
       {
-        label: "Address",
+        label: i18n.t("cta_modal_forms.address.field_label"),
         type: "text",
         id: "field_value",
-        placeholder: "Address",
+        placeholder: i18n.t("cta_modal_forms.address.field_placeholder"),
         required: true,
-        errorMessage: "Please enter a Address",
-        validate: (value: string) =>
-          this.formModalService.isValidAddress(value),
+        errorMessage: i18n.t("cta_modal_forms.field_error_message"),
+        validate: (value: string) => this.formModalService.isValidAddress(value),
       },
       {
-        label: "Label",
+        label: i18n.t("cta_modal_forms.label"),
         type: "text",
         id: "field_label",
-        placeholder: "Visit us",
+        placeholder: i18n.t("cta_modal_forms.address.label_placeholder"),
         required: true,
-        errorMessage: "Please enter a label for your address",
+        errorMessage: i18n.t("cta_modal_forms.label_error_message"),
         minLength: 5,
       },
     ]);

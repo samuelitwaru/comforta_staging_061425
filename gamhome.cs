@@ -233,7 +233,7 @@ namespace GeneXus.Programs {
          {
             disableOutput();
          }
-         FormProcess = " data-HasEnter=\"false\" data-Skiponenter=\"false\"";
+         FormProcess = ((nGXWrapped==0) ? " data-HasEnter=\"false\" data-Skiponenter=\"false\"" : "");
          context.WriteHtmlText( "<body ") ;
          if ( StringUtil.StrCmp(context.GetLanguageProperty( "rtl"), "true") == 0 )
          {
@@ -247,12 +247,15 @@ namespace GeneXus.Programs {
          context.WriteHtmlText( " "+"class=\"form-horizontal Form\""+" "+ "style='"+bodyStyle+"'") ;
          context.WriteHtmlText( FormProcess+">") ;
          context.skipLines(1);
-         context.WriteHtmlTextNl( "<form id=\"MAINFORM\" autocomplete=\"off\" name=\"MAINFORM\" method=\"post\" tabindex=-1  class=\"form-horizontal Form\" data-gx-class=\"form-horizontal Form\" novalidate action=\""+formatLink("gamhome.aspx") +"\">") ;
-         GxWebStd.gx_hidden_field( context, "_EventName", "");
-         GxWebStd.gx_hidden_field( context, "_EventGridId", "");
-         GxWebStd.gx_hidden_field( context, "_EventRowId", "");
-         context.WriteHtmlText( "<div style=\"height:0;overflow:hidden\"><input type=\"submit\" title=\"submit\"  disabled></div>") ;
-         AssignProp("", false, "FORM", "Class", "form-horizontal Form", true);
+         if ( nGXWrapped != 1 )
+         {
+            context.WriteHtmlTextNl( "<form id=\"MAINFORM\" autocomplete=\"off\" name=\"MAINFORM\" method=\"post\" tabindex=-1  class=\"form-horizontal Form\" data-gx-class=\"form-horizontal Form\" novalidate action=\""+formatLink("gamhome.aspx") +"\">") ;
+            GxWebStd.gx_hidden_field( context, "_EventName", "");
+            GxWebStd.gx_hidden_field( context, "_EventGridId", "");
+            GxWebStd.gx_hidden_field( context, "_EventRowId", "");
+            context.WriteHtmlText( "<div style=\"height:0;overflow:hidden\"><input type=\"submit\" title=\"submit\"  disabled></div>") ;
+            AssignProp("", false, "FORM", "Class", "form-horizontal Form", true);
+         }
          toggleJsOutput = isJsOutputEnabled( );
          if ( context.isSpaRequest( ) )
          {
@@ -264,6 +267,8 @@ namespace GeneXus.Programs {
       {
          GxWebStd.gx_hidden_field( context, "vID", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV42Id), 4, 0, context.GetLanguageProperty( "decimal_point"), "")));
          GxWebStd.gx_hidden_field( context, "gxhash_vID", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV42Id), "ZZZ9"), context));
+         GxWebStd.gx_hidden_field( context, "vAPPLICATIONHOMEOBJECT", StringUtil.RTrim( AV36ApplicationHomeObject));
+         GxWebStd.gx_hidden_field( context, "gxhash_vAPPLICATIONHOMEOBJECT", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV36ApplicationHomeObject, "")), context));
          GxWebStd.gx_boolean_hidden_field( context, "vISJAVAENVIRONMENT", AV39isJavaEnvironment);
          GxWebStd.gx_hidden_field( context, "gxhash_vISJAVAENVIRONMENT", GetSecureSignedToken( "", AV39isJavaEnvironment, context));
          GXKey = Crypto.GetSiteKey( );
@@ -276,6 +281,8 @@ namespace GeneXus.Programs {
          send_integrity_footer_hashes( ) ;
          GxWebStd.gx_hidden_field( context, "vID", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV42Id), 4, 0, context.GetLanguageProperty( "decimal_point"), "")));
          GxWebStd.gx_hidden_field( context, "gxhash_vID", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV42Id), "ZZZ9"), context));
+         GxWebStd.gx_hidden_field( context, "vAPPLICATIONHOMEOBJECT", StringUtil.RTrim( AV36ApplicationHomeObject));
+         GxWebStd.gx_hidden_field( context, "gxhash_vAPPLICATIONHOMEOBJECT", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV36ApplicationHomeObject, "")), context));
          GxWebStd.gx_boolean_hidden_field( context, "vISJAVAENVIRONMENT", AV39isJavaEnvironment);
          GxWebStd.gx_hidden_field( context, "gxhash_vISJAVAENVIRONMENT", GetSecureSignedToken( "", AV39isJavaEnvironment, context));
          GxWebStd.gx_hidden_field( context, "vHTTPREQUEST_Baseurl", StringUtil.RTrim( AV40HttpRequest.BaseURL));
@@ -294,7 +301,10 @@ namespace GeneXus.Programs {
          {
             disableOutput();
          }
-         context.WriteHtmlTextNl( "</form>") ;
+         if ( nGXWrapped != 1 )
+         {
+            context.WriteHtmlTextNl( "</form>") ;
+         }
          if ( context.isSpaRequest( ) )
          {
             enableOutput();
@@ -344,106 +354,13 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "Section", "start", "top", " "+"data-gx-base-lib=\"bootstrapv3\""+" "+"data-abstract-form"+" ", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divMaintable_Internalname, 1, 0, "px", 0, "px", "", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, divLayoutmaintable_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-8 col-sm-offset-2", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divTablecontainer_Internalname, 1, 0, "px", 0, "px", "stack-top-xxl Card inset-l", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 stack-bottom-xxxl", "Center", "top", "", "", "div");
-            /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblWelcome_Internalname, context.GetMessage( "GAM_WELCOMETOGENEXUSACCESSMANAGER", ""), "", "", lblWelcome_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "Title", 0, "", 1, 1, 0, 0, "HLP_GAMHome.htm");
-            GxWebStd.gx_div_end( context, "Center", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 stack-bottom-xxl stack-top-l", "start", "top", "", "", "div");
-            /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblTextblock2_Internalname, context.GetMessage( "GAM_YouwereredirectedtothispanelbecauseyoudonthavetheHomeObjectconfiguredfortheapplication", ""), "", "", lblTextblock2_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlock", 0, "", 1, 1, 0, 0, "HLP_GAMHome.htm");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 stack-bottom-xl", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, divTableoptions_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 30, "px", "col-xs-12 col-sm-5", "start", "top", "", "", "div");
-            /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblTextblock4_Internalname, context.GetMessage( "GAM_IfyouwanttogototheGAMsBackoffice", ""), "", "", lblTextblock4_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlock", 0, "", 1, 1, 0, 0, "HLP_GAMHome.htm");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 30, "px", "col-xs-12 col-sm-7", "start", "top", "", "", "div");
-            /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblTextblock7_Internalname, context.GetMessage( "GAM_clickhere", ""), "", "", lblTextblock7_Jsonclick, "'"+""+"'"+",false,"+"'"+"E\\'GOBACKEND\\'."+"'", "", "TextBlock", 5, "", 1, 1, 0, 0, "HLP_GAMHome.htm");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 30, "px", "col-xs-12 col-sm-5", "start", "top", "", "", "div");
-            /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblTextblock5_Internalname, context.GetMessage( "GAM_IfyouwanttogototheDeveloperMenu", ""), "", "", lblTextblock5_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlock", 0, "", 1, 1, 0, 0, "HLP_GAMHome.htm");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 30, "px", "col-xs-12 col-sm-7", "start", "top", "", "", "div");
-            /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblTextblock8_Internalname, context.GetMessage( "GAM_clickhere", ""), "", "", lblTextblock8_Jsonclick, "'"+""+"'"+",false,"+"'"+"E\\'GODEVMENU\\'."+"'", "", "TextBlock", 5, "", 1, 1, 0, 0, "HLP_GAMHome.htm");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 30, "px", "col-xs-12 col-sm-5", "start", "top", "", "", "div");
-            /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblTextblock3_Internalname, context.GetMessage( "GAM_Formoreinformationaboutthisyoucan", ""), "", "", lblTextblock3_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlock", 0, "", 1, 1, 0, 0, "HLP_GAMHome.htm");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 30, "px", "col-xs-12 col-sm-7", "start", "top", "", "", "div");
-            /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblTextblock6_Internalname, context.GetMessage( "GAM_clickhere", ""), "", "", lblTextblock6_Jsonclick, "'"+""+"'"+",false,"+"'"+"E\\'GODOC\\'."+"'", "", "TextBlock", 5, "", 1, 1, 0, 0, "HLP_GAMHome.htm");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 stack-bottom-l stack-top-l", "start", "top", "", "", "div");
-            /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblTextblock9_Internalname, context.GetMessage( "GAM_IfyouwanttoconfiguretheHomeObjectyoucanwriteitsnamehere", ""), "", "", lblTextblock9_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlock", 0, "", 1, 1, 0, 0, "HLP_GAMHome.htm");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-8", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
-            /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, edtavApplicationhomeobject_Internalname, context.GetMessage( "GAM_HomeObject", ""), "col-sm-3 AttributeLabel", 0, true, "");
-            /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 37,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavApplicationhomeobject_Internalname, StringUtil.RTrim( AV36ApplicationHomeObject), StringUtil.RTrim( context.localUtil.Format( AV36ApplicationHomeObject, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,37);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", context.GetMessage( "GAM_HomeObjectName", ""), edtavApplicationhomeobject_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavApplicationhomeobject_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_GAMHome.htm");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-4", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 39,'',false,'',0)\"";
-            ClassString = "Button Primary";
-            StyleString = "";
-            GxWebStd.gx_button_ctrl( context, bttConfirm_Internalname, "", context.GetMessage( "GAM_SaveandGo", ""), bttConfirm_Jsonclick, 5, context.GetMessage( "GAM_SaveandGo", ""), "", StyleString, ClassString, 1, 1, "standard", "'"+""+"'"+",false,"+"'"+"E\\'CONFIRM\\'."+"'", TempTags, "", context.GetButtonType( ), "HLP_GAMHome.htm");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_start( context, divTablemain_Internalname, 1, 0, "px", 0, "px", "TableMain", "start", "top", "", "", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -612,8 +529,6 @@ namespace GeneXus.Programs {
             }
             if ( ! context.isAjaxRequest( ) )
             {
-               GX_FocusControl = edtavApplicationhomeobject_Internalname;
-               AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
             }
             nDonePA = 1;
          }
@@ -675,6 +590,8 @@ namespace GeneXus.Programs {
       {
          GxWebStd.gx_hidden_field( context, "vID", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV42Id), 4, 0, context.GetLanguageProperty( "decimal_point"), "")));
          GxWebStd.gx_hidden_field( context, "gxhash_vID", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV42Id), "ZZZ9"), context));
+         GxWebStd.gx_hidden_field( context, "vAPPLICATIONHOMEOBJECT", StringUtil.RTrim( AV36ApplicationHomeObject));
+         GxWebStd.gx_hidden_field( context, "gxhash_vAPPLICATIONHOMEOBJECT", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV36ApplicationHomeObject, "")), context));
          GxWebStd.gx_boolean_hidden_field( context, "vISJAVAENVIRONMENT", AV39isJavaEnvironment);
          GxWebStd.gx_hidden_field( context, "gxhash_vISJAVAENVIRONMENT", GetSecureSignedToken( "", AV39isJavaEnvironment, context));
       }
@@ -699,8 +616,6 @@ namespace GeneXus.Programs {
             /* Read saved SDTs. */
             /* Read saved values. */
             /* Read variables values. */
-            AV36ApplicationHomeObject = cgiGet( edtavApplicationhomeobject_Internalname);
-            AssignAttri("", false, "AV36ApplicationHomeObject", AV36ApplicationHomeObject);
             /* Read subfile selected row values. */
             /* Read hidden variables. */
             GXKey = Crypto.GetSiteKey( );
@@ -848,7 +763,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201763496", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202562584298", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -863,8 +778,11 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamhome.js", "?20256201763496", false, true);
+         if ( nGXWrapped != 1 )
+         {
+            context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
+            context.AddJavascriptSource("gamhome.js", "?202562584299", false, true);
+         }
          /* End function include_jscripts */
       }
 
@@ -875,20 +793,8 @@ namespace GeneXus.Programs {
 
       protected void init_default_properties( )
       {
-         lblWelcome_Internalname = "WELCOME";
-         lblTextblock2_Internalname = "TEXTBLOCK2";
-         lblTextblock4_Internalname = "TEXTBLOCK4";
-         lblTextblock7_Internalname = "TEXTBLOCK7";
-         lblTextblock5_Internalname = "TEXTBLOCK5";
-         lblTextblock8_Internalname = "TEXTBLOCK8";
-         lblTextblock3_Internalname = "TEXTBLOCK3";
-         lblTextblock6_Internalname = "TEXTBLOCK6";
-         divTableoptions_Internalname = "TABLEOPTIONS";
-         lblTextblock9_Internalname = "TEXTBLOCK9";
-         edtavApplicationhomeobject_Internalname = "vAPPLICATIONHOMEOBJECT";
-         bttConfirm_Internalname = "CONFIRM";
-         divTablecontainer_Internalname = "TABLECONTAINER";
-         divMaintable_Internalname = "MAINTABLE";
+         divTablemain_Internalname = "TABLEMAIN";
+         divLayoutmaintable_Internalname = "LAYOUTMAINTABLE";
          Form.Internalname = "FORM";
       }
 
@@ -900,8 +806,6 @@ namespace GeneXus.Programs {
             disableJsOutput();
          }
          init_default_properties( ) ;
-         edtavApplicationhomeobject_Jsonclick = "";
-         edtavApplicationhomeobject_Enabled = 1;
          if ( context.isSpaRequest( ) )
          {
             enableJsOutput();
@@ -915,8 +819,8 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV42Id","fld":"vID","pic":"ZZZ9","hsh":true},{"av":"AV39isJavaEnvironment","fld":"vISJAVAENVIRONMENT","hsh":true}]}""");
-         setEventMetadata("'CONFIRM'","""{"handler":"E120R2","iparms":[{"av":"AV42Id","fld":"vID","pic":"ZZZ9","hsh":true},{"av":"AV36ApplicationHomeObject","fld":"vAPPLICATIONHOMEOBJECT"}]}""");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV42Id","fld":"vID","pic":"ZZZ9","hsh":true},{"av":"AV36ApplicationHomeObject","fld":"vAPPLICATIONHOMEOBJECT","hsh":true},{"av":"AV39isJavaEnvironment","fld":"vISJAVAENVIRONMENT","hsh":true}]}""");
+         setEventMetadata("'CONFIRM'","""{"handler":"E120R2","iparms":[{"av":"AV42Id","fld":"vID","pic":"ZZZ9","hsh":true},{"av":"AV36ApplicationHomeObject","fld":"vAPPLICATIONHOMEOBJECT","hsh":true}]}""");
          setEventMetadata("'GODEVMENU'","""{"handler":"E130R2","iparms":[{"av":"AV39isJavaEnvironment","fld":"vISJAVAENVIRONMENT","hsh":true},{"av":"AV40HttpRequest.BaseURL","ctrl":"vHTTPREQUEST","prop":"Baseurl"}]}""");
          setEventMetadata("'GOBACKEND'","""{"handler":"E140R2","iparms":[{"av":"AV39isJavaEnvironment","fld":"vISJAVAENVIRONMENT","hsh":true}]}""");
          setEventMetadata("'GODOC'","""{"handler":"E150R2","iparms":[]}""");
@@ -940,23 +844,10 @@ namespace GeneXus.Programs {
          sDynURL = "";
          FormProcess = "";
          bodyStyle = "";
+         AV36ApplicationHomeObject = "";
          GXKey = "";
          GX_FocusControl = "";
          sPrefix = "";
-         lblWelcome_Jsonclick = "";
-         lblTextblock2_Jsonclick = "";
-         lblTextblock4_Jsonclick = "";
-         lblTextblock7_Jsonclick = "";
-         lblTextblock5_Jsonclick = "";
-         lblTextblock8_Jsonclick = "";
-         lblTextblock3_Jsonclick = "";
-         lblTextblock6_Jsonclick = "";
-         lblTextblock9_Jsonclick = "";
-         TempTags = "";
-         AV36ApplicationHomeObject = "";
-         ClassString = "";
-         StyleString = "";
-         bttConfirm_Jsonclick = "";
          Form = new GXWebForm();
          sEvt = "";
          EvtGridId = "";
@@ -985,50 +876,23 @@ namespace GeneXus.Programs {
 
       private short nGotPars ;
       private short GxWebError ;
+      private short nGXWrapped ;
       private short AV42Id ;
       private short wbEnd ;
       private short wbStart ;
       private short nDonePA ;
-      private short nGXWrapped ;
-      private int edtavApplicationhomeobject_Enabled ;
       private int idxLst ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string sDynURL ;
       private string FormProcess ;
       private string bodyStyle ;
+      private string AV36ApplicationHomeObject ;
       private string GXKey ;
       private string GX_FocusControl ;
       private string sPrefix ;
-      private string divMaintable_Internalname ;
-      private string divTablecontainer_Internalname ;
-      private string lblWelcome_Internalname ;
-      private string lblWelcome_Jsonclick ;
-      private string lblTextblock2_Internalname ;
-      private string lblTextblock2_Jsonclick ;
-      private string divTableoptions_Internalname ;
-      private string lblTextblock4_Internalname ;
-      private string lblTextblock4_Jsonclick ;
-      private string lblTextblock7_Internalname ;
-      private string lblTextblock7_Jsonclick ;
-      private string lblTextblock5_Internalname ;
-      private string lblTextblock5_Jsonclick ;
-      private string lblTextblock8_Internalname ;
-      private string lblTextblock8_Jsonclick ;
-      private string lblTextblock3_Internalname ;
-      private string lblTextblock3_Jsonclick ;
-      private string lblTextblock6_Internalname ;
-      private string lblTextblock6_Jsonclick ;
-      private string lblTextblock9_Internalname ;
-      private string lblTextblock9_Jsonclick ;
-      private string edtavApplicationhomeobject_Internalname ;
-      private string TempTags ;
-      private string AV36ApplicationHomeObject ;
-      private string edtavApplicationhomeobject_Jsonclick ;
-      private string ClassString ;
-      private string StyleString ;
-      private string bttConfirm_Internalname ;
-      private string bttConfirm_Jsonclick ;
+      private string divLayoutmaintable_Internalname ;
+      private string divTablemain_Internalname ;
       private string sEvt ;
       private string EvtGridId ;
       private string EvtRowId ;

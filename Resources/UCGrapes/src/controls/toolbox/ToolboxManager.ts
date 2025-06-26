@@ -188,7 +188,7 @@ export class ToolboxManager {
     const pageId = (globalThis as any).currentPageId;
 
     if (!pageId) {
-      console.log("No editor found");
+      console.log("No editor found....");
       return;
     }
 
@@ -230,10 +230,10 @@ export class ToolboxManager {
     }
   }
 
-  applyNewState(stateData: any, pageId: string) {
+  public applyNewState(stateData: any, pageId: string) {
+    
     const editor = (globalThis as any).activeEditor;
     if (!editor) return;
-
     const frameContainer = editor.getWrapper().find("#frame-container")[0];
     if (!frameContainer) return;
 

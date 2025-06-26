@@ -82,7 +82,7 @@ namespace GeneXus.Programs {
          {
             AV30AppVersionName = context.GetMessage( "Version 1", "");
             AV31IsActive = true;
-            new prc_createappversion(context ).execute(  AV30AppVersionName,  AV31IsActive, out  AV28SDT_AppVersion, out  AV29SDT_Error,  AV8LocationId,  AV14OrganisationId) ;
+            new prc_createappversion(context ).execute(  AV30AppVersionName,  context.GetMessage( "nl", ""),  AV31IsActive, out  AV28SDT_AppVersion, out  AV29SDT_Error,  AV8LocationId,  AV14OrganisationId) ;
          }
          cleanup();
       }

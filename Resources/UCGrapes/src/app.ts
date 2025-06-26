@@ -2,8 +2,7 @@ import { AppConfig } from "./AppConfig";
 import { EditorManager } from "./controls/editor/EditorManager";
 import { Localisation } from "./controls/Localisation";
 import { ToolboxManager } from "./controls/toolbox/ToolboxManager";
-import { i18n } from "./i18n/i18n";
-import { I18n } from "i18n-js";
+import { i18n, i18nModule } from "./i18n/i18n";
 
 class ToolboxApp {
   private toolboxManager: ToolboxManager;
@@ -36,6 +35,10 @@ class ToolboxApp {
     } else {
       i18n.locale = "en";
     }
+
+    const activeVersion = (globalThis as any).activeVersion;
+    const versionLanguage = activeVersion.AppVersionLanguage;
+    i18nModule.locale = versionLanguage;
   }
 
   removeModalListener(): void {
@@ -51,7 +54,7 @@ class ToolboxApp {
       // Check if click is on modal backdrop
       if (
         target.classList.contains("tb-modal") ||
-        target.classList.contains("popup-modal-link")||
+        target.classList.contains("popup-modal-link") ||
         target.classList.contains("popup-modal")
       ) {
         target.style.display = "none";

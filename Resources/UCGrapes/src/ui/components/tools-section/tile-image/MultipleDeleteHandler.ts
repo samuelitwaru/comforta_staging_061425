@@ -1,5 +1,10 @@
 // MultipleDeleteManager.ts
 import { ImageUploadManager } from "../../../../controls/ImageUploadManager";
+import { HistoryManager } from "../../../../controls/toolbox/HistoryManager";
+import { ToolboxManager } from "../../../../controls/toolbox/ToolboxManager";
+import { AppVersionManager } from "../../../../controls/versions/AppVersionManager";
+import { i18n } from "../../../../i18n/i18n";
+import { AppVersion } from "../../../../types";
 import { ConfirmationBox } from "../../ConfirmationBox";
 
 export class MultipleDeleteHandler {
@@ -52,7 +57,7 @@ export class MultipleDeleteHandler {
     this.checkboxLabel = document.createElement("label");
     this.checkboxLabel.htmlFor = "selectAllCheckbox";
     this.checkboxLabel.className = "checkbox-label";
-    this.checkboxLabel.innerText = "Select images";
+    this.checkboxLabel.innerText = i18n.t("sidebar.image_upload.select_images");
     this.checkboxLabel.style.cursor = "pointer";
 
     // Create counter span
@@ -65,7 +70,7 @@ export class MultipleDeleteHandler {
     const deselectSpan: HTMLSpanElement = document.createElement("span");
     deselectSpan.className = "deselect-all";
     deselectSpan.id = "deselectAll";
-    deselectSpan.innerText = "Deselect all";
+    deselectSpan.innerText = i18n.t("sidebar.image_upload.deselect_all");
     deselectSpan.style.display = "none"; // Initially hidden
 
     this.deleteImageButton = document.createElement("span");
@@ -114,6 +119,7 @@ export class MultipleDeleteHandler {
       e.stopPropagation();
     });
     checkbox.addEventListener("click", (e: Event) => {
+      e.preventDefault();
       this.isMultipleDeleteChecked = !this.isMultipleDeleteChecked;
 
       if (this.isMultipleDeleteChecked) {
@@ -197,8 +203,8 @@ export class MultipleDeleteHandler {
 
   public deleteEvent(): void {
     const confirmationBox = new ConfirmationBox(
-      `Are you sure you want to delete these media files?`,
-      "Delete media",
+      i18n.t("sidebar.image_upload.delete_image_modal_title"),
+      i18n.t("sidebar.image_upload.delete_images_message"),
       this.handleDeleteConfirmation.bind(this)
     );
     confirmationBox.render(document.body);
@@ -210,6 +216,7 @@ export class MultipleDeleteHandler {
       this.onLoadMediaCallback();
       this.clearSelection();
       this.onRefreshCallback();
+      await this.controller.refreshEditorPages();
       const modalActions = this.modalContent.querySelector(
         ".modal-actions"
       ) as HTMLElement;

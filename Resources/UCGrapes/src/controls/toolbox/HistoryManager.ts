@@ -1,14 +1,20 @@
 import { ToolboxManager } from "./ToolboxManager";
 
-export class HistoryManager {
-  private static pagesStore: Record<
-    string,
-    {
-      history: any[];
-      currentIndex: number;
-    }
-  > = {};
+interface PageHistoryState {
+  history: any[];
+  currentIndex: number;
+}
 
+interface HistoryStatus {
+  canUndo: boolean;
+  canRedo: boolean;
+  currentPosition: number;
+  totalStates: number;
+}
+
+export class HistoryManager {
+  private static pagesStore: Record<string, PageHistoryState> = {};
+  
   currentPageId: string;
   limit: number;
 
@@ -16,16 +22,16 @@ export class HistoryManager {
     return HistoryManager.pagesStore;
   }
 
-  constructor(currentPageId: string) {
+  constructor(currentPageId: string, limit: number = 50) {
     this.currentPageId = currentPageId;
-    this.limit = 50;
+    this.limit = Math.max(1, limit); // Ensure minimum of 1
 
     if (!this.pages[currentPageId]) {
       this.addPage(currentPageId);
     }
   }
 
-  addPage(pageId: string = this.currentPageId) {
+  addPage(pageId: string = this.currentPageId): void {
     if (!this.pages[pageId]) {
       this.pages[pageId] = {
         history: [],
@@ -34,104 +40,168 @@ export class HistoryManager {
     }
   }
 
-  get currentState() {
+  get currentState(): any | null {
     if (!this.currentPageId || !this.pages[this.currentPageId]) return null;
     const page = this.pages[this.currentPageId];
-    return page.history[page.currentIndex];
+    return page.currentIndex >= 0 ? page.history[page.currentIndex] : null;
   }
 
-  addState(newState: any) {
-    if (!this.currentPageId) return null;
+  private deepClone(obj: any): any {
+    try {
+      return JSON.parse(JSON.stringify(obj));
+    } catch (error) {
+      console.warn('Failed to clone state:', error);
+      return obj;
+    }
+  }
+
+  private isEqual(a: any, b: any): boolean {
+    try {
+      return JSON.stringify(a) === JSON.stringify(b);
+    } catch (error) {
+      console.warn('Failed to compare states:', error);
+      return false;
+    }
+  }
+
+  addState(newState: any): any | null {
+    if (!this.currentPageId) {
+      console.warn('No current page ID set');
+      return null;
+    }
+
+    if (newState === null || newState === undefined) {
+      console.warn('Cannot add null or undefined state');
+      return null;
+    }
 
     if (!this.pages[this.currentPageId]) {
       this.addPage(this.currentPageId);
     }
 
     const page = this.pages[this.currentPageId];
-
+    // If this is the first state
     if (page.history.length === 0) {
-      page.history.push(JSON.parse(JSON.stringify(newState)));
+      page.history.push(this.deepClone(newState));
       page.currentIndex = 0;
+      this.notifyStateChange();
       return this.currentState;
     }
 
-    // Truncate history if we're not at the end (due to undo operations)
+    // Remove any future states if we're not at the end
     if (page.currentIndex < page.history.length - 1) {
       page.history = page.history.slice(0, page.currentIndex + 1);
     }
 
-    // Compare with the LAST state in history (most recent)
-    const lastState = page.history[page.history.length - 1];
-    if (JSON.stringify(lastState) === JSON.stringify(newState)) {
-      return this.currentState; // Don't add duplicate state
+    // Check if state is different from current
+    const currentState = page.history[page.currentIndex];
+    if (this.isEqual(currentState, newState)) {
+      return this.currentState;
     }
 
-    page.history.push(JSON.parse(JSON.stringify(newState)));
+    // Add new state
+    page.history.push(this.deepClone(newState));
+    page.currentIndex++;
 
+    // Maintain history limit
     if (page.history.length > this.limit) {
       page.history.shift();
-    } else {
-      page.currentIndex++;
+      page.currentIndex = Math.max(0, page.currentIndex - 1);
     }
 
-    new ToolboxManager().unDoReDo();
+    this.notifyStateChange();
     return this.currentState;
   }
 
-  canUndo() {
+  canUndo(): boolean {
     if (!this.currentPageId || !this.pages[this.currentPageId]) return false;
     return this.pages[this.currentPageId].currentIndex > 0;
   }
 
-  canRedo() {
+  canRedo(): boolean {
     if (!this.currentPageId || !this.pages[this.currentPageId]) return false;
     const page = this.pages[this.currentPageId];
     return page.currentIndex < page.history.length - 1;
   }
 
-  undo() {
-    if (this.canUndo()) {
-      this.pages[this.currentPageId].currentIndex--;
-      return this.currentState;
-    }
-    return null;
+  undo(): any | null {
+    if (!this.canUndo()) return null;
+    
+    this.pages[this.currentPageId].currentIndex--;
+    this.notifyStateChange();
+    return this.currentState;
   }
 
-  redo() {
-    if (this.canRedo()) {
-      this.pages[this.currentPageId].currentIndex++;
-      return this.currentState;
-    }
-    return null;
+  redo(): any | null {
+    if (!this.canRedo()) return null;
+    
+    this.pages[this.currentPageId].currentIndex++;
+    this.notifyStateChange();
+    return this.currentState;
   }
 
-  getHistoryStatus() {
-    if (!this.currentPageId || !this.pages[this.currentPageId])
-      return "No page selected";
+  getHistoryStatus(): HistoryStatus {
+    if (!this.currentPageId || !this.pages[this.currentPageId]) {
+      return {
+        canUndo: false,
+        canRedo: false,
+        currentPosition: 0,
+        totalStates: 0
+      };
+    }
+
     const page = this.pages[this.currentPageId];
-    return `History: ${page.currentIndex + 1}/${page.history.length}`;
+    return {
+      canUndo: this.canUndo(),
+      canRedo: this.canRedo(),
+      currentPosition: page.currentIndex + 1,
+      totalStates: page.history.length
+    };
   }
 
-  getPageData(pageId: string) {
+  getPageData(pageId: string): any | null {
     if (!this.pages[pageId]) {
       this.addPage(pageId);
+      return null;
     }
 
-    if (this.pages[pageId]) {
-      return this.pages[pageId].history[this.pages[pageId].currentIndex];
-    }
-    return null;
+    const page = this.pages[pageId];
+    return page.currentIndex >= 0 ? page.history[page.currentIndex] : null;
   }
 
-  getAllHistory() {
+  // Clear history for a specific page
+  clearPageHistory(pageId: string = this.currentPageId): void {
+    if (this.pages[pageId]) {
+      this.pages[pageId] = {
+        history: [],
+        currentIndex: -1
+      };
+    }
+  }
+
+  // Get history length for a page
+  getHistoryLength(pageId: string = this.currentPageId): number {
+    if (!this.pages[pageId]) return 0;
+    return this.pages[pageId].history.length;
+  }
+
+  private notifyStateChange(): void {
+    try {
+      new ToolboxManager().unDoReDo();
+    } catch (error) {
+      console.warn('Failed to notify ToolboxManager:', error);
+    }
+  }
+
+  getAllHistory(): Record<string, PageHistoryState> {
     return this.pages;
   }
 
-  static getAllPages() {
+  static getAllPages(): Record<string, PageHistoryState> {
     return HistoryManager.pagesStore;
   }
 
-  static clearAllHistory() {
+  static clearAllHistory(): void {
     HistoryManager.pagesStore = {};
   }
 }

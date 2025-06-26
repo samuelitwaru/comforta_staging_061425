@@ -855,7 +855,7 @@ namespace GeneXus.Programs {
          else
          {
             AV11LoadSuccess = false;
-            CallWebObject(formatLink("gamexamplenotauthorized.aspx") );
+            CallWebObject(formatLink("wp_notauthorized.aspx") );
             context.wjLocDisableFrm = 1;
          }
          if ( AV11LoadSuccess )
@@ -1038,7 +1038,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201793575", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202562313501715", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1054,7 +1054,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wp_createneworganisationtype.js", "?20256201793575", false, true);
+         context.AddJavascriptSource("wp_createneworganisationtype.js", "?202562313501715", false, true);
          /* End function include_jscripts */
       }
 

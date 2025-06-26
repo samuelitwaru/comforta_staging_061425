@@ -496,7 +496,7 @@ namespace GeneXus.Programs {
          /* Div Control */
          GxWebStd.gx_div_start( context, "", dynLocationId.Visible, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+dynLocationId_Internalname+"\"", "", "div");
          /* Attribute/Variable Label */
-         GxWebStd.gx_label_element( context, dynLocationId_Internalname, context.GetMessage( "Location", ""), "col-sm-4 AttributeLabel", 1, true, "");
+         GxWebStd.gx_label_element( context, dynLocationId_Internalname, context.GetMessage( "Location Id", ""), "col-sm-4 AttributeLabel", 1, true, "");
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-8 gx-attribute", "start", "top", "", "", "div");
          TempTags = "  onfocus=\"gx.evt.onfocus(this, 24,'',false,'',0)\"";
@@ -1118,6 +1118,7 @@ namespace GeneXus.Programs {
                Imageuploaduc_Isreadonlymode = cgiGet( "IMAGEUPLOADUC_Isreadonlymode");
                Imageuploaduc_Maxfilesize = cgiGet( "IMAGEUPLOADUC_Maxfilesize");
                Imageuploaduc_Visible = StringUtil.StrToBool( cgiGet( "IMAGEUPLOADUC_Visible"));
+               Imageuploaduc_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "IMAGEUPLOADUC_Gxcontroltype"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
                Combo_suppliergenid_Objectcall = cgiGet( "COMBO_SUPPLIERGENID_Objectcall");
                Combo_suppliergenid_Class = cgiGet( "COMBO_SUPPLIERGENID_Class");
                Combo_suppliergenid_Icontype = cgiGet( "COMBO_SUPPLIERGENID_Icontype");
@@ -3869,7 +3870,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201722038", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256231347147", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3885,7 +3886,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("trn_productservice.js", "?20256201722042", false, true);
+         context.AddJavascriptSource("trn_productservice.js", "?202562313471414", false, true);
          context.AddJavascriptSource("UserControls/UC_CustomImageUploadRender.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
@@ -4984,6 +4985,7 @@ namespace GeneXus.Programs {
       private int edtProductServiceTileName_Enabled ;
       private int imgProductServiceImage_Visible ;
       private int imgProductServiceImage_Enabled ;
+      private int Imageuploaduc_Gxcontroltype ;
       private int Combo_suppliergenid_Datalistupdateminimumcharacters ;
       private int Combo_suppliergenid_Gxcontroltype ;
       private int Combo_suppliergen_id_Datalistupdateminimumcharacters ;

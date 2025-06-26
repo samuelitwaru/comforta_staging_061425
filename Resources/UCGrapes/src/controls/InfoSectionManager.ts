@@ -8,6 +8,7 @@ import { AddInfoSectionButton } from "../ui/components/AddInfoSectionButton";
 import { CtaAttributes, InfoType } from "../types";
 import { JSONToGrapesJSMenu } from "./editor/JSONToGrapesJSMenu";
 import { ToolboxManager } from "./toolbox/ToolboxManager";
+import { i18n } from "../i18n/i18n";
 
 export class InfoSectionManager {
   editor: any;
@@ -98,7 +99,6 @@ export class InfoSectionManager {
     nextSectionId?: string
   ) {
     // console.log('addMultipleImages nextSectionId', nextSectionId);
-    console.log("Selected images: ", selectedImages);
     const imgContainer = this.infoSectionUI.getMultipleImages(
       selectedImages.map((img) => img.Url),
       isUpdating,
@@ -151,7 +151,11 @@ export class InfoSectionManager {
     submitSection.classList.add("popup-footer");
     submitSection.style.marginBottom = "-12px";
 
-    const saveBtn = this.createButton("submit_form", "tb-btn-primary", "Save");
+    const saveBtn = this.createButton(
+      "submit_form",
+      "tb-btn-primary",
+      i18n.t("cta_modal_forms.save")
+    );
     saveBtn.disabled = true; // Disable save button initially
     saveBtn.style.opacity = "0.6";
     saveBtn.style.cursor = "not-allowed";
@@ -159,7 +163,7 @@ export class InfoSectionManager {
     const cancelBtn = this.createButton(
       "cancel_form",
       "tb-btn-outline",
-      "Cancel"
+      i18n.t("cta_modal_forms.cancel")
     );
 
     const characterCounterSection = document.createElement("div");
@@ -179,7 +183,7 @@ export class InfoSectionManager {
     modalBody.appendChild(submitSection);
 
     const modal = new Modal({
-      title: "Description",
+      title: i18n.t("section.description_modal.title"),
       width: "500px",
       body: modalBody,
     });
@@ -187,13 +191,7 @@ export class InfoSectionManager {
 
     const Delta = Quill.import('delta');
     const quill = new Quill("#editor", {
-      formats: [
-        'bold',
-        'italic',
-        'underline',
-        'link',
-        'list'
-      ],
+      formats: ["bold", "italic", "underline", "link", "list"],
       modules: {
         toolbar: [
           ["bold", "italic", "underline", "link"],
@@ -204,38 +202,38 @@ export class InfoSectionManager {
             [
               Node.ELEMENT_NODE,
               (node: Node, delta: any) => {
-                return delta.compose(new Delta().retain(delta.length(), {
-                  background: false,
-                  color: false,
-                  font: false,
-                  code: false,
-                  size: false,
-                  strike: false,
-                  script: false,
-                  blockquote: false,
-                  header: false,
-                  indent: false,
-                  align: false,
-                  direction: false,
-                  formula: false,
-                  image: false,
-                  video: false
-                }));
-              }
-            ]
-          ]
-        }
+                return delta.compose(
+                  new Delta().retain(delta.length(), {
+                    background: false,
+                    color: false,
+                    font: false,
+                    code: false,
+                    size: false,
+                    strike: false,
+                    script: false,
+                    blockquote: false,
+                    header: false,
+                    indent: false,
+                    align: false,
+                    direction: false,
+                    formula: false,
+                    image: false,
+                    video: false,
+                  })
+                );
+              },
+            ],
+          ],
+        },
       },
       theme: "snow",
-      placeholder: "Start typing here...",
+      placeholder: i18n.t("section.description_modal.placeholder"),
     });
 
     // Set focus to the editor
     setTimeout(() => {
       quill.focus();
     }, 0);
-
-
 
     // Monitor content changes to enable/disable save button
     quill.on("text-change", () => {

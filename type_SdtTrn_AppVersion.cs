@@ -77,6 +77,7 @@ namespace GeneXus.Programs {
          state.Add("gxTpr_Isactive_Z");
          state.Add("gxTpr_Isversiondeleted_Z");
          state.Add("gxTpr_Versiondeletedat_Z_Nullable");
+         state.Add("gxTpr_Appversionlanguage_Z");
          state.Add("gxTpr_Trn_themeid_Z");
          state.Add("gxTpr_Locationid_N");
          state.Add("gxTpr_Organisationid_N");
@@ -95,6 +96,7 @@ namespace GeneXus.Programs {
          gxTv_SdtTrn_AppVersion_Isactive = sdt.gxTv_SdtTrn_AppVersion_Isactive ;
          gxTv_SdtTrn_AppVersion_Isversiondeleted = sdt.gxTv_SdtTrn_AppVersion_Isversiondeleted ;
          gxTv_SdtTrn_AppVersion_Versiondeletedat = sdt.gxTv_SdtTrn_AppVersion_Versiondeletedat ;
+         gxTv_SdtTrn_AppVersion_Appversionlanguage = sdt.gxTv_SdtTrn_AppVersion_Appversionlanguage ;
          gxTv_SdtTrn_AppVersion_Trn_themeid = sdt.gxTv_SdtTrn_AppVersion_Trn_themeid ;
          gxTv_SdtTrn_AppVersion_Page = sdt.gxTv_SdtTrn_AppVersion_Page ;
          gxTv_SdtTrn_AppVersion_Mode = sdt.gxTv_SdtTrn_AppVersion_Mode ;
@@ -106,6 +108,7 @@ namespace GeneXus.Programs {
          gxTv_SdtTrn_AppVersion_Isactive_Z = sdt.gxTv_SdtTrn_AppVersion_Isactive_Z ;
          gxTv_SdtTrn_AppVersion_Isversiondeleted_Z = sdt.gxTv_SdtTrn_AppVersion_Isversiondeleted_Z ;
          gxTv_SdtTrn_AppVersion_Versiondeletedat_Z = sdt.gxTv_SdtTrn_AppVersion_Versiondeletedat_Z ;
+         gxTv_SdtTrn_AppVersion_Appversionlanguage_Z = sdt.gxTv_SdtTrn_AppVersion_Appversionlanguage_Z ;
          gxTv_SdtTrn_AppVersion_Trn_themeid_Z = sdt.gxTv_SdtTrn_AppVersion_Trn_themeid_Z ;
          gxTv_SdtTrn_AppVersion_Locationid_N = sdt.gxTv_SdtTrn_AppVersion_Locationid_N ;
          gxTv_SdtTrn_AppVersion_Organisationid_N = sdt.gxTv_SdtTrn_AppVersion_Organisationid_N ;
@@ -157,6 +160,7 @@ namespace GeneXus.Programs {
          sDateCnv += StringUtil.Substring( "00", 1, 2-StringUtil.Len( sNumToPad)) + sNumToPad;
          AddObjectProperty("VersionDeletedAt", sDateCnv, false, includeNonInitialized);
          AddObjectProperty("VersionDeletedAt_N", gxTv_SdtTrn_AppVersion_Versiondeletedat_N, false, includeNonInitialized);
+         AddObjectProperty("AppVersionLanguage", gxTv_SdtTrn_AppVersion_Appversionlanguage, false, includeNonInitialized);
          AddObjectProperty("Trn_ThemeId", gxTv_SdtTrn_AppVersion_Trn_themeid, false, includeNonInitialized);
          if ( gxTv_SdtTrn_AppVersion_Page != null )
          {
@@ -192,6 +196,7 @@ namespace GeneXus.Programs {
             sNumToPad = StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Second( datetime_STZ)), 10, 0));
             sDateCnv += StringUtil.Substring( "00", 1, 2-StringUtil.Len( sNumToPad)) + sNumToPad;
             AddObjectProperty("VersionDeletedAt_Z", sDateCnv, false, includeNonInitialized);
+            AddObjectProperty("AppVersionLanguage_Z", gxTv_SdtTrn_AppVersion_Appversionlanguage_Z, false, includeNonInitialized);
             AddObjectProperty("Trn_ThemeId_Z", gxTv_SdtTrn_AppVersion_Trn_themeid_Z, false, includeNonInitialized);
             AddObjectProperty("LocationId_N", gxTv_SdtTrn_AppVersion_Locationid_N, false, includeNonInitialized);
             AddObjectProperty("OrganisationId_N", gxTv_SdtTrn_AppVersion_Organisationid_N, false, includeNonInitialized);
@@ -239,6 +244,11 @@ namespace GeneXus.Programs {
             gxTv_SdtTrn_AppVersion_Versiondeletedat_N = (short)(sdt.gxTv_SdtTrn_AppVersion_Versiondeletedat_N);
             sdtIsNull = 0;
             gxTv_SdtTrn_AppVersion_Versiondeletedat = sdt.gxTv_SdtTrn_AppVersion_Versiondeletedat ;
+         }
+         if ( sdt.IsDirty("AppVersionLanguage") )
+         {
+            sdtIsNull = 0;
+            gxTv_SdtTrn_AppVersion_Appversionlanguage = sdt.gxTv_SdtTrn_AppVersion_Appversionlanguage ;
          }
          if ( sdt.IsDirty("Trn_ThemeId") )
          {
@@ -294,6 +304,7 @@ namespace GeneXus.Programs {
                this.gxTv_SdtTrn_AppVersion_Isactive_Z_SetNull( );
                this.gxTv_SdtTrn_AppVersion_Isversiondeleted_Z_SetNull( );
                this.gxTv_SdtTrn_AppVersion_Versiondeletedat_Z_SetNull( );
+               this.gxTv_SdtTrn_AppVersion_Appversionlanguage_Z_SetNull( );
                this.gxTv_SdtTrn_AppVersion_Trn_themeid_Z_SetNull( );
                if ( gxTv_SdtTrn_AppVersion_Page != null )
                {
@@ -471,6 +482,22 @@ namespace GeneXus.Programs {
       public bool gxTv_SdtTrn_AppVersion_Versiondeletedat_IsNull( )
       {
          return (gxTv_SdtTrn_AppVersion_Versiondeletedat_N==1) ;
+      }
+
+      [  SoapElement( ElementName = "AppVersionLanguage" )]
+      [  XmlElement( ElementName = "AppVersionLanguage"   )]
+      public string gxTpr_Appversionlanguage
+      {
+         get {
+            return gxTv_SdtTrn_AppVersion_Appversionlanguage ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtTrn_AppVersion_Appversionlanguage = value;
+            SetDirty("Appversionlanguage");
+         }
+
       }
 
       [  SoapElement( ElementName = "Trn_ThemeId" )]
@@ -820,6 +847,34 @@ namespace GeneXus.Programs {
          return false ;
       }
 
+      [  SoapElement( ElementName = "AppVersionLanguage_Z" )]
+      [  XmlElement( ElementName = "AppVersionLanguage_Z"   )]
+      public string gxTpr_Appversionlanguage_Z
+      {
+         get {
+            return gxTv_SdtTrn_AppVersion_Appversionlanguage_Z ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtTrn_AppVersion_Appversionlanguage_Z = value;
+            SetDirty("Appversionlanguage_Z");
+         }
+
+      }
+
+      public void gxTv_SdtTrn_AppVersion_Appversionlanguage_Z_SetNull( )
+      {
+         gxTv_SdtTrn_AppVersion_Appversionlanguage_Z = "";
+         SetDirty("Appversionlanguage_Z");
+         return  ;
+      }
+
+      public bool gxTv_SdtTrn_AppVersion_Appversionlanguage_Z_IsNull( )
+      {
+         return false ;
+      }
+
       [  SoapElement( ElementName = "Trn_ThemeId_Z" )]
       [  XmlElement( ElementName = "Trn_ThemeId_Z"   )]
       public Guid gxTpr_Trn_themeid_Z
@@ -954,6 +1009,7 @@ namespace GeneXus.Programs {
          gxTv_SdtTrn_AppVersion_Locationid = Guid.Empty;
          gxTv_SdtTrn_AppVersion_Organisationid = Guid.Empty;
          gxTv_SdtTrn_AppVersion_Versiondeletedat = (DateTime)(DateTime.MinValue);
+         gxTv_SdtTrn_AppVersion_Appversionlanguage = "";
          gxTv_SdtTrn_AppVersion_Trn_themeid = Guid.Empty;
          gxTv_SdtTrn_AppVersion_Mode = "";
          gxTv_SdtTrn_AppVersion_Appversionid_Z = Guid.Empty;
@@ -961,6 +1017,7 @@ namespace GeneXus.Programs {
          gxTv_SdtTrn_AppVersion_Locationid_Z = Guid.Empty;
          gxTv_SdtTrn_AppVersion_Organisationid_Z = Guid.Empty;
          gxTv_SdtTrn_AppVersion_Versiondeletedat_Z = (DateTime)(DateTime.MinValue);
+         gxTv_SdtTrn_AppVersion_Appversionlanguage_Z = "";
          gxTv_SdtTrn_AppVersion_Trn_themeid_Z = Guid.Empty;
          datetime_STZ = (DateTime)(DateTime.MinValue);
          sDateCnv = "";
@@ -995,7 +1052,9 @@ namespace GeneXus.Programs {
       private bool gxTv_SdtTrn_AppVersion_Isactive_Z ;
       private bool gxTv_SdtTrn_AppVersion_Isversiondeleted_Z ;
       private string gxTv_SdtTrn_AppVersion_Appversionname ;
+      private string gxTv_SdtTrn_AppVersion_Appversionlanguage ;
       private string gxTv_SdtTrn_AppVersion_Appversionname_Z ;
+      private string gxTv_SdtTrn_AppVersion_Appversionlanguage_Z ;
       private Guid gxTv_SdtTrn_AppVersion_Appversionid ;
       private Guid gxTv_SdtTrn_AppVersion_Locationid ;
       private Guid gxTv_SdtTrn_AppVersion_Organisationid ;
@@ -1117,7 +1176,21 @@ namespace GeneXus.Programs {
 
       }
 
-      [DataMember( Name = "Trn_ThemeId" , Order = 7 )]
+      [DataMember( Name = "AppVersionLanguage" , Order = 7 )]
+      [GxSeudo()]
+      public string gxTpr_Appversionlanguage
+      {
+         get {
+            return sdt.gxTpr_Appversionlanguage ;
+         }
+
+         set {
+            sdt.gxTpr_Appversionlanguage = value;
+         }
+
+      }
+
+      [DataMember( Name = "Trn_ThemeId" , Order = 8 )]
       [GxSeudo()]
       public Guid gxTpr_Trn_themeid
       {
@@ -1131,7 +1204,7 @@ namespace GeneXus.Programs {
 
       }
 
-      [DataMember( Name = "Page" , Order = 8 )]
+      [DataMember( Name = "Page" , Order = 9 )]
       public GxGenericCollection<SdtTrn_AppVersion_Page_RESTInterface> gxTpr_Page
       {
          get {
@@ -1165,7 +1238,7 @@ namespace GeneXus.Programs {
          }
       }
 
-      [DataMember( Name = "gx_md5_hash", Order = 9 )]
+      [DataMember( Name = "gx_md5_hash", Order = 10 )]
       public string Hash
       {
          get {

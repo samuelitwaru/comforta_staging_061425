@@ -3,6 +3,8 @@ import { Image, InfoType, Media, Tile } from "../types";
 import { ImageUploadUi } from "../ui/components/tools-section/tile-image/ImageUploadUi";
 import { TileProperties } from "./editor/TileProperties";
 import { InfoSectionManager } from "./InfoSectionManager";
+import { ToolboxManager } from "./toolbox/ToolboxManager";
+import { AppVersionManager } from "./versions/AppVersionManager";
 
 export class ImageUploadManager {
   private type: "tile" | "cta" | "content" | "info";
@@ -76,10 +78,7 @@ export class ImageUploadManager {
   }
 
   /* Position Management Methods */
-  public captureCurrentPosition(
-    frame: HTMLElement,
-    container: HTMLElement
-  ) {
+  public captureCurrentPosition(frame: HTMLElement, container: HTMLElement) {
     const frameRect = frame.getBoundingClientRect();
     const containerRect = container.getBoundingClientRect();
 
@@ -372,9 +371,86 @@ export class ImageUploadManager {
         this.toolboxService.deleteMedia(id)
       );
       await Promise.all(deletePromises);
+      await this.refreshEditorPages();
     } catch (error) {
       console.error("Error deleting images:", error);
       throw error;
+    }
+  }
+
+  public async refreshEditorPages() {
+    const iframes = document.querySelectorAll(
+        ".mobile-frame iframe"
+    ) as NodeListOf<HTMLIFrameElement>;
+    if (!iframes.length) return;
+
+    iframes.forEach((iframe) => {
+        try {
+            const iframeDoc = this.getIframeDocument(iframe);
+            if (iframeDoc) {
+                // Handle img tags
+                const imgTags = iframeDoc.querySelectorAll('img') as NodeListOf<HTMLImageElement>;
+                imgTags?.forEach(img => {
+                    if (img.src) {
+                        const cleanUrl = img.src.split('?')[0];
+                        img.src = `${cleanUrl}?t=${Date.now()}`;
+                    }
+                });
+
+                // Handle CSS-defined background images (classes and IDs)
+                const allElements = iframeDoc.querySelectorAll('*') as NodeListOf<HTMLDivElement>;
+                allElements.forEach((element: HTMLDivElement) => {
+                    const computedStyle = iframe.contentWindow?.getComputedStyle(element);
+                    if (computedStyle) {
+                        const bgImage = computedStyle.backgroundImage;
+                        if (bgImage && bgImage !== 'none' && bgImage.includes('url(')) {
+                            const match = bgImage.match(/url\(['"]?(.*?)['"]?\)/);
+                            if (match && match[1]) {
+                                const cleanUrl = match[1].split('?')[0];
+                                // Override with inline style to force refresh
+                                element.style.setProperty('background-image', `url(${cleanUrl}?t=${Date.now()})`);
+
+                                this.updateTileAttribute(element)
+                            }
+                        }
+                    }
+                });
+            }
+        } catch (error) {
+            console.error("Error processing iframe content:", error);
+        }
+    });
+}
+
+  private updateTileAttribute(tileEl: HTMLElement) {
+    const tileWrapper = tileEl.parentElement as HTMLDivElement;
+    if (tileWrapper && tileWrapper.getAttribute('data-gjs-type') === 'tile-wrapper') {
+        const updates = {
+        BGImageUrl: "",
+        Opacity: "0",
+        BGPosition: "",
+        Top: "",
+        Left: "",
+        OriginalImageUrl: "",
+        BGSize: "",
+      };
+      const rowId = tileWrapper.parentElement?.id;
+      if (rowId) {
+        const infoSectionManager = new InfoSectionManager();
+
+        for (const [key, value] of Object.entries(updates)) {
+          infoSectionManager.updateInfoTileAttributes(rowId, tileWrapper.id, key, value);
+        }
+      }
+    }
+}
+
+  private getIframeDocument(iframe: HTMLIFrameElement): Document | null {
+    try {
+      return iframe.contentDocument || iframe.contentWindow?.document || null;
+    } catch (error) {
+      console.error("Error accessing iframe document:", error);
+      return null;
     }
   }
 
@@ -499,9 +575,9 @@ export class ImageUploadManager {
 
     const sanitizedBase = baseName
       .toLowerCase()
-      .replace(/\s+/g, "-") 
-      .replace(/[()]/g, "") 
-      .replace(/[^a-z0-9-_]/g, ""); 
+      .replace(/\s+/g, "-")
+      .replace(/[()]/g, "")
+      .replace(/[^a-z0-9-_]/g, "");
 
     return `${sanitizedBase}-${randomSuffix}.${extension}`;
   }

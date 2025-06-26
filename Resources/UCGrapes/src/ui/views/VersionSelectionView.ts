@@ -22,6 +22,7 @@ export class VersionSelectionView {
   private versionList: HTMLDivElement;
   private appVersions: AppVersion[];
   private versionNameField?: FormField;
+  private VersionLanguageField?: FormField;
 
   constructor() {
     this.versionController = new AppVersionController();
@@ -52,7 +53,7 @@ export class VersionSelectionView {
     button.setAttribute("aria-haspopup", "listbox");
 
     this.activeVersion.classList.add("selected-theme-value");
-    this.activeVersion.textContent = "Select Version";
+    this.activeVersion.textContent = i18n.t("navbar.appversion.select_version");
 
     button.appendChild(this.activeVersion);
     button.onclick = (e) => {
@@ -67,16 +68,11 @@ export class VersionSelectionView {
   private toggleSelection(button: HTMLButtonElement): void {
     this.versionSelection.classList.toggle("show");
     button.classList.toggle("open");
-    button.setAttribute(
-      "aria-expanded",
-      button.classList.contains("open").toString()
-    );
+    button.setAttribute("aria-expanded", button.classList.contains("open").toString());
   }
 
   public async initializeVersionOptions(): Promise<void> {
-    const existingVersionSelection = this.selectionDiv.querySelector(
-      ".theme-options-list"
-    );
+    const existingVersionSelection = this.selectionDiv.querySelector(".theme-options-list");
     if (existingVersionSelection) {
       existingVersionSelection.remove();
     }
@@ -93,9 +89,7 @@ export class VersionSelectionView {
 
     const versions = await this.versionController.getVersions();
     this.appVersions = versions;
-    versions.forEach((version: AppVersion) =>
-      this.createVersionOption(version)
-    );
+    versions.forEach((version: AppVersion) => this.createVersionOption(version));
 
     // this.addTemplatesButton();
     this.selectionDiv.appendChild(this.versionSelection);
@@ -115,7 +109,7 @@ export class VersionSelectionView {
   private addTemplatesButton(): void {
     const templatesBtn = document.createElement("div");
     templatesBtn.className = "theme-option";
-    templatesBtn.innerHTML = `Select Templates`;
+    templatesBtn.innerHTML = i18n.t("navbar.appversion.select_version");
     templatesBtn.onclick = () => {
       const config = AppConfig.getInstance();
       config.addTemplatesButtonEvent();
@@ -136,23 +130,17 @@ export class VersionSelectionView {
 
     // Check if this is the active version
     const activeVersion =
-      (globalThis as any).activeVersion ||
-      (await this.versionController.getActiveVersion());
+      (globalThis as any).activeVersion || (await this.versionController.getActiveVersion());
     // console.log('activeVersion', activeVersion);
     // console.log('version', version);
     const isActive = version.AppVersionId === activeVersion?.AppVersionId;
 
     if (isActive) {
       versionOption.classList.add("selected");
-      this.activeVersion.textContent = truncateString(
-        version.AppVersionName,
-        15
-      );
+      this.activeVersion.textContent = truncateString(version.AppVersionName, 15);
     }
 
-    versionOption.addEventListener("click", (e) =>
-      this.handleVersionSelection(e, version)
-    );
+    versionOption.addEventListener("click", (e) => this.handleVersionSelection(e, version));
 
     // Create submenu with options
     const subMenu = this.createVersionSubMenu(version, isActive);
@@ -161,23 +149,20 @@ export class VersionSelectionView {
     this.versionList.appendChild(versionOption);
   }
 
-  private createVersionSubMenu(
-    version: AppVersion,
-    isActive: boolean
-  ): HTMLDivElement {
+  private createVersionSubMenu(version: AppVersion, isActive: boolean): HTMLDivElement {
     const subMenu = document.createElement("div");
     subMenu.className = "submenu-list";
 
     // Duplicate option
     const duplicateOption = document.createElement("div");
     duplicateOption.classList.add("theme-option");
-    duplicateOption.innerHTML = "Duplicate";
+    duplicateOption.innerHTML = i18n.t("navbar.appversion.duplicate");
     duplicateOption.addEventListener("click", (e) => {
       e.stopPropagation();
       this.openVersionModal(
         version.AppVersionName + " - Copy",
-        "Duplicate version",
-        "Duplicate",
+        i18n.t("navbar.appversion.duplicate_title"),
+        i18n.t("navbar.appversion.duplicate"),
         "duplicate",
         version.AppVersionId
       );
@@ -187,13 +172,13 @@ export class VersionSelectionView {
     // Rename option
     const renameOption = document.createElement("div");
     renameOption.classList.add("theme-option");
-    renameOption.innerHTML = "Rename";
+    renameOption.innerHTML = i18n.t("sidebar.image_upload.select_images");
     renameOption.addEventListener("click", (e) => {
       e.stopPropagation();
       this.openVersionModal(
         version.AppVersionName,
-        "Rename version",
-        "Rename",
+        i18n.t("navbar.appversion.rename_version"),
+        i18n.t("navbar.appversion.rename"),
         "rename",
         version.AppVersionId
       );
@@ -204,7 +189,7 @@ export class VersionSelectionView {
     if (!isActive) {
       const deleteOption = document.createElement("div");
       deleteOption.classList.add("theme-option");
-      deleteOption.innerHTML = "Move to Trash";
+      deleteOption.innerHTML = i18n.t("navbar.appversion.move_to_trash");
       deleteOption.addEventListener("click", (e) => {
         e.stopPropagation();
         this.confirmDeleteVersion(version);
@@ -221,8 +206,8 @@ export class VersionSelectionView {
   }
 
   private confirmDeleteVersion(version: AppVersion): void {
-    const title = "Delete version";
-    const message = "Are you sure you want to delete this version?";
+    const title = i18n.t("navbar.appversion.delete_version");
+    const message = i18n.t("navbar.appversion.delete_version_message");
 
     const handleConfirmation = async () => {
       try {
@@ -233,18 +218,11 @@ export class VersionSelectionView {
       }
     };
 
-    const confirmationBox = new ConfirmationBox(
-      message,
-      title,
-      handleConfirmation
-    );
+    const confirmationBox = new ConfirmationBox(message, title, handleConfirmation);
     confirmationBox.render(document.body);
   }
 
-  private async handleVersionSelection(
-    e: Event,
-    version: AppVersion
-  ): Promise<void> {
+  private async handleVersionSelection(e: Event, version: AppVersion): Promise<void> {
     // Skip if clicking on a submenu item
     if ((e.target as HTMLElement).closest(".submenu-list")) {
       return;
@@ -252,23 +230,17 @@ export class VersionSelectionView {
 
     try {
       // Mark selected in UI
-      const allOptions =
-        this.versionSelection.querySelectorAll(".theme-option");
+      const allOptions = this.versionSelection.querySelectorAll(".theme-option");
       allOptions.forEach((opt) => opt.classList.remove("selected"));
 
       const selectedOption = e.currentTarget as HTMLElement;
       selectedOption.classList.add("selected");
 
       // Update display
-      this.activeVersion.textContent = truncateString(
-        version.AppVersionName,
-        15
-      );
+      this.activeVersion.textContent = truncateString(version.AppVersionName, 15);
 
       // Activate version and reload if successful
-      const activationResult = await this.versionController.activateVersion(
-        version.AppVersionId
-      );
+      const activationResult = await this.versionController.activateVersion(version.AppVersionId);
       if (activationResult) {
         this.reloadPage(activationResult.AppVersion);
       }
@@ -310,9 +282,7 @@ export class VersionSelectionView {
 
   private updateTheme(themeId: string): void {
     if (!themeId) return;
-    const themeSelectionEl = document.getElementById(
-      "tb-custom-theme-selection"
-    );
+    const themeSelectionEl = document.getElementById("tb-custom-theme-selection");
     if (themeSelectionEl) {
       const themeList = themeSelectionEl.querySelectorAll(
         ".theme-option"
@@ -334,8 +304,8 @@ export class VersionSelectionView {
 
   public openVersionModal(
     initialValue: string = "",
-    title: string = "Create new version",
-    buttonText: string = "Save",
+    title: string = i18n.t("navbar.appversion.create_new"),
+    buttonText: string = i18n.t("navbar.appversion.save"),
     action: string = "create",
     versionId?: string
   ): void {
@@ -343,27 +313,21 @@ export class VersionSelectionView {
     const versionNameField = form.addField({
       type: "text",
       id: "version_name",
-      placeholder: "Version name",
+      placeholder: i18n.t("navbar.appversion.field_placeholder"),
       required: true,
       value: initialValue,
       errorMessage: "",
       validate: (value: string) => {
         if (!value.trim()) {
-          versionNameField?.showError(
-            i18n.t("messages.error.empty_version_name")
-          );
+          versionNameField?.showError(i18n.t("messages.error.empty_version_name"));
           return false;
         }
         if (this.appVersions.some((v) => v.AppVersionName === value.trim())) {
-          versionNameField?.showError(
-            i18n.t("messages.error.existing_version_name")
-          );
+          versionNameField?.showError(i18n.t("messages.error.existing_version_name"));
           return false;
         }
         if (value.length > 50) {
-          versionNameField?.showError(
-            i18n.t("messages.error.long_version_name")
-          );
+          versionNameField?.showError(i18n.t("messages.error.long_version_name"));
           return false;
         }
         versionNameField?.hideError();
@@ -373,8 +337,36 @@ export class VersionSelectionView {
 
     this.versionNameField = versionNameField;
 
+    // Add language field
+    const languageField = form.addField({
+      type: "select",
+      id: "version_language",
+      options: [
+        { value: "", label: "Select language" },
+        { value: "en", label: "English" },
+        { value: "nl", label: "Nederlands" },
+      ],
+
+      validate: (value: string) => {
+        if (value === "") {
+          this.VersionLanguageField?.showError(i18n.t("messages.error.select_language"));
+          return false;
+        }
+        this.VersionLanguageField?.hideError();
+        return true;
+      },
+    });
+    this.VersionLanguageField = languageField;
+
     const div = document.createElement("div");
     form.render(div);
+
+    //hide language field if action is duplicate or rename
+    if (action === "duplicate" || action === "rename") {
+      languageField.getElement().style.display = "none";
+    } else {
+      languageField.getElement().style.display = "block";
+    }
 
     const submitSection = this.createSubmitSection(buttonText);
     div.appendChild(submitSection);
@@ -394,15 +386,12 @@ export class VersionSelectionView {
     submitSection.classList.add("popup-footer");
     submitSection.style.marginBottom = "-12px";
 
-    const saveBtn = this.createButton(
-      "submit_form",
-      "tb-btn-primary",
-      buttonText
-    );
+    const saveBtn = this.createButton("submit_form", "tb-btn-primary", buttonText);
+
     const cancelBtn = this.createButton(
       "cancel_form",
       "tb-btn-outline",
-      "Cancel"
+      i18n.t("navbar.appversion.cancel")
     );
 
     submitSection.appendChild(saveBtn);
@@ -421,9 +410,17 @@ export class VersionSelectionView {
     const cancelBtn = div.querySelector("#cancel_form");
 
     const inputElement = div.querySelector("#version_name") as HTMLInputElement;
-    inputElement?.addEventListener("input", () =>
-      this.versionNameField?.hideError()
-    );
+    inputElement?.addEventListener("input", () => this.versionNameField?.hideError());
+
+    // Add language field validation
+    const languageField = div.querySelector("#version_language") as HTMLSelectElement;
+    languageField?.addEventListener("change", () => {
+      if (languageField.value === "") {
+        this.VersionLanguageField?.showError(i18n.t("messages.error.select_language"));
+      } else {
+        this.VersionLanguageField?.hideError();
+      }
+    });
 
     saveBtn?.addEventListener("click", async (e) => {
       e.preventDefault();
@@ -434,29 +431,30 @@ export class VersionSelectionView {
         return;
       }
 
+      const isLanguageValid = this.VersionLanguageField?.validate();
+      if (!isLanguageValid && action !== "duplicate" && action !== "rename") {
+        languageField.focus();
+        return;
+      }
+
       const versionName = inputElement.value.trim();
+      const versionLanguage = languageField.value;
 
       try {
         let result;
 
         switch (action) {
           case "create":
-            result = await this.versionController.createVersion(versionName);
+            result = await this.versionController.createVersion(versionName, versionLanguage);
             break;
           case "duplicate":
             if (versionId) {
-              result = await this.versionController.duplicateVersion(
-                versionId,
-                versionName
-              );
+              result = await this.versionController.duplicateVersion(versionId, versionName);
             }
             break;
           case "rename":
             if (versionId) {
-              result = await this.versionController.renameVersion(
-                versionId,
-                versionName
-              );
+              result = await this.versionController.renameVersion(versionId, versionName);
             }
             break;
         }
@@ -475,11 +473,7 @@ export class VersionSelectionView {
     cancelBtn?.addEventListener("click", () => modal.close());
   }
 
-  private createButton(
-    id: string,
-    className: string,
-    text: string
-  ): HTMLButtonElement {
+  private createButton(id: string, className: string, text: string): HTMLButtonElement {
     const btn = document.createElement("button");
     btn.id = id;
     btn.classList.add("tb-btn", className);
@@ -491,9 +485,7 @@ export class VersionSelectionView {
     if (this.versionSelection.classList.contains("show")) {
       this.versionSelection.classList.remove("show");
 
-      const button = this.container.querySelector(
-        ".theme-select-button"
-      ) as HTMLElement;
+      const button = this.container.querySelector(".theme-select-button") as HTMLElement;
       button.setAttribute("aria-expanded", "false");
       button.classList.remove("open");
     }

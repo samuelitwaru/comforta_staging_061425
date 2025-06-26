@@ -2693,10 +2693,10 @@ details .tb_debug_details-content {
   align-items: center;
 }
 
-.menu-container .menu-item:last-child:hover {
+/* .menu-container .menu-item:last-child:hover {
   border-bottom-right-radius: 9px;
   border-bottom-left-radius: 9px;
-}
+} */
 
 .menu-container .menu-item.expandable {
   background-color: #f0f0f0;

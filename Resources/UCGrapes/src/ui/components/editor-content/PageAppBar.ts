@@ -22,8 +22,7 @@ export class PageAppBar {
     this.originalTitle = this.title;
     this.id = id;
     this.isNewPage = isNewPage;
-    this.isTitleSaved =
-      !isNewPage && title !== "Untitled" && title !== "" && title !== undefined;
+    this.isTitleSaved = !isNewPage && title !== "Untitled" && title !== "" && title !== undefined;
     this.container = document.createElement("div");
     this.editor = new EditorManager();
     this.editorWidth = (globalThis as any).deviceWidth;
@@ -45,21 +44,16 @@ export class PageAppBar {
         `;
 
     const backButton = wrapper.firstElementChild;
-    const thumbsList = document.querySelector(
-      ".editor-thumbs-list"
-    ) as HTMLElement;
+    const thumbsList = document.querySelector(".editor-thumbs-list") as HTMLElement;
     backButton?.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
       const currentFrame = document.querySelector(`#${this.id}-frame`);
-      const previousFrame =
-        currentFrame?.previousElementSibling as HTMLDivElement;
+      const previousFrame = currentFrame?.previousElementSibling as HTMLDivElement;
 
       if (previousFrame && previousFrame?.classList.contains("mobile-frame")) {
         (globalThis as any).pageId = previousFrame.dataset.pageid;
-        (globalThis as any).uiManager.activateEditor(
-          previousFrame.id.replace("-frame", "")
-        );
+        (globalThis as any).uiManager.activateEditor(previousFrame.id.replace("-frame", ""));
       }
       if (currentFrame) {
         let nextElement = currentFrame.nextElementSibling;
@@ -67,18 +61,14 @@ export class PageAppBar {
           const elementToRemove = nextElement;
           nextElement = nextElement.nextElementSibling;
 
-          const thumbToRemove = thumbsList.querySelector(
-            `div[id="${elementToRemove.id}"]`
-          );
+          const thumbToRemove = thumbsList.querySelector(`div[id="${elementToRemove.id}"]`);
           if (thumbToRemove) {
             thumbToRemove.parentElement?.parentElement?.parentElement?.remove();
           }
 
           elementToRemove.remove();
         }
-        const thumbToRemove = thumbsList.querySelector(
-          `div[id="${currentFrame.id}"]`
-        );
+        const thumbToRemove = thumbsList.querySelector(`div[id="${currentFrame.id}"]`);
         if (thumbToRemove) {
           thumbToRemove.parentElement?.parentElement?.parentElement?.remove();
         }
@@ -95,9 +85,7 @@ export class PageAppBar {
     pageTitle.className = "title";
     const length = this.editorWidth ? (this.editorWidth <= 300 ? 18 : 23) : 23;
     const truncatedTitle =
-      this.title.length > length
-        ? this.title.substring(0, length) + "..."
-        : this.title;
+      this.title.length > length ? this.title.substring(0, length) + "..." : this.title;
     pageTitle.setAttribute("title", this.title || "Untitled");
     pageTitle.textContent = truncatedTitle || "Untitled";
     this.pageTitle = pageTitle;
@@ -107,10 +95,7 @@ export class PageAppBar {
     const iconContainer = document.createElement("div");
     iconContainer.classList.add("icon-container");
 
-    const editHeader = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "svg"
-    );
+    const editHeader = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     editHeader.id = "edit_page_title";
     editHeader.setAttribute("width", "14px");
     editHeader.setAttribute("height", "14px");
@@ -208,7 +193,9 @@ export class PageAppBar {
 
       this.pageTitle.contentEditable = "true";
       this.pageTitle.textContent =
-        this.title.toLowerCase() === "Untitled".toLowerCase()  || this.isNewPage ? "" : this.pageTitle.title;
+        this.title.toLowerCase() === "Untitled".toLowerCase() || this.isNewPage
+          ? ""
+          : this.pageTitle.title;
 
       this.updatePlaceholderVisibility();
 
@@ -273,9 +260,7 @@ export class PageAppBar {
 
   private updateSideBarTitle(title: string) {
     console.log("title", title);
-    const sideBarPageTitle = document.getElementById(
-      "page-info-title"
-    ) as HTMLDivElement;
+    const sideBarPageTitle = document.getElementById("page-info-title") as HTMLDivElement;
     if (sideBarPageTitle) {
       const h3 = sideBarPageTitle.querySelector("h3") as HTMLHeadingElement;
       if (h3) {
@@ -290,7 +275,9 @@ export class PageAppBar {
       this.frameContainer = frame;
 
       const shouldDisableFrame =
-        this.title.toLowerCase() === "Untitled".toLowerCase()  || !this.isTitleSaved || this.isInEditMode;
+        this.title.toLowerCase() === "Untitled".toLowerCase() ||
+        !this.isTitleSaved ||
+        this.isInEditMode;
 
       if (shouldDisableFrame) {
         frame.style.pointerEvents = "none";
@@ -312,11 +299,11 @@ export class PageAppBar {
         const shouldDisableButtons =
           !this.isTitleSaved ||
           this.isInEditMode ||
-          this.title.toLowerCase() === "Untitled".toLowerCase()  ||
+          this.title.toLowerCase() === "Untitled".toLowerCase() ||
           this.title.trim() === "";
 
         newInfoSectionButtons.forEach((button) => {
-          console.log('shouldDisableButtons', shouldDisableButtons)
+          console.log("shouldDisableButtons", shouldDisableButtons);
           button.style.pointerEvents = shouldDisableButtons ? "none" : "auto";
         });
       }
@@ -340,7 +327,7 @@ export class PageAppBar {
       this.title = this.originalTitle;
       this.pageTitle.title = this.originalTitle;
 
-      if (this.title.toLowerCase() === "Untitled".toLowerCase() ) {
+      if (this.title.toLowerCase() === "Untitled".toLowerCase()) {
         this.isTitleSaved = false;
         if (this.pageTitle) {
           this.pageTitle.style.outline = "#d0030378 dashed 1px";
@@ -372,18 +359,14 @@ export class PageAppBar {
   }
 
   private captureFrameContainer(): HTMLDivElement | null {
-    const currentFrameWrapper = document.querySelector(
-      `#${this.id}-frame`
-    ) as HTMLDivElement;
+    const currentFrameWrapper = document.querySelector(`#${this.id}-frame`) as HTMLDivElement;
 
     if (!currentFrameWrapper) {
       console.warn("Frame wrapper div not found");
       return null;
     }
 
-    const iframe = currentFrameWrapper.querySelector(
-      "iframe"
-    ) as HTMLIFrameElement | null;
+    const iframe = currentFrameWrapper.querySelector("iframe") as HTMLIFrameElement | null;
 
     if (!iframe) {
       console.warn("Iframe not found inside wrapper");
@@ -397,9 +380,7 @@ export class PageAppBar {
       return null;
     }
 
-    const frameContainer = iframeDoc.getElementById(
-      "frame-container"
-    ) as HTMLDivElement | null;
+    const frameContainer = iframeDoc.getElementById("frame-container") as HTMLDivElement | null;
 
     if (!frameContainer) {
       console.warn("'frame-container' not found inside iframe");
@@ -415,7 +396,7 @@ export class PageAppBar {
       this.updateAddNewInfoSectionVisibility();
       this.updateFrameContainerHoverState();
 
-      if (this.isNewPage || this.title.toLowerCase() === "Untitled".toLowerCase() ) {
+      if (this.isNewPage || this.title.toLowerCase() === "Untitled".toLowerCase()) {
         this.enterEditMode();
       }
     }, 0);

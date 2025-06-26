@@ -407,8 +407,11 @@ export class ImageUploadUi {
       const percentage = Math.round((current / total) * 100);
       progressBar.style.width = `${percentage}%`;
 
-      const phaseText = phase === "compressing" ? "Preparing" : "Uploading";
-      progressText.textContent = `${phaseText} images...`;
+      const phaseText =
+        phase === "compressing"
+          ? i18n.t("sidebar.image_upload.preparing_images")
+          : i18n.t("sidebar.image_upload.uploading_images");
+      progressText.textContent = `${phaseText}`;
       progressCounter.textContent = `${current} / ${total}`;
     }
   }
@@ -440,7 +443,7 @@ export class ImageUploadUi {
                 color: #666;
                 text-align: center;
                 margin-bottom: 8px;
-              ">Preparing images...</div>
+              ">${i18n.t("sidebar.image_upload.preparing_images")}</div>
               
               <div style="
                 width: 100%;

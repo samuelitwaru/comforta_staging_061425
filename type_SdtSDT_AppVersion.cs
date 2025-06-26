@@ -32,6 +32,8 @@ namespace GeneXus.Programs
 			/* Constructor for serialization */
 			gxTv_SdtSDT_AppVersion_Appversionname = "";
 
+			gxTv_SdtSDT_AppVersion_Appversionlanguage = "";
+
 		}
 
 		public SdtSDT_AppVersion(IGxContext context)
@@ -69,6 +71,9 @@ namespace GeneXus.Programs
 
 
 			AddObjectProperty("IsActive", gxTpr_Isactive, false);
+
+
+			AddObjectProperty("AppVersionLanguage", gxTpr_Appversionlanguage, false);
 
 
 			AddObjectProperty("ThemeId", gxTpr_Themeid, false);
@@ -141,6 +146,22 @@ namespace GeneXus.Programs
 			set {
 				gxTv_SdtSDT_AppVersion_Isactive = value;
 				SetDirty("Isactive");
+			}
+		}
+
+
+
+
+		[SoapElement(ElementName="AppVersionLanguage")]
+		[XmlElement(ElementName="AppVersionLanguage")]
+		public string gxTpr_Appversionlanguage
+		{
+			get {
+				return gxTv_SdtSDT_AppVersion_Appversionlanguage; 
+			}
+			set {
+				gxTv_SdtSDT_AppVersion_Appversionlanguage = value;
+				SetDirty("Appversionlanguage");
 			}
 		}
 
@@ -223,6 +244,7 @@ namespace GeneXus.Programs
 			gxTv_SdtSDT_AppVersion_Appversionname = "";
 
 
+			gxTv_SdtSDT_AppVersion_Appversionlanguage = "";
 
 
 			gxTv_SdtSDT_AppVersion_Pages_N = true;
@@ -246,6 +268,9 @@ namespace GeneXus.Programs
 		 
 
 		protected bool gxTv_SdtSDT_AppVersion_Isactive;
+		 
+
+		protected string gxTv_SdtSDT_AppVersion_Appversionlanguage;
 		 
 
 		protected Guid gxTv_SdtSDT_AppVersion_Themeid;
@@ -319,7 +344,19 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ThemeId", Order=4)]
+		[DataMember(Name="AppVersionLanguage", Order=4)]
+		public  string gxTpr_Appversionlanguage
+		{
+			get { 
+				return sdt.gxTpr_Appversionlanguage;
+
+			}
+			set { 
+				 sdt.gxTpr_Appversionlanguage = value;
+			}
+		}
+
+		[DataMember(Name="ThemeId", Order=5)]
 		public Guid gxTpr_Themeid
 		{
 			get { 
@@ -331,7 +368,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Pages", Order=5, EmitDefaultValue=false)]
+		[DataMember(Name="Pages", Order=6, EmitDefaultValue=false)]
 		public GxGenericCollection<SdtSDT_AppVersion_PagesItem_RESTInterface> gxTpr_Pages
 		{
 			get {

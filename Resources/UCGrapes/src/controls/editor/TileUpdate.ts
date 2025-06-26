@@ -14,10 +14,11 @@ export class TileUpdate {
   }
 
   updateTile(rowComponent: any, isDragging: boolean = false) {
-    console.log('updateTile-rowComponent', rowComponent);
     this.rowComponent = rowComponent;
     const tiles = rowComponent.find(".template-wrapper");
     const length = tiles.length;
+    const tileUpdates: { tileId: string; align: string }[] = [];
+
     tiles.forEach((tile: any) => {
       const tileAttributes = this.getTileAttributes(rowComponent, tile);
       const rightButton = tile.find(".add-button-right")[0];
@@ -54,10 +55,22 @@ export class TileUpdate {
       this.updateTileHeight(tile, length);
       this.updateAlignment(tile, tileAlignment, titleAlignment);
       this.updateTileTitleLength(tile, length);
+      
       if (!isDragging) {
-        this.updateTileAttributes(tile.getId(), "Align", alignValue);
+        // Collect tile updates instead of updating individually
+        let align = alignValue;
+        if (alignValue === "start") {
+          align = "left";
+        }
+        tileUpdates.push({ tileId: tile.getId(), align });
       }
     });
+
+    // Update all tiles in the row at once
+    if (!isDragging && tileUpdates.length > 0) {
+      this.updateRowAttributes(rowComponent.getId(), tileUpdates);
+    }
+
     this.removeEmptyRows();
   }
 
@@ -139,25 +152,29 @@ export class TileUpdate {
     return title.replace("<br>", "");
   }
 
-  updateTileAttributes(tileId: string, attribute: string, value: string) {
-    const tileAttributes = new TileMapper(this.pageId);
-    let align = value;
-    if (value === "start") {
-      align = "left";
-    }
+  // Removed the old updateTileAttributes method since we're now using updateRowAttributes
 
+  updateRowAttributes(rowId: string, tileUpdates: { tileId: string; align: string }[]) {
     const pageData = (globalThis as any).pageData;
 
     if (pageData.PageType === "Information") {
       const infoSectionManager = new InfoSectionManager();
-      infoSectionManager.updateInfoTileAttributes(
-        this.rowComponent.getId(),
-        tileId,
-        "Align",
-        align
-      );
-    } else {
-      tileAttributes.updateTile(tileId, attribute, align);
+      const tileInfoSectionAttributes = infoSectionManager.getInfoContent(rowId);
+      
+      if (tileInfoSectionAttributes) {
+        // Update all tiles in the row
+        tileUpdates.forEach(({ tileId, align }) => {
+          const tile = tileInfoSectionAttributes.Tiles?.find(
+            (tile) => tile.Id === tileId
+          );
+          if (tile) {
+            tile.Align = align; 
+          }
+        });
+
+        // Save the entire row with all updated tiles
+        infoSectionManager.updateInfoMapper(rowId, tileInfoSectionAttributes);
+      }
     }
   }
 

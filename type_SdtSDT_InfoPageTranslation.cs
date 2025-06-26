@@ -32,7 +32,11 @@ namespace GeneXus.Programs
 			/* Constructor for serialization */
 			gxTv_SdtSDT_InfoPageTranslation_Pagetype = "";
 
+			gxTv_SdtSDT_InfoPageTranslation_Pageattributetype = "";
+
 			gxTv_SdtSDT_InfoPageTranslation_Pagepublishedstructure = "";
+
+			gxTv_SdtSDT_InfoPageTranslation_Pagestructure = "";
 
 		}
 
@@ -67,7 +71,13 @@ namespace GeneXus.Programs
 			AddObjectProperty("PageType", gxTpr_Pagetype, false);
 
 
+			AddObjectProperty("PageAttributeType", gxTpr_Pageattributetype, false);
+
+
 			AddObjectProperty("PagePublishedStructure", gxTpr_Pagepublishedstructure, false);
+
+
+			AddObjectProperty("PageStructure", gxTpr_Pagestructure, false);
 
 			return;
 		}
@@ -107,6 +117,22 @@ namespace GeneXus.Programs
 
 
 
+		[SoapElement(ElementName="PageAttributeType")]
+		[XmlElement(ElementName="PageAttributeType")]
+		public string gxTpr_Pageattributetype
+		{
+			get {
+				return gxTv_SdtSDT_InfoPageTranslation_Pageattributetype; 
+			}
+			set {
+				gxTv_SdtSDT_InfoPageTranslation_Pageattributetype = value;
+				SetDirty("Pageattributetype");
+			}
+		}
+
+
+
+
 		[SoapElement(ElementName="PagePublishedStructure")]
 		[XmlElement(ElementName="PagePublishedStructure")]
 		public string gxTpr_Pagepublishedstructure
@@ -117,6 +143,22 @@ namespace GeneXus.Programs
 			set {
 				gxTv_SdtSDT_InfoPageTranslation_Pagepublishedstructure = value;
 				SetDirty("Pagepublishedstructure");
+			}
+		}
+
+
+
+
+		[SoapElement(ElementName="PageStructure")]
+		[XmlElement(ElementName="PageStructure")]
+		public string gxTpr_Pagestructure
+		{
+			get {
+				return gxTv_SdtSDT_InfoPageTranslation_Pagestructure; 
+			}
+			set {
+				gxTv_SdtSDT_InfoPageTranslation_Pagestructure = value;
+				SetDirty("Pagestructure");
 			}
 		}
 
@@ -144,7 +186,9 @@ namespace GeneXus.Programs
 		public void initialize( )
 		{
 			gxTv_SdtSDT_InfoPageTranslation_Pagetype = "";
+			gxTv_SdtSDT_InfoPageTranslation_Pageattributetype = "";
 			gxTv_SdtSDT_InfoPageTranslation_Pagepublishedstructure = "";
+			gxTv_SdtSDT_InfoPageTranslation_Pagestructure = "";
 			return  ;
 		}
 
@@ -160,7 +204,13 @@ namespace GeneXus.Programs
 		protected string gxTv_SdtSDT_InfoPageTranslation_Pagetype;
 		 
 
+		protected string gxTv_SdtSDT_InfoPageTranslation_Pageattributetype;
+		 
+
 		protected string gxTv_SdtSDT_InfoPageTranslation_Pagepublishedstructure;
+		 
+
+		protected string gxTv_SdtSDT_InfoPageTranslation_Pagestructure;
 		 
 
 
@@ -204,7 +254,19 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="PagePublishedStructure", Order=2)]
+		[DataMember(Name="PageAttributeType", Order=2)]
+		public  string gxTpr_Pageattributetype
+		{
+			get { 
+				return sdt.gxTpr_Pageattributetype;
+
+			}
+			set { 
+				 sdt.gxTpr_Pageattributetype = value;
+			}
+		}
+
+		[DataMember(Name="PagePublishedStructure", Order=3)]
 		public  string gxTpr_Pagepublishedstructure
 		{
 			get { 
@@ -213,6 +275,18 @@ namespace GeneXus.Programs
 			}
 			set { 
 				 sdt.gxTpr_Pagepublishedstructure = value;
+			}
+		}
+
+		[DataMember(Name="PageStructure", Order=4)]
+		public  string gxTpr_Pagestructure
+		{
+			get { 
+				return sdt.gxTpr_Pagestructure;
+
+			}
+			set { 
+				 sdt.gxTpr_Pagestructure = value;
 			}
 		}
 

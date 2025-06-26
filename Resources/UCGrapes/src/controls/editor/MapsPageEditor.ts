@@ -36,7 +36,7 @@ export class MapsPageEditor {
   }
 
   createMapComponent(lat: number, lng: number) {
-    const linkUrl = `https://www.google.com/maps/embed/v1/view?key=AIzaSyBBaQo7_sF2xk3uNIyKp_Z-4BbaTebGGa4&center=${lat},${lng}&zoom=18`;
+    const linkUrl = `https://www.google.com/maps/embed/v1/view?key=${process.env.MAPS_API_KEY}&center=${lat},${lng}&zoom=18`;
 
     // Add the iframe component to the editor
     const component = this.editor.addComponents(`
@@ -60,7 +60,7 @@ export class MapsPageEditor {
 
     // Get the iframe DOM element
     const iframe = component.find('#map-frame')[0]?.getEl();
-    
+
     if (iframe) {
       // Add event listener directly to the DOM element
       iframe.onload = () => {
@@ -70,7 +70,7 @@ export class MapsPageEditor {
         }
       };
     }
-    
+
     // Fallback to hide preloader if onload doesn't trigger
     setTimeout(() => {
       const preloader = component.find('#map-preloader')[0];

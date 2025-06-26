@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: "Development"
-  version: "20250621033619"
+  version: "20250626082532"
 servers:
   - url: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/rest
 paths:
@@ -164,6 +164,29 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Trn_EnvironmentVariableWWGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /Trn_IconWWGetFilterData:
+    post:
+      tags:
+        - Trn_IconWWGetFilterData
+      operationId: "Trn_IconWWGetFilterData"
+      summary: "Trn_Icon WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_IconWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_IconWWGetFilterDataOutput"
         404:
           description: "Not found"
   /Trn_LocationWWGetFilterData:
@@ -1246,6 +1269,14 @@ components:
           type: "string"
         OptionIndexesJson:
           type: "string"
+    Trn_IconWWGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
     Trn_LocationWWGetFilterDataOutput:
       properties:
         OptionsJson:
@@ -1590,6 +1621,14 @@ components:
         SearchTxtTo:
           type: "string"
     Trn_EnvironmentVariableWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    Trn_IconWWGetFilterDataInput:  
       properties:
         DDOName:
           type: "string"
@@ -2093,6 +2132,9 @@ components:
         IsActive:
           description: "Is Active"
           type: "boolean"
+        AppVersionLanguage:
+          description: "App Version Language"
+          type: "string"
         ThemeId:
           description: "Trn_Theme Id"
           type: "string"

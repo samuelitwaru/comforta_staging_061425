@@ -1,4 +1,5 @@
 import { AppConfig } from "../../../../AppConfig";
+import { i18n } from "../../../../i18n/i18n";
 import { ToolBoxService } from "../../../../services/ToolBoxService";
 import { CtaAttributes, InfoType, SupplierList } from "../../../../types";
 import { Form } from "../../Form";
@@ -144,7 +145,7 @@ export class FormModalService {
 
     // Create the label text
     const label = document.createElement("label");
-    label.innerText = "Connect Supplier (optional)";
+    label.innerText = i18n.t("cta_modal_forms.connect_supplier");
 
     labelContainer.appendChild(label);
 
@@ -333,8 +334,16 @@ export class FormModalService {
     submitSection.classList.add("popup-footer");
     submitSection.style.marginBottom = "-12px";
 
-    const saveBtn = this.createButton("submit_form", "tb-btn-primary", "Save");
-    const cancelBtn = this.createButton("cancel_form", "tb-btn-outline", "Cancel");
+    const saveBtn = this.createButton(
+      "submit_form",
+      "tb-btn-primary",
+      i18n.t("cta_modal_forms.save")
+    );
+    const cancelBtn = this.createButton(
+      "cancel_form",
+      "tb-btn-outline",
+      i18n.t("cta_modal_forms.cancel")
+    );
 
     saveBtn.addEventListener("click", (e) => {
       e.preventDefault();

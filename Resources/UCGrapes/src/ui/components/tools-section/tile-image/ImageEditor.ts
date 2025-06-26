@@ -149,8 +149,8 @@ export class ImageEditor {
     })`;
 
     // Set frame dimensions
-    frame.style.width = `${frameWidth}px`;
-    frame.style.height = `${frameHeight}px`;
+    frame.style.width = `${frameWidth > 0 ? frameWidth : 50}px`;
+    frame.style.height = `${frameHeight> 0 ? frameHeight : 50}px`;
 
     this.controller.captureCurrentPosition(frame, container);
     this.addResizeHandles(frame, container, aspectRatio);

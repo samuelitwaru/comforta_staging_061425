@@ -984,8 +984,9 @@ namespace GeneXus.Programs {
          while ( (pr_default.getStatus(1) != 101) )
          {
             A632EnvironmentVariableId = H00BO3_A632EnvironmentVariableId[0];
+            A633EnvironmentVariableKey = H00BO3_A633EnvironmentVariableKey[0];
             AV16GXLvl9 = 1;
-            Form.Caption = A632EnvironmentVariableId.ToString();
+            Form.Caption = A633EnvironmentVariableKey;
             AssignProp("", false, "FORM", "Caption", Form.Caption, true);
             AV8Exists = true;
             /* Exiting from a For First loop. */
@@ -1224,7 +1225,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202562017151553", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202562313503197", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1240,7 +1241,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("trn_environmentvariableview.js", "?202562017151553", false, true);
+         context.AddJavascriptSource("trn_environmentvariableview.js", "?202562313503197", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -1373,6 +1374,8 @@ namespace GeneXus.Programs {
          H00BO2_A632EnvironmentVariableId = new Guid[] {Guid.Empty} ;
          AV6WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          H00BO3_A632EnvironmentVariableId = new Guid[] {Guid.Empty} ;
+         H00BO3_A633EnvironmentVariableKey = new string[] {""} ;
+         A633EnvironmentVariableKey = "";
          AV14Session = context.GetSession();
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
@@ -1382,7 +1385,7 @@ namespace GeneXus.Programs {
                H00BO2_A632EnvironmentVariableId
                }
                , new Object[] {
-               H00BO3_A632EnvironmentVariableId
+               H00BO3_A632EnvironmentVariableId, H00BO3_A633EnvironmentVariableKey
                }
             }
          );
@@ -1471,6 +1474,7 @@ namespace GeneXus.Programs {
       private bool bDynCreated_Wwpaux_wc ;
       private bool bDynCreated_Webcomponent_general ;
       private string AV13RecordDescription ;
+      private string A633EnvironmentVariableKey ;
       private Guid AV9EnvironmentVariableId ;
       private Guid wcpOAV9EnvironmentVariableId ;
       private Guid A632EnvironmentVariableId ;
@@ -1488,6 +1492,7 @@ namespace GeneXus.Programs {
       private Guid[] H00BO2_A632EnvironmentVariableId ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV6WWPContext ;
       private Guid[] H00BO3_A632EnvironmentVariableId ;
+      private string[] H00BO3_A633EnvironmentVariableKey ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
    }
@@ -1518,7 +1523,7 @@ namespace GeneXus.Programs {
           };
           def= new CursorDef[] {
               new CursorDef("H00BO2", "SELECT EnvironmentVariableId FROM Trn_EnvironmentVariable WHERE EnvironmentVariableId = :AV9EnvironmentVariableId ORDER BY EnvironmentVariableId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00BO2,1, GxCacheFrequency.OFF ,true,true )
-             ,new CursorDef("H00BO3", "SELECT EnvironmentVariableId FROM Trn_EnvironmentVariable WHERE EnvironmentVariableId = :AV9EnvironmentVariableId ORDER BY EnvironmentVariableId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00BO3,1, GxCacheFrequency.OFF ,false,true )
+             ,new CursorDef("H00BO3", "SELECT EnvironmentVariableId, EnvironmentVariableKey FROM Trn_EnvironmentVariable WHERE EnvironmentVariableId = :AV9EnvironmentVariableId ORDER BY EnvironmentVariableId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00BO3,1, GxCacheFrequency.OFF ,false,true )
           };
        }
     }
@@ -1534,6 +1539,7 @@ namespace GeneXus.Programs {
                 return;
              case 1 :
                 ((Guid[]) buf[0])[0] = rslt.getGuid(1);
+                ((string[]) buf[1])[0] = rslt.getVarchar(2);
                 return;
        }
     }

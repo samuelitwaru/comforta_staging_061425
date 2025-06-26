@@ -1,9 +1,7 @@
 import { AppConfig } from "../../../AppConfig";
 import { ThemeManager } from "../../../controls/themes/ThemeManager";
-import { TreeComponent } from "../TreeComponent";
 import { PageTreeRenderer } from "./PageTreeRenderer";
 import { PageTreeRendererInfoPage } from "./PageTreeRendererInfoPage";
-import { EditorManager } from "../../../controls/editor/EditorManager";
 
 interface PageNode {
   id: string;
@@ -45,6 +43,62 @@ export class PageBubbleTree {
   navigationHistory: { id: string; name: string }[] = [];
   parentNodeId: string | null = null;
 
+  // constructor(primaryNodeId?: string) {
+  //   this.pageTreeRenderer = new PageTreeRenderer();
+  //   this.PageTreeRendererInfoPage = new PageTreeRendererInfoPage();
+  //   const config = AppConfig.getInstance();
+  //   this.d3 = config.UC.d3;
+  //   this.themeManager = new ThemeManager();
+  //   const appVersionManager = this.themeManager.appVersionManager;
+  //   this.appVersionManager = appVersionManager;
+  //   this.pages = appVersionManager.getPages();
+
+  //   this.processedPages = this.processPageData(this.pages);
+  //   // const homePage = this.processedPages.find((page) => page.title === "Home");
+
+  //   // if (homePage) {
+  //   //   this.primaryNodeId = homePage.id;
+  //   //   // Initialize navigation history with home page
+  //   //   this.navigationHistory = [{ id: homePage.id, name: homePage.title }];
+  //   //   // Use the same logic as onNodeClick for initialization
+  //   //   this.updateNodeDisplay(homePage);
+  //   // }
+
+  //   // If primaryNodeId is provided, use it; otherwise, use "Home"
+  //   let initialNode = null;
+  //   if (primaryNodeId) {
+  //     this.primaryNodeId = primaryNodeId;
+  //     initialNode = this.processedPages.find(
+  //       (page) => page.id === primaryNodeId
+  //     );
+  //   } else {
+  //     const homePage = this.processedPages.find(
+  //       (page) => page.title === "Home"
+  //     );
+  //     if (homePage) {
+  //       this.primaryNodeId = homePage.id;
+  //       initialNode = homePage;
+  //     }
+  //   }
+
+  //   if (initialNode) {
+  //     // Optionally initialize navigation history
+  //     this.navigationHistory = [
+  //       { id: initialNode.id, name: initialNode.title },
+  //     ];
+  //     this.updateNodeDisplay(initialNode);
+  //   }
+
+  //   // this.init();
+  // }
+
+  // init() {
+  //   this.refreshPages();
+
+  //   this.graphContainer = this.build();
+  //   this.buildTree();
+  // }
+
   constructor(primaryNodeId?: string) {
     this.pageTreeRenderer = new PageTreeRenderer();
     this.PageTreeRendererInfoPage = new PageTreeRendererInfoPage();
@@ -55,58 +109,65 @@ export class PageBubbleTree {
     this.appVersionManager = appVersionManager;
     this.pages = appVersionManager.getPages();
     this.processedPages = this.processPageData(this.pages);
-    console.log('processedPages', this.processedPages)
     const homePage = this.processedPages.find((page) => page.title === "Home");
+    if (homePage) {
+      this.primaryNodeId = homePage.id;
+      this.navigationHistory = [{ id: homePage.id, name: homePage.title }];
 
-    // if (homePage) {
-    //   this.primaryNodeId = homePage.id;
-    //   // Initialize navigation history with home page
-    //   // this.navigationHistory = [{ id: homePage.id, name: homePage.title }];
-    //   // Use the same logic as onNodeClick for initialization
-    //   this.updateNodeDisplay(homePage);
-    // }
-
-    // If primaryNodeId is provided, use it; otherwise, use "Home"
-    let initialNode = null;
-    if (primaryNodeId) {
-      this.primaryNodeId = primaryNodeId;
-      initialNode = this.processedPages.find(
-        (page) => page.id === primaryNodeId
-      );
-    } else {
-      const homePage = this.processedPages.find(
-        (page) => page.title === "Home"
-      );
-      if (homePage) {
-        this.primaryNodeId = homePage.id;
-        initialNode = homePage;
+      // If a different primaryNodeId is provided, trace path from Home to that node
+      if (primaryNodeId && primaryNodeId !== homePage.id) {
+        const path = this.findPathFromHome(homePage.id, primaryNodeId);
+        if (path && path.length > 1) {
+          // Build navigation history from Home to the target node
+          this.navigationHistory = path.map((id) => {
+            const page = this.processedPages.find((p) => p.id === id);
+            return { id, name: page ? page.title : id };
+          });
+          this.primaryNodeId = primaryNodeId;
+          const targetNode = this.processedPages.find((p) => p.id === primaryNodeId);
+          if (targetNode) {
+            this.updateNodeDisplay(targetNode);
+            return;
+          }
+        }
       }
+      // Default: just show Home
+      this.updateNodeDisplay(homePage);
     }
-
-    if (initialNode) {
-      // Optionally initialize navigation history
-      this.navigationHistory = [
-        { id: initialNode.id, name: initialNode.title },
-      ];
-      this.updateNodeDisplay(initialNode);
-    }
-
-    // this.init();
   }
 
-  // init() {
-  //   this.refreshPages();
+  // Helper to find path from Home to target node (DFS)
+  findPathFromHome(startId: string, targetId: string): string[] | null {
+    const visited = new Set<string>();
+    const path: string[] = [];
 
-  //   this.graphContainer = this.build();
-  //   this.buildTree();
-  // }
+    const dfs = (currentId: string): boolean => {
+      visited.add(currentId);
+      path.push(currentId);
+      if (currentId === targetId) return true;
+      const current = this.processedPages.find((p) => p.id === currentId);
+      if (current && current.children) {
+        for (const childId of current.children) {
+          if (!visited.has(childId)) {
+            if (dfs(childId)) return true;
+          }
+        }
+      }
+      path.pop();
+      return false;
+    };
+
+    return dfs(startId) ? path : null;
+  }
 
   refreshPages() {
     this.pages = this.appVersionManager.getPages();
     this.processedPages = this.processPageData(this.pages);
+    // console.log("Processed Pages:", this.processedPages);
   }
 
   intializePreviewTree() {
+    this.refreshPages();
     this.treeContainer = this.build2();
     this.buildPreviewTree();
   }
@@ -117,20 +178,12 @@ export class PageBubbleTree {
     this.graphContainer = this.build();
     this.buildTree();
 
-    const editorSections = document.getElementsByClassName(
-      "editor-main-section"
-    );
-    const toolSection = document.getElementById(
-      "tools-section"
-    ) as HTMLDivElement;
+    const editorSections = document.getElementsByClassName("editor-main-section");
+    const toolSection = document.getElementById("tools-section") as HTMLDivElement;
 
-    const treeSection = document.getElementById(
-      "tree-container"
-    ) as HTMLDivElement;
+    const treeSection = document.getElementById("tree-container") as HTMLDivElement;
 
-    const sidebarSection = document.getElementById(
-      "tb-sidebar"
-    ) as HTMLDivElement;
+    const sidebarSection = document.getElementById("tb-sidebar") as HTMLDivElement;
 
     //set display to none for editor section
     if (editorSections.length > 0) {
@@ -155,18 +208,14 @@ export class PageBubbleTree {
   }
 
   build() {
-    const mainContainer = document.getElementById(
-      "main-content"
-    ) as HTMLDivElement;
+    const mainContainer = document.getElementById("main-content") as HTMLDivElement;
 
     if (!mainContainer) {
-      console.error("Main content container not found");
+      // console.error("Main content container not found");
       return document.createElement("div");
     }
 
-    this.graphContainer = document.getElementById(
-      "graph-container-1"
-    ) as HTMLDivElement;
+    this.graphContainer = document.getElementById("graph-container-1") as HTMLDivElement;
 
     if (!this.graphContainer) {
       this.graphContainer = document.createElement("div");
@@ -179,25 +228,21 @@ export class PageBubbleTree {
 
     mainContainer.appendChild(this.graphContainer);
     this.graphContainer.setAttribute("style", "display:block;width:100%;");
-    console.log("this.graphContainer", this.graphContainer);
+    // console.log("this.graphContainer", this.graphContainer);
 
     return this.graphContainer;
   }
 
   build2() {
-    console.log("Build2");
-    const TreeSection = document.getElementById(
-      "section-tree"
-    ) as HTMLDivElement;
+    // console.log("Build2");
+    const TreeSection = document.getElementById("section-tree") as HTMLDivElement;
 
     if (!TreeSection) {
-      console.error("Main content container not found");
+      // console.error("Main content container not found");
       return document.createElement("div");
     }
 
-    this.treeContainer = document.getElementById(
-      "tree-container"
-    ) as HTMLDivElement;
+    this.treeContainer = document.getElementById("tree-container") as HTMLDivElement;
 
     if (!this.treeContainer) {
       this.treeContainer = document.createElement("div");
@@ -217,7 +262,7 @@ export class PageBubbleTree {
   processPageData(pages: any[]) {
     const linkPages: PageNode[] = [];
     pages = pages.map((page: any) => {
-      let ret: PageNode = {
+      const ret: PageNode = {
         id: page.PageId,
         title: page.PageName,
         structure: "",
@@ -227,98 +272,72 @@ export class PageBubbleTree {
         y: 0,
       };
 
-      if (
-        page.PageType === "Menu" ||
-        page.PageType === "MyCare" ||
-        page.PageType === "MyLiving" ||
-        page.PageType === "MyService"
-      ) {
-        ret.structure = this.pageTreeRenderer.createMenuHTML(page);
-        page.PageMenuStructure.Rows.forEach((row: any) => {
-          row.Tiles.forEach((tile: any) => {
-            if (
-              tile.Action.ObjectType == "DynamicForm" ||
-              tile.Action.ObjectType == "WebLink"
-            ) {
-              const title =
-                tile.Action.ObjectType == "DynamicForm"
-                  ? "Dynamic Form"
-                  : "Web Link";
-
-              linkPages.push({
-                id: tile.Action.ObjectId,
-                title: title,
-                structure: this.pageTreeRenderer.createLinkHTML(
-                  title,
-                  tile.Action.ObjectUrl
-                ),
-                thumbnail: page.PageThumbnailUrl,
-                children: [],
-                x: 0,
-                y: 0,
-              });
-              ret.children.push(tile.Action.ObjectId);
-            } else if (tile.Action.ObjectId) {
-              if (
-                this.pages.some(
-                  // Changed from filter to some for boolean check
-                  (page: any) => page.PageId === tile.Action.ObjectId
-                )
-              ) {
-                this.primaryNodeId = page.PageId;
-                ret.children.push(tile.Action.ObjectId);
-              }
-            }
-          });
-        });
-      } else if (page.PageType === "Information") {
+      if (page.PageType === "Information") {
         if (page.PageInfoStructure.InfoContent) {
           ret.structure = this.PageTreeRendererInfoPage.createMenuHTML(page);
           page.PageInfoStructure.InfoContent.forEach((row: any) => {
             if (row.InfoType === "TileRow") {
               row.Tiles.forEach((tile: any) => {
-                if (
-                  tile.Action.ObjectType == "DynamicForm" ||
-                  tile.Action.ObjectType == "WebLink"
-                ) {
-                  const title =
-                    tile.Action.ObjectType == "DynamicForm"
-                      ? "Dynamic Form"
-                      : "Web Link";
-                  linkPages.push({
-                    id: tile.Action.ObjectId,
-                    title: title,
-                    structure: "",
-                    thumbnail: page.PageThumbnailUrl,
-                    children: [],
-                    x: 0,
-                    y: 0,
-                  });
+                // if (
+                //   tile.Action.ObjectType == "DynamicForm" ||
+                //   tile.Action.ObjectType == "WebLink"
+                // ) {
+                //   const title =
+                //     tile.Action.ObjectType == "DynamicForm"
+                //       ? "Dynamic Form"
+                //       : "Web Link";
+                //   linkPages.push({
+                //     id: tile.Action.ObjectId,
+                //     title: title,
+                //     structure: "",
+                //     thumbnail: page.PageThumbnailUrl,
+                //     children: [],
+                //     x: 0,
+                //     y: 0,
+                //   });
+                //   ret.children.push(tile.Action.ObjectId);
+                // } else if (
+                //   tile.Action.ObjectId &&
+                //   tile.Action.ObjectType !== ""
+                // ) {
+                //   if (
+                //     this.pages.some(
+                //       (page: any) => page.PageId === tile.Action.ObjectId
+                //     )
+                //   ) {
+                //     ret.children.push(tile.Action.ObjectId);
+                //   }
+                // }
+
+                if (tile.Action.ObjectId) {
                   ret.children.push(tile.Action.ObjectId);
-                } else if (tile.Action.ObjectId) {
-                  if (
-                    this.pages.some(
-                      (page: any) => page.PageId === tile.Action.ObjectId
-                    )
-                  ) {
-                    ret.children.push(tile.Action.ObjectId);
-                  }
                 }
               });
+            } else if (row.InfoType === "Cta") {
+              // console.log("row.CtaAttributes", row.CtaAttributes);
+
+              if (row.CtaAttributes.CtaType == "Form" || row.CtaAttributes.CtaType == "WebLink") {
+                const title = row.CtaAttributes.CtaType == "Form" ? "Dynamic Form" : "Web Link";
+
+                linkPages.push({
+                  id: row.CtaAttributes.Action.ObjectId,
+                  title: title,
+                  structure: "",
+                  thumbnail: page.PageThumbnailUrl,
+                  children: [],
+                  x: 0,
+                  y: 0,
+                });
+                ret.children.push(row.CtaAttributes.Action.ObjectId);
+              }
             }
           });
         }
-      } else if (
-        page.PageType == "Content" ||
-        page.PageType == "Location" ||
-        page.PageType == "Reception"
-      ) {
-        ret.structure = this.pageTreeRenderer.createContentHTML(page);
-      } else if (page.PageType == "Calendar") {
+      } else if (page.PageType === "Calendar") {
         ret.structure = this.pageTreeRenderer.createAgendaHTML(page);
-      } else if (page.PageType == "MyActivity") {
+      } else if (page.PageType === "MyActivity") {
         ret.structure = this.pageTreeRenderer.createMyActivityHTML(page);
-      } else if (page.PageType == "Map") {
+      } else if (page.PageType === "Map") {
         ret.structure = this.pageTreeRenderer.createMapHTML(page);
       }
       return ret;
@@ -348,12 +367,10 @@ export class PageBubbleTree {
   }
 
   createLinks(processedPages: any[] = this.processedPages) {
-    console.log('processedPages', processedPages)
+    // console.log("processedPages", processedPages);
     return processedPages.flatMap((p) =>
       p.children
-        .filter((childId: string) =>
-          processedPages.some((page: any) => page.id === childId)
-        )
+        .filter((childId: string) => processedPages.some((page: any) => page.id === childId))
         .map((childId: string) => ({
           source: p.id,
           target: childId,
@@ -383,9 +400,9 @@ export class PageBubbleTree {
     this.onTick();
     this.panAndZoom();
 
-    console.log("svg", this.svg);
+    // console.log("svg", this.svg);
 
-    console.log("container", this.container);
+    // console.log("container", this.container);
   }
 
   buildTree() {
@@ -441,13 +458,13 @@ export class PageBubbleTree {
       .join("line")
       .attr("stroke-width", 2.0)
       .style("cursor", "pointer") // Make it look clickable
-      .on("click", (event: any, d: any) => {
-        // const editorManager = new EditorManager();
-        // editorManager.currentPage(d.source.id);
-        // alert(
-        //   `Parent (source): ${d.source.id}\nChild (target): ${d.target.id}`
-        // );
-      });
+      // .on("click", (event: any, d: any) => {
+      //   // const editorManager = new EditorManager();
+      //   // editorManager.currentPage(d.source.id);
+      //   // alert(
+      //   //   `Parent (source): ${d.source.id}\nChild (target): ${d.target.id}`
+      //   // );
+      // });
   }
 
   createLinkArrows() {
@@ -490,9 +507,7 @@ export class PageBubbleTree {
   }
 
   createCircularNodes() {
-    let tooltip = document.getElementById(
-      "bubble-tree-tooltip"
-    ) as HTMLDivElement;
+    let tooltip = document.getElementById("bubble-tree-tooltip") as HTMLDivElement;
     if (!tooltip) {
       tooltip = document.createElement("div");
       tooltip.id = "bubble-tree-tooltip";
@@ -548,10 +563,7 @@ export class PageBubbleTree {
     const nodeHeight = 175;
 
     this.node
-      .filter(
-        (d: any) =>
-          d.totalChildCount > d.childCount && d.id !== this.primaryNodeId
-      )
+      .filter((d: any) => d.totalChildCount > d.childCount && d.id !== this.primaryNodeId)
       .append("rect")
       .attr("width", nodeWidth)
       .attr("height", nodeHeight)
@@ -573,9 +585,7 @@ export class PageBubbleTree {
       .attr("height", nodeHeight)
       .attr("x", -nodeWidth / 2) // Center the rectangle horizontally
       .attr("y", -nodeHeight / 2) // Center the rectangle vertically
-      .attr("stroke", (d: any) =>
-        d.id === this.primaryNodeId ? "#FF5722" : "#222f54"
-      )
+      .attr("stroke", (d: any) => (d.id === this.primaryNodeId ? "#FF5722" : "#222f54"))
       .attr("fill", "#efeeec")
       .attr("rx", 10)
       .attr("ry", 10);
@@ -670,9 +680,7 @@ export class PageBubbleTree {
       .drag()
       .on("start", (event: any, d: any) => this.dragstarted(event, d))
       .on("drag", (event: any, d: any) => {
-        const tooltip = document.getElementById(
-          "bubble-tree-tooltip"
-        ) as HTMLDivElement;
+        const tooltip = document.getElementById("bubble-tree-tooltip") as HTMLDivElement;
         if (tooltip) tooltip.style.display = "none";
         this.dragged(event, d);
       })
@@ -698,21 +706,16 @@ export class PageBubbleTree {
 
   onNodeClick(event: any, d: any) {
     if (!d || !d.id) {
-      console.error("Invalid node clicked:", d);
+      // console.error("Invalid node clicked:", d);
       return;
     }
 
     // Check if node is already in history
-    const existingIndex = this.navigationHistory.findIndex(
-      (item) => item.id === d.id
-    );
+    const existingIndex = this.navigationHistory.findIndex((item) => item.id === d.id);
 
     if (existingIndex !== -1) {
       // If clicking a node that's in history, truncate history to that point
-      this.navigationHistory = this.navigationHistory.slice(
-        0,
-        existingIndex + 1
-      );
+      this.navigationHistory = this.navigationHistory.slice(0, existingIndex + 1);
     } else {
       // Add new node to navigation history
       this.navigationHistory.push({ id: d.id, name: d.name });
@@ -737,7 +740,7 @@ export class PageBubbleTree {
       .map((item) => item.id);
 
     // Collect node IDs to display
-    let nodeIds = new Set<string>();
+    const nodeIds = new Set<string>();
     nodeIds.add(node.id);
 
     // Add all ancestor nodes
@@ -748,9 +751,7 @@ export class PageBubbleTree {
 
     // Add shared nodes (children of both current node and any ancestor)
     ancestorIds.forEach((ancestorId) => {
-      const ancestor = this.processedPages.find(
-        (p: any) => p.id === ancestorId
-      );
+      const ancestor = this.processedPages.find((p: any) => p.id === ancestorId);
       if (ancestor) {
         const shared = (ancestor.children || []).filter((id: string) =>
           (node.children || []).includes(id)
@@ -760,9 +761,7 @@ export class PageBubbleTree {
     });
 
     // Build processedPages for these nodes
-    const processedPages = this.processedPages.filter((p: any) =>
-      nodeIds.has(p.id)
-    );
+    const processedPages = this.processedPages.filter((p: any) => nodeIds.has(p.id));
 
     this.nodes = this.createNodes(processedPages);
     this.links = this.createLinks(processedPages);
@@ -773,7 +772,7 @@ export class PageBubbleTree {
   navigateToNode(nodeId: string, historyIndex?: number) {
     const node = this.processedPages.find((page: any) => page.id === nodeId);
     if (!node) {
-      console.error("Node not found:", nodeId);
+      // console.error("Node not found:", nodeId);
       return;
     }
 
@@ -783,10 +782,7 @@ export class PageBubbleTree {
     // Update navigation history if index provided
     if (historyIndex !== undefined) {
       // Truncate history if clicking on a breadcrumb
-      this.navigationHistory = this.navigationHistory.slice(
-        0,
-        historyIndex + 1
-      );
+      this.navigationHistory = this.navigationHistory.slice(0, historyIndex + 1);
     }
 
     // Use the common update function

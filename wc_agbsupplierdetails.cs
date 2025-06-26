@@ -1168,7 +1168,7 @@ namespace GeneXus.Programs {
          else
          {
             AV11LoadSuccess = false;
-            CallWebObject(formatLink("gamexamplenotauthorized.aspx") );
+            CallWebObject(formatLink("wp_notauthorized.aspx") );
             context.wjLocDisableFrm = 1;
          }
          edtavTrn_supplieragb_supplieragbid_Visible = 0;
@@ -1427,7 +1427,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201703068", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202562313451033", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1445,7 +1445,7 @@ namespace GeneXus.Programs {
       {
          if ( nGXWrapped != 1 )
          {
-            context.AddJavascriptSource("wc_agbsupplierdetails.js", "?20256201703068", false, true);
+            context.AddJavascriptSource("wc_agbsupplierdetails.js", "?202562313451033", false, true);
          }
          /* End function include_jscripts */
       }

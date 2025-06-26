@@ -20,7 +20,7 @@ using GeneXus.Http.Client;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
-   public class gamexamplelogin : GXHttpHandler
+   public class gamexamplelogin : GXDataArea
    {
       public gamexamplelogin( )
       {
@@ -56,8 +56,9 @@ namespace GeneXus.Programs {
       protected override void createObjects( )
       {
          cmbavLogonto = new GXCombobox();
-         chkavRememberme = new GXCheckbox();
          chkavKeepmeloggedin = new GXCheckbox();
+         chkavRememberme = new GXCheckbox();
+         cmbavTypeauthtype = new GXCombobox();
       }
 
       protected void INITWEB( )
@@ -104,14 +105,14 @@ namespace GeneXus.Programs {
                }
                gxfirstwebparm = GetNextPar( );
             }
-            else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxNewRow_"+"Gridextauthtypes") == 0 )
+            else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxNewRow_"+"Gridauthtypes") == 0 )
             {
-               gxnrGridextauthtypes_newrow_invoke( ) ;
+               gxnrGridauthtypes_newrow_invoke( ) ;
                return  ;
             }
-            else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxGridRefresh_"+"Gridextauthtypes") == 0 )
+            else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxGridRefresh_"+"Gridauthtypes") == 0 )
             {
-               gxgrGridextauthtypes_refresh_invoke( ) ;
+               gxgrGridauthtypes_refresh_invoke( ) ;
                return  ;
             }
             else
@@ -137,38 +138,45 @@ namespace GeneXus.Programs {
          }
       }
 
-      protected void gxnrGridextauthtypes_newrow_invoke( )
+      protected void gxnrGridauthtypes_newrow_invoke( )
       {
-         nRC_GXsfl_62 = (int)(Math.Round(NumberUtil.Val( GetPar( "nRC_GXsfl_62"), "."), 18, MidpointRounding.ToEven));
-         nGXsfl_62_idx = (int)(Math.Round(NumberUtil.Val( GetPar( "nGXsfl_62_idx"), "."), 18, MidpointRounding.ToEven));
-         sGXsfl_62_idx = GetPar( "sGXsfl_62_idx");
+         nRC_GXsfl_54 = (int)(Math.Round(NumberUtil.Val( GetPar( "nRC_GXsfl_54"), "."), 18, MidpointRounding.ToEven));
+         nGXsfl_54_idx = (int)(Math.Round(NumberUtil.Val( GetPar( "nGXsfl_54_idx"), "."), 18, MidpointRounding.ToEven));
+         sGXsfl_54_idx = GetPar( "sGXsfl_54_idx");
+         cmbavTypeauthtype.Visible = (int)(Math.Round(NumberUtil.Val( GetNextPar( ), "."), 18, MidpointRounding.ToEven));
+         AssignProp("", false, cmbavTypeauthtype_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(cmbavTypeauthtype.Visible), 5, 0), !bGXsfl_54_Refreshing);
+         edtavNameauthtype_Visible = (int)(Math.Round(NumberUtil.Val( GetNextPar( ), "."), 18, MidpointRounding.ToEven));
+         AssignProp("", false, edtavNameauthtype_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavNameauthtype_Visible), 5, 0), !bGXsfl_54_Refreshing);
          setAjaxCallMode();
          if ( ! IsValidAjaxCall( true) )
          {
             GxWebError = 1;
             return  ;
          }
-         gxnrGridextauthtypes_newrow( ) ;
-         /* End function gxnrGridextauthtypes_newrow_invoke */
+         gxnrGridauthtypes_newrow( ) ;
+         /* End function gxnrGridauthtypes_newrow_invoke */
       }
 
-      protected void gxgrGridextauthtypes_refresh_invoke( )
+      protected void gxgrGridauthtypes_refresh_invoke( )
       {
-         AV18IDP_State = GetPar( "IDP_State");
+         AV24Language = GetPar( "Language");
          AV8AuxUserName = GetPar( "AuxUserName");
          AV33UserRememberMe = (short)(Math.Round(NumberUtil.Val( GetPar( "UserRememberMe"), "."), 18, MidpointRounding.ToEven));
-         AV28RememberMe = StringUtil.StrToBool( GetPar( "RememberMe"));
+         cmbavTypeauthtype.Visible = (int)(Math.Round(NumberUtil.Val( GetNextPar( ), "."), 18, MidpointRounding.ToEven));
+         AssignProp("", false, cmbavTypeauthtype_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(cmbavTypeauthtype.Visible), 5, 0), !bGXsfl_54_Refreshing);
+         edtavNameauthtype_Visible = (int)(Math.Round(NumberUtil.Val( GetNextPar( ), "."), 18, MidpointRounding.ToEven));
+         AssignProp("", false, edtavNameauthtype_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavNameauthtype_Visible), 5, 0), !bGXsfl_54_Refreshing);
          AV23KeepMeLoggedIn = StringUtil.StrToBool( GetPar( "KeepMeLoggedIn"));
-         AV24Language = GetPar( "Language");
+         AV28RememberMe = StringUtil.StrToBool( GetPar( "RememberMe"));
          setAjaxCallMode();
          if ( ! IsValidAjaxCall( true) )
          {
             GxWebError = 1;
             return  ;
          }
-         gxgrGridextauthtypes_refresh( AV18IDP_State, AV8AuxUserName, AV33UserRememberMe, AV28RememberMe, AV23KeepMeLoggedIn, AV24Language) ;
+         gxgrGridauthtypes_refresh( AV24Language, AV8AuxUserName, AV33UserRememberMe, AV23KeepMeLoggedIn, AV28RememberMe) ;
          AddString( context.getJSONResponse( )) ;
-         /* End function gxgrGridextauthtypes_refresh_invoke */
+         /* End function gxgrGridauthtypes_refresh_invoke */
       }
 
       public override void webExecute( )
@@ -178,19 +186,10 @@ namespace GeneXus.Programs {
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
+            MasterPageObj = (GXMasterPage) ClassLoader.GetInstance("wwpbaseobjects.workwithplusmasterpageempty", "GeneXus.Programs.wwpbaseobjects.workwithplusmasterpageempty", new Object[] {context});
+            MasterPageObj.setDataArea(this,false);
             ValidateSpaRequest();
-            PA0P2( ) ;
-            if ( ( GxWebError == 0 ) && ! isAjaxCallMode( ) )
-            {
-               /* GeneXus formulas. */
-               edtavNameauthtype_Enabled = 0;
-               AssignProp("", false, edtavNameauthtype_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavNameauthtype_Enabled), 5, 0), !bGXsfl_62_Refreshing);
-               WS0P2( ) ;
-               if ( ! isAjaxCallMode( ) )
-               {
-                  WE0P2( ) ;
-               }
-            }
+            MasterPageObj.webExecute();
             if ( ( GxWebError == 0 ) && context.isAjaxRequest( ) )
             {
                enableOutput();
@@ -217,19 +216,30 @@ namespace GeneXus.Programs {
          cleanup();
       }
 
-      protected void RenderHtmlHeaders( )
+      public override short ExecuteStartEvent( )
+      {
+         PA0P2( ) ;
+         gxajaxcallmode = (short)((isAjaxCallMode( ) ? 1 : 0));
+         if ( ( gxajaxcallmode == 0 ) && ( GxWebError == 0 ) )
+         {
+            START0P2( ) ;
+         }
+         return gxajaxcallmode ;
+      }
+
+      public override void RenderHtmlHeaders( )
       {
          GxWebStd.gx_html_headers( context, 0, "", "", Form.Meta, Form.Metaequiv, true);
       }
 
-      protected void RenderHtmlOpenForm( )
+      public override void RenderHtmlOpenForm( )
       {
          if ( context.isSpaRequest( ) )
          {
             enableOutput();
          }
          context.WriteHtmlText( "<title>") ;
-         context.SendWebValue( context.GetMessage( "GAM_Login", "")) ;
+         context.SendWebValue( Form.Caption) ;
          context.WriteHtmlTextNl( "</title>") ;
          if ( context.isSpaRequest( ) )
          {
@@ -240,6 +250,10 @@ namespace GeneXus.Programs {
             context.WriteHtmlText( "<BASE href=\""+sDynURL+"\" />") ;
          }
          define_styles( ) ;
+         if ( nGXWrapped != 1 )
+         {
+            MasterPageObj.master_styles();
+         }
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
@@ -252,6 +266,11 @@ namespace GeneXus.Programs {
          {
             enableOutput();
          }
+         context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Mask/jquery.mask.js", "", false, true);
+         context.AddJavascriptSource("DVelop/WorkWithPlusUtilities/BootstrapSelect.js", "", false, true);
+         context.AddJavascriptSource("DVelop/WorkWithPlusUtilities/WorkWithPlusUtilitiesRender.js", "", false, true);
+         context.WriteHtmlText( Form.Headerrawhtml) ;
          context.CloseHtmlHeader();
          if ( context.isSpaRequest( ) )
          {
@@ -263,20 +282,24 @@ namespace GeneXus.Programs {
          {
             context.WriteHtmlText( " dir=\"rtl\" ") ;
          }
-         bodyStyle = "";
+         bodyStyle = "" + "background-color:" + context.BuildHTMLColor( Form.Backcolor) + ";color:" + context.BuildHTMLColor( Form.Textcolor) + ";";
          if ( nGXWrapped == 0 )
          {
             bodyStyle += "-moz-opacity:0;opacity:0;";
          }
-         context.WriteHtmlText( " "+"class=\"form-horizontal Form\""+" "+ "style='"+bodyStyle+"'") ;
+         if ( ! ( String.IsNullOrEmpty(StringUtil.RTrim( Form.Background)) ) )
+         {
+            bodyStyle += " background-image:url(" + context.convertURL( Form.Background) + ")";
+         }
+         context.WriteHtmlText( " "+"class=\"form-horizontal FormBackgroundImage\""+" "+ "style='"+bodyStyle+"'") ;
          context.WriteHtmlText( FormProcess+">") ;
          context.skipLines(1);
-         context.WriteHtmlTextNl( "<form id=\"MAINFORM\" autocomplete=\"off\" name=\"MAINFORM\" method=\"post\" tabindex=-1  class=\"form-horizontal Form\" data-gx-class=\"form-horizontal Form\" novalidate action=\""+formatLink("gamexamplelogin.aspx") +"\">") ;
+         context.WriteHtmlTextNl( "<form id=\"MAINFORM\" autocomplete=\"off\" name=\"MAINFORM\" method=\"post\" tabindex=-1  class=\"form-horizontal FormBackgroundImage\" data-gx-class=\"form-horizontal FormBackgroundImage\" novalidate action=\""+formatLink("gamexamplelogin.aspx") +"\">") ;
          GxWebStd.gx_hidden_field( context, "_EventName", "");
          GxWebStd.gx_hidden_field( context, "_EventGridId", "");
          GxWebStd.gx_hidden_field( context, "_EventRowId", "");
          context.WriteHtmlText( "<div style=\"height:0;overflow:hidden\"><input type=\"submit\" title=\"submit\"  disabled></div>") ;
-         AssignProp("", false, "FORM", "Class", "form-horizontal Form", true);
+         AssignProp("", false, "FORM", "Class", "form-horizontal FormBackgroundImage", true);
          toggleJsOutput = isJsOutputEnabled( );
          if ( context.isSpaRequest( ) )
          {
@@ -286,12 +309,12 @@ namespace GeneXus.Programs {
 
       protected void send_integrity_footer_hashes( )
       {
+         GxWebStd.gx_hidden_field( context, "vLANGUAGE", StringUtil.RTrim( AV24Language));
+         GxWebStd.gx_hidden_field( context, "gxhash_vLANGUAGE", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV24Language, "")), context));
          GxWebStd.gx_hidden_field( context, "vAUXUSERNAME", AV8AuxUserName);
          GxWebStd.gx_hidden_field( context, "gxhash_vAUXUSERNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV8AuxUserName, "")), context));
          GxWebStd.gx_hidden_field( context, "vUSERREMEMBERME", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV33UserRememberMe), 2, 0, context.GetLanguageProperty( "decimal_point"), "")));
          GxWebStd.gx_hidden_field( context, "gxhash_vUSERREMEMBERME", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV33UserRememberMe), "Z9"), context));
-         GxWebStd.gx_hidden_field( context, "vLANGUAGE", StringUtil.RTrim( AV24Language));
-         GxWebStd.gx_hidden_field( context, "gxhash_vLANGUAGE", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV24Language, "")), context));
          GXKey = Crypto.GetSiteKey( );
       }
 
@@ -300,20 +323,38 @@ namespace GeneXus.Programs {
          /* Send hidden variables. */
          /* Send saved values. */
          send_integrity_footer_hashes( ) ;
-         GxWebStd.gx_hidden_field( context, "nRC_GXsfl_62", StringUtil.LTrim( StringUtil.NToC( (decimal)(nRC_GXsfl_62), 8, 0, context.GetLanguageProperty( "decimal_point"), "")));
+         GxWebStd.gx_hidden_field( context, "nRC_GXsfl_54", StringUtil.LTrim( StringUtil.NToC( (decimal)(nRC_GXsfl_54), 8, 0, context.GetLanguageProperty( "decimal_point"), "")));
+         if ( context.isAjaxRequest( ) )
+         {
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vWWPCONTEXT", AV123WWPContext);
+         }
+         else
+         {
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vWWPCONTEXT", AV123WWPContext);
+         }
          GxWebStd.gx_hidden_field( context, "vIDP_STATE", StringUtil.RTrim( AV18IDP_State));
+         GxWebStd.gx_hidden_field( context, "vLANGUAGE", StringUtil.RTrim( AV24Language));
+         GxWebStd.gx_hidden_field( context, "gxhash_vLANGUAGE", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV24Language, "")), context));
          GxWebStd.gx_hidden_field( context, "vAUXUSERNAME", AV8AuxUserName);
          GxWebStd.gx_hidden_field( context, "gxhash_vAUXUSERNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV8AuxUserName, "")), context));
          GxWebStd.gx_hidden_field( context, "vUSERREMEMBERME", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV33UserRememberMe), 2, 0, context.GetLanguageProperty( "decimal_point"), "")));
          GxWebStd.gx_hidden_field( context, "gxhash_vUSERREMEMBERME", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV33UserRememberMe), "Z9"), context));
-         GxWebStd.gx_hidden_field( context, "vLANGUAGE", StringUtil.RTrim( AV24Language));
-         GxWebStd.gx_hidden_field( context, "gxhash_vLANGUAGE", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV24Language, "")), context));
-         GxWebStd.gx_hidden_field( context, "subGridextauthtypes_Recordcount", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridextauthtypes_Recordcount), 5, 0, context.GetLanguageProperty( "decimal_point"), "")));
-         GxWebStd.gx_hidden_field( context, "TBLEXTERNALSAUTH_Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(divTblexternalsauth_Visible), 5, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "TBLEXTERNALSAUTH_Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(divTblexternalsauth_Visible), 5, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "subGridauthtypes_Recordcount", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridauthtypes_Recordcount), 5, 0, context.GetLanguageProperty( "decimal_point"), "")));
+         GxWebStd.gx_hidden_field( context, "WWPUTILITIES_Enablefixobjectfitcover", StringUtil.BoolToStr( Wwputilities_Enablefixobjectfitcover));
+         GxWebStd.gx_hidden_field( context, "WWPUTILITIES_Enableconvertcombotobootstrapselect", StringUtil.BoolToStr( Wwputilities_Enableconvertcombotobootstrapselect));
+         GxWebStd.gx_hidden_field( context, "WWPUTILITIES_Allowcolumnresizing", StringUtil.BoolToStr( Wwputilities_Allowcolumnresizing));
+         GxWebStd.gx_hidden_field( context, "WWPUTILITIES_Allowcolumnreordering", StringUtil.BoolToStr( Wwputilities_Allowcolumnreordering));
+         GxWebStd.gx_hidden_field( context, "WWPUTILITIES_Allowcolumnsrestore", StringUtil.BoolToStr( Wwputilities_Allowcolumnsrestore));
+         GxWebStd.gx_hidden_field( context, "WWPUTILITIES_Comboloadtype", StringUtil.RTrim( Wwputilities_Comboloadtype));
+         GxWebStd.gx_hidden_field( context, "GRIDAUTHTYPES_Class", StringUtil.RTrim( subGridauthtypes_Class));
+         GxWebStd.gx_hidden_field( context, "GRIDAUTHTYPES_Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridauthtypes_Visible), 5, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "TABLEBUTTONS_Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(divTablebuttons_Visible), 5, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "vTYPEAUTHTYPE_Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(cmbavTypeauthtype.Visible), 5, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "vNAMEAUTHTYPE_Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavNameauthtype_Visible), 5, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "TABLEBUTTONS_Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(divTablebuttons_Visible), 5, 0, ".", "")));
       }
 
-      protected void RenderHtmlCloseForm0P2( )
+      public override void RenderHtmlCloseForm( )
       {
          SendCloseFormHiddens( ) ;
          GxWebStd.gx_hidden_field( context, "GX_FocusControl", GX_FocusControl);
@@ -344,12 +385,39 @@ namespace GeneXus.Programs {
             context.WriteHtmlText( "gx.StorageTimeZone = "+1+";") ;
          }
          context.WriteHtmlText( "</script>") ;
-         context.WriteHtmlTextNl( "</body>") ;
-         context.WriteHtmlTextNl( "</html>") ;
-         if ( context.isSpaRequest( ) )
+      }
+
+      public override void RenderHtmlContent( )
+      {
+         gxajaxcallmode = (short)((isAjaxCallMode( ) ? 1 : 0));
+         if ( ( gxajaxcallmode == 0 ) && ( GxWebError == 0 ) )
          {
-            enableOutput();
+            context.WriteHtmlText( "<div") ;
+            GxWebStd.ClassAttribute( context, "gx-ct-body"+" "+(String.IsNullOrEmpty(StringUtil.RTrim( Form.Class)) ? "form-horizontal FormBackgroundImage" : Form.Class)+"-fx");
+            context.WriteHtmlText( ">") ;
+            WE0P2( ) ;
+            context.WriteHtmlText( "</div>") ;
          }
+      }
+
+      public override void DispatchEvents( )
+      {
+         EVT0P2( ) ;
+      }
+
+      public override bool HasEnterEvent( )
+      {
+         return true ;
+      }
+
+      public override GXWebForm GetForm( )
+      {
+         return Form ;
+      }
+
+      public override string GetSelfLink( )
+      {
+         return formatLink("gamexamplelogin.aspx")  ;
       }
 
       public override string GetPgmname( )
@@ -359,7 +427,7 @@ namespace GeneXus.Programs {
 
       public override string GetPgmdesc( )
       {
-         return context.GetMessage( "GAM_Login", "") ;
+         return context.GetMessage( "Login", "") ;
       }
 
       protected void WB0P0( )
@@ -370,165 +438,151 @@ namespace GeneXus.Programs {
          }
          if ( ! wbLoad )
          {
-            RenderHtmlHeaders( ) ;
-            RenderHtmlOpenForm( ) ;
+            if ( nGXWrapped == 1 )
+            {
+               RenderHtmlHeaders( ) ;
+               RenderHtmlOpenForm( ) ;
+            }
+            GxWebStd.gx_msg_list( context, "", context.GX_msglist.DisplayMode, "", "", "", "false");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "Section", "start", "top", " "+"data-gx-base-lib=\"bootstrapv3\""+" "+"data-abstract-form"+" ", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divMaintable_Internalname, 1, 0, "px", 0, "px", "table-login stack-top-xxl", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 stack-bottom-xl", "Center", "top", "", "", "div");
-            /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblTbtitle_Internalname, context.GetMessage( "GAM_Login", ""), "", "", lblTbtitle_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "Title", 0, "", 1, 1, 0, 0, "HLP_GAMExampleLogin.htm");
-            GxWebStd.gx_div_end( context, "Center", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 stack-bottom-l", "Center", "top", "", "", "div");
-            /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblTbcurrentrepository_Internalname, lblTbcurrentrepository_Caption, "", "", lblTbcurrentrepository_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlock", 0, "", lblTbcurrentrepository_Visible, 1, 0, 0, "HLP_GAMExampleLogin.htm");
-            GxWebStd.gx_div_end( context, "Center", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 stack-bottom-l", "Center", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, divTablecreateaccount_Internalname, divTablecreateaccount_Visible, 0, "px", 0, "px", "Table w-100", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-9", "end", "top", "", "", "div");
-            /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblTbhaveaccount_Internalname, context.GetMessage( "GAM_Donthaveanaccount", ""), "", "", lblTbhaveaccount_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlock", 0, "", 1, 1, 0, 0, "HLP_GAMExampleLogin.htm");
-            GxWebStd.gx_div_end( context, "end", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-3", "start", "top", "", "", "div");
-            /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblTbregister_Internalname, context.GetMessage( "GAM_Register", ""), "", "", lblTbregister_Jsonclick, "'"+""+"'"+",false,"+"'"+"E\\'REGISTER\\'."+"'", "", "TextBlock", 5, "", 1, 1, 0, 0, "HLP_GAMExampleLogin.htm");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "Center", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_start( context, divLayoutmaintable_Internalname, 1, 0, "px", 0, "px", divLayoutmaintable_Class, "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", cmbavLogonto.Visible, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+cmbavLogonto_Internalname+"\"", "", "div");
-            /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, cmbavLogonto_Internalname, context.GetMessage( "GAM_Logonto", ""), "col-xs-12 AttributeLabel w-100Label", 1, true, "");
+            GxWebStd.gx_div_start( context, divTablemain_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 gx-attribute", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 22,'',false,'" + sGXsfl_62_idx + "',0)\"";
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 CellMarginLoginImageLeft", "Center", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divTablelogincontent_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 CellPaddingLeft30", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divTablelogin_Internalname, 1, 0, "px", 0, "px", "TableLoginTransparency", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "Center", "top", "", "", "div");
+            /* Static images/pictures */
+            ClassString = "Image" + " " + ((StringUtil.StrCmp(imgLogologin_gximage, "")==0) ? "GX_Image_ComfortaLogo_Class" : "GX_Image_"+imgLogologin_gximage+"_Class");
+            StyleString = "";
+            sImgUrl = (string)(context.GetImagePath( "2f7c9247-c2e5-4f23-9059-2fa189584da0", "", context.GetTheme( )));
+            GxWebStd.gx_bitmap( context, imgLogologin_Internalname, sImgUrl, "", "", "", context.GetTheme( ), 1, 1, "", "", 0, 0, 0, "px", 0, "px", 0, 0, 0, "", "", StyleString, ClassString, "", "", "", "", " "+"data-gx-image"+" ", "", "", 1, false, false, context.GetImageSrcSet( sImgUrl), "HLP_GAMExampleLogin.htm");
+            GxWebStd.gx_div_end( context, "Center", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 CellMarginTop", "Center", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divUnnamedtable1_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 DataContentCellLogin CellPaddingLogin", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
+            /* Attribute/Variable Label */
+            GxWebStd.gx_label_element( context, cmbavLogonto_Internalname, context.GetMessage( "Log on to", ""), "col-sm-3 AttributeLoginImageLeftLabel", 0, true, "");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 22,'',false,'" + sGXsfl_54_idx + "',0)\"";
             /* ComboBox */
-            GxWebStd.gx_combobox_ctrl1( context, cmbavLogonto, cmbavLogonto_Internalname, StringUtil.RTrim( AV26LogOnTo), 1, cmbavLogonto_Jsonclick, 5, "'"+""+"'"+",false,"+"'"+"EVLOGONTO.CLICK."+"'", "char", "", cmbavLogonto.Visible, cmbavLogonto.Enabled, 0, 0, 0, "em", 0, "", "", "Attribute w-100", "", "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,22);\"", "", true, 0, "HLP_GAMExampleLogin.htm");
+            GxWebStd.gx_combobox_ctrl1( context, cmbavLogonto, cmbavLogonto_Internalname, StringUtil.RTrim( AV26LogOnTo), 1, cmbavLogonto_Jsonclick, 5, "'"+""+"'"+",false,"+"'"+"EVLOGONTO.CLICK."+"'", "svchar", "", cmbavLogonto.Visible, cmbavLogonto.Enabled, 0, 0, 0, "em", 0, "", "", "AttributeLoginImageLeft", "", "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,22);\"", "", true, 0, "HLP_GAMExampleLogin.htm");
             cmbavLogonto.CurrentValue = StringUtil.RTrim( AV26LogOnTo);
             AssignProp("", false, cmbavLogonto_Internalname, "Values", (string)(cmbavLogonto.ToJavascriptSource()), true);
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtavUsername_Internalname+"\"", "", "div");
-            /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, edtavUsername_Internalname, context.GetMessage( "GAM_User", ""), "col-xs-12 AttributeLabel w-100Label", 1, true, "");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 gx-attribute", "start", "top", "", "", "div");
-            /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 27,'',false,'" + sGXsfl_62_idx + "',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavUsername_Internalname, AV31UserName, StringUtil.RTrim( context.localUtil.Format( AV31UserName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,27);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", edtavUsername_Invitemessage, edtavUsername_Jsonclick, 0, "Attribute w-100", "", "", "", "", 1, edtavUsername_Enabled, 0, "text", "", 0, "px", 1, "row", 100, 0, 0, 0, 0, 0, 0, true, "GeneXusSecurityCommon\\GAMUserIdentification", "start", true, "", "HLP_GAMExampleLogin.htm");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", edtavUserpassword_Visible, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtavUserpassword_Internalname+"\"", "", "div");
-            /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, edtavUserpassword_Internalname, context.GetMessage( "GAM_Password", ""), "col-xs-12 AttributeLabel w-100Label", 1, true, "");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 gx-attribute", "start", "top", "", "", "div");
-            /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 32,'',false,'" + sGXsfl_62_idx + "',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavUserpassword_Internalname, StringUtil.RTrim( AV32UserPassword), StringUtil.RTrim( context.localUtil.Format( AV32UserPassword, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,32);\""+" "+"idenableshowpasswordhint=\"False\""+" ", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", edtavUserpassword_Invitemessage, edtavUserpassword_Jsonclick, 0, "Attribute w-100", "", "", "", "", edtavUserpassword_Visible, edtavUserpassword_Enabled, 0, "text", "", 0, "px", 1, "row", 50, -1, 0, 0, 0, 0, 0, true, "GeneXusSecurityCommon\\GAMPassword", "start", true, "", "HLP_GAMExampleLogin.htm");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 stack-bottom-l", "end", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, divCurrentrepositorycell_Internalname, 1, 0, "px", 0, "px", "col-xs-12 CellMarginTop", "start", "top", "", "", "div");
             /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblTbforgotpwd_Internalname, context.GetMessage( "GAM_Forgotyourpassword", ""), "", "", lblTbforgotpwd_Jsonclick, "'"+""+"'"+",false,"+"'"+"E\\'FORGOTPASSWORD\\'."+"'", "", "TextBlock", 5, "", lblTbforgotpwd_Visible, 1, 0, 0, "HLP_GAMExampleLogin.htm");
-            GxWebStd.gx_div_end( context, "end", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 stack-bottom-l", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", chkavRememberme.Visible, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+chkavRememberme_Internalname+"\"", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-9 gx-attribute", "start", "top", "", "", "div");
-            /* Check box */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 40,'',false,'" + sGXsfl_62_idx + "',0)\"";
-            ClassString = "Attribute";
-            StyleString = "";
-            GxWebStd.gx_checkbox_ctrl( context, chkavRememberme_Internalname, StringUtil.BoolToStr( AV28RememberMe), "", "", chkavRememberme.Visible, chkavRememberme.Enabled, "true", context.GetMessage( "Remember Me", ""), StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(40, this, 'true', 'false',"+"''"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,40);\"");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_label_ctrl( context, lblCurrentrepository_Internalname, lblCurrentrepository_Caption, "", "", lblCurrentrepository_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "DataDescriptionLogin", 0, "", lblCurrentrepository_Visible, 1, 0, 0, "HLP_GAMExampleLogin.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "Center", "top", "", "", "div");
-            ClassString = "ErrorViewer";
-            StyleString = "";
-            GxWebStd.gx_msg_list( context, "", context.GX_msglist.DisplayMode, StyleString, ClassString, "", "false");
-            GxWebStd.gx_div_end( context, "Center", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 stack-bottom-l", "Center", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, divTblloginbutton_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-5", "end", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", chkavKeepmeloggedin.Visible, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+chkavKeepmeloggedin_Internalname+"\"", "", "div");
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 DataContentCellLogin CellPaddingLogin CellLoginUserName", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
-            /* Check box */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 51,'',false,'" + sGXsfl_62_idx + "',0)\"";
-            ClassString = "Attribute";
-            StyleString = "";
-            GxWebStd.gx_checkbox_ctrl( context, chkavKeepmeloggedin_Internalname, StringUtil.BoolToStr( AV23KeepMeLoggedIn), "", "", chkavKeepmeloggedin.Visible, chkavKeepmeloggedin.Enabled, "true", context.GetMessage( "GAM_Keepmeloggedin", ""), StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(51, this, 'true', 'false',"+"''"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,51);\"");
+            /* Attribute/Variable Label */
+            GxWebStd.gx_label_element( context, edtavUsername_Internalname, context.GetMessage( "User Name", ""), "col-sm-3 AttributeLoginImageLeftLabel", 0, true, "");
+            /* Single line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 29,'',false,'" + sGXsfl_54_idx + "',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavUsername_Internalname, AV31UserName, StringUtil.RTrim( context.localUtil.Format( AV31UserName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,29);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", context.GetMessage( "WWP_GAM_Email", ""), edtavUsername_Jsonclick, 0, "AttributeLoginImageLeft", "", "", "", "", 1, edtavUsername_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, 0, 0, true, "GeneXusSecurityCommon\\GAMUserIdentification", "start", true, "", "HLP_GAMExampleLogin.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "end", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-7", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 53,'',false,'',0)\"";
-            ClassString = "Button Primary";
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 DataContentCellLogin CellPaddingLogin CellLoginPassword", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
+            /* Attribute/Variable Label */
+            GxWebStd.gx_label_element( context, edtavUserpassword_Internalname, context.GetMessage( "User Password", ""), "col-sm-3 AttributeLoginImageLeftLabel", 0, true, "");
+            /* Single line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 33,'',false,'" + sGXsfl_54_idx + "',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavUserpassword_Internalname, StringUtil.RTrim( AV32UserPassword), StringUtil.RTrim( context.localUtil.Format( AV32UserPassword, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,33);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", edtavUserpassword_Invitemessage, edtavUserpassword_Jsonclick, 0, "AttributeLoginImageLeft", "", "", "", "", edtavUserpassword_Visible, edtavUserpassword_Enabled, 0, "text", "", 50, "chr", 1, "row", 50, -1, 0, 0, 0, 0, 0, true, "GeneXusSecurityCommon\\GAMPassword", "start", true, "", "HLP_GAMExampleLogin.htm");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 DataContentCellLogin CellPaddingLogin", "start", "top", "", "", "div");
+            /* Text block */
+            GxWebStd.gx_label_ctrl( context, lblForgotpassword_Internalname, context.GetMessage( "WWP_GAM_ForgotPassword", ""), "", "", lblForgotpassword_Jsonclick, "'"+""+"'"+",false,"+"'"+"EFORGOTPASSWORD.CLICK."+"'", "", "DataDescriptionLogin", 5, "", lblForgotpassword_Visible, 1, 0, 1, "HLP_GAMExampleLogin.htm");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divKeepmeloggedin_cell_Internalname, 1, 0, "px", 0, "px", divKeepmeloggedin_cell_Class, "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
+            /* Attribute/Variable Label */
+            GxWebStd.gx_label_element( context, chkavKeepmeloggedin_Internalname, context.GetMessage( "Keep Me Logged In", ""), "col-sm-3 AttributeCheckBoxLabel", 0, true, "");
+            /* Check box */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 40,'',false,'" + sGXsfl_54_idx + "',0)\"";
+            ClassString = "AttributeCheckBox";
             StyleString = "";
-            GxWebStd.gx_button_ctrl( context, bttLogin_Internalname, "gx.evt.setGridEvt("+StringUtil.Str( (decimal)(62), 2, 0)+","+"null"+");", bttLogin_Caption, bttLogin_Jsonclick, 5, context.GetMessage( "GAM_SIGNIN", ""), "", StyleString, ClassString, 1, 1, "standard", "'"+""+"'"+",false,"+"'"+"EENTER."+"'", TempTags, "", context.GetButtonType( ), "HLP_GAMExampleLogin.htm");
+            GxWebStd.gx_checkbox_ctrl( context, chkavKeepmeloggedin_Internalname, StringUtil.BoolToStr( AV23KeepMeLoggedIn), "", context.GetMessage( "Keep Me Logged In", ""), chkavKeepmeloggedin.Visible, chkavKeepmeloggedin.Enabled, "true", context.GetMessage( "WWP_GAM_Keepmeloggedin", ""), StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(40, this, 'true', 'false',"+"''"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,40);\"");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divRememberme_cell_Internalname, 1, 0, "px", 0, "px", divRememberme_cell_Class, "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
+            /* Attribute/Variable Label */
+            GxWebStd.gx_label_element( context, chkavRememberme_Internalname, context.GetMessage( "Remember Me", ""), "col-sm-3 AttributeCheckBoxLabel", 0, true, "");
+            /* Check box */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 44,'',false,'" + sGXsfl_54_idx + "',0)\"";
+            ClassString = "AttributeCheckBox";
+            StyleString = "";
+            GxWebStd.gx_checkbox_ctrl( context, chkavRememberme_Internalname, StringUtil.BoolToStr( AV28RememberMe), "", context.GetMessage( "Remember Me", ""), chkavRememberme.Visible, chkavRememberme.Enabled, "true", context.GetMessage( "WWP_GAM_RememberMe", ""), StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(44, this, 'true', 'false',"+"''"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,44);\"");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 DataContentCellLogin CellPaddingLogin", "start", "top", "", "", "div");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 47,'',false,'',0)\"";
+            ClassString = "ButtonMaterial ButtonLogin";
+            StyleString = "";
+            GxWebStd.gx_button_ctrl( context, bttBtnenter_Internalname, "gx.evt.setGridEvt("+StringUtil.Str( (decimal)(54), 2, 0)+","+"null"+");", bttBtnenter_Caption, bttBtnenter_Jsonclick, 5, context.GetMessage( "GX_BtnEnter", ""), "", StyleString, ClassString, 1, 1, "standard", "'"+""+"'"+",false,"+"'"+"EENTER."+"'", TempTags, "", context.GetButtonType( ), "HLP_GAMExampleLogin.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -537,38 +591,33 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 stack-top-l", "Center", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, divTblexternalsauth_Internalname, divTblexternalsauth_Visible, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 stack-bottom-l", "start", "top", "", "", "div");
-            /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblTbexternalauthentication_Internalname, context.GetMessage( "GAM_Orloginwith", ""), "", "", lblTbexternalauthentication_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "text-line-separator", 0, "", 1, 1, 0, 0, "HLP_GAMExampleLogin.htm");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "Center", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divTablebuttons_Internalname, divTablebuttons_Visible, 0, "px", 0, "px", "CellMarginTop", "start", "top", " "+"data-gx-flex"+" ", "flex-wrap:wrap;", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "", "start", "top", "", "flex-grow:1;align-self:center;", "div");
+            /* Text block */
+            GxWebStd.gx_label_ctrl( context, lblLoginwith_Internalname, context.GetMessage( "WWP_GAM_OrLoginWith", ""), "", "", lblLoginwith_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "DataDescriptionLogin", 0, "", 1, 1, 0, 1, "HLP_GAMExampleLogin.htm");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "", "start", "top", "", "flex-grow:1;", "div");
             /*  Grid Control  */
-            GridextauthtypesContainer.SetIsFreestyle(true);
-            GridextauthtypesContainer.SetWrapped(nGXWrapped);
-            StartGridControl62( ) ;
+            GridauthtypesContainer.SetIsFreestyle(true);
+            GridauthtypesContainer.SetWrapped(nGXWrapped);
+            StartGridControl54( ) ;
          }
-         if ( wbEnd == 62 )
+         if ( wbEnd == 54 )
          {
             wbEnd = 0;
-            nRC_GXsfl_62 = (int)(nGXsfl_62_idx-1);
-            if ( GridextauthtypesContainer.GetWrapped() == 1 )
+            nRC_GXsfl_54 = (int)(nGXsfl_54_idx-1);
+            if ( GridauthtypesContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "</table>") ;
                context.WriteHtmlText( "</div>") ;
             }
             else
             {
-               if ( subGridextauthtypes_Visible != 0 )
+               if ( subGridauthtypes_Visible != 0 )
                {
                   sStyleString = "";
                }
@@ -576,42 +625,76 @@ namespace GeneXus.Programs {
                {
                   sStyleString = " style=\"display:none;\"";
                }
-               context.WriteHtmlText( "<div id=\""+"GridextauthtypesContainer"+"Div\" "+sStyleString+">"+"</div>") ;
-               context.httpAjaxContext.ajax_rsp_assign_grid("_"+"Gridextauthtypes", GridextauthtypesContainer, subGridextauthtypes_Internalname);
+               context.WriteHtmlText( "<div id=\""+"GridauthtypesContainer"+"Div\" "+sStyleString+">"+"</div>") ;
+               context.httpAjaxContext.ajax_rsp_assign_grid("_"+"Gridauthtypes", GridauthtypesContainer, subGridauthtypes_Internalname);
                if ( ! context.isAjaxRequest( ) && ! context.isSpaRequest( ) )
                {
-                  GxWebStd.gx_hidden_field( context, "GridextauthtypesContainerData", GridextauthtypesContainer.ToJavascriptSource());
+                  GxWebStd.gx_hidden_field( context, "GridauthtypesContainerData", GridauthtypesContainer.ToJavascriptSource());
                }
                if ( context.isAjaxRequest( ) || context.isSpaRequest( ) )
                {
-                  GxWebStd.gx_hidden_field( context, "GridextauthtypesContainerData"+"V", GridextauthtypesContainer.GridValuesHidden());
+                  GxWebStd.gx_hidden_field( context, "GridauthtypesContainerData"+"V", GridauthtypesContainer.GridValuesHidden());
                }
                else
                {
-                  context.WriteHtmlText( "<input type=\"hidden\" "+"name=\""+"GridextauthtypesContainerData"+"V"+"\" value='"+GridextauthtypesContainer.GridValuesHidden()+"'/>") ;
+                  context.WriteHtmlText( "<input type=\"hidden\" "+"name=\""+"GridauthtypesContainerData"+"V"+"\" value='"+GridauthtypesContainer.GridValuesHidden()+"'/>") ;
                }
             }
-            GxWebStd.gx_div_end( context, "Center", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "Center", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "Center", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
+            /* User Defined Control */
+            ucWwputilities.SetProperty("EnableFixObjectFitCover", Wwputilities_Enablefixobjectfitcover);
+            ucWwputilities.SetProperty("EnableConvertComboToBootstrapSelect", Wwputilities_Enableconvertcombotobootstrapselect);
+            ucWwputilities.SetProperty("AllowColumnResizing", Wwputilities_Allowcolumnresizing);
+            ucWwputilities.SetProperty("AllowColumnReordering", Wwputilities_Allowcolumnreordering);
+            ucWwputilities.SetProperty("AllowColumnsRestore", Wwputilities_Allowcolumnsrestore);
+            ucWwputilities.SetProperty("ComboLoadType", Wwputilities_Comboloadtype);
+            ucWwputilities.Render(context, "wwp.workwithplusutilities_fal", Wwputilities_Internalname, "WWPUTILITIESContainer");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divHtml_bottomauxiliarcontrols_Internalname, 1, 0, "px", 0, "px", "Section", "start", "top", "", "", "div");
+            /* Single line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 76,'',false,'" + sGXsfl_54_idx + "',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavUrl_Internalname, AV30URL, StringUtil.RTrim( context.localUtil.Format( AV30URL, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,76);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavUrl_Jsonclick, 0, "Attribute", "", "", "", "", edtavUrl_Visible, 1, 0, "text", "", 0, "px", 1, "row", 2048, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMURL", "start", true, "", "HLP_GAMExampleLogin.htm");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
          }
-         if ( wbEnd == 62 )
+         if ( wbEnd == 54 )
          {
             wbEnd = 0;
             if ( isFullAjaxMode( ) )
             {
-               if ( GridextauthtypesContainer.GetWrapped() == 1 )
+               if ( GridauthtypesContainer.GetWrapped() == 1 )
                {
                   context.WriteHtmlText( "</table>") ;
                   context.WriteHtmlText( "</div>") ;
                }
                else
                {
-                  if ( subGridextauthtypes_Visible != 0 )
+                  if ( subGridauthtypes_Visible != 0 )
                   {
                      sStyleString = "";
                   }
@@ -619,19 +702,19 @@ namespace GeneXus.Programs {
                   {
                      sStyleString = " style=\"display:none;\"";
                   }
-                  context.WriteHtmlText( "<div id=\""+"GridextauthtypesContainer"+"Div\" "+sStyleString+">"+"</div>") ;
-                  context.httpAjaxContext.ajax_rsp_assign_grid("_"+"Gridextauthtypes", GridextauthtypesContainer, subGridextauthtypes_Internalname);
+                  context.WriteHtmlText( "<div id=\""+"GridauthtypesContainer"+"Div\" "+sStyleString+">"+"</div>") ;
+                  context.httpAjaxContext.ajax_rsp_assign_grid("_"+"Gridauthtypes", GridauthtypesContainer, subGridauthtypes_Internalname);
                   if ( ! context.isAjaxRequest( ) && ! context.isSpaRequest( ) )
                   {
-                     GxWebStd.gx_hidden_field( context, "GridextauthtypesContainerData", GridextauthtypesContainer.ToJavascriptSource());
+                     GxWebStd.gx_hidden_field( context, "GridauthtypesContainerData", GridauthtypesContainer.ToJavascriptSource());
                   }
                   if ( context.isAjaxRequest( ) || context.isSpaRequest( ) )
                   {
-                     GxWebStd.gx_hidden_field( context, "GridextauthtypesContainerData"+"V", GridextauthtypesContainer.GridValuesHidden());
+                     GxWebStd.gx_hidden_field( context, "GridauthtypesContainerData"+"V", GridauthtypesContainer.GridValuesHidden());
                   }
                   else
                   {
-                     context.WriteHtmlText( "<input type=\"hidden\" "+"name=\""+"GridextauthtypesContainerData"+"V"+"\" value='"+GridextauthtypesContainer.GridValuesHidden()+"'/>") ;
+                     context.WriteHtmlText( "<input type=\"hidden\" "+"name=\""+"GridauthtypesContainerData"+"V"+"\" value='"+GridauthtypesContainer.GridValuesHidden()+"'/>") ;
                   }
                }
             }
@@ -651,7 +734,7 @@ namespace GeneXus.Programs {
                Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
-         Form.Meta.addItem("description", context.GetMessage( "GAM_Login", ""), 0) ;
+         Form.Meta.addItem("description", context.GetMessage( "Login", ""), 0) ;
          context.wjLoc = "";
          context.nUserReturn = 0;
          context.wbHandled = 0;
@@ -682,123 +765,124 @@ namespace GeneXus.Programs {
                {
                   sEvtType = StringUtil.Left( sEvt, 1);
                   sEvt = StringUtil.Right( sEvt, (short)(StringUtil.Len( sEvt)-1));
-                  if ( StringUtil.StrCmp(sEvtType, "E") == 0 )
+                  if ( StringUtil.StrCmp(sEvtType, "M") != 0 )
                   {
-                     sEvtType = StringUtil.Right( sEvt, 1);
-                     if ( StringUtil.StrCmp(sEvtType, ".") == 0 )
+                     if ( StringUtil.StrCmp(sEvtType, "E") == 0 )
                      {
-                        sEvt = StringUtil.Left( sEvt, (short)(StringUtil.Len( sEvt)-1));
-                        if ( StringUtil.StrCmp(sEvt, "RFR") == 0 )
+                        sEvtType = StringUtil.Right( sEvt, 1);
+                        if ( StringUtil.StrCmp(sEvtType, ".") == 0 )
                         {
-                           context.wbHandled = 1;
-                           dynload_actions( ) ;
-                        }
-                        else if ( StringUtil.StrCmp(sEvt, "VLOGONTO.CLICK") == 0 )
-                        {
-                           context.wbHandled = 1;
-                           dynload_actions( ) ;
-                           E110P2 ();
-                        }
-                        else if ( StringUtil.StrCmp(sEvt, "ENTER") == 0 )
-                        {
-                           context.wbHandled = 1;
-                           if ( ! wbErr )
+                           sEvt = StringUtil.Left( sEvt, (short)(StringUtil.Len( sEvt)-1));
+                           if ( StringUtil.StrCmp(sEvt, "RFR") == 0 )
                            {
-                              Rfr0gs = false;
-                              if ( ! Rfr0gs )
+                              context.wbHandled = 1;
+                              dynload_actions( ) ;
+                           }
+                           else if ( StringUtil.StrCmp(sEvt, "ENTER") == 0 )
+                           {
+                              context.wbHandled = 1;
+                              if ( ! wbErr )
                               {
-                                 /* Execute user event: Enter */
-                                 E120P2 ();
+                                 Rfr0gs = false;
+                                 if ( ! Rfr0gs )
+                                 {
+                                    /* Execute user event: Enter */
+                                    E110P2 ();
+                                 }
+                                 dynload_actions( ) ;
                               }
+                           }
+                           else if ( StringUtil.StrCmp(sEvt, "VLOGONTO.CLICK") == 0 )
+                           {
+                              context.wbHandled = 1;
+                              dynload_actions( ) ;
+                              E120P2 ();
+                           }
+                           else if ( StringUtil.StrCmp(sEvt, "FORGOTPASSWORD.CLICK") == 0 )
+                           {
+                              context.wbHandled = 1;
+                              dynload_actions( ) ;
+                              /* Execute user event: Forgotpassword.Click */
+                              E130P2 ();
+                           }
+                           else if ( StringUtil.StrCmp(sEvt, "LSCR") == 0 )
+                           {
+                              context.wbHandled = 1;
+                              dynload_actions( ) ;
                               dynload_actions( ) ;
                            }
                         }
-                        else if ( StringUtil.StrCmp(sEvt, "'FORGOTPASSWORD'") == 0 )
+                        else
                         {
-                           context.wbHandled = 1;
-                           dynload_actions( ) ;
-                           /* Execute user event: 'ForgotPassword' */
-                           E130P2 ();
-                        }
-                        else if ( StringUtil.StrCmp(sEvt, "'REGISTER'") == 0 )
-                        {
-                           context.wbHandled = 1;
-                           dynload_actions( ) ;
-                           /* Execute user event: 'Register' */
-                           E140P2 ();
-                        }
-                        else if ( StringUtil.StrCmp(sEvt, "'SELECTAUTHENTICATIONTYPE'") == 0 )
-                        {
-                           context.wbHandled = 1;
-                           dynload_actions( ) ;
-                           /* Execute user event: 'SelectAuthenticationType' */
-                           E150P2 ();
-                        }
-                        else if ( StringUtil.StrCmp(sEvt, "LSCR") == 0 )
-                        {
-                           context.wbHandled = 1;
-                           dynload_actions( ) ;
-                           dynload_actions( ) ;
-                        }
-                     }
-                     else
-                     {
-                        sEvtType = StringUtil.Right( sEvt, 4);
-                        sEvt = StringUtil.Left( sEvt, (short)(StringUtil.Len( sEvt)-4));
-                        if ( ( StringUtil.StrCmp(StringUtil.Left( sEvt, 5), "START") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 7), "REFRESH") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 21), "GRIDEXTAUTHTYPES.LOAD") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 26), "'SELECTAUTHENTICATIONTYPE'") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 6), "CANCEL") == 0 ) )
-                        {
-                           nGXsfl_62_idx = (int)(Math.Round(NumberUtil.Val( sEvtType, "."), 18, MidpointRounding.ToEven));
-                           sGXsfl_62_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_62_idx), 4, 0), 4, "0");
-                           SubsflControlProps_622( ) ;
-                           AV27NameAuthType = cgiGet( edtavNameauthtype_Internalname);
-                           AssignAttri("", false, edtavNameauthtype_Internalname, AV27NameAuthType);
-                           GxWebStd.gx_hidden_field( context, "gxhash_vNAMEAUTHTYPE"+"_"+sGXsfl_62_idx, GetSecureSignedToken( sGXsfl_62_idx, StringUtil.RTrim( context.localUtil.Format( AV27NameAuthType, "")), context));
-                           sEvtType = StringUtil.Right( sEvt, 1);
-                           if ( StringUtil.StrCmp(sEvtType, ".") == 0 )
+                           sEvtType = StringUtil.Right( sEvt, 4);
+                           sEvt = StringUtil.Left( sEvt, (short)(StringUtil.Len( sEvt)-4));
+                           if ( ( StringUtil.StrCmp(StringUtil.Left( sEvt, 5), "START") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 18), "GRIDAUTHTYPES.LOAD") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 7), "REFRESH") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 20), "VIMAGEAUTHTYPE.CLICK") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 26), "'SELECTAUTHENTICATIONTYPE'") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 6), "CANCEL") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 20), "VIMAGEAUTHTYPE.CLICK") == 0 ) )
                            {
-                              sEvt = StringUtil.Left( sEvt, (short)(StringUtil.Len( sEvt)-1));
-                              if ( StringUtil.StrCmp(sEvt, "START") == 0 )
+                              nGXsfl_54_idx = (int)(Math.Round(NumberUtil.Val( sEvtType, "."), 18, MidpointRounding.ToEven));
+                              sGXsfl_54_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_54_idx), 4, 0), 4, "0");
+                              SubsflControlProps_542( ) ;
+                              AV109ImageAuthType = cgiGet( edtavImageauthtype_Internalname);
+                              AssignProp("", false, edtavImageauthtype_Internalname, "Bitmap", (String.IsNullOrEmpty(StringUtil.RTrim( AV109ImageAuthType)) ? AV129Imageauthtype_GXI : context.convertURL( context.PathToRelativeUrl( AV109ImageAuthType))), !bGXsfl_54_Refreshing);
+                              AssignProp("", false, edtavImageauthtype_Internalname, "SrcSet", context.GetImageSrcSet( AV109ImageAuthType), true);
+                              cmbavTypeauthtype.Name = cmbavTypeauthtype_Internalname;
+                              cmbavTypeauthtype.CurrentValue = cgiGet( cmbavTypeauthtype_Internalname);
+                              AV110TypeAuthType = cgiGet( cmbavTypeauthtype_Internalname);
+                              AssignAttri("", false, cmbavTypeauthtype_Internalname, AV110TypeAuthType);
+                              AV27NameAuthType = cgiGet( edtavNameauthtype_Internalname);
+                              AssignAttri("", false, edtavNameauthtype_Internalname, AV27NameAuthType);
+                              sEvtType = StringUtil.Right( sEvt, 1);
+                              if ( StringUtil.StrCmp(sEvtType, ".") == 0 )
                               {
-                                 context.wbHandled = 1;
-                                 dynload_actions( ) ;
-                                 /* Execute user event: Start */
-                                 E160P2 ();
+                                 sEvt = StringUtil.Left( sEvt, (short)(StringUtil.Len( sEvt)-1));
+                                 if ( StringUtil.StrCmp(sEvt, "START") == 0 )
+                                 {
+                                    context.wbHandled = 1;
+                                    dynload_actions( ) ;
+                                    /* Execute user event: Start */
+                                    E140P2 ();
+                                 }
+                                 else if ( StringUtil.StrCmp(sEvt, "GRIDAUTHTYPES.LOAD") == 0 )
+                                 {
+                                    context.wbHandled = 1;
+                                    dynload_actions( ) ;
+                                    /* Execute user event: Gridauthtypes.Load */
+                                    E150P2 ();
+                                 }
+                                 else if ( StringUtil.StrCmp(sEvt, "REFRESH") == 0 )
+                                 {
+                                    context.wbHandled = 1;
+                                    dynload_actions( ) ;
+                                    /* Execute user event: Refresh */
+                                    E160P2 ();
+                                 }
+                                 else if ( StringUtil.StrCmp(sEvt, "VIMAGEAUTHTYPE.CLICK") == 0 )
+                                 {
+                                    context.wbHandled = 1;
+                                    dynload_actions( ) ;
+                                    E170P2 ();
+                                 }
+                                 else if ( StringUtil.StrCmp(sEvt, "'SELECTAUTHENTICATIONTYPE'") == 0 )
+                                 {
+                                    context.wbHandled = 1;
+                                    dynload_actions( ) ;
+                                    /* Execute user event: 'SelectAuthenticationType' */
+                                    E180P2 ();
+                                    /* No code required for Cancel button. It is implemented as the Reset button. */
+                                 }
+                                 else if ( StringUtil.StrCmp(sEvt, "LSCR") == 0 )
+                                 {
+                                    context.wbHandled = 1;
+                                    dynload_actions( ) ;
+                                 }
                               }
-                              else if ( StringUtil.StrCmp(sEvt, "REFRESH") == 0 )
+                              else
                               {
-                                 context.wbHandled = 1;
-                                 dynload_actions( ) ;
-                                 /* Execute user event: Refresh */
-                                 E170P2 ();
                               }
-                              else if ( StringUtil.StrCmp(sEvt, "GRIDEXTAUTHTYPES.LOAD") == 0 )
-                              {
-                                 context.wbHandled = 1;
-                                 dynload_actions( ) ;
-                                 /* Execute user event: Gridextauthtypes.Load */
-                                 E180P2 ();
-                              }
-                              else if ( StringUtil.StrCmp(sEvt, "'SELECTAUTHENTICATIONTYPE'") == 0 )
-                              {
-                                 context.wbHandled = 1;
-                                 dynload_actions( ) ;
-                                 /* Execute user event: 'SelectAuthenticationType' */
-                                 E150P2 ();
-                                 /* No code required for Cancel button. It is implemented as the Reset button. */
-                              }
-                              else if ( StringUtil.StrCmp(sEvt, "LSCR") == 0 )
-                              {
-                                 context.wbHandled = 1;
-                                 dynload_actions( ) ;
-                              }
-                           }
-                           else
-                           {
                            }
                         }
                      }
+                     context.wbHandled = 1;
                   }
-                  context.wbHandled = 1;
                }
             }
          }
@@ -812,7 +896,10 @@ namespace GeneXus.Programs {
             Refresh( ) ;
             if ( ! GxWebStd.gx_redirect( context) )
             {
-               RenderHtmlCloseForm0P2( ) ;
+               if ( nGXWrapped == 1 )
+               {
+                  RenderHtmlCloseForm( ) ;
+               }
             }
          }
       }
@@ -849,42 +936,39 @@ namespace GeneXus.Programs {
          /* End function dynload_actions */
       }
 
-      protected void gxnrGridextauthtypes_newrow( )
+      protected void gxnrGridauthtypes_newrow( )
       {
          GxWebStd.set_html_headers( context, 0, "", "");
-         SubsflControlProps_622( ) ;
-         while ( nGXsfl_62_idx <= nRC_GXsfl_62 )
+         SubsflControlProps_542( ) ;
+         while ( nGXsfl_54_idx <= nRC_GXsfl_54 )
          {
-            sendrow_622( ) ;
-            nGXsfl_62_idx = ((subGridextauthtypes_Islastpage==1)&&(nGXsfl_62_idx+1>subGridextauthtypes_fnc_Recordsperpage( )) ? 1 : nGXsfl_62_idx+1);
-            sGXsfl_62_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_62_idx), 4, 0), 4, "0");
-            SubsflControlProps_622( ) ;
+            sendrow_542( ) ;
+            nGXsfl_54_idx = ((subGridauthtypes_Islastpage==1)&&(nGXsfl_54_idx+1>subGridauthtypes_fnc_Recordsperpage( )) ? 1 : nGXsfl_54_idx+1);
+            sGXsfl_54_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_54_idx), 4, 0), 4, "0");
+            SubsflControlProps_542( ) ;
          }
-         AddString( context.httpAjaxContext.getJSONContainerResponse( GridextauthtypesContainer)) ;
-         /* End function gxnrGridextauthtypes_newrow */
+         AddString( context.httpAjaxContext.getJSONContainerResponse( GridauthtypesContainer)) ;
+         /* End function gxnrGridauthtypes_newrow */
       }
 
-      protected void gxgrGridextauthtypes_refresh( string AV18IDP_State ,
-                                                   string AV8AuxUserName ,
-                                                   short AV33UserRememberMe ,
-                                                   bool AV28RememberMe ,
-                                                   bool AV23KeepMeLoggedIn ,
-                                                   string AV24Language )
+      protected void gxgrGridauthtypes_refresh( string AV24Language ,
+                                                string AV8AuxUserName ,
+                                                short AV33UserRememberMe ,
+                                                bool AV23KeepMeLoggedIn ,
+                                                bool AV28RememberMe )
       {
          initialize_formulas( ) ;
          GxWebStd.set_html_headers( context, 0, "", "");
-         GRIDEXTAUTHTYPES_nCurrentRecord = 0;
+         GRIDAUTHTYPES_nCurrentRecord = 0;
          RF0P2( ) ;
          GXKey = Crypto.GetSiteKey( );
          send_integrity_footer_hashes( ) ;
          GXKey = Crypto.GetSiteKey( );
-         /* End function gxgrGridextauthtypes_refresh */
+         /* End function gxgrGridauthtypes_refresh */
       }
 
       protected void send_integrity_hashes( )
       {
-         GxWebStd.gx_hidden_field( context, "gxhash_vNAMEAUTHTYPE", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV27NameAuthType, "")), context));
-         GxWebStd.gx_hidden_field( context, "vNAMEAUTHTYPE", StringUtil.RTrim( AV27NameAuthType));
       }
 
       protected void clear_multi_value_controls( )
@@ -908,10 +992,10 @@ namespace GeneXus.Programs {
             cmbavLogonto.CurrentValue = StringUtil.RTrim( AV26LogOnTo);
             AssignProp("", false, cmbavLogonto_Internalname, "Values", cmbavLogonto.ToJavascriptSource(), true);
          }
-         AV28RememberMe = StringUtil.StrToBool( StringUtil.BoolToStr( AV28RememberMe));
-         AssignAttri("", false, "AV28RememberMe", AV28RememberMe);
          AV23KeepMeLoggedIn = StringUtil.StrToBool( StringUtil.BoolToStr( AV23KeepMeLoggedIn));
          AssignAttri("", false, "AV23KeepMeLoggedIn", AV23KeepMeLoggedIn);
+         AV28RememberMe = StringUtil.StrToBool( StringUtil.BoolToStr( AV28RememberMe));
+         AssignAttri("", false, "AV28RememberMe", AV28RememberMe);
       }
 
       public void Refresh( )
@@ -927,7 +1011,6 @@ namespace GeneXus.Programs {
       protected void initialize_formulas( )
       {
          /* GeneXus formulas. */
-         edtavNameauthtype_Enabled = 0;
       }
 
       protected void RF0P2( )
@@ -936,80 +1019,78 @@ namespace GeneXus.Programs {
          clear_multi_value_controls( ) ;
          if ( isAjaxCallMode( ) )
          {
-            GridextauthtypesContainer.ClearRows();
+            GridauthtypesContainer.ClearRows();
          }
-         wbStart = 62;
+         wbStart = 54;
          /* Execute user event: Refresh */
-         E170P2 ();
-         nGXsfl_62_idx = 1;
-         sGXsfl_62_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_62_idx), 4, 0), 4, "0");
-         SubsflControlProps_622( ) ;
-         bGXsfl_62_Refreshing = true;
-         GridextauthtypesContainer.AddObjectProperty("GridName", "Gridextauthtypes");
-         GridextauthtypesContainer.AddObjectProperty("CmpContext", "");
-         GridextauthtypesContainer.AddObjectProperty("InMasterPage", "false");
-         GridextauthtypesContainer.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridextauthtypes_Visible), 5, 0, ".", "")));
-         GridextauthtypesContainer.AddObjectProperty("Class", StringUtil.RTrim( "FreeStyleGrid"));
-         GridextauthtypesContainer.AddObjectProperty("Class", "FreeStyleGrid");
-         GridextauthtypesContainer.AddObjectProperty("Cellpadding", StringUtil.LTrim( StringUtil.NToC( (decimal)(1), 4, 0, ".", "")));
-         GridextauthtypesContainer.AddObjectProperty("Cellspacing", StringUtil.LTrim( StringUtil.NToC( (decimal)(2), 4, 0, ".", "")));
-         GridextauthtypesContainer.AddObjectProperty("Backcolorstyle", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridextauthtypes_Backcolorstyle), 1, 0, ".", "")));
-         GridextauthtypesContainer.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridextauthtypes_Visible), 5, 0, ".", "")));
-         GridextauthtypesContainer.PageSize = subGridextauthtypes_fnc_Recordsperpage( );
-         if ( subGridextauthtypes_Islastpage != 0 )
+         E160P2 ();
+         nGXsfl_54_idx = 1;
+         sGXsfl_54_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_54_idx), 4, 0), 4, "0");
+         SubsflControlProps_542( ) ;
+         bGXsfl_54_Refreshing = true;
+         GridauthtypesContainer.AddObjectProperty("GridName", "Gridauthtypes");
+         GridauthtypesContainer.AddObjectProperty("CmpContext", "");
+         GridauthtypesContainer.AddObjectProperty("InMasterPage", "false");
+         GridauthtypesContainer.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridauthtypes_Visible), 5, 0, ".", "")));
+         GridauthtypesContainer.AddObjectProperty("Class", StringUtil.RTrim( "FreeStyleGrid"));
+         GridauthtypesContainer.AddObjectProperty("Class", "FreeStyleGrid");
+         GridauthtypesContainer.AddObjectProperty("Cellpadding", StringUtil.LTrim( StringUtil.NToC( (decimal)(1), 4, 0, ".", "")));
+         GridauthtypesContainer.AddObjectProperty("Cellspacing", StringUtil.LTrim( StringUtil.NToC( (decimal)(2), 4, 0, ".", "")));
+         GridauthtypesContainer.AddObjectProperty("Backcolorstyle", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridauthtypes_Backcolorstyle), 1, 0, ".", "")));
+         GridauthtypesContainer.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridauthtypes_Visible), 5, 0, ".", "")));
+         GridauthtypesContainer.PageSize = subGridauthtypes_fnc_Recordsperpage( );
+         if ( subGridauthtypes_Islastpage != 0 )
          {
-            GRIDEXTAUTHTYPES_nFirstRecordOnPage = (long)(subGridextauthtypes_fnc_Recordcount( )-subGridextauthtypes_fnc_Recordsperpage( ));
-            GxWebStd.gx_hidden_field( context, "GRIDEXTAUTHTYPES_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRIDEXTAUTHTYPES_nFirstRecordOnPage), 15, 0, ".", "")));
-            GridextauthtypesContainer.AddObjectProperty("GRIDEXTAUTHTYPES_nFirstRecordOnPage", GRIDEXTAUTHTYPES_nFirstRecordOnPage);
+            GRIDAUTHTYPES_nFirstRecordOnPage = (long)(subGridauthtypes_fnc_Recordcount( )-subGridauthtypes_fnc_Recordsperpage( ));
+            GxWebStd.gx_hidden_field( context, "GRIDAUTHTYPES_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRIDAUTHTYPES_nFirstRecordOnPage), 15, 0, ".", "")));
+            GridauthtypesContainer.AddObjectProperty("GRIDAUTHTYPES_nFirstRecordOnPage", GRIDAUTHTYPES_nFirstRecordOnPage);
          }
          gxdyncontrolsrefreshing = true;
          fix_multi_value_controls( ) ;
          gxdyncontrolsrefreshing = false;
          if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
          {
-            SubsflControlProps_622( ) ;
-            /* Execute user event: Gridextauthtypes.Load */
-            E180P2 ();
-            wbEnd = 62;
+            SubsflControlProps_542( ) ;
+            /* Execute user event: Gridauthtypes.Load */
+            E150P2 ();
+            wbEnd = 54;
             WB0P0( ) ;
          }
-         bGXsfl_62_Refreshing = true;
+         bGXsfl_54_Refreshing = true;
       }
 
       protected void send_integrity_lvl_hashes0P2( )
       {
+         GxWebStd.gx_hidden_field( context, "vLANGUAGE", StringUtil.RTrim( AV24Language));
+         GxWebStd.gx_hidden_field( context, "gxhash_vLANGUAGE", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV24Language, "")), context));
          GxWebStd.gx_hidden_field( context, "vAUXUSERNAME", AV8AuxUserName);
          GxWebStd.gx_hidden_field( context, "gxhash_vAUXUSERNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV8AuxUserName, "")), context));
          GxWebStd.gx_hidden_field( context, "vUSERREMEMBERME", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV33UserRememberMe), 2, 0, context.GetLanguageProperty( "decimal_point"), "")));
          GxWebStd.gx_hidden_field( context, "gxhash_vUSERREMEMBERME", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV33UserRememberMe), "Z9"), context));
-         GxWebStd.gx_hidden_field( context, "vLANGUAGE", StringUtil.RTrim( AV24Language));
-         GxWebStd.gx_hidden_field( context, "gxhash_vLANGUAGE", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV24Language, "")), context));
-         GxWebStd.gx_hidden_field( context, "gxhash_vNAMEAUTHTYPE"+"_"+sGXsfl_62_idx, GetSecureSignedToken( sGXsfl_62_idx, StringUtil.RTrim( context.localUtil.Format( AV27NameAuthType, "")), context));
       }
 
-      protected int subGridextauthtypes_fnc_Pagecount( )
+      protected int subGridauthtypes_fnc_Pagecount( )
       {
          return (int)(-1) ;
       }
 
-      protected int subGridextauthtypes_fnc_Recordcount( )
+      protected int subGridauthtypes_fnc_Recordcount( )
       {
          return (int)(-1) ;
       }
 
-      protected int subGridextauthtypes_fnc_Recordsperpage( )
+      protected int subGridauthtypes_fnc_Recordsperpage( )
       {
          return (int)(-1) ;
       }
 
-      protected int subGridextauthtypes_fnc_Currentpage( )
+      protected int subGridauthtypes_fnc_Currentpage( )
       {
          return (int)(-1) ;
       }
 
       protected void before_start_formulas( )
       {
-         edtavNameauthtype_Enabled = 0;
          fix_multi_value_controls( ) ;
       }
 
@@ -1020,16 +1101,24 @@ namespace GeneXus.Programs {
          /* Execute Start event if defined. */
          context.wbGlbDoneStart = 0;
          /* Execute user event: Start */
-         E160P2 ();
+         E140P2 ();
          context.wbGlbDoneStart = 1;
          /* After Start, stand alone formulas. */
          if ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 )
          {
             /* Read saved SDTs. */
             /* Read saved values. */
-            nRC_GXsfl_62 = (int)(Math.Round(context.localUtil.CToN( cgiGet( "nRC_GXsfl_62"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
-            subGridextauthtypes_Recordcount = (int)(Math.Round(context.localUtil.CToN( cgiGet( "subGridextauthtypes_Recordcount"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
-            divTblexternalsauth_Visible = (int)(Math.Round(context.localUtil.CToN( cgiGet( "TBLEXTERNALSAUTH_Visible"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
+            nRC_GXsfl_54 = (int)(Math.Round(context.localUtil.CToN( cgiGet( "nRC_GXsfl_54"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
+            subGridauthtypes_Recordcount = (int)(Math.Round(context.localUtil.CToN( cgiGet( "subGridauthtypes_Recordcount"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
+            Wwputilities_Enablefixobjectfitcover = StringUtil.StrToBool( cgiGet( "WWPUTILITIES_Enablefixobjectfitcover"));
+            Wwputilities_Enableconvertcombotobootstrapselect = StringUtil.StrToBool( cgiGet( "WWPUTILITIES_Enableconvertcombotobootstrapselect"));
+            Wwputilities_Allowcolumnresizing = StringUtil.StrToBool( cgiGet( "WWPUTILITIES_Allowcolumnresizing"));
+            Wwputilities_Allowcolumnreordering = StringUtil.StrToBool( cgiGet( "WWPUTILITIES_Allowcolumnreordering"));
+            Wwputilities_Allowcolumnsrestore = StringUtil.StrToBool( cgiGet( "WWPUTILITIES_Allowcolumnsrestore"));
+            Wwputilities_Comboloadtype = cgiGet( "WWPUTILITIES_Comboloadtype");
+            subGridauthtypes_Class = cgiGet( "GRIDAUTHTYPES_Class");
+            subGridauthtypes_Visible = (int)(Math.Round(context.localUtil.CToN( cgiGet( "GRIDAUTHTYPES_Visible"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
+            divTablebuttons_Visible = (int)(Math.Round(context.localUtil.CToN( cgiGet( "TABLEBUTTONS_Visible"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
             /* Read variables values. */
             cmbavLogonto.Name = cmbavLogonto_Internalname;
             cmbavLogonto.CurrentValue = cgiGet( cmbavLogonto_Internalname);
@@ -1039,10 +1128,12 @@ namespace GeneXus.Programs {
             AssignAttri("", false, "AV31UserName", AV31UserName);
             AV32UserPassword = cgiGet( edtavUserpassword_Internalname);
             AssignAttri("", false, "AV32UserPassword", AV32UserPassword);
-            AV28RememberMe = StringUtil.StrToBool( cgiGet( chkavRememberme_Internalname));
-            AssignAttri("", false, "AV28RememberMe", AV28RememberMe);
             AV23KeepMeLoggedIn = StringUtil.StrToBool( cgiGet( chkavKeepmeloggedin_Internalname));
             AssignAttri("", false, "AV23KeepMeLoggedIn", AV23KeepMeLoggedIn);
+            AV28RememberMe = StringUtil.StrToBool( cgiGet( chkavRememberme_Internalname));
+            AssignAttri("", false, "AV28RememberMe", AV28RememberMe);
+            AV30URL = cgiGet( edtavUrl_Internalname);
+            AssignAttri("", false, "AV30URL", AV30URL);
             /* Read subfile selected row values. */
             /* Read hidden variables. */
             GXKey = Crypto.GetSiteKey( );
@@ -1056,18 +1147,20 @@ namespace GeneXus.Programs {
       protected void GXStart( )
       {
          /* Execute user event: Start */
-         E160P2 ();
+         E140P2 ();
          if (returnInSub) return;
       }
 
-      protected void E160P2( )
+      protected void E140P2( )
       {
          /* Start Routine */
          returnInSub = false;
-         lblTbcurrentrepository_Visible = 0;
-         AssignProp("", false, lblTbcurrentrepository_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(lblTbcurrentrepository_Visible), 5, 0), true);
-         divTblexternalsauth_Visible = 0;
-         AssignProp("", false, divTblexternalsauth_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(divTblexternalsauth_Visible), 5, 0), true);
+         divLayoutmaintable_Class = "MainContainerNoBackground";
+         AssignProp("", false, divLayoutmaintable_Internalname, "Class", divLayoutmaintable_Class, true);
+         lblCurrentrepository_Visible = 0;
+         AssignProp("", false, lblCurrentrepository_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(lblCurrentrepository_Visible), 5, 0), true);
+         divTablebuttons_Visible = 0;
+         AssignProp("", false, divTablebuttons_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(divTablebuttons_Visible), 5, 0), true);
          AV19isConnectionOK = new GeneXus.Programs.genexussecurity.SdtGAM(context).checkconnection();
          AssignAttri("", false, "AV19isConnectionOK", AV19isConnectionOK);
          if ( new GeneXus.Programs.genexussecurity.SdtGAM(context).ismultitenant() )
@@ -1082,7 +1175,7 @@ namespace GeneXus.Programs {
             {
                if ( new GeneXus.Programs.genexussecurity.SdtGAM(context).getdefaultrepository(out  AV29RepositoryGUID) )
                {
-                  AV19isConnectionOK = new GeneXus.Programs.genexussecurity.SdtGAM(context).setconnectionbyrepositoryguid(AV29RepositoryGUID, out  AV103GAMErrorCollection);
+                  AV19isConnectionOK = new GeneXus.Programs.genexussecurity.SdtGAM(context).setconnectionbyrepositoryguid(AV29RepositoryGUID, out  AV112Errors);
                   AssignAttri("", false, "AV19isConnectionOK", AV19isConnectionOK);
                }
                else
@@ -1090,245 +1183,82 @@ namespace GeneXus.Programs {
                   AV9ConnectionInfoCollection = new GeneXus.Programs.genexussecurity.SdtGAM(context).getconnections();
                   if ( AV9ConnectionInfoCollection.Count > 0 )
                   {
-                     AV19isConnectionOK = new GeneXus.Programs.genexussecurity.SdtGAM(context).setconnection(((GeneXus.Programs.genexussecurity.SdtGAMConnectionInfo)AV9ConnectionInfoCollection.Item(1)).gxTpr_Name, out  AV103GAMErrorCollection);
+                     AV19isConnectionOK = new GeneXus.Programs.genexussecurity.SdtGAM(context).setconnection(((GeneXus.Programs.genexussecurity.SdtGAMConnectionInfo)AV9ConnectionInfoCollection.Item(1)).gxTpr_Name, out  AV112Errors);
                      AssignAttri("", false, "AV19isConnectionOK", AV19isConnectionOK);
                   }
                }
             }
-            if ( new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).isgamadministrator(out  AV103GAMErrorCollection) )
-            {
-               AV15GAMRepository = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).get();
-               lblTbcurrentrepository_Caption = context.GetMessage( "GAM_Repository", "")+AV15GAMRepository.gxTpr_Name;
-               AssignProp("", false, lblTbcurrentrepository_Internalname, "Caption", lblTbcurrentrepository_Caption, true);
-               lblTbcurrentrepository_Visible = 1;
-               AssignProp("", false, lblTbcurrentrepository_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(lblTbcurrentrepository_Visible), 5, 0), true);
-            }
          }
+         /* Execute user subroutine: 'ATTRIBUTESSECURITYCODE' */
+         S122 ();
+         if (returnInSub) return;
+         edtavUrl_Visible = 0;
+         AssignProp("", false, edtavUrl_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavUrl_Visible), 5, 0), true);
+         cmbavTypeauthtype.Visible = 0;
+         AssignProp("", false, cmbavTypeauthtype_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(cmbavTypeauthtype.Visible), 5, 0), !bGXsfl_54_Refreshing);
+         edtavNameauthtype_Visible = 0;
+         AssignProp("", false, edtavNameauthtype_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavNameauthtype_Visible), 5, 0), !bGXsfl_54_Refreshing);
       }
 
-      protected void E170P2( )
+      private void E150P2( )
       {
-         if ( gx_refresh_fired )
-         {
-            return  ;
-         }
-         gx_refresh_fired = true;
-         /* Refresh Routine */
+         /* Gridauthtypes_Load Routine */
          returnInSub = false;
-         subGridextauthtypes_Visible = 0;
-         AssignProp("", false, "GridextauthtypesContainerDiv", "Visible", StringUtil.LTrimStr( (decimal)(subGridextauthtypes_Visible), 5, 0), true);
-         AV15GAMRepository = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).get();
-         if ( StringUtil.StrCmp(AV15GAMRepository.gxTpr_Useridentification, "name") == 0 )
+         AV128GXV1 = 1;
+         while ( AV128GXV1 <= AV7AuthenticationTypes.Count )
          {
-            edtavUsername_Invitemessage = GeneXus.Programs.genexussecuritycommon.gxdomaingamrepositoryuseridentifications.getDescription(context,"name");
-            AssignProp("", false, edtavUsername_Internalname, "Invitemessage", edtavUsername_Invitemessage, true);
-         }
-         else if ( StringUtil.StrCmp(AV15GAMRepository.gxTpr_Useridentification, "email") == 0 )
-         {
-            edtavUsername_Invitemessage = GeneXus.Programs.genexussecuritycommon.gxdomaingamrepositoryuseridentifications.getDescription(context,"email");
-            AssignProp("", false, edtavUsername_Internalname, "Invitemessage", edtavUsername_Invitemessage, true);
-         }
-         else if ( StringUtil.StrCmp(AV15GAMRepository.gxTpr_Useridentification, "namema") == 0 )
-         {
-            edtavUsername_Invitemessage = GeneXus.Programs.genexussecuritycommon.gxdomaingamrepositoryuseridentifications.getDescription(context,"namema");
-            AssignProp("", false, edtavUsername_Internalname, "Invitemessage", edtavUsername_Invitemessage, true);
-         }
-         AV106hasErrors = false;
-         AV103GAMErrorCollection = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).getlasterrors();
-         if ( AV103GAMErrorCollection.Count > 0 )
-         {
-            if ( ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV103GAMErrorCollection.Item(1)).gxTpr_Code == 13 ) || ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV103GAMErrorCollection.Item(1)).gxTpr_Code == 1 ) || ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV103GAMErrorCollection.Item(1)).gxTpr_Code == 104 ) )
+            AV6AuthenticationType = ((GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSimple)AV7AuthenticationTypes.Item(AV128GXV1));
+            if ( ! AV6AuthenticationType.gxTpr_Needusername )
             {
-            }
-            else if ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV103GAMErrorCollection.Item(1)).gxTpr_Code == 161 )
-            {
-               GXKey = Crypto.GetSiteKey( );
-               GXEncryptionTmp = "gamexampleupdateregisteruser.aspx"+UrlEncode(StringUtil.RTrim(AV18IDP_State));
-               CallWebObject(formatLink("gamexampleupdateregisteruser.aspx") + "?" + UriEncrypt64( GXEncryptionTmp+Crypto.CheckSum( GXEncryptionTmp, 6), GXKey));
-               context.wjLocDisableFrm = 1;
-               AV106hasErrors = true;
-            }
-            else
-            {
-               AV106hasErrors = true;
-               AV32UserPassword = "";
-               AssignAttri("", false, "AV32UserPassword", AV32UserPassword);
-               /* Execute user subroutine: 'DISPLAYMESSAGES' */
-               S122 ();
-               if (returnInSub) return;
-            }
-         }
-         if ( ! AV106hasErrors )
-         {
-            AV107isValidSession = new GeneXus.Programs.genexussecurity.SdtGAMSession(context).isvalid(out  AV105GAMSession, out  AV104GAMErrorDelete);
-            if ( AV107isValidSession && ! AV105GAMSession.gxTpr_Isanonymous )
-            {
-               AV30URL = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).getlasterrorsurl();
-               if ( String.IsNullOrEmpty(StringUtil.RTrim( AV30URL)) )
+               if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV6AuthenticationType.gxTpr_Smallimagename)) )
                {
-                  CallWebObject(formatLink("gamhome.aspx") );
-                  context.wjLocDisableFrm = 1;
+                  AV109ImageAuthType = context.GetImagePath( AV6AuthenticationType.gxTpr_Smallimagename, "", context.GetTheme( ));
+                  AssignAttri("", false, edtavImageauthtype_Internalname, AV109ImageAuthType);
+                  AV129Imageauthtype_GXI = GXDbFile.PathToUrl( AV6AuthenticationType.gxTpr_Smallimagename, context);
                }
                else
                {
-                  CallWebObject(formatLink(AV30URL) );
-                  context.wjLocDisableFrm = 0;
+                  edtavImageauthtype_gximage = "GAM_GAMButtonGAMRemoteSmall";
+                  AV109ImageAuthType = context.GetImagePath( "6cdd3e18-cc5b-44e0-bd22-3efaf48a6c40", "", context.GetTheme( ));
+                  AssignAttri("", false, edtavImageauthtype_Internalname, AV109ImageAuthType);
+                  AV129Imageauthtype_GXI = GXDbFile.PathToUrl( context.GetImagePath( "6cdd3e18-cc5b-44e0-bd22-3efaf48a6c40", "", context.GetTheme( )), context);
                }
-            }
-            else
-            {
-               cmbavLogonto.removeAllItems();
-               AV24Language = context.GetLanguageProperty( "culture");
-               AssignAttri("", false, "AV24Language", AV24Language);
-               GxWebStd.gx_hidden_field( context, "gxhash_vLANGUAGE", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV24Language, "")), context));
-               AV7AuthenticationTypes = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).getenabledauthenticationtypes(AV24Language, out  AV103GAMErrorCollection);
-               AV108GXV1 = 1;
-               while ( AV108GXV1 <= AV7AuthenticationTypes.Count )
-               {
-                  AV6AuthenticationType = ((GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSimple)AV7AuthenticationTypes.Item(AV108GXV1));
-                  if ( AV6AuthenticationType.gxTpr_Needusername )
-                  {
-                     cmbavLogonto.addItem(AV6AuthenticationType.gxTpr_Name, AV6AuthenticationType.gxTpr_Description, 0);
-                  }
-                  else
-                  {
-                     subGridextauthtypes_Visible = 1;
-                     AssignProp("", false, "GridextauthtypesContainerDiv", "Visible", StringUtil.LTrimStr( (decimal)(subGridextauthtypes_Visible), 5, 0), true);
-                  }
-                  AV108GXV1 = (int)(AV108GXV1+1);
-               }
-               if ( cmbavLogonto.ItemCount <= 1 )
-               {
-                  cmbavLogonto.Visible = 0;
-                  AssignProp("", false, cmbavLogonto_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(cmbavLogonto.Visible), 5, 0), true);
-               }
-               else
-               {
-                  AV26LogOnTo = ((GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSimple)AV7AuthenticationTypes.Item(1)).gxTpr_Name;
-                  AssignAttri("", false, "AV26LogOnTo", AV26LogOnTo);
-               }
-               AV21isOK = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).getrememberlogin(out  AV26LogOnTo, out  AV8AuxUserName, out  AV33UserRememberMe, out  AV103GAMErrorCollection);
-               if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV8AuxUserName)) )
-               {
-                  AV31UserName = AV8AuxUserName;
-                  AssignAttri("", false, "AV31UserName", AV31UserName);
-               }
-               if ( AV33UserRememberMe == 2 )
-               {
-                  AV28RememberMe = true;
-                  AssignAttri("", false, "AV28RememberMe", AV28RememberMe);
-               }
-               if ( cmbavLogonto.ItemCount > 1 )
-               {
-                  AV26LogOnTo = AV15GAMRepository.gxTpr_Defaultauthenticationtypename;
-                  AssignAttri("", false, "AV26LogOnTo", AV26LogOnTo);
-               }
-               /* Execute user subroutine: 'DISPLAYCHECKBOX' */
-               S132 ();
-               if (returnInSub) return;
-               AV109GXV2 = 1;
-               while ( AV109GXV2 <= AV7AuthenticationTypes.Count )
-               {
-                  AV6AuthenticationType = ((GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSimple)AV7AuthenticationTypes.Item(AV109GXV2));
-                  if ( StringUtil.StrCmp(AV6AuthenticationType.gxTpr_Name, AV26LogOnTo) == 0 )
-                  {
-                     /* Execute user subroutine: 'VALIDLOGONTOOTP' */
-                     S142 ();
-                     if (returnInSub) return;
-                     if (true) break;
-                  }
-                  AV109GXV2 = (int)(AV109GXV2+1);
-               }
-            }
-         }
-         /*  Sending Event outputs  */
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV15GAMRepository", AV15GAMRepository);
-         cmbavLogonto.CurrentValue = StringUtil.RTrim( AV26LogOnTo);
-         AssignProp("", false, cmbavLogonto_Internalname, "Values", cmbavLogonto.ToJavascriptSource(), true);
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV6AuthenticationType", AV6AuthenticationType);
-      }
-
-      private void E180P2( )
-      {
-         /* Gridextauthtypes_Load Routine */
-         returnInSub = false;
-         AV110GXV3 = 1;
-         while ( AV110GXV3 <= AV7AuthenticationTypes.Count )
-         {
-            AV6AuthenticationType = ((GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSimple)AV7AuthenticationTypes.Item(AV110GXV3));
-            if ( AV6AuthenticationType.gxTpr_Redirtoauthenticate )
-            {
-               AV27NameAuthType = GXUtil.UrlEncode( StringUtil.Trim( AV6AuthenticationType.gxTpr_Name));
+               AV110TypeAuthType = AV6AuthenticationType.gxTpr_Type;
+               AssignAttri("", false, cmbavTypeauthtype_Internalname, AV110TypeAuthType);
+               AV27NameAuthType = StringUtil.Trim( AV6AuthenticationType.gxTpr_Name);
                AssignAttri("", false, edtavNameauthtype_Internalname, AV27NameAuthType);
-               GxWebStd.gx_hidden_field( context, "gxhash_vNAMEAUTHTYPE"+"_"+sGXsfl_62_idx, GetSecureSignedToken( sGXsfl_62_idx, StringUtil.RTrim( context.localUtil.Format( AV27NameAuthType, "")), context));
-               bttExternalauthentication_Caption = StringUtil.Trim( AV6AuthenticationType.gxTpr_Description);
-               AssignProp("", false, bttExternalauthentication_Internalname, "Caption", bttExternalauthentication_Caption, !bGXsfl_62_Refreshing);
-               bttExternalauthentication_Tooltiptext = StringUtil.Format( context.GetMessage( "GAM_Signinwith1", ""), StringUtil.Trim( AV6AuthenticationType.gxTpr_Description), "", "", "", "", "", "", "", "");
-               AssignProp("", false, bttExternalauthentication_Internalname, "Tooltiptext", bttExternalauthentication_Tooltiptext, !bGXsfl_62_Refreshing);
-               if ( divTblexternalsauth_Visible == 0 )
+               edtavImageauthtype_Tooltiptext = StringUtil.Format( context.GetMessage( "Sign in with %1", ""), StringUtil.Trim( AV6AuthenticationType.gxTpr_Description), "", "", "", "", "", "", "", "");
+               if ( divTablebuttons_Visible == 0 )
                {
-                  divTblexternalsauth_Visible = 1;
-                  AssignProp("", false, divTblexternalsauth_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(divTblexternalsauth_Visible), 5, 0), true);
+                  divTablebuttons_Visible = 1;
+                  AssignProp("", false, divTablebuttons_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(divTablebuttons_Visible), 5, 0), true);
                }
                /* Load Method */
                if ( wbStart != -1 )
                {
-                  wbStart = 62;
+                  wbStart = 54;
                }
-               sendrow_622( ) ;
-               if ( isFullAjaxMode( ) && ! bGXsfl_62_Refreshing )
+               sendrow_542( ) ;
+               if ( isFullAjaxMode( ) && ! bGXsfl_54_Refreshing )
                {
-                  DoAjaxLoad(62, GridextauthtypesRow);
+                  DoAjaxLoad(54, GridauthtypesRow);
                }
             }
-            AV110GXV3 = (int)(AV110GXV3+1);
+            AV128GXV1 = (int)(AV128GXV1+1);
          }
          /*  Sending Event outputs  */
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV6AuthenticationType", AV6AuthenticationType);
-      }
-
-      protected void E110P2( )
-      {
-         /* Logonto_Click Routine */
-         returnInSub = false;
-         AV7AuthenticationTypes = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).getenabledauthenticationtypes(AV24Language, out  AV103GAMErrorCollection);
-         AV20isModeOTP = false;
-         AV111GXV4 = 1;
-         while ( AV111GXV4 <= AV7AuthenticationTypes.Count )
-         {
-            AV6AuthenticationType = ((GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSimple)AV7AuthenticationTypes.Item(AV111GXV4));
-            if ( StringUtil.StrCmp(AV6AuthenticationType.gxTpr_Name, AV26LogOnTo) == 0 )
-            {
-               /* Execute user subroutine: 'VALIDLOGONTOOTP' */
-               S142 ();
-               if (returnInSub) return;
-               if (true) break;
-            }
-            AV111GXV4 = (int)(AV111GXV4+1);
-         }
-         if ( ! AV20isModeOTP )
-         {
-            edtavUserpassword_Visible = 1;
-            AssignProp("", false, edtavUserpassword_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavUserpassword_Visible), 5, 0), true);
-            edtavUserpassword_Invitemessage = context.GetMessage( "GAM_Password", "");
-            AssignProp("", false, edtavUserpassword_Internalname, "Invitemessage", edtavUserpassword_Invitemessage, true);
-            bttLogin_Caption = context.GetMessage( "GAM_SIGNIN", "");
-            AssignProp("", false, bttLogin_Internalname, "Caption", bttLogin_Caption, true);
-            lblTbforgotpwd_Visible = 1;
-            AssignProp("", false, lblTbforgotpwd_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(lblTbforgotpwd_Visible), 5, 0), true);
-         }
-         /*  Sending Event outputs  */
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV6AuthenticationType", AV6AuthenticationType);
+         cmbavTypeauthtype.CurrentValue = StringUtil.RTrim( AV110TypeAuthType);
       }
 
       public void GXEnter( )
       {
          /* Execute user event: Enter */
-         E120P2 ();
+         E110P2 ();
          if (returnInSub) return;
       }
 
-      protected void E120P2( )
+      protected void E110P2( )
       {
          /* Enter Routine */
          returnInSub = false;
@@ -1346,42 +1276,58 @@ namespace GeneXus.Programs {
          }
          AV5AdditionalParameter.gxTpr_Authenticationtypename = AV26LogOnTo;
          AV5AdditionalParameter.gxTpr_Otpstep = 1;
-         AV25LoginOK = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).login(AV31UserName, AV32UserPassword, AV5AdditionalParameter, out  AV103GAMErrorCollection);
+         AV25LoginOK = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).login(AV31UserName, AV32UserPassword, AV5AdditionalParameter, out  AV112Errors);
          if ( AV25LoginOK )
          {
-            AV30URL = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).getlasterrorsurl();
-            if ( String.IsNullOrEmpty(StringUtil.RTrim( AV30URL)) )
+            AV127LoggedInUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context).get();
+            if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV127LoggedInUser.gxTpr_Language)) )
             {
-               CallWebObject(formatLink("gamhome.aspx") );
+               AV126NumericValue = (short)(context.SetLanguage( AV127LoggedInUser.gxTpr_Language));
+            }
+            else
+            {
+               AV126NumericValue = (short)(context.SetLanguage( "English"));
+            }
+            new prc_loadwwpcontext(context ).execute( ref  AV123WWPContext) ;
+            if ( AV124GAMUser.checkrole("Comforta Admin") || AV124GAMUser.checkrole("Root Admin") )
+            {
+               CallWebObject(formatLink("trn_organisationww.aspx") );
                context.wjLocDisableFrm = 1;
             }
             else
             {
-               CallWebObject(formatLink(AV30URL) );
-               context.wjLocDisableFrm = 0;
+               if ( AV124GAMUser.checkrole("Receptionist") )
+               {
+                  CallWebObject(formatLink("wp_notificationdashboard.aspx") );
+                  context.wjLocDisableFrm = 1;
+               }
+               else
+               {
+                  CallWebObject(formatLink("home.aspx") );
+                  context.wjLocDisableFrm = 1;
+               }
             }
          }
          else
          {
-            if ( AV103GAMErrorCollection.Count > 0 )
+            if ( AV112Errors.Count > 0 )
             {
-               if ( ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV103GAMErrorCollection.Item(1)).gxTpr_Code == 24 ) || ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV103GAMErrorCollection.Item(1)).gxTpr_Code == 23 ) )
+               if ( ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV112Errors.Item(1)).gxTpr_Code == 24 ) || ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV112Errors.Item(1)).gxTpr_Code == 23 ) )
                {
                   GXKey = Crypto.GetSiteKey( );
                   GXEncryptionTmp = "gamexamplechangepassword.aspx"+UrlEncode(StringUtil.RTrim(AV18IDP_State));
                   CallWebObject(formatLink("gamexamplechangepassword.aspx") + "?" + UriEncrypt64( GXEncryptionTmp+Crypto.CheckSum( GXEncryptionTmp, 6), GXKey));
                   context.wjLocDisableFrm = 1;
                }
-               else if ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV103GAMErrorCollection.Item(1)).gxTpr_Code == 161 )
+               else if ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV112Errors.Item(1)).gxTpr_Code == 161 )
                {
                   GXKey = Crypto.GetSiteKey( );
                   GXEncryptionTmp = "gamexampleupdateregisteruser.aspx"+UrlEncode(StringUtil.RTrim(AV18IDP_State));
                   CallWebObject(formatLink("gamexampleupdateregisteruser.aspx") + "?" + UriEncrypt64( GXEncryptionTmp+Crypto.CheckSum( GXEncryptionTmp, 6), GXKey));
                   context.wjLocDisableFrm = 1;
                }
-               else if ( ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV103GAMErrorCollection.Item(1)).gxTpr_Code == 400 ) || ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV103GAMErrorCollection.Item(1)).gxTpr_Code == 410 ) )
+               else if ( ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV112Errors.Item(1)).gxTpr_Code == 400 ) || ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV112Errors.Item(1)).gxTpr_Code == 410 ) )
                {
-                  AV104GAMErrorDelete = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).getlasterrors();
                   GXKey = Crypto.GetSiteKey( );
                   GXEncryptionTmp = "gamexampleotpauthentication.aspx"+UrlEncode(StringUtil.RTrim(AV18IDP_State));
                   CallWebObject(formatLink("gamexampleotpauthentication.aspx") + "?" + UriEncrypt64( GXEncryptionTmp+Crypto.CheckSum( GXEncryptionTmp, 6), GXKey));
@@ -1392,18 +1338,212 @@ namespace GeneXus.Programs {
                   AV32UserPassword = "";
                   AssignAttri("", false, "AV32UserPassword", AV32UserPassword);
                   /* Execute user subroutine: 'DISPLAYMESSAGES' */
-                  S122 ();
+                  S132 ();
                   if (returnInSub) return;
                }
             }
          }
          /*  Sending Event outputs  */
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV5AdditionalParameter", AV5AdditionalParameter);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV123WWPContext", AV123WWPContext);
+      }
+
+      protected void S122( )
+      {
+         /* 'ATTRIBUTESSECURITYCODE' Routine */
+         returnInSub = false;
+         if ( ! ( ( 1 == 1 ) ) )
+         {
+            chkavKeepmeloggedin.Visible = 0;
+            AssignProp("", false, chkavKeepmeloggedin_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(chkavKeepmeloggedin.Visible), 5, 0), true);
+            divKeepmeloggedin_cell_Class = "Invisible";
+            AssignProp("", false, divKeepmeloggedin_cell_Internalname, "Class", divKeepmeloggedin_cell_Class, true);
+         }
+         else
+         {
+            chkavKeepmeloggedin.Visible = 1;
+            AssignProp("", false, chkavKeepmeloggedin_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(chkavKeepmeloggedin.Visible), 5, 0), true);
+            divKeepmeloggedin_cell_Class = "col-xs-12 DataContentCellLogin";
+            AssignProp("", false, divKeepmeloggedin_cell_Internalname, "Class", divKeepmeloggedin_cell_Class, true);
+         }
+         if ( ! ( ( 1 == 1 ) ) )
+         {
+            chkavRememberme.Visible = 0;
+            AssignProp("", false, chkavRememberme_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(chkavRememberme.Visible), 5, 0), true);
+            divRememberme_cell_Class = "Invisible";
+            AssignProp("", false, divRememberme_cell_Internalname, "Class", divRememberme_cell_Class, true);
+         }
+         else
+         {
+            chkavRememberme.Visible = 1;
+            AssignProp("", false, chkavRememberme_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(chkavRememberme.Visible), 5, 0), true);
+            divRememberme_cell_Class = "col-xs-12 DataContentCellLogin";
+            AssignProp("", false, divRememberme_cell_Internalname, "Class", divRememberme_cell_Class, true);
+         }
+         divTablebuttons_Visible = ((new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).canauthenticatewith("Facebook")||new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).canauthenticatewith("Twitter")||new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).canauthenticatewith("Google")||new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).canauthenticatewith("GAMRemote")) ? 1 : 0);
+         AssignProp("", false, divTablebuttons_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(divTablebuttons_Visible), 5, 0), true);
+      }
+
+      protected void E160P2( )
+      {
+         if ( gx_refresh_fired )
+         {
+            return  ;
+         }
+         gx_refresh_fired = true;
+         /* Refresh Routine */
+         returnInSub = false;
+         AV114isRedirect = false;
+         AV113ErrorsLogin = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).getlasterrors();
+         if ( AV113ErrorsLogin.Count > 0 )
+         {
+            if ( ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV113ErrorsLogin.Item(1)).gxTpr_Code == 1 ) || ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV113ErrorsLogin.Item(1)).gxTpr_Code == 104 ) )
+            {
+            }
+            else
+            {
+               AV32UserPassword = "";
+               AssignAttri("", false, "AV32UserPassword", AV32UserPassword);
+               AV112Errors = AV113ErrorsLogin;
+               /* Execute user subroutine: 'DISPLAYMESSAGES' */
+               S132 ();
+               if (returnInSub) return;
+            }
+         }
+         if ( ! AV114isRedirect )
+         {
+            AV118SessionValid = new GeneXus.Programs.genexussecurity.SdtGAMSession(context).isvalid(out  AV117Session, out  AV112Errors);
+            if ( AV118SessionValid && ! AV117Session.gxTpr_Isanonymous )
+            {
+               CallWebObject(formatLink("home.aspx") );
+               context.wjLocDisableFrm = 1;
+            }
+            else
+            {
+               cmbavLogonto.removeAllItems();
+               AV7AuthenticationTypes = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).getenabledauthenticationtypes(AV24Language, out  AV112Errors);
+               AV130GXV2 = 1;
+               while ( AV130GXV2 <= AV7AuthenticationTypes.Count )
+               {
+                  AV6AuthenticationType = ((GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSimple)AV7AuthenticationTypes.Item(AV130GXV2));
+                  if ( AV6AuthenticationType.gxTpr_Needusername )
+                  {
+                     if ( StringUtil.StrCmp(AV6AuthenticationType.gxTpr_Name, context.GetMessage( "local", "")) == 0 )
+                     {
+                        cmbavLogonto.addItem(AV6AuthenticationType.gxTpr_Name, AV6AuthenticationType.gxTpr_Description, 0);
+                     }
+                  }
+                  else
+                  {
+                     subGridauthtypes_Visible = 1;
+                     AssignProp("", false, "GridauthtypesContainerDiv", "Visible", StringUtil.LTrimStr( (decimal)(subGridauthtypes_Visible), 5, 0), true);
+                  }
+                  AV130GXV2 = (int)(AV130GXV2+1);
+               }
+               if ( cmbavLogonto.ItemCount <= 1 )
+               {
+                  cmbavLogonto.Visible = 0;
+                  AssignProp("", false, cmbavLogonto_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(cmbavLogonto.Visible), 5, 0), true);
+               }
+               else
+               {
+                  AV26LogOnTo = ((GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSimple)AV7AuthenticationTypes.Item(1)).gxTpr_Name;
+                  AssignAttri("", false, "AV26LogOnTo", AV26LogOnTo);
+               }
+               AV21isOK = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).getrememberlogin(out  AV26LogOnTo, out  AV8AuxUserName, out  AV33UserRememberMe, out  AV112Errors);
+               if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV8AuxUserName)) )
+               {
+                  AV31UserName = AV8AuxUserName;
+                  AssignAttri("", false, "AV31UserName", AV31UserName);
+               }
+               if ( AV33UserRememberMe == 2 )
+               {
+                  AV28RememberMe = true;
+                  AssignAttri("", false, "AV28RememberMe", AV28RememberMe);
+               }
+               AV116Repository = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).get();
+               if ( cmbavLogonto.ItemCount > 1 )
+               {
+                  AV26LogOnTo = AV116Repository.gxTpr_Defaultauthenticationtypename;
+                  AssignAttri("", false, "AV26LogOnTo", AV26LogOnTo);
+               }
+               /* Execute user subroutine: 'DISPLAYCHECKBOX' */
+               S142 ();
+               if (returnInSub) return;
+               AV131GXV3 = 1;
+               while ( AV131GXV3 <= AV7AuthenticationTypes.Count )
+               {
+                  AV6AuthenticationType = ((GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSimple)AV7AuthenticationTypes.Item(AV131GXV3));
+                  if ( StringUtil.StrCmp(AV6AuthenticationType.gxTpr_Name, AV26LogOnTo) == 0 )
+                  {
+                     /* Execute user subroutine: 'VALIDLOGONTOOTP' */
+                     S152 ();
+                     if (returnInSub) return;
+                     if (true) break;
+                  }
+                  AV131GXV3 = (int)(AV131GXV3+1);
+               }
+            }
+         }
+         /*  Sending Event outputs  */
+         cmbavLogonto.CurrentValue = StringUtil.RTrim( AV26LogOnTo);
+         AssignProp("", false, cmbavLogonto_Internalname, "Values", cmbavLogonto.ToJavascriptSource(), true);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV6AuthenticationType", AV6AuthenticationType);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV116Repository", AV116Repository);
+      }
+
+      protected void E170P2( )
+      {
+         /* Imageauthtype_Click Routine */
+         returnInSub = false;
+         AV5AdditionalParameter.gxTpr_Authenticationtypename = AV27NameAuthType;
+         AV25LoginOK = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).login(AV31UserName, AV32UserPassword, AV5AdditionalParameter, out  AV112Errors);
+         /*  Sending Event outputs  */
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV5AdditionalParameter", AV5AdditionalParameter);
+      }
+
+      protected void E120P2( )
+      {
+         /* Logonto_Click Routine */
+         returnInSub = false;
+         AV7AuthenticationTypes = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).getenabledauthenticationtypes(AV24Language, out  AV112Errors);
+         AV20isModeOTP = false;
+         AV132GXV4 = 1;
+         while ( AV132GXV4 <= AV7AuthenticationTypes.Count )
+         {
+            AV6AuthenticationType = ((GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSimple)AV7AuthenticationTypes.Item(AV132GXV4));
+            if ( StringUtil.StrCmp(AV6AuthenticationType.gxTpr_Name, AV26LogOnTo) == 0 )
+            {
+               /* Execute user subroutine: 'VALIDLOGONTOOTP' */
+               S152 ();
+               if (returnInSub) return;
+               if (true) break;
+            }
+            AV132GXV4 = (int)(AV132GXV4+1);
+         }
+         if ( ! AV20isModeOTP )
+         {
+            edtavUserpassword_Visible = 1;
+            AssignProp("", false, edtavUserpassword_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavUserpassword_Visible), 5, 0), true);
+            edtavUserpassword_Invitemessage = context.GetMessage( "WWP_GAM_Password", "");
+            AssignProp("", false, edtavUserpassword_Internalname, "Invitemessage", edtavUserpassword_Invitemessage, true);
+            bttBtnenter_Caption = context.GetMessage( "WWP_GAM_SignIn", "");
+            AssignProp("", false, bttBtnenter_Internalname, "Caption", bttBtnenter_Caption, true);
+            lblForgotpassword_Visible = 1;
+            AssignProp("", false, lblForgotpassword_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(lblForgotpassword_Visible), 5, 0), true);
+            AV116Repository = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).get();
+            /* Execute user subroutine: 'DISPLAYCHECKBOX' */
+            S142 ();
+            if (returnInSub) return;
+         }
+         /*  Sending Event outputs  */
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV6AuthenticationType", AV6AuthenticationType);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV116Repository", AV116Repository);
       }
 
       protected void E130P2( )
       {
-         /* 'ForgotPassword' Routine */
+         /* Forgotpassword_Click Routine */
          returnInSub = false;
          GXKey = Crypto.GetSiteKey( );
          GXEncryptionTmp = "gamexamplerecoverpasswordstep1.aspx"+UrlEncode(StringUtil.RTrim(AV18IDP_State));
@@ -1412,32 +1552,12 @@ namespace GeneXus.Programs {
          /*  Sending Event outputs  */
       }
 
-      protected void E140P2( )
-      {
-         /* 'Register' Routine */
-         returnInSub = false;
-         CallWebObject(formatLink("gamexampleregisteruser.aspx") );
-         context.wjLocDisableFrm = 1;
-      }
-
-      protected void E150P2( )
+      protected void E180P2( )
       {
          /* 'SelectAuthenticationType' Routine */
          returnInSub = false;
-         if ( AV23KeepMeLoggedIn )
-         {
-            AV5AdditionalParameter.gxTpr_Rememberusertype = 3;
-         }
-         else if ( AV28RememberMe )
-         {
-            AV5AdditionalParameter.gxTpr_Rememberusertype = 2;
-         }
-         else
-         {
-            AV5AdditionalParameter.gxTpr_Rememberusertype = 1;
-         }
          AV5AdditionalParameter.gxTpr_Authenticationtypename = AV27NameAuthType;
-         AV25LoginOK = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).login(AV31UserName, AV32UserPassword, AV5AdditionalParameter, out  AV103GAMErrorCollection);
+         AV25LoginOK = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).login(AV31UserName, AV32UserPassword, AV5AdditionalParameter, out  AV112Errors);
          /*  Sending Event outputs  */
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV5AdditionalParameter", AV5AdditionalParameter);
       }
@@ -1449,14 +1569,14 @@ namespace GeneXus.Programs {
          AV15GAMRepository = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).get();
          if ( ! (0==AV15GAMRepository.gxTpr_Authenticationmasterrepositoryid) )
          {
-            AV19isConnectionOK = new GeneXus.Programs.genexussecurity.SdtGAM(context).setconnectionbyrepositoryid(AV15GAMRepository.gxTpr_Authenticationmasterrepositoryid, out  AV103GAMErrorCollection);
+            AV19isConnectionOK = new GeneXus.Programs.genexussecurity.SdtGAM(context).setconnectionbyrepositoryid(AV15GAMRepository.gxTpr_Authenticationmasterrepositoryid, out  AV112Errors);
             AssignAttri("", false, "AV19isConnectionOK", AV19isConnectionOK);
          }
          if ( ! AV19isConnectionOK )
          {
             if ( new GeneXus.Programs.genexussecurity.SdtGAM(context).getdefaultrepository(out  AV29RepositoryGUID) )
             {
-               AV19isConnectionOK = new GeneXus.Programs.genexussecurity.SdtGAM(context).setconnectionbyrepositoryguid(AV29RepositoryGUID, out  AV103GAMErrorCollection);
+               AV19isConnectionOK = new GeneXus.Programs.genexussecurity.SdtGAM(context).setconnectionbyrepositoryguid(AV29RepositoryGUID, out  AV112Errors);
                AssignAttri("", false, "AV19isConnectionOK", AV19isConnectionOK);
             }
             else
@@ -1464,7 +1584,7 @@ namespace GeneXus.Programs {
                AV9ConnectionInfoCollection = new GeneXus.Programs.genexussecurity.SdtGAM(context).getconnections();
                if ( AV9ConnectionInfoCollection.Count > 0 )
                {
-                  AV19isConnectionOK = new GeneXus.Programs.genexussecurity.SdtGAM(context).setconnection(((GeneXus.Programs.genexussecurity.SdtGAMConnectionInfo)AV9ConnectionInfoCollection.Item(1)).gxTpr_Name, out  AV103GAMErrorCollection);
+                  AV19isConnectionOK = new GeneXus.Programs.genexussecurity.SdtGAM(context).setconnection(((GeneXus.Programs.genexussecurity.SdtGAMConnectionInfo)AV9ConnectionInfoCollection.Item(1)).gxTpr_Name, out  AV112Errors);
                   AssignAttri("", false, "AV19isConnectionOK", AV19isConnectionOK);
                }
             }
@@ -1474,36 +1594,36 @@ namespace GeneXus.Programs {
             AV15GAMRepository = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).get();
             if ( ! (0==AV15GAMRepository.gxTpr_Authenticationmasterrepositoryid) )
             {
-               AV19isConnectionOK = new GeneXus.Programs.genexussecurity.SdtGAM(context).setconnectionbyrepositoryid(AV15GAMRepository.gxTpr_Authenticationmasterrepositoryid, out  AV103GAMErrorCollection);
+               AV19isConnectionOK = new GeneXus.Programs.genexussecurity.SdtGAM(context).setconnectionbyrepositoryid(AV15GAMRepository.gxTpr_Authenticationmasterrepositoryid, out  AV112Errors);
                AssignAttri("", false, "AV19isConnectionOK", AV19isConnectionOK);
                AV15GAMRepository = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).get();
             }
-            lblTbcurrentrepository_Caption = context.GetMessage( "GAM_Repository", "")+AV15GAMRepository.gxTpr_Name;
-            AssignProp("", false, lblTbcurrentrepository_Internalname, "Caption", lblTbcurrentrepository_Caption, true);
-            lblTbcurrentrepository_Visible = 1;
-            AssignProp("", false, lblTbcurrentrepository_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(lblTbcurrentrepository_Visible), 5, 0), true);
+            lblCurrentrepository_Caption = context.GetMessage( "Repository: ", "")+AV15GAMRepository.gxTpr_Name;
+            AssignProp("", false, lblCurrentrepository_Internalname, "Caption", lblCurrentrepository_Caption, true);
+            lblCurrentrepository_Visible = 1;
+            AssignProp("", false, lblCurrentrepository_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(lblCurrentrepository_Visible), 5, 0), true);
          }
       }
 
-      protected void S132( )
+      protected void S142( )
       {
          /* 'DISPLAYCHECKBOX' Routine */
          returnInSub = false;
-         if ( StringUtil.StrCmp(AV15GAMRepository.gxTpr_Userremembermetype, "Login") == 0 )
+         if ( StringUtil.StrCmp(AV116Repository.gxTpr_Userremembermetype, "Login") == 0 )
          {
             chkavKeepmeloggedin.Visible = 0;
             AssignProp("", false, chkavKeepmeloggedin_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(chkavKeepmeloggedin.Visible), 5, 0), true);
             chkavRememberme.Visible = 1;
             AssignProp("", false, chkavRememberme_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(chkavRememberme.Visible), 5, 0), true);
          }
-         else if ( StringUtil.StrCmp(AV15GAMRepository.gxTpr_Userremembermetype, "Auth") == 0 )
+         else if ( StringUtil.StrCmp(AV116Repository.gxTpr_Userremembermetype, "Auth") == 0 )
          {
             chkavKeepmeloggedin.Visible = 1;
             AssignProp("", false, chkavKeepmeloggedin_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(chkavKeepmeloggedin.Visible), 5, 0), true);
             chkavRememberme.Visible = 0;
             AssignProp("", false, chkavRememberme_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(chkavRememberme.Visible), 5, 0), true);
          }
-         else if ( StringUtil.StrCmp(AV15GAMRepository.gxTpr_Userremembermetype, "Both") == 0 )
+         else if ( StringUtil.StrCmp(AV116Repository.gxTpr_Userremembermetype, "Both") == 0 )
          {
             chkavKeepmeloggedin.Visible = 1;
             AssignProp("", false, chkavKeepmeloggedin_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(chkavKeepmeloggedin.Visible), 5, 0), true);
@@ -1519,42 +1639,54 @@ namespace GeneXus.Programs {
          }
       }
 
-      protected void S142( )
+      protected void S152( )
       {
          /* 'VALIDLOGONTOOTP' Routine */
          returnInSub = false;
-         if ( AV6AuthenticationType.gxTpr_Needusername && ! AV6AuthenticationType.gxTpr_Needuserpassword )
+         if ( ! AV6AuthenticationType.gxTpr_Needuserpassword )
          {
             AV20isModeOTP = true;
             edtavUserpassword_Visible = 0;
             AssignProp("", false, edtavUserpassword_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavUserpassword_Visible), 5, 0), true);
-            if ( AV6AuthenticationType.gxTpr_Istotp )
-            {
-               bttLogin_Caption = context.GetMessage( "GAM_NEXT", "");
-               AssignProp("", false, bttLogin_Internalname, "Caption", bttLogin_Caption, true);
-            }
-            else
-            {
-               bttLogin_Caption = context.GetMessage( "GAM_SENDMEACODE", "");
-               AssignProp("", false, bttLogin_Internalname, "Caption", bttLogin_Caption, true);
-            }
-            lblTbforgotpwd_Visible = 0;
-            AssignProp("", false, lblTbforgotpwd_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(lblTbforgotpwd_Visible), 5, 0), true);
-            divTablecreateaccount_Visible = 0;
-            AssignProp("", false, divTablecreateaccount_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(divTablecreateaccount_Visible), 5, 0), true);
+            bttBtnenter_Caption = context.GetMessage( "WWP_GAM_SendMeCode", "");
+            AssignProp("", false, bttBtnenter_Internalname, "Caption", bttBtnenter_Caption, true);
+            chkavRememberme.Visible = 0;
+            AssignProp("", false, chkavRememberme_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(chkavRememberme.Visible), 5, 0), true);
+            chkavKeepmeloggedin.Visible = 0;
+            AssignProp("", false, chkavKeepmeloggedin_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(chkavKeepmeloggedin.Visible), 5, 0), true);
+            lblForgotpassword_Visible = 0;
+            AssignProp("", false, lblForgotpassword_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(lblForgotpassword_Visible), 5, 0), true);
          }
       }
 
-      protected void S122( )
+      protected void S132( )
       {
          /* 'DISPLAYMESSAGES' Routine */
          returnInSub = false;
-         AV112GXV5 = 1;
-         while ( AV112GXV5 <= AV103GAMErrorCollection.Count )
+         AV133GXV5 = 1;
+         while ( AV133GXV5 <= AV112Errors.Count )
          {
-            AV102GAMError = ((GeneXus.Programs.genexussecurity.SdtGAMError)AV103GAMErrorCollection.Item(AV112GXV5));
-            GX_msglist.addItem(AV102GAMError.gxTpr_Message);
-            AV112GXV5 = (int)(AV112GXV5+1);
+            AV111Error = ((GeneXus.Programs.genexussecurity.SdtGAMError)AV112Errors.Item(AV133GXV5));
+            if ( AV111Error.gxTpr_Code != 13 )
+            {
+               if ( AV111Error.gxTpr_Code == 11 )
+               {
+                  GX_msglist.addItem(new WorkWithPlus.workwithplus_web.dvmessagegetbasicnotificationmsg(context).executeUdp(  "Error!",  AV111Error.gxTpr_Message,  "error",  "#"+edtavUserpassword_Internalname,  "true",  ""));
+               }
+               else if ( AV111Error.gxTpr_Code == 79 )
+               {
+                  GX_msglist.addItem(new WorkWithPlus.workwithplus_web.dvmessagegetbasicnotificationmsg(context).executeUdp(  "Error!",  AV111Error.gxTpr_Message,  "error",  "#"+edtavUsername_Internalname,  "true",  ""));
+               }
+               else if ( AV111Error.gxTpr_Code == 18 )
+               {
+                  GX_msglist.addItem(new WorkWithPlus.workwithplus_web.dvmessagegetbasicnotificationmsg(context).executeUdp(  "Error!",  AV111Error.gxTpr_Message,  "error",  "#"+edtavUsername_Internalname,  "true",  ""));
+               }
+               else
+               {
+                  GX_msglist.addItem(StringUtil.Format( "%1 (GAM%2)", AV111Error.gxTpr_Message, StringUtil.LTrimStr( (decimal)(AV111Error.gxTpr_Code), 12, 0), "", "", "", "", "", "", ""));
+               }
+            }
+            AV133GXV5 = (int)(AV133GXV5+1);
          }
       }
 
@@ -1588,6 +1720,8 @@ namespace GeneXus.Programs {
 
       protected void define_styles( )
       {
+         AddStyleSheetFile("DVelop/Bootstrap/Shared/fontawesome_vlatest/css/all.min.css", "");
+         AddStyleSheetFile("DVelop/Bootstrap/Shared/DVelopBootstrap.css", "");
          AddThemeStyleSheetFile("", context.GetTheme( )+".css", "?"+GetCacheInvalidationToken( ));
          bool outputEnabled = isOutputEnabled( );
          if ( context.isSpaRequest( ) )
@@ -1597,7 +1731,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201771693", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256258435688", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1613,113 +1747,228 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamexamplelogin.js", "?20256201771697", false, true);
+         context.AddJavascriptSource("gamexamplelogin.js", "?20256258435691", false, true);
+         context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Mask/jquery.mask.js", "", false, true);
+         context.AddJavascriptSource("DVelop/WorkWithPlusUtilities/BootstrapSelect.js", "", false, true);
+         context.AddJavascriptSource("DVelop/WorkWithPlusUtilities/WorkWithPlusUtilitiesRender.js", "", false, true);
          /* End function include_jscripts */
       }
 
-      protected void SubsflControlProps_622( )
+      protected void SubsflControlProps_542( )
       {
-         edtavNameauthtype_Internalname = "vNAMEAUTHTYPE_"+sGXsfl_62_idx;
+         edtavImageauthtype_Internalname = "vIMAGEAUTHTYPE_"+sGXsfl_54_idx;
+         cmbavTypeauthtype_Internalname = "vTYPEAUTHTYPE_"+sGXsfl_54_idx;
+         edtavNameauthtype_Internalname = "vNAMEAUTHTYPE_"+sGXsfl_54_idx;
       }
 
-      protected void SubsflControlProps_fel_622( )
+      protected void SubsflControlProps_fel_542( )
       {
-         edtavNameauthtype_Internalname = "vNAMEAUTHTYPE_"+sGXsfl_62_fel_idx;
+         edtavImageauthtype_Internalname = "vIMAGEAUTHTYPE_"+sGXsfl_54_fel_idx;
+         cmbavTypeauthtype_Internalname = "vTYPEAUTHTYPE_"+sGXsfl_54_fel_idx;
+         edtavNameauthtype_Internalname = "vNAMEAUTHTYPE_"+sGXsfl_54_fel_idx;
       }
 
-      protected void sendrow_622( )
+      protected void sendrow_542( )
       {
-         sGXsfl_62_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_62_idx), 4, 0), 4, "0");
-         SubsflControlProps_622( ) ;
+         sGXsfl_54_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_54_idx), 4, 0), 4, "0");
+         SubsflControlProps_542( ) ;
          WB0P0( ) ;
-         GridextauthtypesRow = GXWebRow.GetNew(context,GridextauthtypesContainer);
-         if ( subGridextauthtypes_Backcolorstyle == 0 )
+         GridauthtypesRow = GXWebRow.GetNew(context,GridauthtypesContainer);
+         if ( subGridauthtypes_Backcolorstyle == 0 )
          {
             /* None style subfile background logic. */
-            subGridextauthtypes_Backstyle = 0;
-            if ( StringUtil.StrCmp(subGridextauthtypes_Class, "") != 0 )
+            subGridauthtypes_Backstyle = 0;
+            if ( StringUtil.StrCmp(subGridauthtypes_Class, "") != 0 )
             {
-               subGridextauthtypes_Linesclass = subGridextauthtypes_Class+"Odd";
+               subGridauthtypes_Linesclass = subGridauthtypes_Class+"Odd";
             }
          }
-         else if ( subGridextauthtypes_Backcolorstyle == 1 )
+         else if ( subGridauthtypes_Backcolorstyle == 1 )
          {
             /* Uniform style subfile background logic. */
-            subGridextauthtypes_Backstyle = 0;
-            subGridextauthtypes_Backcolor = subGridextauthtypes_Allbackcolor;
-            if ( StringUtil.StrCmp(subGridextauthtypes_Class, "") != 0 )
+            subGridauthtypes_Backstyle = 0;
+            subGridauthtypes_Backcolor = subGridauthtypes_Allbackcolor;
+            if ( StringUtil.StrCmp(subGridauthtypes_Class, "") != 0 )
             {
-               subGridextauthtypes_Linesclass = subGridextauthtypes_Class+"Uniform";
+               subGridauthtypes_Linesclass = subGridauthtypes_Class+"Uniform";
             }
          }
-         else if ( subGridextauthtypes_Backcolorstyle == 2 )
+         else if ( subGridauthtypes_Backcolorstyle == 2 )
          {
             /* Header style subfile background logic. */
-            subGridextauthtypes_Backstyle = 1;
-            if ( StringUtil.StrCmp(subGridextauthtypes_Class, "") != 0 )
+            subGridauthtypes_Backstyle = 1;
+            if ( StringUtil.StrCmp(subGridauthtypes_Class, "") != 0 )
             {
-               subGridextauthtypes_Linesclass = subGridextauthtypes_Class+"Odd";
+               subGridauthtypes_Linesclass = subGridauthtypes_Class+"Odd";
             }
-            subGridextauthtypes_Backcolor = (int)(0xFFFFFF);
+            subGridauthtypes_Backcolor = (int)(0xFFFFFF);
          }
-         else if ( subGridextauthtypes_Backcolorstyle == 3 )
+         else if ( subGridauthtypes_Backcolorstyle == 3 )
          {
             /* Report style subfile background logic. */
-            subGridextauthtypes_Backstyle = 1;
-            if ( ((int)((nGXsfl_62_idx) % (2))) == 0 )
+            subGridauthtypes_Backstyle = 1;
+            subGridauthtypes_Backcolor = (int)(0xFFFFFF);
+            if ( StringUtil.StrCmp(subGridauthtypes_Class, "") != 0 )
             {
-               subGridextauthtypes_Backcolor = (int)(0x0);
-               if ( StringUtil.StrCmp(subGridextauthtypes_Class, "") != 0 )
-               {
-                  subGridextauthtypes_Linesclass = subGridextauthtypes_Class+"Even";
-               }
-            }
-            else
-            {
-               subGridextauthtypes_Backcolor = (int)(0xFFFFFF);
-               if ( StringUtil.StrCmp(subGridextauthtypes_Class, "") != 0 )
-               {
-                  subGridextauthtypes_Linesclass = subGridextauthtypes_Class+"Odd";
-               }
+               subGridauthtypes_Linesclass = subGridauthtypes_Class+"Odd";
             }
          }
          /* Start of Columns property logic. */
-         if ( GridextauthtypesContainer.GetWrapped() == 1 )
-         {
-            context.WriteHtmlText( "<tr"+" class=\""+subGridextauthtypes_Linesclass+"\" style=\""+""+"\""+" data-gxrow=\""+sGXsfl_62_idx+"\">") ;
-         }
+         /* Table start */
+         GridauthtypesRow.AddColumnProperties("table", -1, isAjaxCallMode( ), new Object[] {(string)tblUnnamedtablefsgridauthtypes_Internalname+"_"+sGXsfl_54_idx,(short)1,(string)"Table",(string)"",(string)"",(string)"",(string)"",(string)"",(string)"",(short)1,(short)2,(string)"",(string)"",(string)"",(string)"px",(string)"px",(string)""});
+         GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+         GridauthtypesRow.AddRenderProperties(GridauthtypesColumn);
+         GridauthtypesRow.AddColumnProperties("row", -1, isAjaxCallMode( ), new Object[] {(string)"",(string)"",(string)""});
+         GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+         GridauthtypesRow.AddRenderProperties(GridauthtypesColumn);
+         GridauthtypesRow.AddColumnProperties("cell", -1, isAjaxCallMode( ), new Object[] {(string)"",(string)"",(string)""});
+         GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+         GridauthtypesRow.AddRenderProperties(GridauthtypesColumn);
          /* Div Control */
-         GridextauthtypesRow.AddColumnProperties("div_start", -1, isAjaxCallMode( ), new Object[] {(string)divTblgridextauthtypes_Internalname+"_"+sGXsfl_62_idx,(short)1,(short)0,(string)"px",(short)0,(string)"px",(string)"Table",(string)"start",(string)"top",(string)"",(string)"",(string)"div"});
-         /* Div Control */
-         GridextauthtypesRow.AddColumnProperties("div_start", -1, isAjaxCallMode( ), new Object[] {(string)"",(short)1,(short)0,(string)"px",(short)0,(string)"px",(string)"row",(string)"start",(string)"top",(string)"",(string)"",(string)"div"});
-         /* Div Control */
-         GridextauthtypesRow.AddColumnProperties("div_start", -1, isAjaxCallMode( ), new Object[] {(string)"",(short)1,(short)0,(string)"px",(short)0,(string)"px",(string)"col-xs-12 stack-bottom-l",(string)"start",(string)"top",(string)"",(string)"",(string)"div"});
-         TempTags = "  onfocus=\"gx.evt.onfocus(this, 66,'',false,'',0)\"";
-         ClassString = "Button button-tertiary w-100";
-         StyleString = "";
-         GridextauthtypesRow.AddColumnProperties("button", 2, isAjaxCallMode( ), new Object[] {(string)bttExternalauthentication_Internalname+"_"+sGXsfl_62_idx,"gx.evt.setGridEvt("+StringUtil.Str( (decimal)(62), 2, 0)+","+"null"+");",(string)bttExternalauthentication_Caption,(string)bttExternalauthentication_Jsonclick,(short)5,(string)bttExternalauthentication_Tooltiptext,(string)"",(string)StyleString,(string)ClassString,(short)1,(short)1,(string)"standard","'"+""+"'"+",false,"+"'"+"E\\'SELECTAUTHENTICATIONTYPE\\'."+"'",(string)TempTags,(string)"",context.GetButtonType( )});
-         GridextauthtypesRow.AddColumnProperties("div_end", -1, isAjaxCallMode( ), new Object[] {(string)"start",(string)"top",(string)"div"});
-         /* Div Control */
-         GridextauthtypesRow.AddColumnProperties("div_start", -1, isAjaxCallMode( ), new Object[] {(string)"",(short)1,(short)0,(string)"px",(short)0,(string)"px",(string)"col-xs-12 hidden-xs hidden-sm hidden-md hidden-lg",(string)"start",(string)"top",(string)"",(string)"",(string)"div"});
-         /* Div Control */
-         GridextauthtypesRow.AddColumnProperties("div_start", -1, isAjaxCallMode( ), new Object[] {(string)"",(short)1,(short)0,(string)"px",(short)0,(string)"px",(string)" gx-attribute",(string)"start",(string)"top",(string)"",(string)"",(string)"div"});
+         GridauthtypesRow.AddColumnProperties("div_start", -1, isAjaxCallMode( ), new Object[] {(string)"",(short)1,(short)0,(string)"px",(short)0,(string)"px",(string)" gx-attribute",(string)"start",(string)"top",(string)"",(string)"",(string)"div"});
+         GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+         GridauthtypesRow.AddRenderProperties(GridauthtypesColumn);
          /* Attribute/Variable Label */
-         GridextauthtypesRow.AddColumnProperties("html_label", -1, isAjaxCallMode( ), new Object[] {(string)edtavNameauthtype_Internalname,context.GetMessage( "Name Auth Type", ""),(string)"col-sm-3 AttributeLabel",(short)0,(bool)true,(string)""});
+         GridauthtypesRow.AddColumnProperties("html_label", -1, isAjaxCallMode( ), new Object[] {(string)"",context.GetMessage( "Image Auth Type", ""),(string)"gx-form-item AttributeImage30Label",(short)0,(bool)true,(string)"width: 25%;"});
+         GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+         GridauthtypesRow.AddRenderProperties(GridauthtypesColumn);
+         /* Active Bitmap Variable */
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 59,'',false,'',54)\"";
+         ClassString = "AttributeImage30" + " " + ((StringUtil.StrCmp(edtavImageauthtype_gximage, "")==0) ? "" : "GX_Image_"+edtavImageauthtype_gximage+"_Class");
+         StyleString = "";
+         AV109ImageAuthType_IsBlob = (bool)((String.IsNullOrEmpty(StringUtil.RTrim( AV109ImageAuthType))&&String.IsNullOrEmpty(StringUtil.RTrim( AV129Imageauthtype_GXI)))||!String.IsNullOrEmpty(StringUtil.RTrim( AV109ImageAuthType)));
+         sImgUrl = (String.IsNullOrEmpty(StringUtil.RTrim( AV109ImageAuthType)) ? AV129Imageauthtype_GXI : context.PathToRelativeUrl( AV109ImageAuthType));
+         GridauthtypesRow.AddColumnProperties("bitmap", 1, isAjaxCallMode( ), new Object[] {(string)edtavImageauthtype_Internalname,(string)sImgUrl,(string)"",(string)"",(string)"",context.GetTheme( ),(short)1,(short)1,(string)"",(string)edtavImageauthtype_Tooltiptext,(short)0,(short)-1,(short)0,(string)"",(short)0,(string)"",(short)0,(short)0,(short)5,(string)edtavImageauthtype_Jsonclick,"'"+""+"'"+",false,"+"'"+"EVIMAGEAUTHTYPE.CLICK."+sGXsfl_54_idx+"'",(string)StyleString,(string)ClassString,(string)"",(string)"",(string)"",(string)"",(string)""+TempTags,(string)"",(string)"",(short)1,(bool)AV109ImageAuthType_IsBlob,(bool)false,context.GetImageSrcSet( sImgUrl)});
+         GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+         GridauthtypesRow.AddRenderProperties(GridauthtypesColumn);
+         GridauthtypesRow.AddColumnProperties("div_end", -1, isAjaxCallMode( ), new Object[] {(string)"start",(string)"top",(string)"div"});
+         GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+         GridauthtypesRow.AddRenderProperties(GridauthtypesColumn);
+         if ( GridauthtypesContainer.GetWrapped() == 1 )
+         {
+            GridauthtypesContainer.CloseTag("cell");
+         }
+         if ( GridauthtypesContainer.GetWrapped() == 1 )
+         {
+            GridauthtypesContainer.CloseTag("row");
+         }
+         GridauthtypesRow.AddColumnProperties("row", -1, isAjaxCallMode( ), new Object[] {(string)"",(string)"",(string)""});
+         GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+         GridauthtypesRow.AddRenderProperties(GridauthtypesColumn);
+         GridauthtypesRow.AddColumnProperties("cell", -1, isAjaxCallMode( ), new Object[] {(string)"",(string)"",(string)"Invisible"});
+         GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+         GridauthtypesRow.AddRenderProperties(GridauthtypesColumn);
+         /* Table start */
+         GridauthtypesRow.AddColumnProperties("table", -1, isAjaxCallMode( ), new Object[] {(string)tblUnnamedtablecontentfsgridauthtypes_Internalname+"_"+sGXsfl_54_idx,(short)1,(string)"Table",(string)"",(string)"",(string)"",(string)"",(string)"",(string)"",(short)1,(short)2,(string)"",(string)"",(string)"",(string)"px",(string)"px",(string)""});
+         GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+         GridauthtypesRow.AddRenderProperties(GridauthtypesColumn);
+         GridauthtypesRow.AddColumnProperties("row", -1, isAjaxCallMode( ), new Object[] {(string)"",(string)"",(string)""});
+         GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+         GridauthtypesRow.AddRenderProperties(GridauthtypesColumn);
+         GridauthtypesRow.AddColumnProperties("cell", -1, isAjaxCallMode( ), new Object[] {(string)"",(string)"",(string)""});
+         GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+         GridauthtypesRow.AddRenderProperties(GridauthtypesColumn);
+         /* Div Control */
+         GridauthtypesRow.AddColumnProperties("div_start", -1, isAjaxCallMode( ), new Object[] {(string)"",(short)1,(short)0,(string)"px",(short)0,(string)"px",(string)" gx-attribute",(string)"start",(string)"top",(string)"",(string)"",(string)"div"});
+         GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+         GridauthtypesRow.AddRenderProperties(GridauthtypesColumn);
+         /* Attribute/Variable Label */
+         GridauthtypesRow.AddColumnProperties("html_label", -1, isAjaxCallMode( ), new Object[] {(string)cmbavTypeauthtype_Internalname,context.GetMessage( "Type Auth Type", ""),(string)"gx-form-item AttributeLabel",(short)0,(bool)true,(string)"width: 25%;"});
+         GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+         GridauthtypesRow.AddRenderProperties(GridauthtypesColumn);
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 66,'',false,'" + sGXsfl_54_idx + "',54)\"";
+         if ( ( cmbavTypeauthtype.ItemCount == 0 ) && isAjaxCallMode( ) )
+         {
+            GXCCtl = "vTYPEAUTHTYPE_" + sGXsfl_54_idx;
+            cmbavTypeauthtype.Name = GXCCtl;
+            cmbavTypeauthtype.WebTags = "";
+            cmbavTypeauthtype.addItem("APIkey", context.GetMessage( "GAM_APIkey", ""), 0);
+            cmbavTypeauthtype.addItem("AppleID", context.GetMessage( "GAM_Apple", ""), 0);
+            cmbavTypeauthtype.addItem("Custom", context.GetMessage( "GAM_Custom", ""), 0);
+            cmbavTypeauthtype.addItem("ExternalWebService", context.GetMessage( "GAM_ExternalWebService", ""), 0);
+            cmbavTypeauthtype.addItem("Facebook", context.GetMessage( "GAM_Facebook", ""), 0);
+            cmbavTypeauthtype.addItem("GAMLocal", context.GetMessage( "GAM_Local", ""), 0);
+            cmbavTypeauthtype.addItem("GAMRemote", context.GetMessage( "GAM_GAMRemote", ""), 0);
+            cmbavTypeauthtype.addItem("GAMRemoteRest", context.GetMessage( "GAM_GAMRemoteREST", ""), 0);
+            cmbavTypeauthtype.addItem("Google", context.GetMessage( "GAM_Google", ""), 0);
+            cmbavTypeauthtype.addItem("Oauth20", context.GetMessage( "GAM_OAuth2.0", ""), 0);
+            cmbavTypeauthtype.addItem("OTP", context.GetMessage( "GAM_OneTimePassword", ""), 0);
+            cmbavTypeauthtype.addItem("Saml20", context.GetMessage( "GAM_Saml2.0", ""), 0);
+            cmbavTypeauthtype.addItem("Twitter", context.GetMessage( "GAM_Twitter", ""), 0);
+            cmbavTypeauthtype.addItem("WeChat", context.GetMessage( "GAM_WeChat", ""), 0);
+            if ( cmbavTypeauthtype.ItemCount > 0 )
+            {
+               AV110TypeAuthType = cmbavTypeauthtype.getValidValue(AV110TypeAuthType);
+               AssignAttri("", false, cmbavTypeauthtype_Internalname, AV110TypeAuthType);
+            }
+         }
+         /* ComboBox */
+         GridauthtypesRow.AddColumnProperties("combobox", 2, isAjaxCallMode( ), new Object[] {(GXCombobox)cmbavTypeauthtype,(string)cmbavTypeauthtype_Internalname,StringUtil.RTrim( AV110TypeAuthType),(short)1,(string)cmbavTypeauthtype_Jsonclick,(short)0,(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"char",(string)"",cmbavTypeauthtype.Visible,(short)1,(short)0,(short)0,(short)0,(string)"em",(short)0,(string)"",(string)"",(string)"Attribute",(string)"",(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,66);\"",(string)"",(bool)true,(short)0});
+         GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+         GridauthtypesRow.AddRenderProperties(GridauthtypesColumn);
+         cmbavTypeauthtype.CurrentValue = StringUtil.RTrim( AV110TypeAuthType);
+         AssignProp("", false, cmbavTypeauthtype_Internalname, "Values", (string)(cmbavTypeauthtype.ToJavascriptSource()), !bGXsfl_54_Refreshing);
+         GridauthtypesRow.AddColumnProperties("div_end", -1, isAjaxCallMode( ), new Object[] {(string)"start",(string)"top",(string)"div"});
+         GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+         GridauthtypesRow.AddRenderProperties(GridauthtypesColumn);
+         if ( GridauthtypesContainer.GetWrapped() == 1 )
+         {
+            GridauthtypesContainer.CloseTag("cell");
+         }
+         GridauthtypesRow.AddColumnProperties("cell", -1, isAjaxCallMode( ), new Object[] {(string)"",(string)"",(string)""});
+         GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+         GridauthtypesRow.AddRenderProperties(GridauthtypesColumn);
+         /* Div Control */
+         GridauthtypesRow.AddColumnProperties("div_start", -1, isAjaxCallMode( ), new Object[] {(string)"",(short)1,(short)0,(string)"px",(short)0,(string)"px",(string)" gx-attribute",(string)"start",(string)"top",(string)"",(string)"",(string)"div"});
+         GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+         GridauthtypesRow.AddRenderProperties(GridauthtypesColumn);
+         /* Attribute/Variable Label */
+         GridauthtypesRow.AddColumnProperties("html_label", -1, isAjaxCallMode( ), new Object[] {(string)edtavNameauthtype_Internalname,context.GetMessage( "Name Auth Type", ""),(string)"gx-form-item AttributeLabel",(short)0,(bool)true,(string)"width: 25%;"});
+         GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+         GridauthtypesRow.AddRenderProperties(GridauthtypesColumn);
          /* Single line edit */
-         TempTags = "  onfocus=\"gx.evt.onfocus(this, 69,'',false,'" + sGXsfl_62_idx + "',62)\"";
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 69,'',false,'" + sGXsfl_54_idx + "',54)\"";
          ROClassString = "Attribute";
-         GridextauthtypesRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavNameauthtype_Internalname,StringUtil.RTrim( AV27NameAuthType),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,69);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavNameauthtype_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"",(string)"",(short)1,(int)edtavNameauthtype_Enabled,(short)0,(string)"text",(string)"",(short)60,(string)"chr",(short)1,(string)"row",(short)60,(short)0,(short)0,(short)62,(short)0,(short)-1,(short)-1,(bool)true,(string)"GeneXusSecurityCommon\\GAMAuthenticationTypeName",(string)"start",(bool)true,(string)""});
-         GridextauthtypesRow.AddColumnProperties("div_end", -1, isAjaxCallMode( ), new Object[] {(string)"start",(string)"top",(string)"div"});
-         GridextauthtypesRow.AddColumnProperties("div_end", -1, isAjaxCallMode( ), new Object[] {(string)"start",(string)"top",(string)"div"});
-         GridextauthtypesRow.AddColumnProperties("div_end", -1, isAjaxCallMode( ), new Object[] {(string)"start",(string)"top",(string)"div"});
-         GridextauthtypesRow.AddColumnProperties("div_end", -1, isAjaxCallMode( ), new Object[] {(string)"start",(string)"top",(string)"div"});
+         GridauthtypesRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavNameauthtype_Internalname,StringUtil.RTrim( AV27NameAuthType),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,69);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavNameauthtype_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"",(string)"",(int)edtavNameauthtype_Visible,(short)1,(short)0,(string)"text",(string)"",(short)60,(string)"chr",(short)1,(string)"row",(short)60,(short)0,(short)0,(short)54,(short)0,(short)-1,(short)-1,(bool)true,(string)"GeneXusSecurityCommon\\GAMAuthenticationTypeName",(string)"start",(bool)true,(string)""});
+         GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+         GridauthtypesRow.AddRenderProperties(GridauthtypesColumn);
+         GridauthtypesRow.AddColumnProperties("div_end", -1, isAjaxCallMode( ), new Object[] {(string)"start",(string)"top",(string)"div"});
+         GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+         GridauthtypesRow.AddRenderProperties(GridauthtypesColumn);
+         if ( GridauthtypesContainer.GetWrapped() == 1 )
+         {
+            GridauthtypesContainer.CloseTag("cell");
+         }
+         if ( GridauthtypesContainer.GetWrapped() == 1 )
+         {
+            GridauthtypesContainer.CloseTag("row");
+         }
+         if ( GridauthtypesContainer.GetWrapped() == 1 )
+         {
+            GridauthtypesContainer.CloseTag("table");
+         }
+         /* End of table */
+         if ( GridauthtypesContainer.GetWrapped() == 1 )
+         {
+            GridauthtypesContainer.CloseTag("cell");
+         }
+         if ( GridauthtypesContainer.GetWrapped() == 1 )
+         {
+            GridauthtypesContainer.CloseTag("row");
+         }
+         if ( GridauthtypesContainer.GetWrapped() == 1 )
+         {
+            GridauthtypesContainer.CloseTag("table");
+         }
+         /* End of table */
          send_integrity_lvl_hashes0P2( ) ;
          /* End of Columns property logic. */
-         GridextauthtypesContainer.AddRow(GridextauthtypesRow);
-         nGXsfl_62_idx = ((subGridextauthtypes_Islastpage==1)&&(nGXsfl_62_idx+1>subGridextauthtypes_fnc_Recordsperpage( )) ? 1 : nGXsfl_62_idx+1);
-         sGXsfl_62_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_62_idx), 4, 0), 4, "0");
-         SubsflControlProps_622( ) ;
-         /* End function sendrow_622 */
+         GridauthtypesContainer.AddRow(GridauthtypesRow);
+         nGXsfl_54_idx = ((subGridauthtypes_Islastpage==1)&&(nGXsfl_54_idx+1>subGridauthtypes_fnc_Recordsperpage( )) ? 1 : nGXsfl_54_idx+1);
+         sGXsfl_54_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_54_idx), 4, 0), 4, "0");
+         SubsflControlProps_542( ) ;
+         /* End function sendrow_542 */
       }
 
       protected void init_web_controls( )
@@ -1731,110 +1980,160 @@ namespace GeneXus.Programs {
             AV26LogOnTo = cmbavLogonto.getValidValue(AV26LogOnTo);
             AssignAttri("", false, "AV26LogOnTo", AV26LogOnTo);
          }
-         chkavRememberme.Name = "vREMEMBERME";
-         chkavRememberme.WebTags = "";
-         chkavRememberme.Caption = "";
-         AssignProp("", false, chkavRememberme_Internalname, "TitleCaption", chkavRememberme.Caption, true);
-         chkavRememberme.CheckedValue = "false";
-         AV28RememberMe = StringUtil.StrToBool( StringUtil.BoolToStr( AV28RememberMe));
-         AssignAttri("", false, "AV28RememberMe", AV28RememberMe);
          chkavKeepmeloggedin.Name = "vKEEPMELOGGEDIN";
          chkavKeepmeloggedin.WebTags = "";
-         chkavKeepmeloggedin.Caption = "";
+         chkavKeepmeloggedin.Caption = context.GetMessage( "Keep Me Logged In", "");
          AssignProp("", false, chkavKeepmeloggedin_Internalname, "TitleCaption", chkavKeepmeloggedin.Caption, true);
          chkavKeepmeloggedin.CheckedValue = "false";
          AV23KeepMeLoggedIn = StringUtil.StrToBool( StringUtil.BoolToStr( AV23KeepMeLoggedIn));
          AssignAttri("", false, "AV23KeepMeLoggedIn", AV23KeepMeLoggedIn);
+         chkavRememberme.Name = "vREMEMBERME";
+         chkavRememberme.WebTags = "";
+         chkavRememberme.Caption = context.GetMessage( "Remember Me", "");
+         AssignProp("", false, chkavRememberme_Internalname, "TitleCaption", chkavRememberme.Caption, true);
+         chkavRememberme.CheckedValue = "false";
+         AV28RememberMe = StringUtil.StrToBool( StringUtil.BoolToStr( AV28RememberMe));
+         AssignAttri("", false, "AV28RememberMe", AV28RememberMe);
+         GXCCtl = "vTYPEAUTHTYPE_" + sGXsfl_54_idx;
+         cmbavTypeauthtype.Name = GXCCtl;
+         cmbavTypeauthtype.WebTags = "";
+         cmbavTypeauthtype.addItem("APIkey", context.GetMessage( "GAM_APIkey", ""), 0);
+         cmbavTypeauthtype.addItem("AppleID", context.GetMessage( "GAM_Apple", ""), 0);
+         cmbavTypeauthtype.addItem("Custom", context.GetMessage( "GAM_Custom", ""), 0);
+         cmbavTypeauthtype.addItem("ExternalWebService", context.GetMessage( "GAM_ExternalWebService", ""), 0);
+         cmbavTypeauthtype.addItem("Facebook", context.GetMessage( "GAM_Facebook", ""), 0);
+         cmbavTypeauthtype.addItem("GAMLocal", context.GetMessage( "GAM_Local", ""), 0);
+         cmbavTypeauthtype.addItem("GAMRemote", context.GetMessage( "GAM_GAMRemote", ""), 0);
+         cmbavTypeauthtype.addItem("GAMRemoteRest", context.GetMessage( "GAM_GAMRemoteREST", ""), 0);
+         cmbavTypeauthtype.addItem("Google", context.GetMessage( "GAM_Google", ""), 0);
+         cmbavTypeauthtype.addItem("Oauth20", context.GetMessage( "GAM_OAuth2.0", ""), 0);
+         cmbavTypeauthtype.addItem("OTP", context.GetMessage( "GAM_OneTimePassword", ""), 0);
+         cmbavTypeauthtype.addItem("Saml20", context.GetMessage( "GAM_Saml2.0", ""), 0);
+         cmbavTypeauthtype.addItem("Twitter", context.GetMessage( "GAM_Twitter", ""), 0);
+         cmbavTypeauthtype.addItem("WeChat", context.GetMessage( "GAM_WeChat", ""), 0);
+         if ( cmbavTypeauthtype.ItemCount > 0 )
+         {
+            AV110TypeAuthType = cmbavTypeauthtype.getValidValue(AV110TypeAuthType);
+            AssignAttri("", false, cmbavTypeauthtype_Internalname, AV110TypeAuthType);
+         }
          /* End function init_web_controls */
       }
 
-      protected void StartGridControl62( )
+      protected void StartGridControl54( )
       {
-         if ( GridextauthtypesContainer.GetWrapped() == 1 )
+         if ( GridauthtypesContainer.GetWrapped() == 1 )
          {
-            context.WriteHtmlText( "<div id=\""+"GridextauthtypesContainer"+"DivS\" data-gxgridid=\"62\">") ;
+            context.WriteHtmlText( "<div id=\""+"GridauthtypesContainer"+"DivS\" data-gxgridid=\"54\">") ;
             sStyleString = "";
-            if ( subGridextauthtypes_Visible == 0 )
+            if ( subGridauthtypes_Visible == 0 )
             {
                sStyleString += "display:none;";
             }
-            GxWebStd.gx_table_start( context, subGridextauthtypes_Internalname, subGridextauthtypes_Internalname, "", "FreeStyleGrid", 0, "", "", 1, 2, sStyleString, "", "", 0);
-            GridextauthtypesContainer.AddObjectProperty("GridName", "Gridextauthtypes");
+            GxWebStd.gx_table_start( context, subGridauthtypes_Internalname, subGridauthtypes_Internalname, "", "FreeStyleGrid", 0, "", "", 1, 2, sStyleString, "", "", 0);
+            GridauthtypesContainer.AddObjectProperty("GridName", "Gridauthtypes");
          }
          else
          {
-            GridextauthtypesContainer.AddObjectProperty("GridName", "Gridextauthtypes");
-            GridextauthtypesContainer.AddObjectProperty("Header", subGridextauthtypes_Header);
-            GridextauthtypesContainer.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridextauthtypes_Visible), 5, 0, ".", "")));
-            GridextauthtypesContainer.AddObjectProperty("Class", StringUtil.RTrim( "FreeStyleGrid"));
-            GridextauthtypesContainer.AddObjectProperty("Class", "FreeStyleGrid");
-            GridextauthtypesContainer.AddObjectProperty("Cellpadding", StringUtil.LTrim( StringUtil.NToC( (decimal)(1), 4, 0, ".", "")));
-            GridextauthtypesContainer.AddObjectProperty("Cellspacing", StringUtil.LTrim( StringUtil.NToC( (decimal)(2), 4, 0, ".", "")));
-            GridextauthtypesContainer.AddObjectProperty("Backcolorstyle", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridextauthtypes_Backcolorstyle), 1, 0, ".", "")));
-            GridextauthtypesContainer.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridextauthtypes_Visible), 5, 0, ".", "")));
-            GridextauthtypesContainer.AddObjectProperty("CmpContext", "");
-            GridextauthtypesContainer.AddObjectProperty("InMasterPage", "false");
-            GridextauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridextauthtypesContainer.AddColumnProperties(GridextauthtypesColumn);
-            GridextauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridextauthtypesContainer.AddColumnProperties(GridextauthtypesColumn);
-            GridextauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridextauthtypesContainer.AddColumnProperties(GridextauthtypesColumn);
-            GridextauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridextauthtypesContainer.AddColumnProperties(GridextauthtypesColumn);
-            GridextauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridextauthtypesContainer.AddColumnProperties(GridextauthtypesColumn);
-            GridextauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridextauthtypesContainer.AddColumnProperties(GridextauthtypesColumn);
-            GridextauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridextauthtypesContainer.AddColumnProperties(GridextauthtypesColumn);
-            GridextauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridextauthtypesContainer.AddColumnProperties(GridextauthtypesColumn);
-            GridextauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridextauthtypesColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.RTrim( AV27NameAuthType)));
-            GridextauthtypesColumn.AddObjectProperty("Enabled", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavNameauthtype_Enabled), 5, 0, ".", "")));
-            GridextauthtypesContainer.AddColumnProperties(GridextauthtypesColumn);
-            GridextauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridextauthtypesContainer.AddColumnProperties(GridextauthtypesColumn);
-            GridextauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridextauthtypesContainer.AddColumnProperties(GridextauthtypesColumn);
-            GridextauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridextauthtypesContainer.AddColumnProperties(GridextauthtypesColumn);
-            GridextauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridextauthtypesContainer.AddColumnProperties(GridextauthtypesColumn);
-            GridextauthtypesContainer.AddObjectProperty("Selectedindex", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridextauthtypes_Selectedindex), 4, 0, ".", "")));
-            GridextauthtypesContainer.AddObjectProperty("Allowselection", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridextauthtypes_Allowselection), 1, 0, ".", "")));
-            GridextauthtypesContainer.AddObjectProperty("Selectioncolor", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridextauthtypes_Selectioncolor), 9, 0, ".", "")));
-            GridextauthtypesContainer.AddObjectProperty("Allowhover", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridextauthtypes_Allowhovering), 1, 0, ".", "")));
-            GridextauthtypesContainer.AddObjectProperty("Hovercolor", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridextauthtypes_Hoveringcolor), 9, 0, ".", "")));
-            GridextauthtypesContainer.AddObjectProperty("Allowcollapsing", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridextauthtypes_Allowcollapsing), 1, 0, ".", "")));
-            GridextauthtypesContainer.AddObjectProperty("Collapsed", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridextauthtypes_Collapsed), 1, 0, ".", "")));
+            GridauthtypesContainer.AddObjectProperty("GridName", "Gridauthtypes");
+            GridauthtypesContainer.AddObjectProperty("Header", subGridauthtypes_Header);
+            GridauthtypesContainer.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridauthtypes_Visible), 5, 0, ".", "")));
+            GridauthtypesContainer.AddObjectProperty("Class", StringUtil.RTrim( "FreeStyleGrid"));
+            GridauthtypesContainer.AddObjectProperty("Class", "FreeStyleGrid");
+            GridauthtypesContainer.AddObjectProperty("Cellpadding", StringUtil.LTrim( StringUtil.NToC( (decimal)(1), 4, 0, ".", "")));
+            GridauthtypesContainer.AddObjectProperty("Cellspacing", StringUtil.LTrim( StringUtil.NToC( (decimal)(2), 4, 0, ".", "")));
+            GridauthtypesContainer.AddObjectProperty("Backcolorstyle", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridauthtypes_Backcolorstyle), 1, 0, ".", "")));
+            GridauthtypesContainer.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridauthtypes_Visible), 5, 0, ".", "")));
+            GridauthtypesContainer.AddObjectProperty("CmpContext", "");
+            GridauthtypesContainer.AddObjectProperty("InMasterPage", "false");
+            GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridauthtypesContainer.AddColumnProperties(GridauthtypesColumn);
+            GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridauthtypesContainer.AddColumnProperties(GridauthtypesColumn);
+            GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridauthtypesContainer.AddColumnProperties(GridauthtypesColumn);
+            GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridauthtypesContainer.AddColumnProperties(GridauthtypesColumn);
+            GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridauthtypesContainer.AddColumnProperties(GridauthtypesColumn);
+            GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridauthtypesColumn.AddObjectProperty("Value", context.convertURL( AV109ImageAuthType));
+            GridauthtypesColumn.AddObjectProperty("Tooltiptext", StringUtil.RTrim( edtavImageauthtype_Tooltiptext));
+            GridauthtypesContainer.AddColumnProperties(GridauthtypesColumn);
+            GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridauthtypesContainer.AddColumnProperties(GridauthtypesColumn);
+            GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridauthtypesContainer.AddColumnProperties(GridauthtypesColumn);
+            GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridauthtypesContainer.AddColumnProperties(GridauthtypesColumn);
+            GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridauthtypesContainer.AddColumnProperties(GridauthtypesColumn);
+            GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridauthtypesContainer.AddColumnProperties(GridauthtypesColumn);
+            GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridauthtypesContainer.AddColumnProperties(GridauthtypesColumn);
+            GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridauthtypesContainer.AddColumnProperties(GridauthtypesColumn);
+            GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridauthtypesContainer.AddColumnProperties(GridauthtypesColumn);
+            GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridauthtypesColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.RTrim( AV110TypeAuthType)));
+            GridauthtypesColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(cmbavTypeauthtype.Visible), 5, 0, ".", "")));
+            GridauthtypesContainer.AddColumnProperties(GridauthtypesColumn);
+            GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridauthtypesContainer.AddColumnProperties(GridauthtypesColumn);
+            GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridauthtypesContainer.AddColumnProperties(GridauthtypesColumn);
+            GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridauthtypesContainer.AddColumnProperties(GridauthtypesColumn);
+            GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridauthtypesContainer.AddColumnProperties(GridauthtypesColumn);
+            GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridauthtypesColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.RTrim( AV27NameAuthType)));
+            GridauthtypesColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavNameauthtype_Visible), 5, 0, ".", "")));
+            GridauthtypesContainer.AddColumnProperties(GridauthtypesColumn);
+            GridauthtypesColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridauthtypesContainer.AddColumnProperties(GridauthtypesColumn);
+            GridauthtypesContainer.AddObjectProperty("Selectedindex", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridauthtypes_Selectedindex), 4, 0, ".", "")));
+            GridauthtypesContainer.AddObjectProperty("Allowselection", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridauthtypes_Allowselection), 1, 0, ".", "")));
+            GridauthtypesContainer.AddObjectProperty("Selectioncolor", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridauthtypes_Selectioncolor), 9, 0, ".", "")));
+            GridauthtypesContainer.AddObjectProperty("Allowhover", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridauthtypes_Allowhovering), 1, 0, ".", "")));
+            GridauthtypesContainer.AddObjectProperty("Hovercolor", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridauthtypes_Hoveringcolor), 9, 0, ".", "")));
+            GridauthtypesContainer.AddObjectProperty("Allowcollapsing", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridauthtypes_Allowcollapsing), 1, 0, ".", "")));
+            GridauthtypesContainer.AddObjectProperty("Collapsed", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridauthtypes_Collapsed), 1, 0, ".", "")));
          }
       }
 
       protected void init_default_properties( )
       {
-         lblTbtitle_Internalname = "TBTITLE";
-         lblTbcurrentrepository_Internalname = "TBCURRENTREPOSITORY";
-         lblTbhaveaccount_Internalname = "TBHAVEACCOUNT";
-         lblTbregister_Internalname = "TBREGISTER";
-         divTablecreateaccount_Internalname = "TABLECREATEACCOUNT";
+         imgLogologin_Internalname = "LOGOLOGIN";
          cmbavLogonto_Internalname = "vLOGONTO";
+         lblCurrentrepository_Internalname = "CURRENTREPOSITORY";
+         divCurrentrepositorycell_Internalname = "CURRENTREPOSITORYCELL";
          edtavUsername_Internalname = "vUSERNAME";
          edtavUserpassword_Internalname = "vUSERPASSWORD";
-         lblTbforgotpwd_Internalname = "TBFORGOTPWD";
-         chkavRememberme_Internalname = "vREMEMBERME";
+         lblForgotpassword_Internalname = "FORGOTPASSWORD";
          chkavKeepmeloggedin_Internalname = "vKEEPMELOGGEDIN";
-         bttLogin_Internalname = "LOGIN";
-         divTblloginbutton_Internalname = "TBLLOGINBUTTON";
-         lblTbexternalauthentication_Internalname = "TBEXTERNALAUTHENTICATION";
-         bttExternalauthentication_Internalname = "EXTERNALAUTHENTICATION";
+         divKeepmeloggedin_cell_Internalname = "KEEPMELOGGEDIN_CELL";
+         chkavRememberme_Internalname = "vREMEMBERME";
+         divRememberme_cell_Internalname = "REMEMBERME_CELL";
+         bttBtnenter_Internalname = "BTNENTER";
+         divUnnamedtable1_Internalname = "UNNAMEDTABLE1";
+         lblLoginwith_Internalname = "LOGINWITH";
+         edtavImageauthtype_Internalname = "vIMAGEAUTHTYPE";
+         cmbavTypeauthtype_Internalname = "vTYPEAUTHTYPE";
          edtavNameauthtype_Internalname = "vNAMEAUTHTYPE";
-         divTblgridextauthtypes_Internalname = "TBLGRIDEXTAUTHTYPES";
-         divTblexternalsauth_Internalname = "TBLEXTERNALSAUTH";
-         divMaintable_Internalname = "MAINTABLE";
+         tblUnnamedtablecontentfsgridauthtypes_Internalname = "UNNAMEDTABLECONTENTFSGRIDAUTHTYPES";
+         tblUnnamedtablefsgridauthtypes_Internalname = "UNNAMEDTABLEFSGRIDAUTHTYPES";
+         divTablebuttons_Internalname = "TABLEBUTTONS";
+         divTablelogin_Internalname = "TABLELOGIN";
+         divTablelogincontent_Internalname = "TABLELOGINCONTENT";
+         Wwputilities_Internalname = "WWPUTILITIES";
+         divTablemain_Internalname = "TABLEMAIN";
+         edtavUrl_Internalname = "vURL";
+         divHtml_bottomauxiliarcontrols_Internalname = "HTML_BOTTOMAUXILIARCONTROLS";
+         divLayoutmaintable_Internalname = "LAYOUTMAINTABLE";
          Form.Internalname = "FORM";
-         subGridextauthtypes_Internalname = "GRIDEXTAUTHTYPES";
+         subGridauthtypes_Internalname = "GRIDAUTHTYPES";
       }
 
       public override void initialize_properties( )
@@ -1845,37 +2144,53 @@ namespace GeneXus.Programs {
             disableJsOutput();
          }
          init_default_properties( ) ;
-         subGridextauthtypes_Allowcollapsing = 0;
-         chkavKeepmeloggedin.Caption = "";
-         chkavRememberme.Caption = "";
+         subGridauthtypes_Allowcollapsing = 0;
+         chkavRememberme.Caption = context.GetMessage( "Remember Me", "");
+         chkavKeepmeloggedin.Caption = context.GetMessage( "Keep Me Logged In", "");
          edtavNameauthtype_Jsonclick = "";
-         edtavNameauthtype_Enabled = 0;
-         subGridextauthtypes_Class = "FreeStyleGrid";
-         bttExternalauthentication_Tooltiptext = context.GetMessage( "GAM_ExternalAuthentication", "");
-         bttExternalauthentication_Caption = context.GetMessage( "GAM_ExternalAuthentication", "");
-         subGridextauthtypes_Backcolorstyle = 0;
-         subGridextauthtypes_Visible = 1;
-         divTblexternalsauth_Visible = 1;
-         bttLogin_Caption = context.GetMessage( "GAM_SIGNIN", "");
-         chkavKeepmeloggedin.Enabled = 1;
-         chkavKeepmeloggedin.Visible = 1;
+         cmbavTypeauthtype_Jsonclick = "";
+         edtavImageauthtype_Jsonclick = "";
+         edtavImageauthtype_gximage = "";
+         edtavImageauthtype_Tooltiptext = "";
+         subGridauthtypes_Backcolorstyle = 0;
+         edtavUrl_Jsonclick = "";
+         edtavUrl_Visible = 1;
+         subGridauthtypes_Visible = 1;
+         divTablebuttons_Visible = 1;
+         bttBtnenter_Caption = context.GetMessage( "WWP_GAM_Login", "");
          chkavRememberme.Enabled = 1;
          chkavRememberme.Visible = 1;
-         lblTbforgotpwd_Visible = 1;
+         divRememberme_cell_Class = "col-xs-12";
+         chkavKeepmeloggedin.Enabled = 1;
+         chkavKeepmeloggedin.Visible = 1;
+         divKeepmeloggedin_cell_Class = "col-xs-12";
+         lblForgotpassword_Visible = 1;
          edtavUserpassword_Jsonclick = "";
-         edtavUserpassword_Invitemessage = "";
+         edtavUserpassword_Invitemessage = context.GetMessage( "WWP_GAM_Password", "");
          edtavUserpassword_Enabled = 1;
          edtavUserpassword_Visible = 1;
          edtavUsername_Jsonclick = "";
-         edtavUsername_Invitemessage = "";
          edtavUsername_Enabled = 1;
+         lblCurrentrepository_Caption = context.GetMessage( "Repository: <REPOSITORY>", "");
+         lblCurrentrepository_Visible = 1;
          cmbavLogonto_Jsonclick = "";
-         cmbavLogonto.Enabled = 1;
          cmbavLogonto.Visible = 1;
-         divTablecreateaccount_Visible = 1;
-         lblTbcurrentrepository_Caption = "";
-         lblTbcurrentrepository_Visible = 1;
-         context.GX_msglist.DisplayMode = 1;
+         cmbavLogonto.Enabled = 1;
+         divLayoutmaintable_Class = "Table";
+         subGridauthtypes_Class = "FreeStyleGrid";
+         Wwputilities_Comboloadtype = "InfiniteScrolling";
+         Wwputilities_Allowcolumnsrestore = Convert.ToBoolean( -1);
+         Wwputilities_Allowcolumnreordering = Convert.ToBoolean( -1);
+         Wwputilities_Allowcolumnresizing = Convert.ToBoolean( -1);
+         Wwputilities_Enableconvertcombotobootstrapselect = Convert.ToBoolean( -1);
+         Wwputilities_Enablefixobjectfitcover = Convert.ToBoolean( -1);
+         Form.Headerrawhtml = "";
+         Form.Background = "";
+         Form.Textcolor = 0;
+         Form.Backcolor = (int)(0xFFFFFF);
+         Form.Caption = context.GetMessage( "Login", "");
+         edtavNameauthtype_Visible = 1;
+         cmbavTypeauthtype.Visible = 1;
          if ( context.isSpaRequest( ) )
          {
             enableJsOutput();
@@ -1889,18 +2204,19 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRIDEXTAUTHTYPES_nFirstRecordOnPage"},{"av":"GRIDEXTAUTHTYPES_nEOF"},{"av":"AV18IDP_State","fld":"vIDP_STATE"},{"av":"AV28RememberMe","fld":"vREMEMBERME"},{"av":"AV23KeepMeLoggedIn","fld":"vKEEPMELOGGEDIN"},{"av":"AV8AuxUserName","fld":"vAUXUSERNAME","hsh":true},{"av":"AV33UserRememberMe","fld":"vUSERREMEMBERME","pic":"Z9","hsh":true},{"av":"AV24Language","fld":"vLANGUAGE","hsh":true}]""");
-         setEventMetadata("REFRESH",""","oparms":[{"av":"subGridextauthtypes_Visible","ctrl":"GRIDEXTAUTHTYPES","prop":"Visible"},{"av":"edtavUsername_Invitemessage","ctrl":"vUSERNAME","prop":"Invitemessage"},{"av":"AV18IDP_State","fld":"vIDP_STATE"},{"av":"AV32UserPassword","fld":"vUSERPASSWORD"},{"av":"cmbavLogonto"},{"av":"AV26LogOnTo","fld":"vLOGONTO"},{"av":"AV24Language","fld":"vLANGUAGE","hsh":true},{"av":"AV31UserName","fld":"vUSERNAME"},{"av":"AV28RememberMe","fld":"vREMEMBERME"},{"av":"chkavKeepmeloggedin.Visible","ctrl":"vKEEPMELOGGEDIN","prop":"Visible"},{"av":"chkavRememberme.Visible","ctrl":"vREMEMBERME","prop":"Visible"},{"av":"edtavUserpassword_Visible","ctrl":"vUSERPASSWORD","prop":"Visible"},{"ctrl":"LOGIN","prop":"Caption"},{"av":"lblTbforgotpwd_Visible","ctrl":"TBFORGOTPWD","prop":"Visible"},{"av":"divTablecreateaccount_Visible","ctrl":"TABLECREATEACCOUNT","prop":"Visible"}]}""");
-         setEventMetadata("GRIDEXTAUTHTYPES.LOAD","""{"handler":"E180P2","iparms":[{"av":"divTblexternalsauth_Visible","ctrl":"TBLEXTERNALSAUTH","prop":"Visible"}]""");
-         setEventMetadata("GRIDEXTAUTHTYPES.LOAD",""","oparms":[{"av":"AV27NameAuthType","fld":"vNAMEAUTHTYPE","hsh":true},{"ctrl":"EXTERNALAUTHENTICATION","prop":"Caption"},{"ctrl":"EXTERNALAUTHENTICATION","prop":"Tooltiptext"},{"av":"divTblexternalsauth_Visible","ctrl":"TBLEXTERNALSAUTH","prop":"Visible"}]}""");
-         setEventMetadata("VLOGONTO.CLICK","""{"handler":"E110P2","iparms":[{"av":"AV24Language","fld":"vLANGUAGE","hsh":true},{"av":"cmbavLogonto"},{"av":"AV26LogOnTo","fld":"vLOGONTO"}]""");
-         setEventMetadata("VLOGONTO.CLICK",""","oparms":[{"av":"edtavUserpassword_Visible","ctrl":"vUSERPASSWORD","prop":"Visible"},{"av":"edtavUserpassword_Invitemessage","ctrl":"vUSERPASSWORD","prop":"Invitemessage"},{"ctrl":"LOGIN","prop":"Caption"},{"av":"lblTbforgotpwd_Visible","ctrl":"TBFORGOTPWD","prop":"Visible"},{"av":"divTablecreateaccount_Visible","ctrl":"TABLECREATEACCOUNT","prop":"Visible"}]}""");
-         setEventMetadata("ENTER","""{"handler":"E120P2","iparms":[{"av":"AV23KeepMeLoggedIn","fld":"vKEEPMELOGGEDIN"},{"av":"AV28RememberMe","fld":"vREMEMBERME"},{"av":"cmbavLogonto"},{"av":"AV26LogOnTo","fld":"vLOGONTO"},{"av":"AV31UserName","fld":"vUSERNAME"},{"av":"AV32UserPassword","fld":"vUSERPASSWORD"},{"av":"AV18IDP_State","fld":"vIDP_STATE"}]""");
-         setEventMetadata("ENTER",""","oparms":[{"av":"AV18IDP_State","fld":"vIDP_STATE"},{"av":"AV32UserPassword","fld":"vUSERPASSWORD"}]}""");
-         setEventMetadata("'FORGOTPASSWORD'","""{"handler":"E130P2","iparms":[{"av":"AV18IDP_State","fld":"vIDP_STATE"}]""");
-         setEventMetadata("'FORGOTPASSWORD'",""","oparms":[{"av":"AV18IDP_State","fld":"vIDP_STATE"}]}""");
-         setEventMetadata("'REGISTER'","""{"handler":"E140P2","iparms":[]}""");
-         setEventMetadata("'SELECTAUTHENTICATIONTYPE'","""{"handler":"E150P2","iparms":[{"av":"AV23KeepMeLoggedIn","fld":"vKEEPMELOGGEDIN"},{"av":"AV28RememberMe","fld":"vREMEMBERME"},{"av":"AV27NameAuthType","fld":"vNAMEAUTHTYPE","hsh":true},{"av":"AV31UserName","fld":"vUSERNAME"},{"av":"AV32UserPassword","fld":"vUSERPASSWORD"}]}""");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRIDAUTHTYPES_nFirstRecordOnPage"},{"av":"GRIDAUTHTYPES_nEOF"},{"av":"cmbavTypeauthtype"},{"av":"edtavNameauthtype_Visible","ctrl":"vNAMEAUTHTYPE","prop":"Visible"},{"av":"AV23KeepMeLoggedIn","fld":"vKEEPMELOGGEDIN"},{"av":"AV28RememberMe","fld":"vREMEMBERME"},{"av":"AV24Language","fld":"vLANGUAGE","hsh":true},{"av":"AV8AuxUserName","fld":"vAUXUSERNAME","hsh":true},{"av":"AV33UserRememberMe","fld":"vUSERREMEMBERME","pic":"Z9","hsh":true}]""");
+         setEventMetadata("REFRESH",""","oparms":[{"av":"AV32UserPassword","fld":"vUSERPASSWORD"},{"av":"cmbavLogonto"},{"av":"AV26LogOnTo","fld":"vLOGONTO"},{"av":"subGridauthtypes_Visible","ctrl":"GRIDAUTHTYPES","prop":"Visible"},{"av":"AV31UserName","fld":"vUSERNAME"},{"av":"AV28RememberMe","fld":"vREMEMBERME"},{"av":"chkavKeepmeloggedin.Visible","ctrl":"vKEEPMELOGGEDIN","prop":"Visible"},{"av":"chkavRememberme.Visible","ctrl":"vREMEMBERME","prop":"Visible"},{"av":"edtavUserpassword_Visible","ctrl":"vUSERPASSWORD","prop":"Visible"},{"ctrl":"BTNENTER","prop":"Caption"},{"av":"lblForgotpassword_Visible","ctrl":"FORGOTPASSWORD","prop":"Visible"}]}""");
+         setEventMetadata("GRIDAUTHTYPES.LOAD","""{"handler":"E150P2","iparms":[{"av":"divTablebuttons_Visible","ctrl":"TABLEBUTTONS","prop":"Visible"}]""");
+         setEventMetadata("GRIDAUTHTYPES.LOAD",""","oparms":[{"av":"AV109ImageAuthType","fld":"vIMAGEAUTHTYPE"},{"av":"cmbavTypeauthtype"},{"av":"AV110TypeAuthType","fld":"vTYPEAUTHTYPE"},{"av":"AV27NameAuthType","fld":"vNAMEAUTHTYPE"},{"av":"edtavImageauthtype_Tooltiptext","ctrl":"vIMAGEAUTHTYPE","prop":"Tooltiptext"},{"av":"divTablebuttons_Visible","ctrl":"TABLEBUTTONS","prop":"Visible"}]}""");
+         setEventMetadata("ENTER","""{"handler":"E110P2","iparms":[{"av":"AV23KeepMeLoggedIn","fld":"vKEEPMELOGGEDIN"},{"av":"AV28RememberMe","fld":"vREMEMBERME"},{"av":"cmbavLogonto"},{"av":"AV26LogOnTo","fld":"vLOGONTO"},{"av":"AV31UserName","fld":"vUSERNAME"},{"av":"AV32UserPassword","fld":"vUSERPASSWORD"},{"av":"AV123WWPContext","fld":"vWWPCONTEXT"},{"av":"AV18IDP_State","fld":"vIDP_STATE"}]""");
+         setEventMetadata("ENTER",""","oparms":[{"av":"AV123WWPContext","fld":"vWWPCONTEXT"},{"av":"AV18IDP_State","fld":"vIDP_STATE"},{"av":"AV32UserPassword","fld":"vUSERPASSWORD"}]}""");
+         setEventMetadata("VIMAGEAUTHTYPE.CLICK","""{"handler":"E170P2","iparms":[{"av":"AV27NameAuthType","fld":"vNAMEAUTHTYPE"},{"av":"AV31UserName","fld":"vUSERNAME"},{"av":"AV32UserPassword","fld":"vUSERPASSWORD"}]}""");
+         setEventMetadata("VLOGONTO.CLICK","""{"handler":"E120P2","iparms":[{"av":"AV24Language","fld":"vLANGUAGE","hsh":true},{"av":"cmbavLogonto"},{"av":"AV26LogOnTo","fld":"vLOGONTO"}]""");
+         setEventMetadata("VLOGONTO.CLICK",""","oparms":[{"av":"edtavUserpassword_Visible","ctrl":"vUSERPASSWORD","prop":"Visible"},{"av":"edtavUserpassword_Invitemessage","ctrl":"vUSERPASSWORD","prop":"Invitemessage"},{"ctrl":"BTNENTER","prop":"Caption"},{"av":"lblForgotpassword_Visible","ctrl":"FORGOTPASSWORD","prop":"Visible"},{"av":"chkavRememberme.Visible","ctrl":"vREMEMBERME","prop":"Visible"},{"av":"chkavKeepmeloggedin.Visible","ctrl":"vKEEPMELOGGEDIN","prop":"Visible"}]}""");
+         setEventMetadata("FORGOTPASSWORD.CLICK","""{"handler":"E130P2","iparms":[{"av":"AV18IDP_State","fld":"vIDP_STATE"}]""");
+         setEventMetadata("FORGOTPASSWORD.CLICK",""","oparms":[{"av":"AV18IDP_State","fld":"vIDP_STATE"}]}""");
+         setEventMetadata("'SELECTAUTHENTICATIONTYPE'","""{"handler":"E180P2","iparms":[{"av":"AV27NameAuthType","fld":"vNAMEAUTHTYPE"},{"av":"AV31UserName","fld":"vUSERNAME"},{"av":"AV32UserPassword","fld":"vUSERPASSWORD"}]}""");
+         setEventMetadata("VALIDV_TYPEAUTHTYPE","""{"handler":"Validv_Typeauthtype","iparms":[]}""");
          setEventMetadata("NULL","""{"handler":"Validv_Nameauthtype","iparms":[]}""");
          return  ;
       }
@@ -1918,206 +2234,242 @@ namespace GeneXus.Programs {
       {
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
-         AV18IDP_State = "";
-         AV8AuxUserName = "";
          AV24Language = "";
+         AV8AuxUserName = "";
          sDynURL = "";
          FormProcess = "";
          bodyStyle = "";
          GXKey = "";
+         AV123WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
+         AV18IDP_State = "";
          GX_FocusControl = "";
+         Form = new GXWebForm();
          sPrefix = "";
-         lblTbtitle_Jsonclick = "";
-         lblTbcurrentrepository_Jsonclick = "";
-         lblTbhaveaccount_Jsonclick = "";
-         lblTbregister_Jsonclick = "";
+         ClassString = "";
+         imgLogologin_gximage = "";
+         StyleString = "";
+         sImgUrl = "";
          TempTags = "";
          AV26LogOnTo = "";
+         lblCurrentrepository_Jsonclick = "";
          AV31UserName = "";
          AV32UserPassword = "";
-         lblTbforgotpwd_Jsonclick = "";
-         ClassString = "";
-         StyleString = "";
-         bttLogin_Jsonclick = "";
-         lblTbexternalauthentication_Jsonclick = "";
-         GridextauthtypesContainer = new GXWebGrid( context);
+         lblForgotpassword_Jsonclick = "";
+         bttBtnenter_Jsonclick = "";
+         lblLoginwith_Jsonclick = "";
+         GridauthtypesContainer = new GXWebGrid( context);
          sStyleString = "";
-         Form = new GXWebForm();
+         ucWwputilities = new GXUserControl();
+         AV30URL = "";
          sEvt = "";
          EvtGridId = "";
          EvtRowId = "";
          sEvtType = "";
+         AV109ImageAuthType = "";
+         AV129Imageauthtype_GXI = "";
+         AV110TypeAuthType = "";
          AV27NameAuthType = "";
          AV29RepositoryGUID = "";
-         AV103GAMErrorCollection = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError>( context, "GeneXus.Programs.genexussecurity.SdtGAMError", "GeneXus.Programs");
+         AV112Errors = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError>( context, "GeneXus.Programs.genexussecurity.SdtGAMError", "GeneXus.Programs");
          AV9ConnectionInfoCollection = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMConnectionInfo>( context, "GeneXus.Programs.genexussecurity.SdtGAMConnectionInfo", "GeneXus.Programs");
-         AV15GAMRepository = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context);
-         GXEncryptionTmp = "";
-         AV105GAMSession = new GeneXus.Programs.genexussecurity.SdtGAMSession(context);
-         AV104GAMErrorDelete = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError>( context, "GeneXus.Programs.genexussecurity.SdtGAMError", "GeneXus.Programs");
-         AV30URL = "";
          AV7AuthenticationTypes = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSimple>( context, "GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSimple", "GeneXus.Programs");
          AV6AuthenticationType = new GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSimple(context);
-         GridextauthtypesRow = new GXWebRow();
+         GridauthtypesRow = new GXWebRow();
          AV5AdditionalParameter = new GeneXus.Programs.genexussecurity.SdtGAMLoginAdditionalParameters(context);
-         AV102GAMError = new GeneXus.Programs.genexussecurity.SdtGAMError(context);
+         AV127LoggedInUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
+         AV124GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
+         GXEncryptionTmp = "";
+         AV113ErrorsLogin = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError>( context, "GeneXus.Programs.genexussecurity.SdtGAMError", "GeneXus.Programs");
+         AV117Session = new GeneXus.Programs.genexussecurity.SdtGAMSession(context);
+         AV116Repository = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context);
+         AV15GAMRepository = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context);
+         AV111Error = new GeneXus.Programs.genexussecurity.SdtGAMError(context);
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
-         subGridextauthtypes_Linesclass = "";
-         bttExternalauthentication_Jsonclick = "";
+         subGridauthtypes_Linesclass = "";
+         GridauthtypesColumn = new GXWebColumn();
+         GXCCtl = "";
          ROClassString = "";
-         subGridextauthtypes_Header = "";
-         GridextauthtypesColumn = new GXWebColumn();
+         subGridauthtypes_Header = "";
          /* GeneXus formulas. */
-         edtavNameauthtype_Enabled = 0;
       }
 
       private short nGotPars ;
       private short GxWebError ;
       private short AV33UserRememberMe ;
+      private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
       private short nDonePA ;
-      private short subGridextauthtypes_Backcolorstyle ;
-      private short GRIDEXTAUTHTYPES_nEOF ;
+      private short subGridauthtypes_Backcolorstyle ;
+      private short AV126NumericValue ;
+      private short GRIDAUTHTYPES_nEOF ;
       private short nGXWrapped ;
-      private short subGridextauthtypes_Backstyle ;
-      private short subGridextauthtypes_Allowselection ;
-      private short subGridextauthtypes_Allowhovering ;
-      private short subGridextauthtypes_Allowcollapsing ;
-      private short subGridextauthtypes_Collapsed ;
-      private int divTblexternalsauth_Visible ;
-      private int nRC_GXsfl_62 ;
-      private int subGridextauthtypes_Recordcount ;
-      private int nGXsfl_62_idx=1 ;
-      private int edtavNameauthtype_Enabled ;
-      private int lblTbcurrentrepository_Visible ;
-      private int divTablecreateaccount_Visible ;
+      private short subGridauthtypes_Backstyle ;
+      private short subGridauthtypes_Allowselection ;
+      private short subGridauthtypes_Allowhovering ;
+      private short subGridauthtypes_Allowcollapsing ;
+      private short subGridauthtypes_Collapsed ;
+      private int edtavNameauthtype_Visible ;
+      private int divTablebuttons_Visible ;
+      private int nRC_GXsfl_54 ;
+      private int subGridauthtypes_Recordcount ;
+      private int nGXsfl_54_idx=1 ;
+      private int subGridauthtypes_Visible ;
+      private int lblCurrentrepository_Visible ;
       private int edtavUsername_Enabled ;
       private int edtavUserpassword_Visible ;
       private int edtavUserpassword_Enabled ;
-      private int lblTbforgotpwd_Visible ;
-      private int subGridextauthtypes_Visible ;
-      private int subGridextauthtypes_Islastpage ;
-      private int AV108GXV1 ;
-      private int AV109GXV2 ;
-      private int AV110GXV3 ;
-      private int AV111GXV4 ;
-      private int AV112GXV5 ;
+      private int lblForgotpassword_Visible ;
+      private int edtavUrl_Visible ;
+      private int subGridauthtypes_Islastpage ;
+      private int AV128GXV1 ;
+      private int AV130GXV2 ;
+      private int AV131GXV3 ;
+      private int AV132GXV4 ;
+      private int AV133GXV5 ;
       private int idxLst ;
-      private int subGridextauthtypes_Backcolor ;
-      private int subGridextauthtypes_Allbackcolor ;
-      private int subGridextauthtypes_Selectedindex ;
-      private int subGridextauthtypes_Selectioncolor ;
-      private int subGridextauthtypes_Hoveringcolor ;
-      private long GRIDEXTAUTHTYPES_nCurrentRecord ;
-      private long GRIDEXTAUTHTYPES_nFirstRecordOnPage ;
+      private int subGridauthtypes_Backcolor ;
+      private int subGridauthtypes_Allbackcolor ;
+      private int subGridauthtypes_Selectedindex ;
+      private int subGridauthtypes_Selectioncolor ;
+      private int subGridauthtypes_Hoveringcolor ;
+      private long GRIDAUTHTYPES_nCurrentRecord ;
+      private long GRIDAUTHTYPES_nFirstRecordOnPage ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
-      private string sGXsfl_62_idx="0001" ;
-      private string AV18IDP_State ;
-      private string AV24Language ;
+      private string sGXsfl_54_idx="0001" ;
+      private string cmbavTypeauthtype_Internalname ;
       private string edtavNameauthtype_Internalname ;
+      private string AV24Language ;
       private string sDynURL ;
       private string FormProcess ;
       private string bodyStyle ;
       private string GXKey ;
+      private string AV18IDP_State ;
+      private string Wwputilities_Comboloadtype ;
+      private string subGridauthtypes_Class ;
       private string GX_FocusControl ;
       private string sPrefix ;
-      private string divMaintable_Internalname ;
-      private string lblTbtitle_Internalname ;
-      private string lblTbtitle_Jsonclick ;
-      private string lblTbcurrentrepository_Internalname ;
-      private string lblTbcurrentrepository_Caption ;
-      private string lblTbcurrentrepository_Jsonclick ;
-      private string divTablecreateaccount_Internalname ;
-      private string lblTbhaveaccount_Internalname ;
-      private string lblTbhaveaccount_Jsonclick ;
-      private string lblTbregister_Internalname ;
-      private string lblTbregister_Jsonclick ;
+      private string divLayoutmaintable_Internalname ;
+      private string divLayoutmaintable_Class ;
+      private string divTablemain_Internalname ;
+      private string divTablelogincontent_Internalname ;
+      private string divTablelogin_Internalname ;
+      private string ClassString ;
+      private string imgLogologin_gximage ;
+      private string StyleString ;
+      private string sImgUrl ;
+      private string imgLogologin_Internalname ;
+      private string divUnnamedtable1_Internalname ;
       private string cmbavLogonto_Internalname ;
       private string TempTags ;
-      private string AV26LogOnTo ;
       private string cmbavLogonto_Jsonclick ;
+      private string divCurrentrepositorycell_Internalname ;
+      private string lblCurrentrepository_Internalname ;
+      private string lblCurrentrepository_Caption ;
+      private string lblCurrentrepository_Jsonclick ;
       private string edtavUsername_Internalname ;
-      private string edtavUsername_Invitemessage ;
       private string edtavUsername_Jsonclick ;
       private string edtavUserpassword_Internalname ;
       private string AV32UserPassword ;
       private string edtavUserpassword_Invitemessage ;
       private string edtavUserpassword_Jsonclick ;
-      private string lblTbforgotpwd_Internalname ;
-      private string lblTbforgotpwd_Jsonclick ;
-      private string chkavRememberme_Internalname ;
-      private string ClassString ;
-      private string StyleString ;
-      private string divTblloginbutton_Internalname ;
+      private string lblForgotpassword_Internalname ;
+      private string lblForgotpassword_Jsonclick ;
+      private string divKeepmeloggedin_cell_Internalname ;
+      private string divKeepmeloggedin_cell_Class ;
       private string chkavKeepmeloggedin_Internalname ;
-      private string bttLogin_Internalname ;
-      private string bttLogin_Caption ;
-      private string bttLogin_Jsonclick ;
-      private string divTblexternalsauth_Internalname ;
-      private string lblTbexternalauthentication_Internalname ;
-      private string lblTbexternalauthentication_Jsonclick ;
+      private string divRememberme_cell_Internalname ;
+      private string divRememberme_cell_Class ;
+      private string chkavRememberme_Internalname ;
+      private string bttBtnenter_Internalname ;
+      private string bttBtnenter_Caption ;
+      private string bttBtnenter_Jsonclick ;
+      private string divTablebuttons_Internalname ;
+      private string lblLoginwith_Internalname ;
+      private string lblLoginwith_Jsonclick ;
       private string sStyleString ;
-      private string subGridextauthtypes_Internalname ;
+      private string subGridauthtypes_Internalname ;
+      private string Wwputilities_Internalname ;
+      private string divHtml_bottomauxiliarcontrols_Internalname ;
+      private string edtavUrl_Internalname ;
+      private string edtavUrl_Jsonclick ;
       private string sEvt ;
       private string EvtGridId ;
       private string EvtRowId ;
       private string sEvtType ;
+      private string edtavImageauthtype_Internalname ;
+      private string AV110TypeAuthType ;
       private string AV27NameAuthType ;
       private string AV29RepositoryGUID ;
+      private string edtavImageauthtype_gximage ;
+      private string edtavImageauthtype_Tooltiptext ;
       private string GXEncryptionTmp ;
-      private string bttExternalauthentication_Caption ;
-      private string bttExternalauthentication_Internalname ;
-      private string bttExternalauthentication_Tooltiptext ;
-      private string sGXsfl_62_fel_idx="0001" ;
-      private string subGridextauthtypes_Class ;
-      private string subGridextauthtypes_Linesclass ;
-      private string divTblgridextauthtypes_Internalname ;
-      private string bttExternalauthentication_Jsonclick ;
+      private string sGXsfl_54_fel_idx="0001" ;
+      private string subGridauthtypes_Linesclass ;
+      private string tblUnnamedtablefsgridauthtypes_Internalname ;
+      private string edtavImageauthtype_Jsonclick ;
+      private string tblUnnamedtablecontentfsgridauthtypes_Internalname ;
+      private string GXCCtl ;
+      private string cmbavTypeauthtype_Jsonclick ;
       private string ROClassString ;
       private string edtavNameauthtype_Jsonclick ;
-      private string subGridextauthtypes_Header ;
+      private string subGridauthtypes_Header ;
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
-      private bool AV28RememberMe ;
+      private bool bGXsfl_54_Refreshing=false ;
       private bool AV23KeepMeLoggedIn ;
-      private bool bGXsfl_62_Refreshing=false ;
+      private bool AV28RememberMe ;
+      private bool Wwputilities_Enablefixobjectfitcover ;
+      private bool Wwputilities_Enableconvertcombotobootstrapselect ;
+      private bool Wwputilities_Allowcolumnresizing ;
+      private bool Wwputilities_Allowcolumnreordering ;
+      private bool Wwputilities_Allowcolumnsrestore ;
       private bool wbLoad ;
       private bool Rfr0gs ;
       private bool wbErr ;
       private bool gxdyncontrolsrefreshing ;
       private bool returnInSub ;
       private bool AV19isConnectionOK ;
+      private bool AV25LoginOK ;
       private bool gx_refresh_fired ;
-      private bool AV106hasErrors ;
-      private bool AV107isValidSession ;
+      private bool AV114isRedirect ;
+      private bool AV118SessionValid ;
       private bool AV21isOK ;
       private bool AV20isModeOTP ;
-      private bool AV25LoginOK ;
+      private bool AV109ImageAuthType_IsBlob ;
       private string AV8AuxUserName ;
+      private string AV26LogOnTo ;
       private string AV31UserName ;
       private string AV30URL ;
-      private GXWebGrid GridextauthtypesContainer ;
-      private GXWebRow GridextauthtypesRow ;
-      private GXWebColumn GridextauthtypesColumn ;
+      private string AV129Imageauthtype_GXI ;
+      private string AV109ImageAuthType ;
+      private GXWebGrid GridauthtypesContainer ;
+      private GXWebRow GridauthtypesRow ;
+      private GXWebColumn GridauthtypesColumn ;
+      private GXUserControl ucWwputilities ;
       private GXWebForm Form ;
       private IGxDataStore dsDataStore1 ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXCombobox cmbavLogonto ;
-      private GXCheckbox chkavRememberme ;
       private GXCheckbox chkavKeepmeloggedin ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV103GAMErrorCollection ;
+      private GXCheckbox chkavRememberme ;
+      private GXCombobox cmbavTypeauthtype ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV123WWPContext ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV112Errors ;
       private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMConnectionInfo> AV9ConnectionInfoCollection ;
-      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV15GAMRepository ;
-      private GeneXus.Programs.genexussecurity.SdtGAMSession AV105GAMSession ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV104GAMErrorDelete ;
       private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSimple> AV7AuthenticationTypes ;
       private GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSimple AV6AuthenticationType ;
       private GeneXus.Programs.genexussecurity.SdtGAMLoginAdditionalParameters AV5AdditionalParameter ;
-      private GeneXus.Programs.genexussecurity.SdtGAMError AV102GAMError ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV127LoggedInUser ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV124GAMUser ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV113ErrorsLogin ;
+      private GeneXus.Programs.genexussecurity.SdtGAMSession AV117Session ;
+      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV116Repository ;
+      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV15GAMRepository ;
+      private GeneXus.Programs.genexussecurity.SdtGAMError AV111Error ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
    }

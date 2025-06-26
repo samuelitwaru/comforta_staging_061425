@@ -134,17 +134,17 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
             AV92DynamicFormNumber = "#" + StringUtil.Trim( StringUtil.Str( (decimal)(AV10WWPFormInstance.gxTpr_Wwpforminstanceid), 6, 0));
             AV95Date = StringUtil.Trim( context.localUtil.Format( AV10WWPFormInstance.gxTpr_Wwpforminstancedate, "99/99/99 99:99"));
             AV94User = AV10WWPFormInstance.gxTpr_Wwpuserextendedfullname;
-            H4X0( false, 107) ;
-            getPrinter().GxDrawRect(0, Gx_line+0, 552, Gx_line+107, 1, 0, 0, 0, 1, 34, 47, 84, 1, 1, 1, 1, 0, 0, 0, 0) ;
+            H4X0( false, 108) ;
+            getPrinter().GxDrawRect(0, Gx_line+0, 552, Gx_line+108, 1, 0, 0, 0, 1, 34, 47, 84, 1, 1, 1, 1, 0, 0, 0, 0) ;
             getPrinter().GxAttris("Microsoft Sans Serif", 8, false, false, false, false, 0, 255, 255, 255, 0, 255, 255, 255) ;
-            getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV92DynamicFormNumber, "")), 30, Gx_line+30, 422, Gx_line+44, 0, 0, 0, 0) ;
+            getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV92DynamicFormNumber, "")), 30, Gx_line+30, 422, Gx_line+45, 0, 0, 0, 0) ;
             getPrinter().GxAttris("Microsoft Sans Serif", 20, false, false, false, false, 0, 255, 255, 255, 0, 255, 255, 255) ;
-            getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV93DynamicFormDescription, "")), 30, Gx_line+44, 422, Gx_line+77, 0, 0, 0, 0) ;
+            getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV93DynamicFormDescription, "")), 30, Gx_line+45, 422, Gx_line+78, 0, 0, 0, 0) ;
             getPrinter().GxAttris("Microsoft Sans Serif", 8, false, false, false, false, 0, 255, 255, 255, 0, 255, 255, 255) ;
-            getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV94User, "")), 422, Gx_line+30, 522, Gx_line+53, 2, 0, 0, 0) ;
-            getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV95Date, "")), 422, Gx_line+53, 522, Gx_line+77, 2, 0, 0, 0) ;
+            getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV94User, "")), 422, Gx_line+30, 522, Gx_line+54, 2, 0, 0, 0) ;
+            getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV95Date, "")), 422, Gx_line+54, 522, Gx_line+78, 2, 0, 0, 0) ;
             Gx_OldLine = Gx_line;
-            Gx_line = (int)(Gx_line+107);
+            Gx_line = (int)(Gx_line+108);
             new GeneXus.Programs.workwithplus.dynamicforms.wwp_getelementsforreport(context ).execute(  AV10WWPFormInstance,  0,  0,  true, ref  AV86WWPFormElements) ;
             AV13AuxNum = 1.1m;
             AV61SeparatorChar = StringUtil.Trim( context.localUtil.Format( AV13AuxNum, "9.9"));
@@ -327,15 +327,15 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
                   AV101Booleanlabel_GXI = AV100Booleantitle_GXI;
                   AV49Label2 = A229WWPFormElementTitle;
                   AV15BooleanLabel_ControlTitle = AV19BooleanTitle_ControlTitle;
-                  H4X0( false, 31) ;
+                  H4X0( false, 32) ;
                   getPrinter().GxAttris("Microsoft Sans Serif", 9, true, false, false, false, 0, 105, 101, 103, 0, 255, 255, 255) ;
-                  getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV49Label2, "")), 0, Gx_line+0, 205, Gx_line+16, 2, 0, 0, 0) ;
+                  getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV49Label2, "")), 0, Gx_line+0, 205, Gx_line+17, 2, 0, 0, 0) ;
                   sImgUrl = (String.IsNullOrEmpty(StringUtil.RTrim( AV14BooleanLabel)) ? AV101Booleanlabel_GXI : AV14BooleanLabel);
-                  getPrinter().GxDrawBitMap(sImgUrl, 220, Gx_line+0, 237, Gx_line+16) ;
+                  getPrinter().GxDrawBitMap(sImgUrl, 220, Gx_line+0, 237, Gx_line+17) ;
                   getPrinter().GxAttris("Microsoft Sans Serif", 8, false, false, false, false, 0, 0, 0, 0, 0, 255, 255, 255) ;
-                  getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV15BooleanLabel_ControlTitle, "")), 247, Gx_line+0, 552, Gx_line+16, 0, 0, 0, 0) ;
+                  getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV15BooleanLabel_ControlTitle, "")), 247, Gx_line+0, 552, Gx_line+17, 0, 0, 0, 0) ;
                   Gx_OldLine = Gx_line;
-                  Gx_line = (int)(Gx_line+31);
+                  Gx_line = (int)(Gx_line+32);
                }
                else
                {
@@ -500,14 +500,14 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
                      AV57Lines2 = GXt_int1;
                      if ( ( AV56Lines <= 1 ) && ( AV57Lines2 <= 1 ) )
                      {
-                        H4X0( false, 41) ;
+                        H4X0( false, 42) ;
                         getPrinter().GxAttris("Microsoft Sans Serif", 9, true, false, false, false, 0, 105, 101, 103, 0, 255, 255, 255) ;
-                        getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV47Label, "")), 0, Gx_line+5, 205, Gx_line+21, 2+16, 0, 0, 0) ;
-                        getPrinter().GxDrawRect(220, Gx_line+0, 552, Gx_line+26, 1, 0, 0, 0, 1, 243, 243, 243, 1, 1, 1, 1, 0, 0, 0, 0) ;
+                        getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV47Label, "")), 0, Gx_line+5, 205, Gx_line+22, 2+16, 0, 0, 0) ;
+                        getPrinter().GxDrawRect(220, Gx_line+0, 552, Gx_line+27, 1, 0, 0, 0, 1, 243, 243, 243, 1, 1, 1, 1, 0, 0, 0, 0) ;
                         getPrinter().GxAttris("Microsoft Sans Serif", 8, false, false, false, false, 0, 0, 0, 0, 0, 255, 255, 255) ;
-                        getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV31DataLabel, "")), 230, Gx_line+5, 552, Gx_line+21, 0+16, 0, 0, 0) ;
+                        getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV31DataLabel, "")), 230, Gx_line+5, 552, Gx_line+22, 0+16, 0, 0, 0) ;
                         Gx_OldLine = Gx_line;
-                        Gx_line = (int)(Gx_line+41);
+                        Gx_line = (int)(Gx_line+42);
                      }
                      else if ( ( AV56Lines <= 2 ) && ( AV57Lines2 <= 2 ) )
                      {
@@ -606,12 +606,12 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
                               Gx_OldLine = Gx_line;
                               Gx_line = (int)(Gx_line+1);
                            }
-                           H4X0( false, 38) ;
+                           H4X0( false, 39) ;
                            getPrinter().GxAttris("Microsoft Sans Serif", 9, false, false, false, false, 0, 0, 128, 128, 0, 255, 255, 255) ;
-                           getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV66Title_OneColumn, "")), 0, Gx_line+10, 552, Gx_line+26, 0, 0, 0, 0) ;
-                           getPrinter().GxDrawLine(0, Gx_line+32, 552, Gx_line+32, 2, 0, 128, 128, 0) ;
+                           getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV66Title_OneColumn, "")), 0, Gx_line+10, 552, Gx_line+27, 0, 0, 0, 0) ;
+                           getPrinter().GxDrawLine(0, Gx_line+33, 552, Gx_line+33, 2, 0, 128, 128, 0) ;
                            Gx_OldLine = Gx_line;
-                           Gx_line = (int)(Gx_line+38);
+                           Gx_line = (int)(Gx_line+39);
                         }
                      }
                      AV25Data_OneColumn = AV37DataTitle;
@@ -627,11 +627,11 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
                            Gx_OldLine = Gx_line;
                            Gx_line = (int)(Gx_line+1);
                         }
-                        H4X0( false, 31) ;
+                        H4X0( false, 32) ;
                         getPrinter().GxAttris("Microsoft Sans Serif", 9, false, false, false, false, 0, 0, 0, 0, 0, 255, 255, 255) ;
-                        getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV25Data_OneColumn, "")), 0, Gx_line+10, 552, Gx_line+26, 0, 0, 0, 0) ;
+                        getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV25Data_OneColumn, "")), 0, Gx_line+10, 552, Gx_line+27, 0, 0, 0, 0) ;
                         Gx_OldLine = Gx_line;
-                        Gx_line = (int)(Gx_line+31);
+                        Gx_line = (int)(Gx_line+32);
                      }
                   }
                   else if ( AV20column == 2 )
@@ -643,13 +643,13 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
                         AV63Title_FourColumns2 = AV71Title_TwoColumns2;
                         if ( AV12AmountOfElementsOfGrid == 2 )
                         {
-                           H4X0( false, 38) ;
+                           H4X0( false, 39) ;
                            getPrinter().GxAttris("Microsoft Sans Serif", 9, false, false, false, false, 0, 0, 128, 128, 0, 255, 255, 255) ;
-                           getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV70Title_TwoColumns1, "")), 0, Gx_line+10, 276, Gx_line+26, 0, 0, 0, 0) ;
-                           getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV71Title_TwoColumns2, "")), 276, Gx_line+10, 552, Gx_line+26, 0, 0, 0, 0) ;
-                           getPrinter().GxDrawLine(0, Gx_line+32, 552, Gx_line+32, 2, 0, 128, 128, 0) ;
+                           getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV70Title_TwoColumns1, "")), 0, Gx_line+10, 276, Gx_line+27, 0, 0, 0, 0) ;
+                           getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV71Title_TwoColumns2, "")), 276, Gx_line+10, 552, Gx_line+27, 0, 0, 0, 0) ;
+                           getPrinter().GxDrawLine(0, Gx_line+33, 552, Gx_line+33, 2, 0, 128, 128, 0) ;
                            Gx_OldLine = Gx_line;
-                           Gx_line = (int)(Gx_line+38);
+                           Gx_line = (int)(Gx_line+39);
                         }
                      }
                      AV30Data_TwoColumns2 = AV37DataTitle;
@@ -664,12 +664,12 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
                            Gx_OldLine = Gx_line;
                            Gx_line = (int)(Gx_line+1);
                         }
-                        H4X0( false, 31) ;
+                        H4X0( false, 32) ;
                         getPrinter().GxAttris("Microsoft Sans Serif", 9, false, false, false, false, 0, 0, 0, 0, 0, 255, 255, 255) ;
-                        getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV29Data_TwoColumns1, "")), 0, Gx_line+10, 276, Gx_line+26, 0, 0, 0, 0) ;
-                        getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV30Data_TwoColumns2, "")), 276, Gx_line+10, 552, Gx_line+26, 0, 0, 0, 0) ;
+                        getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV29Data_TwoColumns1, "")), 0, Gx_line+10, 276, Gx_line+27, 0, 0, 0, 0) ;
+                        getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV30Data_TwoColumns2, "")), 276, Gx_line+10, 552, Gx_line+27, 0, 0, 0, 0) ;
                         Gx_OldLine = Gx_line;
-                        Gx_line = (int)(Gx_line+31);
+                        Gx_line = (int)(Gx_line+32);
                      }
                   }
                   else if ( AV20column == 3 )
@@ -680,14 +680,14 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
                         AV64Title_FourColumns3 = AV69Title_ThreeColumns3;
                         if ( AV12AmountOfElementsOfGrid == 3 )
                         {
-                           H4X0( false, 33) ;
+                           H4X0( false, 34) ;
                            getPrinter().GxAttris("Microsoft Sans Serif", 9, false, false, false, false, 0, 0, 128, 128, 0, 255, 255, 255) ;
-                           getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV67Title_ThreeColumns1, "")), 0, Gx_line+10, 184, Gx_line+26, 0, 0, 0, 0) ;
-                           getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV68Title_ThreeColumns2, "")), 184, Gx_line+10, 368, Gx_line+26, 0, 0, 0, 0) ;
-                           getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV69Title_ThreeColumns3, "")), 368, Gx_line+10, 552, Gx_line+26, 0, 0, 0, 0) ;
-                           getPrinter().GxDrawLine(0, Gx_line+32, 552, Gx_line+32, 2, 0, 128, 128, 0) ;
+                           getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV67Title_ThreeColumns1, "")), 0, Gx_line+10, 184, Gx_line+27, 0, 0, 0, 0) ;
+                           getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV68Title_ThreeColumns2, "")), 184, Gx_line+10, 368, Gx_line+27, 0, 0, 0, 0) ;
+                           getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV69Title_ThreeColumns3, "")), 368, Gx_line+10, 552, Gx_line+27, 0, 0, 0, 0) ;
+                           getPrinter().GxDrawLine(0, Gx_line+33, 552, Gx_line+33, 2, 0, 128, 128, 0) ;
                            Gx_OldLine = Gx_line;
-                           Gx_line = (int)(Gx_line+33);
+                           Gx_line = (int)(Gx_line+34);
                         }
                      }
                      AV28Data_ThreeColumns3 = AV37DataTitle;
@@ -701,13 +701,13 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
                            Gx_OldLine = Gx_line;
                            Gx_line = (int)(Gx_line+1);
                         }
-                        H4X0( false, 32) ;
+                        H4X0( false, 33) ;
                         getPrinter().GxAttris("Microsoft Sans Serif", 9, false, false, false, false, 0, 0, 0, 0, 0, 255, 255, 255) ;
-                        getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV26Data_ThreeColumns1, "")), 0, Gx_line+8, 184, Gx_line+24, 0, 0, 0, 0) ;
-                        getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV27Data_ThreeColumns2, "")), 184, Gx_line+8, 368, Gx_line+24, 0, 0, 0, 0) ;
-                        getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV28Data_ThreeColumns3, "")), 368, Gx_line+8, 552, Gx_line+24, 0, 0, 0, 0) ;
+                        getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV26Data_ThreeColumns1, "")), 0, Gx_line+8, 184, Gx_line+25, 0, 0, 0, 0) ;
+                        getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV27Data_ThreeColumns2, "")), 184, Gx_line+8, 368, Gx_line+25, 0, 0, 0, 0) ;
+                        getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV28Data_ThreeColumns3, "")), 368, Gx_line+8, 552, Gx_line+25, 0, 0, 0, 0) ;
                         Gx_OldLine = Gx_line;
-                        Gx_line = (int)(Gx_line+32);
+                        Gx_line = (int)(Gx_line+33);
                      }
                   }
                   else if ( AV20column == 4 )
@@ -717,15 +717,15 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
                         AV65Title_FourColumns4 = A229WWPFormElementTitle;
                         if ( AV12AmountOfElementsOfGrid == 4 )
                         {
-                           H4X0( false, 34) ;
+                           H4X0( false, 35) ;
                            getPrinter().GxAttris("Microsoft Sans Serif", 9, false, false, false, false, 0, 0, 128, 128, 0, 255, 255, 255) ;
-                           getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV62Title_FourColumns1, "")), 0, Gx_line+13, 138, Gx_line+29, 0, 0, 0, 0) ;
-                           getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV63Title_FourColumns2, "")), 138, Gx_line+13, 276, Gx_line+29, 0, 0, 0, 0) ;
-                           getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV64Title_FourColumns3, "")), 276, Gx_line+13, 414, Gx_line+29, 0, 0, 0, 0) ;
-                           getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV65Title_FourColumns4, "")), 414, Gx_line+13, 552, Gx_line+29, 0, 0, 0, 0) ;
-                           getPrinter().GxDrawLine(0, Gx_line+33, 552, Gx_line+33, 2, 0, 128, 128, 0) ;
+                           getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV62Title_FourColumns1, "")), 0, Gx_line+13, 138, Gx_line+30, 0, 0, 0, 0) ;
+                           getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV63Title_FourColumns2, "")), 138, Gx_line+13, 276, Gx_line+30, 0, 0, 0, 0) ;
+                           getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV64Title_FourColumns3, "")), 276, Gx_line+13, 414, Gx_line+30, 0, 0, 0, 0) ;
+                           getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV65Title_FourColumns4, "")), 414, Gx_line+13, 552, Gx_line+30, 0, 0, 0, 0) ;
+                           getPrinter().GxDrawLine(0, Gx_line+34, 552, Gx_line+34, 2, 0, 128, 128, 0) ;
                            Gx_OldLine = Gx_line;
-                           Gx_line = (int)(Gx_line+34);
+                           Gx_line = (int)(Gx_line+35);
                         }
                      }
                      AV24Data_FourColumns4 = AV37DataTitle;
@@ -738,14 +738,14 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
                            Gx_OldLine = Gx_line;
                            Gx_line = (int)(Gx_line+1);
                         }
-                        H4X0( false, 31) ;
+                        H4X0( false, 32) ;
                         getPrinter().GxAttris("Microsoft Sans Serif", 9, false, false, false, false, 0, 0, 0, 0, 0, 255, 255, 255) ;
-                        getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV21Data_FourColumns1, "")), 0, Gx_line+10, 138, Gx_line+26, 0, 0, 0, 0) ;
-                        getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV22Data_FourColumns2, "")), 138, Gx_line+10, 276, Gx_line+26, 0, 0, 0, 0) ;
-                        getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV23Data_FourColumns3, "")), 276, Gx_line+10, 414, Gx_line+26, 0, 0, 0, 0) ;
-                        getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV24Data_FourColumns4, "")), 414, Gx_line+10, 552, Gx_line+26, 0, 0, 0, 0) ;
+                        getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV21Data_FourColumns1, "")), 0, Gx_line+10, 138, Gx_line+27, 0, 0, 0, 0) ;
+                        getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV22Data_FourColumns2, "")), 138, Gx_line+10, 276, Gx_line+27, 0, 0, 0, 0) ;
+                        getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV23Data_FourColumns3, "")), 276, Gx_line+10, 414, Gx_line+27, 0, 0, 0, 0) ;
+                        getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV24Data_FourColumns4, "")), 414, Gx_line+10, 552, Gx_line+27, 0, 0, 0, 0) ;
                         Gx_OldLine = Gx_line;
-                        Gx_line = (int)(Gx_line+31);
+                        Gx_line = (int)(Gx_line+32);
                      }
                   }
                }
@@ -794,11 +794,11 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
             AV56Lines = GXt_int1;
             if ( AV56Lines <= 1 )
             {
-               H4X0( false, 26) ;
+               H4X0( false, 27) ;
                getPrinter().GxAttris("Microsoft Sans Serif", 9, true, false, false, false, 0, 105, 101, 103, 0, 255, 255, 255) ;
-               getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV52LabelText, "")), 0, Gx_line+5, 552, Gx_line+21, 0+16, 0, 0, 0) ;
+               getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV52LabelText, "")), 0, Gx_line+5, 552, Gx_line+22, 0+16, 0, 0, 0) ;
                Gx_OldLine = Gx_line;
-               Gx_line = (int)(Gx_line+26);
+               Gx_line = (int)(Gx_line+27);
             }
             else if ( AV56Lines == 2 )
             {
@@ -951,9 +951,9 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
                   AV96PagesFooter = StringUtil.Format( context.GetMessage( "WWP_DF_Report_Page", ""), StringUtil.LTrimStr( (decimal)(Gx_page), 6, 0), "", "", "", "", "", "", "", "");
                   getPrinter().GxDrawLine(0, Gx_line+1, 552, Gx_line+1, 2, 0, 128, 128, 0) ;
                   getPrinter().GxAttris("Microsoft Sans Serif", 8, false, false, false, false, 0, 0, 0, 0, 0, 255, 255, 255) ;
-                  getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV96PagesFooter, "")), 0, Gx_line+7, 552, Gx_line+21, 2, 0, 0, 0) ;
+                  getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( AV96PagesFooter, "")), 0, Gx_line+7, 552, Gx_line+22, 2, 0, 0, 0) ;
                   Gx_OldLine = Gx_line;
-                  Gx_line = (int)(Gx_line+21);
+                  Gx_line = (int)(Gx_line+22);
                   getPrinter().GxEndPage() ;
                   if ( bFoot )
                   {

@@ -97,6 +97,7 @@ namespace GeneXus.Programs {
          AV13OrganisationId = AV24Trn_AppVersion.gxTpr_Organisationid;
          AV11BC_Trn_AppVersion.gxTpr_Appversionid = Guid.NewGuid( );
          AV11BC_Trn_AppVersion.gxTpr_Appversionname = AV22AppVersionName;
+         AV11BC_Trn_AppVersion.gxTpr_Appversionlanguage = AV24Trn_AppVersion.gxTpr_Appversionlanguage;
          AV11BC_Trn_AppVersion.gxTpr_Locationid = AV10LocationId;
          AV11BC_Trn_AppVersion.gxTpr_Organisationid = AV13OrganisationId;
          AV11BC_Trn_AppVersion.gxTpr_Isactive = false;

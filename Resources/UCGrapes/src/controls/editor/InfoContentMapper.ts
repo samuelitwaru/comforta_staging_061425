@@ -21,9 +21,6 @@ export class InfoContentMapper {
   }
 
   public contentRow(content: InfoType): any {
-    const data: any = JSON.parse(
-      localStorage.getItem(`data-${this.pageId}`) || "{}"
-    );
     const row = {
       InfoId: content.InfoId,
       InfoType: content.InfoType || "",
@@ -63,7 +60,6 @@ export class InfoContentMapper {
       // If no match found, fallback to push
       data.PageInfoStructure.InfoContent.push(newSection);
     }
-
     this.saveData(data);
   }
 
@@ -193,8 +189,6 @@ export class InfoContentMapper {
     const storageKey = `data-${this.pageId}`;
     const data: any = JSON.parse(localStorage.getItem(storageKey) || "{}");
 
-    console.log('data :>> ', data);
-
     if (!data.PageInfoStructure) return;
 
     data.PageInfoStructure.InfoContent ??= [];
@@ -234,6 +228,7 @@ export class InfoContentMapper {
       // Insert the dragged tile at the specified index
       targetSection.Tiles.splice(tileDestinationIndex, 0, {
         ...draggedTile,
+        Size: 0, // Reset size to default
         // Id: randomIdGenerator(8), // Generate a new ID for the moved tile
       });
 
@@ -249,6 +244,7 @@ export class InfoContentMapper {
     }
     // refresh updated page structure
     new ToolboxManager().applyNewState(data, this.pageId);
+    
     this.saveData(data);
   }
 
@@ -272,6 +268,7 @@ export class InfoContentMapper {
     // refresh updated page structure
     new ToolboxManager().applyNewState(data, cutPageId);
 
+    
     this.saveData(data);
   }
 
@@ -296,6 +293,7 @@ export class InfoContentMapper {
     const [contentRow] = contentArray.splice(contentRowIndex, 1);
 
     contentArray.splice(newIndex, 0, contentRow);
+    
     this.saveData(data);
   }
 
@@ -310,6 +308,7 @@ export class InfoContentMapper {
     );
     if (contentRowIndex === -1) return false;
     contentArray[contentRowIndex] = newContent;
+    
     this.saveData(data);
 
     return true;
@@ -329,17 +328,11 @@ export class InfoContentMapper {
     if (contentRowIndex === -1) return false;
 
     contentArray.splice(contentRowIndex, 1);
+    
     this.saveData(data);
 
     // trigger a grapes js deselect event
-    const grapesJsEditor = (globalThis as any).activeEditor;
-    if (grapesJsEditor) {
-      const selectedComponent = grapesJsEditor.getSelected();
-      if (selectedComponent) {
-        grapesJsEditor.select(null);
-        (globalThis as any).selectedComponent = null;
-      }
-    }
+    this.clearGJSSelected();
 
     return true;
   }
@@ -358,5 +351,16 @@ export class InfoContentMapper {
     if (contentRowIndex === -1) return null;
 
     return contentArray[contentRowIndex];
+  }
+
+  private clearGJSSelected() {
+    const grapesJsEditor = (globalThis as any).activeEditor;
+    if (grapesJsEditor) {
+      const selectedComponent = grapesJsEditor.getSelected();
+      if (selectedComponent) {
+        grapesJsEditor.select(null);
+        (globalThis as any).selectedComponent = null;
+      }
+    }
   }
 }

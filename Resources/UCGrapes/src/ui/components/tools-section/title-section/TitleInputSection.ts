@@ -1,4 +1,5 @@
 import { InfoSectionManager } from "../../../../controls/InfoSectionManager";
+import { i18n } from "../../../../i18n/i18n";
 import { capitalizeWords } from "../../../../utils/helpers";
 
 export class TitleInputSection {
@@ -11,15 +12,16 @@ export class TitleInputSection {
 
   init() {
     this.input.type = "text";
-    this.input.placeholder = "Enter a title";
+    this.input.placeholder = i18n.t("sidebar.input_place_holder");
     this.input.classList.add("tb-form-control");
     this.input.id = "tile-title";
 
     this.input.addEventListener("input", (e) => {
-      let titleValue = capitalizeWords(this.input.value)
+      e.preventDefault();
+      let titleValue = capitalizeWords(this.input.value);
       const selectedComponent = (globalThis as any).selectedComponent;
 
-      let isFirstTile =
+      const isFirstTile =
         selectedComponent.getClasses().includes("first-tile") &&
         selectedComponent.getClasses().includes("high-priority-template");
 
@@ -33,8 +35,8 @@ export class TitleInputSection {
           rowTilesLength === 3
             ? this.truncate(11)
             : rowTilesLength === 2
-            ? this.truncate(14)
-            : this.truncate(25);
+              ? this.truncate(14)
+              : this.truncate(25);
         tileTitle.components(truncatedTitle);
         tileTitle.addAttributes({ title: titleValue });
       }

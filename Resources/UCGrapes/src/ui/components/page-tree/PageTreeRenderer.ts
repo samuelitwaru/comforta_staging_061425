@@ -213,9 +213,8 @@ export class PageTreeRenderer {
 
     let pageData = `
                 <div class="tb-date-selector" 
-                  style="background-color: ${
-                    this.currentTheme.ThemeColors["backgroundColor"]
-                  };">
+                  style="background-color: ${this.currentTheme.ThemeColors["backgroundColor"]
+      };">
                   <span class="tb-arrow">❮</span>
                   <span class="tb-date-text" id="current-date" > ${this.formatDate()}</span>
                   <span class="tb-arrow">❯</span>
@@ -229,13 +228,12 @@ export class PageTreeRenderer {
                     <div class="tb-time-slot" >
                       <div class="tb-time" >${formattedHour}</div>
                       <div class="tb-events" ></div>
-                      ${
-                        hour === new Date().getHours()
-                          ? `
+                      ${hour === new Date().getHours()
+          ? `
                         <div class="tb-current-time-indicator" ></div>
                         <div class="tb-current-time-dot" ></div>`
-                          : ""
-                      }
+          : ""
+        }
                     </div>
                   `;
     }
@@ -263,7 +261,7 @@ export class PageTreeRenderer {
         height="300"
         frameborder="0"
         style="border:0"
-        src="https://www.google.com/maps/embed/v1/view?key=AIzaSyBBaQo7_sF2xk3uNIyKp_Z-4BbaTebGGa4&center=${lat},${lng}&zoom=18"
+        src="https://www.google.com/maps/embed/v1/view?key=${process.env.MAPS_API_KEY}&center=${lat},${lng}&zoom=18"
         allowfullscreen>
       </iframe>
     `;
@@ -303,8 +301,8 @@ export class PageTreeRenderer {
       FullWidth: (cta: any) => `
               <div class="plain-button-container">
                 <button class="cta-plain-button style="background:${this.getCtaColor(
-                  cta.CtaBGColor
-                )}"">
+        cta.CtaBGColor
+      )}"">
                   <span class="label">${cta.CtaLabel}</span>
                 </button>
               </div>
@@ -312,15 +310,15 @@ export class PageTreeRenderer {
       Round: (cta: any) => `
               <div class="cta-round-button">
                 <div class="cta-round-button-icon" style="background:${this.getCtaColor(
-                  cta.CtaBGColor
-                )}">${icons[cta.CtaType]}</div>
+        cta.CtaBGColor
+      )}">${icons[cta.CtaType]}</div>
                 <div>${cta.CtaLabel}<div>
               </div>
             `,
       Image: (cta: any) => `
               <div class="cta-image-button" style="background:${this.getCtaColor(
-                cta.CtaBGColor
-              )}">
+        cta.CtaBGColor
+      )}">
                 <div class="cta-image-button-image">${icons[cta.CtaImage]}</div>
                 <div class="cta-image-button-label">${cta.CtaLabel}</div>
                   ${cta.CtaLabel}
@@ -329,8 +327,8 @@ export class PageTreeRenderer {
               `,
       Icon: (cta: any) => `
               <div class="cta-icon-button" style="background:${this.getCtaColor(
-                cta.CtaBGColor
-              )}">
+        cta.CtaBGColor
+      )}">
                 <div class="cta-icon-button-icon" >${icons[cta.CtaType]}</div>
                 <div class="cta-icon-button-label">
                   ${cta.CtaLabel}

@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: "API_ResidentService"
   description: "API Services"
-  version: "20250621033619"
+  version: "20250626082532"
 servers:
   - url: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/api
 paths:
@@ -1460,6 +1460,32 @@ paths:
         404:
           description: "Not found"
 
+  /toolbox/translate-appversion:
+    post:
+      tags:
+        - API_ResidentService  
+      operationId: "API_ResidentService.TranslateAppVersion"
+      summary: "Translate App Version Theme"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TranslateAppVersionInput"
+      
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SDT_Error"  
+
+        404:
+          description: "Not found"
+
   /toolbox/v2/save-page:
     post:
       tags:
@@ -2312,6 +2338,7 @@ components:
 
 
 
+
     CreateMenuPageOutput:
       properties:
         MenuPage:
@@ -2621,6 +2648,8 @@ components:
       properties:
         AppVersionName:
           type: "string"
+        AppVersionLanguage:
+          type: "string"
         IsActive:
           type: "boolean"
 
@@ -2660,6 +2689,21 @@ components:
         AppVersionId:
           type: "string"
           format: "uuid"
+
+    TranslateAppVersionInput:  
+      properties:
+        AppVersionId:
+          type: "string"
+          format: "uuid"
+        ActivePageId:
+          type: "string"
+          format: "uuid"
+        languageFrom:
+          type: "string"
+        LanguageToCollection:
+          type: array
+          items:
+            type: "string"
 
     SavePageV2Input:  
       properties:
@@ -3774,6 +3818,9 @@ components:
         IsActive:
           description: "Is Active"
           type: "boolean"
+        AppVersionLanguage:
+          description: "App Version Language"
+          type: "string"
         ThemeId:
           description: "Trn_Theme Id"
           type: "string"

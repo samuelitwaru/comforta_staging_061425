@@ -4,6 +4,7 @@ import { EditorThumbs } from "../../ui/components/editor-content/EditorThumbs";
 import { minTileHeight } from "../../utils/default-attributes";
 import { ImageUploadManager } from "../ImageUploadManager";
 import { InfoSectionManager } from "../InfoSectionManager";
+import { HistoryManager } from "../toolbox/HistoryManager";
 import { AppVersionManager } from "../versions/AppVersionManager";
 import { ChildEditor } from "./ChildEditor";
 import { EditorManager } from "./EditorManager";
@@ -121,7 +122,14 @@ export class EditorEvents {
       this.setupWrapperEventListeners(wrapper);
       this.initializePostLoadComponents();
       this.activateFrameEvents(wrapper);
+      
+      this.loadPageHistory(this.pageData);
     });
+  }
+
+  private loadPageHistory(pageData: any) {
+    const historyManager = new HistoryManager(pageData?.PageId);
+    historyManager.addState(pageData);
   }
 
   private setupGlobalWrapper(wrapper: any, editor: any): void {
@@ -548,7 +556,6 @@ export class EditorEvents {
     this.uiManager.activateEditor(this.frameId);
 
     const editorManager = new EditorManager();
-    editorManager.loadPageHistory(this.pageData);
 
     this.uiManager.handleInfoSectionHover(e);
   }

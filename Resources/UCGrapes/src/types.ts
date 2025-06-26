@@ -10,6 +10,7 @@ export interface ActionPage {
 export interface AppVersion {
   AppVersionId: string;
   AppVersionName: string;
+  AppVersionLanguage: string;
   IsActive: boolean;
   ThemeId: string;
 }
@@ -20,9 +21,8 @@ export interface CallToAction {
   CallToActionPhoneNumber: string;
   CallToActionUrl: string;
   CallToActionName: string;
-  CallToActionId: string
+  CallToActionId: string;
 }
-
 
 export interface Category {
   name: string;
@@ -44,7 +44,7 @@ export interface CtaAttributes {
   CtaButtonIcon?: string;
   CtaSupplierIsConnected?: boolean;
   CtaConnectedSupplierId?: string;
-  Action?: {}
+  Action?: {};
 }
 
 export interface DebugResults {
@@ -65,7 +65,6 @@ export interface DebugResults {
   }[];
 }
 
-
 export interface InfoType {
   InfoId: string;
   InfoType: string;
@@ -79,7 +78,6 @@ export interface InfoType {
 export interface Image {
   InfoImageId: string;
   InfoImageValue?: string;
-
 }
 
 export interface MenuItem {
@@ -133,9 +131,9 @@ export interface Template {
         ObjectType: string;
         ObjectId: string;
         ObjectUrl: string;
-      }
-    }>
-  }>
+      };
+    }>;
+  }>;
 }
 
 export interface Tile {
@@ -156,8 +154,8 @@ export interface Tile {
     ObjectUrl?: string;
     FormId?: number;
   };
-  BGSize?: string,
-  BGPosition?: string
+  BGSize?: string;
+  BGPosition?: string;
   Left?: string;
   Top?: string;
 }
@@ -173,7 +171,6 @@ export interface TrashItem {
 export interface TrashItems {
   TrashItems: TrashItem[];
 }
-
 
 export interface ThemeColors {
   accentColor: string;

@@ -1,6 +1,5 @@
 import { EditorEvents } from "../../../controls/editor/EditorEvents";
 import html2canvas from "html2canvas";
-import { ToolBoxService } from "../../../services/ToolBoxService";
 
 export class EditorThumbs {
   container: HTMLElement;
@@ -12,29 +11,19 @@ export class EditorThumbs {
   isHome?: boolean;
   appVersion: any;
 
-  constructor(
-    frameId: any,
-    pageId: any,
-    editor: any,
-    pageData: any,
-    isHome: boolean = false
-  ) {
+  constructor(frameId: any, pageId: any, editor: any, pageData: any, isHome: boolean = false) {
     this.frameId = frameId;
     this.editor = editor;
     this.pageId = pageId;
     this.pageData = pageData;
     this.isHome = isHome;
     this.thumbnailWrapper = document.createElement("div");
-    this.container = document.getElementById(
-      "editor-thumbs-list"
-    ) as HTMLElement;
+    this.container = document.getElementById("editor-thumbs-list") as HTMLElement;
     this.init();
   }
 
   init() {
-    const editorDiv = document.getElementById(
-      `${this.frameId}-frame`
-    ) as HTMLDivElement;
+    const editorDiv = document.getElementById(`${this.frameId}-frame`) as HTMLDivElement;
     if (!editorDiv) {
       console.error("Editor div not found");
       return;
@@ -42,9 +31,8 @@ export class EditorThumbs {
     const thumbnail = this.captureMiniature(editorDiv);
     thumbnail.style.cursor = "pointer";
     thumbnail.addEventListener("click", (event: MouseEvent) => {
-      const childContainer = document.getElementById(
-        "child-container"
-      ) as HTMLDivElement; 
+      event.preventDefault();
+      const childContainer = document.getElementById("child-container") as HTMLDivElement;
 
       if (childContainer && editorDiv) {
         const editorFrames = Array.from(childContainer.children);
@@ -57,8 +45,7 @@ export class EditorThumbs {
             childContainer.style.justifyContent = "start";
           }
         } else if (isLastItem) {
-          childContainer.scrollLeft =
-            childContainer.scrollWidth - childContainer.clientWidth;
+          childContainer.scrollLeft = childContainer.scrollWidth - childContainer.clientWidth;
         } else {
           const editorDivLeft = editorDiv.offsetLeft;
           const editorDivWidth = editorDiv.offsetWidth;
@@ -69,21 +56,14 @@ export class EditorThumbs {
       }
 
       const editorEvents = new EditorEvents();
-      editorEvents.setPageFocus(
-        this.editor,
-        this.frameId,
-        this.pageId,
-        this.pageData
-      );
+      editorEvents.setPageFocus(this.editor, this.frameId, this.pageId, this.pageData);
     });
     this.container.appendChild(thumbnail);
   }
 
   private captureMiniature(editorDiv: HTMLDivElement) {
     const updateMirror = async () => {
-      const canvasWrapper = editorDiv.querySelector(
-        ".gjs-cv-canvas"
-      ) as HTMLElement;
+      const canvasWrapper = editorDiv.querySelector(".gjs-cv-canvas") as HTMLElement;
       if (!canvasWrapper) return;
 
       const clone = disableInteractivity(editorDiv);
@@ -120,12 +100,8 @@ export class EditorThumbs {
 
       const miniWrapper = document.createElement("div");
       miniWrapper.style.position = "relative";
-      miniWrapper.style.width = `${Math.ceil(
-        canvasWrapper.offsetWidth * 0.15
-      )}px`;
-      miniWrapper.style.height = `${
-        Math.ceil(canvasWrapper.offsetHeight * 0.15) + 6
-      }px`; // Add extra height for space + highlighter
+      miniWrapper.style.width = `${Math.ceil(canvasWrapper.offsetWidth * 0.15)}px`;
+      miniWrapper.style.height = `${Math.ceil(canvasWrapper.offsetHeight * 0.15) + 6}px`; // Add extra height for space + highlighter
       miniWrapper.style.display = "flex";
       miniWrapper.style.flexDirection = "column";
 
@@ -177,9 +153,7 @@ export class EditorThumbs {
       });
     };
 
-    const waitForIframeResources = (
-      iframe: HTMLIFrameElement
-    ): Promise<void> => {
+    const waitForIframeResources = (iframe: HTMLIFrameElement): Promise<void> => {
       return new Promise((resolve) => {
         if (!iframe.contentDocument || !iframe.contentWindow) {
           resolve();

@@ -1,42 +1,42 @@
 import { Clock } from "../../../controls/Clock";
 
 export class FrameHeader {
-    private container: HTMLElement;
+  private container: HTMLElement;
 
-    constructor() {
-        this.container = document.createElement('div');
-        this.init();
-    }
+  constructor() {
+    this.container = document.createElement("div");
+    this.init();
+  }
 
-    init() {
-        this.container.classList.add('header');
-        
-        const clock: any = new Clock('clock');
-        const clockSpan = document.createElement('span');
-        clockSpan.id = 'clock';
-        clockSpan.textContent = clock.updateTime();
+  init() {
+    this.container.classList.add("header");
 
-        const iconsSpan = document.createElement('span');
-        iconsSpan.classList.add('icons');
+    const clock: any = new Clock("clock");
+    const clockSpan = document.createElement("span");
+    clockSpan.id = "clock";
+    clockSpan.textContent = clock.updateTime();
 
-        const signalIcon = document.createElement('i');
-        signalIcon.classList.add('fas', 'fa-signal');
+    const iconsSpan = document.createElement("span");
+    iconsSpan.classList.add("icons");
 
-        const wifiIcon = document.createElement('i');
-        wifiIcon.classList.add('fas', 'fa-wifi');
+    const signalIcon = document.createElement("i");
+    signalIcon.classList.add("fas", "fa-signal");
 
-        const batteryIcon = document.createElement('i');
-        batteryIcon.classList.add('fas', 'fa-battery');
+    const wifiIcon = document.createElement("i");
+    wifiIcon.classList.add("fas", "fa-wifi");
 
-        iconsSpan.appendChild(signalIcon);
-        iconsSpan.appendChild(wifiIcon);
-        iconsSpan.appendChild(batteryIcon);
+    const batteryIcon = document.createElement("i");
+    batteryIcon.classList.add("fas", "fa-battery");
 
-        this.container.appendChild(clockSpan);
-        this.container.appendChild(iconsSpan);
-    }
+    iconsSpan.appendChild(signalIcon);
+    iconsSpan.appendChild(wifiIcon);
+    iconsSpan.appendChild(batteryIcon);
 
-    render(container: HTMLElement) {
-        container.appendChild(this.container);
-    }
+    this.container.appendChild(clockSpan);
+    this.container.appendChild(iconsSpan);
+  }
+
+  render(container: HTMLElement) {
+    container.appendChild(this.container);
+  }
 }

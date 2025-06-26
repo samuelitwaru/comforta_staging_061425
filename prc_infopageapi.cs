@@ -166,13 +166,24 @@ namespace GeneXus.Programs {
             pr_default.readNext(2);
          }
          pr_default.close(2);
-         AV25GXV1 = 1;
-         while ( AV25GXV1 <= AV8SDT_InfoPage.gxTpr_Infocontent.Count )
+         AV28GXV1 = 1;
+         while ( AV28GXV1 <= AV8SDT_InfoPage.gxTpr_Infocontent.Count )
          {
-            AV14InfoContent = ((SdtSDT_InfoPage_InfoContentItem)AV8SDT_InfoPage.gxTpr_Infocontent.Item(AV25GXV1));
-            if ( StringUtil.StrCmp(AV14InfoContent.gxTpr_Infotype, "Image") == 0 )
+            AV14InfoContent = ((SdtSDT_InfoPage_InfoContentItem)AV8SDT_InfoPage.gxTpr_Infocontent.Item(AV28GXV1));
+            if ( StringUtil.StrCmp(AV14InfoContent.gxTpr_Infotype, "Images") == 0 )
             {
-               AV14InfoContent.gxTpr_Images.Add(AV14InfoContent.gxTpr_Infovalue, 0);
+               AV14InfoContent.gxTpr_Infotype = "Image";
+               AV21Images = (GxSimpleCollection<string>)(new GxSimpleCollection<string>());
+               AV29GXV2 = 1;
+               while ( AV29GXV2 <= AV14InfoContent.gxTpr_Images.Count )
+               {
+                  AV23InfoImageString = ((string)AV14InfoContent.gxTpr_Images.Item(AV29GXV2));
+                  AV22InfoImage = new SdtSDT_InfoImage_SDT_InfoImageItem(context);
+                  AV22InfoImage.FromJSonString(AV23InfoImageString, null);
+                  AV21Images.Add(AV22InfoImage.gxTpr_Infoimagevalue, 0);
+                  AV29GXV2 = (int)(AV29GXV2+1);
+               }
+               AV14InfoContent.gxTpr_Images = AV21Images;
             }
             else if ( StringUtil.StrCmp(AV14InfoContent.gxTpr_Infotype, "Cta") == 0 )
             {
@@ -193,10 +204,10 @@ namespace GeneXus.Programs {
             }
             else if ( StringUtil.StrCmp(AV14InfoContent.gxTpr_Infotype, "TileRow") == 0 )
             {
-               AV26GXV2 = 1;
-               while ( AV26GXV2 <= AV14InfoContent.gxTpr_Tiles.Count )
+               AV30GXV3 = 1;
+               while ( AV30GXV3 <= AV14InfoContent.gxTpr_Tiles.Count )
                {
-                  AV17SDT_InfoTile = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV14InfoContent.gxTpr_Tiles.Item(AV26GXV2));
+                  AV17SDT_InfoTile = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV14InfoContent.gxTpr_Tiles.Item(AV30GXV3));
                   GXt_char1 = "";
                   new prc_getthemecolorbyname(context ).execute(  AV15ThemeId,  AV17SDT_InfoTile.gxTpr_Bgcolor, out  GXt_char1) ;
                   AV17SDT_InfoTile.gxTpr_Bgcolor = GXt_char1;
@@ -220,13 +231,13 @@ namespace GeneXus.Programs {
                      }
                      pr_default.close(4);
                   }
-                  AV26GXV2 = (int)(AV26GXV2+1);
+                  AV30GXV3 = (int)(AV30GXV3+1);
                }
             }
             else
             {
             }
-            AV25GXV1 = (int)(AV25GXV1+1);
+            AV28GXV1 = (int)(AV28GXV1+1);
          }
          cleanup();
       }
@@ -295,6 +306,9 @@ namespace GeneXus.Programs {
          A517PageName = "";
          AV19PagePublishedStructure = "";
          AV14InfoContent = new SdtSDT_InfoPage_InfoContentItem(context);
+         AV21Images = new GxSimpleCollection<string>();
+         AV23InfoImageString = "";
+         AV22InfoImage = new SdtSDT_InfoImage_SDT_InfoImageItem(context);
          AV17SDT_InfoTile = new SdtSDT_InfoTile_SDT_InfoTileItem(context);
          P00G36_A206WWPFormId = new short[1] ;
          P00G36_A208WWPFormReferenceName = new string[] {""} ;
@@ -328,8 +342,9 @@ namespace GeneXus.Programs {
 
       private short A206WWPFormId ;
       private short A207WWPFormVersionNumber ;
-      private int AV25GXV1 ;
-      private int AV26GXV2 ;
+      private int AV28GXV1 ;
+      private int AV29GXV2 ;
+      private int AV30GXV3 ;
       private string A599ResidentLanguage ;
       private string AV20ResidentLanguage ;
       private string GXt_char1 ;
@@ -341,6 +356,7 @@ namespace GeneXus.Programs {
       private bool returnInSub ;
       private string A536PagePublishedStructure ;
       private string AV19PagePublishedStructure ;
+      private string AV23InfoImageString ;
       private string AV13UserId ;
       private string A71ResidentGUID ;
       private string A517PageName ;
@@ -391,6 +407,8 @@ namespace GeneXus.Programs {
       private string[] P00G35_A536PagePublishedStructure ;
       private string[] P00G35_A517PageName ;
       private SdtSDT_InfoPage_InfoContentItem AV14InfoContent ;
+      private GxSimpleCollection<string> AV21Images ;
+      private SdtSDT_InfoImage_SDT_InfoImageItem AV22InfoImage ;
       private SdtSDT_InfoTile_SDT_InfoTileItem AV17SDT_InfoTile ;
       private short[] P00G36_A206WWPFormId ;
       private string[] P00G36_A208WWPFormReferenceName ;

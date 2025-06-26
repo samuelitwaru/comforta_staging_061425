@@ -29,7 +29,7 @@ export class PageTreeRendererInfoPage {
 
   private getCtaColor(colorName: string) {
     const ctaColor = this.currentTheme.ThemeCtaColors.find(
-      (ctaColor: any) => ctaColor.CtaColorName == colorName
+      (ctaColor: any) => ctaColor.CtaColorName === colorName
     );
     if (ctaColor) {
       return ctaColor.CtaColorCode;
@@ -59,10 +59,7 @@ export class PageTreeRendererInfoPage {
     let roundCtaBuffer: any[] = [];
 
     json.InfoContent.forEach((row: any, index: number) => {
-      if (
-        row.InfoType === "Cta" &&
-        row.CtaAttributes.CtaButtonType === "Round"
-      ) {
+      if (row.InfoType === "Cta" && row.CtaAttributes.CtaButtonType === "Round") {
         roundCtaBuffer.push(row);
 
         // Process buffer if we have 3 CTAs or this is the last item or next item is not a Round CTA
@@ -73,8 +70,7 @@ export class PageTreeRendererInfoPage {
           json.InfoContent[index + 1]?.CtaAttributes.CtaButtonType !== "Round"
         ) {
           const groupContainer = document.createElement("div");
-          groupContainer.style.cssText =
-            "display: flex; justify-content: center; flex-flow: wrap;";
+          groupContainer.style.cssText = "display: flex; justify-content: center; flex-flow: wrap;";
 
           roundCtaBuffer.forEach((bufferedRow) => {
             const ctaButton = this.createCTAs(bufferedRow.CtaAttributes);
@@ -116,10 +112,8 @@ export class PageTreeRendererInfoPage {
             tileDiv.id = tile.Id;
 
             // Dynamically set alignment based on tile.Align
-            const horizontalAlign =
-              tile.Align === "center" ? "center" : "flex-start";
-            const verticalAlign =
-              tile.Align === "center" ? "center" : "flex-start";
+            const horizontalAlign = tile.Align === "center" ? "center" : "flex-start";
+            const verticalAlign = tile.Align === "center" ? "center" : "flex-start";
 
             const icondiv = document.createElement("div");
             icondiv.style.color = tile.Color;
@@ -152,12 +146,8 @@ export class PageTreeRendererInfoPage {
                 height: ${tileHeight}px;
                 flex: 1;
                 color: ${tile.Color};
-                background-color: ${
-                  this.currentTheme.ThemeColors[tile.BGColor]
-                };
-                background-image: ${
-                  tile.BGImageUrl ? `url('${tile.BGImageUrl}')` : "none"
-                };
+                background-color: ${this.currentTheme.ThemeColors[tile.BGColor]};
+                background-image: ${tile.BGImageUrl ? `url('${tile.BGImageUrl}')` : "none"};
                 background-size: cover;
                 background-repeat: no-repeat;
                 background-position: center;
@@ -182,9 +172,8 @@ export class PageTreeRendererInfoPage {
           descriptionDiv.innerHTML = row.InfoValue;
           descriptionDiv.style.fontFamily = this.currentTheme.ThemeFontFamily;
           descriptionDiv.style.margin = "2.5px 2.5px";
-
           container.appendChild(descriptionDiv);
-        } else if (row.InfoType === "Image") {
+        } else if (row.InfoType === "Images") {
           const imageDiv = document.createElement("div");
           imageDiv.style.margin = "2.5px";
           imageDiv.style.borderRadius = "5px";
@@ -192,14 +181,13 @@ export class PageTreeRendererInfoPage {
           imageDiv.style.display = "flex";
           imageDiv.style.justifyContent = "center";
           imageDiv.style.alignItems = "center";
-
           const img = document.createElement("img");
-          img.src = row.InfoValue;
+          // img.src = row.InfoValue;
+          img.src = row.Images[0].InfoImageValue;
           img.alt = "Image description";
           img.style.width = "100%";
           img.style.height = "50px";
           img.style.objectFit = "cover";
-
           imageDiv.appendChild(img);
           container.appendChild(imageDiv);
         } else if (row.InfoType === "Cta") {
@@ -225,7 +213,7 @@ export class PageTreeRendererInfoPage {
         </div>
         `;
 
-    if (page.PageName == "Home") {
+    if (page.PageName === "Home") {
       appBar = `
             <div class="home-app-bar" style="padding:2px"><div class="logo-added"><img src="${this.logo}" style="height: 20px;"></div>
             `;
@@ -267,8 +255,8 @@ export class PageTreeRendererInfoPage {
     let pageData = `
                 <div class="tb-date-selector"  
                   style="background-color: ${
-                    this.currentTheme.ThemeColors["backgroundColor"]
-                  }; font-size: 6px; padding:2px;">
+  this.currentTheme.ThemeColors["backgroundColor"]
+}; font-size: 6px; padding:2px;">
                   <span class="tb-arrow">❮</span>
                   <span class="tb-date-text" id="current-date" > ${this.formatDate()}</span>
                   <span class="tb-arrow">❯</span>
@@ -283,12 +271,13 @@ export class PageTreeRendererInfoPage {
                       <div class="tb-time" >${formattedHour}</div>
                       <div class="tb-events" ></div>
                       ${
-                        hour === new Date().getHours()
-                          ? `
+  hour === new Date().getHours()
+    ? `
                         <div class="tb-current-time-indicator" ></div>
                         <div class="tb-current-time-dot" ></div>`
-                          : ""
-                      }
+    : ""
+}
+
                     </div>
                   `;
     }
@@ -381,9 +370,7 @@ export class PageTreeRendererInfoPage {
     const models: Models = {
       FullWidth: (cta: any) => `
               <div class="plain-button-container-tree">
-                <button class="plain-button-tree" style="background:${this.getCtaColor(
-                  cta.CtaBGColor
-                )}">
+                <button class="plain-button-tree" style="background:${this.getCtaColor(cta.CtaBGColor)}">
                   <span class="label">${cta.CtaLabel}</span>
                 </button>
               </div>
@@ -392,30 +379,26 @@ export class PageTreeRendererInfoPage {
       Round: (cta: any) => `
       
               <div class="cta-round-button-tree">
-                <div class="cta-round-button-icon-tree" style="background:${this.getCtaColor(
-                  cta.CtaBGColor
-                )}">${icons[cta.CtaType]}</div>
+                <div class="cta-round-button-icon-tree" style="background:${this.getCtaColor(cta.CtaBGColor)}">${icons[cta.CtaType]}</div>
                 <div style="font-size:8px;">${cta.CtaLabel}<div>
               </div>
             `,
       Image: (cta: any) => `
               <div class="cta-image-button-tree" style="background:${this.getCtaColor(
-                cta.CtaBGColor
-              )}">
+    cta.CtaBGColor
+  )}">
                 <div class="cta-image-button-image-tree"> <img src= "${
-                  cta.CtaButtonImgUrl
-                }" alt="Image" style="width: 18px; height: 18px; object-fit: cover; border-radius: 5px;"/></div>
+  cta.CtaButtonImgUrl
+}" alt="Image" style="width: 18px; height: 18px; object-fit: cover; border-radius: 5px;"/></div>
                 <div class="cta-image-button-label-tree">${cta.CtaLabel}</div>
                 <i class="fa fa-angle-right img-button-arrow-tree"></i>
               </div>
               `,
       Icon: (cta: any) => `
               <div class="cta-icon-button-tree" style="background:${this.getCtaColor(
-                cta.CtaBGColor
-              )}">
-                <div class="cta-icon-button-icon-tree" >${
-                  icons[cta.CtaButtonIcon]
-                }</div>
+    cta.CtaBGColor
+  )}">
+                <div class="cta-icon-button-icon-tree" >${icons[cta.CtaButtonIcon]}</div>
                 <div class="cta-icon-button-label-tree">
                   ${cta.CtaLabel}
                 </div>

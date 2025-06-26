@@ -60,11 +60,23 @@ namespace GeneXus.Programs {
          /* Load data into tables. */
       }
 
-      public void ReorganizeTrn_Memo( )
+      public void ReorganizeTrn_Icon( )
       {
          string cmdBuffer = "";
-         /* Indices for table Trn_Memo */
-         cmdBuffer=" ALTER TABLE Trn_Memo ADD MemoCreatedAt timestamp without time zone  "
+         /* Indices for table Trn_Icon */
+         cmdBuffer=" ALTER TABLE Trn_Icon ADD IconDisplayName VARCHAR(100) NOT NULL DEFAULT '' "
+         ;
+         RGZ = new GxCommand(dsDefault.Db, cmdBuffer, dsDefault,0,true,false,null);
+         RGZ.ErrorMask = GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK;
+         RGZ.ExecuteStmt() ;
+         RGZ.Drop();
+         cmdBuffer=" ALTER TABLE Trn_Icon ALTER COLUMN IconDisplayName DROP DEFAULT "
+         ;
+         RGZ = new GxCommand(dsDefault.Db, cmdBuffer, dsDefault,0,true,false,null);
+         RGZ.ErrorMask = GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK;
+         RGZ.ExecuteStmt() ;
+         RGZ.Drop();
+         cmdBuffer=" ALTER TABLE Trn_Icon DROP Trn_IconName "
          ;
          RGZ = new GxCommand(dsDefault.Db, cmdBuffer, dsDefault,0,true,false,null);
          RGZ.ErrorMask = GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK;
@@ -78,9 +90,9 @@ namespace GeneXus.Programs {
          {
             /* Using cursor P00012 */
             pr_default.execute(0);
-            Trn_MemoCount = P00012_ATrn_MemoCount[0];
+            Trn_IconCount = P00012_ATrn_IconCount[0];
             pr_default.close(0);
-            PrintRecordCount ( "Trn_Memo" ,  Trn_MemoCount );
+            PrintRecordCount ( "Trn_Icon" ,  Trn_IconCount );
          }
       }
 
@@ -91,9 +103,14 @@ namespace GeneXus.Programs {
             return true ;
          }
          sSchemaVar = GXUtil.UserId( "Server", context, pr_default);
-         if ( ColumnExist("Trn_Memo",sSchemaVar,"MemoCreatedAt") )
+         if ( ColumnExist("Trn_Icon",sSchemaVar,"IconDisplayName") )
          {
-            SetCheckError ( GXResourceManager.GetMessage("GXM_column_exist", new   object[]  {"MemoCreatedAt", "Trn_Memo"}) ) ;
+            SetCheckError ( GXResourceManager.GetMessage("GXM_column_exist", new   object[]  {"IconDisplayName", "Trn_Icon"}) ) ;
+            return false ;
+         }
+         if ( ! ColumnExist("Trn_Icon",sSchemaVar,"Trn_IconName") )
+         {
+            SetCheckError ( GXResourceManager.GetMessage("GXM_column_not_exist", new   object[]  {"Trn_IconName", "Trn_Icon"}) ) ;
             return false ;
          }
          return true ;
@@ -130,7 +147,7 @@ namespace GeneXus.Programs {
 
       private void ExecuteOnlyTablesReorganization( )
       {
-         ReorgExecute.RegisterBlockForSubmit( 1 ,  "ReorganizeTrn_Memo" , new Object[]{ });
+         ReorgExecute.RegisterBlockForSubmit( 1 ,  "ReorganizeTrn_Icon" , new Object[]{ });
       }
 
       private void ExecuteOnlyRisReorganization( )
@@ -152,7 +169,7 @@ namespace GeneXus.Programs {
 
       private void SetPrecedencetables( )
       {
-         GXReorganization.SetMsg( 1 ,  GXResourceManager.GetMessage("GXM_fileupdate", new   object[]  {"Trn_Memo", ""}) );
+         GXReorganization.SetMsg( 1 ,  GXResourceManager.GetMessage("GXM_fileupdate", new   object[]  {"Trn_Icon", ""}) );
       }
 
       private void SetPrecedenceris( )
@@ -185,7 +202,7 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         P00012_ATrn_MemoCount = new int[1] ;
+         P00012_ATrn_IconCount = new int[1] ;
          sSchemaVar = "";
          sTableName = "";
          sMySchemaName = "";
@@ -217,7 +234,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.reorg__default(),
             new Object[][] {
                 new Object[] {
-               P00012_ATrn_MemoCount
+               P00012_ATrn_IconCount
                }
                , new Object[] {
                P00023_Atablename, P00023_Aschemaname, P00023_Acolumnname, P00023_Aattrelid, P00023_Aoid, P00023_Arelname
@@ -228,7 +245,7 @@ namespace GeneXus.Programs {
       }
 
       protected short ErrCode ;
-      protected int Trn_MemoCount ;
+      protected int Trn_IconCount ;
       protected string sSchemaVar ;
       protected string sTableName ;
       protected string sMySchemaName ;
@@ -250,7 +267,7 @@ namespace GeneXus.Programs {
       protected IGxDataStore dsDefault ;
       protected GxCommand RGZ ;
       protected IDataStoreProvider pr_default ;
-      protected int[] P00012_ATrn_MemoCount ;
+      protected int[] P00012_ATrn_IconCount ;
       protected string[] P00023_Atablename ;
       protected bool[] P00023_ntablename ;
       protected string[] P00023_Aschemaname ;
@@ -291,7 +308,7 @@ namespace GeneXus.Programs {
           new ParDef("sMyColumnName",GXType.Char,255,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P00012", "SELECT COUNT(*) FROM Trn_Memo ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00012,100, GxCacheFrequency.OFF ,true,false )
+              new CursorDef("P00012", "SELECT COUNT(*) FROM Trn_Icon ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00012,100, GxCacheFrequency.OFF ,true,false )
              ,new CursorDef("P00023", "SELECT T.TABLENAME, T.TABLEOWNER, T1.ATTNAME, T1.ATTRELID, T2.OID, T2.RELNAME FROM PG_TABLES T, PG_ATTRIBUTE T1, PG_CLASS T2 WHERE (UPPER(T.TABLENAME) = ( UPPER(:sTableName))) AND (UPPER(T.TABLEOWNER) = ( UPPER(:sMySchemaName))) AND (UPPER(T1.ATTNAME) = ( UPPER(:sMyColumnName))) AND (T2.OID = ( T1.ATTRELID)) AND (T2.RELNAME = ( T.TABLENAME)) ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00023,100, GxCacheFrequency.OFF ,true,false )
           };
        }
