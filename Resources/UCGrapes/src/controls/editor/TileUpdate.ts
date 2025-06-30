@@ -114,7 +114,9 @@ export class TileUpdate {
         if (columnCount < 3) {
           // add resize handle
           tiles[0].append(resizeButton("Resize"));
-          tiles[0].addStyle({height: `100%`})
+          if (maxTileCount > 1) {
+            tiles[0].addStyle({height: `100%`})
+          }
         }
       }
       
