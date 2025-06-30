@@ -158,6 +158,9 @@ export class TileManager {
       const tilesToSplit = tiles.slice(1)
       tilesToSplit.forEach((tile:any) => {
         const tileAttributes = this.getTileAttrs(rowComponent.getId(), tile.parent().getId(), tile.getId())
+        const columnComponent = tile.closest('.tile-column')
+        tile.remove()
+        this.removeTileFromGrid(rowComponent.getId(), columnComponent.getId(), tile.getId())
         this.addTileOnNewRow(tile, tileAttributes, rowComponent)
       })
     }
@@ -517,10 +520,8 @@ export class TileManager {
   }
 
   addTileOnNewRow(tile:any, tileAttributes:any, previousRowComponent:any){
-    tile.remove()
     const index = previousRowComponent.index() + 1
     const parent = previousRowComponent.parent()
-    console.log('tileAttributes', tileAttributes)
     parent.append(infoSectionSpacer(),  { at: index })
     const colId = randomIdGenerator(8)
     const rowId = randomIdGenerator(8)
@@ -538,7 +539,6 @@ export class TileManager {
         `
 
     parent.append(`${rowHTML}`, { at: index + 1})
-    
     
     const rowComponent = this.editor.Components.getWrapper().find(`#${rowId}`)[0];
     this.tileUpdate.updateGridTiles(rowComponent)

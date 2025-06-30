@@ -151,6 +151,7 @@ namespace GeneXus.Programs {
                GXt_char1 = AV21PagePublishedStructure;
                new prc_getdynamictranslation(context ).execute(  A516PageId,  AV20ResidentLanguage,  A536PagePublishedStructure, out  GXt_char1) ;
                AV21PagePublishedStructure = GXt_char1;
+               new prc_logtoserver(context ).execute(  context.GetMessage( "&PagePublishedStructure: ", "")+AV21PagePublishedStructure) ;
                AV11SDT_InfoPage.FromJSonString(AV21PagePublishedStructure, null);
                AV11SDT_InfoPage.gxTpr_Pageid = A516PageId;
                AV11SDT_InfoPage.gxTpr_Pagename = A517PageName;
@@ -160,6 +161,7 @@ namespace GeneXus.Programs {
             pr_default.readNext(2);
          }
          pr_default.close(2);
+         new prc_logtoserver(context ).execute(  context.GetMessage( "&SDT_InfoPage: ", "")+AV11SDT_InfoPage.ToJSonString(false, true)) ;
          AV27GXV1 = 1;
          while ( AV27GXV1 <= AV11SDT_InfoPage.gxTpr_Infocontent.Count )
          {

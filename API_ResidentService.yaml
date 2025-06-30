@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: "API_ResidentService"
   description: "API Services"
-  version: "20250630065621"
+  version: "20250630092156"
 servers:
   - url: https://staging.comforta.yukon.software/api
 paths:
@@ -3527,7 +3527,6 @@ components:
         ColId:
           description: "Col Id"
           type: "string"
-          format: "uuid"
         Tiles:
           description: "SDT_Info Tile"
           type: array

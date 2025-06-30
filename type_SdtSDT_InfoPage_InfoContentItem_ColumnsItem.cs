@@ -30,6 +30,8 @@ namespace GeneXus.Programs
 		public SdtSDT_InfoPage_InfoContentItem_ColumnsItem( )
 		{
 			/* Constructor for serialization */
+			gxTv_SdtSDT_InfoPage_InfoContentItem_ColumnsItem_Colid = "";
+
 		}
 
 		public SdtSDT_InfoPage_InfoContentItem_ColumnsItem(IGxContext context)
@@ -71,7 +73,7 @@ namespace GeneXus.Programs
 
 		[SoapElement(ElementName="ColId")]
 		[XmlElement(ElementName="ColId")]
-		public Guid gxTpr_Colid
+		public string gxTpr_Colid
 		{
 			get {
 				return gxTv_SdtSDT_InfoPage_InfoContentItem_ColumnsItem_Colid; 
@@ -158,6 +160,8 @@ namespace GeneXus.Programs
 
 		public void initialize( )
 		{
+			gxTv_SdtSDT_InfoPage_InfoContentItem_ColumnsItem_Colid = "";
+
 			gxTv_SdtSDT_InfoPage_InfoContentItem_ColumnsItem_Tiles_N = true;
 
 			return  ;
@@ -169,7 +173,7 @@ namespace GeneXus.Programs
 
 		#region Declaration
 
-		protected Guid gxTv_SdtSDT_InfoPage_InfoContentItem_ColumnsItem_Colid;
+		protected string gxTv_SdtSDT_InfoPage_InfoContentItem_ColumnsItem_Colid;
 		 
 		protected bool gxTv_SdtSDT_InfoPage_InfoContentItem_ColumnsItem_Tiles_N;
 		protected GXBaseCollection<GeneXus.Programs.SdtSDT_InfoTile_SDT_InfoTileItem> gxTv_SdtSDT_InfoPage_InfoContentItem_ColumnsItem_Tiles = null;  
@@ -192,14 +196,14 @@ namespace GeneXus.Programs
 
 		#region Rest Properties
 		[DataMember(Name="ColId", Order=0)]
-		public Guid gxTpr_Colid
+		public  string gxTpr_Colid
 		{
 			get { 
 				return sdt.gxTpr_Colid;
 
 			}
 			set { 
-				sdt.gxTpr_Colid = value;
+				 sdt.gxTpr_Colid = value;
 			}
 		}
 

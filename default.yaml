@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: "Development"
-  version: "20250630065621"
+  version: "20250630092156"
 servers:
   - url: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/rest
 paths:
@@ -2512,7 +2512,6 @@ components:
         ColId:
           description: "Col Id"
           type: "string"
-          format: "uuid"
         Tiles:
           description: "SDT_Info Tile"
           type: array
