@@ -421,7 +421,7 @@ export class EditorEvents {
     }else{
       this.applyFinalResize(finalHeight);
     }
-    this.applyFinalResize(finalHeight);
+    // this.applyFinalResize(finalHeight);
     this.updateInfoTileAttributes(finalHeight);
     this.cleanupResize();
   }
