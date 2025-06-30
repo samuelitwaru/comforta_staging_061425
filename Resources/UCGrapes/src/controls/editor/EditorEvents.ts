@@ -66,8 +66,8 @@ export class EditorEvents {
   private initializeTileHeights(isSingleTile=true): void {
     this.tileHeights = {
       min: minTileHeight,
-      medium: minTileHeight * (isSingleTile ? 2.1 : 1.5),
-      max: minTileHeight * (isSingleTile ? 3.2 : 2),
+      medium: minTileHeight * (isSingleTile ? 2.2 : 1.5),
+      max: minTileHeight * (isSingleTile ? 3.3 : 2),
       snapThreshold: 10,
     };
   }
@@ -256,7 +256,9 @@ export class EditorEvents {
               columnComponent.getId(),
               lastTile.getId()
             )
+            console.log('last Tile', lastTile.getEl())
             if (lastTile) {
+              lastTile.remove()
               this.tileManager.addTileOnNewRow(lastTile, tileAttributes, containerRowComponent)
             }
           }
@@ -403,7 +405,10 @@ export class EditorEvents {
     const comps = wrapper.find(`#${this.resizeState.resizingRow.id}`);
 
     if (comps.length) {
+      console.log('comp', comps[0].getEl())
+      const columnComp = comps[0].closest('.tile-column')
       comps[0].addStyle({ height: `${newHeight}px` });
+      columnComp.addStyle({ height: `${newHeight}px` });
     }
   }
 
@@ -418,10 +423,8 @@ export class EditorEvents {
     const isTileColumn = this.resizeState.resizingRow?.parentElement?.classList.contains("tile-column")
     if (isTileColumn) {
       this.resizeGridTiles(finalHeight);
-    }else{
-      this.applyFinalResize(finalHeight);
     }
-    // this.applyFinalResize(finalHeight);
+    this.applyFinalResize(finalHeight);
     this.updateInfoTileAttributes(finalHeight);
     this.cleanupResize();
   }
