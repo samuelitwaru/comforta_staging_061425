@@ -1,17 +1,26 @@
 import { ContentDataUi } from "./ContentDataUi";
+import { ContentMapper } from "./ContentMapper";
 import { CtaButtonProperties } from "./CtaButtonProperties";
 import { InfoContentMapper } from "./InfoContentMapper";
 import { TileManager } from "./TileManager";
 import { TileMapper } from "./TileMapper";
 import { TileProperties } from "./TileProperties";
+import { TileUpdate } from "./TileUpdate";
 import { ChildEditor } from "./ChildEditor";
 import { ActionListPopUp } from "../../ui/views/ActionListPopUp";
 import { InfoSectionPopup } from "../../ui/views/InfoSectionPopup";
+import { ContentSection } from "../../ui/components/tools-section/ContentSection";
+import { ActionSelectContainer } from "../../ui/components/tools-section/action-list/ActionSelectContainer";
 import { ToolboxManager } from "../toolbox/ToolboxManager";
 import { InfoType, Tile } from "../../types";
+import { svg } from "d3";
 import { InfoSectionManager } from "../InfoSectionManager";
 import { AddInfoSectionButton } from "../../ui/components/AddInfoSectionButton";
 import { AppVersionManager } from "../versions/AppVersionManager";
+import { TreeViewSection } from "../../ui/components/tools-section/TreeViewSection";
+import { drop } from "lodash";
+import { randomIdGenerator } from "../../utils/helpers";
+import { InfoSectionUI } from "../../ui/views/InfoSectionUI";
 import { i18n } from "../../i18n/i18n";
 
 export class EditorUIManager {
@@ -19,7 +28,7 @@ export class EditorUIManager {
   pageId: any;
   frameId: any;
   pageData: any;
-  tileManager: any;
+  tileManager!: TileManager;
   tileProperties: any;
   appVersionManager: any;
   tilePropsSection: HTMLElement;
@@ -38,6 +47,7 @@ export class EditorUIManager {
     this.frameId = frameId;
     this.pageData = pageData;
     this.appVersionManager = appVersionManager;
+    this.handleTileManager()
 
     this.tilePropsSection = document.getElementById(
       "menu-page-section"
@@ -47,9 +57,11 @@ export class EditorUIManager {
     ) as HTMLDivElement;
   }
 
-  handleTileManager(e: MouseEvent) {
+  handleTileManager(
+    // e: MouseEvent
+  ) {
     this.tileManager = new TileManager(
-      e,
+      // e,
       this.editor,
       this.pageId,
       this.frameId,
@@ -162,12 +174,18 @@ export class EditorUIManager {
       })();
 
       if (!sectionContainer) {
-        // If no section container is found, exit the function
+        console.warn("No parent info-section-spacing-container found.");
         return;
       }
 
       // Find the next div with class starting with 'info' and ending with 'section'
       const nextSectionId = this.getNextInfoSectionId(sectionContainer);
+
+      if (nextSectionId) {
+        console.log("Found next sectionId:", nextSectionId);
+      } else {
+        console.warn("No matching info section found below.");
+      }
 
       // Proceed with your logic (menu rendering, iframe positioning, etc.)
       const mobileFrame = document.getElementById(
@@ -245,7 +263,7 @@ export class EditorUIManager {
 
   handleDragEnd(model: any, sourceComponent: any, destinationComponent: any) {
     this.activateEditor(this.frameId);
-    const parentEl = destinationComponent.getEl();
+    let parentEl = destinationComponent.getEl();
 
     // manage plus button sections
     const containerColumn = this.editor
@@ -295,7 +313,7 @@ export class EditorUIManager {
           );
         } else {
           // Find the index of the target element in the components array
-          const targetIndex = components.findIndex(
+          let targetIndex = components.findIndex(
             (comp: any) => comp.getId() === modelId
           );
           let nearestSection = null;
@@ -417,7 +435,7 @@ export class EditorUIManager {
     const currentPageId = mobileFrame.dataset.pageid;
     const currentPage = this.appVersionManager
       .getPages()
-      ?.find((page: any) => page.PageId === currentPageId);
+      ?.find((page: any) => page.PageId == currentPageId);
     this.pageData = currentPage;
     const framelist = document.querySelectorAll(".mobile-frame");
     framelist.forEach((frame: any) => {
@@ -551,6 +569,7 @@ export class EditorUIManager {
       const menuSection = document.getElementById(
         "menu-page-section"
       ) as HTMLElement;
+      const contentection = document.getElementById("content-page-section");
       if (menuSection) menuSection.style.display = "block";
       // if (contentection) contentection.remove();
     } else toolSection.style.display = "none";
@@ -567,11 +586,21 @@ export class EditorUIManager {
   setTileProperties() {
     const selectedComponent = (globalThis as any).selectedComponent;
     const tileWrapper = selectedComponent.parent();
-    const rowComponent = tileWrapper.parent();
-    const tileAttributes = (globalThis as any).tileMapper.getTile(
+    // const rowComponent = tileWrapper.parent();
+
+    const rowComponent = tileWrapper.closest('.container-row')
+    const colComponent = tileWrapper.closest('.tile-column')
+
+    const tileAttributes = this.tileManager.getTileAttrs(
       rowComponent.getId(),
+      colComponent.getId(),
       tileWrapper.getId()
-    );
+    )
+
+    // const tileAttributes = (globalThis as any).tileMapper.getTile(
+    //   rowComponent.getId(),
+    //   tileWrapper.getId()
+    // );
 
     if (selectedComponent && tileAttributes) {
       this.tileProperties = new TileProperties(
@@ -640,7 +669,7 @@ export class EditorUIManager {
     if (buttonLayoutContainer) buttonLayoutContainer.style.display = "flex";
     const contentSection = document.querySelector("#content-page-section");
     const colorItems = contentSection?.querySelectorAll(".color-item > input");
-    colorItems?.forEach((input: any) => { input.checked = false; });
+    colorItems?.forEach((input: any) => (input.checked = false));
 
     const buttonLabel = contentSection?.querySelector(".cta-action-input");
     if (buttonLabel) buttonLabel.remove();
@@ -652,6 +681,12 @@ export class EditorUIManager {
     const rowComponent = tileWrapper.parent();
     let tileAttributes;
 
+    const isTile = selectedComponent.getClasses().includes("template-block");
+    const isCta = [
+      "img-button-container",
+      "plain-button-container",
+      "cta-container-child",
+    ].some((cls) => selectedComponent.getClasses().includes(cls));
 
     if (this.pageData.PageType === "Information") {
       const tileInfoSectionAttributes: InfoType = (
@@ -756,9 +791,17 @@ export class EditorUIManager {
   }
 
   activateNavigators(): any {
+    const leftNavigator = document.querySelector(
+      ".page-navigator-left"
+    ) as HTMLElement;
+    const rightNavigator = document.querySelector(
+      ".page-navigator-right"
+    ) as HTMLElement;
     const scrollContainer = document.getElementById(
       "child-container"
     ) as HTMLElement;
+    const prevButton = document.getElementById("scroll-left") as HTMLElement;
+    const nextButton = document.getElementById("scroll-right") as HTMLElement;
     const frames = document.querySelectorAll("#child-container .mobile-frame");
     const menuContainer = document.querySelector(
       ".menu-container"
@@ -766,6 +809,10 @@ export class EditorUIManager {
 
     // Show navigation buttons only when content overflows
     const menuWidth = menuContainer ? menuContainer.clientWidth : 0;
+    const totalFramesWidth =
+      Array.from(frames).reduce((sum, frame) => sum + frame.clientWidth, 0) +
+      menuWidth;
+    const containerWidth = scrollContainer.clientWidth;
 
     const alignment =
       window.innerWidth <= 1440
@@ -773,8 +820,8 @@ export class EditorUIManager {
           ? "right"
           : "center"
         : frames.length > 2
-          ? "right"
-          : "center";
+        ? "right"
+        : "center";
 
     scrollContainer.style.setProperty("justify-content", alignment);
 
@@ -810,7 +857,7 @@ export class EditorUIManager {
     ) as HTMLDivElement;
 
     if (!pageTitle || !editHeader || !saveChange || !titleDiv) {
-      // Required elements not found, exit the function
+      console.warn("resetTitleFromDOM: Required elements not found in DOM");
       return;
     }
 

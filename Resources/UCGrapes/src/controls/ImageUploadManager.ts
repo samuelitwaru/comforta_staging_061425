@@ -312,6 +312,17 @@ export class ImageUploadManager {
       }
 
       for (const [key, value] of Object.entries(updates)) {
+        const rowComponent = tileWrapper.closest('.container-row')
+        const colComponent = tileWrapper.closest('.tile-column')
+
+        this.infoSectionManager.updateGridTileAttribute(
+          rowComponent.getId(),
+          colComponent.getId(),
+          tileWrapper.getId(),
+          key,
+          value
+        )
+
         this.infoSectionManager.updateInfoTileAttributes(
           rowId,
           tileId,

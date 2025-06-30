@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: "API_ResidentService"
   description: "API Services"
-  version: "20250626082532"
+  version: "20250629184129"
 servers:
   - url: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/api
 paths:
@@ -3431,10 +3431,32 @@ components:
           items:
             type: "string"
 
+        Columns:
+          type: array
+          items:
+            description: ColumnsItem
+            $ref: "#/components/schemas/SDT_InfoPage.InfoContent.Columns_ColumnsItem"
+
         CtaAttributes:
           $ref: "#/components/schemas/SDT_InfoPage.InfoContent.CtaAttributes"
 
       x-gx-level: "SDT_InfoPage"
+
+    SDT_InfoPage.InfoContent.Columns_ColumnsItem:
+      properties:
+        ColId:
+          description: "Col Id"
+          type: "string"
+          format: "uuid"
+        Tiles:
+          description: "SDT_Info Tile"
+          type: array
+          items:
+            $ref: "#/components/schemas/SDT_InfoTile_SDT_InfoTileItem"
+
+
+      x-gx-level: "SDT_InfoPage.InfoContent"
+
 
     SDT_InfoPage.InfoContent.CtaAttributes:
       properties:

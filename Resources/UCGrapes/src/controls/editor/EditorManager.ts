@@ -105,6 +105,7 @@ export class EditorManager {
   }
 
   async loadHomePage(editor: any) {
+    // this.homepage.PageInfoStructure.InfoContent = []
     let converter;
     if (this.homepage.PageType == "Information") {
       converter = new JSONToGrapesJSInformation(this.homepage);

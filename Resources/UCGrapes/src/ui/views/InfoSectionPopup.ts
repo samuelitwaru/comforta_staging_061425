@@ -8,6 +8,7 @@ import { InfoSectionUI } from "./InfoSectionUI";
 import { randomIdGenerator } from "../../utils/helpers";
 import { PageCreationService } from "../components/tools-section/action-list/PageCreationService";
 import { i18n } from "../../i18n/i18n";
+import { newTileRow } from "../../utils/gjs-components";
 
 export class InfoSectionPopup {
   private controller: InfoSectionManager;
@@ -62,6 +63,11 @@ export class InfoSectionPopup {
         name: "Description",
         label: i18n.t("sidebar.action_list.description"),
         handler: (sectionId?: string) => this.addDescription(sectionId),
+      },
+      {
+        name: "GridTile",
+        label: "Grid Tile",
+        handler: (sectionId?: string) => this.addGridTile(sectionId),
       },
     ];
 
@@ -180,6 +186,12 @@ export class InfoSectionPopup {
   addTile(sectionId?: string) {
     const tile = this.infoSectionUi.infoTileUi();
     this.controller.addTile(tile, sectionId);
+  }
+
+  // :gridTiles
+  addGridTile(sectionId?: string) {
+    const row = newTileRow()
+    this.controller.addTileGrid(row.html, row.colId, row.tileId, sectionId);
   }
 
   pasteCopiedSection(sectionId?: string) {

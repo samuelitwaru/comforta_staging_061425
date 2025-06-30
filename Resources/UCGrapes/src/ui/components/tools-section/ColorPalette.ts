@@ -173,6 +173,19 @@ export class ColorPalette {
   ): void {
     if (pageData.PageType === "Information") {
       const infoSectionManager = new InfoSectionManager();
+
+      const rowComp = selectedComponent.closest('.container-row')
+      const colComp = selectedComponent.closest('.tile-column')
+      const tile = selectedComponent.closest('.template-wrapper')
+
+      infoSectionManager.updateGridTileAttribute(
+        rowComp.getId(),
+        colComp.getId(),
+        tile.getId(),
+        "BGColor",
+        colorName
+      )
+
       infoSectionManager.updateInfoTileAttributes(
         rowComponent.getId(),
         tileWrapper.getId(),

@@ -73,6 +73,19 @@ export class TextColor {
 
     if (pageData.PageType === "Information") {
       const infoSectionManager = new InfoSectionManager();
+
+      const rowComp = selectedComponent.closest('.container-row')
+      const colComp = selectedComponent.closest('.tile-column')
+      const tile = selectedComponent.closest('.template-wrapper')
+
+      infoSectionManager.updateGridTileAttribute(
+        rowComp.getId(),
+        colComp.getId(),
+        tile.getId(),
+        "Color",
+        colorValue.trim()
+      )
+
       infoSectionManager.updateInfoTileAttributes(
         selectedComponent.parent().parent().getId(),
         selectedComponent.parent().getId(),

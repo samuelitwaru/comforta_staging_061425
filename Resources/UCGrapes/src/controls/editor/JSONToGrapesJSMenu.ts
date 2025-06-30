@@ -11,7 +11,7 @@ import {
   ThemeManager
 } from "../themes/ThemeManager";
 import { i18n } from "../../i18n/i18n";
-import { resizeButton, tileRow } from "../../utils/gjs-components";
+import { resizeButton } from "../../utils/gjs-components";
 import { InfoType } from "../../types";
 
 export class JSONToGrapesJSMenu {
@@ -196,10 +196,6 @@ export class JSONToGrapesJSMenu {
       this.generateTile(tile, infoTilesRow, isFirstSingleTile, isThreeTiles, true)
     ).join("");
     return infoTilesRow?.Tiles?.length === 0 ? `` : `<div id="${infoTilesRow.InfoId}" ${infoRowDefaultAttributes} class="container-row">${tilesHTML}</div>`;
-  }
-
-  public generateInfoTileCol(content: any): string {
-    return  `<div id="${content.InfoId}" ${infoRowDefaultAttributes} class="container-row">${tileRow(content)}</div>`;
   }
 
   public generateHTML(): any {

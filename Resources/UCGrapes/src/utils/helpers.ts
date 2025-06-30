@@ -76,3 +76,19 @@ export function getIconCategories() {
       ];
       return categories;
 }
+
+export function getNextSiblingComponent(component:any, classFilter:string) {
+  const parent = component.parent(); // Get the parent component
+  if (!parent) {
+    return null; // No parent means no siblings
+  }
+
+  const siblings = parent.components().filter((comp:any) => comp.getClasses().includes(classFilter)); // Get all children of the parent (which are siblings of the component)
+  const currentIndex = siblings.indexOf(component); // Find the index of the current component
+
+  if (currentIndex !== -1 && currentIndex < siblings.length - 1) {
+    return siblings.at(currentIndex + 1); // Return the component at the next index
+  }
+    
+  return null; // No next sibling found
+}

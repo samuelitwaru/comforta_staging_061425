@@ -1,6 +1,6 @@
 import { InfoType } from "../../types";
 import { minTileHeight } from "../../utils/default-attributes";
-import { resizeButton } from "../../utils/gjs-components";
+import { addRightButton, resizeButton } from "../../utils/gjs-components";
 import { InfoSectionManager } from "../InfoSectionManager";
 import { InfoContentMapper } from "./InfoContentMapper";
 import { TileMapper } from "./TileMapper";
@@ -72,6 +72,64 @@ export class TileUpdate {
     }
 
     this.removeEmptyRows();
+  }
+
+  updateGridTiles(rowComponent:any) {
+    // remove all add tile and resize components
+    rowComponent.find('.add-button-right').forEach((comp:any) => comp.remove())
+    rowComponent.find('.tile-resize-button').forEach((comp:any) => comp.remove())
+    
+    const columnComponents = rowComponent.find(".tile-column")    
+    const tileCounts = columnComponents.map((comp:any) => comp.components().filter((comp:any)=>comp.get('type') === "tile-wrapper" || comp.getClasses().includes("template-wrapper")).length)
+    
+    const maxTileCount = Math.max(...tileCounts) 
+    rowComponent.addStyle('height', `${maxTileCount*minTileHeight}px`)
+    const columnCount = columnComponents.length
+
+    if (maxTileCount == 1) {
+      // set all tile heights to min height
+      rowComponent.find('.template-wrapper').forEach((comp:any) => {
+        comp.addStyle({height: `${minTileHeight}px`})
+      })
+    }
+
+    columnComponents.forEach((comp:any) => {
+      const maxWidths = ['100%','50%','32%']
+      const colHeights = [178,264]
+      comp.addStyle({'width': maxWidths[columnCount-1]})
+      const tiles = comp.components().filter((comp:any)=>(comp.get('type') === "tile-wrapper")||comp.getClasses().includes("template-wrapper"))
+      const colWidth = comp.view.el.getBoundingClientRect().width
+      tiles.forEach((tile:any) => {
+        // tile.addStyle({'width': `${colWidth}px`})
+        if (maxTileCount === 1 && columnCount < 3) {
+          tile.append(addRightButton("Add Tile Right"));
+        }
+      })
+
+      if (tiles.length === 0) {
+        comp.remove()
+      }
+      else if (tiles.length === 1) {
+        comp.addStyle({'display': 'block', 'height':'100%'})
+        if (columnCount < 3) {
+          // add resize handle
+          tiles[0].append(resizeButton("Resize"));
+          tiles[0].addStyle({height: `100%`})
+        }
+      }
+      
+      else if (tiles.length > 1) {
+        comp.addStyle({'display': 'flex'})
+        comp.addStyle({height: `${colHeights[tiles.length-2]}px`})
+        tiles.forEach((tile:any) => {
+          // remove resize component
+          tile.find(".tile-resize-button").forEach((comp: any) => comp.remove());
+          // set tile height as minHeight
+          tile.addStyle('height', `${minTileHeight}px`)
+        })
+      }
+      
+    })
   }
 
   getTileAttributes(rowComponent: any, tileWrapper: any) {

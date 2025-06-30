@@ -70,6 +70,7 @@
  	<Compile Include="$(WebDirectory)\type_SdtSDT_InfoImage_SDT_InfoImageItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_InfoPage.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_InfoPage_InfoContentItem.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtSDT_InfoPage_InfoContentItem_ColumnsItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_InfoPage_InfoContentItem_CtaAttributes.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_InfoPageTranslation.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_InfoTile_SDT_InfoTileItem.cs" />

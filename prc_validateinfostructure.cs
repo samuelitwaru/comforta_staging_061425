@@ -66,11 +66,32 @@ namespace GeneXus.Programs {
          /* GeneXus formulas */
          /* Output device settings */
          AV10SDT_InfoContent.FromJSonString(AV11PageStructure, null);
-         AV12GXV1 = 1;
-         while ( AV12GXV1 <= AV10SDT_InfoContent.gxTpr_Infocontent.Count )
+         AV12New_InfoContent = new GXBaseCollection<SdtSDT_InfoContent_InfoContentItem>( context, "SDT_InfoContent.InfoContentItem", "Comforta_version2");
+         AV15GXV1 = 1;
+         while ( AV15GXV1 <= AV10SDT_InfoContent.gxTpr_Infocontent.Count )
          {
-            AV9InfoContent = ((SdtSDT_InfoContent_InfoContentItem)AV10SDT_InfoContent.gxTpr_Infocontent.Item(AV12GXV1));
-            if ( StringUtil.StrCmp(AV9InfoContent.gxTpr_Infotype, "Cta") == 0 )
+            AV9InfoContent = ((SdtSDT_InfoContent_InfoContentItem)AV10SDT_InfoContent.gxTpr_Infocontent.Item(AV15GXV1));
+            if ( ( StringUtil.StrCmp(AV9InfoContent.gxTpr_Infotype, "TileGrid") == 0 ) && ( AV9InfoContent.gxTpr_Columns.Count > 0 ) )
+            {
+               AV12New_InfoContent.Add(AV9InfoContent, 0);
+            }
+            else if ( ( StringUtil.StrCmp(AV9InfoContent.gxTpr_Infotype, "TileRow") == 0 ) && ( AV9InfoContent.gxTpr_Tiles.Count > 0 ) )
+            {
+               AV9InfoContent.gxTpr_Infotype = "TileGrid";
+               AV16GXV2 = 1;
+               while ( AV16GXV2 <= AV9InfoContent.gxTpr_Tiles.Count )
+               {
+                  AV13SDT_InfoTile = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV9InfoContent.gxTpr_Tiles.Item(AV16GXV2));
+                  AV14ColumnItem = new SdtSDT_InfoContent_InfoContentItem_ColumnsItem(context);
+                  AV14ColumnItem.gxTpr_Colid = new SdtRandomStringGenerator(context).generate(8);
+                  AV14ColumnItem.gxTpr_Tiles.Add(AV13SDT_InfoTile, 0);
+                  AV9InfoContent.gxTpr_Columns.Add(AV14ColumnItem, 0);
+                  AV16GXV2 = (int)(AV16GXV2+1);
+               }
+               AV9InfoContent.gxTpr_Tiles = new();
+               AV12New_InfoContent.Add(AV9InfoContent, 0);
+            }
+            else if ( StringUtil.StrCmp(AV9InfoContent.gxTpr_Infotype, "Cta") == 0 )
             {
                if ( String.IsNullOrEmpty(StringUtil.RTrim( AV9InfoContent.gxTpr_Ctaattributes.gxTpr_Ctabuttonicon)) )
                {
@@ -80,11 +101,13 @@ namespace GeneXus.Programs {
                {
                   AV9InfoContent.gxTpr_Ctaattributes.gxTpr_Ctabgcolor = context.GetMessage( "ctaColor1", "");
                }
+               AV12New_InfoContent.Add(AV9InfoContent, 0);
             }
             else
             {
+               AV12New_InfoContent.Add(AV9InfoContent, 0);
             }
-            AV12GXV1 = (int)(AV12GXV1+1);
+            AV15GXV1 = (int)(AV15GXV1+1);
          }
          cleanup();
       }
@@ -102,14 +125,21 @@ namespace GeneXus.Programs {
       public override void initialize( )
       {
          AV10SDT_InfoContent = new SdtSDT_InfoContent(context);
+         AV12New_InfoContent = new GXBaseCollection<SdtSDT_InfoContent_InfoContentItem>( context, "SDT_InfoContent.InfoContentItem", "Comforta_version2");
          AV9InfoContent = new SdtSDT_InfoContent_InfoContentItem(context);
+         AV13SDT_InfoTile = new SdtSDT_InfoTile_SDT_InfoTileItem(context);
+         AV14ColumnItem = new SdtSDT_InfoContent_InfoContentItem_ColumnsItem(context);
          /* GeneXus formulas. */
       }
 
-      private int AV12GXV1 ;
+      private int AV15GXV1 ;
+      private int AV16GXV2 ;
       private string AV11PageStructure ;
       private SdtSDT_InfoContent AV10SDT_InfoContent ;
+      private GXBaseCollection<SdtSDT_InfoContent_InfoContentItem> AV12New_InfoContent ;
       private SdtSDT_InfoContent_InfoContentItem AV9InfoContent ;
+      private SdtSDT_InfoTile_SDT_InfoTileItem AV13SDT_InfoTile ;
+      private SdtSDT_InfoContent_InfoContentItem_ColumnsItem AV14ColumnItem ;
       private SdtSDT_InfoContent aP1_SDT_InfoContent ;
    }
 

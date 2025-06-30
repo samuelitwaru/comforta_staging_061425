@@ -2,6 +2,7 @@ import { ToolBoxService } from "../../services/ToolBoxService";
 import { ResizeState, TileHeights } from "../../types";
 import { EditorThumbs } from "../../ui/components/editor-content/EditorThumbs";
 import { minTileHeight } from "../../utils/default-attributes";
+import { newTile } from "../../utils/gjs-components";
 import { ImageUploadManager } from "../ImageUploadManager";
 import { InfoSectionManager } from "../InfoSectionManager";
 import { HistoryManager } from "../toolbox/HistoryManager";
@@ -11,6 +12,8 @@ import { EditorManager } from "./EditorManager";
 import { EditorUIManager } from "./EditorUiManager";
 import { FrameEvent } from "./FrameEvent";
 import { PageMapper } from "./PageMapper";
+import { TileManager } from "./TileManager";
+import { TileUpdate } from "./TileUpdate";
 
 export class EditorEvents {
   // Core editor properties
@@ -31,12 +34,14 @@ export class EditorEvents {
   private selectedComponent: any;
   private resizeState!: ResizeState;
   private tileHeights!: TileHeights;
+  tileUpdate!: TileUpdate;
+  tileManager!: TileManager;
 
   constructor() {
     this.appVersionManager = new AppVersionManager();
     this.toolboxService = new ToolBoxService();
     this.initializeResizeState();
-    this.initializeTileHeights();
+    // this.initializeTileHeights();
     this.isNewPage = false;
   }
 
@@ -58,11 +63,11 @@ export class EditorEvents {
     };
   }
 
-  private initializeTileHeights(): void {
+  private initializeTileHeights(isSingleTile=true): void {
     this.tileHeights = {
       min: minTileHeight,
-      medium: minTileHeight * 1.5,
-      max: minTileHeight * 2,
+      medium: minTileHeight * (isSingleTile ? 2.1 : 1.5),
+      max: minTileHeight * (isSingleTile ? 3.2 : 2),
       snapThreshold: 10,
     };
   }
@@ -80,10 +85,11 @@ export class EditorEvents {
     this.frameId = frameEditor;
     this.isHome = isHome;
     this.isNewPage = isNewPage;
-
+    this.tileUpdate = new TileUpdate(this.pageId);
     this.initializeUIManager();
     this.setupGlobalReferences();
     this.initializeEventListeners();
+    this.initializeTileManager();
   }
 
   private initializeUIManager(): void {
@@ -96,6 +102,16 @@ export class EditorEvents {
     );
   }
 
+  private initializeTileManager() {
+    this.tileManager = new TileManager(
+          // e,
+          this.editor,
+          this.pageId,
+          this.frameId,
+          this.pageData
+        );
+  }
+
   private setupGlobalReferences(): void {
     (globalThis as any).uiManager = this.uiManager;
   }
@@ -106,6 +122,14 @@ export class EditorEvents {
     this.onSelected();
     this.onComponentUpdate();
     this.onLoad();
+  }
+
+  updateTileGrids() {
+    const wrapper = this.editor.getWrapper();
+    const rowComps = wrapper.find('.container-row').filter((comp:any) => comp.find('.tile-column').length > 0 )
+    rowComps.forEach((rowComp:any) => {
+      this.tileUpdate.updateGridTiles(rowComp)
+    })
   }
 
   private onLoad(): void {
@@ -122,8 +146,8 @@ export class EditorEvents {
       this.setupWrapperEventListeners(wrapper);
       this.initializePostLoadComponents();
       this.activateFrameEvents(wrapper);
-      
       this.loadPageHistory(this.pageData);
+      this.updateTileGrids()
     });
   }
 
@@ -162,6 +186,14 @@ export class EditorEvents {
       this.startResize(e, targetElement);
     }
 
+    const wrapper = this.editor.getWrapper();
+    const rowComp = wrapper.find(`#${this.resizeState.resizingRowParent?.id}`)
+    if (rowComp.length && rowComp[0].find('.tile-column').length > 1) {
+      this.initializeTileHeights(true)
+    } else {
+      this.initializeTileHeights(false)
+    }
+
     if (targetElement.closest(".template-block")) {
       this.resizeState.isDragging = true;
     }
@@ -180,7 +212,58 @@ export class EditorEvents {
     this.resizeState.resizeYStart = e.clientY;
     this.resizeState.initialHeight = this.resizeState.resizingRow.offsetHeight;
 
+    console.log('resising row: ',  this.resizeState.resizingRowParent)
+    
     this.setupResizeUI(targetElement);
+  }
+
+  private resizeGridTiles(finalHeight:number) {
+    const verticalTileCount = Math.round(finalHeight / this.tileHeights.min);
+    const tileColumn = this.resizeState.resizingRow?.parentElement
+    if (tileColumn && tileColumn.classList.contains("tile-column")) {
+      const siblingTileColumn = (tileColumn.nextElementSibling || tileColumn.previousElementSibling) as HTMLDivElement;
+      if (siblingTileColumn) {
+        const columnComponent = this.editor.Components.getWrapper().find(`#${siblingTileColumn.id}`)[0];
+        const containerRowComponent = columnComponent.closest('.container-row')
+        
+        containerRowComponent.addStyle('height', `${finalHeight}px`)
+        this.applyResize(finalHeight);
+
+        // this.uiManager.tileManager.updateInfoGridData(containerRowComponent)
+
+        // const siblingTileCount = columnComponent.components().filter((comp: any) => (comp.get("type") === "tile-wrapper") || comp.getClasses().includes("template-wrapper")).length;
+        const siblingTileCount = columnComponent.find('.template-wrapper').length
+        const tilesToAdd = Math.ceil(verticalTileCount - siblingTileCount);
+        const tilesToRemove = Math.floor(siblingTileCount - verticalTileCount);
+        if (tilesToAdd > 0) {
+          for (let i = 0; i < tilesToAdd; i++) {
+            const newTileComponent = this.editor.Components.addComponent(newTile());
+            columnComponent.append(newTileComponent);
+            // DATA: add new tile to column row ..., and column ...
+            this.tileManager.addNewTileToGrid(
+              containerRowComponent.getId(), 
+              columnComponent.getId(), 
+              newTileComponent.getId()
+            )
+          }
+        } else if (tilesToRemove > 0) {
+          const tiles = columnComponent.components().filter((comp: any) => (comp.get("type") === "tile-wrapper") || comp.getClasses().includes("template-wrapper"));
+          for (let i = 0; i < tilesToRemove && tiles.length > 0; i++) {
+            const lastTile = tiles.pop(); 
+            const tileAttributes = this.tileManager.getTileAttrs(containerRowComponent.getId(), columnComponent.getId(), lastTile.getId())
+            this.tileManager.removeTileFromGrid(
+              containerRowComponent.getId(),
+              columnComponent.getId(),
+              lastTile.getId()
+            )
+            if (lastTile) {
+              this.tileManager.addTileOnNewRow(lastTile, tileAttributes, containerRowComponent)
+            }
+          }
+        }
+        this.tileManager.tileUpdate.updateGridTiles(containerRowComponent)
+      }
+    }
   }
 
   private setupResizeUI(targetElement: Element): void {
@@ -332,6 +415,12 @@ export class EditorEvents {
 
   private finishResize(): void {
     const finalHeight = this.calculateFinalHeight();
+    const isTileColumn = this.resizeState.resizingRow?.parentElement?.classList.contains("tile-column")
+    if (isTileColumn) {
+      this.resizeGridTiles(finalHeight);
+    }else{
+      this.applyFinalResize(finalHeight);
+    }
     this.applyFinalResize(finalHeight);
     this.updateInfoTileAttributes(finalHeight);
     this.cleanupResize();
@@ -544,18 +633,75 @@ export class EditorEvents {
     );
   }
 
+  private addGridTile(e:MouseEvent) {
+    const addTileButton = e.target as Element
+    const row = addTileButton.closest('.container-row')
+    const col = addTileButton.closest('.tile-column')
+    if (row && col) {
+      const wrapper = this.editor.getWrapper()
+      const rowComponent = wrapper.find(`#${row.id}`)[0]
+      const colComponent = wrapper.find(`#${col.id}`)[0]
+      this.tileManager.addGridTile(rowComponent, colComponent.index())
+    }
+  }
+
+  private deleteGridTile(e:MouseEvent) {
+    const deleteTileButton = e.target as Element
+    const tile = deleteTileButton.closest('.template-wrapper')
+    if (tile) {
+      const wrapper = this.editor.getWrapper()
+      const tileComponent = wrapper.find(`#${tile.id}`)[0]
+      this.tileManager.deleteGridTile(tileComponent)
+    }
+  }
+
+  private deleteIcon(e:MouseEvent) {
+    this.tileManager.removeTileIcon(e)
+  }
+
+  private deleteTileText(e:MouseEvent) {
+    this.tileManager.removeTileTitle(e)
+  }
+
   private processClick(e: MouseEvent, targetElement: Element): void {
+    const addButtonClicked = (e.target as Element).classList.contains('add-button-right') || 
+                              (e.target as Element).closest('.add-button-right')
+    const deleteButtonClicked = (e.target as Element).classList.contains('delete-button') || 
+                              (e.target as Element).closest('.action-button.delete-button')
+
+    const deleteIconClicked = (e.target as Element).classList.contains('tile-close-icon') || 
+                              (e.target as Element).closest('.tile-close-icon')
+
+    const deleteTextClicked = (e.target as Element).classList.contains('tile-close-title') || 
+                              (e.target as Element).closest('.tile-close-title')
+
+    console.log('deleteIconClicked', deleteIconClicked)
+    console.log('deleteTextClicked', deleteTextClicked)
+                              
+    if (deleteIconClicked) {
+      this.deleteIcon(e)
+    }
+
+    if (deleteTextClicked) {
+      this.deleteTileText(e)
+    }
+    
+    if (addButtonClicked) {
+      this.addGridTile(e)
+    }
+    if (deleteButtonClicked) {
+      this.deleteGridTile(e)
+    }
+
     this.uiManager.activateEditor(this.frameId);
     this.uiManager.clearAllMenuContainers();
     this.uiManager.clearAllDropDowns();
     (globalThis as any).eventTarget = targetElement;
 
-    this.uiManager.handleTileManager(e);
+    // this.uiManager.handleTileManager(e);
     this.uiManager.openMenu(e);
     this.uiManager.initContentDataUi(e, this.pageData);
     this.uiManager.activateEditor(this.frameId);
-
-    const editorManager = new EditorManager();
 
     this.uiManager.handleInfoSectionHover(e);
   }

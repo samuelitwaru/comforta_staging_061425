@@ -109,13 +109,10 @@ namespace GeneXus.Programs {
                {
                   AV16SDT_InfoContent = new SdtSDT_InfoContent(context);
                   AV16SDT_InfoContent.FromJSonString(A518PageStructure, null);
-                  GXt_SdtSDT_InfoContent1 = AV16SDT_InfoContent;
-                  new prc_cleaninfocontent(context ).execute( ref  AV16SDT_InfoContent) ;
-                  AV16SDT_InfoContent = GXt_SdtSDT_InfoContent1;
-                  GXt_SdtSDT_InfoContent1 = new SdtSDT_InfoContent();
-                  new prc_validateinfostructure(context ).execute(  A518PageStructure, out  GXt_SdtSDT_InfoContent1) ;
-                  AV10PageItem.gxTpr_Pageinfostructure = GXt_SdtSDT_InfoContent1;
                   AV11PageStructure = AV16SDT_InfoContent.ToJSonString(false, true);
+                  GXt_SdtSDT_InfoContent1 = new SdtSDT_InfoContent();
+                  new prc_validateinfostructure(context ).execute(  AV11PageStructure, out  GXt_SdtSDT_InfoContent1) ;
+                  AV10PageItem.gxTpr_Pageinfostructure = GXt_SdtSDT_InfoContent1;
                }
                else if ( ( StringUtil.StrCmp(AV10PageItem.gxTpr_Pagetype, "DynamicForm") == 0 ) || ( StringUtil.StrCmp(AV10PageItem.gxTpr_Pagetype, "WebLink") == 0 ) )
                {

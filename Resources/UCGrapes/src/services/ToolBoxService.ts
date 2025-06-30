@@ -80,6 +80,7 @@ export class ToolBoxService {
 
   async getVersions() {
     const response = await this.fetchAPI("/api/toolbox/v2/appversions", {}, true);
+    console.log('response: ', response)
     return response;
   }
 

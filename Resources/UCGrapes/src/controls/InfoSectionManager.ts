@@ -5,7 +5,7 @@ import { InfoSectionUI } from "../ui/views/InfoSectionUI";
 import { randomIdGenerator } from "../utils/helpers";
 import { InfoContentMapper } from "./editor/InfoContentMapper";
 import { AddInfoSectionButton } from "../ui/components/AddInfoSectionButton";
-import { CtaAttributes, InfoType } from "../types";
+import { Column, CtaAttributes, InfoType } from "../types";
 import { JSONToGrapesJSMenu } from "./editor/JSONToGrapesJSMenu";
 import { ToolboxManager } from "./toolbox/ToolboxManager";
 import { i18n } from "../i18n/i18n";
@@ -363,6 +363,52 @@ export class InfoSectionManager {
     }
   }
 
+  addTileGrid(html:string, colId:string, tileId:string, nextSectionId?:string) {
+    const tileWrapper = document.createElement("div");
+    tileWrapper.innerHTML = html;
+    const tileWrapperComponent = tileWrapper.firstElementChild as HTMLElement;
+    // const tileId = tileWrapperComponent.querySelector(".template-wrapper")?.id;
+
+    const append = this.appendComponent(html, nextSectionId);
+
+    if (append) {
+      const infoType: InfoType = {
+        InfoId: tileWrapperComponent.id,
+        InfoType: "TileGrid",
+        InfoPositionId: nextSectionId,
+        Columns: [
+          {
+            ColId: colId,
+            Tiles: [
+              {
+                Id: tileId,
+                Name: "Title",
+                Text: "Title",
+                Color: "#333333",
+                Align: "left",
+                Action: {
+                  ObjectType: "",
+                  ObjectId: "",
+                  ObjectUrl: "",
+                },
+              },
+            ],
+          }
+        ]
+      };
+      this.addToMapper(infoType);
+      // Select the tile
+      const component = this.editor?.getWrapper().find(`#${tileId}`)[0];
+
+      if (component) {
+        const tileComponent = component.find(".template-block")[0];
+        if (tileComponent) {
+          this.editor?.select(tileComponent);
+        }
+      }
+    }
+  }
+
   pasteTile(nextSectionId?: string) {
     // 1. Get the copied tile structure from localStorage
     const copiedTileRaw = localStorage.getItem('copiedInfoSection');
@@ -557,7 +603,7 @@ export class InfoSectionManager {
   }
 
   private addToMapper(infoType: InfoType) {
-    // console.log('addToMapper infoType', infoType);
+    console.log('addToMapper infoType', infoType);
     const pageId = (globalThis as any).currentPageId;
     const infoMapper = new InfoContentMapper(pageId);
     infoMapper.addInfoType(infoType);
@@ -583,13 +629,35 @@ export class InfoSectionManager {
     return infoContent;
   }
 
+  updateGridTileAttribute(
+    rowId:string, 
+    colId:string, 
+    tileId:string, 
+    attributePath:string,
+    value:any
+  ) {
+    const tileInfoSectionAttributes = this.getInfoContent(rowId);
+    if (tileInfoSectionAttributes) {
+      const col = tileInfoSectionAttributes.Columns?.find((col:Column) => colId === col.ColId)
+      console.log('col', col)
+      if (col) {
+        const tile = col.Tiles?.find((tile:any) => tile.Id === tileId);
+        console.log('tile', tile)
+        if (tile) {
+          this.setNestedProperty(tile, attributePath, value);
+        }
+      }
+      console.log('updated', tileInfoSectionAttributes)
+      this.updateInfoMapper(rowId, tileInfoSectionAttributes);
+    }
+  }
+
   updateInfoTileAttributes(
     infoId: string,
     tileId: string,
     attributePath: string, // accepts dot notation
     value: any
   ) {
-    const pageId = (globalThis as any).currentPageId;
     const tileInfoSectionAttributes = this.getInfoContent(infoId);
     if (tileInfoSectionAttributes) {
       const tile = tileInfoSectionAttributes.Tiles?.find(

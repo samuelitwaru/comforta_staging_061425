@@ -163,7 +163,7 @@ namespace GeneXus.Programs {
                AV19Path = context.GetMessage( "media/cropped/", "");
                if ( StringUtil.StartsWith( AV8HttpRequest.BaseURL, context.GetMessage( "http://localhost", "")) )
                {
-                  AV19Path = context.GetMessage( "D:\\KBs\\ComfortaKB\\NETSQLServer043\\Web\\media\\cropped\\", "");
+                  AV19Path = context.GetMessage( "C:\\KBs\\Comforta_version2.1\\Data018\\web\\media\\cropped\\", "");
                }
                new SdtEO_Base64Image(context).saveimage(AV15MediaImageData, AV19Path+AV11MediaName) ;
                new prc_logtofile(context ).execute(  AV19Path+AV11MediaName) ;

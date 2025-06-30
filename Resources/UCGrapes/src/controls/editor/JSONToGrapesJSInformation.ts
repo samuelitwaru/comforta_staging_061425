@@ -9,7 +9,9 @@ import {
   ctaTileDEfaultAttributes,
   DefaultAttributes,
   DefaultInfoColumnAttributes,
+  infoRowDefaultAttributes,
 } from "../../utils/default-attributes";
+import { newTile, tileFromAttributes } from "../../utils/gjs-components";
 import { randomIdGenerator } from "../../utils/helpers";
 import { CtaManager } from "../themes/CtaManager";
 import { ThemeManager } from "../themes/ThemeManager";
@@ -280,9 +282,34 @@ export class JSONToGrapesJSInformation {
     } else if (content.InfoType === "TileRow" && content.Tiles) {
       const getTileHtml = new JSONToGrapesJSMenu(this.data).generateInfoRow(content);
       return getTileHtml;
+    } else if (content.InfoType === "TileGrid" && content.Columns) {
+      return this.generateTileGrid(content.InfoId, content.Columns)
     } else {
       return "";
     }
+  }
+
+  generateTileGrid(rowId:string, columns:any) {
+    const rowHTML = `
+      <div class="container-row" ${infoRowDefaultAttributes} id="${rowId}">
+        ${columns.map((col:any)=> this.generateColHTML(col) ).join("")}
+      </div>
+    `
+    return rowHTML
+  }
+
+  generateColHTML (col:any) {
+    const colHTML = `
+      <div class="tile-column" id="${col.ColId}">
+        ${col.Tiles.map((tile:any)=>this.generateTileHTML(tile)).join("")}
+      </div>
+    `
+    return colHTML
+  }
+
+  generateTileHTML(tile:any) {
+    const tileHTML = tileFromAttributes(tile, this.themeManager)
+    return tileHTML 
   }
 
   public generateHTML(): any {

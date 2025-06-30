@@ -73,6 +73,7 @@ export interface InfoType {
   CtaAttributes?: CtaAttributes;
   Tiles?: Tile[];
   Images?: Image[];
+  Columns?: Column[]
 }
 
 export interface Image {
@@ -134,6 +135,11 @@ export interface Template {
       };
     }>;
   }>;
+}
+
+export interface Column {
+  ColId: string,
+  Tiles: Tile[]
 }
 
 export interface Tile {

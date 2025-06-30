@@ -1,18 +1,5 @@
 import { I18n } from "i18n-js";
 
-export const i18nModule = new I18n({
-  en: {
-    Messages: "Messages",
-    Requests: "Requests",
-    NoMessagesYet: "No Messages Yet",
-  },
-  nl: {
-    Messages: "Berichten",
-    Requests: "Verzoeken",
-    NoMessagesYet: "Nog geen berichten",
-  },
-});
-
 export const i18n = new I18n({
   en: {
     navbar: {

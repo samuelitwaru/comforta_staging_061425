@@ -160,22 +160,22 @@ namespace GeneXus.Programs {
             pr_default.readNext(2);
          }
          pr_default.close(2);
-         AV26GXV1 = 1;
-         while ( AV26GXV1 <= AV11SDT_InfoPage.gxTpr_Infocontent.Count )
+         AV27GXV1 = 1;
+         while ( AV27GXV1 <= AV11SDT_InfoPage.gxTpr_Infocontent.Count )
          {
-            AV13InfoContent = ((SdtSDT_InfoPage_InfoContentItem)AV11SDT_InfoPage.gxTpr_Infocontent.Item(AV26GXV1));
+            AV13InfoContent = ((SdtSDT_InfoPage_InfoContentItem)AV11SDT_InfoPage.gxTpr_Infocontent.Item(AV27GXV1));
             if ( StringUtil.StrCmp(AV13InfoContent.gxTpr_Infotype, "Images") == 0 )
             {
                AV13InfoContent.gxTpr_Infotype = "Image";
                AV19Images = (GxSimpleCollection<string>)(new GxSimpleCollection<string>());
-               AV27GXV2 = 1;
-               while ( AV27GXV2 <= AV13InfoContent.gxTpr_Images.Count )
+               AV28GXV2 = 1;
+               while ( AV28GXV2 <= AV13InfoContent.gxTpr_Images.Count )
                {
-                  AV18InfoImageString = ((string)AV13InfoContent.gxTpr_Images.Item(AV27GXV2));
+                  AV18InfoImageString = ((string)AV13InfoContent.gxTpr_Images.Item(AV28GXV2));
                   AV17InfoImage = new SdtSDT_InfoImage_SDT_InfoImageItem(context);
                   AV17InfoImage.FromJSonString(AV18InfoImageString, null);
                   AV19Images.Add(AV17InfoImage.gxTpr_Infoimagevalue, 0);
-                  AV27GXV2 = (int)(AV27GXV2+1);
+                  AV28GXV2 = (int)(AV28GXV2+1);
                }
                AV13InfoContent.gxTpr_Images = AV19Images;
             }
@@ -196,12 +196,29 @@ namespace GeneXus.Programs {
                new prc_getthemecolorbyname(context ).execute(  AV14ThemeId,  AV13InfoContent.gxTpr_Ctaattributes.gxTpr_Ctabgcolor, out  GXt_char1) ;
                AV13InfoContent.gxTpr_Ctaattributes.gxTpr_Ctabgcolor = GXt_char1;
             }
+            else if ( StringUtil.StrCmp(AV13InfoContent.gxTpr_Infotype, "TileGrid") == 0 )
+            {
+               AV13InfoContent.gxTpr_Infotype = "TileRow";
+               AV29GXV3 = 1;
+               while ( AV29GXV3 <= AV13InfoContent.gxTpr_Columns.Count )
+               {
+                  AV22ColumnsItem = ((SdtSDT_InfoPage_InfoContentItem_ColumnsItem)AV13InfoContent.gxTpr_Columns.Item(AV29GXV3));
+                  AV30GXV4 = 1;
+                  while ( AV30GXV4 <= AV22ColumnsItem.gxTpr_Tiles.Count )
+                  {
+                     AV15SDT_InfoTile = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV22ColumnsItem.gxTpr_Tiles.Item(AV30GXV4));
+                     AV13InfoContent.gxTpr_Tiles.Add(AV15SDT_InfoTile, 0);
+                     AV30GXV4 = (int)(AV30GXV4+1);
+                  }
+                  AV29GXV3 = (int)(AV29GXV3+1);
+               }
+            }
             else if ( StringUtil.StrCmp(AV13InfoContent.gxTpr_Infotype, "TileRow") == 0 )
             {
-               AV28GXV3 = 1;
-               while ( AV28GXV3 <= AV13InfoContent.gxTpr_Tiles.Count )
+               AV31GXV5 = 1;
+               while ( AV31GXV5 <= AV13InfoContent.gxTpr_Tiles.Count )
                {
-                  AV15SDT_InfoTile = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV13InfoContent.gxTpr_Tiles.Item(AV28GXV3));
+                  AV15SDT_InfoTile = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV13InfoContent.gxTpr_Tiles.Item(AV31GXV5));
                   GXt_char1 = "";
                   new prc_getthemecolorbyname(context ).execute(  AV14ThemeId,  AV15SDT_InfoTile.gxTpr_Bgcolor, out  GXt_char1) ;
                   AV15SDT_InfoTile.gxTpr_Bgcolor = GXt_char1;
@@ -225,13 +242,13 @@ namespace GeneXus.Programs {
                      }
                      pr_default.close(4);
                   }
-                  AV28GXV3 = (int)(AV28GXV3+1);
+                  AV31GXV5 = (int)(AV31GXV5+1);
                }
             }
             else
             {
             }
-            AV26GXV1 = (int)(AV26GXV1+1);
+            AV27GXV1 = (int)(AV27GXV1+1);
          }
          cleanup();
       }
@@ -303,6 +320,7 @@ namespace GeneXus.Programs {
          AV19Images = new GxSimpleCollection<string>();
          AV18InfoImageString = "";
          AV17InfoImage = new SdtSDT_InfoImage_SDT_InfoImageItem(context);
+         AV22ColumnsItem = new SdtSDT_InfoPage_InfoContentItem_ColumnsItem(context);
          AV15SDT_InfoTile = new SdtSDT_InfoTile_SDT_InfoTileItem(context);
          P00GB6_A206WWPFormId = new short[1] ;
          P00GB6_A208WWPFormReferenceName = new string[] {""} ;
@@ -336,9 +354,11 @@ namespace GeneXus.Programs {
 
       private short A206WWPFormId ;
       private short A207WWPFormVersionNumber ;
-      private int AV26GXV1 ;
-      private int AV27GXV2 ;
-      private int AV28GXV3 ;
+      private int AV27GXV1 ;
+      private int AV28GXV2 ;
+      private int AV29GXV3 ;
+      private int AV30GXV4 ;
+      private int AV31GXV5 ;
       private string A599ResidentLanguage ;
       private string AV20ResidentLanguage ;
       private string GXt_char1 ;
@@ -402,6 +422,7 @@ namespace GeneXus.Programs {
       private SdtSDT_InfoPage_InfoContentItem AV13InfoContent ;
       private GxSimpleCollection<string> AV19Images ;
       private SdtSDT_InfoImage_SDT_InfoImageItem AV17InfoImage ;
+      private SdtSDT_InfoPage_InfoContentItem_ColumnsItem AV22ColumnsItem ;
       private SdtSDT_InfoTile_SDT_InfoTileItem AV15SDT_InfoTile ;
       private short[] P00GB6_A206WWPFormId ;
       private string[] P00GB6_A208WWPFormReferenceName ;

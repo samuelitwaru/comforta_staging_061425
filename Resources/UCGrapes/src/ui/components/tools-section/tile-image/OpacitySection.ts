@@ -92,12 +92,25 @@ export class OpacitySection {
 
     if (pageData.PageType === "Information") {
       const infoSectionManager = new InfoSectionManager();
-      infoSectionManager.updateInfoTileAttributes(
-        selectedComponent.parent().parent().getId(),
-        selectedComponent.parent().getId(),
+
+      const tileWrapper = selectedComponent.parent();
+      const rowComponent = tileWrapper.closest('.container-row')
+      const colComponent = tileWrapper.closest('.tile-column')
+
+      infoSectionManager.updateGridTileAttribute(
+        rowComponent.getId(),
+        colComponent.getId(),
+        tileWrapper.getId(),
         "Opacity",
         value
-      );
+      )
+
+      // infoSectionManager.updateInfoTileAttributes(
+      //   selectedComponent.parent().parent().getId(),
+      //   selectedComponent.parent().getId(),
+      //   "Opacity",
+      //   value
+      // );
     } else {
       (globalThis as any).tileMapper.updateTile(
         selectedComponent.parent().getId(),

@@ -234,23 +234,24 @@ export class TileMapper {
     // if current page is Information type
     if (data.PageType === "Information") {
       data.PageInfoStructure.InfoContent
-      .filter((content:any)=>content.InfoType == "TileRow")
-      .forEach((content: any) => {
-        content.Tiles.forEach((tile: any) => {
-          if (tile.Id === tileId) {
-            if (attribute.includes(".")) {
-              const parts = attribute.split(".");
-              let current = tile;
-              for (let i = 0; i < parts.length - 1; i++) {
-                current = current[parts[i]];
+        .filter((content:any)=>content.InfoType === "TileRow")
+        .forEach((content: any) => {
+          content.Tiles.forEach((tile: any) => {
+            if (tile.Id === tileId) {
+              if (attribute.includes(".")) {
+                const parts = attribute.split(".");
+                let current = tile;
+                for (let i = 0; i < parts.length - 1; i++) {
+                  current = current[parts[i]];
+                }
+                current[parts[parts.length - 1]] = value;
+              } else {
+                tile[attribute] = value;
               }
-              current[parts[parts.length - 1]] = value;
-            } else {
-              tile[attribute] = value;
             }
-          }
+          });
         });
-      });
+      
       localStorage.setItem(`data-${this.pageId}`, JSON.stringify(data));
       return;
     }

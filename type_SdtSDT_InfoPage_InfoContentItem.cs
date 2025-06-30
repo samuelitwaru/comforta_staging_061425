@@ -75,6 +75,10 @@ namespace GeneXus.Programs
 			{
 				AddObjectProperty("Tiles", gxTv_SdtSDT_InfoPage_InfoContentItem_Tiles, false);
 			}
+			if (gxTv_SdtSDT_InfoPage_InfoContentItem_Columns != null)
+			{
+				AddObjectProperty("Columns", gxTv_SdtSDT_InfoPage_InfoContentItem_Columns, false);
+			}
 			if (gxTv_SdtSDT_InfoPage_InfoContentItem_Images != null)
 			{
 				AddObjectProperty("Images", gxTv_SdtSDT_InfoPage_InfoContentItem_Images, false);
@@ -188,6 +192,43 @@ namespace GeneXus.Programs
 			return gxTv_SdtSDT_InfoPage_InfoContentItem_Tiles != null && gxTv_SdtSDT_InfoPage_InfoContentItem_Tiles.Count > 0;
 
 		}
+
+
+		[SoapElement(ElementName="Columns" )]
+		[XmlArray(ElementName="Columns"  )]
+		[XmlArrayItemAttribute(ElementName="ColumnsItem" , IsNullable=false )]
+		public GXBaseCollection<SdtSDT_InfoPage_InfoContentItem_ColumnsItem> gxTpr_Columns
+		{
+			get {
+				if ( gxTv_SdtSDT_InfoPage_InfoContentItem_Columns == null )
+				{
+					gxTv_SdtSDT_InfoPage_InfoContentItem_Columns = new GXBaseCollection<SdtSDT_InfoPage_InfoContentItem_ColumnsItem>( context, "SDT_InfoPage.InfoContentItem.ColumnsItem", "");
+				}
+				return gxTv_SdtSDT_InfoPage_InfoContentItem_Columns;
+			}
+			set {
+				gxTv_SdtSDT_InfoPage_InfoContentItem_Columns_N = false;
+				gxTv_SdtSDT_InfoPage_InfoContentItem_Columns = value;
+				SetDirty("Columns");
+			}
+		}
+
+		public void gxTv_SdtSDT_InfoPage_InfoContentItem_Columns_SetNull()
+		{
+			gxTv_SdtSDT_InfoPage_InfoContentItem_Columns_N = true;
+			gxTv_SdtSDT_InfoPage_InfoContentItem_Columns = null;
+		}
+
+		public bool gxTv_SdtSDT_InfoPage_InfoContentItem_Columns_IsNull()
+		{
+			return gxTv_SdtSDT_InfoPage_InfoContentItem_Columns == null;
+		}
+		public bool ShouldSerializegxTpr_Columns_GxSimpleCollection_Json()
+		{
+			return gxTv_SdtSDT_InfoPage_InfoContentItem_Columns != null && gxTv_SdtSDT_InfoPage_InfoContentItem_Columns.Count > 0;
+
+		}
+
 
 
 		[SoapElement(ElementName="Images" )]
@@ -307,6 +348,9 @@ namespace GeneXus.Programs
 			gxTv_SdtSDT_InfoPage_InfoContentItem_Tiles_N = true;
 
 
+			gxTv_SdtSDT_InfoPage_InfoContentItem_Columns_N = true;
+
+
 			gxTv_SdtSDT_InfoPage_InfoContentItem_Images_N = true;
 
 
@@ -331,6 +375,9 @@ namespace GeneXus.Programs
 		 
 		protected bool gxTv_SdtSDT_InfoPage_InfoContentItem_Tiles_N;
 		protected GXBaseCollection<GeneXus.Programs.SdtSDT_InfoTile_SDT_InfoTileItem> gxTv_SdtSDT_InfoPage_InfoContentItem_Tiles = null;  
+		protected bool gxTv_SdtSDT_InfoPage_InfoContentItem_Columns_N;
+		protected GXBaseCollection<SdtSDT_InfoPage_InfoContentItem_ColumnsItem> gxTv_SdtSDT_InfoPage_InfoContentItem_Columns = null; 
+
 		protected bool gxTv_SdtSDT_InfoPage_InfoContentItem_Images_N;
 		protected GxSimpleCollection<string> gxTv_SdtSDT_InfoPage_InfoContentItem_Images = null;  
 		protected bool gxTv_SdtSDT_InfoPage_InfoContentItem_Ctaattributes_N;
@@ -405,7 +452,22 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Images", Order=4, EmitDefaultValue=false)]
+		[DataMember(Name="Columns", Order=4, EmitDefaultValue=false)]
+		public GxGenericCollection<SdtSDT_InfoPage_InfoContentItem_ColumnsItem_RESTInterface> gxTpr_Columns
+		{
+			get {
+				if (sdt.ShouldSerializegxTpr_Columns_GxSimpleCollection_Json())
+					return new GxGenericCollection<SdtSDT_InfoPage_InfoContentItem_ColumnsItem_RESTInterface>(sdt.gxTpr_Columns);
+				else
+					return null;
+
+			}
+			set {
+				value.LoadCollection(sdt.gxTpr_Columns);
+			}
+		}
+
+		[DataMember(Name="Images", Order=5, EmitDefaultValue=false)]
 		public  GxSimpleCollection<string> gxTpr_Images
 		{
 			get { 
@@ -420,7 +482,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="CtaAttributes", Order=5, EmitDefaultValue=false)]
+		[DataMember(Name="CtaAttributes", Order=6, EmitDefaultValue=false)]
 		public SdtSDT_InfoPage_InfoContentItem_CtaAttributes_RESTInterface gxTpr_Ctaattributes
 		{
 			get {
