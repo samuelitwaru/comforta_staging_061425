@@ -31,10 +31,8 @@ export function tileFromAttributes (tile: Tile, themeManager:ThemeManager): stri
   const bgColor = bgImage ? '' : themeManager.getThemeColor(tile.BGColor as string)
   const opacity = tile.Opacity;
 
-  console.log('bgImage', bgImage)
-
   return `
-    <div ${tileWrapperDefaultAttributes} class="template-wrapper" id="${ id }">
+    <div ${tileWrapperDefaultAttributes} class="template-wrapper" id="${ id }" style="text-align:${align}">
         <div ${tileDefaultAttributes} class="template-block" style="background-color: ${bgColor}; background-image: url(${bgImage}); color: ${textColor}; justify-content: ${align}; align-items: ${align}">
             <div ${DefaultAttributes} class="tile-icon-section"  style="background-color: ${bgColor}; display: ${icon?'block':'none'}; " >
                 <span ${DefaultAttributes} data-gjs-type="text" class="tile-close-icon top-right selected-tile-title">×</span>

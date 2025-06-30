@@ -49,11 +49,11 @@ export class InfoSectionPopup {
         label: i18n.t("sidebar.action_list.call_to_action"),
         expandable: true,
       },
-      {
-        name: "Tile",
-        label: i18n.t("sidebar.action_list.tile"),
-        handler: (sectionId: string | undefined) => this.addTile(sectionId),
-      },
+      // {
+      //   name: "Tile",
+      //   label: i18n.t("sidebar.action_list.tile"),
+      //   handler: (sectionId: string | undefined) => this.addTile(sectionId),
+      // },
       {
         name: "Image",
         label: i18n.t("sidebar.action_list.image"),
@@ -65,8 +65,8 @@ export class InfoSectionPopup {
         handler: (sectionId?: string) => this.addDescription(sectionId),
       },
       {
-        name: "GridTile",
-        label: "Grid Tile",
+        name: "Tile",
+        label: i18n.t("sidebar.action_list.tile"),
         handler: (sectionId?: string) => this.addGridTile(sectionId),
       },
     ];
