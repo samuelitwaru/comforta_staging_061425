@@ -606,6 +606,26 @@
 },
 {
 "Verb":"POST",
+"PathRegexp":"toolbox/v2/get-translated-page",
+"Path":"toolbox/v2/get-translated-page",
+"Name":"getpagetranslation",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_getpagetranslation",
+"Implementation":"Prc_GetPageTranslation"
+},
+{
+"Verb":"POST",
+"PathRegexp":"toolbox/v2/update-translated-page",
+"Path":"toolbox/v2/update-translated-page",
+"Name":"updatepagetranslation",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_updatepagetranslation",
+"Implementation":"Prc_UpdatePageTranslation"
+},
+{
+"Verb":"POST",
 "PathRegexp":"toolbox/v2/create-link-page",
 "Path":"toolbox/v2/create-link-page",
 "Name":"createlinkpage",

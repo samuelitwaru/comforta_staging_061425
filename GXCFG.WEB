@@ -85,7 +85,7 @@
       <add  key="wcf:serviceHostingEnvironment:useClassicReadEntityBodyMode" value="true"/>
       <add  key="HTTP_PROTOCOL" value="Unsecure"/>
       <add  key="SAMESITE_COOKIE" value="Lax"/>
-      <add  key="CACHE_INVALIDATION_TOKEN" value="20256307422158"/>
+      <add  key="CACHE_INVALIDATION_TOKEN" value="202563010201043"/>
       <add  key="CORS_ALLOW_ORIGIN" value=""/>
       <add  key="LOG_OUTPUT" value="RollingFile"/>
       <add  key="MaxFileUploadSize" value="528000000"/>
@@ -93,7 +93,7 @@
    </appSettings>
    <languages >
       <English  code="eng" time_fmt="24" decimal_point="." thousand_sep="," date_fmt="DMY" culture="en-US" rtl="false"/>
-      <Dutch  code="dutch" time_fmt="12" decimal_point="." thousand_sep="," date_fmt="MDY" culture="en-US" rtl="false"/>
+      <Dutch  code="dutch" time_fmt="24" decimal_point="." thousand_sep="," date_fmt="DMY" culture="nl-NL" rtl="false"/>
    </languages>
    <log4net  configSource="log.config"/>
 </configuration>

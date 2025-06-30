@@ -2,9 +2,9 @@ openapi: 3.0.0
 info:
   title: "API_ResidentService"
   description: "API Services"
-  version: "20250629184129"
+  version: "20250630065621"
 servers:
-  - url: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/api
+  - url: https://staging.comforta.yukon.software/api
 paths:
   /auth/resident-login:
     post:
@@ -1614,6 +1614,57 @@ paths:
         404:
           description: "Not found"
 
+  /toolbox/v2/get-translated-page:
+    post:
+      tags:
+        - API_ResidentService  
+      operationId: "API_ResidentService.GetPageTranslation"
+      summary: "get translated Page"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetPageTranslationInput"
+      
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetPageTranslationOutput"
+        404:
+          description: "Not found"
+
+  /toolbox/v2/update-translated-page:
+    post:
+      tags:
+        - API_ResidentService  
+      operationId: "API_ResidentService.UpdatePageTranslation"
+      summary: "update translated Page"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePageTranslationInput"
+      
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SDT_Error"  
+
+        404:
+          description: "Not found"
+
   /toolbox/v2/create-link-page:
     post:
       tags:
@@ -2077,7 +2128,7 @@ components:
       description: GAM OAuth 2
       flows:
         password:          
-          tokenUrl: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/oauth/gam/v2.0/access_token
+          tokenUrl: https://staging.comforta.yukon.software/oauth/gam/v2.0/access_token
           scopes: 
             fullcontrol: Full access
 
@@ -2360,6 +2411,16 @@ components:
         error:
           description: "SDT_Error"
           $ref: "#/components/schemas/SDT_Error"
+
+    GetPageTranslationOutput:
+      properties:
+        SDT_InfoContent:
+          description: "SDT_Info Content"
+          $ref: "#/components/schemas/SDT_InfoContent"
+        error:
+          description: "SDT_Error"
+          $ref: "#/components/schemas/SDT_Error"
+
 
     CreateLinkPageOutput:
       properties:
@@ -2751,6 +2812,25 @@ components:
           format: "uuid"
         PageName:
           type: "string"
+
+    GetPageTranslationInput:  
+      properties:
+        DynamicTranslationPrimaryKey:
+          type: "string"
+          format: "uuid"
+        Language:
+          type: "string"
+
+    UpdatePageTranslationInput:  
+      properties:
+        DynamicTranslationPrimaryKey:
+          type: "string"
+          format: "uuid"
+        Language:
+          type: "string"
+        SDT_InfoContent:
+          description: "SDT_Info Content"
+          $ref: "#/components/schemas/SDT_InfoContent"
 
     CreateLinkPageInput:  
       properties:
@@ -3892,11 +3972,129 @@ components:
 
       x-gx-level: "SDT_AppVersion"
 
+    SDT_InfoContent:
+      properties:
+        InfoContent:
+          type: array
+          items:
+            description: InfoContentItem
+            $ref: "#/components/schemas/SDT_InfoContent.InfoContent_InfoContentItem"
+
+
+    SDT_InfoContent.InfoContent_InfoContentItem:
+      properties:
+        InfoId:
+          description: "Info Id"
+          type: "string"
+        InfoType:
+          description: "Info Type"
+          type: "string"
+        InfoValue:
+          description: "Info Value"
+          type: "string"
+        Tiles:
+          description: "SDT_Info Tile"
+          type: array
+          items:
+            $ref: "#/components/schemas/SDT_InfoTile_SDT_InfoTileItem"
+        Images:
+          description: "SDT_Info Image"
+          type: array
+          items:
+            $ref: "#/components/schemas/SDT_InfoImage_SDT_InfoImageItem"
+
+        Columns:
+          type: array
+          items:
+            description: ColumnsItem
+            $ref: "#/components/schemas/SDT_InfoContent.InfoContent.Columns_ColumnsItem"
+
+        CtaAttributes:
+          $ref: "#/components/schemas/SDT_InfoContent.InfoContent.CtaAttributes"
+
+      x-gx-level: "SDT_InfoContent"
+
+    SDT_InfoContent.InfoContent.Columns_ColumnsItem:
+      properties:
+        ColId:
+          description: "Col Id"
+          type: "string"
+        Tiles:
+          description: "SDT_Info Tile"
+          type: array
+          items:
+            $ref: "#/components/schemas/SDT_InfoTile_SDT_InfoTileItem"
+
+
+      x-gx-level: "SDT_InfoContent.InfoContent"
+
+
+    SDT_InfoContent.InfoContent.CtaAttributes:
+      properties:
+        CtaId:
+          description: "Cta Id"
+          type: "string"
+        CtaType:
+          description: "Cta Type"
+          type: "string"
+        CtaLabel:
+          description: "Cta Label"
+          type: "string"
+        CtaAction:
+          description: "Cta Action"
+          type: "string"
+        CtaColor:
+          description: "Cta Color"
+          type: "string"
+        CtaBGColor:
+          description: "Cta BGColor"
+          type: "string"
+        CtaButtonType:
+          description: "Cta Button Type"
+          type: "string"
+        CtaButtonImgUrl:
+          description: "Cta Button Img Url"
+          type: "string"
+        CtaButtonIcon:
+          description: "Cta Button Icon"
+          type: "string"
+        CtaSupplierIsConnected:
+          description: "Cta Supplier Is Connected"
+          type: "boolean"
+        CtaConnectedSupplierId:
+          description: "Cta Connected Supplier Id"
+          type: "string"
+          format: "uuid"
+
+        Action:
+          $ref: "#/components/schemas/SDT_InfoContent.InfoContent.CtaAttributes.Action"
+
+      x-gx-level: "SDT_InfoContent.InfoContent"
+
+    SDT_InfoContent.InfoContent.CtaAttributes.Action:
+      properties:
+        ObjectType:
+          description: "Object Type"
+          type: "string"
+        ObjectUrl:
+          description: "Object Url"
+          type: "string"
+        ObjectId:
+          description: "Object Id"
+          type: "string"
+
+
+      x-gx-level: "SDT_InfoContent.InfoContent.CtaAttributes"
+
     SDT_PageUrl:
       properties:
         Page:
           description: "Page"
           type: "string"
+        PageId:
+          description: "Page Id"
+          type: "string"
+          format: "uuid"
 
         Urls:
           type: array
@@ -3915,6 +4113,9 @@ components:
           type: "string"
         AffectedName:
           description: "Affected Name"
+          type: "string"
+        AffectedInfoId:
+          description: "Affected Info Id"
           type: "string"
 
 
@@ -3956,6 +4157,10 @@ components:
         Page:
           description: "Page"
           type: "string"
+        PageId:
+          description: "Page Id"
+          type: "string"
+          format: "uuid"
 
         UrlList:
           type: array
@@ -3981,6 +4186,9 @@ components:
           type: "string"
         AffectedName:
           description: "Affected Name"
+          type: "string"
+        AffectedInfoId:
+          description: "Affected Info Id"
           type: "string"
 
 
@@ -4200,6 +4408,10 @@ components:
         MemoTextColor:
           description: "Memo Text Color"
           type: "string"
+        MemoCreatedAt:
+          description: "Memo Created At"
+          type: "string"
+          format: "date-time"
 
 
 
@@ -4372,120 +4584,6 @@ components:
           type: "string"
 
 
-
-    SDT_InfoContent:
-      properties:
-        InfoContent:
-          type: array
-          items:
-            description: InfoContentItem
-            $ref: "#/components/schemas/SDT_InfoContent.InfoContent_InfoContentItem"
-
-
-    SDT_InfoContent.InfoContent_InfoContentItem:
-      properties:
-        InfoId:
-          description: "Info Id"
-          type: "string"
-        InfoType:
-          description: "Info Type"
-          type: "string"
-        InfoValue:
-          description: "Info Value"
-          type: "string"
-        Tiles:
-          description: "SDT_Info Tile"
-          type: array
-          items:
-            $ref: "#/components/schemas/SDT_InfoTile_SDT_InfoTileItem"
-        Images:
-          description: "SDT_Info Image"
-          type: array
-          items:
-            $ref: "#/components/schemas/SDT_InfoImage_SDT_InfoImageItem"
-
-        Columns:
-          type: array
-          items:
-            description: ColumnsItem
-            $ref: "#/components/schemas/SDT_InfoContent.InfoContent.Columns_ColumnsItem"
-
-        CtaAttributes:
-          $ref: "#/components/schemas/SDT_InfoContent.InfoContent.CtaAttributes"
-
-      x-gx-level: "SDT_InfoContent"
-
-    SDT_InfoContent.InfoContent.Columns_ColumnsItem:
-      properties:
-        ColId:
-          description: "Col Id"
-          type: "string"
-        Tiles:
-          description: "SDT_Info Tile"
-          type: array
-          items:
-            $ref: "#/components/schemas/SDT_InfoTile_SDT_InfoTileItem"
-
-
-      x-gx-level: "SDT_InfoContent.InfoContent"
-
-
-    SDT_InfoContent.InfoContent.CtaAttributes:
-      properties:
-        CtaId:
-          description: "Cta Id"
-          type: "string"
-        CtaType:
-          description: "Cta Type"
-          type: "string"
-        CtaLabel:
-          description: "Cta Label"
-          type: "string"
-        CtaAction:
-          description: "Cta Action"
-          type: "string"
-        CtaColor:
-          description: "Cta Color"
-          type: "string"
-        CtaBGColor:
-          description: "Cta BGColor"
-          type: "string"
-        CtaButtonType:
-          description: "Cta Button Type"
-          type: "string"
-        CtaButtonImgUrl:
-          description: "Cta Button Img Url"
-          type: "string"
-        CtaButtonIcon:
-          description: "Cta Button Icon"
-          type: "string"
-        CtaSupplierIsConnected:
-          description: "Cta Supplier Is Connected"
-          type: "boolean"
-        CtaConnectedSupplierId:
-          description: "Cta Connected Supplier Id"
-          type: "string"
-          format: "uuid"
-
-        Action:
-          $ref: "#/components/schemas/SDT_InfoContent.InfoContent.CtaAttributes.Action"
-
-      x-gx-level: "SDT_InfoContent.InfoContent"
-
-    SDT_InfoContent.InfoContent.CtaAttributes.Action:
-      properties:
-        ObjectType:
-          description: "Object Type"
-          type: "string"
-        ObjectUrl:
-          description: "Object Url"
-          type: "string"
-        ObjectId:
-          description: "Object Id"
-          type: "string"
-
-
-      x-gx-level: "SDT_InfoContent.InfoContent.CtaAttributes"
 
     SDT_MenuPage:
       properties:

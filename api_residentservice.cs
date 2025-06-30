@@ -271,6 +271,14 @@ namespace GeneXus.Programs {
          {
             return GAMSecurityLevel.SecurityNone ;
          }
+         else if ( StringUtil.StrCmp(permissionMethod, "gxep_getpagetranslation") == 0 )
+         {
+            return GAMSecurityLevel.SecurityNone ;
+         }
+         else if ( StringUtil.StrCmp(permissionMethod, "gxep_updatepagetranslation") == 0 )
+         {
+            return GAMSecurityLevel.SecurityNone ;
+         }
          else if ( StringUtil.StrCmp(permissionMethod, "gxep_createlinkpage") == 0 )
          {
             return GAMSecurityLevel.SecurityNone ;
@@ -383,13 +391,178 @@ namespace GeneXus.Programs {
          cleanup();
       }
 
+      protected void E11012( )
+      {
+         /* Loginwithqrcode_After Routine */
+         returnInSub = false;
+         if ( AV20SDT_LoginResidentResponse.FromJSonString(AV17result, null) )
+         {
+            AV21loginResult = AV20SDT_LoginResidentResponse;
+         }
+      }
+
+      protected void E12012( )
+      {
+         /* Loginwithusernamepassword_After Routine */
+         returnInSub = false;
+         if ( AV20SDT_LoginResidentResponse.FromJSonString(AV17result, null) )
+         {
+            AV21loginResult = AV20SDT_LoginResidentResponse;
+         }
+      }
+
+      protected void E13012( )
+      {
+         /* Changeuserpassword_After Routine */
+         returnInSub = false;
+         if ( AV75SDT_ChangeYourPassword.FromJSonString(AV17result, null) )
+         {
+            AV76ChangeYourPasswordResult = AV75SDT_ChangeYourPassword;
+         }
+      }
+
+      protected void E14012( )
+      {
+         /* Recoverpasswordstep1_After Routine */
+         returnInSub = false;
+         if ( AV79SDT_RecoverPasswordStep1.FromJSonString(AV17result, null) )
+         {
+            AV80RecoverPasswordStep1Result = AV79SDT_RecoverPasswordStep1;
+         }
+      }
+
+      protected void E15012( )
+      {
+         /* Refreshauthtoken_After Routine */
+         returnInSub = false;
+         if ( AV20SDT_LoginResidentResponse.FromJSonString(AV17result, null) )
+         {
+            AV21loginResult = AV20SDT_LoginResidentResponse;
+         }
+      }
+
+      protected void E16012( )
+      {
+         /* Getresidentinformation_After Routine */
+         returnInSub = false;
+         if ( AV22SDT_Resident.FromJSonString(AV17result, null) )
+         {
+         }
+      }
+
+      protected void E17012( )
+      {
+         /* Getorganisationinformation_After Routine */
+         returnInSub = false;
+         if ( AV23SDT_Organisation.FromJSonString(AV17result, null) )
+         {
+         }
+      }
+
+      protected void E18012( )
+      {
+         /* Getlocationinformation_After Routine */
+         returnInSub = false;
+         if ( AV19SDT_Location.FromJSonString(AV17result, null) )
+         {
+         }
+      }
+
+      protected void E19012( )
+      {
+         /* Agendalocation_After Routine */
+         returnInSub = false;
+         if ( AV42SDT_AgendaLocation.FromJSonString(AV17result, null) )
+         {
+         }
+         else
+         {
+         }
+      }
+
+      protected void E20012( )
+      {
+         /* Getresidentnotificationhistory_After Routine */
+         returnInSub = false;
+         AV87SDT_ApiListResponse = new SdtSDT_ApiListResponse(context);
+         if ( AV87SDT_ApiListResponse.FromJSonString(AV17result, null) )
+         {
+         }
+         else
+         {
+         }
+      }
+
+      protected void E21012( )
+      {
+         /* Getresidentfilledforms_After Routine */
+         returnInSub = false;
+         AV87SDT_ApiListResponse = new SdtSDT_ApiListResponse(context);
+         if ( AV87SDT_ApiListResponse.FromJSonString(AV17result, null) )
+         {
+         }
+         else
+         {
+         }
+      }
+
+      protected void E22012( )
+      {
+         /* Getlocationmemos_After Routine */
+         returnInSub = false;
+         AV87SDT_ApiListResponse = new SdtSDT_ApiListResponse(context);
+         if ( ! AV87SDT_ApiListResponse.FromJSonString(AV17result, null) )
+         {
+            new prc_logtofile(context ).execute(  context.GetMessage( "Loc Memos API Response: ", "")+AV17result) ;
+         }
+      }
+
+      protected void E23012( )
+      {
+         /* Getresidentmemos_After Routine */
+         returnInSub = false;
+         AV87SDT_ApiListResponse = new SdtSDT_ApiListResponse(context);
+         if ( ! AV87SDT_ApiListResponse.FromJSonString(AV17result, null) )
+         {
+         }
+      }
+
+      protected void E24012( )
+      {
+         /* Createappversion_Before Routine */
+         returnInSub = false;
+         AV156EmptyGUID = Guid.Empty;
+      }
+
+      protected void E25012( )
+      {
+         /* Activateappversion_Before Routine */
+         returnInSub = false;
+         AV156EmptyGUID = Guid.Empty;
+      }
+
+      protected void E26012( )
+      {
+         /* Getappversion_Before Routine */
+         returnInSub = false;
+         AV156EmptyGUID = Guid.Empty;
+      }
+
       public void gxep_loginwithqrcode( string aP0_secretKey ,
                                         out SdtSDT_LoginResidentResponse aP1_loginResult )
       {
          this.AV7secretKey = aP0_secretKey;
+         AV21loginResult = new SdtSDT_LoginResidentResponse(context);
          initialize();
          /* LoginWithQrCode Constructor */
          new prc_loginresident(context ).execute(  AV7secretKey, out  AV17result) ;
+         /* Execute user event: Loginwithqrcode.After */
+         E11012 ();
+         if ( returnInSub )
+         {
+            aP1_loginResult=this.AV21loginResult;
+            return;
+         }
          aP1_loginResult=this.AV21loginResult;
       }
 
@@ -403,6 +576,13 @@ namespace GeneXus.Programs {
          initialize();
          /* LoginWithUsernamePassword Constructor */
          new prc_loginresident2(context ).execute(  AV71username,  AV72password, out  AV17result) ;
+         /* Execute user event: Loginwithusernamepassword.After */
+         E12012 ();
+         if ( returnInSub )
+         {
+            aP2_loginResult=this.AV21loginResult;
+            return;
+         }
          aP2_loginResult=this.AV21loginResult;
       }
 
@@ -410,9 +590,17 @@ namespace GeneXus.Programs {
                                              out SdtSDT_RecoverPasswordStep1 aP1_RecoverPasswordStep1Result )
       {
          this.AV71username = aP0_username;
+         AV80RecoverPasswordStep1Result = new SdtSDT_RecoverPasswordStep1(context);
          initialize();
          /* RecoverPasswordStep1 Constructor */
          new prc_recoverpasswordstep1(context ).execute(  AV71username, out  AV17result) ;
+         /* Execute user event: Recoverpasswordstep1.After */
+         E14012 ();
+         if ( returnInSub )
+         {
+            aP1_RecoverPasswordStep1Result=this.AV80RecoverPasswordStep1Result;
+            return;
+         }
          aP1_RecoverPasswordStep1Result=this.AV80RecoverPasswordStep1Result;
       }
 
@@ -424,9 +612,17 @@ namespace GeneXus.Programs {
          this.AV8userId = aP0_userId;
          this.AV72password = aP1_password;
          this.AV74passwordNew = aP2_passwordNew;
+         AV76ChangeYourPasswordResult = new SdtSDT_ChangeYourPassword(context);
          initialize();
          /* ChangeUserPassword Constructor */
          new prc_changeuserpassword(context ).execute(  AV8userId,  AV72password,  AV74passwordNew, out  AV17result) ;
+         /* Execute user event: Changeuserpassword.After */
+         E13012 ();
+         if ( returnInSub )
+         {
+            aP3_ChangeYourPasswordResult=this.AV76ChangeYourPasswordResult;
+            return;
+         }
          aP3_ChangeYourPasswordResult=this.AV76ChangeYourPasswordResult;
       }
 
@@ -438,6 +634,13 @@ namespace GeneXus.Programs {
          initialize();
          /* RefreshAuthToken Constructor */
          new prc_refreshauthtoken(context ).execute(  AV67refreshToken, out  AV17result) ;
+         /* Execute user event: Refreshauthtoken.After */
+         E15012 ();
+         if ( returnInSub )
+         {
+            aP1_loginResult=this.AV21loginResult;
+            return;
+         }
          aP1_loginResult=this.AV21loginResult;
       }
 
@@ -445,9 +648,17 @@ namespace GeneXus.Programs {
                                                out SdtSDT_Resident aP1_SDT_Resident )
       {
          this.AV8userId = aP0_userId;
+         AV22SDT_Resident = new SdtSDT_Resident(context);
          initialize();
          /* GetResidentInformation Constructor */
          new prc_getresidentinformation(context ).execute(  AV8userId, out  AV17result) ;
+         /* Execute user event: Getresidentinformation.After */
+         E16012 ();
+         if ( returnInSub )
+         {
+            aP1_SDT_Resident=this.AV22SDT_Resident;
+            return;
+         }
          aP1_SDT_Resident=this.AV22SDT_Resident;
       }
 
@@ -455,9 +666,17 @@ namespace GeneXus.Programs {
                                                    out SdtSDT_Organisation aP1_SDT_Organisation )
       {
          this.AV16organisationId = aP0_organisationId;
+         AV23SDT_Organisation = new SdtSDT_Organisation(context);
          initialize();
          /* GetOrganisationInformation Constructor */
          new prc_getorganisationinformation(context ).execute(  AV16organisationId, out  AV17result) ;
+         /* Execute user event: Getorganisationinformation.After */
+         E17012 ();
+         if ( returnInSub )
+         {
+            aP1_SDT_Organisation=this.AV23SDT_Organisation;
+            return;
+         }
          aP1_SDT_Organisation=this.AV23SDT_Organisation;
       }
 
@@ -465,9 +684,17 @@ namespace GeneXus.Programs {
                                                out SdtSDT_Location aP1_SDT_Location )
       {
          this.AV12locationId = aP0_locationId;
+         AV19SDT_Location = new SdtSDT_Location(context);
          initialize();
          /* GetLocationInformation Constructor */
          new prc_getlocationinformation(context ).execute(  AV12locationId, out  AV17result) ;
+         /* Execute user event: Getlocationinformation.After */
+         E18012 ();
+         if ( returnInSub )
+         {
+            aP1_SDT_Location=this.AV19SDT_Location;
+            return;
+         }
          aP1_SDT_Location=this.AV19SDT_Location;
       }
 
@@ -479,9 +706,17 @@ namespace GeneXus.Programs {
          this.AV55ResidentId = aP0_ResidentId;
          this.AV86PageSize = aP1_PageSize;
          this.AV85PageNumber = aP2_PageNumber;
+         AV87SDT_ApiListResponse = new SdtSDT_ApiListResponse(context);
          initialize();
          /* GetResidentNotificationHistory Constructor */
          new prc_getresidentnotificationhistory(context ).execute(  AV55ResidentId,  AV86PageSize,  AV85PageNumber, out  AV17result) ;
+         /* Execute user event: Getresidentnotificationhistory.After */
+         E20012 ();
+         if ( returnInSub )
+         {
+            aP3_SDT_ApiListResponse=this.AV87SDT_ApiListResponse;
+            return;
+         }
          aP3_SDT_ApiListResponse=this.AV87SDT_ApiListResponse;
       }
 
@@ -497,6 +732,13 @@ namespace GeneXus.Programs {
          initialize();
          /* GetResidentFilledForms Constructor */
          new prc_getresidentfilledforms(context ).execute(  AV55ResidentId,  AV86PageSize,  AV85PageNumber, out  AV17result) ;
+         /* Execute user event: Getresidentfilledforms.After */
+         E21012 ();
+         if ( returnInSub )
+         {
+            aP3_SDT_ApiListResponse=this.AV87SDT_ApiListResponse;
+            return;
+         }
          aP3_SDT_ApiListResponse=this.AV87SDT_ApiListResponse;
       }
 
@@ -566,9 +808,17 @@ namespace GeneXus.Programs {
          this.AV55ResidentId = aP0_ResidentId;
          this.AV60StartDate = aP1_StartDate;
          this.AV58EndDate = aP2_EndDate;
+         AV42SDT_AgendaLocation = new GXBaseCollection<SdtSDT_AgendaLocation>( context, "SDT_AgendaLocation", "Comforta_version2");
          initialize();
          /* AgendaLocation Constructor */
          new prc_agendalocationapi(context ).execute(  AV55ResidentId,  AV60StartDate,  AV58EndDate, out  AV17result) ;
+         /* Execute user event: Agendalocation.After */
+         E19012 ();
+         if ( returnInSub )
+         {
+            aP3_SDT_AgendaLocation=this.AV42SDT_AgendaLocation;
+            return;
+         }
          aP3_SDT_AgendaLocation=this.AV42SDT_AgendaLocation;
       }
 
@@ -1013,6 +1263,22 @@ namespace GeneXus.Programs {
       {
          AV69error = new SdtSDT_Error(context);
          initialize();
+         /* Execute user event: Getappversion.Before */
+         E26012 ();
+         if ( returnInSub )
+         {
+            if ( this.AV98AppVersion == null )
+            {
+               this.AV98AppVersion=new SdtSDT_AppVersion();
+            }
+            aP0_AppVersion=this.AV98AppVersion;
+            if ( this.AV69error == null )
+            {
+               this.AV69error=new SdtSDT_Error();
+            }
+            aP1_error=this.AV69error;
+            return;
+         }
          /* GetAppVersion Constructor */
          new prc_getappversion(context ).execute( out  AV98AppVersion, out  AV69error,  AV156EmptyGUID) ;
          aP0_AppVersion=this.AV98AppVersion;
@@ -1031,6 +1297,22 @@ namespace GeneXus.Programs {
          AV98AppVersion = new SdtSDT_AppVersion(context);
          AV69error = new SdtSDT_Error(context);
          initialize();
+         /* Execute user event: Createappversion.Before */
+         E24012 ();
+         if ( returnInSub )
+         {
+            if ( this.AV98AppVersion == null )
+            {
+               this.AV98AppVersion=new SdtSDT_AppVersion();
+            }
+            aP3_AppVersion=this.AV98AppVersion;
+            if ( this.AV69error == null )
+            {
+               this.AV69error=new SdtSDT_Error();
+            }
+            aP4_error=this.AV69error;
+            return;
+         }
          /* CreateAppVersion Constructor */
          new prc_createappversion(context ).execute(  AV99AppVersionName,  AV207AppVersionLanguage,  AV100IsActive, out  AV98AppVersion, out  AV69error,  AV156EmptyGUID,  AV156EmptyGUID) ;
          aP3_AppVersion=this.AV98AppVersion;
@@ -1093,6 +1375,22 @@ namespace GeneXus.Programs {
          AV98AppVersion = new SdtSDT_AppVersion(context);
          AV69error = new SdtSDT_Error(context);
          initialize();
+         /* Execute user event: Activateappversion.Before */
+         E25012 ();
+         if ( returnInSub )
+         {
+            if ( this.AV98AppVersion == null )
+            {
+               this.AV98AppVersion=new SdtSDT_AppVersion();
+            }
+            aP1_AppVersion=this.AV98AppVersion;
+            if ( this.AV69error == null )
+            {
+               this.AV69error=new SdtSDT_Error();
+            }
+            aP2_error=this.AV69error;
+            return;
+         }
          /* ActivateAppVersion Constructor */
          new prc_activateappversion(context ).execute(  AV92AppVersionId, out  AV98AppVersion, out  AV69error,  AV156EmptyGUID) ;
          aP1_AppVersion=this.AV98AppVersion;
@@ -1202,6 +1500,36 @@ namespace GeneXus.Programs {
          /* CreateInfoPage Constructor */
          new prc_createinfopage(context ).execute(  AV92AppVersionId,  AV43PageName, out  AV97MenuPage, out  AV69error) ;
          aP2_MenuPage=this.AV97MenuPage;
+         aP3_error=this.AV69error;
+      }
+
+      public void gxep_getpagetranslation( Guid aP0_DynamicTranslationPrimaryKey ,
+                                           string aP1_Language ,
+                                           out SdtSDT_InfoContent aP2_SDT_InfoContent ,
+                                           out SdtSDT_Error aP3_error )
+      {
+         this.AV212DynamicTranslationPrimaryKey = aP0_DynamicTranslationPrimaryKey;
+         this.AV131Language = aP1_Language;
+         AV69error = new SdtSDT_Error(context);
+         initialize();
+         /* GetPageTranslation Constructor */
+         new prc_getpagetranslation(context ).execute(  AV212DynamicTranslationPrimaryKey,  AV131Language, out  AV211SDT_InfoContent, out  AV69error) ;
+         aP2_SDT_InfoContent=this.AV211SDT_InfoContent;
+         aP3_error=this.AV69error;
+      }
+
+      public void gxep_updatepagetranslation( Guid aP0_DynamicTranslationPrimaryKey ,
+                                              string aP1_Language ,
+                                              SdtSDT_InfoContent aP2_SDT_InfoContent ,
+                                              out SdtSDT_Error aP3_error )
+      {
+         this.AV212DynamicTranslationPrimaryKey = aP0_DynamicTranslationPrimaryKey;
+         this.AV131Language = aP1_Language;
+         this.AV211SDT_InfoContent = aP2_SDT_InfoContent;
+         AV69error = new SdtSDT_Error(context);
+         initialize();
+         /* UpdatePageTranslation Constructor */
+         new prc_updatepagetranslation(context ).execute(  AV212DynamicTranslationPrimaryKey,  AV131Language,  AV211SDT_InfoContent, out  AV69error) ;
          aP3_error=this.AV69error;
       }
 
@@ -1492,6 +1820,13 @@ namespace GeneXus.Programs {
          initialize();
          /* GetResidentMemos Constructor */
          new prc_getresidentmemos(context ).execute(  AV55ResidentId,  AV86PageSize,  AV85PageNumber, out  AV17result) ;
+         /* Execute user event: Getresidentmemos.After */
+         E23012 ();
+         if ( returnInSub )
+         {
+            aP3_SDT_ApiListResponse=this.AV87SDT_ApiListResponse;
+            return;
+         }
          aP3_SDT_ApiListResponse=this.AV87SDT_ApiListResponse;
       }
 
@@ -1507,6 +1842,13 @@ namespace GeneXus.Programs {
          initialize();
          /* GetLocationMemos Constructor */
          new prc_getlocationmemos(context ).execute(  AV55ResidentId,  AV86PageSize,  AV85PageNumber, out  AV17result) ;
+         /* Execute user event: Getlocationmemos.After */
+         E22012 ();
+         if ( returnInSub )
+         {
+            aP3_SDT_ApiListResponse=this.AV87SDT_ApiListResponse;
+            return;
+         }
          aP3_SDT_ApiListResponse=this.AV87SDT_ApiListResponse;
       }
 
@@ -1528,15 +1870,19 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV21loginResult = new SdtSDT_LoginResidentResponse(context);
          AV17result = "";
-         AV80RecoverPasswordStep1Result = new SdtSDT_RecoverPasswordStep1(context);
+         AV20SDT_LoginResidentResponse = new SdtSDT_LoginResidentResponse(context);
+         AV21loginResult = new SdtSDT_LoginResidentResponse(context);
+         AV75SDT_ChangeYourPassword = new SdtSDT_ChangeYourPassword(context);
          AV76ChangeYourPasswordResult = new SdtSDT_ChangeYourPassword(context);
+         AV79SDT_RecoverPasswordStep1 = new SdtSDT_RecoverPasswordStep1(context);
+         AV80RecoverPasswordStep1Result = new SdtSDT_RecoverPasswordStep1(context);
          AV22SDT_Resident = new SdtSDT_Resident(context);
          AV23SDT_Organisation = new SdtSDT_Organisation(context);
          AV19SDT_Location = new SdtSDT_Location(context);
-         AV87SDT_ApiListResponse = new SdtSDT_ApiListResponse(context);
          AV42SDT_AgendaLocation = new GXBaseCollection<SdtSDT_AgendaLocation>( context, "SDT_AgendaLocation", "Comforta_version2");
+         AV87SDT_ApiListResponse = new SdtSDT_ApiListResponse(context);
+         AV156EmptyGUID = Guid.Empty;
          AV33BC_Trn_Media = new SdtTrn_Media(context);
          AV69error = new SdtSDT_Error(context);
          AV64SDT_MediaCollection = new GXBaseCollection<SdtSDT_Media>( context, "SDT_Media", "Comforta_version2");
@@ -1554,7 +1900,6 @@ namespace GeneXus.Programs {
          AV140TrashItems = new GXBaseCollection<SdtSDT_TrashItem>( context, "SDT_TrashItem", "Comforta_version2");
          AV96AppVersions = new GXBaseCollection<SdtSDT_AppVersion>( context, "SDT_AppVersion", "Comforta_version2");
          AV98AppVersion = new SdtSDT_AppVersion(context);
-         AV156EmptyGUID = Guid.Empty;
          AV97MenuPage = new SdtSDT_AppVersion_PagesItem(context);
          AV95ContentPage = new SdtSDT_AppVersion_PagesItem(context);
          AV176SDT_DebugResults = new SdtSDT_AppDebugResults(context);
@@ -1585,6 +1930,7 @@ namespace GeneXus.Programs {
       protected DateTime AV115MemoStartDateTime ;
       protected DateTime AV111MemoEndDateTime ;
       protected DateTime AV114MemoRemoveDate ;
+      protected bool returnInSub ;
       protected bool AV48PageIsPublished ;
       protected bool AV190IsNotifyResidents ;
       protected bool AV100IsActive ;
@@ -1592,8 +1938,8 @@ namespace GeneXus.Programs {
       protected bool AV150MemoIsBold ;
       protected bool AV152MemoIsItalic ;
       protected bool AV151MemoIsCapitalized ;
-      protected string AV7secretKey ;
       protected string AV17result ;
+      protected string AV7secretKey ;
       protected string AV67refreshToken ;
       protected string AV65Base64Image ;
       protected string AV32MediaImageData ;
@@ -1639,6 +1985,7 @@ namespace GeneXus.Programs {
       protected string AV202MemoName ;
       protected string AV155MemoTextFontName ;
       protected string AV154MemoTextColor ;
+      protected Guid AV156EmptyGUID ;
       protected Guid AV16organisationId ;
       protected Guid AV12locationId ;
       protected Guid AV157CroppedOriginalMediaId ;
@@ -1649,34 +1996,37 @@ namespace GeneXus.Programs {
       protected Guid AV192ChildPageId ;
       protected Guid AV49ProductServiceId ;
       protected Guid AV141TrashId ;
-      protected Guid AV156EmptyGUID ;
       protected Guid AV92AppVersionId ;
       protected Guid AV195ThemeId ;
       protected Guid AV208ActivePageId ;
+      protected Guid AV212DynamicTranslationPrimaryKey ;
       protected Guid AV107MemoCategoryId ;
       protected Guid AV112MemoId ;
       protected IGxDataStore dsDataStore1 ;
       protected IGxDataStore dsGAM ;
       protected IGxDataStore dsDefault ;
+      protected SdtSDT_LoginResidentResponse AV20SDT_LoginResidentResponse ;
       protected SdtSDT_LoginResidentResponse AV21loginResult ;
+      protected SdtSDT_ChangeYourPassword AV75SDT_ChangeYourPassword ;
+      protected SdtSDT_ChangeYourPassword AV76ChangeYourPasswordResult ;
+      protected SdtSDT_RecoverPasswordStep1 AV79SDT_RecoverPasswordStep1 ;
+      protected SdtSDT_RecoverPasswordStep1 AV80RecoverPasswordStep1Result ;
+      protected SdtSDT_Resident AV22SDT_Resident ;
+      protected SdtSDT_Organisation AV23SDT_Organisation ;
+      protected SdtSDT_Location AV19SDT_Location ;
+      protected GXBaseCollection<SdtSDT_AgendaLocation> AV42SDT_AgendaLocation ;
+      protected SdtSDT_ApiListResponse AV87SDT_ApiListResponse ;
       protected SdtSDT_LoginResidentResponse aP1_loginResult ;
       protected SdtSDT_LoginResidentResponse aP2_loginResult ;
-      protected SdtSDT_RecoverPasswordStep1 AV80RecoverPasswordStep1Result ;
       protected SdtSDT_RecoverPasswordStep1 aP1_RecoverPasswordStep1Result ;
-      protected SdtSDT_ChangeYourPassword AV76ChangeYourPasswordResult ;
       protected SdtSDT_ChangeYourPassword aP3_ChangeYourPasswordResult ;
-      protected SdtSDT_Resident AV22SDT_Resident ;
       protected SdtSDT_Resident aP1_SDT_Resident ;
-      protected SdtSDT_Organisation AV23SDT_Organisation ;
       protected SdtSDT_Organisation aP1_SDT_Organisation ;
-      protected SdtSDT_Location AV19SDT_Location ;
       protected SdtSDT_Location aP1_SDT_Location ;
-      protected SdtSDT_ApiListResponse AV87SDT_ApiListResponse ;
       protected SdtSDT_ApiListResponse aP3_SDT_ApiListResponse ;
       protected string aP2_result ;
       protected string aP6_result ;
       protected string aP3_result ;
-      protected GXBaseCollection<SdtSDT_AgendaLocation> AV42SDT_AgendaLocation ;
       protected GXBaseCollection<SdtSDT_AgendaLocation> aP3_SDT_AgendaLocation ;
       protected string aP0_result ;
       protected SdtTrn_Media AV33BC_Trn_Media ;
@@ -1734,6 +2084,8 @@ namespace GeneXus.Programs {
       protected GxSimpleCollection<string> AV210LanguageToCollection ;
       protected SdtSDT_AppVersion_PagesItem AV97MenuPage ;
       protected SdtSDT_AppVersion_PagesItem aP2_MenuPage ;
+      protected SdtSDT_InfoContent AV211SDT_InfoContent ;
+      protected SdtSDT_InfoContent aP2_SDT_InfoContent ;
       protected SdtSDT_AppVersion_PagesItem aP5_MenuPage ;
       protected SdtSDT_AppVersion_PagesItem AV95ContentPage ;
       protected SdtSDT_AppVersion_PagesItem aP2_ContentPage ;

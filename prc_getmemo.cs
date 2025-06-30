@@ -116,6 +116,8 @@ namespace GeneXus.Programs {
             A640MemoIsItalic = P00CV2_A640MemoIsItalic[0];
             A641MemoIsCapitalized = P00CV2_A641MemoIsCapitalized[0];
             A642MemoTextColor = P00CV2_A642MemoTextColor[0];
+            A647MemoCreatedAt = P00CV2_A647MemoCreatedAt[0];
+            n647MemoCreatedAt = P00CV2_n647MemoCreatedAt[0];
             A72ResidentSalutation = P00CV2_A72ResidentSalutation[0];
             A64ResidentGivenName = P00CV2_A64ResidentGivenName[0];
             A65ResidentLastName = P00CV2_A65ResidentLastName[0];
@@ -150,6 +152,7 @@ namespace GeneXus.Programs {
             AV9SDT_Memo.gxTpr_Memoisitalic = A640MemoIsItalic;
             AV9SDT_Memo.gxTpr_Memoiscapitalized = A641MemoIsCapitalized;
             AV9SDT_Memo.gxTpr_Memotextcolor = A642MemoTextColor;
+            AV9SDT_Memo.gxTpr_Memocreatedat = A647MemoCreatedAt;
             /* Exiting from a For First loop. */
             if (true) break;
          }
@@ -209,6 +212,8 @@ namespace GeneXus.Programs {
          P00CV2_A640MemoIsItalic = new bool[] {false} ;
          P00CV2_A641MemoIsCapitalized = new bool[] {false} ;
          P00CV2_A642MemoTextColor = new string[] {""} ;
+         P00CV2_A647MemoCreatedAt = new DateTime[] {DateTime.MinValue} ;
+         P00CV2_n647MemoCreatedAt = new bool[] {false} ;
          A528SG_LocationId = Guid.Empty;
          A29LocationId = Guid.Empty;
          A529SG_OrganisationId = Guid.Empty;
@@ -233,13 +238,15 @@ namespace GeneXus.Programs {
          A637MemoTextFontName = "";
          A638MemoTextAlignment = "";
          A642MemoTextColor = "";
+         A647MemoCreatedAt = (DateTime)(DateTime.MinValue);
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.prc_getmemo__default(),
             new Object[][] {
                 new Object[] {
                P00CV2_A528SG_LocationId, P00CV2_A29LocationId, P00CV2_A529SG_OrganisationId, P00CV2_A11OrganisationId, P00CV2_A549MemoId, P00CV2_A550MemoTitle, P00CV2_A551MemoDescription, P00CV2_A552MemoImage, P00CV2_n552MemoImage, P00CV2_A553MemoDocument,
                P00CV2_n553MemoDocument, P00CV2_A561MemoStartDateTime, P00CV2_n561MemoStartDateTime, P00CV2_A562MemoEndDateTime, P00CV2_n562MemoEndDateTime, P00CV2_A563MemoDuration, P00CV2_n563MemoDuration, P00CV2_A564MemoRemoveDate, P00CV2_n564MemoRemoveDate, P00CV2_A62ResidentId,
                P00CV2_A72ResidentSalutation, P00CV2_A64ResidentGivenName, P00CV2_A65ResidentLastName, P00CV2_A71ResidentGUID, P00CV2_A566MemoBgColorCode, P00CV2_n566MemoBgColorCode, P00CV2_A567MemoForm, P00CV2_A624MemoType, P00CV2_A625MemoName, P00CV2_A626MemoLeftOffset,
-               P00CV2_A627MemoTopOffset, P00CV2_A628MemoTitleAngle, P00CV2_A629MemoTitleScale, P00CV2_A637MemoTextFontName, P00CV2_A638MemoTextAlignment, P00CV2_A639MemoIsBold, P00CV2_A640MemoIsItalic, P00CV2_A641MemoIsCapitalized, P00CV2_A642MemoTextColor
+               P00CV2_A627MemoTopOffset, P00CV2_A628MemoTitleAngle, P00CV2_A629MemoTitleScale, P00CV2_A637MemoTextFontName, P00CV2_A638MemoTextAlignment, P00CV2_A639MemoIsBold, P00CV2_A640MemoIsItalic, P00CV2_A641MemoIsCapitalized, P00CV2_A642MemoTextColor, P00CV2_A647MemoCreatedAt,
+               P00CV2_n647MemoCreatedAt
                }
             }
          );
@@ -256,6 +263,7 @@ namespace GeneXus.Programs {
       private string A638MemoTextAlignment ;
       private DateTime A561MemoStartDateTime ;
       private DateTime A562MemoEndDateTime ;
+      private DateTime A647MemoCreatedAt ;
       private DateTime A564MemoRemoveDate ;
       private bool n552MemoImage ;
       private bool n553MemoDocument ;
@@ -267,6 +275,7 @@ namespace GeneXus.Programs {
       private bool A639MemoIsBold ;
       private bool A640MemoIsItalic ;
       private bool A641MemoIsCapitalized ;
+      private bool n647MemoCreatedAt ;
       private string A552MemoImage ;
       private string A550MemoTitle ;
       private string A551MemoDescription ;
@@ -330,6 +339,8 @@ namespace GeneXus.Programs {
       private bool[] P00CV2_A640MemoIsItalic ;
       private bool[] P00CV2_A641MemoIsCapitalized ;
       private string[] P00CV2_A642MemoTextColor ;
+      private DateTime[] P00CV2_A647MemoCreatedAt ;
+      private bool[] P00CV2_n647MemoCreatedAt ;
       private SdtSDT_Memo aP1_SDT_Memo ;
    }
 
@@ -353,7 +364,7 @@ namespace GeneXus.Programs {
           new ParDef("AV8MemoId",GXType.UniqueIdentifier,36,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P00CV2", "SELECT T1.SG_LocationId, T2.LocationId, T1.SG_OrganisationId, T2.OrganisationId, T1.MemoId, T1.MemoTitle, T1.MemoDescription, T1.MemoImage, T1.MemoDocument, T1.MemoStartDateTime, T1.MemoEndDateTime, T1.MemoDuration, T1.MemoRemoveDate, T1.ResidentId, T2.ResidentSalutation, T2.ResidentGivenName, T2.ResidentLastName, T2.ResidentGUID, T1.MemoBgColorCode, T1.MemoForm, T1.MemoType, T1.MemoName, T1.MemoLeftOffset, T1.MemoTopOffset, T1.MemoTitleAngle, T1.MemoTitleScale, T1.MemoTextFontName, T1.MemoTextAlignment, T1.MemoIsBold, T1.MemoIsItalic, T1.MemoIsCapitalized, T1.MemoTextColor FROM (Trn_Memo T1 INNER JOIN Trn_Resident T2 ON T2.ResidentId = T1.ResidentId AND T2.LocationId = T1.SG_LocationId AND T2.OrganisationId = T1.SG_OrganisationId) WHERE T1.MemoId = :AV8MemoId ORDER BY T1.MemoId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CV2,1, GxCacheFrequency.OFF ,false,true )
+              new CursorDef("P00CV2", "SELECT T1.SG_LocationId, T2.LocationId, T1.SG_OrganisationId, T2.OrganisationId, T1.MemoId, T1.MemoTitle, T1.MemoDescription, T1.MemoImage, T1.MemoDocument, T1.MemoStartDateTime, T1.MemoEndDateTime, T1.MemoDuration, T1.MemoRemoveDate, T1.ResidentId, T2.ResidentSalutation, T2.ResidentGivenName, T2.ResidentLastName, T2.ResidentGUID, T1.MemoBgColorCode, T1.MemoForm, T1.MemoType, T1.MemoName, T1.MemoLeftOffset, T1.MemoTopOffset, T1.MemoTitleAngle, T1.MemoTitleScale, T1.MemoTextFontName, T1.MemoTextAlignment, T1.MemoIsBold, T1.MemoIsItalic, T1.MemoIsCapitalized, T1.MemoTextColor, T1.MemoCreatedAt FROM (Trn_Memo T1 INNER JOIN Trn_Resident T2 ON T2.ResidentId = T1.ResidentId AND T2.LocationId = T1.SG_LocationId AND T2.OrganisationId = T1.SG_OrganisationId) WHERE T1.MemoId = :AV8MemoId ORDER BY T1.MemoId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CV2,1, GxCacheFrequency.OFF ,false,true )
           };
        }
     }
@@ -404,6 +415,8 @@ namespace GeneXus.Programs {
                 ((bool[]) buf[36])[0] = rslt.getBool(30);
                 ((bool[]) buf[37])[0] = rslt.getBool(31);
                 ((string[]) buf[38])[0] = rslt.getVarchar(32);
+                ((DateTime[]) buf[39])[0] = rslt.getGXDateTime(33);
+                ((bool[]) buf[40])[0] = rslt.wasNull(33);
                 return;
        }
     }

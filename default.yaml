@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: "Development"
-  version: "20250629184128"
+  version: "20250630065621"
 servers:
   - url: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/rest
 paths:
@@ -419,29 +419,6 @@ paths:
                 $ref: "#/components/schemas/Trn_OrganisationWWGetFilterDataOutput"
         404:
           description: "Not found"
-  /Trn_PageLoadDVCombo:
-    post:
-      tags:
-        - Trn_PageLoadDVCombo
-      operationId: "Trn_PageLoadDVCombo"
-      summary: "Trn_Page Load DVCombo"
-      security: 
-        - oAuthGXGAM: []
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Trn_PageLoadDVComboInput"
-      responses:
-        200:
-          description: "Successful operation"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Trn_PageLoadDVComboOutput"
-        404:
-          description: "Not found"
   /Trn_PageWWGetFilterData:
     post:
       tags:
@@ -739,6 +716,27 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UFilledOutFormsGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /WC_NotificationPanelLoadDVCombo:
+    post:
+      tags:
+        - WC_NotificationPanelLoadDVCombo
+      operationId: "WC_NotificationPanelLoadDVCombo"
+      summary: "WC_Notification Panel Load DVCombo"
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WC_NotificationPanelLoadDVComboInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WC_NotificationPanelLoadDVComboOutput"
         404:
           description: "Not found"
   /WorkWithPlus/DynamicForms/WWP_DF_DynamicComboBox_WCLoadDVCombo:
@@ -1357,14 +1355,6 @@ components:
           type: "string"
         OptionIndexesJson:
           type: "string"
-    Trn_PageLoadDVComboOutput:
-      properties:
-        SelectedValue:
-          type: "string"
-        SelectedText:
-          type: "string"
-        Combo_DataJson:
-          type: "string"
     Trn_PageWWGetFilterDataOutput:
       properties:
         OptionsJson:
@@ -1468,6 +1458,10 @@ components:
         OptionsDescJson:
           type: "string"
         OptionIndexesJson:
+          type: "string"
+    WC_NotificationPanelLoadDVComboOutput:
+      properties:
+        Combo_DataJson:
           type: "string"
     WorkWithPlus.DynamicForms.WWP_DF_DynamicComboBox_WCLoadDVComboOutput:
       properties:
@@ -1721,28 +1715,6 @@ components:
           type: "string"
         SearchTxtTo:
           type: "string"
-    Trn_PageLoadDVComboInput:  
-      properties:
-        ComboName:
-          type: "string"
-        TrnMode:
-          type: "string"
-        IsDynamicCall:
-          type: "boolean"
-        Trn_PageId:
-          type: "string"
-          format: "uuid"
-        LocationId:
-          type: "string"
-          format: "uuid"
-        Cond_OrganisationId:
-          type: "string"
-          format: "uuid"
-        Cond_LocationId:
-          type: "string"
-          format: "uuid"
-        SearchTxtParms:
-          type: "string"
     Trn_PageWWGetFilterDataInput:  
       properties:
         DDOName:
@@ -1846,6 +1818,12 @@ components:
         SearchTxtParms:
           type: "string"
         SearchTxtTo:
+          type: "string"
+    WC_NotificationPanelLoadDVComboInput:  
+      properties:
+        ComboName:
+          type: "string"
+        SearchTxtParms:
           type: "string"
     WorkWithPlus.DynamicForms.WWP_DF_DynamicComboBox_WCLoadDVComboInput:  
       properties:
@@ -2092,6 +2070,10 @@ components:
         Page:
           description: "Page"
           type: "string"
+        PageId:
+          description: "Page Id"
+          type: "string"
+          format: "uuid"
         UrlList:
           type: array
           items:
@@ -2114,6 +2096,9 @@ components:
           type: "string"
         AffectedName:
           description: "Affected Name"
+          type: "string"
+        AffectedInfoId:
+          description: "Affected Info Id"
           type: "string"
       x-gx-level: "SDT_AppDebugResults.Pages"
     SDT_AppVersion:
@@ -2863,6 +2848,10 @@ components:
         MemoTextColor:
           description: "Memo Text Color"
           type: "string"
+        MemoCreatedAt:
+          description: "Memo Created At"
+          type: "string"
+          format: "date-time"
     SDT_MemoCategory:
       properties:
         MemoCategoryId:
@@ -3148,6 +3137,10 @@ components:
         Page:
           description: "Page"
           type: "string"
+        PageId:
+          description: "Page Id"
+          type: "string"
+          format: "uuid"
         Urls:
           type: array
           items:
@@ -3163,6 +3156,9 @@ components:
           type: "string"
         AffectedName:
           description: "Affected Name"
+          type: "string"
+        AffectedInfoId:
+          description: "Affected Info Id"
           type: "string"
       x-gx-level: "SDT_PageUrl"
     SDT_ProductService:

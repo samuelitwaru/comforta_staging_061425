@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\KBs\\Comforta_version2.1\\Data018\\Web\\GxDeps.csproj": {}
+    "C:\\KBs\\Comforta_version2.1\\Data018\\web\\GxDeps.csproj": {}
   },
   "projects": {
-    "C:\\KBs\\Comforta_version2.1\\Data018\\Web\\GxDeps.csproj": {
+    "C:\\KBs\\Comforta_version2.1\\Data018\\web\\GxDeps.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\KBs\\Comforta_version2.1\\Data018\\Web\\GxDeps.csproj",
+        "projectUniqueName": "C:\\KBs\\Comforta_version2.1\\Data018\\web\\GxDeps.csproj",
         "projectName": "GxDeps",
-        "projectPath": "C:\\KBs\\Comforta_version2.1\\Data018\\Web\\GxDeps.csproj",
+        "projectPath": "C:\\KBs\\Comforta_version2.1\\Data018\\web\\GxDeps.csproj",
         "packagesPath": "C:\\Users\\samuelitwaru\\.nuget\\packages\\",
-        "outputPath": "C:\\KBs\\Comforta_version2.1\\Data018\\Web\\obj\\",
+        "outputPath": "C:\\KBs\\Comforta_version2.1\\Data018\\web\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\KBs\\Comforta_version2.1\\Data018\\NuGet.Config",

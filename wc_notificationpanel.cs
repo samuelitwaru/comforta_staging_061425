@@ -245,6 +245,9 @@ namespace GeneXus.Programs {
          {
             enableOutput();
          }
+         context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
          if ( StringUtil.Len( sPrefix) == 0 )
          {
             context.CloseHtmlHeader();
@@ -313,15 +316,6 @@ namespace GeneXus.Programs {
 
       protected void send_integrity_footer_hashes( )
       {
-         if ( context.isAjaxRequest( ) )
-         {
-            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vRESIDENTIDCOLLECTIONEMPTY", AV12ResidentIdCollectionEmpty);
-         }
-         else
-         {
-            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vRESIDENTIDCOLLECTIONEMPTY", AV12ResidentIdCollectionEmpty);
-         }
-         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vRESIDENTIDCOLLECTIONEMPTY", GetSecureSignedToken( sPrefix, AV12ResidentIdCollectionEmpty, context));
          GXKey = Crypto.GetSiteKey( );
       }
 
@@ -330,16 +324,43 @@ namespace GeneXus.Programs {
          /* Send hidden variables. */
          /* Send saved values. */
          send_integrity_footer_hashes( ) ;
-         GxWebStd.gx_boolean_hidden_field( context, sPrefix+"vCHECKREQUIREDFIELDSRESULT", AV10CheckRequiredFieldsResult);
          if ( context.isAjaxRequest( ) )
          {
-            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vRESIDENTIDCOLLECTIONEMPTY", AV12ResidentIdCollectionEmpty);
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vDDO_TITLESETTINGSICONS", AV17DDO_TitleSettingsIcons);
          }
          else
          {
-            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vRESIDENTIDCOLLECTIONEMPTY", AV12ResidentIdCollectionEmpty);
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vDDO_TITLESETTINGSICONS", AV17DDO_TitleSettingsIcons);
          }
-         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vRESIDENTIDCOLLECTIONEMPTY", GetSecureSignedToken( sPrefix, AV12ResidentIdCollectionEmpty, context));
+         if ( context.isAjaxRequest( ) )
+         {
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vRECIPIENTLIST_DATA", AV16RecipientList_Data);
+         }
+         else
+         {
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vRECIPIENTLIST_DATA", AV16RecipientList_Data);
+         }
+         GxWebStd.gx_boolean_hidden_field( context, sPrefix+"vCHECKREQUIREDFIELDSRESULT", AV10CheckRequiredFieldsResult);
+         if ( context.isAjaxRequest( ) )
+         {
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vRECIPIENTLIST", AV14RecipientList);
+         }
+         else
+         {
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vRECIPIENTLIST", AV14RecipientList);
+         }
+         GxWebStd.gx_hidden_field( context, sPrefix+"COMBO_RECIPIENTLIST_Cls", StringUtil.RTrim( Combo_recipientlist_Cls));
+         GxWebStd.gx_hidden_field( context, sPrefix+"COMBO_RECIPIENTLIST_Selectedvalue_set", StringUtil.RTrim( Combo_recipientlist_Selectedvalue_set));
+         GxWebStd.gx_hidden_field( context, sPrefix+"COMBO_RECIPIENTLIST_Selectedtext_set", StringUtil.RTrim( Combo_recipientlist_Selectedtext_set));
+         GxWebStd.gx_hidden_field( context, sPrefix+"COMBO_RECIPIENTLIST_Gamoauthtoken", StringUtil.RTrim( Combo_recipientlist_Gamoauthtoken));
+         GxWebStd.gx_hidden_field( context, sPrefix+"COMBO_RECIPIENTLIST_Allowmultipleselection", StringUtil.BoolToStr( Combo_recipientlist_Allowmultipleselection));
+         GxWebStd.gx_hidden_field( context, sPrefix+"COMBO_RECIPIENTLIST_Datalistproc", StringUtil.RTrim( Combo_recipientlist_Datalistproc));
+         GxWebStd.gx_hidden_field( context, sPrefix+"COMBO_RECIPIENTLIST_Datalistprocparametersprefix", StringUtil.RTrim( Combo_recipientlist_Datalistprocparametersprefix));
+         GxWebStd.gx_hidden_field( context, sPrefix+"COMBO_RECIPIENTLIST_Includeonlyselectedoption", StringUtil.BoolToStr( Combo_recipientlist_Includeonlyselectedoption));
+         GxWebStd.gx_hidden_field( context, sPrefix+"COMBO_RECIPIENTLIST_Htmltemplate", StringUtil.RTrim( Combo_recipientlist_Htmltemplate));
+         GxWebStd.gx_hidden_field( context, sPrefix+"COMBO_RECIPIENTLIST_Multiplevaluestype", StringUtil.RTrim( Combo_recipientlist_Multiplevaluestype));
+         GxWebStd.gx_hidden_field( context, sPrefix+"COMBO_RECIPIENTLIST_Emptyitemtext", StringUtil.RTrim( Combo_recipientlist_Emptyitemtext));
+         GxWebStd.gx_hidden_field( context, sPrefix+"COMBO_RECIPIENTLIST_Selectedvalue_get", StringUtil.RTrim( Combo_recipientlist_Selectedvalue_get));
       }
 
       protected void RenderHtmlCloseForm7P2( )
@@ -415,6 +436,9 @@ namespace GeneXus.Programs {
             if ( StringUtil.Len( sPrefix) != 0 )
             {
                GxWebStd.gx_hidden_field( context, sPrefix+"_CMPPGM", "wc_notificationpanel.aspx");
+               context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
+               context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
+               context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
             }
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "Section", "start", "top", " "+"data-gx-base-lib=\"bootstrapv3\""+" "+"data-abstract-form"+" ", "", "div");
@@ -485,6 +509,38 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 DataContentCell DscTop ExtendedComboCell", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divTablesplittedrecipientlist_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 MergeLabelCell", "start", "top", "", "", "div");
+            /* Text block */
+            GxWebStd.gx_label_ctrl( context, lblTextblockcombo_recipientlist_Internalname, context.GetMessage( "Recipients", ""), "", "", lblTextblockcombo_recipientlist_Jsonclick, "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "Label", 0, "", 1, 1, 0, 0, "HLP_WC_NotificationPanel.htm");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
+            /* User Defined Control */
+            ucCombo_recipientlist.SetProperty("Caption", Combo_recipientlist_Caption);
+            ucCombo_recipientlist.SetProperty("Cls", Combo_recipientlist_Cls);
+            ucCombo_recipientlist.SetProperty("AllowMultipleSelection", Combo_recipientlist_Allowmultipleselection);
+            ucCombo_recipientlist.SetProperty("DataListProc", Combo_recipientlist_Datalistproc);
+            ucCombo_recipientlist.SetProperty("DataListProcParametersPrefix", Combo_recipientlist_Datalistprocparametersprefix);
+            ucCombo_recipientlist.SetProperty("IncludeOnlySelectedOption", Combo_recipientlist_Includeonlyselectedoption);
+            ucCombo_recipientlist.SetProperty("MultipleValuesType", Combo_recipientlist_Multiplevaluestype);
+            ucCombo_recipientlist.SetProperty("EmptyItemText", Combo_recipientlist_Emptyitemtext);
+            ucCombo_recipientlist.SetProperty("DropDownOptionsTitleSettingsIcons", AV17DDO_TitleSettingsIcons);
+            ucCombo_recipientlist.SetProperty("DropDownOptionsData", AV16RecipientList_Data);
+            ucCombo_recipientlist.Render(context, "dvelop.gxbootstrap.ddoextendedcombo", Combo_recipientlist_Internalname, sPrefix+"COMBO_RECIPIENTLISTContainer");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -499,7 +555,7 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-action-group CellMarginTop10", "start", "top", " "+"data-gx-actiongroup-type=\"toolbar\""+" ", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 30,'" + sPrefix + "',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 38,'" + sPrefix + "',false,'',0)\"";
             ClassString = "Button";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtnsendnotification_Internalname, "", context.GetMessage( "Send Notification", ""), bttBtnsendnotification_Jsonclick, 5, context.GetMessage( "Send Notification", ""), "", StyleString, ClassString, 1, 1, "standard", "'"+sPrefix+"'"+",false,"+"'"+sPrefix+"E\\'DOSENDNOTIFICATION\\'."+"'", TempTags, "", context.GetButtonType( ), "HLP_WC_NotificationPanel.htm");
@@ -517,10 +573,10 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, divHtml_bottomauxiliarcontrols_Internalname, 1, 0, "px", 0, "px", "Section", "start", "top", "", "", "div");
             /* Check box */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 34,'" + sPrefix + "',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 42,'" + sPrefix + "',false,'',0)\"";
             ClassString = "Attribute";
             StyleString = "";
-            GxWebStd.gx_checkbox_ctrl( context, chkavIstoallusers_Internalname, StringUtil.BoolToStr( AV9isToAllUsers), "", "", chkavIstoallusers.Visible, 1, "true", "", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(34, this, 'true', 'false',"+"'"+sPrefix+"'"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,34);\"");
+            GxWebStd.gx_checkbox_ctrl( context, chkavIstoallusers_Internalname, StringUtil.BoolToStr( AV9isToAllUsers), "", "", chkavIstoallusers.Visible, 1, "true", "", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(42, this, 'true', 'false',"+"'"+sPrefix+"'"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,42);\"");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -827,15 +883,6 @@ namespace GeneXus.Programs {
 
       protected void send_integrity_lvl_hashes7P2( )
       {
-         if ( context.isAjaxRequest( ) )
-         {
-            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vRESIDENTIDCOLLECTIONEMPTY", AV12ResidentIdCollectionEmpty);
-         }
-         else
-         {
-            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vRESIDENTIDCOLLECTIONEMPTY", AV12ResidentIdCollectionEmpty);
-         }
-         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vRESIDENTIDCOLLECTIONEMPTY", GetSecureSignedToken( sPrefix, AV12ResidentIdCollectionEmpty, context));
       }
 
       protected void before_start_formulas( )
@@ -858,7 +905,21 @@ namespace GeneXus.Programs {
          if ( ! GetJustCreated( ) && ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 ) )
          {
             /* Read saved SDTs. */
+            ajax_req_read_hidden_sdt(cgiGet( sPrefix+"vDDO_TITLESETTINGSICONS"), AV17DDO_TitleSettingsIcons);
+            ajax_req_read_hidden_sdt(cgiGet( sPrefix+"vRECIPIENTLIST_DATA"), AV16RecipientList_Data);
+            ajax_req_read_hidden_sdt(cgiGet( sPrefix+"vRECIPIENTLIST"), AV14RecipientList);
             /* Read saved values. */
+            Combo_recipientlist_Cls = cgiGet( sPrefix+"COMBO_RECIPIENTLIST_Cls");
+            Combo_recipientlist_Selectedvalue_set = cgiGet( sPrefix+"COMBO_RECIPIENTLIST_Selectedvalue_set");
+            Combo_recipientlist_Selectedtext_set = cgiGet( sPrefix+"COMBO_RECIPIENTLIST_Selectedtext_set");
+            Combo_recipientlist_Gamoauthtoken = cgiGet( sPrefix+"COMBO_RECIPIENTLIST_Gamoauthtoken");
+            Combo_recipientlist_Allowmultipleselection = StringUtil.StrToBool( cgiGet( sPrefix+"COMBO_RECIPIENTLIST_Allowmultipleselection"));
+            Combo_recipientlist_Datalistproc = cgiGet( sPrefix+"COMBO_RECIPIENTLIST_Datalistproc");
+            Combo_recipientlist_Datalistprocparametersprefix = cgiGet( sPrefix+"COMBO_RECIPIENTLIST_Datalistprocparametersprefix");
+            Combo_recipientlist_Includeonlyselectedoption = StringUtil.StrToBool( cgiGet( sPrefix+"COMBO_RECIPIENTLIST_Includeonlyselectedoption"));
+            Combo_recipientlist_Htmltemplate = cgiGet( sPrefix+"COMBO_RECIPIENTLIST_Htmltemplate");
+            Combo_recipientlist_Multiplevaluestype = cgiGet( sPrefix+"COMBO_RECIPIENTLIST_Multiplevaluestype");
+            Combo_recipientlist_Emptyitemtext = cgiGet( sPrefix+"COMBO_RECIPIENTLIST_Emptyitemtext");
             /* Read variables values. */
             AV7Title = cgiGet( edtavTitle_Internalname);
             AssignAttri(sPrefix, false, "AV7Title", AV7Title);
@@ -889,8 +950,26 @@ namespace GeneXus.Programs {
          returnInSub = false;
          divLayoutmaintable_Class = divLayoutmaintable_Class+" "+"EditForm";
          AssignProp(sPrefix, false, divLayoutmaintable_Internalname, "Class", divLayoutmaintable_Class, true);
+         GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons1 = AV17DDO_TitleSettingsIcons;
+         new GeneXus.Programs.wwpbaseobjects.getwwptitlesettingsicons(context ).execute( out  GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons1) ;
+         AV17DDO_TitleSettingsIcons = GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons1;
+         AV20GAMSession = new GeneXus.Programs.genexussecurity.SdtGAMSession(context).get(out  AV21GAMErrors);
+         Combo_recipientlist_Gamoauthtoken = AV20GAMSession.gxTpr_Token;
+         ucCombo_recipientlist.SendProperty(context, sPrefix, false, Combo_recipientlist_Internalname, "GAMOAuthToken", Combo_recipientlist_Gamoauthtoken);
+         GXt_char2 = "";
+         new GeneXus.Programs.wwpbaseobjects.wwp_getstyleddvcombo(context ).execute(  "Title and font icon", out  GXt_char2) ;
+         Combo_recipientlist_Htmltemplate = GXt_char2;
+         ucCombo_recipientlist.SendProperty(context, sPrefix, false, Combo_recipientlist_Internalname, "HTMLTemplate", Combo_recipientlist_Htmltemplate);
+         /* Execute user subroutine: 'LOADCOMBORECIPIENTLIST' */
+         S112 ();
+         if (returnInSub) return;
          chkavIstoallusers.Visible = 0;
          AssignProp(sPrefix, false, chkavIstoallusers_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(chkavIstoallusers.Visible), 5, 0), true);
+         GXt_char2 = AV22ResidentsTitle;
+         new prc_getorganisationdefinition(context ).execute(  "Residents", out  GXt_char2) ;
+         AV22ResidentsTitle = GXt_char2;
+         Combo_recipientlist_Emptyitemtext = context.GetMessage( "All ", "")+AV22ResidentsTitle;
+         ucCombo_recipientlist.SendProperty(context, sPrefix, false, Combo_recipientlist_Internalname, "EmptyItemText", Combo_recipientlist_Emptyitemtext);
       }
 
       protected void E127P2( )
@@ -898,13 +977,13 @@ namespace GeneXus.Programs {
          /* 'DoSendNotification' Routine */
          returnInSub = false;
          /* Execute user subroutine: 'CHECKREQUIREDFIELDS' */
-         S112 ();
+         S122 ();
          if (returnInSub) return;
          if ( AV10CheckRequiredFieldsResult )
          {
             AV13Metadata = new SdtSDT_OneSignalCustomData(context);
             AV13Metadata.gxTpr_Notificationcategory = "General";
-            new prc_sendresidentnotification(context ).execute(  AV7Title,  AV8Message,  "GENERAL",  AV13Metadata,  AV12ResidentIdCollectionEmpty) ;
+            new prc_sendresidentnotification(context ).execute(  AV7Title,  AV8Message,  "GENERAL",  AV13Metadata,  AV14RecipientList) ;
             GX_msglist.addItem(new WorkWithPlus.workwithplus_web.dvmessagegetbasicnotificationmsg(context).executeUdp(  "",  context.GetMessage( "Message sent", ""),  "success",  "",  "true",  ""));
             AV7Title = "";
             AssignAttri(sPrefix, false, "AV7Title", AV7Title);
@@ -915,7 +994,7 @@ namespace GeneXus.Programs {
          /*  Sending Event outputs  */
       }
 
-      protected void S112( )
+      protected void S122( )
       {
          /* 'CHECKREQUIREDFIELDS' Routine */
          returnInSub = false;
@@ -933,6 +1012,16 @@ namespace GeneXus.Programs {
             AV10CheckRequiredFieldsResult = false;
             AssignAttri(sPrefix, false, "AV10CheckRequiredFieldsResult", AV10CheckRequiredFieldsResult);
          }
+      }
+
+      protected void S112( )
+      {
+         /* 'LOADCOMBORECIPIENTLIST' Routine */
+         returnInSub = false;
+         Combo_recipientlist_Selectedtext_set = AV19RecipientListDescriptionCol.ToJSonString(false);
+         ucCombo_recipientlist.SendProperty(context, sPrefix, false, Combo_recipientlist_Internalname, "SelectedText_set", Combo_recipientlist_Selectedtext_set);
+         Combo_recipientlist_Selectedvalue_set = AV14RecipientList.ToJSonString(false);
+         ucCombo_recipientlist.SendProperty(context, sPrefix, false, Combo_recipientlist_Internalname, "SelectedValue_set", Combo_recipientlist_Selectedvalue_set);
       }
 
       protected void nextLoad( )
@@ -1120,7 +1209,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256201657910", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256309333926", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1136,7 +1225,10 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("wc_notificationpanel.js", "?20256201657910", false, true);
+         context.AddJavascriptSource("wc_notificationpanel.js", "?20256309333929", false, true);
+         context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
          /* End function include_jscripts */
       }
 
@@ -1154,6 +1246,9 @@ namespace GeneXus.Programs {
       {
          edtavTitle_Internalname = sPrefix+"vTITLE";
          edtavMessage_Internalname = sPrefix+"vMESSAGE";
+         lblTextblockcombo_recipientlist_Internalname = sPrefix+"TEXTBLOCKCOMBO_RECIPIENTLIST";
+         Combo_recipientlist_Internalname = sPrefix+"COMBO_RECIPIENTLIST";
+         divTablesplittedrecipientlist_Internalname = sPrefix+"TABLESPLITTEDRECIPIENTLIST";
          divTableattributes_Internalname = sPrefix+"TABLEATTRIBUTES";
          divTablecontent_Internalname = sPrefix+"TABLECONTENT";
          bttBtnsendnotification_Internalname = sPrefix+"BTNSENDNOTIFICATION";
@@ -1180,10 +1275,19 @@ namespace GeneXus.Programs {
          init_default_properties( ) ;
          chkavIstoallusers.Caption = "";
          chkavIstoallusers.Visible = 1;
+         Combo_recipientlist_Caption = "";
          edtavMessage_Enabled = 1;
          edtavTitle_Jsonclick = "";
          edtavTitle_Enabled = 1;
          divLayoutmaintable_Class = "Table TableTransactionTemplate";
+         Combo_recipientlist_Emptyitemtext = "All Location Residents";
+         Combo_recipientlist_Multiplevaluestype = "Tags";
+         Combo_recipientlist_Htmltemplate = "";
+         Combo_recipientlist_Includeonlyselectedoption = Convert.ToBoolean( -1);
+         Combo_recipientlist_Datalistprocparametersprefix = " \"ComboName\": \"RecipientList\"";
+         Combo_recipientlist_Datalistproc = "WC_NotificationPanelLoadDVCombo";
+         Combo_recipientlist_Allowmultipleselection = Convert.ToBoolean( -1);
+         Combo_recipientlist_Cls = "ExtendedCombo Attribute ExtendedComboWithImage";
          context.GX_msglist.DisplayMode = 1;
          if ( StringUtil.Len( sPrefix) == 0 )
          {
@@ -1201,8 +1305,8 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV9isToAllUsers","fld":"vISTOALLUSERS"},{"av":"AV12ResidentIdCollectionEmpty","fld":"vRESIDENTIDCOLLECTIONEMPTY","hsh":true}]}""");
-         setEventMetadata("'DOSENDNOTIFICATION'","""{"handler":"E127P2","iparms":[{"av":"AV10CheckRequiredFieldsResult","fld":"vCHECKREQUIREDFIELDSRESULT"},{"av":"AV7Title","fld":"vTITLE"},{"av":"AV8Message","fld":"vMESSAGE"},{"av":"AV12ResidentIdCollectionEmpty","fld":"vRESIDENTIDCOLLECTIONEMPTY","hsh":true}]""");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV9isToAllUsers","fld":"vISTOALLUSERS"}]}""");
+         setEventMetadata("'DOSENDNOTIFICATION'","""{"handler":"E127P2","iparms":[{"av":"AV10CheckRequiredFieldsResult","fld":"vCHECKREQUIREDFIELDSRESULT"},{"av":"AV7Title","fld":"vTITLE"},{"av":"AV8Message","fld":"vMESSAGE"},{"av":"AV14RecipientList","fld":"vRECIPIENTLIST"}]""");
          setEventMetadata("'DOSENDNOTIFICATION'",""","oparms":[{"av":"AV7Title","fld":"vTITLE"},{"av":"AV8Message","fld":"vMESSAGE"},{"av":"AV10CheckRequiredFieldsResult","fld":"vCHECKREQUIREDFIELDSRESULT"}]}""");
          return  ;
       }
@@ -1218,20 +1322,28 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
+         Combo_recipientlist_Selectedvalue_get = "";
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
          sPrefix = "";
          sDynURL = "";
          FormProcess = "";
          bodyStyle = "";
-         AV12ResidentIdCollectionEmpty = new GxSimpleCollection<Guid>();
          GXKey = "";
+         AV17DDO_TitleSettingsIcons = new WorkWithPlus.workwithplus_web.SdtDVB_SDTDropDownOptionsTitleSettingsIcons(context);
+         AV16RecipientList_Data = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item>( context, "Item", "");
+         AV14RecipientList = new GxSimpleCollection<Guid>();
+         Combo_recipientlist_Selectedvalue_set = "";
+         Combo_recipientlist_Selectedtext_set = "";
+         Combo_recipientlist_Gamoauthtoken = "";
          GX_FocusControl = "";
          ClassString = "";
          StyleString = "";
          TempTags = "";
          AV7Title = "";
          AV8Message = "";
+         lblTextblockcombo_recipientlist_Jsonclick = "";
+         ucCombo_recipientlist = new GXUserControl();
          bttBtnsendnotification_Jsonclick = "";
          Form = new GXWebForm();
          sXEvt = "";
@@ -1239,7 +1351,13 @@ namespace GeneXus.Programs {
          EvtGridId = "";
          EvtRowId = "";
          sEvtType = "";
+         GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons1 = new WorkWithPlus.workwithplus_web.SdtDVB_SDTDropDownOptionsTitleSettingsIcons(context);
+         AV20GAMSession = new GeneXus.Programs.genexussecurity.SdtGAMSession(context);
+         AV21GAMErrors = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError>( context, "GeneXus.Programs.genexussecurity.SdtGAMError", "GeneXus.Programs");
+         AV22ResidentsTitle = "";
+         GXt_char2 = "";
          AV13Metadata = new SdtSDT_OneSignalCustomData(context);
+         AV19RecipientListDescriptionCol = new GxSimpleCollection<string>();
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
          /* GeneXus formulas. */
@@ -1257,6 +1375,7 @@ namespace GeneXus.Programs {
       private int edtavTitle_Enabled ;
       private int edtavMessage_Enabled ;
       private int idxLst ;
+      private string Combo_recipientlist_Selectedvalue_get ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string sPrefix ;
@@ -1266,6 +1385,15 @@ namespace GeneXus.Programs {
       private string FormProcess ;
       private string bodyStyle ;
       private string GXKey ;
+      private string Combo_recipientlist_Cls ;
+      private string Combo_recipientlist_Selectedvalue_set ;
+      private string Combo_recipientlist_Selectedtext_set ;
+      private string Combo_recipientlist_Gamoauthtoken ;
+      private string Combo_recipientlist_Datalistproc ;
+      private string Combo_recipientlist_Datalistprocparametersprefix ;
+      private string Combo_recipientlist_Htmltemplate ;
+      private string Combo_recipientlist_Multiplevaluestype ;
+      private string Combo_recipientlist_Emptyitemtext ;
       private string GX_FocusControl ;
       private string divLayoutmaintable_Internalname ;
       private string divLayoutmaintable_Class ;
@@ -1278,6 +1406,11 @@ namespace GeneXus.Programs {
       private string TempTags ;
       private string edtavTitle_Jsonclick ;
       private string edtavMessage_Internalname ;
+      private string divTablesplittedrecipientlist_Internalname ;
+      private string lblTextblockcombo_recipientlist_Internalname ;
+      private string lblTextblockcombo_recipientlist_Jsonclick ;
+      private string Combo_recipientlist_Caption ;
+      private string Combo_recipientlist_Internalname ;
       private string bttBtnsendnotification_Internalname ;
       private string bttBtnsendnotification_Jsonclick ;
       private string divHtml_bottomauxiliarcontrols_Internalname ;
@@ -1287,9 +1420,12 @@ namespace GeneXus.Programs {
       private string EvtGridId ;
       private string EvtRowId ;
       private string sEvtType ;
+      private string GXt_char2 ;
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
       private bool AV10CheckRequiredFieldsResult ;
+      private bool Combo_recipientlist_Allowmultipleselection ;
+      private bool Combo_recipientlist_Includeonlyselectedoption ;
       private bool wbLoad ;
       private bool AV9isToAllUsers ;
       private bool Rfr0gs ;
@@ -1298,13 +1434,21 @@ namespace GeneXus.Programs {
       private bool returnInSub ;
       private string AV7Title ;
       private string AV8Message ;
+      private string AV22ResidentsTitle ;
+      private GXUserControl ucCombo_recipientlist ;
       private GXWebForm Form ;
       private IGxDataStore dsDataStore1 ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXCheckbox chkavIstoallusers ;
-      private GxSimpleCollection<Guid> AV12ResidentIdCollectionEmpty ;
+      private WorkWithPlus.workwithplus_web.SdtDVB_SDTDropDownOptionsTitleSettingsIcons AV17DDO_TitleSettingsIcons ;
+      private GXBaseCollection<WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item> AV16RecipientList_Data ;
+      private GxSimpleCollection<Guid> AV14RecipientList ;
+      private WorkWithPlus.workwithplus_web.SdtDVB_SDTDropDownOptionsTitleSettingsIcons GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons1 ;
+      private GeneXus.Programs.genexussecurity.SdtGAMSession AV20GAMSession ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV21GAMErrors ;
       private SdtSDT_OneSignalCustomData AV13Metadata ;
+      private GxSimpleCollection<string> AV19RecipientListDescriptionCol ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
    }

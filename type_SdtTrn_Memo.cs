@@ -2545,7 +2545,7 @@ namespace GeneXus.Programs {
          gxTv_SdtTrn_Memo_Memotextfontname = "";
          gxTv_SdtTrn_Memo_Memotextalignment = "";
          gxTv_SdtTrn_Memo_Memotextcolor = "";
-         gxTv_SdtTrn_Memo_Memocreatedat = (DateTime)(DateTime.MinValue);
+         gxTv_SdtTrn_Memo_Memocreatedat = DateTimeUtil.Now( (IGxContext)(context));
          gxTv_SdtTrn_Memo_Mode = "";
          gxTv_SdtTrn_Memo_Memoid_Z = Guid.Empty;
          gxTv_SdtTrn_Memo_Memotitle_Z = "";

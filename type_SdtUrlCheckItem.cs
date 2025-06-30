@@ -98,6 +98,27 @@ namespace GeneXus.Programs {
 
       }
 
+      public string gxTpr_Affectedinfoid
+      {
+         get {
+            if ( UrlCheckItem_externalReference == null )
+            {
+               UrlCheckItem_externalReference = new UrlValidator.UrlCheckItem();
+            }
+            return UrlCheckItem_externalReference.AffectedInfoId ;
+         }
+
+         set {
+            if ( UrlCheckItem_externalReference == null )
+            {
+               UrlCheckItem_externalReference = new UrlValidator.UrlCheckItem();
+            }
+            UrlCheckItem_externalReference.AffectedInfoId = value;
+            SetDirty("Affectedinfoid");
+         }
+
+      }
+
       public Object ExternalInstance
       {
          get {

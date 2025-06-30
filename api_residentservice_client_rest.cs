@@ -1908,6 +1908,69 @@ namespace GeneXus.Programs {
          /* CreateInfoPage Constructor */
       }
 
+      public void gxep_getpagetranslation( Guid aP0_DynamicTranslationPrimaryKey ,
+                                           string aP1_Language ,
+                                           out SdtSDT_InfoContent aP2_SDT_InfoContent ,
+                                           out SdtSDT_Error aP3_error )
+      {
+         restCliGetPageTranslation = new GXRestAPIClient();
+         if ( restLocation == null )
+         {
+            InitLocation();
+         }
+         restLocation.ResourceName = "/toolbox/v2/get-translated-page";
+         restCliGetPageTranslation.Location = restLocation;
+         restCliGetPageTranslation.HttpMethod = "POST";
+         restCliGetPageTranslation.AddBodyVar("DynamicTranslationPrimaryKey", (Guid)(aP0_DynamicTranslationPrimaryKey));
+         restCliGetPageTranslation.AddBodyVar("Language", (string)(aP1_Language));
+         restCliGetPageTranslation.RestExecute();
+         if ( restCliGetPageTranslation.ErrorCode != 0 )
+         {
+            gxProperties.ErrorCode = restCliGetPageTranslation.ErrorCode;
+            gxProperties.ErrorMessage = restCliGetPageTranslation.ErrorMessage;
+            gxProperties.StatusCode = restCliGetPageTranslation.StatusCode;
+            aP2_SDT_InfoContent = new SdtSDT_InfoContent();
+            aP3_error = new SdtSDT_Error();
+         }
+         else
+         {
+            aP2_SDT_InfoContent = restCliGetPageTranslation.GetBodySdt<SdtSDT_InfoContent>("SDT_InfoContent");
+            aP3_error = restCliGetPageTranslation.GetBodySdt<SdtSDT_Error>("error");
+         }
+         /* GetPageTranslation Constructor */
+      }
+
+      public void gxep_updatepagetranslation( Guid aP0_DynamicTranslationPrimaryKey ,
+                                              string aP1_Language ,
+                                              SdtSDT_InfoContent aP2_SDT_InfoContent ,
+                                              out SdtSDT_Error aP3_error )
+      {
+         restCliUpdatePageTranslation = new GXRestAPIClient();
+         if ( restLocation == null )
+         {
+            InitLocation();
+         }
+         restLocation.ResourceName = "/toolbox/v2/update-translated-page";
+         restCliUpdatePageTranslation.Location = restLocation;
+         restCliUpdatePageTranslation.HttpMethod = "POST";
+         restCliUpdatePageTranslation.AddBodyVar("DynamicTranslationPrimaryKey", (Guid)(aP0_DynamicTranslationPrimaryKey));
+         restCliUpdatePageTranslation.AddBodyVar("Language", (string)(aP1_Language));
+         restCliUpdatePageTranslation.AddBodyVar("SDT_InfoContent", aP2_SDT_InfoContent);
+         restCliUpdatePageTranslation.RestExecute();
+         if ( restCliUpdatePageTranslation.ErrorCode != 0 )
+         {
+            gxProperties.ErrorCode = restCliUpdatePageTranslation.ErrorCode;
+            gxProperties.ErrorMessage = restCliUpdatePageTranslation.ErrorMessage;
+            gxProperties.StatusCode = restCliUpdatePageTranslation.StatusCode;
+            aP3_error = new SdtSDT_Error();
+         }
+         else
+         {
+            aP3_error = restCliUpdatePageTranslation.GetBodySdt<SdtSDT_Error>("error");
+         }
+         /* UpdatePageTranslation Constructor */
+      }
+
       public void gxep_createlinkpage( Guid aP0_AppVersionId ,
                                        string aP1_PageName ,
                                        string aP2_Url ,
@@ -2617,6 +2680,9 @@ namespace GeneXus.Programs {
          restCliCreateMenuPage = new GXRestAPIClient();
          aP2_MenuPage = new SdtSDT_AppVersion_PagesItem();
          restCliCreateInfoPage = new GXRestAPIClient();
+         restCliGetPageTranslation = new GXRestAPIClient();
+         aP2_SDT_InfoContent = new SdtSDT_InfoContent();
+         restCliUpdatePageTranslation = new GXRestAPIClient();
          restCliCreateLinkPage = new GXRestAPIClient();
          aP5_MenuPage = new SdtSDT_AppVersion_PagesItem();
          restCliCreateServicePage = new GXRestAPIClient();
@@ -2707,6 +2773,8 @@ namespace GeneXus.Programs {
       protected GXRestAPIClient restCliPublishAppVersion ;
       protected GXRestAPIClient restCliCreateMenuPage ;
       protected GXRestAPIClient restCliCreateInfoPage ;
+      protected GXRestAPIClient restCliGetPageTranslation ;
+      protected GXRestAPIClient restCliUpdatePageTranslation ;
       protected GXRestAPIClient restCliCreateLinkPage ;
       protected GXRestAPIClient restCliCreateServicePage ;
       protected GXRestAPIClient restCliDeletePageV2 ;
@@ -2776,6 +2844,7 @@ namespace GeneXus.Programs {
       protected SdtSDT_AppVersion aP2_AppVersion ;
       protected SdtSDT_AppVersion aP1_AppVersion ;
       protected SdtSDT_AppVersion_PagesItem aP2_MenuPage ;
+      protected SdtSDT_InfoContent aP2_SDT_InfoContent ;
       protected SdtSDT_AppVersion_PagesItem aP5_MenuPage ;
       protected SdtSDT_AppVersion_PagesItem aP2_ContentPage ;
       protected SdtSDT_AppDebugResults aP1_SDT_DebugResults ;

@@ -1125,7 +1125,6 @@ namespace GeneXus.Programs {
                Combo_suppliergentypeid_Selectalltext = cgiGet( "COMBO_SUPPLIERGENTYPEID_Selectalltext");
                Combo_suppliergentypeid_Multiplevaluesseparator = cgiGet( "COMBO_SUPPLIERGENTYPEID_Multiplevaluesseparator");
                Combo_suppliergentypeid_Addnewoptiontext = cgiGet( "COMBO_SUPPLIERGENTYPEID_Addnewoptiontext");
-               Combo_suppliergentypeid_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "COMBO_SUPPLIERGENTYPEID_Gxcontroltype"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
                Combo_suppliergenphonecode_Objectcall = cgiGet( "COMBO_SUPPLIERGENPHONECODE_Objectcall");
                Combo_suppliergenphonecode_Class = cgiGet( "COMBO_SUPPLIERGENPHONECODE_Class");
                Combo_suppliergenphonecode_Icontype = cgiGet( "COMBO_SUPPLIERGENPHONECODE_Icontype");
@@ -1166,7 +1165,6 @@ namespace GeneXus.Programs {
                Combo_suppliergenphonecode_Selectalltext = cgiGet( "COMBO_SUPPLIERGENPHONECODE_Selectalltext");
                Combo_suppliergenphonecode_Multiplevaluesseparator = cgiGet( "COMBO_SUPPLIERGENPHONECODE_Multiplevaluesseparator");
                Combo_suppliergenphonecode_Addnewoptiontext = cgiGet( "COMBO_SUPPLIERGENPHONECODE_Addnewoptiontext");
-               Combo_suppliergenphonecode_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "COMBO_SUPPLIERGENPHONECODE_Gxcontroltype"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
                Combo_suppliergenlandlinecode_Objectcall = cgiGet( "COMBO_SUPPLIERGENLANDLINECODE_Objectcall");
                Combo_suppliergenlandlinecode_Class = cgiGet( "COMBO_SUPPLIERGENLANDLINECODE_Class");
                Combo_suppliergenlandlinecode_Icontype = cgiGet( "COMBO_SUPPLIERGENLANDLINECODE_Icontype");
@@ -1207,7 +1205,6 @@ namespace GeneXus.Programs {
                Combo_suppliergenlandlinecode_Selectalltext = cgiGet( "COMBO_SUPPLIERGENLANDLINECODE_Selectalltext");
                Combo_suppliergenlandlinecode_Multiplevaluesseparator = cgiGet( "COMBO_SUPPLIERGENLANDLINECODE_Multiplevaluesseparator");
                Combo_suppliergenlandlinecode_Addnewoptiontext = cgiGet( "COMBO_SUPPLIERGENLANDLINECODE_Addnewoptiontext");
-               Combo_suppliergenlandlinecode_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "COMBO_SUPPLIERGENLANDLINECODE_Gxcontroltype"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
                Suppliergendescription_Objectcall = cgiGet( "SUPPLIERGENDESCRIPTION_Objectcall");
                Suppliergendescription_Class = cgiGet( "SUPPLIERGENDESCRIPTION_Class");
                Suppliergendescription_Enabled = StringUtil.StrToBool( cgiGet( "SUPPLIERGENDESCRIPTION_Enabled"));
@@ -1271,7 +1268,6 @@ namespace GeneXus.Programs {
                Combo_suppliergenaddresscountry_Selectalltext = cgiGet( "COMBO_SUPPLIERGENADDRESSCOUNTRY_Selectalltext");
                Combo_suppliergenaddresscountry_Multiplevaluesseparator = cgiGet( "COMBO_SUPPLIERGENADDRESSCOUNTRY_Multiplevaluesseparator");
                Combo_suppliergenaddresscountry_Addnewoptiontext = cgiGet( "COMBO_SUPPLIERGENADDRESSCOUNTRY_Addnewoptiontext");
-               Combo_suppliergenaddresscountry_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "COMBO_SUPPLIERGENADDRESSCOUNTRY_Gxcontroltype"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
                /* Read variables values. */
                A43SupplierGenKvkNumber = cgiGet( edtSupplierGenKvkNumber_Internalname);
                AssignAttri("", false, "A43SupplierGenKvkNumber", A43SupplierGenKvkNumber);
@@ -3756,7 +3752,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202562313463217", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256309375483", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3772,7 +3768,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("trn_suppliergen.js", "?202562313463221", false, true);
+         context.AddJavascriptSource("trn_suppliergen.js", "?20256309375486", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -4623,15 +4619,11 @@ namespace GeneXus.Programs {
       private int edtSupplierGenId_Visible ;
       private int edtSupplierGenId_Enabled ;
       private int Combo_suppliergentypeid_Datalistupdateminimumcharacters ;
-      private int Combo_suppliergentypeid_Gxcontroltype ;
       private int Combo_suppliergenphonecode_Datalistupdateminimumcharacters ;
-      private int Combo_suppliergenphonecode_Gxcontroltype ;
       private int Combo_suppliergenlandlinecode_Datalistupdateminimumcharacters ;
-      private int Combo_suppliergenlandlinecode_Gxcontroltype ;
       private int Suppliergendescription_Color ;
       private int Suppliergendescription_Coltitlecolor ;
       private int Combo_suppliergenaddresscountry_Datalistupdateminimumcharacters ;
-      private int Combo_suppliergenaddresscountry_Gxcontroltype ;
       private int AV44GXV1 ;
       private int idxLst ;
       private string sPrefix ;

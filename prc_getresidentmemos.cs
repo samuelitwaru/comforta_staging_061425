@@ -124,6 +124,7 @@ namespace GeneXus.Programs {
             A529SG_OrganisationId = P00CU4_A529SG_OrganisationId[0];
             A11OrganisationId = P00CU4_A11OrganisationId[0];
             A62ResidentId = P00CU4_A62ResidentId[0];
+            A549MemoId = P00CU4_A549MemoId[0];
             A550MemoTitle = P00CU4_A550MemoTitle[0];
             A551MemoDescription = P00CU4_A551MemoDescription[0];
             A552MemoImage = P00CU4_A552MemoImage[0];
@@ -157,7 +158,8 @@ namespace GeneXus.Programs {
             A640MemoIsItalic = P00CU4_A640MemoIsItalic[0];
             A641MemoIsCapitalized = P00CU4_A641MemoIsCapitalized[0];
             A642MemoTextColor = P00CU4_A642MemoTextColor[0];
-            A549MemoId = P00CU4_A549MemoId[0];
+            A647MemoCreatedAt = P00CU4_A647MemoCreatedAt[0];
+            n647MemoCreatedAt = P00CU4_n647MemoCreatedAt[0];
             A72ResidentSalutation = P00CU4_A72ResidentSalutation[0];
             A64ResidentGivenName = P00CU4_A64ResidentGivenName[0];
             A65ResidentLastName = P00CU4_A65ResidentLastName[0];
@@ -192,6 +194,7 @@ namespace GeneXus.Programs {
             AV16SDT_Memo.gxTpr_Memoisitalic = A640MemoIsItalic;
             AV16SDT_Memo.gxTpr_Memoiscapitalized = A641MemoIsCapitalized;
             AV16SDT_Memo.gxTpr_Memotextcolor = A642MemoTextColor;
+            AV16SDT_Memo.gxTpr_Memocreatedat = A647MemoCreatedAt;
             AV17SDT_Memos.Add(AV16SDT_Memo, 0);
             pr_default.readNext(1);
          }
@@ -232,6 +235,7 @@ namespace GeneXus.Programs {
          P00CU4_A529SG_OrganisationId = new Guid[] {Guid.Empty} ;
          P00CU4_A11OrganisationId = new Guid[] {Guid.Empty} ;
          P00CU4_A62ResidentId = new Guid[] {Guid.Empty} ;
+         P00CU4_A549MemoId = new Guid[] {Guid.Empty} ;
          P00CU4_A550MemoTitle = new string[] {""} ;
          P00CU4_A551MemoDescription = new string[] {""} ;
          P00CU4_A552MemoImage = new string[] {""} ;
@@ -265,12 +269,14 @@ namespace GeneXus.Programs {
          P00CU4_A640MemoIsItalic = new bool[] {false} ;
          P00CU4_A641MemoIsCapitalized = new bool[] {false} ;
          P00CU4_A642MemoTextColor = new string[] {""} ;
-         P00CU4_A549MemoId = new Guid[] {Guid.Empty} ;
+         P00CU4_A647MemoCreatedAt = new DateTime[] {DateTime.MinValue} ;
+         P00CU4_n647MemoCreatedAt = new bool[] {false} ;
          A528SG_LocationId = Guid.Empty;
          A29LocationId = Guid.Empty;
          A529SG_OrganisationId = Guid.Empty;
          A11OrganisationId = Guid.Empty;
          A62ResidentId = Guid.Empty;
+         A549MemoId = Guid.Empty;
          A550MemoTitle = "";
          A551MemoDescription = "";
          A552MemoImage = "";
@@ -289,7 +295,7 @@ namespace GeneXus.Programs {
          A637MemoTextFontName = "";
          A638MemoTextAlignment = "";
          A642MemoTextColor = "";
-         A549MemoId = Guid.Empty;
+         A647MemoCreatedAt = (DateTime)(DateTime.MinValue);
          AV16SDT_Memo = new SdtSDT_Memo(context);
          AV15SDT_ApiListResponse = new SdtSDT_ApiListResponse(context);
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.prc_getresidentmemos__default(),
@@ -298,10 +304,11 @@ namespace GeneXus.Programs {
                P00CU3_A40000GXC1, P00CU3_n40000GXC1
                }
                , new Object[] {
-               P00CU4_A528SG_LocationId, P00CU4_A29LocationId, P00CU4_A529SG_OrganisationId, P00CU4_A11OrganisationId, P00CU4_A62ResidentId, P00CU4_A550MemoTitle, P00CU4_A551MemoDescription, P00CU4_A552MemoImage, P00CU4_n552MemoImage, P00CU4_A553MemoDocument,
-               P00CU4_n553MemoDocument, P00CU4_A561MemoStartDateTime, P00CU4_n561MemoStartDateTime, P00CU4_A562MemoEndDateTime, P00CU4_n562MemoEndDateTime, P00CU4_A563MemoDuration, P00CU4_n563MemoDuration, P00CU4_A564MemoRemoveDate, P00CU4_n564MemoRemoveDate, P00CU4_A72ResidentSalutation,
-               P00CU4_A64ResidentGivenName, P00CU4_A65ResidentLastName, P00CU4_A71ResidentGUID, P00CU4_A566MemoBgColorCode, P00CU4_n566MemoBgColorCode, P00CU4_A567MemoForm, P00CU4_A624MemoType, P00CU4_A625MemoName, P00CU4_A626MemoLeftOffset, P00CU4_A627MemoTopOffset,
-               P00CU4_A628MemoTitleAngle, P00CU4_A629MemoTitleScale, P00CU4_A637MemoTextFontName, P00CU4_A638MemoTextAlignment, P00CU4_A639MemoIsBold, P00CU4_A640MemoIsItalic, P00CU4_A641MemoIsCapitalized, P00CU4_A642MemoTextColor, P00CU4_A549MemoId
+               P00CU4_A528SG_LocationId, P00CU4_A29LocationId, P00CU4_A529SG_OrganisationId, P00CU4_A11OrganisationId, P00CU4_A62ResidentId, P00CU4_A549MemoId, P00CU4_A550MemoTitle, P00CU4_A551MemoDescription, P00CU4_A552MemoImage, P00CU4_n552MemoImage,
+               P00CU4_A553MemoDocument, P00CU4_n553MemoDocument, P00CU4_A561MemoStartDateTime, P00CU4_n561MemoStartDateTime, P00CU4_A562MemoEndDateTime, P00CU4_n562MemoEndDateTime, P00CU4_A563MemoDuration, P00CU4_n563MemoDuration, P00CU4_A564MemoRemoveDate, P00CU4_n564MemoRemoveDate,
+               P00CU4_A72ResidentSalutation, P00CU4_A64ResidentGivenName, P00CU4_A65ResidentLastName, P00CU4_A71ResidentGUID, P00CU4_A566MemoBgColorCode, P00CU4_n566MemoBgColorCode, P00CU4_A567MemoForm, P00CU4_A624MemoType, P00CU4_A625MemoName, P00CU4_A626MemoLeftOffset,
+               P00CU4_A627MemoTopOffset, P00CU4_A628MemoTitleAngle, P00CU4_A629MemoTitleScale, P00CU4_A637MemoTextFontName, P00CU4_A638MemoTextAlignment, P00CU4_A639MemoIsBold, P00CU4_A640MemoIsItalic, P00CU4_A641MemoIsCapitalized, P00CU4_A642MemoTextColor, P00CU4_A647MemoCreatedAt,
+               P00CU4_n647MemoCreatedAt
                }
             }
          );
@@ -328,6 +335,7 @@ namespace GeneXus.Programs {
       private string A638MemoTextAlignment ;
       private DateTime A561MemoStartDateTime ;
       private DateTime A562MemoEndDateTime ;
+      private DateTime A647MemoCreatedAt ;
       private DateTime A564MemoRemoveDate ;
       private bool n40000GXC1 ;
       private bool n552MemoImage ;
@@ -340,6 +348,7 @@ namespace GeneXus.Programs {
       private bool A639MemoIsBold ;
       private bool A640MemoIsItalic ;
       private bool A641MemoIsCapitalized ;
+      private bool n647MemoCreatedAt ;
       private string AV14result ;
       private string A552MemoImage ;
       private string AV13ResidentId ;
@@ -374,6 +383,7 @@ namespace GeneXus.Programs {
       private Guid[] P00CU4_A529SG_OrganisationId ;
       private Guid[] P00CU4_A11OrganisationId ;
       private Guid[] P00CU4_A62ResidentId ;
+      private Guid[] P00CU4_A549MemoId ;
       private string[] P00CU4_A550MemoTitle ;
       private string[] P00CU4_A551MemoDescription ;
       private string[] P00CU4_A552MemoImage ;
@@ -407,7 +417,8 @@ namespace GeneXus.Programs {
       private bool[] P00CU4_A640MemoIsItalic ;
       private bool[] P00CU4_A641MemoIsCapitalized ;
       private string[] P00CU4_A642MemoTextColor ;
-      private Guid[] P00CU4_A549MemoId ;
+      private DateTime[] P00CU4_A647MemoCreatedAt ;
+      private bool[] P00CU4_n647MemoCreatedAt ;
       private SdtSDT_Memo AV16SDT_Memo ;
       private SdtSDT_ApiListResponse AV15SDT_ApiListResponse ;
       private string aP3_result ;
@@ -441,7 +452,7 @@ namespace GeneXus.Programs {
           };
           def= new CursorDef[] {
               new CursorDef("P00CU3", "SELECT COALESCE( T1.GXC1, 0) AS GXC1 FROM (SELECT COUNT(*) AS GXC1 FROM Trn_Memo WHERE ResidentId = :AV20PrimaryResidentId ) T1 ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CU3,1, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("P00CU4", "SELECT T1.SG_LocationId, T2.LocationId, T1.SG_OrganisationId, T2.OrganisationId, T1.ResidentId, T1.MemoTitle, T1.MemoDescription, T1.MemoImage, T1.MemoDocument, T1.MemoStartDateTime, T1.MemoEndDateTime, T1.MemoDuration, T1.MemoRemoveDate, T2.ResidentSalutation, T2.ResidentGivenName, T2.ResidentLastName, T2.ResidentGUID, T1.MemoBgColorCode, T1.MemoForm, T1.MemoType, T1.MemoName, T1.MemoLeftOffset, T1.MemoTopOffset, T1.MemoTitleAngle, T1.MemoTitleScale, T1.MemoTextFontName, T1.MemoTextAlignment, T1.MemoIsBold, T1.MemoIsItalic, T1.MemoIsCapitalized, T1.MemoTextColor, T1.MemoId FROM (Trn_Memo T1 INNER JOIN Trn_Resident T2 ON T2.ResidentId = T1.ResidentId AND T2.LocationId = T1.SG_LocationId AND T2.OrganisationId = T1.SG_OrganisationId) WHERE T1.ResidentId = :AV20PrimaryResidentId ORDER BY T1.MemoId DESC  OFFSET :GXPagingFrom2 LIMIT CASE WHEN :GXPagingTo2 > 0 THEN :GXPagingTo2 ELSE 1e9 END",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CU4,100, GxCacheFrequency.OFF ,false,false )
+             ,new CursorDef("P00CU4", "SELECT T1.SG_LocationId, T2.LocationId, T1.SG_OrganisationId, T2.OrganisationId, T1.ResidentId, T1.MemoId, T1.MemoTitle, T1.MemoDescription, T1.MemoImage, T1.MemoDocument, T1.MemoStartDateTime, T1.MemoEndDateTime, T1.MemoDuration, T1.MemoRemoveDate, T2.ResidentSalutation, T2.ResidentGivenName, T2.ResidentLastName, T2.ResidentGUID, T1.MemoBgColorCode, T1.MemoForm, T1.MemoType, T1.MemoName, T1.MemoLeftOffset, T1.MemoTopOffset, T1.MemoTitleAngle, T1.MemoTitleScale, T1.MemoTextFontName, T1.MemoTextAlignment, T1.MemoIsBold, T1.MemoIsItalic, T1.MemoIsCapitalized, T1.MemoTextColor, T1.MemoCreatedAt FROM (Trn_Memo T1 INNER JOIN Trn_Resident T2 ON T2.ResidentId = T1.ResidentId AND T2.LocationId = T1.SG_LocationId AND T2.OrganisationId = T1.SG_OrganisationId) WHERE T1.ResidentId = :AV20PrimaryResidentId ORDER BY T1.MemoCreatedAt DESC, T1.MemoId  OFFSET :GXPagingFrom2 LIMIT CASE WHEN :GXPagingTo2 > 0 THEN :GXPagingTo2 ELSE 1e9 END",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CU4,100, GxCacheFrequency.OFF ,false,false )
           };
        }
     }
@@ -462,40 +473,42 @@ namespace GeneXus.Programs {
                 ((Guid[]) buf[2])[0] = rslt.getGuid(3);
                 ((Guid[]) buf[3])[0] = rslt.getGuid(4);
                 ((Guid[]) buf[4])[0] = rslt.getGuid(5);
-                ((string[]) buf[5])[0] = rslt.getVarchar(6);
+                ((Guid[]) buf[5])[0] = rslt.getGuid(6);
                 ((string[]) buf[6])[0] = rslt.getVarchar(7);
-                ((string[]) buf[7])[0] = rslt.getLongVarchar(8);
-                ((bool[]) buf[8])[0] = rslt.wasNull(8);
-                ((string[]) buf[9])[0] = rslt.getVarchar(9);
-                ((bool[]) buf[10])[0] = rslt.wasNull(9);
-                ((DateTime[]) buf[11])[0] = rslt.getGXDateTime(10);
-                ((bool[]) buf[12])[0] = rslt.wasNull(10);
-                ((DateTime[]) buf[13])[0] = rslt.getGXDateTime(11);
-                ((bool[]) buf[14])[0] = rslt.wasNull(11);
-                ((decimal[]) buf[15])[0] = rslt.getDecimal(12);
-                ((bool[]) buf[16])[0] = rslt.wasNull(12);
-                ((DateTime[]) buf[17])[0] = rslt.getGXDate(13);
-                ((bool[]) buf[18])[0] = rslt.wasNull(13);
-                ((string[]) buf[19])[0] = rslt.getString(14, 20);
-                ((string[]) buf[20])[0] = rslt.getVarchar(15);
+                ((string[]) buf[7])[0] = rslt.getVarchar(8);
+                ((string[]) buf[8])[0] = rslt.getLongVarchar(9);
+                ((bool[]) buf[9])[0] = rslt.wasNull(9);
+                ((string[]) buf[10])[0] = rslt.getVarchar(10);
+                ((bool[]) buf[11])[0] = rslt.wasNull(10);
+                ((DateTime[]) buf[12])[0] = rslt.getGXDateTime(11);
+                ((bool[]) buf[13])[0] = rslt.wasNull(11);
+                ((DateTime[]) buf[14])[0] = rslt.getGXDateTime(12);
+                ((bool[]) buf[15])[0] = rslt.wasNull(12);
+                ((decimal[]) buf[16])[0] = rslt.getDecimal(13);
+                ((bool[]) buf[17])[0] = rslt.wasNull(13);
+                ((DateTime[]) buf[18])[0] = rslt.getGXDate(14);
+                ((bool[]) buf[19])[0] = rslt.wasNull(14);
+                ((string[]) buf[20])[0] = rslt.getString(15, 20);
                 ((string[]) buf[21])[0] = rslt.getVarchar(16);
                 ((string[]) buf[22])[0] = rslt.getVarchar(17);
                 ((string[]) buf[23])[0] = rslt.getVarchar(18);
-                ((bool[]) buf[24])[0] = rslt.wasNull(18);
-                ((string[]) buf[25])[0] = rslt.getString(19, 20);
-                ((string[]) buf[26])[0] = rslt.getVarchar(20);
+                ((string[]) buf[24])[0] = rslt.getVarchar(19);
+                ((bool[]) buf[25])[0] = rslt.wasNull(19);
+                ((string[]) buf[26])[0] = rslt.getString(20, 20);
                 ((string[]) buf[27])[0] = rslt.getVarchar(21);
-                ((decimal[]) buf[28])[0] = rslt.getDecimal(22);
+                ((string[]) buf[28])[0] = rslt.getVarchar(22);
                 ((decimal[]) buf[29])[0] = rslt.getDecimal(23);
                 ((decimal[]) buf[30])[0] = rslt.getDecimal(24);
                 ((decimal[]) buf[31])[0] = rslt.getDecimal(25);
-                ((string[]) buf[32])[0] = rslt.getVarchar(26);
-                ((string[]) buf[33])[0] = rslt.getString(27, 20);
-                ((bool[]) buf[34])[0] = rslt.getBool(28);
+                ((decimal[]) buf[32])[0] = rslt.getDecimal(26);
+                ((string[]) buf[33])[0] = rslt.getVarchar(27);
+                ((string[]) buf[34])[0] = rslt.getString(28, 20);
                 ((bool[]) buf[35])[0] = rslt.getBool(29);
                 ((bool[]) buf[36])[0] = rslt.getBool(30);
-                ((string[]) buf[37])[0] = rslt.getVarchar(31);
-                ((Guid[]) buf[38])[0] = rslt.getGuid(32);
+                ((bool[]) buf[37])[0] = rslt.getBool(31);
+                ((string[]) buf[38])[0] = rslt.getVarchar(32);
+                ((DateTime[]) buf[39])[0] = rslt.getGXDateTime(33);
+                ((bool[]) buf[40])[0] = rslt.wasNull(33);
                 return;
        }
     }

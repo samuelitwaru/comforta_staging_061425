@@ -78,6 +78,7 @@ namespace GeneXus.Programs {
             AV15pageUrl = ((SdtSDT_PageUrl)AV17PageUrlList.Item(AV26GXV1));
             AV14PageItem = new SdtSDT_AppDebugResults_PagesItem(context);
             AV14PageItem.gxTpr_Page = AV15pageUrl.gxTpr_Page;
+            AV14PageItem.gxTpr_Pageid = AV15pageUrl.gxTpr_Pageid;
             AV21UrlCheckItems.Clear();
             AV27GXV2 = 1;
             while ( AV27GXV2 <= AV15pageUrl.gxTpr_Urls.Count )
@@ -87,6 +88,7 @@ namespace GeneXus.Programs {
                AV9urlCheckItem.gxTpr_Url = AV16pageUrlItem.gxTpr_Url;
                AV9urlCheckItem.gxTpr_Affectedtype = AV16pageUrlItem.gxTpr_Affectedtype;
                AV9urlCheckItem.gxTpr_Affectedname = AV16pageUrlItem.gxTpr_Affectedname;
+               AV9urlCheckItem.gxTpr_Affectedinfoid = AV16pageUrlItem.gxTpr_Affectedinfoid;
                AV21UrlCheckItems.Add(AV9urlCheckItem, 0);
                AV27GXV2 = (int)(AV27GXV2+1);
             }
@@ -105,6 +107,7 @@ namespace GeneXus.Programs {
                AV23UrlListItem.gxTpr_Statusmessage = AV24UrlStatus.gxTpr_Message;
                AV23UrlListItem.gxTpr_Affectedtype = AV24UrlStatus.gxTpr_Affectedtype;
                AV23UrlListItem.gxTpr_Affectedname = AV24UrlStatus.gxTpr_Affectedname;
+               AV23UrlListItem.gxTpr_Affectedinfoid = AV24UrlStatus.gxTpr_Affectedinfoid;
                AV14PageItem.gxTpr_Urllist.Add(AV23UrlListItem, 0);
                AV28GXV3 = (int)(AV28GXV3+1);
             }

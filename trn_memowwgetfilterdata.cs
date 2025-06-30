@@ -338,8 +338,8 @@ namespace GeneXus.Programs {
          AV18TFMemoEndDateTime_To = (DateTime)(DateTime.MinValue);
          AV21TFMemoRemoveDate = DateTime.MinValue;
          AV22TFMemoRemoveDate_To = DateTime.MinValue;
-         AV46TFMemoCreatedAt = (DateTime)(DateTime.MinValue);
-         AV47TFMemoCreatedAt_To = (DateTime)(DateTime.MinValue);
+         AV46TFMemoCreatedAt = DateTimeUtil.ResetTime( context.localUtil.CToD( "", DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt"))) ) ;
+         AV47TFMemoCreatedAt_To = DateTimeUtil.ResetTime( context.localUtil.CToD( "", DateTimeUtil.MapDateFormat( context.GetLanguageProperty( "date_fmt"))) ) ;
          AV50Trn_memowwds_1_filterfulltext = "";
          AV51Trn_memowwds_2_tfmemotitle = "";
          AV52Trn_memowwds_3_tfmemotitle_sel = "";

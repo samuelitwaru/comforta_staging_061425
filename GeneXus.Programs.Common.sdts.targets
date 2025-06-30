@@ -62,6 +62,7 @@
  	<Compile Include="$(WebDirectory)\type_SdtSDT_Error.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_ErrorResponse.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_FileUploadData.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtSDT_Icon.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_InfoContent.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_InfoContent_InfoContentItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_InfoContent_InfoContentItem_ColumnsItem.cs" />

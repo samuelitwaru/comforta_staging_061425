@@ -40,6 +40,8 @@ namespace GeneXus.Programs
 
 			gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Affectedname = "";
 
+			gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Affectedinfoid = "";
+
 		}
 
 		public SdtSDT_AppDebugResults_PagesItem_UrlListItem(IGxContext context)
@@ -80,6 +82,9 @@ namespace GeneXus.Programs
 
 
 			AddObjectProperty("AffectedName", gxTpr_Affectedname, false);
+
+
+			AddObjectProperty("AffectedInfoId", gxTpr_Affectedinfoid, false);
 
 			return;
 		}
@@ -166,6 +171,22 @@ namespace GeneXus.Programs
 
 
 
+
+		[SoapElement(ElementName="AffectedInfoId")]
+		[XmlElement(ElementName="AffectedInfoId")]
+		public string gxTpr_Affectedinfoid
+		{
+			get {
+				return gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Affectedinfoid; 
+			}
+			set {
+				gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Affectedinfoid = value;
+				SetDirty("Affectedinfoid");
+			}
+		}
+
+
+
 		public override bool ShouldSerializeSdtJson()
 		{
 			return true;
@@ -192,6 +213,7 @@ namespace GeneXus.Programs
 			gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Statusmessage = "";
 			gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Affectedtype = "";
 			gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Affectedname = "";
+			gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Affectedinfoid = "";
 			return  ;
 		}
 
@@ -214,6 +236,9 @@ namespace GeneXus.Programs
 		 
 
 		protected string gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Affectedname;
+		 
+
+		protected string gxTv_SdtSDT_AppDebugResults_PagesItem_UrlListItem_Affectedinfoid;
 		 
 
 
@@ -290,6 +315,18 @@ namespace GeneXus.Programs
 			}
 			set { 
 				 sdt.gxTpr_Affectedname = value;
+			}
+		}
+
+		[DataMember(Name="AffectedInfoId", Order=5)]
+		public  string gxTpr_Affectedinfoid
+		{
+			get { 
+				return sdt.gxTpr_Affectedinfoid;
+
+			}
+			set { 
+				 sdt.gxTpr_Affectedinfoid = value;
 			}
 		}
 

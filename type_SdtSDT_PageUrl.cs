@@ -61,6 +61,9 @@ namespace GeneXus.Programs
 		{
 			AddObjectProperty("Page", gxTpr_Page, false);
 
+
+			AddObjectProperty("PageId", gxTpr_Pageid, false);
+
 			if (gxTv_SdtSDT_PageUrl_Urls != null)
 			{
 				AddObjectProperty("Urls", gxTv_SdtSDT_PageUrl_Urls, false);
@@ -81,6 +84,22 @@ namespace GeneXus.Programs
 			set {
 				gxTv_SdtSDT_PageUrl_Page = value;
 				SetDirty("Page");
+			}
+		}
+
+
+
+
+		[SoapElement(ElementName="PageId")]
+		[XmlElement(ElementName="PageId")]
+		public Guid gxTpr_Pageid
+		{
+			get {
+				return gxTv_SdtSDT_PageUrl_Pageid; 
+			}
+			set {
+				gxTv_SdtSDT_PageUrl_Pageid = value;
+				SetDirty("Pageid");
 			}
 		}
 
@@ -146,6 +165,7 @@ namespace GeneXus.Programs
 		{
 			gxTv_SdtSDT_PageUrl_Page = "";
 
+
 			gxTv_SdtSDT_PageUrl_Urls_N = true;
 
 			return  ;
@@ -158,6 +178,9 @@ namespace GeneXus.Programs
 		#region Declaration
 
 		protected string gxTv_SdtSDT_PageUrl_Page;
+		 
+
+		protected Guid gxTv_SdtSDT_PageUrl_Pageid;
 		 
 		protected bool gxTv_SdtSDT_PageUrl_Urls_N;
 		protected GXBaseCollection<SdtSDT_PageUrl_UrlsItem> gxTv_SdtSDT_PageUrl_Urls = null; 
@@ -192,7 +215,19 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Urls", Order=1, EmitDefaultValue=false)]
+		[DataMember(Name="PageId", Order=1)]
+		public Guid gxTpr_Pageid
+		{
+			get { 
+				return sdt.gxTpr_Pageid;
+
+			}
+			set { 
+				sdt.gxTpr_Pageid = value;
+			}
+		}
+
+		[DataMember(Name="Urls", Order=2, EmitDefaultValue=false)]
 		public GxGenericCollection<SdtSDT_PageUrl_UrlsItem_RESTInterface> gxTpr_Urls
 		{
 			get {
