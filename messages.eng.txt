@@ -3321,3 +3321,6 @@ WWP_AIError_AssistantHasNoTransactions=no Transactions in your Knowledge Base ha
 WWP_AIAssistant_NM_Title=AI Assistant
 WWP_AIAssistantAppliedFilters_GroupingBy=grouping by {0}
 WC_Create Supplier Form=Create Supplier Form
+I18N_REFERENCEIDHELPICON=The "Reference id" is used to reference this field in the visible conditions or validation of other fields of the form. If this field will not be referenced, it is recommended to leave it blank.
+I18N_DELETEDFORMAPP=The attached form has been deleted. Please contact your administrator.
+I18N_DELETEDFORMTOOLBOX=The attached form has been deleted. Please attach another form or functionality to the tile or remove the tile.

@@ -52,65 +52,75 @@ export class JSONToGrapesJSMenu {
     isInfoPage?: boolean
   ): string {
     return `
-      <div ${isFirstSingleTile
-        ? firstTileWrapperDefaultAttributes
-        : tileWrapperDefaultAttributes
+      <div ${
+        isFirstSingleTile ? firstTileWrapperDefaultAttributes : tileWrapperDefaultAttributes
       } class="template-wrapper" id="${tile.Id}" style="height:${tile.Size || minTileHeight}px;">
-        <div ${tileDefaultAttributes} class="template-block${isFirstSingleTile ? " first-tile high-priority-template" : ""
-      }" 
-          style="color: ${tile.Color ? tile.Color : "#333333"
-      }; text-align: ${tile.Align};
-        ${isThreeTiles ? "align-items: center; justify-content: center;"
-        : `align-items: ${tile.Align === "left" ? "start" : tile.Align}; justify-content: ${tile.Align === "left" ? "start" : tile.Align};`
-      }; 
-        ${tile.BGImageUrl
-        ? `background-color: rgba(0,0,0, ${tile.Opacity / 100});
+        <div ${tileDefaultAttributes} class="template-block${
+          isFirstSingleTile ? " first-tile high-priority-template" : ""
+        }" 
+          style="color: ${tile.Color ? tile.Color : "#333333"}; text-align: ${tile.Align};
+        ${
+          isThreeTiles
+            ? "align-items: center; justify-content: center;"
+            : `align-items: ${tile.Align === "left" ? "start" : tile.Align}; justify-content: ${tile.Align === "left" ? "start" : tile.Align};`
+        }; 
+        ${
+          tile.BGImageUrl
+            ? `background-color: rgba(0,0,0, ${tile.Opacity / 100});
                background-image: url('${tile.BGImageUrl}');
                background-size: cover;
                background-position: center;
                background-blend-mode: overlay;`
-        : `
+            : `
             background-color: ${this.themeManager.getThemeColor(tile.BGColor)}; 
             `
-      }">
+        }">
         
-        <div ${DefaultAttributes} class="tile-icon-section" ${tile.Icon ? 'style="display: block;"' : ''}>
+        <div ${DefaultAttributes} class="tile-icon-section" ${tile.Icon ? 'style="display: block;"' : ""}>
           <span ${DefaultAttributes} class="tile-close-icon top-right">×</span>
           <span ${DefaultAttributes} title="${tile.Icon}" class="tile-icon">
             ${this.getTileIcon(tile)}
           </span>
         </div>
                 
-                <div ${DefaultAttributes} class="tile-title-section" style="${isThreeTiles ? "text-align: center;" : "text-align: left"
-      }">
+                <div ${DefaultAttributes} class="tile-title-section" style="${
+                  isThreeTiles ? "text-align: center;" : "text-align: left"
+                }">
                   <span ${DefaultAttributes} class="tile-close-title top-right">×</span>
-                  <span ${DefaultAttributes} class="tile-title" title="${tile.Text
-      }" style="${isThreeTiles ? "text-align: center;" : `text-align: ${tile.Align}`
-      }">${this.truncateText(tile, tile.Text, isThreeTiles)}</span>
+                  <span ${DefaultAttributes} class="tile-title" title="${tile.Text}" style="${
+                    isThreeTiles ? "text-align: center;" : `text-align: ${tile.Align}`
+                  }">${this.truncateText(tile, tile.Text, isThreeTiles)}</span>
         </div>
       </div>
-      ${isFirstSingleTile
-        ? ""
-        : `
-        <button ${DefaultAttributes} title="${i18n.t("tile.delete_tile")}" class="action-button delete-button">−</button>`
+      ${
+        isFirstSingleTile
+          ? ""
+          : `
+        <button ${DefaultAttributes} title="${i18n.t("tile.delete_tile")}" class="action-button delete-button readonly-mode">−</button>`
       }
-      <button ${DefaultAttributes} title="${i18n.t("tile.add_template_right")}" ${(isThreeTiles && isInfoPage) ? `style="display: none;"` : ""} class="action-button add-button-right">
+      <button ${DefaultAttributes} title="${i18n.t("tile.add_template_right")}" ${isThreeTiles && isInfoPage ? `style="display: none;"` : ""} class="action-button add-button-right readonly-mode">
         <svg ${DefaultAttributes} fill="#fff" width="15" height="15" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path ${DefaultAttributes} d="M19,11H13V5a1,1,0,0,0-2,0v6H5a1,1,0,0,0,0,2h6v6a1,1,0,0,0,2,0V13h6a1,1,0,0,0,0-2Z"/>
         </svg>
       </button>
-      ${(row.Tiles.length === 1) ? `
+      ${
+        row.Tiles.length === 1
+          ? `
           ${resizeButton("Resize")}
-        ` :
-        ``
+        `
+          : ``
       }
-      ${isInfoPage ? "" : `
-        <button ${DefaultAttributes} title="${i18n.t("tile.add_template_bottom")}" class="action-button add-button-bottom">
+      ${
+        isInfoPage
+          ? ""
+          : `
+        <button ${DefaultAttributes} title="${i18n.t("tile.add_template_bottom")}" class="action-button add-button-bottom readonly-mode">
           <svg ${DefaultAttributes} fill="#fff" width="15" height="15" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path ${DefaultAttributes} d="M19,11H13V5a1,1,0,0,0-2,0v6H5a1,1,0,0,0,0,2h6v6a1,1,0,0,0,2,0V13h6a1,1,0,0,0,0-2Z"/>
           </svg>
-        </button>`}
-      <svg ${DefaultAttributes} class="tile-open-menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 27 27">
+        </button>`
+      }
+      <svg ${DefaultAttributes} class="tile-open-menu readonly-mode" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 27 27">
         <g ${DefaultAttributes} id="Group_2383" data-name="Group 2383" transform="translate(-921 -417.999)">
           <g ${DefaultAttributes} id="Group_2382" data-name="Group 2382" transform="translate(921 418)">
             <circle ${DefaultAttributes} id="Ellipse_534" data-name="Ellipse 534" cx="13.5" cy="13.5" r="13.5" transform="translate(0 -0.001)" fill="#6a747f"/>

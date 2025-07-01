@@ -580,7 +580,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblFormdeleted_Internalname, context.GetMessage( "The attached form has been deleted. Please contact your administrator.", ""), "", "", lblFormdeleted_Jsonclick, "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "MissingFormLabel", 0, "", 1, 1, 0, 0, "HLP_WC_ResidentDynamicForm.htm");
+            GxWebStd.gx_label_ctrl( context, lblFormdeleted_Internalname, context.GetMessage( "I18N_DELETEDFORMAPP", ""), "", "", lblFormdeleted_Jsonclick, "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "MissingFormLabel", 0, "", 1, 1, 0, 0, "HLP_WC_ResidentDynamicForm.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1169,7 +1169,7 @@ namespace GeneXus.Programs {
             {
                AV7WWPFormInstance.Load(AV9WWPFormInstanceId);
             }
-            if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV32FormName)) )
+            if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV32FormName)) || ( StringUtil.StrCmp(AV8WWPDynamicFormMode, "INS") != 0 ) )
             {
                new GeneXus.Programs.workwithplus.dynamicforms.wwp_df_saveforminstance(context ).execute(  AV5SessionId,  AV7WWPFormInstance) ;
                /* Execute user subroutine: 'INITIALIZE WC' */
@@ -1281,7 +1281,7 @@ namespace GeneXus.Programs {
          returnInSub = false;
          divTableright_Visible = (((StringUtil.StrCmp(AV8WWPDynamicFormMode, "DSP")==0)&&!String.IsNullOrEmpty(StringUtil.RTrim( AV32FormName))) ? 1 : 0);
          AssignProp(sPrefix, false, divTableright_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(divTableright_Visible), 5, 0), true);
-         divMissingform_Visible = ((String.IsNullOrEmpty(StringUtil.RTrim( AV32FormName))) ? 1 : 0);
+         divMissingform_Visible = (((StringUtil.StrCmp(AV8WWPDynamicFormMode, "INS")==0)&&String.IsNullOrEmpty(StringUtil.RTrim( AV32FormName))) ? 1 : 0);
          AssignProp(sPrefix, false, divMissingform_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(divMissingform_Visible), 5, 0), true);
       }
 
@@ -1858,7 +1858,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256309343812", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257117383079", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1874,7 +1874,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("wc_residentdynamicform.js", "?20256309343814", false, true);
+         context.AddJavascriptSource("wc_residentdynamicform.js", "?20257117383081", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/ConfirmPanel/BootstrapConfirmPanelRender.js", "", false, true);

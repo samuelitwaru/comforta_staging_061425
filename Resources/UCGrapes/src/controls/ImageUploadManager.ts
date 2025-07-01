@@ -14,6 +14,7 @@ export class ImageUploadManager {
   private sectionId?: string;
   private croppedUrl?: string;
   private imgFrame!: HTMLElement;
+  private imgContainer!: HTMLElement;
   private saveCallback?: (urls: Array<{ Id: string; Url: string }>) => void;
 
   private currentPosition: {
@@ -82,16 +83,13 @@ export class ImageUploadManager {
     const frameRect = frame.getBoundingClientRect();
     const containerRect = container.getBoundingClientRect();
 
-    const relativeX =
-      ((frameRect.left - containerRect.left) / containerRect.width) * 100;
-    const relativeY =
-      ((frameRect.top - containerRect.top) / containerRect.height) * 100;
+    const relativeX = ((frameRect.left - containerRect.left) / containerRect.width) * 100;
+    const relativeY = ((frameRect.top - containerRect.top) / containerRect.height) * 100;
 
     const scaleX = containerRect.width / frameRect.width;
     const scaleY = containerRect.height / frameRect.height;
     const scale = Math.max(scaleX, scaleY);
-    let backgroundSizePercent = scale * 100;
-    const selectedComponent = (globalThis as any).selectedComponent;
+    const backgroundSizePercent = scale * 100;
 
     // if (selectedComponent) {
     //   const tileWrapperComp = selectedComponent.parent();
@@ -112,17 +110,10 @@ export class ImageUploadManager {
     const backgroundPosX =
       (relativeX / (100 - (frameRect.width / containerRect.width) * 100)) * 100;
     const backgroundPosY =
-      (relativeY / (100 - (frameRect.height / containerRect.height) * 100)) *
-      100;
+      (relativeY / (100 - (frameRect.height / containerRect.height) * 100)) * 100;
 
-    const clampedBackgroundPosX = Math.max(
-      0,
-      Math.min(100, backgroundPosX || 0)
-    );
-    const clampedBackgroundPosY = Math.max(
-      0,
-      Math.min(100, backgroundPosY || 0)
-    );
+    const clampedBackgroundPosX = Math.max(0, Math.min(100, backgroundPosX || 0));
+    const clampedBackgroundPosY = Math.max(0, Math.min(100, backgroundPosY || 0));
 
     this.currentPosition = {
       x: relativeX,
@@ -137,6 +128,7 @@ export class ImageUploadManager {
     };
 
     this.imgFrame = frame;
+    this.imgContainer = container;
     return this.currentPosition;
   }
 
@@ -145,7 +137,7 @@ export class ImageUploadManager {
   }
 
   private async createImageFromUrl(image: { Id: string; Url: string }) {
-    if (!this.currentPosition || !this.imgFrame) return;
+    if (!this.currentPosition || !this.imgFrame || !this.imgContainer) return;
 
     const img = new Image();
     img.crossOrigin = "anonymous";
@@ -160,51 +152,64 @@ export class ImageUploadManager {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Get the frame dimensions from currentPosition
+    // Get the actual frame and container dimensions
     const frameWidth = this.imgFrame.clientWidth;
     const frameHeight = this.imgFrame.clientHeight;
+    const containerWidth = this.imgContainer.clientWidth;
+    const containerHeight = this.imgContainer.clientHeight;
 
     // Set canvas to the exact frame size
     canvas.width = frameWidth;
     canvas.height = frameHeight;
 
-    // Calculate the source crop dimensions based on background size and position
-    const bgSize = parseFloat(this.currentPosition.backgroundSize) / 100;
-    const [bgPosX, bgPosY] = this.currentPosition.backgroundPosition
-      .split(" ")
-      .map((pos) => parseFloat(pos) / 100);
+    // Calculate how the image is scaled to fit the container
+    const containerAspectRatio = containerWidth / containerHeight;
+    const imageAspectRatio = img.naturalWidth / img.naturalHeight;
 
-    // Calculate the source image dimensions after scaling
-    const sourceWidth = img.naturalWidth / bgSize;
-    const sourceHeight = img.naturalHeight / bgSize;
+    let scaledImageWidth, scaledImageHeight;
+    let imageOffsetX = 0,
+      imageOffsetY = 0;
 
-    // Calculate the source crop position
-    const sourceX = (img.naturalWidth - sourceWidth) * bgPosX;
-    const sourceY = (img.naturalHeight - sourceHeight) * bgPosY;
+    // Image is scaled to fit the container while maintaining aspect ratio
+    if (imageAspectRatio > containerAspectRatio) {
+      // Image is wider - scale to container height
+      scaledImageHeight = containerHeight;
+      scaledImageWidth = scaledImageHeight * imageAspectRatio;
+      imageOffsetX = (containerWidth - scaledImageWidth) / 2;
+    } else {
+      // Image is taller - scale to container width
+      scaledImageWidth = containerWidth;
+      scaledImageHeight = scaledImageWidth / imageAspectRatio;
+      imageOffsetY = (containerHeight - scaledImageHeight) / 2;
+    }
 
-    // Draw the image cropped to the frame dimensions
+    // Calculate frame position relative to the scaled image
+    const frameLeft = parseInt(this.imgFrame.style.left) || 0;
+    const frameTop = parseInt(this.imgFrame.style.top) || 0;
+
+    // Calculate the crop area in the original image coordinates
+    const scaleX = img.naturalWidth / scaledImageWidth;
+    const scaleY = img.naturalHeight / scaledImageHeight;
+
+    const cropX = Math.max(0, (frameLeft - imageOffsetX) * scaleX);
+    const cropY = Math.max(0, (frameTop - imageOffsetY) * scaleY);
+    const cropWidth = Math.min(img.naturalWidth - cropX, frameWidth * scaleX);
+    const cropHeight = Math.min(img.naturalHeight - cropY, frameHeight * scaleY);
+
+    // Draw the cropped image
     ctx.drawImage(
       img,
-      sourceX, // source x
-      sourceY, // source y
-      sourceWidth, // source width
-      sourceHeight, // source height
+      cropX, // source x
+      cropY, // source y
+      cropWidth, // source width
+      cropHeight, // source height
       0, // destination x
       0, // destination y
       frameWidth, // destination width
       frameHeight // destination height
     );
-    // Apply brightness enhancement
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    const data = imageData.data;
-    for (let i = 0; i < data.length; i += 4) {
-      data[i] = Math.min(255, data[i] * 1.1); // red
-      data[i + 1] = Math.min(255, data[i + 1] * 1.1); // green
-      data[i + 2] = Math.min(255, data[i + 2] * 1.1); // blue
-    }
-    ctx.putImageData(imageData, 0, 0);
 
-    const croppedDataUrl = canvas.toDataURL("image/jpeg");
+    const croppedDataUrl = canvas.toDataURL("image/jpeg", 0.9); // Added quality parameter
     const mediaSize = Math.round(croppedDataUrl.length * (3 / 4) - 2);
     const uniqueId = Date.now().toString();
     const uniqueFileName = `cropped-image-${uniqueId}.jpeg`;
@@ -259,10 +264,7 @@ export class ImageUploadManager {
     );
   }
 
-  private async saveSingleImage(
-    image: { Id: string; Url: string },
-    opacityValue: number
-  ) {
+  private async saveSingleImage(image: { Id: string; Url: string }, opacityValue: number) {
     const selectedComponent = (globalThis as any).selectedComponent;
     if (!selectedComponent) return;
     selectedComponent.getEl().style.removeProperty("background-color");
@@ -281,9 +283,7 @@ export class ImageUploadManager {
     if (this.currentPosition) {
       styleProperties["background-size"] = "cover";
       styleProperties["background-position"] = "center";
-      styleProperties[
-        "background-color"
-      ] = `rgba(0, 0, 0, ${opacityValue}) !important`;
+      styleProperties["background-color"] = `rgba(0, 0, 0, ${opacityValue}) !important`;
     }
 
     selectedComponent.addStyle(styleProperties);
@@ -332,26 +332,18 @@ export class ImageUploadManager {
       }
 
       const tileAttributes = this.updateInfoTileAttributes(rowId, tileId);
-      const tileProperties = new TileProperties(
-        selectedComponent,
-        tileAttributes
-      );
+      const tileProperties = new TileProperties(selectedComponent, tileAttributes);
       tileProperties.setTileAttributes();
     }
   }
 
-  private updateInfoTileAttributes(
-    rowComponentId: any,
-    tileWrapperId: any
-  ): any {
+  private updateInfoTileAttributes(rowComponentId: any, tileWrapperId: any): any {
     if (!rowComponentId || !tileWrapperId) return;
     const tileInfoSectionAttributes: InfoType = (
       globalThis as any
     ).infoContentMapper.getInfoContent(rowComponentId);
 
-    return tileInfoSectionAttributes?.Tiles?.find(
-      (tile: any) => tile.Id === tileWrapperId
-    );
+    return tileInfoSectionAttributes?.Tiles?.find((tile: any) => tile.Id === tileWrapperId);
   }
 
   private updateInfoCtaButtonImage(image: { Id: string; Url: string }) {
@@ -378,9 +370,7 @@ export class ImageUploadManager {
     if (!imageIds || imageIds.length === 0) return;
 
     try {
-      const deletePromises = imageIds.map((id) =>
-        this.toolboxService.deleteMedia(id)
-      );
+      const deletePromises = imageIds.map((id) => this.toolboxService.deleteMedia(id));
       await Promise.all(deletePromises);
       await this.refreshEditorPages();
     } catch (error) {
@@ -391,52 +381,52 @@ export class ImageUploadManager {
 
   public async refreshEditorPages() {
     const iframes = document.querySelectorAll(
-        ".mobile-frame iframe"
+      ".mobile-frame iframe"
     ) as NodeListOf<HTMLIFrameElement>;
     if (!iframes.length) return;
 
     iframes.forEach((iframe) => {
-        try {
-            const iframeDoc = this.getIframeDocument(iframe);
-            if (iframeDoc) {
-                // Handle img tags
-                const imgTags = iframeDoc.querySelectorAll('img') as NodeListOf<HTMLImageElement>;
-                imgTags?.forEach(img => {
-                    if (img.src) {
-                        const cleanUrl = img.src.split('?')[0];
-                        img.src = `${cleanUrl}?t=${Date.now()}`;
-                    }
-                });
-
-                // Handle CSS-defined background images (classes and IDs)
-                const allElements = iframeDoc.querySelectorAll('*') as NodeListOf<HTMLDivElement>;
-                allElements.forEach((element: HTMLDivElement) => {
-                    const computedStyle = iframe.contentWindow?.getComputedStyle(element);
-                    if (computedStyle) {
-                        const bgImage = computedStyle.backgroundImage;
-                        if (bgImage && bgImage !== 'none' && bgImage.includes('url(')) {
-                            const match = bgImage.match(/url\(['"]?(.*?)['"]?\)/);
-                            if (match && match[1]) {
-                                const cleanUrl = match[1].split('?')[0];
-                                // Override with inline style to force refresh
-                                element.style.setProperty('background-image', `url(${cleanUrl}?t=${Date.now()})`);
-
-                                this.updateTileAttribute(element)
-                            }
-                        }
-                    }
-                });
+      try {
+        const iframeDoc = this.getIframeDocument(iframe);
+        if (iframeDoc) {
+          // Handle img tags
+          const imgTags = iframeDoc.querySelectorAll("img") as NodeListOf<HTMLImageElement>;
+          imgTags?.forEach((img) => {
+            if (img.src) {
+              const cleanUrl = img.src.split("?")[0];
+              img.src = `${cleanUrl}?t=${Date.now()}`;
             }
-        } catch (error) {
-            console.error("Error processing iframe content:", error);
+          });
+
+          // Handle CSS-defined background images (classes and IDs)
+          const allElements = iframeDoc.querySelectorAll("*") as NodeListOf<HTMLDivElement>;
+          allElements.forEach((element: HTMLDivElement) => {
+            const computedStyle = iframe.contentWindow?.getComputedStyle(element);
+            if (computedStyle) {
+              const bgImage = computedStyle.backgroundImage;
+              if (bgImage && bgImage !== "none" && bgImage.includes("url(")) {
+                const match = bgImage.match(/url\(['"]?(.*?)['"]?\)/);
+                if (match && match[1]) {
+                  const cleanUrl = match[1].split("?")[0];
+                  // Override with inline style to force refresh
+                  element.style.setProperty("background-image", `url(${cleanUrl}?t=${Date.now()})`);
+
+                  this.updateTileAttribute(element);
+                }
+              }
+            }
+          });
         }
+      } catch (error) {
+        console.error("Error processing iframe content:", error);
+      }
     });
-}
+  }
 
   private updateTileAttribute(tileEl: HTMLElement) {
     const tileWrapper = tileEl.parentElement as HTMLDivElement;
-    if (tileWrapper && tileWrapper.getAttribute('data-gjs-type') === 'tile-wrapper') {
-        const updates = {
+    if (tileWrapper && tileWrapper.getAttribute("data-gjs-type") === "tile-wrapper") {
+      const updates = {
         BGImageUrl: "",
         Opacity: "0",
         BGPosition: "",
@@ -454,7 +444,7 @@ export class ImageUploadManager {
         }
       }
     }
-}
+  }
 
   private getIframeDocument(iframe: HTMLIFrameElement): Document | null {
     try {
@@ -484,9 +474,7 @@ export class ImageUploadManager {
   private isMediaSelected(mediaId: string): boolean {
     try {
       const existingImages = this.getExistingImages();
-      return existingImages.some(
-        (image) => image.InfoImageId === `id-${mediaId}`
-      );
+      return existingImages.some((image) => image.InfoImageId === `id-${mediaId}`);
     } catch (error) {
       console.error("Error checking selected media:", error);
       return false;
@@ -610,10 +598,7 @@ export class ImageUploadManager {
     return file;
   }
 
-  private async compressImage(
-    file: File,
-    maxSizeInBytes: number
-  ): Promise<File> {
+  private async compressImage(file: File, maxSizeInBytes: number): Promise<File> {
     return new Promise((resolve) => {
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d")!;

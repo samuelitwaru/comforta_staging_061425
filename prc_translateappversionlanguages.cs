@@ -48,24 +48,28 @@ namespace GeneXus.Programs {
                            Guid aP1_activePageId ,
                            string aP2_languageFrom ,
                            GxSimpleCollection<string> aP3_LanguageToCollection ,
-                           out SdtSDT_Error aP4_error )
+                           out string aP4_result ,
+                           out SdtSDT_Error aP5_error )
       {
          this.AV8AppVersionId = aP0_AppVersionId;
          this.AV18activePageId = aP1_activePageId;
          this.AV9languageFrom = aP2_languageFrom;
          this.AV19LanguageToCollection = aP3_LanguageToCollection;
+         this.AV21result = "" ;
          this.AV11error = new SdtSDT_Error(context) ;
          initialize();
          ExecuteImpl();
-         aP4_error=this.AV11error;
+         aP4_result=this.AV21result;
+         aP5_error=this.AV11error;
       }
 
       public SdtSDT_Error executeUdp( Guid aP0_AppVersionId ,
                                       Guid aP1_activePageId ,
                                       string aP2_languageFrom ,
-                                      GxSimpleCollection<string> aP3_LanguageToCollection )
+                                      GxSimpleCollection<string> aP3_LanguageToCollection ,
+                                      out string aP4_result )
       {
-         execute(aP0_AppVersionId, aP1_activePageId, aP2_languageFrom, aP3_LanguageToCollection, out aP4_error);
+         execute(aP0_AppVersionId, aP1_activePageId, aP2_languageFrom, aP3_LanguageToCollection, out aP4_result, out aP5_error);
          return AV11error ;
       }
 
@@ -73,15 +77,18 @@ namespace GeneXus.Programs {
                                  Guid aP1_activePageId ,
                                  string aP2_languageFrom ,
                                  GxSimpleCollection<string> aP3_LanguageToCollection ,
-                                 out SdtSDT_Error aP4_error )
+                                 out string aP4_result ,
+                                 out SdtSDT_Error aP5_error )
       {
          this.AV8AppVersionId = aP0_AppVersionId;
          this.AV18activePageId = aP1_activePageId;
          this.AV9languageFrom = aP2_languageFrom;
          this.AV19LanguageToCollection = aP3_LanguageToCollection;
+         this.AV21result = "" ;
          this.AV11error = new SdtSDT_Error(context) ;
          SubmitImpl();
-         aP4_error=this.AV11error;
+         aP4_result=this.AV21result;
+         aP5_error=this.AV11error;
       }
 
       protected override void ExecutePrivate( )
@@ -95,10 +102,10 @@ namespace GeneXus.Programs {
             cleanup();
             if (true) return;
          }
-         AV21GXV1 = 1;
-         while ( AV21GXV1 <= AV19LanguageToCollection.Count )
+         AV22GXV1 = 1;
+         while ( AV22GXV1 <= AV19LanguageToCollection.Count )
          {
-            AV10LanguageTo = ((string)AV19LanguageToCollection.Item(AV21GXV1));
+            AV10LanguageTo = ((string)AV19LanguageToCollection.Item(AV22GXV1));
             AV20SDT_InfoPageActivePage = new GXBaseCollection<SdtSDT_InfoPageTranslation>( context, "SDT_InfoPageTranslation", "Comforta_version2");
             AV13SDT_InfoPageTranslationCollection = new GXBaseCollection<SdtSDT_InfoPageTranslation>( context, "SDT_InfoPageTranslation", "Comforta_version2");
             /* Using cursor P00GX2 */
@@ -128,8 +135,9 @@ namespace GeneXus.Programs {
             pr_default.close(0);
             new prc_addappversionpagetodynamictransalation3(context ).execute(  AV20SDT_InfoPageActivePage, ref  AV9languageFrom, ref  AV10LanguageTo) ;
             new prc_addappversionpagetodynamictransalation3(context).executeSubmit(  AV13SDT_InfoPageTranslationCollection, ref  AV9languageFrom, ref  AV10LanguageTo) ;
-            AV21GXV1 = (int)(AV21GXV1+1);
+            AV22GXV1 = (int)(AV22GXV1+1);
          }
+         AV21result = context.GetMessage( "success", "");
          cleanup();
       }
 
@@ -145,6 +153,7 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
+         AV21result = "";
          AV11error = new SdtSDT_Error(context);
          AV12SDT_Error = new SdtSDT_Error(context);
          AV10LanguageTo = "";
@@ -170,10 +179,11 @@ namespace GeneXus.Programs {
          /* GeneXus formulas. */
       }
 
-      private int AV21GXV1 ;
+      private int AV22GXV1 ;
       private string AV9languageFrom ;
       private string AV10LanguageTo ;
       private string A518PageStructure ;
+      private string AV21result ;
       private string A525PageType ;
       private Guid AV8AppVersionId ;
       private Guid AV18activePageId ;
@@ -194,7 +204,8 @@ namespace GeneXus.Programs {
       private string[] P00GX2_A518PageStructure ;
       private SdtTrn_AppVersion AV17BC_Trn_AppVersion ;
       private SdtSDT_InfoPageTranslation AV14SDT_InfoPageTranslation ;
-      private SdtSDT_Error aP4_error ;
+      private string aP4_result ;
+      private SdtSDT_Error aP5_error ;
    }
 
    public class prc_translateappversionlanguages__default : DataStoreHelperBase, IDataStoreHelper

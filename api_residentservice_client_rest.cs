@@ -1722,7 +1722,8 @@ namespace GeneXus.Programs {
                                             Guid aP1_ActivePageId ,
                                             string aP2_languageFrom ,
                                             GxSimpleCollection<string> aP3_LanguageToCollection ,
-                                            out SdtSDT_Error aP4_error )
+                                            out string aP4_result ,
+                                            out SdtSDT_Error aP5_error )
       {
          restCliTranslateAppVersion = new GXRestAPIClient();
          if ( restLocation == null )
@@ -1742,11 +1743,13 @@ namespace GeneXus.Programs {
             gxProperties.ErrorCode = restCliTranslateAppVersion.ErrorCode;
             gxProperties.ErrorMessage = restCliTranslateAppVersion.ErrorMessage;
             gxProperties.StatusCode = restCliTranslateAppVersion.StatusCode;
-            aP4_error = new SdtSDT_Error();
+            aP4_result = "";
+            aP5_error = new SdtSDT_Error();
          }
          else
          {
-            aP4_error = restCliTranslateAppVersion.GetBodySdt<SdtSDT_Error>("error");
+            aP4_result = restCliTranslateAppVersion.GetBodyString("result");
+            aP5_error = restCliTranslateAppVersion.GetBodySdt<SdtSDT_Error>("error");
          }
          /* TranslateAppVersion Constructor */
       }
@@ -2674,6 +2677,7 @@ namespace GeneXus.Programs {
          aP1_AppVersion = new SdtSDT_AppVersion();
          restCliDeleteAppVersion = new GXRestAPIClient();
          restCliTranslateAppVersion = new GXRestAPIClient();
+         aP4_result = "";
          restCliSavePageV2 = new GXRestAPIClient();
          restCliSavePageThumbnail = new GXRestAPIClient();
          restCliPublishAppVersion = new GXRestAPIClient();
@@ -2843,6 +2847,7 @@ namespace GeneXus.Programs {
       protected SdtSDT_Error aP4_error ;
       protected SdtSDT_AppVersion aP2_AppVersion ;
       protected SdtSDT_AppVersion aP1_AppVersion ;
+      protected string aP4_result ;
       protected SdtSDT_AppVersion_PagesItem aP2_MenuPage ;
       protected SdtSDT_InfoContent aP2_SDT_InfoContent ;
       protected SdtSDT_AppVersion_PagesItem aP5_MenuPage ;

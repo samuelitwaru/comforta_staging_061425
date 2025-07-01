@@ -83,7 +83,7 @@ export class IconListCategories {
     searchDiv.className = "icon-search-container tb-hide";
     this.searchInput = document.createElement("input");
     this.searchInput.type = "text";
-    this.searchInput.placeholder = "Search icons";
+    this.searchInput.placeholder = i18n.t("sidebar.icon_search_text");
     this.searchInput.className = "search-input";
 
     const closeSearchButton = document.createElement("button");

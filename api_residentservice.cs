@@ -1414,7 +1414,8 @@ namespace GeneXus.Programs {
                                             Guid aP1_ActivePageId ,
                                             string aP2_languageFrom ,
                                             GxSimpleCollection<string> aP3_LanguageToCollection ,
-                                            out SdtSDT_Error aP4_error )
+                                            out string aP4_result ,
+                                            out SdtSDT_Error aP5_error )
       {
          this.AV92AppVersionId = aP0_AppVersionId;
          this.AV208ActivePageId = aP1_ActivePageId;
@@ -1423,8 +1424,9 @@ namespace GeneXus.Programs {
          AV69error = new SdtSDT_Error(context);
          initialize();
          /* TranslateAppVersion Constructor */
-         new prc_translateappversionlanguages(context ).execute(  AV92AppVersionId,  AV208ActivePageId,  AV209languageFrom,  AV210LanguageToCollection, out  AV69error) ;
-         aP4_error=this.AV69error;
+         new prc_translateappversionlanguages(context ).execute(  AV92AppVersionId,  AV208ActivePageId,  AV209languageFrom,  AV210LanguageToCollection, out  AV17result, out  AV69error) ;
+         aP4_result=this.AV17result;
+         aP5_error=this.AV69error;
       }
 
       public void gxep_savepagev2( Guid aP0_AppVersionId ,
@@ -2082,6 +2084,7 @@ namespace GeneXus.Programs {
       protected SdtSDT_AppVersion aP2_AppVersion ;
       protected SdtSDT_AppVersion aP1_AppVersion ;
       protected GxSimpleCollection<string> AV210LanguageToCollection ;
+      protected string aP4_result ;
       protected SdtSDT_AppVersion_PagesItem AV97MenuPage ;
       protected SdtSDT_AppVersion_PagesItem aP2_MenuPage ;
       protected SdtSDT_InfoContent AV211SDT_InfoContent ;

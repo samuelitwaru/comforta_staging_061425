@@ -46,6 +46,7 @@ export class NavbarButtons {
     });
   }
 
+
   render(container: HTMLElement) {
     container.appendChild(this.container);
   }

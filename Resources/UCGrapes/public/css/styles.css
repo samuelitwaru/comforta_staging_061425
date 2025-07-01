@@ -1573,7 +1573,9 @@ div#cta-selected-actions {
   font-weight: 500;
   text-transform: uppercase;
   border-radius: 4px;
-  transition: background-color 0.3s, color 0.3s;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 }
 
 .tb-tabs .tb-tab-button:hover {
@@ -1785,7 +1787,9 @@ div#cta-selected-actions {
   opacity: 0;
   cursor: pointer;
   margin-top: 40px;
-  transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+  transition:
+    color 0.3s ease,
+    background-color 0.3s ease; /* Smooth transition */
 }
 
 .file-info .file-info-details {
@@ -1971,7 +1975,9 @@ div#cta-selected-actions {
   color: #333;
   cursor: pointer;
   text-align: center;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  transition:
+    background-color 0.3s,
+    box-shadow 0.3s;
 }
 
 .context-menu ul li:hover {
@@ -2649,7 +2655,9 @@ details .tb_debug_details-content {
   z-index: 9;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.2s, visibility 0.2s;
+  transition:
+    opacity 0.2s,
+    visibility 0.2s;
   border-radius: 9px;
   margin-bottom: 10px;
   width: 180px;
@@ -2687,7 +2695,9 @@ details .tb_debug_details-content {
   cursor: pointer;
   z-index: 10;
   color: #303030;
-  transition: opacity 0.2s, visibility 0.2s;
+  transition:
+    opacity 0.2s,
+    visibility 0.2s;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -3372,6 +3382,7 @@ input[type="range"]::-webkit-slider-thumb {
   scrollbar-width: thin;
   scrollbar-color: #ccc transparent;
   max-height: 300px;
+  min-height: 150px;
 }
 
 .grid-image {
@@ -3408,7 +3419,10 @@ input[type="range"]::-webkit-slider-thumb {
   opacity: 0;
   cursor: pointer;
   margin: 0;
-  transition: opacity 0.3s, background 0.3s, color 0.3s;
+  transition:
+    opacity 0.3s,
+    background 0.3s,
+    color 0.3s;
 }
 /* Show icons on hover */
 .file-item:hover .add-image,
@@ -3695,3 +3709,77 @@ input[type="range"]::-webkit-slider-thumb {
   display: none;
 }
 
+/* translationf frame */
+.translate-page-frame {
+  flex-shrink: 0;
+  width: 50vw;
+  height: 90vh;
+  max-width: 272px;
+  max-height: 578px;
+  background-color: #fdfdfd;
+  border-radius: 20px;
+  position: relative;
+  border: #9f9d9d solid 5px;
+  min-height: 400px;
+}
+
+.translate-container {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  background-color: #efeeec;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 460px;
+}
+
+.translated-tile-row {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  gap: 0.5rem;
+  box-sizing: border-box;
+}
+
+.translated-tile {
+  background-color: #8b4513;
+  color: #ffffff;
+  align-items: center;
+  display: flex;
+  height: 6rem;
+  border-radius: 8px;
+  justify-content: left;
+  min-width: calc(76px - 0.3rem);
+  max-width: 100%;
+  flex: 1 1 30%;
+  padding: 0.4rem;
+}
+
+.translate-container::-webkit-scrollbar {
+  width: 2px !important;
+}
+
+.translate-container::-webkit-scrollbar-track {
+  background: #f1f1f1 !important;
+}
+
+.translate-container::-webkit-scrollbar-thumb {
+  background: #222f54a4 !important;
+}
+
+.translated-description p {
+  display: block;
+  margin-block: 0;
+  color: #000000;
+}
+
+.translated-images img {
+  max-height: 156px;
+  min-height: 156px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 13px;
+}

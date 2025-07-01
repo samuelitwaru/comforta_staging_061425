@@ -15,16 +15,12 @@ export class InfoContentMapper {
     const storageKey = `data-${this.pageId}`;
     localStorage.setItem(storageKey, JSON.stringify(data));
     this.historyManager.addState(data);
-    console.log('saveData from infoMapper called');
     // call auto save to DB:
     const toolboxManager = new ToolboxManager();
     toolboxManager.savePages();
   }
 
   public contentRow(content: InfoType): any {
-    const data: any = JSON.parse(
-      localStorage.getItem(`data-${this.pageId}`) || "{}"
-    );
     const row = {
       InfoId: content.InfoId,
       InfoType: content.InfoType || "",
@@ -186,7 +182,6 @@ export class InfoContentMapper {
       // refresh updated page structure
       new ToolboxManager().applyNewState(data, this.pageId);
 
-      
       this.saveData(data);
     }
   }
@@ -234,6 +229,7 @@ export class InfoContentMapper {
       // Insert the dragged tile at the specified index
       targetSection.Tiles.splice(tileDestinationIndex, 0, {
         ...draggedTile,
+        Size: 0, // Reset size to default
         // Id: randomIdGenerator(8), // Generate a new ID for the moved tile
       });
 

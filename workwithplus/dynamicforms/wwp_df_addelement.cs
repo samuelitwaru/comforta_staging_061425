@@ -3603,7 +3603,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          AssignProp(sPrefix, false, divLayoutmaintable_Internalname, "Class", divLayoutmaintable_Class, true);
          lblVisibleconditionhelpicon_Caption = StringUtil.Format( "<i class='BootstrapTooltipLeft fas fa-circle-info' title='%1'></i>", context.GetMessage( "VisibleConditionHelpText", ""), "", "", "", "", "", "", "", "");
          AssignProp(sPrefix, false, lblVisibleconditionhelpicon_Internalname, "Caption", lblVisibleconditionhelpicon_Caption, true);
-         lblReferencieidhelpicon_Caption = StringUtil.Format( "<i class='BootstrapTooltipLeft fas fa-circle-info' title='%1'></i>", context.GetMessage( "The \"Reference id\" is used to reference this field in the visible conditions or validation of other fields of the form. If this field will not be referenced, it is recommended to leave it blank.", ""), "", "", "", "", "", "", "", "");
+         lblReferencieidhelpicon_Caption = StringUtil.Format( "<i class='BootstrapTooltipLeft fas fa-circle-info' title='%1'></i>", context.GetMessage( "I18N_REFERENCEIDHELPICON", ""), "", "", "", "", "", "", "", "");
          AssignProp(sPrefix, false, lblReferencieidhelpicon_Internalname, "Caption", lblReferencieidhelpicon_Caption, true);
          this.executeExternalObjectMethod(sPrefix, false, "WWPActions", "Mask_Apply", new Object[] {(string)edtavWwpformelementreferenceid_Internalname,(string)"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",(bool)false,(bool)false}, false);
          /* Execute user subroutine: 'ATTRIBUTESSECURITYCODE' */
@@ -5861,7 +5861,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025630936831", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257117391244", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -5877,7 +5877,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("workwithplus/dynamicforms/wwp_df_addelement.js", "?2025630936834", false, true);
+         context.AddJavascriptSource("workwithplus/dynamicforms/wwp_df_addelement.js", "?20257117391247", false, true);
          context.AddJavascriptSource("shared/HistoryManager/HistoryManager.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/json2005.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/rsh.js", "", false, true);

@@ -57,6 +57,7 @@ button {
 }
 
 .frame-container::-webkit-scrollbar,
+.translate-container::-webkit-scrollbar,
 .content-frame-container::-webkit-scrollbar,
 .form-frame-container::-webkit-scrollbar {
   width: 2px;
@@ -68,6 +69,7 @@ button {
 
 .frame-container::-webkit-scrollbar-thumb,
 .content-frame-container::-webkit-scrollbar-thumb,
+.translate-container::-webkit-scrollbar-thumb,
 .form-frame-container::-webkit-scrollbar-thumb {
   background: #222f54a4;
 }

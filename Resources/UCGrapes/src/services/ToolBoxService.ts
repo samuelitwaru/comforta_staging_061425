@@ -410,6 +410,19 @@ export class ToolBoxService {
     });
   }
 
+  async TranslateSinglePage(
+    pageId: string,
+    language: string
+  ) {
+    return await this.fetchAPI("/api/toolbox/v2/get-translated-page", {
+      method: "POST",
+      body: JSON.stringify({
+        DynamicTranslationPrimaryKey: pageId,
+        Language: language,
+      }),
+    });
+  }
+
   // Media API methods
   async getMediaFiles() {
     const response = await this.fetchAPI("/api/toolbox/media", {}, true);

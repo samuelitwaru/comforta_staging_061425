@@ -172,14 +172,53 @@ export class EditorEvents {
     viewEl.addEventListener("mouseover", this.handleMouseOver.bind(this));
 
     // Document-level events for resize functionality
-    document.addEventListener(
-      "mousemove",
-      this.handleDocumentMouseMove.bind(this)
-    );
+    document.addEventListener("mousemove", this.handleDocumentMouseMove.bind(this));
     document.addEventListener("mouseup", this.handleDocumentMouseUp.bind(this));
+    document.addEventListener("mouseover", this.handleDocumentMouseOver.bind(this));
+    document.addEventListener("mouseout", this.handleDocumentMouseOut.bind(this));
+    document.addEventListener("mouseenter", this.handleDocumentMouseEnter.bind(this));
+    document.addEventListener("mouseleave", this.handleDocumentMouseLeave.bind(this));
+    document.addEventListener("pointerover", this.handleDocumentPointerOver.bind(this));
+    document.addEventListener("pointerout", this.handleDocumentPointerOut.bind(this));
+    document.addEventListener("pointerenter", this.handleDocumentPointerEnter.bind(this));
+    document.addEventListener("pointerleave", this.handleDocumentPointerLeave.bind(this));
+  }
+
+  private handleDocumentMouseOver(e: MouseEvent): void {
+    // eslint-disable-next-line no-useless-return
+    if (this.disableEditor()) return;
+  }
+
+  private handleDocumentMouseOut(e: MouseEvent): void {
+    if (this.disableEditor()) return;
+  }
+
+  private handleDocumentMouseEnter(e: MouseEvent): void {
+    if (this.disableEditor()) return;
+  }
+
+  private handleDocumentMouseLeave(e: MouseEvent): void {
+    if (this.disableEditor()) return;
+  }
+
+  private handleDocumentPointerOver(e: MouseEvent): void {
+    if (this.disableEditor()) return;
+  }
+
+  private handleDocumentPointerOut(e: MouseEvent): void {
+    if (this.disableEditor()) return;
+  }
+
+  private handleDocumentPointerEnter(e: MouseEvent): void {
+    if (this.disableEditor()) return;
+  }
+
+  private handleDocumentPointerLeave(e: MouseEvent): void {
+    if (this.disableEditor()) return;
   }
 
   private handleMouseDown(e: MouseEvent): void {
+    if (this.disableEditor()) return;
     const targetElement = e.target as Element;
 
     if (targetElement.closest(".tile-resize-button")) {
@@ -201,14 +240,9 @@ export class EditorEvents {
 
   private startResize(e: MouseEvent, targetElement: Element): void {
     this.resizeState.isResizing = true;
-    this.resizeState.resizingRow = targetElement.closest(
-      ".template-wrapper"
-    ) as HTMLDivElement;
-    this.resizeState.resizingRowParent = targetElement.closest(
-      ".container-row"
-    ) as HTMLDivElement;
-    this.resizeState.resizingRowHeight =
-      this.resizeState.resizingRow.offsetHeight;
+    this.resizeState.resizingRow = targetElement.closest(".template-wrapper") as HTMLDivElement;
+    this.resizeState.resizingRowParent = targetElement.closest(".container-row") as HTMLDivElement;
+    this.resizeState.resizingRowHeight = this.resizeState.resizingRow.offsetHeight;
     this.resizeState.resizeYStart = e.clientY;
     this.resizeState.initialHeight = this.resizeState.resizingRow.offsetHeight;
 
@@ -269,14 +303,10 @@ export class EditorEvents {
   }
 
   private setupResizeUI(targetElement: Element): void {
-    const frameContainer = targetElement.closest(
-      "#frame-container"
-    ) as HTMLDivElement;
+    const frameContainer = targetElement.closest("#frame-container") as HTMLDivElement;
 
     // Setup frame children cursors
-    this.resizeState.frameChildren = Array.from(
-      frameContainer?.querySelectorAll("*")
-    ).filter(
+    this.resizeState.frameChildren = Array.from(frameContainer?.querySelectorAll("*")).filter(
       (child): child is HTMLDivElement => child !== this.resizeState.resizingRow
     );
 
@@ -293,9 +323,7 @@ export class EditorEvents {
     // Setup info section spacer
     this.setupInfoSectionSpacer(targetElement);
 
-    this.resizeState.templateBlock = targetElement.closest(
-      ".template-block"
-    ) as HTMLDivElement;
+    this.resizeState.templateBlock = targetElement.closest(".template-block") as HTMLDivElement;
   }
 
   private createResizeOverlay(): void {
@@ -333,9 +361,7 @@ export class EditorEvents {
   private setupInfoSectionSpacer(targetElement: Element): void {
     this.resizeState.infoSectionSpacer = targetElement
       ?.closest(".container-row")
-      ?.nextElementSibling?.closest(
-        ".info-section-spacing-container"
-      ) as HTMLDivElement | null;
+      ?.nextElementSibling?.closest(".info-section-spacing-container") as HTMLDivElement | null;
 
     if (this.resizeState.infoSectionSpacer) {
       this.resizeState.infoSectionSpacer.style.pointerEvents = "none";
@@ -343,6 +369,7 @@ export class EditorEvents {
   }
 
   private handleMouseMove(e: MouseEvent): void {
+    if (this.disableEditor()) return;
     if (this.resizeState.isDragging) {
       if (e.target as Element) {
         const targetElement = e.target as Element;
@@ -358,12 +385,14 @@ export class EditorEvents {
   }
 
   private handleMouseUp(e: MouseEvent): void {
+    if (this.disableEditor()) return;
     if (this.resizeState.isDragging) {
       this.resizeState.isDragging = false;
     }
   }
 
   private handleDocumentMouseMove(e: MouseEvent): void {
+    if (this.disableEditor()) return;
     if (!this.resizeState.isResizing || !this.resizeState.resizingRow) return;
 
     this.performResize(e);
@@ -413,6 +442,7 @@ export class EditorEvents {
   }
 
   private handleDocumentMouseUp(e: MouseEvent): void {
+    if (this.disableEditor()) return;
     if (!this.resizeState.isResizing || !this.resizeState.resizingRow) return;
 
     this.finishResize();
@@ -508,10 +538,7 @@ export class EditorEvents {
   private resetAffectedElementCursors(): void {
     if (this.resizeState.affectedElements && this.resizeState.originalCursors) {
       this.resizeState.affectedElements.forEach((el, i) => {
-        if (
-          this.resizeState.originalCursors &&
-          this.resizeState.originalCursors[i]
-        ) {
+        if (this.resizeState.originalCursors && this.resizeState.originalCursors[i]) {
           el.style.cursor = this.resizeState.originalCursors[i];
         } else {
           el.style.removeProperty("cursor");
@@ -561,9 +588,7 @@ export class EditorEvents {
     modal.classList.add("tb-modal");
     modal.style.display = "flex";
 
-    const tileComp = selectedComponent.closest(
-      '[data-gjs-type="info-tiles-section"]'
-    );
+    const tileComp = selectedComponent.closest('[data-gjs-type="info-tiles-section"]');
     const modalContent = new ImageUploadManager("tile", tileComp?.getId());
     modalContent.render(modal);
 
@@ -595,10 +620,7 @@ export class EditorEvents {
     if (currentSelected) {
       const clickedComponent = this.getComponentFromElement(targetElement);
 
-      if (
-        clickedComponent &&
-        clickedComponent.getId() === currentSelected.getId()
-      ) {
+      if (clickedComponent && clickedComponent.getId() === currentSelected.getId()) {
         this.retriggerSelection(currentSelected);
         return;
       }
@@ -697,6 +719,8 @@ export class EditorEvents {
     }
 
     this.uiManager.activateEditor(this.frameId);
+    this.uiManager.activateEditor(this.frameId);    
+    if (this.disableEditor()) return;
     this.uiManager.clearAllMenuContainers();
     this.uiManager.clearAllDropDowns();
     (globalThis as any).eventTarget = targetElement;
@@ -705,16 +729,14 @@ export class EditorEvents {
     this.uiManager.openMenu(e);
     this.uiManager.initContentDataUi(e, this.pageData);
     this.uiManager.activateEditor(this.frameId);
-
     this.uiManager.handleInfoSectionHover(e);
   }
 
   private handleMouseOver(e: MouseEvent): void {
+    if (this.disableEditor()) return;
     const targetElement = e.target as Element;
 
-    const infoSection = targetElement.closest(
-      ".info-section-spacing-container"
-    ) as HTMLDivElement;
+    const infoSection = targetElement.closest(".info-section-spacing-container") as HTMLDivElement;
 
     if (infoSection && infoSection.style.height !== "3.2rem") {
       this.uiManager.clearAllMenuContainers(true);
@@ -722,14 +744,24 @@ export class EditorEvents {
     }
   }
 
+  private disableEditor(): boolean {
+    const isTranslationMode = (globalThis as any).isTranslationMode;
+    if (isTranslationMode === true) {
+      this.setEditorToReadOnly();
+      return isTranslationMode;
+    }
+    return false;
+  }
+
+  private setEditorToReadOnly(): void {
+    const readOnlyElements = this.editor?.getWrapper()?.getEl().querySelectorAll(".readonly-mode") as NodeListOf<HTMLElement>;
+    readOnlyElements?.forEach((element: HTMLElement) => {
+      element.style.visibility = 'hidden';
+    });
+  }
+
   private initializePostLoadComponents(): void {
-    new EditorThumbs(
-      this.frameId,
-      this.pageId,
-      this.editor,
-      this.pageData,
-      this.isHome
-    );
+    new EditorThumbs(this.frameId, this.pageId, this.editor, this.pageData, this.isHome);
 
     this.uiManager.frameEventListener();
     this.uiManager.activateNavigators();
@@ -749,24 +781,30 @@ export class EditorEvents {
   }
 
   private onDragAndDrop(): void {
+    console.log('hello dargging');
+    if (this.disableEditor()) return;
     let sourceComponent: any;
     let destinationComponent: any;
 
     // When drag starts
-    this.editor.on('component:drag:start', (model: any) => {
+    this.editor.on("component:drag:start", (model: any) => {
       sourceComponent = model.parent;
-      if (model.target.get('type') !== 'tile-wrapper') return;
+      if (model.target.get("type") !== "tile-wrapper") return;
 
-      const allTileContainers = this.editor.getWrapper().find('[data-gjs-type="info-tiles-section"]');
+      const allTileContainers = this.editor
+        .getWrapper()
+        .find('[data-gjs-type="info-tiles-section"]');
       allTileContainers.forEach((container: any) => {
-        const tiles = container.components().filter((comp: any) => comp.get('type') === 'tile-wrapper');
+        const tiles = container
+          .components()
+          .filter((comp: any) => comp.get("type") === "tile-wrapper");
         const isSource = model.parent && model.parent.getId() === container.getId();
         if (tiles.length >= 3 && !isSource) {
-          container.set('droppable', false);
-          container.addAttributes({ 'data-gjs-droppable': 'false' });
+          container.set("droppable", false);
+          container.addAttributes({ "data-gjs-droppable": "false" });
         } else {
-          container.set('droppable', "[data-gjs-type='tile-wrapper']");
-          container.addAttributes({ 'data-gjs-droppable': "[data-gjs-type='tile-wrapper']" });
+          container.set("droppable", "[data-gjs-type='tile-wrapper']");
+          container.addAttributes({ "data-gjs-droppable": "[data-gjs-type='tile-wrapper']" });
         }
       });
     });
@@ -776,10 +814,12 @@ export class EditorEvents {
       destinationComponent = model.parent;
 
       // reset droppable state for all tile containers
-      const allTileContainers = this.editor.getWrapper().find('[data-gjs-type="info-tiles-section"]');
+      const allTileContainers = this.editor
+        .getWrapper()
+        .find('[data-gjs-type="info-tiles-section"]');
       allTileContainers.forEach((container: any) => {
-        container.set('droppable', "[data-gjs-type='tile-wrapper']");
-        container.addAttributes({ 'data-gjs-droppable': "[data-gjs-type='tile-wrapper']" });
+        container.set("droppable", "[data-gjs-type='tile-wrapper']");
+        container.addAttributes({ "data-gjs-droppable": "[data-gjs-type='tile-wrapper']" });
       });
 
       this.uiManager.handleDragEnd(model, sourceComponent, destinationComponent);
@@ -787,14 +827,8 @@ export class EditorEvents {
   }
 
   private onSelected(): void {
-    this.editor.on(
-      "component:selected",
-      this.handleComponentSelected.bind(this)
-    );
-    this.editor.on(
-      "component:deselected",
-      this.handleComponentDeselected.bind(this)
-    );
+    this.editor.on("component:selected", this.handleComponentSelected.bind(this));
+    this.editor.on("component:deselected", this.handleComponentDeselected.bind(this));
   }
 
   private async handleComponentSelected(component: any): Promise<void> {
@@ -817,11 +851,9 @@ export class EditorEvents {
   }
 
   private setupGlobalComponentReferences(component: any): void {
-    const pageMapper = new PageMapper(this.editor);
     (globalThis as any).selectedComponent = component;
     (globalThis as any).tileMapper = this.uiManager.createTileMapper();
-    (globalThis as any).infoContentMapper =
-      this.uiManager.createInfoContentMapper();
+    (globalThis as any).infoContentMapper = this.uiManager.createInfoContentMapper();
     (globalThis as any).frameId = this.frameId;
     (globalThis as any).activeEditor = this.editor;
   }
@@ -833,11 +865,7 @@ export class EditorEvents {
       return "tile";
     }
 
-    const ctaClasses = [
-      "img-button-container",
-      "plain-button-container",
-      "cta-container-child",
-    ];
+    const ctaClasses = ["img-button-container", "plain-button-container", "cta-container-child"];
     if (ctaClasses.some((cls) => classes.includes(cls))) {
       return "cta";
     }
@@ -871,15 +899,13 @@ export class EditorEvents {
   }
 
   private findChildPage(ctaAttrs: any, version: any): any {
-    const pageType =
-      ctaAttrs.CtaType === "Form" ? "DynamicForm" : ctaAttrs.CtaType;
+    const pageType = ctaAttrs.CtaType === "Form" ? "DynamicForm" : ctaAttrs.CtaType;
 
     if (pageType === "DynamicForm") {
       return version?.Pages.find((page: any) => {
         return (
           page.PageType === pageType &&
-          page.PageLinkStructure?.WWPFormId ===
-          Number(ctaAttrs.Action?.ObjectId)
+          page.PageLinkStructure?.WWPFormId === Number(ctaAttrs.Action?.ObjectId)
         );
       });
     } else if (pageType === "WebLink") {
@@ -912,10 +938,7 @@ export class EditorEvents {
   }
 
   private onTileUpdate(containerRow: any): void {
-    if (
-      containerRow &&
-      containerRow.getEl()?.classList.contains("container-row")
-    ) {
+    if (containerRow && containerRow.getEl()?.classList.contains("container-row")) {
       this.editor.off("component:add", this.handleComponentAdd);
       this.editor.on("component:add", this.handleComponentAdd);
     }
@@ -934,12 +957,7 @@ export class EditorEvents {
     }
   };
 
-  public setPageFocus(
-    editor: any,
-    frameId: string,
-    pageId: string,
-    pageData: any
-  ): void {
+  public setPageFocus(editor: any, frameId: string, pageId: string, pageData: any): void {
     this.ensureUIManager();
     this.uiManager.setPageFocus(editor, frameId, pageId, pageData);
   }
@@ -988,4 +1006,5 @@ export class EditorEvents {
       );
     }
   }
-}
+} 
+

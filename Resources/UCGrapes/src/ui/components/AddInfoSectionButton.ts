@@ -15,12 +15,14 @@ export class AddInfoSectionButton {
 
   public getHTML(): string {
     const spacingClass = [
-      'info-section-spacing-container',
-      this.isFirstSectionButton ? 'first-section' : '',
-      this.isLastSectionButton ? 'last-section' : '',
-      this.isBlankInfoPage ? 'blank-page' : '',
-      this.isUntitledPage ? 'untitled-page' : '',
-    ].join(' ').trim();
+      "info-section-spacing-container readonly-mode",
+      this.isFirstSectionButton ? "first-section" : "",
+      this.isLastSectionButton ? "last-section" : "",
+      this.isBlankInfoPage ? "blank-page" : "",
+      this.isUntitledPage ? "untitled-page" : "",
+    ]
+      .join(" ")
+      .trim();
 
     return `
       <div ${DefaultAttributes} data-type="add-button" data-custom="add-button" class="${spacingClass}">

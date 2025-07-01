@@ -564,7 +564,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblFormdeleted_Internalname, context.GetMessage( "The attached form has been deleted. Please attach another form or functionality to the tile or remove the tile.", ""), "", "", lblFormdeleted_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "MissingFormLabel", 0, "", 1, 1, 0, 0, "HLP_UToolboxDynamicForm.htm");
+            GxWebStd.gx_label_ctrl( context, lblFormdeleted_Internalname, context.GetMessage( "I18N_DELETEDFORMTOOLBOX", ""), "", "", lblFormdeleted_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "MissingFormLabel", 0, "", 1, 1, 0, 0, "HLP_UToolboxDynamicForm.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1229,7 +1229,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256309531761", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257117383121", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1245,7 +1245,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("utoolboxdynamicform.js", "?20256309531763", false, true);
+         context.AddJavascriptSource("utoolboxdynamicform.js", "?20257117383122", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);

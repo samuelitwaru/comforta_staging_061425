@@ -43,15 +43,9 @@ export class ChildEditor {
       if (converter) {
         const htmlOutput = converter.generateHTML();
         childEditor.setComponents(htmlOutput);
-        localStorage.setItem(
-          `data-${this.pageId}`,
-          JSON.stringify(this.pageData)
-        );
+        localStorage.setItem(`data-${this.pageId}`, JSON.stringify(this.pageData));
       } else {
-        console.error(
-          "Invalid PageType or pageData is undefined:",
-          this.pageData
-        );
+        console.error("Invalid PageType or pageData is undefined:", this.pageData);
       }
     };
     let converter;
@@ -72,18 +66,12 @@ export class ChildEditor {
     } else if (this.pageData?.PageType === "Reception") {
       const receptionEditor = new LoadReceptionData(childEditor, this.pageData);
       receptionEditor.setupEditor();
-    } else if (
-      this.pageData?.PageType === "WebLink" ||
-      this.pageData?.PageType === "DynamicForm"
-    ) {
+    } else if (this.pageData?.PageType === "WebLink" || this.pageData?.PageType === "DynamicForm") {
       const urlPageEditor = new UrlPageEditor(childEditor);
       if (this.pageData?.PageLinkStructure?.Url) {
         urlPageEditor.initialise(this.pageData.PageLinkStructure.Url);
       } else {
-        console.error(
-          "Missing URL for WebLink/DynamicForm page:",
-          this.pageData
-        );
+        console.error("Missing URL for WebLink/DynamicForm page:", this.pageData);
         urlPageEditor.initialise("htps://www.example.com");
       }
     } else if (this.pageData?.PageType === "Map") {
@@ -97,22 +85,14 @@ export class ChildEditor {
       calendarEditor.load();
     }
 
-    this.editorEvents.init(
-      childEditor,
-      this.pageData,
-      editorId,
-      false,
-      this.isNewPage
-    );
+    this.editorEvents.init(childEditor, this.pageData, editorId, false, this.isNewPage);
     this.editorManager.finalizeEditorSetup(childEditor);
     this.themeManager.applyTheme(this.themeManager.currentTheme);
     this.updatePositions();
   }
-  
+
   createNewEditor(editorId: string) {
-    const frameContainer = document.getElementById(
-      "child-container"
-    ) as HTMLElement;
+    const frameContainer = document.getElementById("child-container") as HTMLElement;
     const newEditor = new EditorFrame(
       editorId,
       false,
@@ -136,9 +116,7 @@ export class ChildEditor {
   refreshPage() {}
 
   addImageContent(editor: any) {
-    const components = editor.DomComponents.getWrapper().find(
-      ".content-page-wrapper"
-    );
+    const components = editor.DomComponents.getWrapper().find(".content-page-wrapper");
     if (components.length > 0) {
       const contentWrapper = components[0];
       contentWrapper.append(`
@@ -150,9 +128,7 @@ export class ChildEditor {
   }
 
   addDescriptionContent(editor: any) {
-    const components = editor.DomComponents.getWrapper().find(
-      ".content-page-wrapper"
-    );
+    const components = editor.DomComponents.getWrapper().find(".content-page-wrapper");
     if (components.length > 0) {
       const contentWrapper = components[0];
       contentWrapper.append(`
@@ -166,11 +142,8 @@ export class ChildEditor {
   }
 
   private updatePositions() {
-    const childContainer = document.getElementById(
-      "child-container"
-    ) as HTMLDivElement;
-    childContainer.scrollLeft =
-      childContainer.scrollWidth - childContainer.clientWidth;
+    const childContainer = document.getElementById("child-container") as HTMLDivElement;
+    childContainer.scrollLeft = childContainer.scrollWidth - childContainer.clientWidth;
     childContainer.style.justifyContent = "right";
   }
 }

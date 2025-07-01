@@ -81,6 +81,10 @@ export class ThemeManager {
     return this._currentTheme?.ThemeCtaColors || {};
   }
 
+  getFontFamily() {
+    return this._currentTheme?.ThemeFontFamily || 'Roboto';
+  }
+
   setTheme(theme: Theme): void {
     this._currentTheme = theme;
     this.appVersionManager.getActiveVersion();

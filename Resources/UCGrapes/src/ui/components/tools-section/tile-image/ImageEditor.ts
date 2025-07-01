@@ -7,6 +7,7 @@ export class ImageEditor {
   private modalContent: HTMLElement;
   private opacityValue!: number;
   private sectionId?: string;
+  private previousContainerDimensions?: { width: number; height: number };
 
   constructor(controller: ImageUploadManager, modalContent: HTMLElement) {
     this.controller = controller;
@@ -15,16 +16,11 @@ export class ImageEditor {
   }
 
   public async displayImageEditor(mediaFile: Media) {
-    if (
-      this.controller.getType === "info" ||
-      this.controller.getType === "cta"
-    ) {
+    if (this.controller.getType === "info" || this.controller.getType === "cta") {
       return;
     }
 
-    const decodedUrl = decodeURIComponent(
-      decodeURIComponent(mediaFile.MediaUrl)
-    );
+    const decodedUrl = decodeURIComponent(decodeURIComponent(mediaFile.MediaUrl));
 
     const image = {
       Id: mediaFile.MediaId,
@@ -33,22 +29,74 @@ export class ImageEditor {
 
     this.controller.clearSelectedImages();
     this.controller.addSelectedImage(image);
-    const uploadArea = this.modalContent.querySelector(
-      ".upload-area"
-    ) as HTMLElement;
+    const uploadArea = this.modalContent.querySelector(".upload-area") as HTMLElement;
+
+    // Create the image element first to get dimensions
+    const imgElement = document.createElement("img");
+    imgElement.src = decodedUrl;
+    imgElement.style.display = "block";
+    imgElement.style.maxHeight = "350px";
+    imgElement.style.maxWidth = "680px";
+    imgElement.style.width = "auto";
+    imgElement.style.height = "auto";
 
     const imageContainer = document.createElement("div");
     imageContainer.className = "image-editor-container";
-    Object.assign(imageContainer.style, {
-      position: "relative",
-      width: "100%",
-      height: "350px",
-      overflow: "hidden",
-      border: "1px solid rgb(204 204 204 / 43%)",
-      backgroundImage: `url("${decodedUrl}")`,
-      backgroundRepeat: "no-repeat",
-      backgroundSize: "100% 100%",
+
+    // Wait for image to load to get proper dimensions
+    await new Promise((resolve) => {
+      imgElement.onload = () => {
+        // Get the actual rendered dimensions of the image
+        const imgWidth = imgElement.offsetWidth || imgElement.naturalWidth;
+        const imgHeight = imgElement.offsetHeight || imgElement.naturalHeight;
+
+        // Calculate the actual displayed size considering max constraints
+        let displayWidth = imgElement.naturalWidth;
+        let displayHeight = imgElement.naturalHeight;
+
+        // Apply max width constraint
+        if (displayWidth > 680) {
+          const ratio = 680 / displayWidth;
+          displayWidth = 680;
+          displayHeight = displayHeight * ratio;
+        }
+
+        // Apply max height constraint
+        if (displayHeight > 350) {
+          const ratio = 350 / displayHeight;
+          displayHeight = 350;
+          displayWidth = displayWidth * ratio;
+        }
+
+        // Set container to exactly match the image size
+        Object.assign(imageContainer.style, {
+          position: "relative",
+          width: `${displayWidth}px`,
+          height: `${displayHeight}px`,
+          overflow: "hidden",
+          border: "1px solid rgb(204 204 204 / 43%)",
+          display: "inline-block",
+        });
+
+        resolve(true);
+      };
+
+      // Fallback if image fails to load
+      imgElement.onerror = () => {
+        Object.assign(imageContainer.style, {
+          position: "relative",
+          width: "300px",
+          height: "300px",
+          overflow: "hidden",
+          border: "1px solid rgb(204 204 204 / 43%)",
+          display: "inline-block",
+        });
+        resolve(true);
+      };
     });
+
+    // Add the image to the container
+    imageContainer.appendChild(imgElement);
 
     const frame = document.createElement("div");
     frame.id = "position-frame";
@@ -81,12 +129,9 @@ export class ImageEditor {
       const singleImageFile = el as HTMLElement;
       if (singleImageFile.id === selectedImage.Id) {
         selectedElement = singleImageFile;
-        const checkbox = singleImageFile.querySelector(
-          ".select-media-checkbox"
-        ) as HTMLElement;
+        const checkbox = singleImageFile.querySelector(".select-media-checkbox") as HTMLElement;
         if (checkbox) {
-          checkbox.className =
-            "select-media-checkbox fa-solid fa-square-check selected-checkbox";
+          checkbox.className = "select-media-checkbox fa-solid fa-square-check selected-checkbox";
           checkbox.style.display = "block";
         }
       }
@@ -100,17 +145,46 @@ export class ImageEditor {
   private async setupPositionFrame(frame: HTMLElement, container: HTMLElement) {
     const selectedComponent = (globalThis as any).selectedComponent;
     let aspectRatio = 1;
-    let tile: Tile | undefined = this.getTile(selectedComponent);
+    const tile: Tile | undefined = this.getTile(selectedComponent);
     let frameWidth: number;
     let frameHeight: number;
 
+    // Get actual container dimensions
+    const containerWidth = container.clientWidth;
+    const containerHeight = container.clientHeight;
+
+    // Store previous container dimensions if they exist
+    const previousContainer = this.previousContainerDimensions;
+    let shouldScalePosition = false;
+    let positionScaleX = 1;
+    let positionScaleY = 1;
+
+    // Calculate position scaling if we have previous dimensions
+    if (
+      previousContainer &&
+      (previousContainer.width !== containerWidth || previousContainer.height !== containerHeight)
+    ) {
+      shouldScalePosition = true;
+      positionScaleX = containerWidth / previousContainer.width;
+      positionScaleY = containerHeight / previousContainer.height;
+    }
+
     if (tile && tile.BGImageUrl) {
       // Use image dimensions when tile has background image
-      const image = (await this.convertUrlToImage(
-        tile.BGImageUrl
-      )) as HTMLImageElement;
+      const image = this.convertUrlToImage(tile.BGImageUrl) as HTMLImageElement;
       frameWidth = image.naturalWidth;
       frameHeight = image.naturalHeight;
+
+      // Scale frame to fit within container while maintaining aspect ratio
+      const imageAspectRatio = frameWidth / frameHeight;
+      if (frameWidth > containerWidth || frameHeight > containerHeight) {
+        const widthScale = containerWidth / frameWidth;
+        const heightScale = containerHeight / frameHeight;
+        const scale = Math.min(widthScale, heightScale);
+
+        frameWidth = frameWidth * scale;
+        frameHeight = frameHeight * scale;
+      }
     } else if (selectedComponent) {
       // Use selected component dimensions when no background image
       const selectedComponentEl = selectedComponent.getEl() as HTMLElement;
@@ -120,37 +194,90 @@ export class ImageEditor {
 
       if (aspectRatio > 3) aspectRatio = 2.3;
 
-      frameWidth = componentWidth * aspectRatio;
-      frameHeight = componentHeight * aspectRatio;
+      // Scale frame relative to container size instead of component size
+      frameWidth = Math.min(containerWidth * 0.8, componentWidth);
+      frameHeight = Math.min(containerHeight * 0.8, componentHeight);
+
+      // Maintain aspect ratio
+      const currentAspectRatio = frameWidth / frameHeight;
+      if (currentAspectRatio !== aspectRatio) {
+        if (frameWidth / aspectRatio <= containerHeight) {
+          frameHeight = frameWidth / aspectRatio;
+        } else {
+          frameWidth = frameHeight * aspectRatio;
+        }
+      }
     } else {
-      // Fallback values
-      frameWidth = 300;
-      frameHeight = 300;
+      // Fallback values based on container size
+      frameWidth = Math.min(containerWidth * 0.6, 300);
+      frameHeight = Math.min(containerHeight * 0.6, 300);
     }
 
-    // Scale down if frame is larger than container
-    const containerWidth = container.clientWidth;
-    if (frameWidth > containerWidth) {
-      const scale = containerWidth / frameWidth;
-      frameWidth = containerWidth;
-      frameHeight = frameHeight * scale;
-      aspectRatio = frameWidth / frameHeight;
-    }
+    // Ensure frame doesn't exceed container bounds
+    frameWidth = Math.min(frameWidth, containerWidth);
+    frameHeight = Math.min(frameHeight, containerHeight);
+    aspectRatio = frameWidth / frameHeight;
 
-    // Apply positioning if tile has position data
+    // Handle frame positioning
+    let frameLeft = 0;
+    let frameTop = 0;
+
     if (tile && tile.Left && tile.Top) {
-      frame.style.left = `${tile.Left}`;
-      frame.style.top = `${tile.Top}`;
+      // Parse existing tile position
+      frameLeft = parseFloat(tile.Left.replace("px", ""));
+      frameTop = parseFloat(tile.Top.replace("px", ""));
+
+      // Scale position if container dimensions changed
+      if (shouldScalePosition) {
+        frameLeft = frameLeft * positionScaleX;
+        frameTop = frameTop * positionScaleY;
+      }
+    } else {
+      // Use previous frame position if available
+      const prevLeft = parseFloat(frame.style.left?.replace("px", "") || "0");
+      const prevTop = parseFloat(frame.style.top?.replace("px", "") || "0");
+
+      if (shouldScalePosition) {
+        frameLeft = prevLeft * positionScaleX;
+        frameTop = prevTop * positionScaleY;
+      } else {
+        frameLeft = prevLeft;
+        frameTop = prevTop;
+      }
     }
 
-    // Apply opacity filter
-    container.style.filter = `brightness(${
-      tile?.Opacity ? 1 - tile.Opacity / 100 : 1
-    })`;
+    // Ensure frame stays within container bounds after scaling
+    const maxLeft = containerWidth - frameWidth;
+    const maxTop = containerHeight - frameHeight;
+
+    frameLeft = Math.max(0, Math.min(frameLeft, maxLeft));
+    frameTop = Math.max(0, Math.min(frameTop, maxTop));
+
+    // If frame is still outside bounds (e.g., very small new image), center it
+    if (frameLeft < 0 || frameTop < 0 || frameLeft > maxLeft || frameTop > maxTop) {
+      frameLeft = Math.max(0, (containerWidth - frameWidth) / 2);
+      frameTop = Math.max(0, (containerHeight - frameHeight) / 2);
+    }
+
+    // Apply positioning
+    frame.style.left = `${frameLeft}px`;
+    frame.style.top = `${frameTop}px`;
+
+    // Apply opacity filter to the image instead of container
+    const imgElement = container.querySelector("img") as HTMLImageElement;
+    if (imgElement) {
+      imgElement.style.filter = `brightness(${tile?.Opacity ? 1 - tile.Opacity / 100 : 1})`;
+    }
 
     // Set frame dimensions
     frame.style.width = `${frameWidth > 0 ? frameWidth : 50}px`;
-    frame.style.height = `${frameHeight> 0 ? frameHeight : 50}px`;
+    frame.style.height = `${frameHeight > 0 ? frameHeight : 50}px`;
+
+    // Store current container dimensions for next time
+    this.previousContainerDimensions = {
+      width: containerWidth,
+      height: containerHeight,
+    };
 
     this.controller.captureCurrentPosition(frame, container);
     this.addResizeHandles(frame, container, aspectRatio);
@@ -178,11 +305,7 @@ export class ImageEditor {
     return tile;
   }
 
-  private addResizeHandles(
-    frame: HTMLElement,
-    container: HTMLElement,
-    tileAspectRatio: number
-  ) {
+  private addResizeHandles(frame: HTMLElement, container: HTMLElement, tileAspectRatio: number) {
     const handles = ["top-left", "top-right", "bottom-left", "bottom-right"];
     handles.forEach((handle) => {
       const handleDiv = document.createElement("div");
@@ -264,19 +387,13 @@ export class ImageEditor {
         frame.style.left = `${newLeft}px`;
         frame.style.top = `${newTop}px`;
 
-        this.controller.captureCurrentPosition(
-          frame,
-          container
-        );
+        this.controller.captureCurrentPosition(frame, container);
       };
 
       const onMouseUp = () => {
         document.removeEventListener("mousemove", onMouseMove);
         document.removeEventListener("mouseup", onMouseUp);
-        this.controller.captureCurrentPosition(
-          frame,
-          container
-        );
+        this.controller.captureCurrentPosition(frame, container);
       };
 
       document.addEventListener("mousemove", onMouseMove);
@@ -323,10 +440,7 @@ export class ImageEditor {
         frame.style.left = `${newLeft}px`;
         frame.style.top = `${newTop}px`;
 
-        this.controller.captureCurrentPosition(
-          frame,
-          container
-        );
+        this.controller.captureCurrentPosition(frame, container);
       }
     });
 
@@ -336,10 +450,7 @@ export class ImageEditor {
         e.stopPropagation();
         isDragging = false;
         document.body.style.userSelect = "auto";
-        this.controller.captureCurrentPosition(
-          frame,
-          container
-        );
+        this.controller.captureCurrentPosition(frame, container);
       }
     });
   }
@@ -379,15 +490,13 @@ export class ImageEditor {
 
       this.opacityValue = opacityValue * 100;
 
-      const container = uploadArea.querySelector(
-        ".image-editor-container"
-      ) as HTMLDivElement;
-      if (!container) return;
+      const container = uploadArea.querySelector(".image-editor-container") as HTMLDivElement;
+      const imgElement = container?.querySelector("img") as HTMLImageElement;
 
-      Object.assign(container.style, {
-        opacity: "1",
-        filter: `brightness(${1 - opacityValue})`,
-      });
+      if (!imgElement) return;
+
+      // Apply opacity filter to the image element instead of container
+      imgElement.style.filter = `brightness(${1 - opacityValue})`;
     });
 
     const sliderWrapper = document.createElement("div");

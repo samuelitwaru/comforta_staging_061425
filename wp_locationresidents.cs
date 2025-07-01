@@ -2868,7 +2868,7 @@ namespace GeneXus.Programs {
          {
             context.CommitDataStores("wp_locationresidents",pr_default);
             new prc_senduseractivationlink(context).executeSubmit(  AV62ResidentGuid_Selected,  AV64ActivactionKey,  AV61baseUrl, ref  AV65isSent, ref  AV67ErrDescroption, ref  AV68GamErrorCollection) ;
-            GX_msglist.addItem(context.GetMessage( "Invitation sent successfully.", ""));
+            GX_msglist.addItem(new WorkWithPlus.workwithplus_web.dvmessagegetbasicnotificationmsg(context).executeUdp(  "Success",  context.GetMessage( "Invitation sent successfully.", ""),  "success",  "",  "true",  ""));
          }
       }
 
@@ -3495,7 +3495,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256309481387", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025711739116", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3511,7 +3511,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wp_locationresidents.js", "?20256309481390", false, true);
+         context.AddJavascriptSource("wp_locationresidents.js", "?2025711739117", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);

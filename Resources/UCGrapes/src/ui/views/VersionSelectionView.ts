@@ -172,7 +172,7 @@ export class VersionSelectionView {
     // Rename option
     const renameOption = document.createElement("div");
     renameOption.classList.add("theme-option");
-    renameOption.innerHTML = i18n.t("sidebar.image_upload.select_images");
+    renameOption.innerHTML = i18n.t("navbar.appversion.dropdow.rename");
     renameOption.addEventListener("click", (e) => {
       e.stopPropagation();
       this.openVersionModal(

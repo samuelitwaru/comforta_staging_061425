@@ -1,5 +1,6 @@
 import { i18n } from "../../i18n/i18n";
-import { LanguageTranslate } from "./LanguageTranslate";
+import { LanguageTranslate } from "../../controls/LanguageTranslate";
+import { TranslationodeUIManager } from "../../controls/TranslationModeUIManager";
 export class EditActions {
   private undoButton: HTMLButtonElement;
   private redoButton: HTMLButtonElement;
@@ -41,6 +42,15 @@ export class EditActions {
     this.translateButton.innerHTML = translateSvg;
     this.translateButton.addEventListener("click", (e) => {
       e.preventDefault();
+      let isTranslationMode = (globalThis as any).isTranslationMode;
+      isTranslationMode = !isTranslationMode;
+
+      if (!isTranslationMode) {
+        (globalThis as any).isTranslationMode = false;
+        const translationModeUi = new TranslationodeUIManager();
+        translationModeUi.disableTranslationMode();
+        return;
+      }
       new LanguageTranslate().translate();
     });
 
