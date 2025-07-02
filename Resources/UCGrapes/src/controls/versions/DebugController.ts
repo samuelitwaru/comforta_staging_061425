@@ -18,7 +18,7 @@ export class DebugController {
   }
 
   private async debugProcess(pageUrls: any) {
-    let results;
+    let results: DebugResults;
     try {
       const toolBoxService = new ToolBoxService();
       const response = await toolBoxService.debugApp(pageUrls);
@@ -28,7 +28,7 @@ export class DebugController {
         this.displayResults(results);
       }
     } catch (error) {
-      console.error(error);
+      throw new Error("Error in debug process" + error);
     }
   }
 
@@ -36,43 +36,28 @@ export class DebugController {
     const pageUrls: {
       page: string;
       pageId: string;
-      urls: { url: string; affectedType: string; affectedName?: string }[];
+      urls: {
+        url: string;
+        affectedType: string;
+        affectedName?: string;
+        affectedInfoId: string;
+        affectedTileId?: string;
+        urlType: "ImgUrl" | "ActionUrl";
+      }[];
     }[] = [];
 
     const activeVersion = await this.appVersions.refreshActiveVersion();
     const pages = activeVersion?.Pages;
 
     for (const page of pages) {
-      const urls: { url: string; affectedType: string; affectedInfoId: string; affectedName?: string }[] = [];
-
-      // Process tiles (menu structure)
-      const rows = page.PageMenuStructure?.Rows;
-      if (rows) {
-        for (const row of rows) {
-          const tiles = row.Tiles;
-          if (tiles) {
-            for (const tile of tiles) {
-              if (tile.Action?.ObjectUrl) {
-                urls.push({
-                  url: tile.Action.ObjectUrl,
-                  affectedType: "Tile",
-                  affectedName: tile.Name || "Unnamed Tile",
-                  affectedInfoId: tile.TileId
-                });
-              }
-
-              if (tile.BGImageUrl) {
-                urls.push({
-                  url: tile.BGImageUrl,
-                  affectedType: "Tile",
-                  affectedName: tile.Name || "Unnamed Tile",
-                  affectedInfoId: tile.TileId,
-                });
-              }
-            }
-          }
-        }
-      }
+      const urls: {
+        url: string;
+        affectedType: string;
+        affectedInfoId: string;
+        affectedTileId?: string;
+        affectedName?: string;
+        urlType: "ImgUrl" | "ActionUrl";
+      }[] = [];
 
       // Process content items
       const content = page.PageInfoStructure?.InfoContent;
@@ -86,6 +71,7 @@ export class DebugController {
                 affectedType: "Content",
                 affectedName: item.InfoType || "Unnamed Content",
                 affectedInfoId: item.InfoId,
+                urlType: "ImgUrl"
               });
             }
           }
@@ -99,6 +85,7 @@ export class DebugController {
               affectedType: "Cta",
               affectedName: item.InfoType || "Unnamed Cta",
               affectedInfoId: item.InfoId,
+              urlType: "ImgUrl"
             });
             if (
               item.CtaAttributes?.CtaAction &&
@@ -109,6 +96,7 @@ export class DebugController {
                 affectedType: "Cta",
                 affectedName: item.InfoType || "Unnamed Cta",
                 affectedInfoId: item.InfoId,
+                urlType: "ActionUrl"
               });
             }
           }
@@ -120,6 +108,8 @@ export class DebugController {
                   affectedType: "Tile",
                   affectedName: tile.Name || "Unnamed Tile",
                   affectedInfoId: item.InfoId,
+                  affectedTileId: tile.Id,
+                  urlType: "ActionUrl"
                 });
               }
 
@@ -129,6 +119,8 @@ export class DebugController {
                   affectedType: "Tile",
                   affectedName: tile.Name || "Unnamed Tile",
                   affectedInfoId: item.InfoId,
+                  affectedTileId: tile.Id,
+                  urlType: "ImgUrl"
                 });
               }
             });
@@ -138,7 +130,11 @@ export class DebugController {
 
       // Only add the page if it has URLs
       if (urls.length > 0) {
-        pageUrls.push({ page: page.PageName || `Page-${pages.indexOf(page) + 1}`, pageId: page.PageId, urls });
+        pageUrls.push({
+          page: page.PageName || `Page-${pages.indexOf(page) + 1}`,
+          pageId: page.PageId,
+          urls,
+        });
       }
     }
 

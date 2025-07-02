@@ -25,7 +25,7 @@ export class ActionInput {
     this.type = type;
     this.actionType = actionType;
     this.pageData = (globalThis as any).pageData;
-    this.inputId = `cta-${this.type}-input`;
+    this.inputId = `${actionType}-${this.type}-input`;
     this.input = document.createElement("input");
 
     // Create debounced update function
@@ -157,7 +157,8 @@ export class ActionInput {
     const existingInput = document.getElementById(this.inputId);
 
     if (existingInput) {
-      (existingInput as HTMLInputElement).value = this.input.value;
+      (existingInput as HTMLInputElement).value =
+        this.input.value;
       return;
     }
 

@@ -781,7 +781,6 @@ export class EditorEvents {
   }
 
   private onDragAndDrop(): void {
-    console.log('hello dargging');
     if (this.disableEditor()) return;
     let sourceComponent: any;
     let destinationComponent: any;

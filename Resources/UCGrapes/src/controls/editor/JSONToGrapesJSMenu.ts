@@ -157,7 +157,10 @@ export class JSONToGrapesJSMenu {
   }
 
   private truncateText(tile: any, tileTitle: string, isThreeTiles: boolean) {
-    // const translatedTitle = this.translateTileLabel(tile, tileTitle);
+    if (tileTitle === "Title" || tileTitle === "Titel") {
+      return i18n.t("tile.title");
+    }
+    
     const screenWidth: number = window.innerWidth;
     const textLength = length === 3 ? 11 : (length === 2 ? 15 : 20);
     if (tileTitle.length > (screenWidth <= 280 ? 20 : textLength + 4)) {

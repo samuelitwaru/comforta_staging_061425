@@ -363,6 +363,14 @@ namespace GeneXus.Programs {
          {
             context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vCURRENTAPPVERSION", AV57CurrentAppVersion);
          }
+         if ( context.isAjaxRequest( ) )
+         {
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vICONS", AV64Icons);
+         }
+         else
+         {
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vICONS", AV64Icons);
+         }
          GxWebStd.gx_hidden_field( context, "vTRN_PAGEID", AV14Trn_PageId.ToString());
          GxWebStd.gx_hidden_field( context, "APPTOOLBOX1_Current_language", StringUtil.RTrim( Apptoolbox1_Current_language));
          GxWebStd.gx_hidden_field( context, "APPTOOLBOX1_Locationid", StringUtil.RTrim( Apptoolbox1_Locationid));
@@ -515,6 +523,7 @@ namespace GeneXus.Programs {
             ucApptoolbox1.SetProperty("BC_Trn_Location", AV42BC_Trn_Location);
             ucApptoolbox1.SetProperty("Current_Version", AV57CurrentAppVersion);
             ucApptoolbox1.SetProperty("OrganisationLogo", Apptoolbox1_Organisationlogo);
+            ucApptoolbox1.SetProperty("Icons", AV64Icons);
             ucApptoolbox1.Render(context, "uc_apptoolbox1", Apptoolbox1_Internalname, "APPTOOLBOX1Container");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -811,6 +820,7 @@ namespace GeneXus.Programs {
             ajax_req_read_hidden_sdt(cgiGet( "vBC_TRN_MEDIACOLLECTION"), AV19BC_Trn_MediaCollection);
             ajax_req_read_hidden_sdt(cgiGet( "vBC_TRN_LOCATION"), AV42BC_Trn_Location);
             ajax_req_read_hidden_sdt(cgiGet( "vCURRENTAPPVERSION"), AV57CurrentAppVersion);
+            ajax_req_read_hidden_sdt(cgiGet( "vICONS"), AV64Icons);
             /* Read saved values. */
             Apptoolbox1_Current_language = cgiGet( "APPTOOLBOX1_Current_language");
             Apptoolbox1_Locationid = cgiGet( "APPTOOLBOX1_Locationid");
@@ -1002,7 +1012,7 @@ namespace GeneXus.Programs {
          }
          pr_default.close(5);
          GXt_objcol_SdtTrn_Theme4 = AV8BC_Trn_ThemeCollection;
-         new prc_getorganisationtheme(context ).execute(  AV40OrganisationId,  AV39LocationId, out  GXt_objcol_SdtTrn_Theme4) ;
+         new prc_getorganisationtheme(context ).execute(  AV40OrganisationId,  AV39LocationId, out  AV64Icons, out  GXt_objcol_SdtTrn_Theme4) ;
          AV8BC_Trn_ThemeCollection = GXt_objcol_SdtTrn_Theme4;
          new prc_getappversion(context ).execute( out  AV57CurrentAppVersion, out  AV58SDT_Error,  AV39LocationId) ;
          Apptoolbox1_Current_theme = AV57CurrentAppVersion.gxTpr_Themeid.ToString();
@@ -1134,7 +1144,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025630947171", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257212554243", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1152,7 +1162,7 @@ namespace GeneXus.Programs {
          if ( nGXWrapped != 1 )
          {
             context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-            context.AddJavascriptSource("wp_applicationdesign.js", "?2025630947174", false, true);
+            context.AddJavascriptSource("wp_applicationdesign.js", "?20257212554246", false, true);
             context.AddJavascriptSource("UserControls/UC_AppToolBox1Render.js", "", false, true);
             context.AddJavascriptSource("UserControls/UC_PreventAccessModalRender.js", "", false, true);
          }
@@ -1249,6 +1259,7 @@ namespace GeneXus.Programs {
          AV19BC_Trn_MediaCollection = new GXBCCollection<SdtTrn_Media>( context, "Trn_Media", "Comforta_version2");
          AV42BC_Trn_Location = new SdtTrn_Location(context);
          AV57CurrentAppVersion = new SdtSDT_AppVersion(context);
+         AV64Icons = new GXBaseCollection<SdtSDT_Icon>( context, "SDT_Icon", "Comforta_version2");
          GX_FocusControl = "";
          Form = new GXWebForm();
          sPrefix = "";
@@ -1514,6 +1525,7 @@ namespace GeneXus.Programs {
       private GXBCCollection<SdtTrn_Media> AV19BC_Trn_MediaCollection ;
       private SdtTrn_Location AV42BC_Trn_Location ;
       private SdtSDT_AppVersion AV57CurrentAppVersion ;
+      private GXBaseCollection<SdtSDT_Icon> AV64Icons ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV60WWPContext ;
       private IDataStoreProvider pr_default ;
       private Guid[] H005C2_A11OrganisationId ;

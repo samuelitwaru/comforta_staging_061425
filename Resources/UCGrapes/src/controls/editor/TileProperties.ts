@@ -1,6 +1,7 @@
 import { i18n } from "../../i18n/i18n";
-import { Tile } from "../../types";
+import { DebugResults, defaultUrlEntry, Tile, UrlEntry } from "../../types";
 import { ActionInput } from "../../ui/components/tools-section/content-section/ActionInput";
+import { DebugFix } from "../../ui/components/tools-section/DebugFix";
 import { capitalizeWords, getIconCategories, rgbToHex } from "../../utils/helpers";
 import { ThemeManager } from "../themes/ThemeManager";
 
@@ -22,6 +23,7 @@ export class TileProperties {
     this.setTileActionProperties();
     // this.setActionProperties();
     this.setTileIconProperties();
+    this.setTileDebugStatus();
   }
 
   private setBgColorProperties(): void {
@@ -29,25 +31,17 @@ export class TileProperties {
     const tileEl = this.selectedComponent.getEl() as HTMLElement;
 
     const computedStyle = window.getComputedStyle(tileEl);
-    const backgroundColor =
-      computedStyle.backgroundColor || tileEl.style.backgroundColor;
+    const backgroundColor = computedStyle.backgroundColor || tileEl.style.backgroundColor;
     const tileBGColorHex = rgbToHex(backgroundColor);
-    const hasBgImage: boolean =
-      this.selectedComponent.getStyle()?.["background-image"];
+    const hasBgImage: boolean = this.selectedComponent.getStyle()?.["background-image"];
 
-    const tileBgColorAttr = this.themeManager.getThemeColor(
-      this.tileAttributes?.BGColor
-    );
+    const tileBgColorAttr = this.themeManager.getThemeColor(this.tileAttributes?.BGColor);
 
     const colorBoxes: any = themeColors?.children;
     for (let i = 0; i < colorBoxes.length; i++) {
       const colorBox = colorBoxes[i] as HTMLElement;
       const inputBox = colorBox.querySelector("input") as HTMLInputElement;
-      if (
-        !hasBgImage &&
-        tileBGColorHex === tileBgColorAttr &&
-        tileBGColorHex === inputBox.value
-      ) {
+      if (!hasBgImage && tileBGColorHex === tileBgColorAttr && tileBGColorHex === inputBox.value) {
         inputBox.checked = true;
       } else {
         inputBox.checked = false;
@@ -58,33 +52,24 @@ export class TileProperties {
   private setOpacityProperties(): void {
     const tileBgImageAttrUrl = this.tileAttributes?.BGImageUrl;
     const tileBgImageAttrOpacity = this.tileAttributes?.Opacity || 0;
-    const bgImageStyle =
-      this.selectedComponent.getStyle()?.["background-image"];
+    const bgImageStyle = this.selectedComponent.getStyle()?.["background-image"];
     let tileBGImage = "";
 
     if (bgImageStyle && bgImageStyle.startsWith("url(")) {
-      tileBGImage = bgImageStyle
-        .replace(/^url\(["']?/, "")
-        .replace(/["']?\)$/, "");
+      tileBGImage = bgImageStyle.replace(/^url\(["']?/, "").replace(/["']?\)$/, "");
     }
 
     if (tileBGImage && tileBgImageAttrUrl) {
       if (tileBGImage === tileBgImageAttrUrl) {
         const opactySection = document.querySelector(".tile-img-section");
         if (opactySection) {
-          const slider = opactySection.querySelector(
-            "#slider-wrapper"
-          ) as HTMLElement;
+          const slider = opactySection.querySelector("#slider-wrapper") as HTMLElement;
           slider.style.display = "flex";
-          const input = opactySection.querySelector(
-            "#bg-opacity"
-          ) as HTMLInputElement;
+          const input = opactySection.querySelector("#bg-opacity") as HTMLInputElement;
           // remove decimal points from the opacity value
           const value = Math.round(tileBgImageAttrOpacity * 100) / 100;
           input.value = value.toString();
-          const opacityValue = opactySection.querySelector(
-            "#valueDisplay"
-          ) as HTMLElement;
+          const opacityValue = opactySection.querySelector("#valueDisplay") as HTMLElement;
           opacityValue.textContent = input.value + "%";
           const tileImageSection = opactySection.querySelector(
             "#tile-img-container"
@@ -93,16 +78,12 @@ export class TileProperties {
             tileImageSection.style.display = "flex";
           }
           this.selectedComponent.addStyle({
-            "background-color": `rgba(0, 0, 0, ${
-              tileBgImageAttrOpacity / 100
-            })`,
+            "background-color": `rgba(0, 0, 0, ${tileBgImageAttrOpacity / 100})`,
           });
         }
       }
     } else {
-      const tileImageSection = document.querySelector(
-        "#tile-img-container"
-      ) as HTMLElement;
+      const tileImageSection = document.querySelector("#tile-img-container") as HTMLElement;
       if (tileImageSection) {
         tileImageSection.style.display = "none";
       }
@@ -169,21 +150,16 @@ export class TileProperties {
 
   private setTileIconProperties() {
     const tileIcon = this.tileAttributes?.Icon as string;
-    let capitalizedTileIcon = ""
-    if (tileIcon) {
-      capitalizedTileIcon = capitalizeWords(tileIcon.replace(/-/g,' ').replace(/_/g,' '))
-    }
-    
     const categoryTitle = this.themeManager.getIconCategory(tileIcon);
     this.themeManager.updateThemeIcons(categoryTitle);
     if (!categoryTitle) return;
-    let categories: { name: string; label: string }[] = getIconCategories()
-    const category = categories.find((cat) => cat.name.toLowerCase() === categoryTitle.toLowerCase())
-    if (!category) return
+    let categories: { name: string; label: string }[] = getIconCategories();
+    const category = categories.find(
+      (cat) => cat.name.toLowerCase() === categoryTitle.toLowerCase()
+    );
+    if (!category) return;
 
-    const categoryContainer = document.querySelector(
-      "#icon-categories-list"
-    ) as HTMLElement;
+    const categoryContainer = document.querySelector("#icon-categories-list") as HTMLElement;
     const allOptions = categoryContainer.querySelectorAll(".category-option");
     allOptions.forEach((opt) => {
       opt.classList.remove("selected");
@@ -197,26 +173,19 @@ export class TileProperties {
         }
       }
     });
-    const iconDiv = this.selectedComponent
-      .getEl()
-      .querySelector(".tile-icon") as HTMLElement;
+    const iconDiv = this.selectedComponent.getEl().querySelector(".tile-icon") as HTMLElement;
+    console.log('iconDiv', iconDiv)
     let selectedTileIcon = iconDiv?.getAttribute("title") ?? "";
-    selectedTileIcon = capitalizeWords(selectedTileIcon.replace(/-/g,' ').replace(/_/g,' '))
-    const sideBarIconsDiv = document.querySelector(
-      "#icons-list"
-    ) as HTMLDivElement;
+    const sideBarIconsDiv = document.querySelector("#icons-list") as HTMLDivElement;
     const sidebarIcons = sideBarIconsDiv.querySelectorAll(".icon");
     sidebarIcons.forEach((icon) => {
       const iconElement = icon as HTMLElement;
       const iconTitle = iconElement.getAttribute("title") ?? "";
-      if (
-        tileIcon &&
-        iconTitle === capitalizedTileIcon &&
-        iconTitle === selectedTileIcon
-      ) {
+      console.log('tileIcon', tileIcon + ' : '+ selectedTileIcon)
+      if (tileIcon && iconTitle === selectedTileIcon) {
         iconElement.style.border = "2px solid #5068A8";
         const svgPath = iconElement.querySelector("svg path") as SVGPathElement;
-        iconElement.scrollIntoView()
+        iconElement.scrollIntoView();
         if (svgPath) {
           svgPath.setAttribute("fill", "#5068A8");
         }
@@ -232,13 +201,60 @@ export class TileProperties {
 
   private tileActionDisplay() {
     const actionValue = this.tileAttributes?.Action?.ObjectUrl;
-    const actionInput = new ActionInput(
-      actionValue,
-      this.tileAttributes,
-      "action",
-      "tile"
-    );
+    const actionInput = new ActionInput(actionValue, this.tileAttributes, "action", "tile");
 
     return actionInput.getInputElement();
+  }
+
+  private setTileDebugStatus() {
+    // search for a tag with id menu-page-section and attach a paragraph tag
+    const menuPageSection = document.getElementById("menu-page-section") as HTMLDivElement;
+    if (menuPageSection) {
+      this.clearAllDebugSection(menuPageSection);
+      const infoSectionComponent = this.selectedComponent.closest(
+        '[data-gjs-type="info-tiles-section"]'
+      );
+      const tileId = this.selectedComponent.closest('[data-gjs-type="tile-wrapper"]')?.getId();
+      if (infoSectionComponent && tileId) {
+        const infoSectionComponentId = infoSectionComponent.getId();
+        if (infoSectionComponentId) {
+          const debugResults: UrlEntry[] | undefined =
+            this.infoSectionDebugItem(infoSectionComponentId, tileId);
+          if (debugResults && debugResults.length > 0) {
+            debugResults.forEach((result: UrlEntry) => {
+              result = { ...defaultUrlEntry, ...result };
+              const statusCode = Number(result.StatusCode);
+              if ((!result.IsFixed && statusCode < 200) || (!result.IsFixed && statusCode > 300)) {
+                const debugSection = new DebugFix(result);
+                debugSection.render(menuPageSection);
+              }
+            });
+          } else {
+            this.clearAllDebugSection(menuPageSection);
+          }
+        }
+      }
+    }
+  }
+
+  private clearAllDebugSection(menuPageSection: HTMLDivElement) {
+    const existingInfoSections = menuPageSection.querySelectorAll(".debug-fix-section");
+    if (existingInfoSections) {
+      existingInfoSections.forEach((section) => {
+        section.remove();
+      });
+    }
+  }
+
+  private infoSectionDebugItem(affectedInfoId: string, tileId: string): UrlEntry[] | undefined {
+    const debugResults: DebugResults = (globalThis as any).debugResults;
+    const pageId = (globalThis as any).currentPageId;
+    if (debugResults) {
+      const page = debugResults.Pages.find((p) => p.PageId === pageId);
+      if (page) {
+        return page.UrlList.filter((url) => (url.AffectedInfoId === affectedInfoId && url.AffectedTileId === tileId));
+      }
+    }
+    return undefined;
   }
 }

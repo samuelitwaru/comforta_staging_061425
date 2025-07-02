@@ -79,6 +79,13 @@ function UC_AppToolBox1($) {
 	  
 	  
 	  
+	 this.setIcons = function(value) {
+			this.Icons = value;
+		}
+
+		this.getIcons = function() {
+			return this.Icons;
+		} 
 
 	var template = '<div class=\"preloader\" id=\"preloader\">   <div class=\"spinner\"></div></div><div id=\"tb-body\">   <!-- Navbar -->   <div class=\"tb-navbar\" id=\"tb-navbar\">      <!--<h3 id=\"navbar_title\"></h3>-->      <div class=\"navbar-buttons\" id=\"navbar-buttons-left\"></div>	<div class=\"navbar-buttons\" id=\"navbar-buttons\"></div>   </div>   <div class=\"tb-container\">      	<!-- Editor Container -->      	<div class=\"main-content\" id=\"main-content\"></div>	      	<div class=\"sidebar sidebar-right\" id=\"tb-sidebar\">			<div id=\"page-info-title\"></div>			<div id=\"page-info-section\"></div>			<div id=\"tools-section\"></div>			<div id=\"mapping-section\" style=\"display: none;\">				<div class=\"mapping-header\">				<h3>					<span id=\"sidebar_mapping_title\">					</span>				</h3>				</div>				<div class=\"sidebar-section\">				<div id=\"tree-container\" class=\"tb-list-container\">				</div>				</div>        	</div>      	</div>				<div class=\"tb-alerts-container\" id=\"tb-alerts-container\">		</div>   </div></div>';
 	var partials = {  }; 
@@ -114,15 +121,20 @@ function UC_AppToolBox1($) {
 			   try {
 				   	this.d3 = d3;
 					const themes = this.BC_Trn_ThemeCollection.map(theme => {
-						
+						theme.ThemeIcons = this.Icons
+						const icons = this.Icons
+						console.log('icons', icons)
 						let res = {
-						ThemeId: theme.Trn_ThemeId,
-						ThemeName: theme.Trn_ThemeName,
-						ThemeFontFamily: theme.Trn_ThemeFontFamily,
-						ThemeColors: {},
-						ThemeIcons: theme.Icon,
-						ThemeCtaColors: theme.CtaColor.sort((a, b) => a.CtaColorName.localeCompare(b.CtaColorName))
+							ThemeId: theme.Trn_ThemeId,
+							ThemeName: theme.Trn_ThemeName,
+							ThemeFontFamily: theme.Trn_ThemeFontFamily,
+							ThemeColors: {},
+							ThemeIcons: icons,
+							Icons: this.Icons,
+							ThemeCtaColors: theme.CtaColor.sort((a, b) => a.CtaColorName.localeCompare(b.CtaColorName))
 						};
+					
+						console.log('>', res)
 						
 						// Sort and map ThemeColors by ColorName
 						theme.Color
@@ -144,13 +156,15 @@ function UC_AppToolBox1($) {
 						
 						// Sort ThemeIcons by IconName
 						if (theme.Icon) {
-						res.ThemeIcons = [...theme.Icon].sort((a, b) => 
+							res.ThemeIcons = [...theme.Icon].sort((a, b) => 
 							a.IconName.localeCompare(b.IconName)
-						);
+							);
 						}
 						
 						return res;
 					});
+				
+					console.log('>>', themes)
 					
 					if (typeof App !== 'undefined') {
 						localStorage.clear();
@@ -202,6 +216,7 @@ function UC_AppToolBox1($) {
 				 
 				 
 				 
+				 this.IconsCurrentIndex = (parseInt($(target).attr('data-items-index'), 10) || 1);  
 			}
 
 			if (this.OnSave) {

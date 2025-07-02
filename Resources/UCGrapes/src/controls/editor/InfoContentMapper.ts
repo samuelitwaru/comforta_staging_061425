@@ -307,6 +307,8 @@ export class InfoContentMapper {
     const contentRowIndex = contentArray.findIndex(
       (row: InfoType) => row.InfoId === infoId
     );
+    
+    console.log("infoType", newContent);
     if (contentRowIndex === -1) return false;
     contentArray[contentRowIndex] = newContent;
     

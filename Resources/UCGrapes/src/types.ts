@@ -55,15 +55,26 @@ export interface DebugResults {
   };
   Pages: {
     Page: string;
-    UrlList: {
-      Url: string;
-      StatusCode: number;
-      StatusMessage: string;
-      AffectedType: string;
-      AffectedName: string;
-    }[];
+    PageId: string;
+    UrlList: UrlEntry[];
   }[];
 }
+
+export type UrlEntry = {
+  Url: string;
+  StatusCode: string;
+  StatusMessage: string;
+  AffectedType: string;
+  AffectedName: string;
+  AffectedInfoId: string;
+  UrlType: "ImgUrl" | "ActionUrl";
+  AffectedTileId?: string;
+  IsFixed?: boolean;
+};
+
+export const defaultUrlEntry: Pick<UrlEntry, "IsFixed"> = {
+  IsFixed: false,
+};
 
 export interface InfoType {
   InfoId: string;
@@ -196,6 +207,7 @@ export interface ThemeIcon {
   IconName: string;
   IconCategory: string;
   IconSVG: string;
+  IconCodeName: string;
 }
 
 export interface ThemeCtaColor {
@@ -212,6 +224,7 @@ export interface Theme {
   ThemeColors: ThemeColors;
   ThemeCtaColors: ThemeCtaColor;
   ThemeIcons: ThemeIcon[];
+  Icons:[];
 }
 
 export interface Form {
@@ -292,3 +305,5 @@ export interface SelectedImage {
 }
 
 export type ImageType = "info" | "tile" | "content" | "cta";
+
+

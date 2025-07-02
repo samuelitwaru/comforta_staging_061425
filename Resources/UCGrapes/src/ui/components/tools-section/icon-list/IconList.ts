@@ -53,7 +53,8 @@ export class IconList {
 
         iconComponent.components(iconSVGWithAttributes);
         iconComponent.addAttributes({
-          title: themeIcon.IconName,
+          // change this to icon code
+          title: themeIcon.IconCodeName,
         });
 
         const iconCompParent = iconComponent.parent();
@@ -73,19 +74,20 @@ export class IconList {
     const colComp = selectedComponent.closest('.tile-column')
     const tile = selectedComponent.closest('.template-wrapper')
 
+    alert(themeIcon.IconCodeName)
     infoSectionManager.updateGridTileAttribute(
       rowComp.getId(),
       colComp.getId(),
       tile.getId(),
       "Icon",
-      themeIcon.IconName
+      themeIcon.IconCodeName
     )
 
           infoSectionManager.updateInfoTileAttributes(
             rowComponent.getId(),
             tileWrapper.getId(),
             "Icon",
-            themeIcon.IconName
+            themeIcon.IconCodeName
           );
 
           const tileInfoSectionAttributes: InfoType = (

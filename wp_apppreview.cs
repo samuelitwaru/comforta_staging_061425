@@ -653,12 +653,12 @@ namespace GeneXus.Programs {
          pr_default.close(0);
          pr_default.close(2);
          GXt_objcol_SdtTrn_Theme1 = AV20Themes;
-         new prc_getorganisationtheme(context ).execute(  AV8BC_Trn_AppVersion.gxTpr_Organisationid,  AV8BC_Trn_AppVersion.gxTpr_Locationid, out  GXt_objcol_SdtTrn_Theme1) ;
+         new prc_getorganisationtheme(context ).execute(  AV8BC_Trn_AppVersion.gxTpr_Organisationid,  AV8BC_Trn_AppVersion.gxTpr_Locationid, out  AV25Icons, out  GXt_objcol_SdtTrn_Theme1) ;
          AV20Themes = GXt_objcol_SdtTrn_Theme1;
-         AV26GXV1 = 1;
-         while ( AV26GXV1 <= AV20Themes.Count )
+         AV27GXV1 = 1;
+         while ( AV27GXV1 <= AV20Themes.Count )
          {
-            AV21Theme = ((SdtTrn_Theme)AV20Themes.Item(AV26GXV1));
+            AV21Theme = ((SdtTrn_Theme)AV20Themes.Item(AV27GXV1));
             if ( AV21Theme.gxTpr_Trn_themeid == AV11Current_Theme )
             {
                AV14SDT_Theme = new SdtSDT_Theme(context);
@@ -666,42 +666,42 @@ namespace GeneXus.Programs {
                AV14SDT_Theme.gxTpr_Themename = AV21Theme.gxTpr_Trn_themename;
                AV14SDT_Theme.gxTpr_Themefontfamily = AV21Theme.gxTpr_Trn_themefontfamily;
                AV14SDT_Theme.gxTpr_Themefontsize = AV21Theme.gxTpr_Trn_themefontsize;
-               AV27GXV2 = 1;
-               while ( AV27GXV2 <= AV21Theme.gxTpr_Color.Count )
+               AV28GXV2 = 1;
+               while ( AV28GXV2 <= AV21Theme.gxTpr_Color.Count )
                {
-                  AV23ThemeColor = ((SdtTrn_Theme_Color)AV21Theme.gxTpr_Color.Item(AV27GXV2));
+                  AV23ThemeColor = ((SdtTrn_Theme_Color)AV21Theme.gxTpr_Color.Item(AV28GXV2));
                   AV15SDT_ThemeColor = new SdtSDT_Theme_ColorsItem(context);
                   AV15SDT_ThemeColor.gxTpr_Colorid = AV23ThemeColor.gxTpr_Colorid;
                   AV15SDT_ThemeColor.gxTpr_Colorname = AV23ThemeColor.gxTpr_Colorname;
                   AV15SDT_ThemeColor.gxTpr_Colorcode = AV23ThemeColor.gxTpr_Colorcode;
                   AV14SDT_Theme.gxTpr_Colors.Add(AV15SDT_ThemeColor, 0);
-                  AV27GXV2 = (int)(AV27GXV2+1);
+                  AV28GXV2 = (int)(AV28GXV2+1);
                }
-               AV28GXV3 = 1;
-               while ( AV28GXV3 <= AV21Theme.gxTpr_Icon.Count )
+               AV29GXV3 = 1;
+               while ( AV29GXV3 <= AV21Theme.gxTpr_Icon.Count )
                {
-                  AV22ThemeIcon = ((SdtTrn_Theme_Icon)AV21Theme.gxTpr_Icon.Item(AV28GXV3));
+                  AV22ThemeIcon = ((SdtTrn_Theme_Icon)AV21Theme.gxTpr_Icon.Item(AV29GXV3));
                   AV16SDT_ThemeIcon = new SdtSDT_Theme_IconsItem(context);
                   AV16SDT_ThemeIcon.gxTpr_Iconid = AV22ThemeIcon.gxTpr_Iconid;
                   AV16SDT_ThemeIcon.gxTpr_Iconname = AV22ThemeIcon.gxTpr_Iconname;
                   AV16SDT_ThemeIcon.gxTpr_Iconsvg = AV22ThemeIcon.gxTpr_Iconsvg;
                   AV16SDT_ThemeIcon.gxTpr_Iconcategory = AV22ThemeIcon.gxTpr_Iconcategory;
                   AV14SDT_Theme.gxTpr_Icons.Add(AV16SDT_ThemeIcon, 0);
-                  AV28GXV3 = (int)(AV28GXV3+1);
+                  AV29GXV3 = (int)(AV29GXV3+1);
                }
-               AV29GXV4 = 1;
-               while ( AV29GXV4 <= AV21Theme.gxTpr_Ctacolor.Count )
+               AV30GXV4 = 1;
+               while ( AV30GXV4 <= AV21Theme.gxTpr_Ctacolor.Count )
                {
-                  AV24ThemeCtaColor = ((SdtTrn_Theme_CtaColor)AV21Theme.gxTpr_Ctacolor.Item(AV29GXV4));
+                  AV24ThemeCtaColor = ((SdtTrn_Theme_CtaColor)AV21Theme.gxTpr_Ctacolor.Item(AV30GXV4));
                   AV18SDT_ThemeCtaColor = new SdtSDT_Theme_CtaColorsItem(context);
                   AV18SDT_ThemeCtaColor.gxTpr_Ctacolorid = AV24ThemeCtaColor.gxTpr_Ctacolorid;
                   AV18SDT_ThemeCtaColor.gxTpr_Ctacolorname = AV24ThemeCtaColor.gxTpr_Ctacolorname;
                   AV18SDT_ThemeCtaColor.gxTpr_Ctacolorcode = AV24ThemeCtaColor.gxTpr_Ctacolorcode;
                   AV14SDT_Theme.gxTpr_Ctacolors.Add(AV18SDT_ThemeCtaColor, 0);
-                  AV29GXV4 = (int)(AV29GXV4+1);
+                  AV30GXV4 = (int)(AV30GXV4+1);
                }
             }
-            AV26GXV1 = (int)(AV26GXV1+1);
+            AV27GXV1 = (int)(AV27GXV1+1);
          }
          AV19SDT_AppPreview.gxTpr_Sdt_theme.FromJSonString(AV14SDT_Theme.ToJSonString(false, true), null);
       }
@@ -758,7 +758,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025630953358", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257213145046", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -776,7 +776,7 @@ namespace GeneXus.Programs {
          if ( nGXWrapped != 1 )
          {
             context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-            context.AddJavascriptSource("wp_apppreview.js", "?2025630953359", false, true);
+            context.AddJavascriptSource("wp_apppreview.js", "?20257213145046", false, true);
             context.AddJavascriptSource("UserControls/UC_AppPreviewRender.js", "", false, true);
          }
          /* End function include_jscripts */
@@ -877,6 +877,7 @@ namespace GeneXus.Programs {
          AV11Current_Theme = Guid.Empty;
          AV20Themes = new GXBCCollection<SdtTrn_Theme>( context, "Trn_Theme", "Comforta_version2");
          GXt_objcol_SdtTrn_Theme1 = new GXBCCollection<SdtTrn_Theme>( context, "Trn_Theme", "Comforta_version2");
+         AV25Icons = new GXBaseCollection<SdtSDT_Icon>( context, "SDT_Icon", "Comforta_version2");
          AV21Theme = new SdtTrn_Theme(context);
          AV14SDT_Theme = new SdtSDT_Theme(context);
          AV23ThemeColor = new SdtTrn_Theme_Color(context);
@@ -912,10 +913,10 @@ namespace GeneXus.Programs {
       private short wbStart ;
       private short nDonePA ;
       private short gxcookieaux ;
-      private int AV26GXV1 ;
-      private int AV27GXV2 ;
-      private int AV28GXV3 ;
-      private int AV29GXV4 ;
+      private int AV27GXV1 ;
+      private int AV28GXV2 ;
+      private int AV29GXV3 ;
+      private int AV30GXV4 ;
       private int idxLst ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
@@ -973,6 +974,7 @@ namespace GeneXus.Programs {
       private Guid[] H00B04_A273Trn_ThemeId ;
       private GXBCCollection<SdtTrn_Theme> AV20Themes ;
       private GXBCCollection<SdtTrn_Theme> GXt_objcol_SdtTrn_Theme1 ;
+      private GXBaseCollection<SdtSDT_Icon> AV25Icons ;
       private SdtTrn_Theme AV21Theme ;
       private SdtSDT_Theme AV14SDT_Theme ;
       private SdtTrn_Theme_Color AV23ThemeColor ;

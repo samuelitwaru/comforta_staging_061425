@@ -30,6 +30,8 @@ namespace GeneXus.Programs
 		public SdtSDT_Icon( )
 		{
 			/* Constructor for serialization */
+			gxTv_SdtSDT_Icon_Iconcodename = "";
+
 			gxTv_SdtSDT_Icon_Iconname = "";
 
 			gxTv_SdtSDT_Icon_Icontags = "";
@@ -68,6 +70,9 @@ namespace GeneXus.Programs
 			AddObjectProperty("IconId", gxTpr_Iconid, false);
 
 
+			AddObjectProperty("IconCodeName", gxTpr_Iconcodename, false);
+
+
 			AddObjectProperty("IconName", gxTpr_Iconname, false);
 
 
@@ -95,6 +100,22 @@ namespace GeneXus.Programs
 			set {
 				gxTv_SdtSDT_Icon_Iconid = value;
 				SetDirty("Iconid");
+			}
+		}
+
+
+
+
+		[SoapElement(ElementName="IconCodeName")]
+		[XmlElement(ElementName="IconCodeName")]
+		public string gxTpr_Iconcodename
+		{
+			get {
+				return gxTv_SdtSDT_Icon_Iconcodename; 
+			}
+			set {
+				gxTv_SdtSDT_Icon_Iconcodename = value;
+				SetDirty("Iconcodename");
 			}
 		}
 
@@ -185,6 +206,7 @@ namespace GeneXus.Programs
 
 		public void initialize( )
 		{
+			gxTv_SdtSDT_Icon_Iconcodename = "";
 			gxTv_SdtSDT_Icon_Iconname = "";
 			gxTv_SdtSDT_Icon_Icontags = "";
 			gxTv_SdtSDT_Icon_Iconsvg = "";
@@ -199,6 +221,9 @@ namespace GeneXus.Programs
 		#region Declaration
 
 		protected Guid gxTv_SdtSDT_Icon_Iconid;
+		 
+
+		protected string gxTv_SdtSDT_Icon_Iconcodename;
 		 
 
 		protected string gxTv_SdtSDT_Icon_Iconname;
@@ -242,7 +267,19 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="IconName", Order=1)]
+		[DataMember(Name="IconCodeName", Order=1)]
+		public  string gxTpr_Iconcodename
+		{
+			get { 
+				return sdt.gxTpr_Iconcodename;
+
+			}
+			set { 
+				 sdt.gxTpr_Iconcodename = value;
+			}
+		}
+
+		[DataMember(Name="IconName", Order=2)]
 		public  string gxTpr_Iconname
 		{
 			get { 
@@ -254,7 +291,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="IconTags", Order=2)]
+		[DataMember(Name="IconTags", Order=3)]
 		public  string gxTpr_Icontags
 		{
 			get { 
@@ -266,7 +303,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="IconSVG", Order=3)]
+		[DataMember(Name="IconSVG", Order=4)]
 		public  string gxTpr_Iconsvg
 		{
 			get { 
@@ -278,7 +315,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="IconCategory", Order=4)]
+		[DataMember(Name="IconCategory", Order=5)]
 		public  string gxTpr_Iconcategory
 		{
 			get { 

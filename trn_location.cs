@@ -1024,6 +1024,7 @@ namespace GeneXus.Programs {
                Combo_locationphonecode_Selectalltext = cgiGet( "COMBO_LOCATIONPHONECODE_Selectalltext");
                Combo_locationphonecode_Multiplevaluesseparator = cgiGet( "COMBO_LOCATIONPHONECODE_Multiplevaluesseparator");
                Combo_locationphonecode_Addnewoptiontext = cgiGet( "COMBO_LOCATIONPHONECODE_Addnewoptiontext");
+               Combo_locationphonecode_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "COMBO_LOCATIONPHONECODE_Gxcontroltype"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
                Imageuploaduc_Objectcall = cgiGet( "IMAGEUPLOADUC_Objectcall");
                Imageuploaduc_Class = cgiGet( "IMAGEUPLOADUC_Class");
                Imageuploaduc_Enabled = StringUtil.StrToBool( cgiGet( "IMAGEUPLOADUC_Enabled"));
@@ -1095,6 +1096,7 @@ namespace GeneXus.Programs {
                Combo_locationcountry_Selectalltext = cgiGet( "COMBO_LOCATIONCOUNTRY_Selectalltext");
                Combo_locationcountry_Multiplevaluesseparator = cgiGet( "COMBO_LOCATIONCOUNTRY_Multiplevaluesseparator");
                Combo_locationcountry_Addnewoptiontext = cgiGet( "COMBO_LOCATIONCOUNTRY_Addnewoptiontext");
+               Combo_locationcountry_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "COMBO_LOCATIONCOUNTRY_Gxcontroltype"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
                /* Read variables values. */
                A31LocationName = cgiGet( edtLocationName_Internalname);
                AssignAttri("", false, "A31LocationName", A31LocationName);
@@ -3678,7 +3680,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20256309371888", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257212464263", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3694,7 +3696,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("trn_location.js", "?20256309371890", false, true);
+         context.AddJavascriptSource("trn_location.js", "?20257212464266", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -4551,8 +4553,10 @@ namespace GeneXus.Programs {
       private int imgLocationImage_Visible ;
       private int imgLocationImage_Enabled ;
       private int Combo_locationphonecode_Datalistupdateminimumcharacters ;
+      private int Combo_locationphonecode_Gxcontroltype ;
       private int Locationdescription_Coltitlecolor ;
       private int Combo_locationcountry_Datalistupdateminimumcharacters ;
+      private int Combo_locationcountry_Gxcontroltype ;
       private int AV47GXV1 ;
       private int idxLst ;
       private string sPrefix ;

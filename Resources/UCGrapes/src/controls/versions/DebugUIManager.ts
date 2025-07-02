@@ -134,7 +134,7 @@ export class DebugUIManager {
     const debugPage = document.createElement("div");
     debugPage.classList.add("tb_debug_page-sections");
 
-    this.debugResults.Pages.forEach((pageItem) => {
+    this.debugResults.Pages.forEach((pageItem: any) => {
       const pageSection = this.debugPageSection(pageItem);
       debugPage.appendChild(pageSection);
     });

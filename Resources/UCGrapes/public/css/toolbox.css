@@ -729,7 +729,7 @@ img.content-page-block {
 
 .img-button-section span {
   position: absolute;
-  bottom: -6px;
+  top: -6px;
   right: -10px;
   cursor: pointer;
   opacity: 0;

@@ -1,6 +1,7 @@
 import { EditorEvents } from "../../../controls/editor/EditorEvents";
 import { EditorManager } from "../../../controls/editor/EditorManager";
 import { AppVersionManager } from "../../../controls/versions/AppVersionManager";
+import { i18n } from "../../../i18n/i18n";
 
 export class PageAppBar {
   private container: HTMLElement;
@@ -90,7 +91,7 @@ export class PageAppBar {
     pageTitle.textContent = truncatedTitle || "Untitled";
     this.pageTitle = pageTitle;
 
-    this.pageTitle.setAttribute("data-placeholder", "Enter page title");
+    this.pageTitle.setAttribute("data-placeholder", i18n.t("page.title_placeholder"));
 
     const iconContainer = document.createElement("div");
     iconContainer.classList.add("icon-container");

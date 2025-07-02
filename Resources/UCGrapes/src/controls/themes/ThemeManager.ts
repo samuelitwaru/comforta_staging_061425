@@ -70,7 +70,7 @@ export class ThemeManager {
   }
 
   getActiveThemeIcons(): any[] {
-    return this._currentTheme?.ThemeIcons || [];
+    return this._currentTheme?.Icons || [];
   }
 
   getActiveThemeColors(): ThemeColors | Record<string, never> {
@@ -220,14 +220,15 @@ export class ThemeManager {
   getThemeIcon(iconName: string): string | null {
     const icons = this.getActiveThemeIcons();
     return (
-      icons?.find((icon: any) => icon.IconName === iconName)?.IconSVG || null
+      icons?.find((icon: any) => icon.IconCodeName === iconName)?.IconSVG || null
     );
   }
 
   getIconCategory(iconName: string): string | null {
+    alert(iconName)
     const icons = this.getActiveThemeIcons();
     return (
-      icons?.find((icon: any) => icon.IconName === iconName)?.IconCategory ||
+      icons?.find((icon: any) => icon.IconCodeName === iconName)?.IconCategory ||
       null
     );
   }

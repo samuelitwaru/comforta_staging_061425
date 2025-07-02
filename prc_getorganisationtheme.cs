@@ -46,32 +46,39 @@ namespace GeneXus.Programs {
 
       public void execute( Guid aP0_OrganisationId ,
                            Guid aP1_LocationId ,
-                           out GXBCCollection<SdtTrn_Theme> aP2_BC_Trn_ThemeCollection )
+                           out GXBaseCollection<SdtSDT_Icon> aP2_SDT_IconCollection ,
+                           out GXBCCollection<SdtTrn_Theme> aP3_BC_Trn_ThemeCollection )
       {
          this.AV16OrganisationId = aP0_OrganisationId;
          this.AV26LocationId = aP1_LocationId;
+         this.AV30SDT_IconCollection = new GXBaseCollection<SdtSDT_Icon>( context, "SDT_Icon", "Comforta_version2") ;
          this.AV23BC_Trn_ThemeCollection = new GXBCCollection<SdtTrn_Theme>( context, "Trn_Theme", "Comforta_version2") ;
          initialize();
          ExecuteImpl();
-         aP2_BC_Trn_ThemeCollection=this.AV23BC_Trn_ThemeCollection;
+         aP2_SDT_IconCollection=this.AV30SDT_IconCollection;
+         aP3_BC_Trn_ThemeCollection=this.AV23BC_Trn_ThemeCollection;
       }
 
       public GXBCCollection<SdtTrn_Theme> executeUdp( Guid aP0_OrganisationId ,
-                                                      Guid aP1_LocationId )
+                                                      Guid aP1_LocationId ,
+                                                      out GXBaseCollection<SdtSDT_Icon> aP2_SDT_IconCollection )
       {
-         execute(aP0_OrganisationId, aP1_LocationId, out aP2_BC_Trn_ThemeCollection);
+         execute(aP0_OrganisationId, aP1_LocationId, out aP2_SDT_IconCollection, out aP3_BC_Trn_ThemeCollection);
          return AV23BC_Trn_ThemeCollection ;
       }
 
       public void executeSubmit( Guid aP0_OrganisationId ,
                                  Guid aP1_LocationId ,
-                                 out GXBCCollection<SdtTrn_Theme> aP2_BC_Trn_ThemeCollection )
+                                 out GXBaseCollection<SdtSDT_Icon> aP2_SDT_IconCollection ,
+                                 out GXBCCollection<SdtTrn_Theme> aP3_BC_Trn_ThemeCollection )
       {
          this.AV16OrganisationId = aP0_OrganisationId;
          this.AV26LocationId = aP1_LocationId;
+         this.AV30SDT_IconCollection = new GXBaseCollection<SdtSDT_Icon>( context, "SDT_Icon", "Comforta_version2") ;
          this.AV23BC_Trn_ThemeCollection = new GXBCCollection<SdtTrn_Theme>( context, "Trn_Theme", "Comforta_version2") ;
          SubmitImpl();
-         aP2_BC_Trn_ThemeCollection=this.AV23BC_Trn_ThemeCollection;
+         aP2_SDT_IconCollection=this.AV30SDT_IconCollection;
+         aP3_BC_Trn_ThemeCollection=this.AV23BC_Trn_ThemeCollection;
       }
 
       protected override void ExecutePrivate( )
@@ -84,6 +91,7 @@ namespace GeneXus.Programs {
          while ( (pr_default.getStatus(0) != 101) )
          {
             A649Trn_IconId = P00C32_A649Trn_IconId[0];
+            A657IconDisplayName = P00C32_A657IconDisplayName[0];
             A651IconEnglishName = P00C32_A651IconEnglishName[0];
             A655IconEnglishTags = P00C32_A655IconEnglishTags[0];
             A652IconDutchName = P00C32_A652IconDutchName[0];
@@ -92,6 +100,7 @@ namespace GeneXus.Programs {
             A654Trn_IconCategory = P00C32_A654Trn_IconCategory[0];
             AV29SDT_Icon = new SdtSDT_Icon(context);
             AV29SDT_Icon.gxTpr_Iconid = A649Trn_IconId;
+            AV29SDT_Icon.gxTpr_Iconcodename = A657IconDisplayName;
             if ( StringUtil.StrCmp(AV31Language, context.GetMessage( "English", "")) == 0 )
             {
                AV29SDT_Icon.gxTpr_Iconname = A651IconEnglishName;
@@ -233,9 +242,11 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
+         AV30SDT_IconCollection = new GXBaseCollection<SdtSDT_Icon>( context, "SDT_Icon", "Comforta_version2");
          AV23BC_Trn_ThemeCollection = new GXBCCollection<SdtTrn_Theme>( context, "Trn_Theme", "Comforta_version2");
          AV31Language = "";
          P00C32_A649Trn_IconId = new Guid[] {Guid.Empty} ;
+         P00C32_A657IconDisplayName = new string[] {""} ;
          P00C32_A651IconEnglishName = new string[] {""} ;
          P00C32_A655IconEnglishTags = new string[] {""} ;
          P00C32_A652IconDutchName = new string[] {""} ;
@@ -243,6 +254,7 @@ namespace GeneXus.Programs {
          P00C32_A653Trn_IconSVG = new string[] {""} ;
          P00C32_A654Trn_IconCategory = new string[] {""} ;
          A649Trn_IconId = Guid.Empty;
+         A657IconDisplayName = "";
          A651IconEnglishName = "";
          A655IconEnglishTags = "";
          A652IconDutchName = "";
@@ -250,7 +262,6 @@ namespace GeneXus.Programs {
          A653Trn_IconSVG = "";
          A654Trn_IconCategory = "";
          AV29SDT_Icon = new SdtSDT_Icon(context);
-         AV30SDT_IconCollection = new GXBaseCollection<SdtSDT_Icon>( context, "SDT_Icon", "Comforta_version2");
          P00C33_A576ThemeIsPredefined = new bool[] {false} ;
          P00C33_A274Trn_ThemeName = new string[] {""} ;
          P00C33_A273Trn_ThemeId = new Guid[] {Guid.Empty} ;
@@ -288,7 +299,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.prc_getorganisationtheme__default(),
             new Object[][] {
                 new Object[] {
-               P00C32_A649Trn_IconId, P00C32_A651IconEnglishName, P00C32_A655IconEnglishTags, P00C32_A652IconDutchName, P00C32_A656IconDutchTags, P00C32_A653Trn_IconSVG, P00C32_A654Trn_IconCategory
+               P00C32_A649Trn_IconId, P00C32_A657IconDisplayName, P00C32_A651IconEnglishName, P00C32_A655IconEnglishTags, P00C32_A652IconDutchName, P00C32_A656IconDutchTags, P00C32_A653Trn_IconSVG, P00C32_A654Trn_IconCategory
                }
                , new Object[] {
                P00C33_A576ThemeIsPredefined, P00C33_A274Trn_ThemeName, P00C33_A273Trn_ThemeId
@@ -325,6 +336,7 @@ namespace GeneXus.Programs {
       private string A655IconEnglishTags ;
       private string A656IconDutchTags ;
       private string A653Trn_IconSVG ;
+      private string A657IconDisplayName ;
       private string A651IconEnglishName ;
       private string A652IconDutchName ;
       private string A654Trn_IconCategory ;
@@ -342,9 +354,11 @@ namespace GeneXus.Programs {
       private IGxDataStore dsDataStore1 ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GXBaseCollection<SdtSDT_Icon> AV30SDT_IconCollection ;
       private GXBCCollection<SdtTrn_Theme> AV23BC_Trn_ThemeCollection ;
       private IDataStoreProvider pr_default ;
       private Guid[] P00C32_A649Trn_IconId ;
+      private string[] P00C32_A657IconDisplayName ;
       private string[] P00C32_A651IconEnglishName ;
       private string[] P00C32_A655IconEnglishTags ;
       private string[] P00C32_A652IconDutchName ;
@@ -352,7 +366,6 @@ namespace GeneXus.Programs {
       private string[] P00C32_A653Trn_IconSVG ;
       private string[] P00C32_A654Trn_IconCategory ;
       private SdtSDT_Icon AV29SDT_Icon ;
-      private GXBaseCollection<SdtSDT_Icon> AV30SDT_IconCollection ;
       private bool[] P00C33_A576ThemeIsPredefined ;
       private string[] P00C33_A274Trn_ThemeName ;
       private Guid[] P00C33_A273Trn_ThemeId ;
@@ -379,7 +392,8 @@ namespace GeneXus.Programs {
       private Guid[] P00C38_A273Trn_ThemeId ;
       private bool[] P00C38_n273Trn_ThemeId ;
       private Guid[] P00C38_A100OrganisationSettingid ;
-      private GXBCCollection<SdtTrn_Theme> aP2_BC_Trn_ThemeCollection ;
+      private GXBaseCollection<SdtSDT_Icon> aP2_SDT_IconCollection ;
+      private GXBCCollection<SdtTrn_Theme> aP3_BC_Trn_ThemeCollection ;
    }
 
    public class prc_getorganisationtheme__default : DataStoreHelperBase, IDataStoreHelper
@@ -430,7 +444,7 @@ namespace GeneXus.Programs {
           new ParDef("AV16OrganisationId",GXType.UniqueIdentifier,36,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P00C32", "SELECT Trn_IconId, IconEnglishName, IconEnglishTags, IconDutchName, IconDutchTags, Trn_IconSVG, Trn_IconCategory FROM Trn_Icon ORDER BY Trn_IconId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00C32,100, GxCacheFrequency.OFF ,false,false )
+              new CursorDef("P00C32", "SELECT Trn_IconId, IconDisplayName, IconEnglishName, IconEnglishTags, IconDutchName, IconDutchTags, Trn_IconSVG, Trn_IconCategory FROM Trn_Icon ORDER BY Trn_IconId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00C32,100, GxCacheFrequency.OFF ,false,false )
              ,new CursorDef("P00C33", "SELECT ThemeIsPredefined, Trn_ThemeName, Trn_ThemeId FROM Trn_Theme WHERE (Not (char_length(trim(trailing ' ' from RTRIM(LTRIM(Trn_ThemeName))))=0)) AND (ThemeIsPredefined = TRUE) ORDER BY Trn_ThemeName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00C33,100, GxCacheFrequency.OFF ,true,false )
              ,new CursorDef("P00C34", "SELECT ActiveAppVersionId, PublishedActiveAppVersionId, LocationThemeId, LocationHasOwnBrand, LocationId, OrganisationId FROM Trn_Location WHERE (LocationId = :AV26LocationId) AND (LocationHasOwnBrand = TRUE) ORDER BY LocationId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00C34,100, GxCacheFrequency.OFF ,true,false )
              ,new CursorDef("P00C35", "SELECT Trn_ThemeId FROM Trn_AppVersion WHERE AppVersionId = :PublishedActiveAppVersionId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00C35,1, GxCacheFrequency.OFF ,true,false )
@@ -450,11 +464,12 @@ namespace GeneXus.Programs {
              case 0 :
                 ((Guid[]) buf[0])[0] = rslt.getGuid(1);
                 ((string[]) buf[1])[0] = rslt.getVarchar(2);
-                ((string[]) buf[2])[0] = rslt.getLongVarchar(3);
-                ((string[]) buf[3])[0] = rslt.getVarchar(4);
-                ((string[]) buf[4])[0] = rslt.getLongVarchar(5);
+                ((string[]) buf[2])[0] = rslt.getVarchar(3);
+                ((string[]) buf[3])[0] = rslt.getLongVarchar(4);
+                ((string[]) buf[4])[0] = rslt.getVarchar(5);
                 ((string[]) buf[5])[0] = rslt.getLongVarchar(6);
-                ((string[]) buf[6])[0] = rslt.getVarchar(7);
+                ((string[]) buf[6])[0] = rslt.getLongVarchar(7);
+                ((string[]) buf[7])[0] = rslt.getVarchar(8);
                 return;
              case 1 :
                 ((bool[]) buf[0])[0] = rslt.getBool(1);

@@ -132,7 +132,7 @@ namespace GeneXus.Programs {
             if ( (Guid.Empty==AV14ThemeId) )
             {
                /* Execute user subroutine: 'GETTHEMEID' */
-               S111 ();
+               S121 ();
                if ( returnInSub )
                {
                   pr_default.close(2);
@@ -200,7 +200,6 @@ namespace GeneXus.Programs {
             }
             else if ( StringUtil.StrCmp(AV13InfoContent.gxTpr_Infotype, "TileGrid") == 0 )
             {
-               AV13InfoContent.gxTpr_Infotype = "TileRow";
                AV29GXV3 = 1;
                while ( AV29GXV3 <= AV13InfoContent.gxTpr_Columns.Count )
                {
@@ -209,6 +208,13 @@ namespace GeneXus.Programs {
                   while ( AV30GXV4 <= AV22ColumnsItem.gxTpr_Tiles.Count )
                   {
                      AV15SDT_InfoTile = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV22ColumnsItem.gxTpr_Tiles.Item(AV30GXV4));
+                     /* Execute user subroutine: 'CLEANTILE' */
+                     S111 ();
+                     if ( returnInSub )
+                     {
+                        cleanup();
+                        if (true) return;
+                     }
                      AV13InfoContent.gxTpr_Tiles.Add(AV15SDT_InfoTile, 0);
                      AV30GXV4 = (int)(AV30GXV4+1);
                   }
@@ -221,28 +227,12 @@ namespace GeneXus.Programs {
                while ( AV31GXV5 <= AV13InfoContent.gxTpr_Tiles.Count )
                {
                   AV15SDT_InfoTile = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV13InfoContent.gxTpr_Tiles.Item(AV31GXV5));
-                  GXt_char1 = "";
-                  new prc_getthemecolorbyname(context ).execute(  AV14ThemeId,  AV15SDT_InfoTile.gxTpr_Bgcolor, out  GXt_char1) ;
-                  AV15SDT_InfoTile.gxTpr_Bgcolor = GXt_char1;
-                  AV15SDT_InfoTile.gxTpr_Size = (decimal)(((AV15SDT_InfoTile.gxTpr_Size==Convert.ToDecimal(0)) ? 80 : (short)(Math.Round(AV15SDT_InfoTile.gxTpr_Size, 18, MidpointRounding.ToEven))));
-                  AV15SDT_InfoTile.gxTpr_Size = (decimal)(AV15SDT_InfoTile.gxTpr_Size/ (decimal)(80));
-                  if ( StringUtil.StrCmp(AV15SDT_InfoTile.gxTpr_Action.gxTpr_Objecttype, "DynamicForm") == 0 )
+                  /* Execute user subroutine: 'CLEANTILE' */
+                  S111 ();
+                  if ( returnInSub )
                   {
-                     /* Using cursor P00GB6 */
-                     pr_default.execute(4, new Object[] {AV15SDT_InfoTile.gxTpr_Action.gxTpr_Formid, AV15SDT_InfoTile.gxTpr_Action.gxTpr_Objectid});
-                     while ( (pr_default.getStatus(4) != 101) )
-                     {
-                        A206WWPFormId = P00GB6_A206WWPFormId[0];
-                        A208WWPFormReferenceName = P00GB6_A208WWPFormReferenceName[0];
-                        A207WWPFormVersionNumber = P00GB6_A207WWPFormVersionNumber[0];
-                        AV15SDT_InfoTile.gxTpr_Action.gxTpr_Objecturl = A367CallToActionUrl;
-                        GXt_char1 = "";
-                        GXt_char2 = context.GetMessage( "Form", "");
-                        new prc_getcalltoactionformurl(context ).execute( ref  GXt_char2, ref  A208WWPFormReferenceName, out  GXt_char1) ;
-                        AV15SDT_InfoTile.gxTpr_Action.gxTpr_Objecturl = GXt_char1;
-                        pr_default.readNext(4);
-                     }
-                     pr_default.close(4);
+                     cleanup();
+                     if (true) return;
                   }
                   AV31GXV5 = (int)(AV31GXV5+1);
                }
@@ -256,6 +246,35 @@ namespace GeneXus.Programs {
       }
 
       protected void S111( )
+      {
+         /* 'CLEANTILE' Routine */
+         returnInSub = false;
+         GXt_char1 = "";
+         new prc_getthemecolorbyname(context ).execute(  AV14ThemeId,  AV15SDT_InfoTile.gxTpr_Bgcolor, out  GXt_char1) ;
+         AV15SDT_InfoTile.gxTpr_Bgcolor = GXt_char1;
+         AV15SDT_InfoTile.gxTpr_Size = (decimal)(((AV15SDT_InfoTile.gxTpr_Size==Convert.ToDecimal(0)) ? 80 : (short)(Math.Round(AV15SDT_InfoTile.gxTpr_Size, 18, MidpointRounding.ToEven))));
+         AV15SDT_InfoTile.gxTpr_Size = (decimal)(AV15SDT_InfoTile.gxTpr_Size/ (decimal)(80));
+         if ( StringUtil.StrCmp(AV15SDT_InfoTile.gxTpr_Action.gxTpr_Objecttype, "DynamicForm") == 0 )
+         {
+            /* Using cursor P00GB6 */
+            pr_default.execute(4, new Object[] {AV15SDT_InfoTile.gxTpr_Action.gxTpr_Formid, AV15SDT_InfoTile.gxTpr_Action.gxTpr_Objectid});
+            while ( (pr_default.getStatus(4) != 101) )
+            {
+               A206WWPFormId = P00GB6_A206WWPFormId[0];
+               A208WWPFormReferenceName = P00GB6_A208WWPFormReferenceName[0];
+               A207WWPFormVersionNumber = P00GB6_A207WWPFormVersionNumber[0];
+               AV15SDT_InfoTile.gxTpr_Action.gxTpr_Objecturl = A367CallToActionUrl;
+               GXt_char1 = "";
+               GXt_char2 = context.GetMessage( "Form", "");
+               new prc_getcalltoactionformurl(context ).execute( ref  GXt_char2, ref  A208WWPFormReferenceName, out  GXt_char1) ;
+               AV15SDT_InfoTile.gxTpr_Action.gxTpr_Objecturl = GXt_char1;
+               pr_default.readNext(4);
+            }
+            pr_default.close(4);
+         }
+      }
+
+      protected void S121( )
       {
          /* 'GETTHEMEID' Routine */
          returnInSub = false;

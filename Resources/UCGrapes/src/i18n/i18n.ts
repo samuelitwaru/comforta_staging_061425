@@ -41,6 +41,8 @@ export const i18n = new I18n({
         affected_tile: "Affected Tile",
         affected_content: "Affected Content",
         affected_cta: "Affected CTA",
+        debug_error_message: "*Page has some errors in the link. Please check again",
+        processing_message: "Please wait while we are checking the urls...",
       },
       share: {
         label: "Share",
@@ -86,6 +88,7 @@ export const i18n = new I18n({
     redo: "Redo",
     translate: "Translate",
     sidebar: {
+      icon_search_text: "Search Icons",
       pages: "Pages",
       linked_pages: "Linked Pages",
       templates: {
@@ -145,6 +148,7 @@ export const i18n = new I18n({
         paste_selection: "Paste Selection",
       },
       input_place_holder: "Enter title",
+      search_icons: "Search icons",
     },
     default: {
       reception: "Reception",
@@ -202,7 +206,9 @@ export const i18n = new I18n({
     Messages: "Messages",
     Requests: "Requests",
     NoMessagesYet: "No Messages Yet",
-
+    page: {
+      title_placeholder: "Enter page title",
+    },
     section: {
       delete: "Delete",
       edit: "Edit",
@@ -271,7 +277,7 @@ export const i18n = new I18n({
       },
       debug: {
         label: "Debug",
-        modal_title: "App Debugging",
+        modal_title: "App-debuggen",
         total_urls: "Totaal aantal URL's",
         total_successful: "Succesvol",
         total_failed: "Mislukt",
@@ -281,6 +287,8 @@ export const i18n = new I18n({
         affected_tile: "Beïnvloede tegel",
         affected_content: "Beïnvloede inhoud",
         affected_cta: "Beïnvloede CTA",
+        debug_error_message: "*Pagina bevat enkele fouten in de link. Controleer het opnieuw",
+        processing_message: "Even geduld terwijl we de URL's controleren...",
       },
       share: {
         label: "Delen",
@@ -379,6 +387,7 @@ export const i18n = new I18n({
         paste_selection: "Selectie plakken",
       },
       input_place_holder: "Voer titel in",
+      search_icons: "Pictogrammen zoeken",
     },
     default: {
       reception: "Receptie",
@@ -437,7 +446,9 @@ export const i18n = new I18n({
     Messages: "Berichten",
     Requests: "Verzoeken",
     NoMessagesYet: "Nog geen berichten",
-
+    page: {
+      title_placeholder: "Voer paginatitel in",
+    },
     section: {
       delete: "Verwijderen",
       edit: "Bewerken",
