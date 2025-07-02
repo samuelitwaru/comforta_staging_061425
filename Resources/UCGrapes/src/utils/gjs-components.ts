@@ -26,7 +26,11 @@ export function tileFromAttributes (tile: Tile, themeManager:ThemeManager): stri
   const text = tile.Text
   const textColor = tile.Color
   const align = tile.Align
-  const icon = themeManager.getThemeIcon(tile.Icon as string)?.replace(/fill="[^"]*"/g, `fill="${textColor}"`)
+  const icon = themeManager.getThemeIcon(tile.Icon as string)
+  let iconSVG = ""
+  if (icon) {
+    iconSVG = icon.IconSVG.replace(/fill="[^"]*"/g, `fill="${textColor}"`)
+  }
   const bgImage = tile.BGImageUrl
   const bgColor = bgImage ? '' : themeManager.getThemeColor(tile.BGColor as string)
   const opacity = tile.Opacity;
@@ -36,8 +40,8 @@ export function tileFromAttributes (tile: Tile, themeManager:ThemeManager): stri
         <div ${tileDefaultAttributes} class="template-block" style="background-color: ${bgColor}; background-image: url(${bgImage}); color: ${textColor}; justify-content: ${align}; align-items: ${align}">
             <div ${DefaultAttributes} class="tile-icon-section"  style="display: ${icon?'block':'none'}; " >
                 <span ${DefaultAttributes} data-gjs-type="text" class="tile-close-icon top-right selected-tile-title">×</span>
-                <span ${DefaultAttributes} data-gjs-type="text" class="tile-icon">
-                  ${icon}
+                <span ${DefaultAttributes} data-gjs-type="text" title="${icon?.IconName}" class="tile-icon">
+                  ${iconSVG}
                 </span>
             </div>
             <div ${DefaultAttributes} class="tile-title-section">
