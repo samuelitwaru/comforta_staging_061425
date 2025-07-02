@@ -26,6 +26,9 @@ export class TileProperties {
     this.setTileDebugStatus();
   }
 
+  /**
+   * ::set selected tile background color
+   */
   private setBgColorProperties(): void {
     const themeColors = document.getElementById("theme-color-palette");
     const tileEl = this.selectedComponent.getEl() as HTMLElement;
@@ -41,6 +44,7 @@ export class TileProperties {
     for (let i = 0; i < colorBoxes.length; i++) {
       const colorBox = colorBoxes[i] as HTMLElement;
       const inputBox = colorBox.querySelector("input") as HTMLInputElement;
+      console.log(!hasBgImage, tileBGColorHex, tileBgColorAttr, inputBox.value)
       if (!hasBgImage && tileBGColorHex === tileBgColorAttr && tileBGColorHex === inputBox.value) {
         inputBox.checked = true;
       } else {
@@ -185,7 +189,11 @@ export class TileProperties {
       if (tileIcon && iconTitle === selectedTileIcon) {
         iconElement.style.border = "2px solid #5068A8";
         const svgPath = iconElement.querySelector("svg path") as SVGPathElement;
-        iconElement.scrollIntoView();
+        iconElement.scrollIntoView({
+          block: "nearest",
+          inline: "nearest",
+          behavior: "smooth",
+        });
         if (svgPath) {
           svgPath.setAttribute("fill", "#5068A8");
         }
