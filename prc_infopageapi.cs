@@ -170,6 +170,7 @@ namespace GeneXus.Programs {
          while ( AV29GXV1 <= AV8SDT_InfoPage.gxTpr_Infocontent.Count )
          {
             AV14InfoContent = ((SdtSDT_InfoPage_InfoContentItem)AV8SDT_InfoPage.gxTpr_Infocontent.Item(AV29GXV1));
+            AV14InfoContent.gxTpr_Tiles = new();
             if ( StringUtil.StrCmp(AV14InfoContent.gxTpr_Infotype, "Images") == 0 )
             {
                AV14InfoContent.gxTpr_Infotype = "Image";

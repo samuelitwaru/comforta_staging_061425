@@ -341,8 +341,10 @@ export class VersionSelectionView {
     const languageField = form.addField({
       type: "select",
       id: "version_language",
+      //and infor icon on label
+      information: i18n.t("navbar.publish.select_default_language_info"),
       options: [
-        { value: "", label: "Select language" },
+        { value: "", label: i18n.t("navbar.publish.select_default_language") },
         { value: "en", label: "English" },
         { value: "nl", label: "Nederlands" },
       ],
@@ -360,6 +362,8 @@ export class VersionSelectionView {
 
     const div = document.createElement("div");
     form.render(div);
+
+    //create dive to explain
 
     //hide language field if action is duplicate or rename
     if (action === "duplicate" || action === "rename") {

@@ -13,7 +13,8 @@ export class FormField {
     validate?: (value: string) => boolean;
     minLength?: number;
     hidden?: boolean;
-    options?: { value: string; label: string }[]; // For select inputs
+    options?: { value: string; label: string }[];
+    information?: string;
   }) {
     this.validateFn = config.validate;
     this.formField = document.createElement("div");
@@ -29,6 +30,28 @@ export class FormField {
     if (config.label) {
       label.htmlFor = config.id;
       label.textContent = config.label;
+    }
+
+    //information
+    const info = document.createElement("span");
+    info.className = "info";
+    info.style.cssText = `
+            color: #888;
+            font-size: 15px;
+            display: flex;
+            margin-top: 5px;
+        `;
+    if (config.information) {
+      const infoIcon = document.createElement("i");
+      infoIcon.className = "fa fa-info-circle";
+      infoIcon.title = config.information;
+      infoIcon.style.marginLeft = "5px";
+      infoIcon.style.marginRight = "5px";
+      info.appendChild(infoIcon);
+
+      const infoText = document.createElement("label");
+      infoText.textContent = config.information;
+      info.appendChild(infoText);
     }
 
     // Create input or select element based on type
@@ -86,6 +109,9 @@ export class FormField {
     }
     this.formField.appendChild(input);
     this.formField.appendChild(errorSpan);
+    if (config.information) {
+      this.formField.appendChild(info);
+    }
   }
 
   getElement(): HTMLDivElement {

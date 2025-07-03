@@ -26,6 +26,9 @@ export class TileProperties {
     this.setTileDebugStatus();
   }
 
+  /**
+   * ::set selected tile background color
+   */
   private setBgColorProperties(): void {
     const themeColors = document.getElementById("theme-color-palette");
     const tileEl = this.selectedComponent.getEl() as HTMLElement;
@@ -150,11 +153,6 @@ export class TileProperties {
 
   private setTileIconProperties() {
     const tileIcon = this.tileAttributes?.Icon as string;
-    let capitalizedTileIcon = "";
-    if (tileIcon) {
-      capitalizedTileIcon = capitalizeWords(tileIcon.replace(/-/g, " ").replace(/_/g, " "));
-    }
-
     const categoryTitle = this.themeManager.getIconCategory(tileIcon);
     this.themeManager.updateThemeIcons(categoryTitle);
     if (!categoryTitle) return;
@@ -180,16 +178,19 @@ export class TileProperties {
     });
     const iconDiv = this.selectedComponent.getEl().querySelector(".tile-icon") as HTMLElement;
     let selectedTileIcon = iconDiv?.getAttribute("title") ?? "";
-    selectedTileIcon = capitalizeWords(selectedTileIcon.replace(/-/g, " ").replace(/_/g, " "));
     const sideBarIconsDiv = document.querySelector("#icons-list") as HTMLDivElement;
     const sidebarIcons = sideBarIconsDiv.querySelectorAll(".icon");
     sidebarIcons.forEach((icon) => {
       const iconElement = icon as HTMLElement;
       const iconTitle = iconElement.getAttribute("title") ?? "";
-      if (tileIcon && iconTitle === capitalizedTileIcon && iconTitle === selectedTileIcon) {
+      if (tileIcon && iconTitle === selectedTileIcon) {
         iconElement.style.border = "2px solid #5068A8";
         const svgPath = iconElement.querySelector("svg path") as SVGPathElement;
-        iconElement.scrollIntoView();
+        iconElement.scrollIntoView({
+          block: "nearest",
+          inline: "nearest",
+          behavior: "smooth",
+        });
         if (svgPath) {
           svgPath.setAttribute("fill", "#5068A8");
         }

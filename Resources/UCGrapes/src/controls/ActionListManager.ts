@@ -126,6 +126,7 @@ export class ActionListManager {
       appVersion.AppVersionId,
       title
     );
+
     console.log('res', res)
     if (!res.error.message) {
       const page = {
@@ -134,7 +135,6 @@ export class ActionListManager {
         TileName: res.MenuPage.PageName,
         PageType: res.MenuPage.PageType,
       };
-      console.log('page', page)
       this.pageAttacher.attachToTile(page, "Information", "Information", true);
     } else {
       console.error("error", res.error.message);
@@ -142,7 +142,13 @@ export class ActionListManager {
   }
 
   private handleSubMenuItemSelection(item: any, type: string): void {
+    console.log('handleSubMenuItemSelection', item)
+    console.log('handleSubMenuItemSelection', (globalThis as any).pageData)
+
     this.pageAttacher.removeOtherEditors();
+
+    console.log('handleSubMenuItemSelection:removeOtherEditors', (globalThis as any).pageData)
+
     if (type === "DynamicForm") {
       this.handleDynamicForms(item);
     } else if (type === "Modules") {

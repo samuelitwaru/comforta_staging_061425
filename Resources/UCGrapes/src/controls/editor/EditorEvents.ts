@@ -133,6 +133,7 @@ export class EditorEvents {
   }
 
   private onLoad(): void {
+    
     if (!this.editor) return;
 
     this.editor.on("load", () => {
@@ -290,7 +291,6 @@ export class EditorEvents {
               columnComponent.getId(),
               lastTile.getId()
             )
-            console.log('last Tile', lastTile.getEl())
             if (lastTile) {
               lastTile.remove()
               this.tileManager.addTileOnNewRow(lastTile, tileAttributes, containerRowComponent)
@@ -689,6 +689,7 @@ export class EditorEvents {
   }
 
   private processClick(e: MouseEvent, targetElement: Element): void {
+    (globalThis as any).pageData = this.pageData
     const addButtonClicked = (e.target as Element).classList.contains('add-button-right') || 
                               (e.target as Element).closest('.add-button-right')
     const deleteButtonClicked = (e.target as Element).classList.contains('delete-button') || 
@@ -700,9 +701,6 @@ export class EditorEvents {
     const deleteTextClicked = (e.target as Element).classList.contains('tile-close-title') || 
                               (e.target as Element).closest('.tile-close-title')
 
-    console.log('deleteIconClicked', deleteIconClicked)
-    console.log('deleteTextClicked', deleteTextClicked)
-                              
     if (deleteIconClicked) {
       this.deleteIcon(e)
     }
@@ -719,7 +717,7 @@ export class EditorEvents {
     }
 
     this.uiManager.activateEditor(this.frameId);
-    this.uiManager.activateEditor(this.frameId);    
+       
     if (this.disableEditor()) return;
     this.uiManager.clearAllMenuContainers();
     this.uiManager.clearAllDropDowns();

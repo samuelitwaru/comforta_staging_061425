@@ -253,7 +253,6 @@ export class PageAppBar {
       this.resetTitle(true);
       this.refreshPage();
       this.updateSideBarTitle(this.title);
-      // TODO: ASK MARK
       this.updateAddNewInfoSectionVisibility();
       this.updateFrameContainerHoverState();
     }
@@ -304,7 +303,6 @@ export class PageAppBar {
           this.title.trim() === "";
 
         newInfoSectionButtons.forEach((button) => {
-          console.log("shouldDisableButtons", shouldDisableButtons);
           button.style.pointerEvents = shouldDisableButtons ? "none" : "auto";
         });
       }

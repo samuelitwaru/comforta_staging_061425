@@ -70,7 +70,7 @@ export class ThemeManager {
   }
 
   getActiveThemeIcons(): any[] {
-    return this._currentTheme?.ThemeIcons || [];
+    return this._currentTheme?.Icons || [];
   }
 
   getActiveThemeColors(): ThemeColors | Record<string, never> {
@@ -217,17 +217,17 @@ export class ThemeManager {
     );
   }
 
-  getThemeIcon(iconName: string): string | null {
+  getThemeIcon(iconName: string): any | null {
     const icons = this.getActiveThemeIcons();
     return (
-      icons?.find((icon: any) => icon.IconName === iconName)?.IconSVG || null
+      icons?.find((icon: any) => icon.IconCodeName === iconName) || null
     );
   }
 
   getIconCategory(iconName: string): string | null {
     const icons = this.getActiveThemeIcons();
     return (
-      icons?.find((icon: any) => icon.IconName === iconName)?.IconCategory ||
+      icons?.find((icon: any) => icon.IconCodeName === iconName)?.IconCategory ||
       null
     );
   }
@@ -398,7 +398,7 @@ export class ThemeManager {
       const iconSVG = iconEl.querySelector("svg");
       if (!iconSVG || !tile.Icon) return;
 
-      let newIconSVG = this.getThemeIcon(tile.Icon);
+      let newIconSVG = this.getThemeIcon(tile.Icon)?.IconSVG;
       if (!newIconSVG) return;
 
       if (tile.Color) {

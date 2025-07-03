@@ -207,6 +207,7 @@ export interface ThemeIcon {
   IconName: string;
   IconCategory: string;
   IconSVG: string;
+  IconCodeName: string;
 }
 
 export interface ThemeCtaColor {
@@ -223,6 +224,7 @@ export interface Theme {
   ThemeColors: ThemeColors;
   ThemeCtaColors: ThemeCtaColor;
   ThemeIcons: ThemeIcon[];
+  Icons:[];
 }
 
 export interface Form {

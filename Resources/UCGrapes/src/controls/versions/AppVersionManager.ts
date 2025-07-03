@@ -1,7 +1,5 @@
-import { version } from "d3";
 import { AppConfig } from "../../AppConfig";
 import { ToolBoxService } from "../../services/ToolBoxService";
-import { TileMapper } from "../editor/TileMapper";
 import { AppVersionController } from "./AppVersionController";
 
 export class AppVersionManager {
@@ -12,28 +10,6 @@ export class AppVersionManager {
 
   constructor() {
     this.config = AppConfig.getInstance();
-    this.initializeActiveVersion();
-  }
-
-  private async initializeActiveVersion() {
-    try {
-      // Initialize from window.app.currentVersion if available
-      if ((window as any).app?.currentVersion) {
-        (globalThis as any).activeVersion = (window as any).app.currentVersion;
-        this.appVersion = (globalThis as any).activeVersion;
-        return;
-      }
-
-      // Fallback to fetching from service
-      const toolboxService = new ToolBoxService();
-      const appVersion = await toolboxService.getVersion();
-      (globalThis as any).activeVersion = appVersion.AppVersion;
-      this.appVersion = (globalThis as any).activeVersion;
-    } catch (error) {
-      console.error('Failed to initialize active version:', error);
-      (globalThis as any).activeVersion = null;
-      this.appVersion = null;
-    }
   }
 
   public async getCurrentVersion() {

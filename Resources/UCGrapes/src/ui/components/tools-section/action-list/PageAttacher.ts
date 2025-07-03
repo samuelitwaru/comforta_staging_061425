@@ -55,9 +55,20 @@ export class PageAttacher {
     const pageData = (globalThis as any).pageData;
     if (pageData.PageType === "Information") {
       const infoSectionManager = new InfoSectionManager();
+      const rowComp = selectedComponent.closest('.container-row')
+      const colComp = selectedComponent.closest('.tile-column')
+      const tile = selectedComponent.closest('.template-wrapper')
       if (selectedComponent.is("info-cta-section")) {
-      } else if (selectedComponent.parent().parent().is("info-tiles-section")) {
+      } else if (rowComp.is("info-tiles-section")) {
         for (const [property, value] of updates) {
+          infoSectionManager.updateGridTileAttribute(
+            rowComp.getId(),
+            colComp.getId(),
+            tile.getId(),
+            property,
+            value
+          )
+
           infoSectionManager.updateInfoTileAttributes(
             selectedComponent.parent().parent().getId(),
             selectedComponent.parent().getId(),
@@ -105,7 +116,8 @@ export class PageAttacher {
     const childPage =
       version?.Pages.find((page: any) => page.PageId === selectedItemPageId) ||
       null;
-
+    
+    console.log('attachPage', childPage)
     this.removeOtherEditors();
     if (childPage) {
       new ChildEditor(page.PageId, childPage, isNewPage).init(tileAttributes);
@@ -114,6 +126,7 @@ export class PageAttacher {
 
   removeOtherEditors(): void {
     new EditorEvents().removeOtherEditors();
+    console.log('PageAttacher.removeOtherEditors', (globalThis as any).pageData)
     new EditorEvents().activateNavigators();
   }
 

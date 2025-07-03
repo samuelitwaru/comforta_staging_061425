@@ -30,7 +30,7 @@ export class IconList {
     themeIcons.forEach((themeIcon) => {
       const icon = document.createElement("div");
       icon.classList.add("icon");
-      icon.title = capitalizeWords(themeIcon.IconName.replace(/-/g,' ').replace(/_/g,' '));
+      icon.title = themeIcon.IconName;
       icon.innerHTML = `${themeIcon.IconSVG}`;
 
       icon.addEventListener("click", (e) => {
@@ -53,6 +53,7 @@ export class IconList {
 
         iconComponent.components(iconSVGWithAttributes);
         iconComponent.addAttributes({
+          // change this to icon code
           title: themeIcon.IconName,
         });
 
@@ -72,20 +73,20 @@ export class IconList {
           const rowComp = selectedComponent.closest('.container-row')
     const colComp = selectedComponent.closest('.tile-column')
     const tile = selectedComponent.closest('.template-wrapper')
-
+    
     infoSectionManager.updateGridTileAttribute(
       rowComp.getId(),
       colComp.getId(),
       tile.getId(),
       "Icon",
-      themeIcon.IconName
+      themeIcon.IconCodeName
     )
 
           infoSectionManager.updateInfoTileAttributes(
             rowComponent.getId(),
             tileWrapper.getId(),
             "Icon",
-            themeIcon.IconName
+            themeIcon.IconCodeName
           );
 
           const tileInfoSectionAttributes: InfoType = (

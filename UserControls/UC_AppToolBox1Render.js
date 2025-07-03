@@ -123,7 +123,6 @@ function UC_AppToolBox1($) {
 					const themes = this.BC_Trn_ThemeCollection.map(theme => {
 						theme.ThemeIcons = this.Icons
 						const icons = this.Icons
-						console.log('icons', icons)
 						let res = {
 							ThemeId: theme.Trn_ThemeId,
 							ThemeName: theme.Trn_ThemeName,
@@ -133,8 +132,6 @@ function UC_AppToolBox1($) {
 							Icons: this.Icons,
 							ThemeCtaColors: theme.CtaColor.sort((a, b) => a.CtaColorName.localeCompare(b.CtaColorName))
 						};
-					
-						console.log('>', res)
 						
 						// Sort and map ThemeColors by ColorName
 						theme.Color
@@ -164,7 +161,6 @@ function UC_AppToolBox1($) {
 						return res;
 					});
 				
-					console.log('>>', themes)
 					
 					if (typeof App !== 'undefined') {
 						localStorage.clear();

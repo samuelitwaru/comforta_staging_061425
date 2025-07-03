@@ -25,6 +25,7 @@ export class App {
     addTemplatesButtonEvent: any
   ) {
     this.currentVersion = currentVersion;
+    (globalThis as any).activeVersion = currentVersion
     this.currentThemeId = currentThemeId;
     this.suppliers = suppliers;
     this.forms = forms;

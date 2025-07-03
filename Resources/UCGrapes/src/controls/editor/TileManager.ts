@@ -43,11 +43,9 @@ export class TileManager {
     this.frameId = frameId;
     this.pageData = pageData;
     this.tileUpdate = new TileUpdate(pageId);
-    (globalThis as any).pageData = pageData;
+    // (globalThis as any).pageData = pageData;
     (globalThis as any).tileMapper = new TileMapper(this.pageId);
     this.page = (globalThis as any).pageData;
-    console.log('this.page', this.page)
-    console.log('this.pageData', this.pageData)
     this.themeManager = new ThemeManager();
     this.init();
   }
@@ -392,8 +390,6 @@ export class TileManager {
     const parentComponent = component.closest('.container-row')
     const columnComponenet = component.closest('.tile-column')
 
-    console.log('tile', component.getEl())
-
     if (!parentComponent) return false;
     let tileAttributes;
     if (this.pageData.PageType === "Information") {
@@ -624,9 +620,6 @@ export class TileManager {
     const infoContentMapper = new InfoContentMapper(this.pageId);
     const tileSection: InfoType | null =
       infoContentMapper.getInfoContent(rowId);
-      
-    console.log('rowId >> ', rowId)
-    console.log('tileSection >> ', tileSection)
     if (tileSection) {
       const col = tileSection.Columns?.find((col:any) => col.ColId == colId)
       const tile = col?.Tiles?.find((tile:any) => tile.Id == tileId)

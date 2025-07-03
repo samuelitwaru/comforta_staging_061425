@@ -20,8 +20,8 @@ export class EditorUIManager {
   frameId: any;
   pageData: any;
   tileManager!: TileManager;
-  tileProperties: any;
-  appVersionManager: any;
+  tileProperties!: TileProperties;
+  appVersionManager: AppVersionManager;
   tilePropsSection: HTMLElement;
   ctaPropsSection: HTMLDivElement;
   isMenuOpen: boolean = false;
@@ -218,7 +218,6 @@ export class EditorUIManager {
   }
 
   getNextInfoSectionId(target: HTMLElement): string {
-    // console.log('target :>> ', target);
     // Check if the target has the class 'info-section-spacing-container'
     if (!target.classList.contains("info-section-spacing-container")) {
       // console.warn('Target element does not have the correct class');
@@ -447,6 +446,7 @@ export class EditorUIManager {
     (globalThis as any).pageData = this.pageData;
     (globalThis as any).frameId = frameId;
 
+
     //log (globalThis as any).currentPageId
 
     // new TreeViewSection().refresh();
@@ -597,6 +597,7 @@ export class EditorUIManager {
   }
 
   setInfoTileProperties() {
+
     if (this.pageData.PageType !== "Information") return;
     const selectedComponent = (globalThis as any).selectedComponent;
     const tileWrapper = selectedComponent.parent();
@@ -663,18 +664,13 @@ export class EditorUIManager {
   async createChildEditor() {
     const selectedComponent = (globalThis as any).selectedComponent;
     const tileWrapper = selectedComponent.parent();
-    const rowComponent = tileWrapper.parent();
+    const colComponent = tileWrapper.closest('.tile-column');
+    const rowComponent = tileWrapper.closest('.container-row');
     let tileAttributes;
 
 
     if (this.pageData.PageType === "Information") {
-      const tileInfoSectionAttributes: InfoType = (
-        globalThis as any
-      ).infoContentMapper.getInfoContent(rowComponent.getId());
-
-      tileAttributes = tileInfoSectionAttributes?.Tiles?.find(
-        (tile: any) => tile.Id === tileWrapper.getId()
-      );
+      tileAttributes = this.tileManager.getTileAttrs(rowComponent.getId(), colComponent.getId(), tileWrapper.getId())
     } else {
       tileAttributes = (globalThis as any).tileMapper.getTile(
         rowComponent.getId(),

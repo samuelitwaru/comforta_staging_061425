@@ -603,7 +603,6 @@ export class InfoSectionManager {
   }
 
   private addToMapper(infoType: InfoType) {
-    console.log('addToMapper infoType', infoType);
     const pageId = (globalThis as any).currentPageId;
     const infoMapper = new InfoContentMapper(pageId);
     infoMapper.addInfoType(infoType);
@@ -639,15 +638,12 @@ export class InfoSectionManager {
     const tileInfoSectionAttributes = this.getInfoContent(rowId);
     if (tileInfoSectionAttributes) {
       const col = tileInfoSectionAttributes.Columns?.find((col:Column) => colId === col.ColId)
-      console.log('col', col)
       if (col) {
         const tile = col.Tiles?.find((tile:any) => tile.Id === tileId);
-        console.log('tile', tile)
         if (tile) {
           this.setNestedProperty(tile, attributePath, value);
         }
       }
-      console.log('updated', tileInfoSectionAttributes)
       this.updateInfoMapper(rowId, tileInfoSectionAttributes);
     }
   }
