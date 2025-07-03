@@ -126,6 +126,8 @@ namespace GeneXus.Programs {
             A28ManagerGAMGUID = P007O2_A28ManagerGAMGUID[0];
             A332ManagerIsMainManager = P007O2_A332ManagerIsMainManager[0];
             A365ManagerIsActive = P007O2_A365ManagerIsActive[0];
+            A658ManagerSalutation = P007O2_A658ManagerSalutation[0];
+            n658ManagerSalutation = P007O2_n658ManagerSalutation[0];
             AV11AuditingObject = new WorkWithPlus.workwithplus_web.SdtAuditingObject(context);
             AV11AuditingObject.gxTpr_Mode = AV15ActualMode;
             AV12AuditingObjectRecordItem = new WorkWithPlus.workwithplus_web.SdtAuditingObject_RecordItem(context);
@@ -223,6 +225,13 @@ namespace GeneXus.Programs {
             AV13AuditingObjectRecordItemAttributeItem.gxTpr_Isdescriptionattribute = false;
             AV13AuditingObjectRecordItemAttributeItem.gxTpr_Oldvalue = StringUtil.BoolToStr( A365ManagerIsActive);
             AV12AuditingObjectRecordItem.gxTpr_Attribute.Add(AV13AuditingObjectRecordItemAttributeItem, 0);
+            AV13AuditingObjectRecordItemAttributeItem = new WorkWithPlus.workwithplus_web.SdtAuditingObject_RecordItem_AttributeItem(context);
+            AV13AuditingObjectRecordItemAttributeItem.gxTpr_Name = "ManagerSalutation";
+            AV13AuditingObjectRecordItemAttributeItem.gxTpr_Description = context.GetMessage( "Salutation", "");
+            AV13AuditingObjectRecordItemAttributeItem.gxTpr_Ispartofkey = false;
+            AV13AuditingObjectRecordItemAttributeItem.gxTpr_Isdescriptionattribute = false;
+            AV13AuditingObjectRecordItemAttributeItem.gxTpr_Oldvalue = A658ManagerSalutation;
+            AV12AuditingObjectRecordItem.gxTpr_Attribute.Add(AV13AuditingObjectRecordItemAttributeItem, 0);
             /* Exiting from a For First loop. */
             if (true) break;
          }
@@ -250,6 +259,8 @@ namespace GeneXus.Programs {
             A28ManagerGAMGUID = P007O3_A28ManagerGAMGUID[0];
             A332ManagerIsMainManager = P007O3_A332ManagerIsMainManager[0];
             A365ManagerIsActive = P007O3_A365ManagerIsActive[0];
+            A658ManagerSalutation = P007O3_A658ManagerSalutation[0];
+            n658ManagerSalutation = P007O3_n658ManagerSalutation[0];
             if ( StringUtil.StrCmp(AV15ActualMode, "INS") == 0 )
             {
                AV11AuditingObject = new WorkWithPlus.workwithplus_web.SdtAuditingObject(context);
@@ -348,6 +359,13 @@ namespace GeneXus.Programs {
                AV13AuditingObjectRecordItemAttributeItem.gxTpr_Isdescriptionattribute = false;
                AV13AuditingObjectRecordItemAttributeItem.gxTpr_Newvalue = StringUtil.BoolToStr( A365ManagerIsActive);
                AV12AuditingObjectRecordItem.gxTpr_Attribute.Add(AV13AuditingObjectRecordItemAttributeItem, 0);
+               AV13AuditingObjectRecordItemAttributeItem = new WorkWithPlus.workwithplus_web.SdtAuditingObject_RecordItem_AttributeItem(context);
+               AV13AuditingObjectRecordItemAttributeItem.gxTpr_Name = "ManagerSalutation";
+               AV13AuditingObjectRecordItemAttributeItem.gxTpr_Description = context.GetMessage( "Salutation", "");
+               AV13AuditingObjectRecordItemAttributeItem.gxTpr_Ispartofkey = false;
+               AV13AuditingObjectRecordItemAttributeItem.gxTpr_Isdescriptionattribute = false;
+               AV13AuditingObjectRecordItemAttributeItem.gxTpr_Newvalue = A658ManagerSalutation;
+               AV12AuditingObjectRecordItem.gxTpr_Attribute.Add(AV13AuditingObjectRecordItemAttributeItem, 0);
             }
             if ( StringUtil.StrCmp(AV15ActualMode, "UPD") == 0 )
             {
@@ -411,6 +429,10 @@ namespace GeneXus.Programs {
                      {
                         AV13AuditingObjectRecordItemAttributeItem.gxTpr_Newvalue = StringUtil.BoolToStr( A365ManagerIsActive);
                      }
+                     else if ( StringUtil.StrCmp(AV13AuditingObjectRecordItemAttributeItem.gxTpr_Name, "ManagerSalutation") == 0 )
+                     {
+                        AV13AuditingObjectRecordItemAttributeItem.gxTpr_Newvalue = A658ManagerSalutation;
+                     }
                      AV22GXV2 = (int)(AV22GXV2+1);
                   }
                   AV21GXV1 = (int)(AV21GXV1+1);
@@ -447,6 +469,8 @@ namespace GeneXus.Programs {
          P007O2_A28ManagerGAMGUID = new string[] {""} ;
          P007O2_A332ManagerIsMainManager = new bool[] {false} ;
          P007O2_A365ManagerIsActive = new bool[] {false} ;
+         P007O2_A658ManagerSalutation = new string[] {""} ;
+         P007O2_n658ManagerSalutation = new bool[] {false} ;
          A11OrganisationId = Guid.Empty;
          A21ManagerId = Guid.Empty;
          A22ManagerGivenName = "";
@@ -458,6 +482,7 @@ namespace GeneXus.Programs {
          A358ManagerPhoneNumber = "";
          A27ManagerGender = "";
          A28ManagerGAMGUID = "";
+         A658ManagerSalutation = "";
          AV12AuditingObjectRecordItem = new WorkWithPlus.workwithplus_web.SdtAuditingObject_RecordItem(context);
          AV13AuditingObjectRecordItemAttributeItem = new WorkWithPlus.workwithplus_web.SdtAuditingObject_RecordItem_AttributeItem(context);
          P007O3_A11OrganisationId = new Guid[] {Guid.Empty} ;
@@ -473,15 +498,17 @@ namespace GeneXus.Programs {
          P007O3_A28ManagerGAMGUID = new string[] {""} ;
          P007O3_A332ManagerIsMainManager = new bool[] {false} ;
          P007O3_A365ManagerIsActive = new bool[] {false} ;
+         P007O3_A658ManagerSalutation = new string[] {""} ;
+         P007O3_n658ManagerSalutation = new bool[] {false} ;
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.loadaudittrn_manager__default(),
             new Object[][] {
                 new Object[] {
                P007O2_A11OrganisationId, P007O2_A21ManagerId, P007O2_A22ManagerGivenName, P007O2_A23ManagerLastName, P007O2_A24ManagerInitials, P007O2_A25ManagerEmail, P007O2_A26ManagerPhone, P007O2_A357ManagerPhoneCode, P007O2_A358ManagerPhoneNumber, P007O2_A27ManagerGender,
-               P007O2_A28ManagerGAMGUID, P007O2_A332ManagerIsMainManager, P007O2_A365ManagerIsActive
+               P007O2_A28ManagerGAMGUID, P007O2_A332ManagerIsMainManager, P007O2_A365ManagerIsActive, P007O2_A658ManagerSalutation, P007O2_n658ManagerSalutation
                }
                , new Object[] {
                P007O3_A11OrganisationId, P007O3_A21ManagerId, P007O3_A22ManagerGivenName, P007O3_A23ManagerLastName, P007O3_A24ManagerInitials, P007O3_A25ManagerEmail, P007O3_A26ManagerPhone, P007O3_A357ManagerPhoneCode, P007O3_A358ManagerPhoneNumber, P007O3_A27ManagerGender,
-               P007O3_A28ManagerGAMGUID, P007O3_A332ManagerIsMainManager, P007O3_A365ManagerIsActive
+               P007O3_A28ManagerGAMGUID, P007O3_A332ManagerIsMainManager, P007O3_A365ManagerIsActive, P007O3_A658ManagerSalutation, P007O3_n658ManagerSalutation
                }
             }
          );
@@ -494,9 +521,11 @@ namespace GeneXus.Programs {
       private string AV15ActualMode ;
       private string A24ManagerInitials ;
       private string A26ManagerPhone ;
+      private string A658ManagerSalutation ;
       private bool returnInSub ;
       private bool A332ManagerIsMainManager ;
       private bool A365ManagerIsActive ;
+      private bool n658ManagerSalutation ;
       private string A22ManagerGivenName ;
       private string A23ManagerLastName ;
       private string A25ManagerEmail ;
@@ -527,6 +556,8 @@ namespace GeneXus.Programs {
       private string[] P007O2_A28ManagerGAMGUID ;
       private bool[] P007O2_A332ManagerIsMainManager ;
       private bool[] P007O2_A365ManagerIsActive ;
+      private string[] P007O2_A658ManagerSalutation ;
+      private bool[] P007O2_n658ManagerSalutation ;
       private WorkWithPlus.workwithplus_web.SdtAuditingObject_RecordItem AV12AuditingObjectRecordItem ;
       private WorkWithPlus.workwithplus_web.SdtAuditingObject_RecordItem_AttributeItem AV13AuditingObjectRecordItemAttributeItem ;
       private Guid[] P007O3_A11OrganisationId ;
@@ -542,6 +573,8 @@ namespace GeneXus.Programs {
       private string[] P007O3_A28ManagerGAMGUID ;
       private bool[] P007O3_A332ManagerIsMainManager ;
       private bool[] P007O3_A365ManagerIsActive ;
+      private string[] P007O3_A658ManagerSalutation ;
+      private bool[] P007O3_n658ManagerSalutation ;
    }
 
    public class loadaudittrn_manager__default : DataStoreHelperBase, IDataStoreHelper
@@ -571,8 +604,8 @@ namespace GeneXus.Programs {
           new ParDef("AV18OrganisationId",GXType.UniqueIdentifier,36,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P007O2", "SELECT OrganisationId, ManagerId, ManagerGivenName, ManagerLastName, ManagerInitials, ManagerEmail, ManagerPhone, ManagerPhoneCode, ManagerPhoneNumber, ManagerGender, ManagerGAMGUID, ManagerIsMainManager, ManagerIsActive FROM Trn_Manager WHERE ManagerId = :AV17ManagerId and OrganisationId = :AV18OrganisationId ORDER BY ManagerId, OrganisationId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP007O2,1, GxCacheFrequency.OFF ,false,true )
-             ,new CursorDef("P007O3", "SELECT OrganisationId, ManagerId, ManagerGivenName, ManagerLastName, ManagerInitials, ManagerEmail, ManagerPhone, ManagerPhoneCode, ManagerPhoneNumber, ManagerGender, ManagerGAMGUID, ManagerIsMainManager, ManagerIsActive FROM Trn_Manager WHERE ManagerId = :AV17ManagerId and OrganisationId = :AV18OrganisationId ORDER BY ManagerId, OrganisationId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP007O3,1, GxCacheFrequency.OFF ,false,true )
+              new CursorDef("P007O2", "SELECT OrganisationId, ManagerId, ManagerGivenName, ManagerLastName, ManagerInitials, ManagerEmail, ManagerPhone, ManagerPhoneCode, ManagerPhoneNumber, ManagerGender, ManagerGAMGUID, ManagerIsMainManager, ManagerIsActive, ManagerSalutation FROM Trn_Manager WHERE ManagerId = :AV17ManagerId and OrganisationId = :AV18OrganisationId ORDER BY ManagerId, OrganisationId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP007O2,1, GxCacheFrequency.OFF ,false,true )
+             ,new CursorDef("P007O3", "SELECT OrganisationId, ManagerId, ManagerGivenName, ManagerLastName, ManagerInitials, ManagerEmail, ManagerPhone, ManagerPhoneCode, ManagerPhoneNumber, ManagerGender, ManagerGAMGUID, ManagerIsMainManager, ManagerIsActive, ManagerSalutation FROM Trn_Manager WHERE ManagerId = :AV17ManagerId and OrganisationId = :AV18OrganisationId ORDER BY ManagerId, OrganisationId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP007O3,1, GxCacheFrequency.OFF ,false,true )
           };
        }
     }
@@ -597,6 +630,8 @@ namespace GeneXus.Programs {
                 ((string[]) buf[10])[0] = rslt.getVarchar(11);
                 ((bool[]) buf[11])[0] = rslt.getBool(12);
                 ((bool[]) buf[12])[0] = rslt.getBool(13);
+                ((string[]) buf[13])[0] = rslt.getString(14, 20);
+                ((bool[]) buf[14])[0] = rslt.wasNull(14);
                 return;
              case 1 :
                 ((Guid[]) buf[0])[0] = rslt.getGuid(1);
@@ -612,6 +647,8 @@ namespace GeneXus.Programs {
                 ((string[]) buf[10])[0] = rslt.getVarchar(11);
                 ((bool[]) buf[11])[0] = rslt.getBool(12);
                 ((bool[]) buf[12])[0] = rslt.getBool(13);
+                ((string[]) buf[13])[0] = rslt.getString(14, 20);
+                ((bool[]) buf[14])[0] = rslt.wasNull(14);
                 return;
        }
     }

@@ -2710,7 +2710,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257212512756", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257218182274", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2726,7 +2726,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("trn_agendaeventgroup.js", "?20257212512757", false, true);
+         context.AddJavascriptSource("trn_agendaeventgroup.js", "?20257218182274", false, true);
          /* End function include_jscripts */
       }
 
@@ -2882,6 +2882,7 @@ namespace GeneXus.Programs {
          }
          cmbResidentGender.Name = "RESIDENTGENDER";
          cmbResidentGender.WebTags = "";
+         cmbResidentGender.addItem("", context.GetMessage( "GX_EmptyItemText", ""), 0);
          cmbResidentGender.addItem("Male", context.GetMessage( "Male", ""), 0);
          cmbResidentGender.addItem("Female", context.GetMessage( "Female", ""), 0);
          cmbResidentGender.addItem("Other", context.GetMessage( "Other", ""), 0);

@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: "Development"
-  version: "20250702100422"
+  version: "20250702152341"
 servers:
   - url: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/rest
 paths:
@@ -2100,6 +2100,12 @@ components:
         AffectedInfoId:
           description: "Affected Info Id"
           type: "string"
+        AffectedTileId:
+          description: "Affected Tile Id"
+          type: "string"
+        UrlType:
+          description: "Url Type"
+          type: "string"
       x-gx-level: "SDT_AppDebugResults.Pages"
     SDT_AppVersion:
       properties:
@@ -3158,6 +3164,12 @@ components:
           type: "string"
         AffectedInfoId:
           description: "Affected Info Id"
+          type: "string"
+        AffectedTileId:
+          description: "Affected Tile Id"
+          type: "string"
+        UrlType:
+          description: "Url Type"
           type: "string"
       x-gx-level: "SDT_PageUrl"
     SDT_ProductService:

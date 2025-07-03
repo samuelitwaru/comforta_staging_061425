@@ -50,6 +50,10 @@ namespace GeneXus.Programs
 
 			gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistimage = "";
 			gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistimage_gxi = "";
+			gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistsalutation = "";
+
+			gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistgender = "";
+
 		}
 
 		public SdtSDT_Receptionists_SDT_ReceptionistsItem(IGxContext context)
@@ -119,6 +123,12 @@ namespace GeneXus.Programs
 			AddObjectProperty("ReceptionistImage", gxTpr_Receptionistimage, false);
 			AddObjectProperty("ReceptionistImage_GXI", gxTpr_Receptionistimage_gxi, false);
 
+
+
+			AddObjectProperty("ReceptionistSalutation", gxTpr_Receptionistsalutation, false);
+
+
+			AddObjectProperty("ReceptionistGender", gxTpr_Receptionistgender, false);
 
 			return;
 		}
@@ -362,6 +372,38 @@ namespace GeneXus.Programs
 				SetDirty("Receptionistimage_gxi");
 			}
 		}
+
+		[SoapElement(ElementName="ReceptionistSalutation")]
+		[XmlElement(ElementName="ReceptionistSalutation")]
+		public string gxTpr_Receptionistsalutation
+		{
+			get {
+				return gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistsalutation; 
+			}
+			set {
+				gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistsalutation = value;
+				SetDirty("Receptionistsalutation");
+			}
+		}
+
+
+
+
+		[SoapElement(ElementName="ReceptionistGender")]
+		[XmlElement(ElementName="ReceptionistGender")]
+		public string gxTpr_Receptionistgender
+		{
+			get {
+				return gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistgender; 
+			}
+			set {
+				gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistgender = value;
+				SetDirty("Receptionistgender");
+			}
+		}
+
+
+
 		public override bool ShouldSerializeSdtJson()
 		{
 			return true;
@@ -394,6 +436,8 @@ namespace GeneXus.Programs
 
 			gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistgamguid = "";
 			gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistimage = "";gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistimage_gxi = "";
+			gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistsalutation = "";
+			gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistgender = "";
 			return  ;
 		}
 
@@ -443,6 +487,12 @@ namespace GeneXus.Programs
 		 
 		protected string gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistimage_gxi;
 		protected string gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistimage;
+		 
+
+		protected string gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistsalutation;
+		 
+
+		protected string gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistgender;
 		 
 
 
@@ -628,6 +678,30 @@ namespace GeneXus.Programs
 			}
 			set { 
 				 sdt.gxTpr_Receptionistimage = value;
+			}
+		}
+
+		[DataMember(Name="ReceptionistSalutation", Order=14)]
+		public  string gxTpr_Receptionistsalutation
+		{
+			get { 
+				return StringUtil.RTrim( sdt.gxTpr_Receptionistsalutation);
+
+			}
+			set { 
+				 sdt.gxTpr_Receptionistsalutation = value;
+			}
+		}
+
+		[DataMember(Name="ReceptionistGender", Order=15)]
+		public  string gxTpr_Receptionistgender
+		{
+			get { 
+				return sdt.gxTpr_Receptionistgender;
+
+			}
+			set { 
+				 sdt.gxTpr_Receptionistgender = value;
 			}
 		}
 

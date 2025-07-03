@@ -44,12 +44,14 @@ namespace GeneXus.Programs
 
 			gxTv_SdtSDT_Managers_SDT_ManagersItem_Managerphonenumber = "";
 
-			gxTv_SdtSDT_Managers_SDT_ManagersItem_Managergender = "";
-
 			gxTv_SdtSDT_Managers_SDT_ManagersItem_Managergamguid = "";
 
 			gxTv_SdtSDT_Managers_SDT_ManagersItem_Managerimage = "";
 			gxTv_SdtSDT_Managers_SDT_ManagersItem_Managerimage_gxi = "";
+			gxTv_SdtSDT_Managers_SDT_ManagersItem_Managergender = "";
+
+			gxTv_SdtSDT_Managers_SDT_ManagersItem_Managersalutation = "";
+
 		}
 
 		public SdtSDT_Managers_SDT_ManagersItem(IGxContext context)
@@ -104,9 +106,6 @@ namespace GeneXus.Programs
 			AddObjectProperty("ManagerPhoneNumber", gxTpr_Managerphonenumber, false);
 
 
-			AddObjectProperty("ManagerGender", gxTpr_Managergender, false);
-
-
 			AddObjectProperty("ManagerGAMGUID", gxTpr_Managergamguid, false);
 
 
@@ -116,6 +115,12 @@ namespace GeneXus.Programs
 			AddObjectProperty("ManagerImage", gxTpr_Managerimage, false);
 			AddObjectProperty("ManagerImage_GXI", gxTpr_Managerimage_gxi, false);
 
+
+
+			AddObjectProperty("ManagerGender", gxTpr_Managergender, false);
+
+
+			AddObjectProperty("ManagerSalutation", gxTpr_Managersalutation, false);
 
 			return;
 		}
@@ -267,22 +272,6 @@ namespace GeneXus.Programs
 
 
 
-		[SoapElement(ElementName="ManagerGender")]
-		[XmlElement(ElementName="ManagerGender")]
-		public string gxTpr_Managergender
-		{
-			get {
-				return gxTv_SdtSDT_Managers_SDT_ManagersItem_Managergender; 
-			}
-			set {
-				gxTv_SdtSDT_Managers_SDT_ManagersItem_Managergender = value;
-				SetDirty("Managergender");
-			}
-		}
-
-
-
-
 		[SoapElement(ElementName="ManagerGAMGUID")]
 		[XmlElement(ElementName="ManagerGAMGUID")]
 		public string gxTpr_Managergamguid
@@ -343,6 +332,38 @@ namespace GeneXus.Programs
 				SetDirty("Managerimage_gxi");
 			}
 		}
+
+		[SoapElement(ElementName="ManagerGender")]
+		[XmlElement(ElementName="ManagerGender")]
+		public string gxTpr_Managergender
+		{
+			get {
+				return gxTv_SdtSDT_Managers_SDT_ManagersItem_Managergender; 
+			}
+			set {
+				gxTv_SdtSDT_Managers_SDT_ManagersItem_Managergender = value;
+				SetDirty("Managergender");
+			}
+		}
+
+
+
+
+		[SoapElement(ElementName="ManagerSalutation")]
+		[XmlElement(ElementName="ManagerSalutation")]
+		public string gxTpr_Managersalutation
+		{
+			get {
+				return gxTv_SdtSDT_Managers_SDT_ManagersItem_Managersalutation; 
+			}
+			set {
+				gxTv_SdtSDT_Managers_SDT_ManagersItem_Managersalutation = value;
+				SetDirty("Managersalutation");
+			}
+		}
+
+
+
 		public override bool ShouldSerializeSdtJson()
 		{
 			return true;
@@ -371,10 +392,11 @@ namespace GeneXus.Programs
 			gxTv_SdtSDT_Managers_SDT_ManagersItem_Managerphone = "";
 			gxTv_SdtSDT_Managers_SDT_ManagersItem_Managerphonecode = "";
 			gxTv_SdtSDT_Managers_SDT_ManagersItem_Managerphonenumber = "";
-			gxTv_SdtSDT_Managers_SDT_ManagersItem_Managergender = "";
 			gxTv_SdtSDT_Managers_SDT_ManagersItem_Managergamguid = "";
 			gxTv_SdtSDT_Managers_SDT_ManagersItem_Managerismainmanager = false;
 			gxTv_SdtSDT_Managers_SDT_ManagersItem_Managerimage = "";gxTv_SdtSDT_Managers_SDT_ManagersItem_Managerimage_gxi = "";
+			gxTv_SdtSDT_Managers_SDT_ManagersItem_Managergender = "";
+			gxTv_SdtSDT_Managers_SDT_ManagersItem_Managersalutation = "";
 			return  ;
 		}
 
@@ -411,9 +433,6 @@ namespace GeneXus.Programs
 		protected string gxTv_SdtSDT_Managers_SDT_ManagersItem_Managerphonenumber;
 		 
 
-		protected string gxTv_SdtSDT_Managers_SDT_ManagersItem_Managergender;
-		 
-
 		protected string gxTv_SdtSDT_Managers_SDT_ManagersItem_Managergamguid;
 		 
 
@@ -421,6 +440,12 @@ namespace GeneXus.Programs
 		 
 		protected string gxTv_SdtSDT_Managers_SDT_ManagersItem_Managerimage_gxi;
 		protected string gxTv_SdtSDT_Managers_SDT_ManagersItem_Managerimage;
+		 
+
+		protected string gxTv_SdtSDT_Managers_SDT_ManagersItem_Managergender;
+		 
+
+		protected string gxTv_SdtSDT_Managers_SDT_ManagersItem_Managersalutation;
 		 
 
 
@@ -548,19 +573,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ManagerGender", Order=9)]
-		public  string gxTpr_Managergender
-		{
-			get { 
-				return sdt.gxTpr_Managergender;
-
-			}
-			set { 
-				 sdt.gxTpr_Managergender = value;
-			}
-		}
-
-		[DataMember(Name="ManagerGAMGUID", Order=10)]
+		[DataMember(Name="ManagerGAMGUID", Order=9)]
 		public  string gxTpr_Managergamguid
 		{
 			get { 
@@ -572,7 +585,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ManagerIsMainManager", Order=11)]
+		[DataMember(Name="ManagerIsMainManager", Order=10)]
 		public bool gxTpr_Managerismainmanager
 		{
 			get { 
@@ -584,7 +597,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ManagerImage", Order=12)]
+		[DataMember(Name="ManagerImage", Order=11)]
 		[GxUpload()]
 		public  string gxTpr_Managerimage
 		{
@@ -594,6 +607,30 @@ namespace GeneXus.Programs
 			}
 			set { 
 				 sdt.gxTpr_Managerimage = value;
+			}
+		}
+
+		[DataMember(Name="ManagerGender", Order=12)]
+		public  string gxTpr_Managergender
+		{
+			get { 
+				return sdt.gxTpr_Managergender;
+
+			}
+			set { 
+				 sdt.gxTpr_Managergender = value;
+			}
+		}
+
+		[DataMember(Name="ManagerSalutation", Order=13)]
+		public  string gxTpr_Managersalutation
+		{
+			get { 
+				return StringUtil.RTrim( sdt.gxTpr_Managersalutation);
+
+			}
+			set { 
+				 sdt.gxTpr_Managersalutation = value;
 			}
 		}
 

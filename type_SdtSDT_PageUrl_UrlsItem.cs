@@ -38,6 +38,10 @@ namespace GeneXus.Programs
 
 			gxTv_SdtSDT_PageUrl_UrlsItem_Affectedinfoid = "";
 
+			gxTv_SdtSDT_PageUrl_UrlsItem_Affectedtileid = "";
+
+			gxTv_SdtSDT_PageUrl_UrlsItem_Urltype = "";
+
 		}
 
 		public SdtSDT_PageUrl_UrlsItem(IGxContext context)
@@ -75,6 +79,12 @@ namespace GeneXus.Programs
 
 
 			AddObjectProperty("AffectedInfoId", gxTpr_Affectedinfoid, false);
+
+
+			AddObjectProperty("AffectedTileId", gxTpr_Affectedtileid, false);
+
+
+			AddObjectProperty("UrlType", gxTpr_Urltype, false);
 
 			return;
 		}
@@ -145,6 +155,38 @@ namespace GeneXus.Programs
 
 
 
+
+		[SoapElement(ElementName="AffectedTileId")]
+		[XmlElement(ElementName="AffectedTileId")]
+		public string gxTpr_Affectedtileid
+		{
+			get {
+				return gxTv_SdtSDT_PageUrl_UrlsItem_Affectedtileid; 
+			}
+			set {
+				gxTv_SdtSDT_PageUrl_UrlsItem_Affectedtileid = value;
+				SetDirty("Affectedtileid");
+			}
+		}
+
+
+
+
+		[SoapElement(ElementName="UrlType")]
+		[XmlElement(ElementName="UrlType")]
+		public string gxTpr_Urltype
+		{
+			get {
+				return gxTv_SdtSDT_PageUrl_UrlsItem_Urltype; 
+			}
+			set {
+				gxTv_SdtSDT_PageUrl_UrlsItem_Urltype = value;
+				SetDirty("Urltype");
+			}
+		}
+
+
+
 		public override bool ShouldSerializeSdtJson()
 		{
 			return true;
@@ -170,6 +212,8 @@ namespace GeneXus.Programs
 			gxTv_SdtSDT_PageUrl_UrlsItem_Affectedtype = "";
 			gxTv_SdtSDT_PageUrl_UrlsItem_Affectedname = "";
 			gxTv_SdtSDT_PageUrl_UrlsItem_Affectedinfoid = "";
+			gxTv_SdtSDT_PageUrl_UrlsItem_Affectedtileid = "";
+			gxTv_SdtSDT_PageUrl_UrlsItem_Urltype = "";
 			return  ;
 		}
 
@@ -189,6 +233,12 @@ namespace GeneXus.Programs
 		 
 
 		protected string gxTv_SdtSDT_PageUrl_UrlsItem_Affectedinfoid;
+		 
+
+		protected string gxTv_SdtSDT_PageUrl_UrlsItem_Affectedtileid;
+		 
+
+		protected string gxTv_SdtSDT_PageUrl_UrlsItem_Urltype;
 		 
 
 
@@ -253,6 +303,30 @@ namespace GeneXus.Programs
 			}
 			set { 
 				 sdt.gxTpr_Affectedinfoid = value;
+			}
+		}
+
+		[DataMember(Name="AffectedTileId", Order=4)]
+		public  string gxTpr_Affectedtileid
+		{
+			get { 
+				return sdt.gxTpr_Affectedtileid;
+
+			}
+			set { 
+				 sdt.gxTpr_Affectedtileid = value;
+			}
+		}
+
+		[DataMember(Name="UrlType", Order=5)]
+		public  string gxTpr_Urltype
+		{
+			get { 
+				return sdt.gxTpr_Urltype;
+
+			}
+			set { 
+				 sdt.gxTpr_Urltype = value;
 			}
 		}
 

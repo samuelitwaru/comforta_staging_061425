@@ -1396,9 +1396,10 @@ namespace GeneXus.Programs {
             ( StringUtil.Like( context.GetMessage( "mrs", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) && ( StringUtil.StrCmp(A72ResidentSalutation, "Mrs") == 0 ) ) || ( StringUtil.Like( context.GetMessage( "dr", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) &&
             ( StringUtil.StrCmp(A72ResidentSalutation, "Dr") == 0 ) ) || ( StringUtil.Like( context.GetMessage( "miss", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) && ( StringUtil.StrCmp(A72ResidentSalutation, "Miss") == 0 ) ) ||
             ( StringUtil.Like( StringUtil.Lower( A64ResidentGivenName) , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) ) || ( StringUtil.Like( StringUtil.Lower( A65ResidentLastName) , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) ) ||
-            ( StringUtil.Like( context.GetMessage( "male", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) && ( StringUtil.StrCmp(A68ResidentGender, "Male") == 0 ) ) || ( StringUtil.Like( context.GetMessage( "female", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) &&
-            ( StringUtil.StrCmp(A68ResidentGender, "Female") == 0 ) ) || ( StringUtil.Like( context.GetMessage( "other", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) && ( StringUtil.StrCmp(A68ResidentGender, "Other") == 0 ) ) ||
-            ( StringUtil.Like( StringUtil.Lower( A67ResidentEmail) , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) ) || ( StringUtil.Like( StringUtil.Lower( A70ResidentPhone) , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) ) || ( StringUtil.Like( StringUtil.Lower( A97ResidentTypeName) , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) ) )
+            ( StringUtil.Like( context.GetMessage( "gx_emptyitemtext", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) && String.IsNullOrEmpty(StringUtil.RTrim( A68ResidentGender)) ) || ( StringUtil.Like( context.GetMessage( "male", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) &&
+            ( StringUtil.StrCmp(A68ResidentGender, "Male") == 0 ) ) || ( StringUtil.Like( context.GetMessage( "female", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) && ( StringUtil.StrCmp(A68ResidentGender, "Female") == 0 ) ) ||
+            ( StringUtil.Like( context.GetMessage( "other", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) && ( StringUtil.StrCmp(A68ResidentGender, "Other") == 0 ) ) || ( StringUtil.Like( StringUtil.Lower( A67ResidentEmail) , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) ) ||
+            ( StringUtil.Like( StringUtil.Lower( A70ResidentPhone) , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) ) || ( StringUtil.Like( StringUtil.Lower( A97ResidentTypeName) , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) ) )
             )
             {
                GRID_nRecordCount = (long)(GRID_nRecordCount+1);
@@ -1526,9 +1527,10 @@ namespace GeneXus.Programs {
                ( StringUtil.Like( context.GetMessage( "mrs", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) && ( StringUtil.StrCmp(A72ResidentSalutation, "Mrs") == 0 ) ) || ( StringUtil.Like( context.GetMessage( "dr", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) &&
                ( StringUtil.StrCmp(A72ResidentSalutation, "Dr") == 0 ) ) || ( StringUtil.Like( context.GetMessage( "miss", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) && ( StringUtil.StrCmp(A72ResidentSalutation, "Miss") == 0 ) ) ||
                ( StringUtil.Like( StringUtil.Lower( A64ResidentGivenName) , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) ) || ( StringUtil.Like( StringUtil.Lower( A65ResidentLastName) , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) ) ||
-               ( StringUtil.Like( context.GetMessage( "male", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) && ( StringUtil.StrCmp(A68ResidentGender, "Male") == 0 ) ) || ( StringUtil.Like( context.GetMessage( "female", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) &&
-               ( StringUtil.StrCmp(A68ResidentGender, "Female") == 0 ) ) || ( StringUtil.Like( context.GetMessage( "other", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) && ( StringUtil.StrCmp(A68ResidentGender, "Other") == 0 ) ) ||
-               ( StringUtil.Like( StringUtil.Lower( A67ResidentEmail) , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) ) || ( StringUtil.Like( StringUtil.Lower( A70ResidentPhone) , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) ) || ( StringUtil.Like( StringUtil.Lower( A97ResidentTypeName) , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) ) )
+               ( StringUtil.Like( context.GetMessage( "gx_emptyitemtext", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) && String.IsNullOrEmpty(StringUtil.RTrim( A68ResidentGender)) ) || ( StringUtil.Like( context.GetMessage( "male", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) &&
+               ( StringUtil.StrCmp(A68ResidentGender, "Male") == 0 ) ) || ( StringUtil.Like( context.GetMessage( "female", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) && ( StringUtil.StrCmp(A68ResidentGender, "Female") == 0 ) ) ||
+               ( StringUtil.Like( context.GetMessage( "other", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) && ( StringUtil.StrCmp(A68ResidentGender, "Other") == 0 ) ) || ( StringUtil.Like( StringUtil.Lower( A67ResidentEmail) , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) ) ||
+               ( StringUtil.Like( StringUtil.Lower( A70ResidentPhone) , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) ) || ( StringUtil.Like( StringUtil.Lower( A97ResidentTypeName) , StringUtil.PadR( "%" + StringUtil.Lower( AV78Trn_residentwwds_1_filterfulltext) , 255 , "%"),  ' ' ) ) )
                )
                {
                   /* Execute user event: Grid.Load */
@@ -2874,7 +2876,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257212561457", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257218205088", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2890,7 +2892,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("trn_residentww.js", "?20257212561460", false, true);
+         context.AddJavascriptSource("trn_residentww.js", "?20257218205094", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3122,6 +3124,7 @@ namespace GeneXus.Programs {
                GXCCtl = "RESIDENTGENDER_" + sGXsfl_39_idx;
                cmbResidentGender.Name = GXCCtl;
                cmbResidentGender.WebTags = "";
+               cmbResidentGender.addItem("", context.GetMessage( "GX_EmptyItemText", ""), 0);
                cmbResidentGender.addItem("Male", context.GetMessage( "Male", ""), 0);
                cmbResidentGender.addItem("Female", context.GetMessage( "Female", ""), 0);
                cmbResidentGender.addItem("Other", context.GetMessage( "Other", ""), 0);
@@ -3304,6 +3307,7 @@ namespace GeneXus.Programs {
          GXCCtl = "RESIDENTGENDER_" + sGXsfl_39_idx;
          cmbResidentGender.Name = GXCCtl;
          cmbResidentGender.WebTags = "";
+         cmbResidentGender.addItem("", context.GetMessage( "GX_EmptyItemText", ""), 0);
          cmbResidentGender.addItem("Male", context.GetMessage( "Male", ""), 0);
          cmbResidentGender.addItem("Female", context.GetMessage( "Female", ""), 0);
          cmbResidentGender.addItem("Other", context.GetMessage( "Other", ""), 0);

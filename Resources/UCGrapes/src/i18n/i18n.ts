@@ -28,8 +28,6 @@ export const i18n = new I18n({
         sidebar_mapping_title: "Mapping",
         current_version: "Current published version: ",
         new_version: "Version being published: ",
-        select_default_language: "Select default language",
-        select_default_language_info: "select language you want to build the application",
       },
       debug: {
         label: "Debug",
@@ -276,8 +274,6 @@ export const i18n = new I18n({
         sidebar_mapping_title: "Indeling",
         current_version: "Huidige gepubliceerde versie: ",
         new_version: "Versie wordt gepubliceerd: ",
-        select_default_language: "Selecteer standaardtaal",
-        select_default_language_info: "selecteer de taal waarin je de applicatie wilt bouwen",
       },
       debug: {
         label: "Debug",
@@ -445,7 +441,6 @@ export const i18n = new I18n({
           "Geen geldige geselecteerde secties om te kopiëren. Probeer het opnieuw.",
         sections_cut_error:
           "Geen geldige geselecteerde secties om te knippen. Probeer het opnieuw.",
-        select_language: "Selecteer een taal alstublieft.",
       },
     },
     Messages: "Berichten",

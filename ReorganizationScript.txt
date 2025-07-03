@@ -1,4 +1,9 @@
-ALTER TABLE Trn_Icon ADD IconDisplayName VARCHAR(100) NOT NULL DEFAULT '';
-ALTER TABLE Trn_Icon ALTER COLUMN IconDisplayName DROP DEFAULT;
-ALTER TABLE Trn_Icon DROP Trn_IconName;
+ALTER TABLE Trn_Manager ADD ManagerSalutation CHAR(20);
+
+ALTER TABLE Trn_SupplierGen ADD SupplierGenContactSalutation CHAR(20);
+
+ALTER TABLE Trn_AgendaCalendar ADD AgendaCalendarLocationEvent BOOLEAN DEFAULT TRUE;
+ALTER TABLE Trn_AgendaCalendar ALTER COLUMN AgendaCalendarLocationEvent DROP DEFAULT;
+
+ALTER TABLE Trn_Receptionist ADD ReceptionistSalutation CHAR(20) , ADD ReceptionistGender VARCHAR(40);
 

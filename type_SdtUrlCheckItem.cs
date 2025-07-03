@@ -119,6 +119,48 @@ namespace GeneXus.Programs {
 
       }
 
+      public string gxTpr_Affectedtileid
+      {
+         get {
+            if ( UrlCheckItem_externalReference == null )
+            {
+               UrlCheckItem_externalReference = new UrlValidator.UrlCheckItem();
+            }
+            return UrlCheckItem_externalReference.AffectedTileId ;
+         }
+
+         set {
+            if ( UrlCheckItem_externalReference == null )
+            {
+               UrlCheckItem_externalReference = new UrlValidator.UrlCheckItem();
+            }
+            UrlCheckItem_externalReference.AffectedTileId = value;
+            SetDirty("Affectedtileid");
+         }
+
+      }
+
+      public string gxTpr_Urltype
+      {
+         get {
+            if ( UrlCheckItem_externalReference == null )
+            {
+               UrlCheckItem_externalReference = new UrlValidator.UrlCheckItem();
+            }
+            return UrlCheckItem_externalReference.UrlType ;
+         }
+
+         set {
+            if ( UrlCheckItem_externalReference == null )
+            {
+               UrlCheckItem_externalReference = new UrlValidator.UrlCheckItem();
+            }
+            UrlCheckItem_externalReference.UrlType = value;
+            SetDirty("Urltype");
+         }
+
+      }
+
       public Object ExternalInstance
       {
          get {

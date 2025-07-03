@@ -153,6 +153,7 @@ namespace GeneXus.Programs.workwithplus {
          AV19Message = new GeneXus.Utils.SdtMessages_Message(context);
          AV19Message.gxTpr_Description = context.GetMessage( "In order to add events, you need to add the code in the procedures that are in WorkWithPlus Module / UCCalendar / CalendarUser folder", "");
          AV13ErrorMessages.Add(AV19Message, 0);
+         new prc_logtofile(context ).execute(  context.GetMessage( "Residents", "")+AV29AddressGroup.ToJSonString(false)) ;
          if ( StringUtil.StrCmp(Gx_mode, "UPD") == 0 )
          {
             AV9CalendarEventGUID = StringUtil.StrToGuid( AV10CalendarEventId);
@@ -173,6 +174,14 @@ namespace GeneXus.Programs.workwithplus {
          AV22Trn_AgendCalendar.gxTpr_Agendacalendarrecurringtype = AV26RecuringEventType;
          AV22Trn_AgendCalendar.gxTpr_Agendacalendarrecurring = AV24RecurringEvent;
          AV22Trn_AgendCalendar.gxTpr_Agendacalendaraddrsvp = AV25AddRSVP;
+         if ( AV29AddressGroup.Count > 0 )
+         {
+            AV22Trn_AgendCalendar.gxTpr_Agendacalendarlocationevent = false;
+         }
+         else
+         {
+            AV22Trn_AgendCalendar.gxTpr_Agendacalendarlocationevent = true;
+         }
          AV22Trn_AgendCalendar.Save();
          if ( AV22Trn_AgendCalendar.Success() )
          {
@@ -194,15 +203,18 @@ namespace GeneXus.Programs.workwithplus {
                pr_default.readNext(0);
             }
             pr_default.close(0);
-            AV39GXV1 = 1;
-            while ( AV39GXV1 <= AV29AddressGroup.Count )
+            if ( AV29AddressGroup.Count > 0 )
             {
-               AV31ResidentId = ((Guid)AV29AddressGroup.Item(AV39GXV1));
-               AV30Trn_AgendaEventGroup = new SdtTrn_AgendaEventGroup(context);
-               AV30Trn_AgendaEventGroup.gxTpr_Residentid = AV31ResidentId;
-               AV30Trn_AgendaEventGroup.gxTpr_Agendacalendarid = AV22Trn_AgendCalendar.gxTpr_Agendacalendarid;
-               AV30Trn_AgendaEventGroup.InsertOrUpdate();
-               AV39GXV1 = (int)(AV39GXV1+1);
+               AV39GXV1 = 1;
+               while ( AV39GXV1 <= AV29AddressGroup.Count )
+               {
+                  AV31ResidentId = ((Guid)AV29AddressGroup.Item(AV39GXV1));
+                  AV30Trn_AgendaEventGroup = new SdtTrn_AgendaEventGroup(context);
+                  AV30Trn_AgendaEventGroup.gxTpr_Residentid = AV31ResidentId;
+                  AV30Trn_AgendaEventGroup.gxTpr_Agendacalendarid = AV22Trn_AgendCalendar.gxTpr_Agendacalendarid;
+                  AV30Trn_AgendaEventGroup.InsertOrUpdate();
+                  AV39GXV1 = (int)(AV39GXV1+1);
+               }
             }
             context.CommitDataStores("workwithplus.wwp_calendar_editevent",pr_default);
             AV14EventCreated = true;

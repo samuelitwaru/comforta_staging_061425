@@ -91,6 +91,7 @@ export class ColorPalette {
     input: HTMLInputElement
   ): void {
     e.preventDefault();
+
     const selectedComponent = this.getSelectedComponent();
     if (!selectedComponent) return;
 

@@ -42,6 +42,8 @@ namespace GeneXus.Programs
 
 			gxTv_SdtWP_CreateOrganisationAndManagerData_Step2_Managergamguid = "";
 
+			gxTv_SdtWP_CreateOrganisationAndManagerData_Step2_Managersalutation = "";
+
 			gxTv_SdtWP_CreateOrganisationAndManagerData_Step2_Managergivenname = "";
 
 			gxTv_SdtWP_CreateOrganisationAndManagerData_Step2_Managerlastname = "";
@@ -97,6 +99,9 @@ namespace GeneXus.Programs
 
 
 			AddObjectProperty("ManagerGAMGUID", gxTpr_Managergamguid, false);
+
+
+			AddObjectProperty("ManagerSalutation", gxTpr_Managersalutation, false);
 
 
 			AddObjectProperty("ManagerGivenName", gxTpr_Managergivenname, false);
@@ -245,6 +250,22 @@ namespace GeneXus.Programs
 
 
 
+		[SoapElement(ElementName="ManagerSalutation")]
+		[XmlElement(ElementName="ManagerSalutation")]
+		public string gxTpr_Managersalutation
+		{
+			get {
+				return gxTv_SdtWP_CreateOrganisationAndManagerData_Step2_Managersalutation; 
+			}
+			set {
+				gxTv_SdtWP_CreateOrganisationAndManagerData_Step2_Managersalutation = value;
+				SetDirty("Managersalutation");
+			}
+		}
+
+
+
+
 		[SoapElement(ElementName="ManagerGivenName")]
 		[XmlElement(ElementName="ManagerGivenName")]
 		public string gxTpr_Managergivenname
@@ -374,6 +395,7 @@ namespace GeneXus.Programs
 			gxTv_SdtWP_CreateOrganisationAndManagerData_Step2_Managerphonecode = "";
 
 			gxTv_SdtWP_CreateOrganisationAndManagerData_Step2_Managergamguid = "";
+			gxTv_SdtWP_CreateOrganisationAndManagerData_Step2_Managersalutation = "";
 			gxTv_SdtWP_CreateOrganisationAndManagerData_Step2_Managergivenname = "";
 			gxTv_SdtWP_CreateOrganisationAndManagerData_Step2_Managerlastname = "";
 			gxTv_SdtWP_CreateOrganisationAndManagerData_Step2_Managergender = "";
@@ -411,6 +433,9 @@ namespace GeneXus.Programs
 		 
 
 		protected string gxTv_SdtWP_CreateOrganisationAndManagerData_Step2_Managergamguid;
+		 
+
+		protected string gxTv_SdtWP_CreateOrganisationAndManagerData_Step2_Managersalutation;
 		 
 
 		protected string gxTv_SdtWP_CreateOrganisationAndManagerData_Step2_Managergivenname;
@@ -537,7 +562,19 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ManagerGivenName", Order=8)]
+		[DataMember(Name="ManagerSalutation", Order=8)]
+		public  string gxTpr_Managersalutation
+		{
+			get { 
+				return StringUtil.RTrim( sdt.gxTpr_Managersalutation);
+
+			}
+			set { 
+				 sdt.gxTpr_Managersalutation = value;
+			}
+		}
+
+		[DataMember(Name="ManagerGivenName", Order=9)]
 		public  string gxTpr_Managergivenname
 		{
 			get { 
@@ -549,7 +586,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ManagerLastName", Order=9)]
+		[DataMember(Name="ManagerLastName", Order=10)]
 		public  string gxTpr_Managerlastname
 		{
 			get { 
@@ -561,7 +598,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ManagerGender", Order=10)]
+		[DataMember(Name="ManagerGender", Order=11)]
 		public  string gxTpr_Managergender
 		{
 			get { 
@@ -573,7 +610,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="SDT_Managers", Order=11, EmitDefaultValue=false)]
+		[DataMember(Name="SDT_Managers", Order=12, EmitDefaultValue=false)]
 		public  GxGenericCollection<GeneXus.Programs.SdtSDT_Managers_SDT_ManagersItem_RESTInterface> gxTpr_Sdt_managers
 		{
 			get { 

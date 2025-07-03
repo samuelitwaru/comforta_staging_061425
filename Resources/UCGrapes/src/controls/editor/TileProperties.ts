@@ -26,9 +26,6 @@ export class TileProperties {
     this.setTileDebugStatus();
   }
 
-  /**
-   * ::set selected tile background color
-   */
   private setBgColorProperties(): void {
     const themeColors = document.getElementById("theme-color-palette");
     const tileEl = this.selectedComponent.getEl() as HTMLElement;
@@ -44,7 +41,6 @@ export class TileProperties {
     for (let i = 0; i < colorBoxes.length; i++) {
       const colorBox = colorBoxes[i] as HTMLElement;
       const inputBox = colorBox.querySelector("input") as HTMLInputElement;
-      console.log(!hasBgImage, tileBGColorHex, tileBgColorAttr, inputBox.value)
       if (!hasBgImage && tileBGColorHex === tileBgColorAttr && tileBGColorHex === inputBox.value) {
         inputBox.checked = true;
       } else {
@@ -154,6 +150,11 @@ export class TileProperties {
 
   private setTileIconProperties() {
     const tileIcon = this.tileAttributes?.Icon as string;
+    let capitalizedTileIcon = "";
+    if (tileIcon) {
+      capitalizedTileIcon = capitalizeWords(tileIcon.replace(/-/g, " ").replace(/_/g, " "));
+    }
+
     const categoryTitle = this.themeManager.getIconCategory(tileIcon);
     this.themeManager.updateThemeIcons(categoryTitle);
     if (!categoryTitle) return;
@@ -178,22 +179,17 @@ export class TileProperties {
       }
     });
     const iconDiv = this.selectedComponent.getEl().querySelector(".tile-icon") as HTMLElement;
-    console.log('iconDiv', iconDiv)
     let selectedTileIcon = iconDiv?.getAttribute("title") ?? "";
+    selectedTileIcon = capitalizeWords(selectedTileIcon.replace(/-/g, " ").replace(/_/g, " "));
     const sideBarIconsDiv = document.querySelector("#icons-list") as HTMLDivElement;
     const sidebarIcons = sideBarIconsDiv.querySelectorAll(".icon");
     sidebarIcons.forEach((icon) => {
       const iconElement = icon as HTMLElement;
       const iconTitle = iconElement.getAttribute("title") ?? "";
-      console.log('tileIcon', tileIcon + ' : '+ selectedTileIcon)
-      if (tileIcon && iconTitle === selectedTileIcon) {
+      if (tileIcon && iconTitle === capitalizedTileIcon && iconTitle === selectedTileIcon) {
         iconElement.style.border = "2px solid #5068A8";
         const svgPath = iconElement.querySelector("svg path") as SVGPathElement;
-        iconElement.scrollIntoView({
-          block: "nearest",
-          inline: "nearest",
-          behavior: "smooth",
-        });
+        iconElement.scrollIntoView();
         if (svgPath) {
           svgPath.setAttribute("fill", "#5068A8");
         }

@@ -20,7 +20,7 @@ export class EditorUIManager {
   frameId: any;
   pageData: any;
   tileManager!: TileManager;
-  tileProperties!: TileProperties;
+  tileProperties: any;
   appVersionManager: any;
   tilePropsSection: HTMLElement;
   ctaPropsSection: HTMLDivElement;
