@@ -78,4 +78,7 @@
   <Object name="Trn_EnvironmentVariable_DataProvider" id="34" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="Trn_EnvironmentVariable_DataProvider" xmlns="qv">
     <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
   </Object>
+  <Object name="DP_ResidentAccessGroups" id="35" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="DP_ResidentAccessGroups" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
 </Objects>

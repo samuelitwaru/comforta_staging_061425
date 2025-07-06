@@ -60,6 +60,8 @@ trn_location
 trn_manager
 trn_organisationtype
 trn_organisation
+wp_createresidentandnetwork
+wc_networkindividual
 trn_icongeneral
 trn_iconww
 trn_iconview

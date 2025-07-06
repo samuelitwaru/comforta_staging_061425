@@ -492,7 +492,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblLblnetworkindividualbsnnumberfilter_Internalname, context.GetMessage( "Network Individual Bsn Number", ""), "", "", lblLblnetworkindividualbsnnumberfilter_Jsonclick, "'"+""+"'"+",false,"+"'"+"e120h1_client"+"'", "", "WWAdvancedLabel WWFilterLabel", 7, "", 1, 1, 0, 1, "HLP_Gx00H0.htm");
+            GxWebStd.gx_label_ctrl( context, lblLblnetworkindividualbsnnumberfilter_Internalname, context.GetMessage( "BSN Number", ""), "", "", lblLblnetworkindividualbsnnumberfilter_Jsonclick, "'"+""+"'"+",false,"+"'"+"e120h1_client"+"'", "", "WWAdvancedLabel WWFilterLabel", 7, "", 1, 1, 0, 1, "HLP_Gx00H0.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
@@ -523,7 +523,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblLblnetworkindividualphonefilter_Internalname, context.GetMessage( "Network Individual Phone", ""), "", "", lblLblnetworkindividualphonefilter_Jsonclick, "'"+""+"'"+",false,"+"'"+"e130h1_client"+"'", "", "WWAdvancedLabel WWFilterLabel", 7, "", 1, 1, 0, 1, "HLP_Gx00H0.htm");
+            GxWebStd.gx_label_ctrl( context, lblLblnetworkindividualphonefilter_Internalname, context.GetMessage( "Phone", ""), "", "", lblLblnetworkindividualphonefilter_Jsonclick, "'"+""+"'"+",false,"+"'"+"e130h1_client"+"'", "", "WWAdvancedLabel WWFilterLabel", 7, "", 1, 1, 0, 1, "HLP_Gx00H0.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
@@ -554,7 +554,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblLblnetworkindividualgenderfilter_Internalname, context.GetMessage( "Network Individual Gender", ""), "", "", lblLblnetworkindividualgenderfilter_Jsonclick, "'"+""+"'"+",false,"+"'"+"e140h1_client"+"'", "", "WWAdvancedLabel WWFilterLabel", 7, "", 1, 1, 0, 1, "HLP_Gx00H0.htm");
+            GxWebStd.gx_label_ctrl( context, lblLblnetworkindividualgenderfilter_Internalname, context.GetMessage( "Gender", ""), "", "", lblLblnetworkindividualgenderfilter_Jsonclick, "'"+""+"'"+",false,"+"'"+"e140h1_client"+"'", "", "WWAdvancedLabel WWFilterLabel", 7, "", 1, 1, 0, 1, "HLP_Gx00H0.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
@@ -1372,7 +1372,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025721821627", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202576170422", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1388,7 +1388,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gx00h0.js", "?2025721821628", false, true);
+         context.AddJavascriptSource("gx00h0.js", "?202576170422", false, true);
          /* End function include_jscripts */
       }
 
@@ -1528,7 +1528,6 @@ namespace GeneXus.Programs {
       {
          cmbavCnetworkindividualgender.Name = "vCNETWORKINDIVIDUALGENDER";
          cmbavCnetworkindividualgender.WebTags = "";
-         cmbavCnetworkindividualgender.addItem("", context.GetMessage( "GX_EmptyItemText", ""), 0);
          cmbavCnetworkindividualgender.addItem("Male", context.GetMessage( "Male", ""), 0);
          cmbavCnetworkindividualgender.addItem("Female", context.GetMessage( "Female", ""), 0);
          cmbavCnetworkindividualgender.addItem("Other", context.GetMessage( "Other", ""), 0);
@@ -1584,10 +1583,10 @@ namespace GeneXus.Programs {
             context.SendWebValue( context.GetMessage( "Individual Id", "")) ;
             context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"DescriptionAttribute"+"\" "+" style=\""+""+""+"\" "+">") ;
-            context.SendWebValue( context.GetMessage( "Bsn Number", "")) ;
+            context.SendWebValue( context.GetMessage( "Number", "")) ;
             context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+""+""+"\" "+">") ;
-            context.SendWebValue( context.GetMessage( "Individual Phone", "")) ;
+            context.SendWebValue( context.GetMessage( "Phone", "")) ;
             context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlTextNl( "</tr>") ;
             Grid1Container.AddObjectProperty("GridName", "Grid1");

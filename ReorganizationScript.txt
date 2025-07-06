@@ -1,9 +1,9 @@
-ALTER TABLE Trn_Manager ADD ManagerSalutation CHAR(20);
+ALTER TABLE Trn_NetworkIndividual ALTER COLUMN NetworkIndividualId DROP DEFAULT;
+CREATE TABLE GXA0017 (NetworkIndividualId CHAR(36) NOT NULL , NetworkIndividualBsnNumber VARCHAR(9) NOT NULL , NetworkIndividualGivenName VARCHAR(100) NOT NULL , NetworkIndividualLastName VARCHAR(100) NOT NULL , NetworkIndividualEmail VARCHAR(100) NOT NULL , NetworkIndividualPhone CHAR(20) NOT NULL , NetworkIndividualGender VARCHAR(40) NOT NULL , NetworkIndividualCountry VARCHAR(100) NOT NULL , NetworkIndividualCity VARCHAR(100) NOT NULL , NetworkIndividualZipCode VARCHAR(100) NOT NULL , NetworkIndividualAddressLine1 VARCHAR(100) NOT NULL , NetworkIndividualAddressLine2 VARCHAR(100) NOT NULL , NetworkIndividualPhoneCode VARCHAR(40) NOT NULL , NetworkIndividualPhoneNumber VARCHAR(9) NOT NULL , NetworkIndividualHomePhone CHAR(20) NOT NULL , NetworkIndividualHomePhoneCode VARCHAR(40) NOT NULL , NetworkIndividualHomePhoneNumb VARCHAR(9) NOT NULL , NetworkIndividualRelationship VARCHAR(400) NOT NULL , NetworkIndividualSalutation CHAR(20) , ResidentId CHAR(36) NOT NULL );
+Run conversion program for table Trn_NetworkIndividual;
+DROP TABLE Trn_NetworkIndividual CASCADE;
+ALTER TABLE GXA0017 RENAME TO Trn_NetworkIndividual;
+ALTER TABLE Trn_NetworkIndividual ADD CONSTRAINT Trn_NetworkIndividual_pkey PRIMARY KEY(NetworkIndividualId);
 
-ALTER TABLE Trn_SupplierGen ADD SupplierGenContactSalutation CHAR(20);
-
-ALTER TABLE Trn_AgendaCalendar ADD AgendaCalendarLocationEvent BOOLEAN DEFAULT TRUE;
-ALTER TABLE Trn_AgendaCalendar ALTER COLUMN AgendaCalendarLocationEvent DROP DEFAULT;
-
-ALTER TABLE Trn_Receptionist ADD ReceptionistSalutation CHAR(20) , ADD ReceptionistGender VARCHAR(40);
+ALTER TABLE Trn_AgendaCalendar ADD AgendaCalendarSelectedGroups TEXT;
 

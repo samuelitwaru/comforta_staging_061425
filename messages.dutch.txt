@@ -1468,3 +1468,11 @@ The "Reference id" is used to reference this field in the visible conditions or 
 I18N_REFERENCEIDHELPICON=De "Referentie-id" wordt gebruikt om naar dit veld te verwijzen in de zichtbaarheidsvoorwaarden of validatie van andere velden in het formulier. Als er niet naar dit veld verwezen zal worden, is het aanbevolen om dit leeg te laten.
 I18N_DELETEDFORMAPP=Het gekoppelde formulier is verwijderd. Neem contact op met uw beheerder.
 I18N_DELETEDFORMTOOLBOX=Het gekoppelde formulier is verwijderd. Koppel een ander formulier of functionaliteit aan de tegel, of verwijder de tegel.
+Groups=Groepen
+Selected Groups=Gekozen Groupen
+Recipients=Ontvangers
+Next of Kin=Nabestaanden
+Next of Kin Information=Informatie over Nabestaanden
+Deleted successfully=Succesvol verwijderd
+The following data associated with the resident will be deleted: Forms=De volgende gegevens die aan de bewoner zijn gekoppeld, zullen worden verwijderd: Formulieren
+Are you sure you want to re-send an invititation to this resident?=Weet u zeker dat u deze bewoner opnieuw een uitnodiging wilt sturen?

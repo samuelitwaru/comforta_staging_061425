@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CallableObject guid="9f2c6d67-acfb-480b-a541-fa9abcda7afc" name="DP_ResidentAccessGroups" description="DP_Resident Access Groups" namespace="GeneXus.Programs">
+  <Signature name="parm">
+    <Parameter name="ReturnValue" accessor="out">
+      <Field name="SDT_ResidentPackage" description="SDT_Resident Package" collection="true">
+        <Fields>
+          <Field name="ResidentPackageId" description="Resident Package Id">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>GUID</Value>
+              </Property>
+              <Property>
+                <Name>Picture</Name>
+                <Value>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="ResidentPackageName" description="Resident Package Name">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>100</Value>
+              </Property>
+            </Properties>
+          </Field>
+        </Fields>
+      </Field>
+    </Parameter>
+  </Signature>
+</CallableObject>

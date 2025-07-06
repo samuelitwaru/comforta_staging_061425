@@ -177,7 +177,7 @@ namespace GeneXus.Programs {
             GX38ASARESIDENTHOMEPHONE0964( A431ResidentHomePhoneCode, A432ResidentHomePhoneNumber) ;
             return  ;
          }
-         else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxExecAct_"+"gxLoad_64") == 0 )
+         else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxExecAct_"+"gxLoad_61") == 0 )
          {
             A29LocationId = StringUtil.StrToGuid( GetPar( "LocationId"));
             AssignAttri("", false, "A29LocationId", A29LocationId.ToString());
@@ -189,10 +189,10 @@ namespace GeneXus.Programs {
                GxWebError = 1;
                return  ;
             }
-            gxLoad_64( A29LocationId, A11OrganisationId) ;
+            gxLoad_61( A29LocationId, A11OrganisationId) ;
             return  ;
          }
-         else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxExecAct_"+"gxLoad_65") == 0 )
+         else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxExecAct_"+"gxLoad_62") == 0 )
          {
             A96ResidentTypeId = StringUtil.StrToGuid( GetPar( "ResidentTypeId"));
             n96ResidentTypeId = false;
@@ -203,10 +203,10 @@ namespace GeneXus.Programs {
                GxWebError = 1;
                return  ;
             }
-            gxLoad_65( A96ResidentTypeId) ;
+            gxLoad_62( A96ResidentTypeId) ;
             return  ;
          }
-         else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxExecAct_"+"gxLoad_66") == 0 )
+         else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxExecAct_"+"gxLoad_63") == 0 )
          {
             A98MedicalIndicationId = StringUtil.StrToGuid( GetPar( "MedicalIndicationId"));
             n98MedicalIndicationId = false;
@@ -217,10 +217,10 @@ namespace GeneXus.Programs {
                GxWebError = 1;
                return  ;
             }
-            gxLoad_66( A98MedicalIndicationId) ;
+            gxLoad_63( A98MedicalIndicationId) ;
             return  ;
          }
-         else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxExecAct_"+"gxLoad_67") == 0 )
+         else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxExecAct_"+"gxLoad_64") == 0 )
          {
             A527ResidentPackageId = StringUtil.StrToGuid( GetPar( "ResidentPackageId"));
             n527ResidentPackageId = false;
@@ -231,7 +231,7 @@ namespace GeneXus.Programs {
                GxWebError = 1;
                return  ;
             }
-            gxLoad_67( A527ResidentPackageId) ;
+            gxLoad_64( A527ResidentPackageId) ;
             return  ;
          }
          else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxEvt") == 0 )
@@ -2415,7 +2415,7 @@ namespace GeneXus.Programs {
 
       protected void ZM0964( short GX_JID )
       {
-         if ( ( GX_JID == 63 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 60 ) || ( GX_JID == 0 ) )
          {
             if ( ! IsIns( ) )
             {
@@ -2472,7 +2472,7 @@ namespace GeneXus.Programs {
                Z527ResidentPackageId = A527ResidentPackageId;
             }
          }
-         if ( GX_JID == -63 )
+         if ( GX_JID == -60 )
          {
             Z62ResidentId = A62ResidentId;
             Z312ResidentCountry = A312ResidentCountry;
@@ -2853,7 +2853,7 @@ namespace GeneXus.Programs {
             AssignAttri("", false, "A528SG_LocationId", A528SG_LocationId.ToString());
             A445ResidentImage = T00098_A445ResidentImage[0];
             n445ResidentImage = T00098_n445ResidentImage[0];
-            ZM0964( -63) ;
+            ZM0964( -60) ;
          }
          pr_default.close(6);
          OnLoadActions0964( ) ;
@@ -2941,13 +2941,6 @@ namespace GeneXus.Programs {
          }
          A314ResidentZipCode = StringUtil.Upper( A314ResidentZipCode);
          AssignAttri("", false, "A314ResidentZipCode", A314ResidentZipCode);
-         if ( ! GxRegex.IsMatch(A314ResidentZipCode,context.GetMessage( "^\\d{4}\\s?[A-Z]{2}$", "")) && ! String.IsNullOrEmpty(StringUtil.RTrim( A314ResidentZipCode)) )
-         {
-            GX_msglist.addItem(context.GetMessage( "Zip Code is incorrect", ""), 1, "RESIDENTZIPCODE");
-            AnyError = 1;
-            GX_FocusControl = edtResidentZipCode_Internalname;
-            AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
-         }
          /* Using cursor T00095 */
          pr_default.execute(3, new Object[] {n96ResidentTypeId, A96ResidentTypeId});
          if ( (pr_default.getStatus(3) == 101) )
@@ -2980,24 +2973,10 @@ namespace GeneXus.Programs {
          new prc_concatenateintlphone(context ).execute(  A347ResidentPhoneCode,  A348ResidentPhoneNumber, out  GXt_char2) ;
          A70ResidentPhone = GXt_char2;
          AssignAttri("", false, "A70ResidentPhone", A70ResidentPhone);
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( A348ResidentPhoneNumber)) && ! GxRegex.IsMatch(A348ResidentPhoneNumber,context.GetMessage( "^\\d{9}$", "")) )
-         {
-            GX_msglist.addItem(context.GetMessage( "Phone contains 9 digits", ""), 1, "RESIDENTPHONENUMBER");
-            AnyError = 1;
-            GX_FocusControl = edtResidentPhoneNumber_Internalname;
-            AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
-         }
          GXt_char2 = A430ResidentHomePhone;
          new prc_concatenateintlphone(context ).execute(  A431ResidentHomePhoneCode,  A432ResidentHomePhoneNumber, out  GXt_char2) ;
          A430ResidentHomePhone = GXt_char2;
          AssignAttri("", false, "A430ResidentHomePhone", A430ResidentHomePhone);
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( A432ResidentHomePhoneNumber)) && ! GxRegex.IsMatch(A432ResidentHomePhoneNumber,context.GetMessage( "^\\d{9}$", "")) )
-         {
-            GX_msglist.addItem(context.GetMessage( "Phone contains 9 digits", ""), 1, "RESIDENTHOMEPHONENUMBER");
-            AnyError = 1;
-            GX_FocusControl = edtResidentHomePhoneNumber_Internalname;
-            AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
-         }
          /* Using cursor T00097 */
          pr_default.execute(5, new Object[] {n527ResidentPackageId, A527ResidentPackageId});
          if ( (pr_default.getStatus(5) == 101) )
@@ -3030,7 +3009,7 @@ namespace GeneXus.Programs {
       {
       }
 
-      protected void gxLoad_64( Guid A29LocationId ,
+      protected void gxLoad_61( Guid A29LocationId ,
                                 Guid A11OrganisationId )
       {
          /* Using cursor T00099 */
@@ -3054,7 +3033,7 @@ namespace GeneXus.Programs {
          pr_default.close(7);
       }
 
-      protected void gxLoad_65( Guid A96ResidentTypeId )
+      protected void gxLoad_62( Guid A96ResidentTypeId )
       {
          /* Using cursor T000910 */
          pr_default.execute(8, new Object[] {n96ResidentTypeId, A96ResidentTypeId});
@@ -3082,7 +3061,7 @@ namespace GeneXus.Programs {
          pr_default.close(8);
       }
 
-      protected void gxLoad_66( Guid A98MedicalIndicationId )
+      protected void gxLoad_63( Guid A98MedicalIndicationId )
       {
          /* Using cursor T000911 */
          pr_default.execute(9, new Object[] {n98MedicalIndicationId, A98MedicalIndicationId});
@@ -3110,7 +3089,7 @@ namespace GeneXus.Programs {
          pr_default.close(9);
       }
 
-      protected void gxLoad_67( Guid A527ResidentPackageId )
+      protected void gxLoad_64( Guid A527ResidentPackageId )
       {
          /* Using cursor T000912 */
          pr_default.execute(10, new Object[] {n527ResidentPackageId, A527ResidentPackageId});
@@ -3163,7 +3142,7 @@ namespace GeneXus.Programs {
          pr_default.execute(1, new Object[] {A62ResidentId, A29LocationId, A11OrganisationId});
          if ( (pr_default.getStatus(1) != 101) )
          {
-            ZM0964( 63) ;
+            ZM0964( 60) ;
             RcdFound64 = 1;
             A62ResidentId = T00093_A62ResidentId[0];
             AssignAttri("", false, "A62ResidentId", A62ResidentId.ToString());
@@ -4548,7 +4527,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257218174729", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025761658071", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -4564,7 +4543,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("trn_resident.js", "?20257218174733", false, true);
+         context.AddJavascriptSource("trn_resident.js", "?2025761658074", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -5069,7 +5048,6 @@ namespace GeneXus.Programs {
          }
          cmbResidentGender.Name = "RESIDENTGENDER";
          cmbResidentGender.WebTags = "";
-         cmbResidentGender.addItem("", context.GetMessage( "GX_EmptyItemText", ""), 0);
          cmbResidentGender.addItem("Male", context.GetMessage( "Male", ""), 0);
          cmbResidentGender.addItem("Female", context.GetMessage( "Female", ""), 0);
          cmbResidentGender.addItem("Other", context.GetMessage( "Other", ""), 0);
@@ -5135,12 +5113,6 @@ namespace GeneXus.Programs {
          GXt_char2 = A70ResidentPhone;
          new prc_concatenateintlphone(context ).execute(  A347ResidentPhoneCode,  A348ResidentPhoneNumber, out  GXt_char2) ;
          A70ResidentPhone = GXt_char2;
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( A348ResidentPhoneNumber)) && ! GxRegex.IsMatch(A348ResidentPhoneNumber,context.GetMessage( "^\\d{9}$", "")) )
-         {
-            GX_msglist.addItem(context.GetMessage( "Phone contains 9 digits", ""), 1, "RESIDENTPHONENUMBER");
-            AnyError = 1;
-            GX_FocusControl = edtResidentPhoneNumber_Internalname;
-         }
          dynload_actions( ) ;
          /*  Sending validation outputs */
          AssignAttri("", false, "A70ResidentPhone", StringUtil.RTrim( A70ResidentPhone));
@@ -5151,12 +5123,6 @@ namespace GeneXus.Programs {
          GXt_char2 = A430ResidentHomePhone;
          new prc_concatenateintlphone(context ).execute(  A431ResidentHomePhoneCode,  A432ResidentHomePhoneNumber, out  GXt_char2) ;
          A430ResidentHomePhone = GXt_char2;
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( A432ResidentHomePhoneNumber)) && ! GxRegex.IsMatch(A432ResidentHomePhoneNumber,context.GetMessage( "^\\d{9}$", "")) )
-         {
-            GX_msglist.addItem(context.GetMessage( "Phone contains 9 digits", ""), 1, "RESIDENTHOMEPHONENUMBER");
-            AnyError = 1;
-            GX_FocusControl = edtResidentHomePhoneNumber_Internalname;
-         }
          dynload_actions( ) ;
          /*  Sending validation outputs */
          AssignAttri("", false, "A430ResidentHomePhone", StringUtil.RTrim( A430ResidentHomePhone));

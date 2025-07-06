@@ -57,8 +57,9 @@ namespace GeneXus.Programs.workwithplus {
                            string aP10_RecuringEventType ,
                            bool aP11_AddRSVP ,
                            GxSimpleCollection<Guid> aP12_AddressGroup ,
-                           out GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP13_ErrorMessages ,
-                           out bool aP14_EventCreated )
+                           GxSimpleCollection<Guid> aP13_ResidentPackageGroups ,
+                           out GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP14_ErrorMessages ,
+                           out bool aP15_EventCreated )
       {
          this.Gx_mode = aP0_Gx_mode;
          this.AV20Title = aP1_Title;
@@ -73,12 +74,13 @@ namespace GeneXus.Programs.workwithplus {
          this.AV26RecuringEventType = aP10_RecuringEventType;
          this.AV25AddRSVP = aP11_AddRSVP;
          this.AV29AddressGroup = aP12_AddressGroup;
+         this.AV37ResidentPackageGroups = aP13_ResidentPackageGroups;
          this.AV13ErrorMessages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
          this.AV14EventCreated = false ;
          initialize();
          ExecuteImpl();
-         aP13_ErrorMessages=this.AV13ErrorMessages;
-         aP14_EventCreated=this.AV14EventCreated;
+         aP14_ErrorMessages=this.AV13ErrorMessages;
+         aP15_EventCreated=this.AV14EventCreated;
       }
 
       public bool executeUdp( string aP0_Gx_mode ,
@@ -94,9 +96,10 @@ namespace GeneXus.Programs.workwithplus {
                               string aP10_RecuringEventType ,
                               bool aP11_AddRSVP ,
                               GxSimpleCollection<Guid> aP12_AddressGroup ,
-                              out GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP13_ErrorMessages )
+                              GxSimpleCollection<Guid> aP13_ResidentPackageGroups ,
+                              out GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP14_ErrorMessages )
       {
-         execute(aP0_Gx_mode, aP1_Title, aP2_Date, aP3_FromTime, aP4_ToTime, aP5_AllDay, aP6_EndDate, aP7_CalendarEventId, aP8_EventType, aP9_RecurringEvent, aP10_RecuringEventType, aP11_AddRSVP, aP12_AddressGroup, out aP13_ErrorMessages, out aP14_EventCreated);
+         execute(aP0_Gx_mode, aP1_Title, aP2_Date, aP3_FromTime, aP4_ToTime, aP5_AllDay, aP6_EndDate, aP7_CalendarEventId, aP8_EventType, aP9_RecurringEvent, aP10_RecuringEventType, aP11_AddRSVP, aP12_AddressGroup, aP13_ResidentPackageGroups, out aP14_ErrorMessages, out aP15_EventCreated);
          return AV14EventCreated ;
       }
 
@@ -113,8 +116,9 @@ namespace GeneXus.Programs.workwithplus {
                                  string aP10_RecuringEventType ,
                                  bool aP11_AddRSVP ,
                                  GxSimpleCollection<Guid> aP12_AddressGroup ,
-                                 out GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP13_ErrorMessages ,
-                                 out bool aP14_EventCreated )
+                                 GxSimpleCollection<Guid> aP13_ResidentPackageGroups ,
+                                 out GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP14_ErrorMessages ,
+                                 out bool aP15_EventCreated )
       {
          this.Gx_mode = aP0_Gx_mode;
          this.AV20Title = aP1_Title;
@@ -129,11 +133,12 @@ namespace GeneXus.Programs.workwithplus {
          this.AV26RecuringEventType = aP10_RecuringEventType;
          this.AV25AddRSVP = aP11_AddRSVP;
          this.AV29AddressGroup = aP12_AddressGroup;
+         this.AV37ResidentPackageGroups = aP13_ResidentPackageGroups;
          this.AV13ErrorMessages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
          this.AV14EventCreated = false ;
          SubmitImpl();
-         aP13_ErrorMessages=this.AV13ErrorMessages;
-         aP14_EventCreated=this.AV14EventCreated;
+         aP14_ErrorMessages=this.AV13ErrorMessages;
+         aP15_EventCreated=this.AV14EventCreated;
       }
 
       protected override void ExecutePrivate( )
@@ -174,6 +179,14 @@ namespace GeneXus.Programs.workwithplus {
          AV22Trn_AgendCalendar.gxTpr_Agendacalendarrecurringtype = AV26RecuringEventType;
          AV22Trn_AgendCalendar.gxTpr_Agendacalendarrecurring = AV24RecurringEvent;
          AV22Trn_AgendCalendar.gxTpr_Agendacalendaraddrsvp = AV25AddRSVP;
+         if ( AV37ResidentPackageGroups.Count > 0 )
+         {
+            AV22Trn_AgendCalendar.gxTpr_Agendacalendarselectedgroups = AV37ResidentPackageGroups.ToJSonString(false);
+         }
+         else
+         {
+            AV22Trn_AgendCalendar.gxTpr_Agendacalendarselectedgroups = "";
+         }
          if ( AV29AddressGroup.Count > 0 )
          {
             AV22Trn_AgendCalendar.gxTpr_Agendacalendarlocationevent = false;
@@ -205,15 +218,15 @@ namespace GeneXus.Programs.workwithplus {
             pr_default.close(0);
             if ( AV29AddressGroup.Count > 0 )
             {
-               AV39GXV1 = 1;
-               while ( AV39GXV1 <= AV29AddressGroup.Count )
+               AV42GXV1 = 1;
+               while ( AV42GXV1 <= AV29AddressGroup.Count )
                {
-                  AV31ResidentId = ((Guid)AV29AddressGroup.Item(AV39GXV1));
+                  AV31ResidentId = ((Guid)AV29AddressGroup.Item(AV42GXV1));
                   AV30Trn_AgendaEventGroup = new SdtTrn_AgendaEventGroup(context);
                   AV30Trn_AgendaEventGroup.gxTpr_Residentid = AV31ResidentId;
                   AV30Trn_AgendaEventGroup.gxTpr_Agendacalendarid = AV22Trn_AgendCalendar.gxTpr_Agendacalendarid;
                   AV30Trn_AgendaEventGroup.InsertOrUpdate();
-                  AV39GXV1 = (int)(AV39GXV1+1);
+                  AV42GXV1 = (int)(AV42GXV1+1);
                }
             }
             context.CommitDataStores("workwithplus.wwp_calendar_editevent",pr_default);
@@ -222,14 +235,38 @@ namespace GeneXus.Programs.workwithplus {
             AV36Metadata = new SdtSDT_OneSignalCustomData(context);
             AV36Metadata.gxTpr_Notificationcategory = "Agenda";
             AV36Metadata.gxTpr_Agendadetails.gxTpr_Agendaeventid = AV22Trn_AgendCalendar.gxTpr_Agendacalendarid;
+            AV38ResidentsToNotify = (GxSimpleCollection<Guid>)(new GxSimpleCollection<Guid>());
+            AV38ResidentsToNotify = (GxSimpleCollection<Guid>)(AV29AddressGroup.Clone());
+            AV43GXV2 = 1;
+            while ( AV43GXV2 <= AV37ResidentPackageGroups.Count )
+            {
+               AV39ResidentPackageId = ((Guid)AV37ResidentPackageGroups.Item(AV43GXV2));
+               /* Using cursor P006H3 */
+               pr_default.execute(1, new Object[] {AV39ResidentPackageId});
+               while ( (pr_default.getStatus(1) != 101) )
+               {
+                  A527ResidentPackageId = P006H3_A527ResidentPackageId[0];
+                  n527ResidentPackageId = P006H3_n527ResidentPackageId[0];
+                  A62ResidentId = P006H3_A62ResidentId[0];
+                  A29LocationId = P006H3_A29LocationId[0];
+                  A11OrganisationId = P006H3_A11OrganisationId[0];
+                  if ( ! (AV38ResidentsToNotify.IndexOf(A62ResidentId)>0) )
+                  {
+                     AV38ResidentsToNotify.Add(A62ResidentId, 0);
+                  }
+                  pr_default.readNext(1);
+               }
+               pr_default.close(1);
+               AV43GXV2 = (int)(AV43GXV2+1);
+            }
             if ( StringUtil.StrCmp(Gx_mode, "INS") == 0 )
             {
-               new prc_sendresidentnotification(context ).execute(  context.GetMessage( "New Calendar Event", ""),  AV33EventDescription,  context.GetMessage( "AGENDA", ""),  AV36Metadata,  AV29AddressGroup) ;
+               new prc_sendresidentnotification(context ).execute(  context.GetMessage( "New Calendar Event", ""),  AV33EventDescription,  context.GetMessage( "AGENDA", ""),  AV36Metadata,  AV38ResidentsToNotify) ;
                new GeneXus.Programs.wwpbaseobjects.notifications.common.wwp_sendnotification(context ).execute(  "AgendaNotification",  "AgendaEvents",  "",  "",  context.GetMessage( "New Agenda Created", ""),  AV33EventDescription,  AV33EventDescription,  formatLink("wp_calendaragenda.aspx") ,  "",  "",  true) ;
             }
             else if ( StringUtil.StrCmp(Gx_mode, "UPD") == 0 )
             {
-               new prc_sendresidentnotification(context ).execute(  context.GetMessage( "Calendar Event Updated", ""),  AV33EventDescription,  context.GetMessage( "AGENDA", ""),  AV36Metadata,  AV29AddressGroup) ;
+               new prc_sendresidentnotification(context ).execute(  context.GetMessage( "Calendar Event Updated", ""),  AV33EventDescription,  context.GetMessage( "AGENDA", ""),  AV36Metadata,  AV38ResidentsToNotify) ;
                new GeneXus.Programs.wwpbaseobjects.notifications.common.wwp_sendnotification(context ).execute(  "AgendaNotification",  "AgendaEvents",  "",  "",  context.GetMessage( "Agenda Event Updated", ""),  AV33EventDescription,  AV33EventDescription,  formatLink("wp_calendaragenda.aspx") ,  "",  "",  true) ;
             }
          }
@@ -268,6 +305,16 @@ namespace GeneXus.Programs.workwithplus {
          AV31ResidentId = Guid.Empty;
          AV33EventDescription = "";
          AV36Metadata = new SdtSDT_OneSignalCustomData(context);
+         AV38ResidentsToNotify = new GxSimpleCollection<Guid>();
+         AV39ResidentPackageId = Guid.Empty;
+         P006H3_A527ResidentPackageId = new Guid[] {Guid.Empty} ;
+         P006H3_n527ResidentPackageId = new bool[] {false} ;
+         P006H3_A62ResidentId = new Guid[] {Guid.Empty} ;
+         P006H3_A29LocationId = new Guid[] {Guid.Empty} ;
+         P006H3_A11OrganisationId = new Guid[] {Guid.Empty} ;
+         A527ResidentPackageId = Guid.Empty;
+         A29LocationId = Guid.Empty;
+         A11OrganisationId = Guid.Empty;
          pr_datastore1 = new DataStoreProvider(context, new GeneXus.Programs.workwithplus.wwp_calendar_editevent__datastore1(),
             new Object[][] {
             }
@@ -281,12 +328,16 @@ namespace GeneXus.Programs.workwithplus {
                 new Object[] {
                P006H2_A268AgendaCalendarId, P006H2_A62ResidentId
                }
+               , new Object[] {
+               P006H3_A527ResidentPackageId, P006H3_n527ResidentPackageId, P006H3_A62ResidentId, P006H3_A29LocationId, P006H3_A11OrganisationId
+               }
             }
          );
          /* GeneXus formulas. */
       }
 
-      private int AV39GXV1 ;
+      private int AV42GXV1 ;
+      private int AV43GXV2 ;
       private string Gx_mode ;
       private DateTime AV18FromTime ;
       private DateTime AV21ToTime ;
@@ -298,6 +349,7 @@ namespace GeneXus.Programs.workwithplus {
       private bool AV24RecurringEvent ;
       private bool AV25AddRSVP ;
       private bool AV14EventCreated ;
+      private bool n527ResidentPackageId ;
       private string AV20Title ;
       private string AV10CalendarEventId ;
       private string AV27EventType ;
@@ -308,10 +360,15 @@ namespace GeneXus.Programs.workwithplus {
       private Guid A268AgendaCalendarId ;
       private Guid A62ResidentId ;
       private Guid AV31ResidentId ;
+      private Guid AV39ResidentPackageId ;
+      private Guid A527ResidentPackageId ;
+      private Guid A29LocationId ;
+      private Guid A11OrganisationId ;
       private IGxDataStore dsDataStore1 ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GxSimpleCollection<Guid> AV29AddressGroup ;
+      private GxSimpleCollection<Guid> AV37ResidentPackageGroups ;
       private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV13ErrorMessages ;
       private GeneXus.Utils.SdtMessages_Message AV19Message ;
       private SdtTrn_AgendaCalendar AV22Trn_AgendCalendar ;
@@ -320,8 +377,14 @@ namespace GeneXus.Programs.workwithplus {
       private Guid[] P006H2_A62ResidentId ;
       private SdtTrn_AgendaEventGroup AV30Trn_AgendaEventGroup ;
       private SdtSDT_OneSignalCustomData AV36Metadata ;
-      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP13_ErrorMessages ;
-      private bool aP14_EventCreated ;
+      private GxSimpleCollection<Guid> AV38ResidentsToNotify ;
+      private Guid[] P006H3_A527ResidentPackageId ;
+      private bool[] P006H3_n527ResidentPackageId ;
+      private Guid[] P006H3_A62ResidentId ;
+      private Guid[] P006H3_A29LocationId ;
+      private Guid[] P006H3_A11OrganisationId ;
+      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP14_ErrorMessages ;
+      private bool aP15_EventCreated ;
       private IDataStoreProvider pr_datastore1 ;
       private IDataStoreProvider pr_gam ;
    }
@@ -428,6 +491,7 @@ public class wwp_calendar_editevent__default : DataStoreHelperBase, IDataStoreHe
       cursorDefinitions();
       return new Cursor[] {
        new ForEachCursor(def[0])
+      ,new ForEachCursor(def[1])
     };
  }
 
@@ -436,12 +500,17 @@ public class wwp_calendar_editevent__default : DataStoreHelperBase, IDataStoreHe
  {
     if ( def == null )
     {
+       Object[] prmP006H3;
+       prmP006H3 = new Object[] {
+       new ParDef("AV39ResidentPackageId",GXType.UniqueIdentifier,36,0)
+       };
        Object[] prmP006H2;
        prmP006H2 = new Object[] {
        new ParDef("AV9CalendarEventGUID",GXType.UniqueIdentifier,36,0)
        };
        def= new CursorDef[] {
            new CursorDef("P006H2", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP006H2,100, GxCacheFrequency.OFF ,true,false )
+          ,new CursorDef("P006H3", "SELECT ResidentPackageId, ResidentId, LocationId, OrganisationId FROM Trn_Resident WHERE ResidentPackageId = :AV39ResidentPackageId ORDER BY ResidentPackageId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP006H3,100, GxCacheFrequency.OFF ,false,false )
        };
     }
  }
@@ -455,6 +524,13 @@ public class wwp_calendar_editevent__default : DataStoreHelperBase, IDataStoreHe
           case 0 :
              ((Guid[]) buf[0])[0] = rslt.getGuid(1);
              ((Guid[]) buf[1])[0] = rslt.getGuid(2);
+             return;
+          case 1 :
+             ((Guid[]) buf[0])[0] = rslt.getGuid(1);
+             ((bool[]) buf[1])[0] = rslt.wasNull(1);
+             ((Guid[]) buf[2])[0] = rslt.getGuid(2);
+             ((Guid[]) buf[3])[0] = rslt.getGuid(3);
+             ((Guid[]) buf[4])[0] = rslt.getGuid(4);
              return;
     }
  }
