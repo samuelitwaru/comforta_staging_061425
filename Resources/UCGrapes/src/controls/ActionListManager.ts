@@ -89,11 +89,13 @@ export class ActionListManager {
 
   async getSubMenuItems(categoryData: any, type: string): Promise<MenuItem[]> {
     const category = categoryData.find((cat: any) => cat.name === type);
+    console.log("getSubMenuItems category", category);
     const itemsList = category?.options || [];
     return itemsList.map((item: any) => {
       return {
         id: item.PageId,
         label: item.PageName,
+        isConnectedFromHome: item.IsConnectedFromHome,
         url: item.PageUrl,
         action: () => this.handleSubMenuItemSelection(item, item.PageType),
       };
@@ -102,10 +104,7 @@ export class ActionListManager {
 
   async createNewPage(title: string): Promise<void> {
     const appVersion = await this.appVersionManager.getActiveVersion();
-    const res = await this.toolboxService.createMenuPage(
-      appVersion.AppVersionId,
-      title
-    );
+    const res = await this.toolboxService.createMenuPage(appVersion.AppVersionId, title);
 
     if (!res.error.message) {
       const page = {
@@ -122,12 +121,9 @@ export class ActionListManager {
 
   async createNewInfoPage(title: string): Promise<void> {
     const appVersion = await this.appVersionManager.getActiveVersion();
-    const res = await this.toolboxService.createInfoPage(
-      appVersion.AppVersionId,
-      title
-    );
+    const res = await this.toolboxService.createInfoPage(appVersion.AppVersionId, title);
 
-    console.log('res', res)
+    console.log("res", res);
     if (!res.error.message) {
       const page = {
         PageId: res.MenuPage.PageId,
@@ -142,12 +138,12 @@ export class ActionListManager {
   }
 
   private handleSubMenuItemSelection(item: any, type: string): void {
-    console.log('handleSubMenuItemSelection', item)
-    console.log('handleSubMenuItemSelection', (globalThis as any).pageData)
+    console.log("handleSubMenuItemSelection", item);
+    console.log("handleSubMenuItemSelection", (globalThis as any).pageData);
 
     this.pageAttacher.removeOtherEditors();
 
-    console.log('handleSubMenuItemSelection:removeOtherEditors', (globalThis as any).pageData)
+    console.log("handleSubMenuItemSelection:removeOtherEditors", (globalThis as any).pageData);
 
     if (type === "DynamicForm") {
       this.handleDynamicForms(item);
@@ -158,7 +154,7 @@ export class ActionListManager {
     } else if (type === "CtaPhone") {
       this.pageCreationService.handlePhone();
     } else if (type === "CtaWebLink") {
-      console.log('at Actionlistmanager')
+      console.log("at Actionlistmanager");
       this.pageCreationService.handleWebLinks();
     } else {
       this.pageAttacher.attachToTile(item, type, item.PageName);
@@ -178,21 +174,18 @@ export class ActionListManager {
     const version = (globalThis as any).activeVersion;
     let childPage = version?.Pages.find((page: any) => {
       if (page.PageType == "DynamicForm")
-        return (
-          page.PageType == "DynamicForm" &&
-          page.PageLinkStructure.WWPFormId == form.PageId
-        );
+        return page.PageType == "DynamicForm" && page.PageLinkStructure.WWPFormId == form.PageId;
     });
     const parsedUrl = new URL(form.PageUrl);
     // Get the query parameters
     const params = parsedUrl.searchParams;
     // Extract values
-    const WWPFormReferenceName = params.get('WWPFormReferenceName');
+    const WWPFormReferenceName = params.get("WWPFormReferenceName");
     //const WWPFormInstanceId = params.get('WWPFormInstanceId');
     //const WWPDynamicFormMode = params.get('WWPDynamicFormMode');
     // Output
-    console.log('ActionListManager');
-    console.log('WWPFormReferenceName:', WWPFormReferenceName);
+    console.log("ActionListManager");
+    console.log("WWPFormReferenceName:", WWPFormReferenceName);
     //console.log('WWPFormInstanceId:', WWPFormInstanceId);
     //console.log('WWPDynamicFormMode:', WWPDynamicFormMode);
     if (!childPage) {
@@ -219,22 +212,12 @@ export class ActionListManager {
 
     for (const [property, value] of updates) {
       const infoSectionManager = new InfoSectionManager();
-      infoSectionManager.updateInfoTileAttributes(
-        rowId,
-        tileId,
-        property,
-        value
-      );
+      infoSectionManager.updateInfoTileAttributes(rowId, tileId, property, value);
     }
-    const tileAttributes = (globalThis as any).tileMapper.getTile(
-      rowId,
-      tileId
-    );
+    const tileAttributes = (globalThis as any).tileMapper.getTile(rowId, tileId);
 
     new ChildEditor(childPage?.PageId, childPage).init(tileAttributes);
   }
-
-
 
   filterMenuItems(items: HTMLElement[], searchTerm: string): HTMLElement[] {
     return items.filter((item) => {
@@ -267,9 +250,7 @@ export class ActionListManager {
     }
 
     // 2. Retrieve the tile structure from localStorage
-    const data: any = JSON.parse(
-      localStorage.getItem(`data-${activePage.PageId}`) || "{}"
-    );
+    const data: any = JSON.parse(localStorage.getItem(`data-${activePage.PageId}`) || "{}");
     // console.log('local storage key', `data-${activePage.PageId}`);
     // console.log('copySelectedTile data', data);
     if (data?.PageInfoStructure?.InfoContent) {
@@ -289,7 +270,6 @@ export class ActionListManager {
           // No need to continue if we found the tile directly
 
           return;
-
         }
       });
     }
@@ -300,9 +280,8 @@ export class ActionListManager {
     }
 
     // Option B: Store in a dedicated localStorage key
-    localStorage.setItem('copiedInfoSection', JSON.stringify(copiedStructure));
+    localStorage.setItem("copiedInfoSection", JSON.stringify(copiedStructure));
 
     // console.log("Tile copied:", tileId, copiedStructure);
   }
 }
-

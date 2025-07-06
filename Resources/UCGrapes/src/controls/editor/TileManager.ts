@@ -16,7 +16,6 @@ import { CtaManager } from "../themes/CtaManager";
 import { ThemeManager } from "../themes/ThemeManager";
 import { EditorEvents } from "./EditorEvents";
 import { InfoContentMapper } from "./InfoContentMapper";
-import { NewPageButton } from "./NewPageButton";
 import { TileMapper } from "./TileMapper";
 import { TileUpdate } from "./TileUpdate";
 

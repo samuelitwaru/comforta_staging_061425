@@ -37,36 +37,24 @@ export class ToolboxManager {
     const sideBar = document.getElementById("tb-sidebar") as HTMLElement;
     const toolsSection = new ToolsSection();
     toolsSection.render(sideBar);
-    const toolSectionElement = document.getElementById(
-      "tools-section"
-    ) as HTMLDivElement;
+    const toolSectionElement = document.getElementById("tools-section") as HTMLDivElement;
     if (toolSectionElement) toolSectionElement.style.display = "none";
 
-    // const treeViewSection = new TreeViewSection();
-    // treeViewSection.render(sideBar);
-    // treeViewSection.render(sideBar);
+    const treeViewSection = new TreeViewSection();
+    treeViewSection.render(sideBar);
   }
 
   public setUpScrollButtons() {
-    const scrollContainer = document.getElementById(
-      "child-container"
-    ) as HTMLElement;
-    const leftScroll = document.querySelector(
-      ".navigator .page-navigator-left"
-    ) as HTMLElement;
-    const rightScroll = document.querySelector(
-      ".navigator .page-navigator-right"
-    ) as HTMLElement;
+    const scrollContainer = document.getElementById("child-container") as HTMLElement;
+    const leftScroll = document.querySelector(".navigator .page-navigator-left") as HTMLElement;
+    const rightScroll = document.querySelector(".navigator .page-navigator-right") as HTMLElement;
 
     const scrollAmount: number = 300;
 
     const updateButtonVisibility = () => {
-      leftScroll.style.display =
-        scrollContainer.scrollLeft > 0 ? "none" : "block";
-      const maxScrollLeft =
-        scrollContainer.scrollWidth - scrollContainer.clientWidth;
-      rightScroll.style.display =
-        scrollContainer.scrollLeft < maxScrollLeft - 5 ? "none" : "block";
+      leftScroll.style.display = scrollContainer.scrollLeft > 0 ? "none" : "block";
+      const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+      rightScroll.style.display = scrollContainer.scrollLeft < maxScrollLeft - 5 ? "none" : "block";
     };
 
     leftScroll.onclick = () => {
@@ -98,9 +86,7 @@ export class ToolboxManager {
         pages.map(async (page: any) => {
           const pageId = page.PageId;
           const localStorageKey = `data-${pageId}`;
-          const pageData = JSON.parse(
-            localStorage.getItem(localStorageKey) || "{}"
-          );
+          const pageData = JSON.parse(localStorage.getItem(localStorageKey) || "{}");
 
           let localStructureProperty = null;
           if (
@@ -120,12 +106,9 @@ export class ToolboxManager {
             localStructureProperty = "PageInfoStructure";
           }
 
-          if (!localStructureProperty || !pageData[localStructureProperty])
-            return;
+          if (!localStructureProperty || !pageData[localStructureProperty]) return;
 
-          const localStructureString = JSON.stringify(
-            pageData[localStructureProperty]
-          );
+          const localStructureString = JSON.stringify(pageData[localStructureProperty]);
 
           // Ensure page.PageStructure is a string for comparison
           const pageStructureString =
@@ -231,7 +214,6 @@ export class ToolboxManager {
   }
 
   public applyNewState(stateData: any, pageId: string) {
-    
     const editor = (globalThis as any).activeEditor;
     if (!editor) return;
     const frameContainer = editor.getWrapper().find("#frame-container")[0];
@@ -274,11 +256,7 @@ export class ToolboxManager {
     };
   }
 
-  private replaceFrameContent(
-    stateData: any,
-    pageId: string,
-    frameContainer: any
-  ) {
+  private replaceFrameContent(stateData: any, pageId: string, frameContainer: any) {
     const jsonFormatter = new JSONToGrapesJSInformation(stateData);
     const updatedHtml = jsonFormatter.generateHTML();
     const storageKey = `data-${pageId}`;
@@ -305,18 +283,14 @@ export class ToolboxManager {
     });
   }
 
-  private restoreScrollPosition(
-    editor: any,
-    scrollPosition: { top: number; left: number }
-  ) {
+  private restoreScrollPosition(editor: any, scrollPosition: { top: number; left: number }) {
     try {
       const newFrameContainer = editor.getWrapper().find("#frame-container")[0];
       const newFrameContainerEl = newFrameContainer?.getEl();
 
       if (!newFrameContainerEl) return;
 
-      const hasScrollToRestore =
-        scrollPosition.top > 0 || scrollPosition.left > 0;
+      const hasScrollToRestore = scrollPosition.top > 0 || scrollPosition.left > 0;
 
       if (hasScrollToRestore) {
         newFrameContainerEl.scrollTop = scrollPosition.top;
@@ -335,9 +309,7 @@ export class ToolboxManager {
 
     setTimeout(() => {
       try {
-        const newFrameContainer = editor
-          .getWrapper()
-          .find("#frame-container")[0];
+        const newFrameContainer = editor.getWrapper().find("#frame-container")[0];
         if (!newFrameContainer) return;
 
         let selectedComponentId;
@@ -346,20 +318,15 @@ export class ToolboxManager {
           selectedComponentId = selectedComponent.getId();
           newComponent = editor.getWrapper().find(`#${selectedComponentId}`)[0];
           selectedComponentId = selectedComponent.getId();
-          newComponent = editor
-            .getWrapper()
-            .find(`#${selectedComponentId}`)[0];
+          newComponent = editor.getWrapper().find(`#${selectedComponentId}`)[0];
         } else {
           // it is a tile
           const tileSectionId = selectedComponent?.parent()?.getId();
           if (!tileSectionId) return;
-          const newTileSection = editor
-            .getWrapper()
-            .find(`#${tileSectionId}`)[0];
+          const newTileSection = editor.getWrapper().find(`#${tileSectionId}`)[0];
           if (!newTileSection) return;
           newComponent = newTileSection.find(`.template-block`)[0];
-          newComponent = newTileSection
-            .find(`.template-block`)[0];
+          newComponent = newTileSection.find(`.template-block`)[0];
         }
         if (newComponent) {
           editor.select(newComponent);

@@ -7,7 +7,7 @@ import { Category } from "../../../../types";
 
 export class ActionListDropDown {
   container: HTMLElement;
-  toolBoxService: ToolBoxService;  
+  toolBoxService: ToolBoxService;
   currentLanguage: any;
   appVersion: AppVersionManager;
 
@@ -15,7 +15,7 @@ export class ActionListDropDown {
     this.container = document.createElement("div");
     this.toolBoxService = new ToolBoxService();
     this.appVersion = new AppVersionManager();
-    this.init(); 
+    this.init();
   }
 
   async init() {
@@ -30,7 +30,7 @@ export class ActionListDropDown {
 
   async getCategoryData(): Promise<Category[]> {
     const activePage = (globalThis as any).pageData;
-  
+
     const categories = [
       {
         name: "Page",
@@ -39,12 +39,10 @@ export class ActionListDropDown {
         options: await this.getPages(),
         canCreatePage: true,
       },
-      (activePage) &&
-      (
-        activePage.PageType === "MyCare" ||
+      activePage &&
+      (activePage.PageType === "MyCare" ||
         activePage.PageType === "MyService" ||
-        activePage.PageType === "MyLiving"
-      )
+        activePage.PageType === "MyLiving")
         ? {
             name: "Content",
             displayName: i18n.t("sidebar.action_list.services"),
@@ -78,66 +76,83 @@ export class ActionListDropDown {
         name: "CallToActions",
         displayName: i18n.t("sidebar.action_list.call_to_action"),
         label: i18n.t("sidebar.action_list.call_to_action"),
-        options:
-        [
-          { PageId: "add-email", PageName: i18n.t("tile.email"), TileName: "", PageType: "CtaEmail", },
-          { PageId: "add-phone", PageName: i18n.t("tile.phone"), TileName: "", PageType: "CtaPhone", },
-          { PageId: "add-web-link", PageName: "Web link", TileName: "", PageType: "CtaWebLink", },
+        options: [
+          {
+            PageId: "add-email",
+            PageName: i18n.t("tile.email"),
+            TileName: "",
+            PageType: "CtaEmail",
+          },
+          {
+            PageId: "add-phone",
+            PageName: i18n.t("tile.phone"),
+            TileName: "",
+            PageType: "CtaPhone",
+          },
+          { PageId: "add-web-link", PageName: "Web link", TileName: "", PageType: "CtaWebLink" },
         ],
         canCreatePage: false,
       },
     ];
-  
+
     return categories
       .filter((category): category is Category => category !== null)
       .sort((a, b) => a.label.localeCompare(b.label));
   }
-  
 
   getDynamicForms() {
     const forms = (this.toolBoxService.forms || []).map((form) => ({
-        PageId: form.FormId,
-        PageName: form.PageName,
-        TileName: form.PageName,
-        PageUrl: form.FormUrl,
-        PageType: "DynamicForm",
-      }));
+      PageId: form.FormId,
+      PageName: form.PageName,
+      TileName: form.PageName,
+      PageUrl: form.FormUrl,
+      PageType: "DynamicForm",
+    }));
     return forms;
   }
 
   getServices(activePage: any) {
-    let services = (this.toolBoxService.services || []);
-    services = services.filter(
-      (service: any) => 
-        service.ProductServiceClass.replace(/\s+/g, "")== activePage.PageType
+    let services = this.toolBoxService.services || [];
+    services = services
+      .filter(
+        (service: any) => service.ProductServiceClass.replace(/\s+/g, "") == activePage.PageType
       )
       .map((service) => ({
         PageId: service.ProductServiceId,
         PageName: service.ProductServiceName,
         TileName: service.ProductServiceTileName || service.ProductServiceName,
-        TileCategory: service.ProductServiceClass
+        TileCategory: service.ProductServiceClass,
       }));
     return services;
   }
 
-
   async getPages() {
     try {
-      const versions = this.appVersion.getPages() || [];
-      const pages = versions.filter(
-        (page: any) => 
-          (page.PageType == "Menu" || page.PageType == "Information") 
-          && (page.PageName !== "Home"
-          && page.PageName !== "My Care"
-          && page.PageName !== "My Living"
-          && page.PageName !== "My Services")
-      ).map((page: any) => ({
-        PageId: page.PageId,
-        PageName: capitalizeWords(page.PageName),
-        TileName: capitalizeWords(page.PageName),
-        PageType: page.PageType,
-      }))
+      const result = this.appVersion.refreshVersion();
+      if (result instanceof Promise) {
+        await result;
+      }
 
+      const versions = this.appVersion.getPages() || [];
+
+      const pages = versions
+        .filter(
+          (page: any) =>
+            (page.PageType == "Menu" || page.PageType == "Information") &&
+            page.PageName !== "Home" &&
+            page.PageName !== "My Care" &&
+            page.PageName !== "My Living" &&
+            page.PageName !== "My Services"
+        )
+        .map((page: any) => ({
+          PageId: page.PageId,
+          PageName: capitalizeWords(page.PageName),
+          TileName: capitalizeWords(page.PageName),
+          PageType: page.PageType,
+          IsConnectedFromHome: this.isPageConnectedFromHome(page.PageId),
+        }));
+
+      console.log("Pages fetched:", pages);
       return pages;
     } catch (error) {
       console.error("Error fetching pages:", error);
@@ -145,15 +160,80 @@ export class ActionListDropDown {
     }
   }
 
+  isPageConnectedFromHome(targetPageId: string): boolean {
+    const pages = this.appVersion.getPages() || [];
+
+    // Helper to extract connected page IDs from a page object
+    const getConnectedPageIds = (page: any): string[] => {
+      const children: string[] = [];
+      if (page.PageType === "Information" && page.PageInfoStructure?.InfoContent) {
+        page.PageInfoStructure.InfoContent.forEach((row: any) => {
+          if (row.InfoType === "TileGrid") {
+            row.Columns.forEach((column: any) => {
+              column.Tiles.forEach((tile: any) => {
+                if (tile.Action?.ObjectId) {
+                  children.push(tile.Action.ObjectId);
+                } else if (row.InfoType === "Cta") {
+                  if (
+                    row.CtaAttributes?.CtaType === "Form" ||
+                    row.CtaAttributes?.CtaType === "WebLink"
+                  ) {
+                    if (row.CtaAttributes.Action?.ObjectId) {
+                      children.push(row.CtaAttributes.Action.ObjectId);
+                    }
+                  }
+                }
+              });
+            });
+          }
+          if (row.InfoType === "TileRow") {
+            row.Tiles.forEach((tile: any) => {
+              if (tile.Action?.ObjectId) {
+                children.push(tile.Action.ObjectId);
+              }
+            });
+          } else if (row.InfoType === "Cta") {
+            if (row.CtaAttributes?.CtaType === "Form" || row.CtaAttributes?.CtaType === "WebLink") {
+              if (row.CtaAttributes.Action?.ObjectId) {
+                children.push(row.CtaAttributes.Action.ObjectId);
+              }
+            }
+          }
+        });
+      }
+      return children;
+    };
+
+    // Find the Home page
+    const homePage = pages.find((p: any) => p.PageName === "Home");
+    if (!homePage) return false;
+
+    // DFS to find a path from Home to targetPageId
+    const visited = new Set<string>();
+    const dfs = (page: any): boolean => {
+      if (!page || visited.has(page.PageId)) return false;
+      if (page.PageId === targetPageId) return true;
+      visited.add(page.PageId);
+      const childrenIds = getConnectedPageIds(page);
+      for (const childId of childrenIds) {
+        const childPage = pages.find((p: any) => p.PageId === childId);
+        if (dfs(childPage)) return true;
+      }
+      return false;
+    };
+
+    return dfs(homePage);
+  }
+
   async getPredefinedPages() {
     try {
-      const version = await this.appVersion.preDefinedPages() || [];
+      const version = (await this.appVersion.preDefinedPages()) || [];
       const pages = version.map((page: any) => ({
         PageId: page.PageId,
         PageName: page.PageName,
         TileName: page.PageName,
-        PageType: page.PageType
-      }))
+        PageType: page.PageType,
+      }));
       return pages;
     } catch (error) {
       console.error("Error fetching pages:", error);

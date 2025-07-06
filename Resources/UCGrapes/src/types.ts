@@ -84,7 +84,7 @@ export interface InfoType {
   CtaAttributes?: CtaAttributes;
   Tiles?: Tile[];
   Images?: Image[];
-  Columns?: Column[]
+  Columns?: Column[];
 }
 
 export interface Image {
@@ -98,6 +98,7 @@ export interface MenuItem {
   name?: string;
   action: (categoryItems?: any[]) => void;
   expandable?: boolean;
+  isConnectedFromHome?: boolean;
 }
 
 export interface SelectOptionConfig<DropdownOption> {
@@ -149,8 +150,8 @@ export interface Template {
 }
 
 export interface Column {
-  ColId: string,
-  Tiles: Tile[]
+  ColId: string;
+  Tiles: Tile[];
 }
 
 export interface Tile {
@@ -224,7 +225,7 @@ export interface Theme {
   ThemeColors: ThemeColors;
   ThemeCtaColors: ThemeCtaColor;
   ThemeIcons: ThemeIcon[];
-  Icons:[];
+  Icons: [];
 }
 
 export interface Form {
@@ -305,5 +306,3 @@ export interface SelectedImage {
 }
 
 export type ImageType = "info" | "tile" | "content" | "cta";
-
-

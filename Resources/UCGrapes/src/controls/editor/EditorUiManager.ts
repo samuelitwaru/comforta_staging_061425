@@ -13,6 +13,8 @@ import { InfoSectionManager } from "../InfoSectionManager";
 import { AddInfoSectionButton } from "../../ui/components/AddInfoSectionButton";
 import { AppVersionManager } from "../versions/AppVersionManager";
 import { i18n } from "../../i18n/i18n";
+import { TreeViewSection } from "../../ui/components/tools-section/TreeViewSection";
+(globalThis as any).activePages = (globalThis as any).activePages || [];
 
 export class EditorUIManager {
   editor: any;
@@ -38,19 +40,14 @@ export class EditorUIManager {
     this.frameId = frameId;
     this.pageData = pageData;
     this.appVersionManager = appVersionManager;
-    this.handleTileManager()
+    this.handleTileManager();
 
-    this.tilePropsSection = document.getElementById(
-      "menu-page-section"
-    ) as HTMLElement;
-    this.ctaPropsSection = document.getElementById(
-      "content-page-section"
-    ) as HTMLDivElement;
+    this.tilePropsSection = document.getElementById("menu-page-section") as HTMLElement;
+    this.ctaPropsSection = document.getElementById("content-page-section") as HTMLDivElement;
   }
 
-  handleTileManager(
+  handleTileManager() {
     // e: MouseEvent
-  ) {
     this.tileManager = new TileManager(
       // e,
       this.editor,
@@ -72,26 +69,18 @@ export class EditorUIManager {
       }
     });
 
-    const infoSections = this.editor
-      ?.getWrapper()
-      ?.find(".info-section-spacing-container");
+    const infoSections = this.editor?.getWrapper()?.find(".info-section-spacing-container");
     infoSections?.forEach((component: any) => {
       component.getEl().style.removeProperty("height");
-      const svgTrigger = component
-        .getEl()
-        .querySelector('[data-name="Ellipse 6"]') as HTMLElement;
-      const addButton = component
-        .getEl()
-        .querySelector(".add-new-info-section") as HTMLDivElement;
+      const svgTrigger = component.getEl().querySelector('[data-name="Ellipse 6"]') as HTMLElement;
+      const addButton = component.getEl().querySelector(".add-new-info-section") as HTMLDivElement;
       if (addButton) {
         addButton.style.removeProperty("opacity");
       }
       if (svgTrigger) {
         svgTrigger.setAttribute("fill", "#fdfdfd");
       }
-      const svgGPath = component
-        .getEl()
-        .querySelector("path") as SVGPathElement;
+      const svgGPath = component.getEl().querySelector("path") as SVGPathElement;
       if (svgGPath) {
         svgGPath.setAttribute("fill", "#5068a8");
       }
@@ -105,9 +94,7 @@ export class EditorUIManager {
     if (dropDownOptions) {
       dropDownOptions.forEach((dropDown: HTMLElement) => {
         dropDown.classList.remove("show");
-        const button = document.querySelector(
-          ".theme-select-button"
-        ) as HTMLElement;
+        const button = document.querySelector(".theme-select-button") as HTMLElement;
         button?.setAttribute("aria-expanded", "false");
         button?.classList.toggle("open");
       });
@@ -119,16 +106,12 @@ export class EditorUIManager {
     if (target.closest(".tile-open-menu")) {
       e.stopPropagation();
       const menuBtn = target.closest(".tile-open-menu") as HTMLElement;
-      const templateContainer = menuBtn.closest(
-        ".template-wrapper"
-      ) as HTMLElement;
+      const templateContainer = menuBtn.closest(".template-wrapper") as HTMLElement;
 
       this.clearAllMenuContainers();
 
       // Get the mobileFrame for positioning context
-      const mobileFrame = document.getElementById(
-        `${this.frameId}-frame`
-      ) as HTMLElement;
+      const mobileFrame = document.getElementById(`${this.frameId}-frame`) as HTMLElement;
       const iframe = mobileFrame?.querySelector("iframe") as HTMLIFrameElement;
       const iframeRect = iframe?.getBoundingClientRect();
 
@@ -148,17 +131,14 @@ export class EditorUIManager {
       return;
     }
     // Check if the target is within a '.add-new-info-section svg'
-    const svgTrigger = target.closest(
-      ".add-new-info-section svg"
-    ) as HTMLElement;
+    const svgTrigger = target.closest(".add-new-info-section svg") as HTMLElement;
 
     if (svgTrigger) {
       // Find the nearest parent container with class 'info-section-spacing-container'
       let el: HTMLElement | null = svgTrigger;
       const sectionContainer = (() => {
         while (el) {
-          if (el.classList.contains("info-section-spacing-container"))
-            return el;
+          if (el.classList.contains("info-section-spacing-container")) return el;
           el = el.parentElement;
         }
         return null;
@@ -173,17 +153,11 @@ export class EditorUIManager {
       const nextSectionId = this.getNextInfoSectionId(sectionContainer);
 
       // Proceed with your logic (menu rendering, iframe positioning, etc.)
-      const mobileFrame = document.getElementById(
-        `${this.frameId}-frame`
-      ) as HTMLElement;
+      const mobileFrame = document.getElementById(`${this.frameId}-frame`) as HTMLElement;
       const iframe = mobileFrame?.querySelector("iframe") as HTMLIFrameElement;
       const iframeRect = iframe?.getBoundingClientRect();
 
-      const menu = new InfoSectionPopup(
-        sectionContainer,
-        mobileFrame,
-        nextSectionId
-      );
+      const menu = new InfoSectionPopup(sectionContainer, mobileFrame, nextSectionId);
       const triggerRect = svgTrigger.getBoundingClientRect();
 
       menu.render(triggerRect, iframeRect);
@@ -199,9 +173,7 @@ export class EditorUIManager {
         if (addButton) {
           addButton.style.opacity = "1";
         }
-        const svgGEl = svgTrigger.querySelector(
-          '[data-name="Ellipse 6"]'
-        ) as HTMLElement;
+        const svgGEl = svgTrigger.querySelector('[data-name="Ellipse 6"]') as HTMLElement;
         if (svgGEl) {
           svgGEl.setAttribute("fill", "#5068a8");
         }
@@ -250,16 +222,12 @@ export class EditorUIManager {
     const parentEl = destinationComponent.getEl();
 
     // manage plus button sections
-    const containerColumn = this.editor
-      ?.getWrapper()
-      .find(".container-column-info")[0];
+    const containerColumn = this.editor?.getWrapper().find(".container-column-info")[0];
     if (containerColumn) {
       const modalElement = model.target.getEl?.();
       const modelId = model.target?.getId?.() ?? model.getId();
       const components = containerColumn.components().models;
-      const modelIndex = components.findIndex(
-        (comp: any) => comp.getId() === modelId
-      );
+      const modelIndex = components.findIndex((comp: any) => comp.getId() === modelId);
 
       const addInfoSectionButton = new AddInfoSectionButton().getHTML();
 
@@ -273,9 +241,7 @@ export class EditorUIManager {
 
       // handle tile drag scenarios
       // 1. Check if the dragged element is a tile.
-      const isTile =
-        modalElement &&
-        modalElement.getAttribute("data-gjs-type") === "tile-wrapper";
+      const isTile = modalElement && modalElement.getAttribute("data-gjs-type") === "tile-wrapper";
 
       if (isTile) {
         const targetId = model.target.getId();
@@ -297,9 +263,7 @@ export class EditorUIManager {
           );
         } else {
           // Find the index of the target element in the components array
-          const targetIndex = components.findIndex(
-            (comp: any) => comp.getId() === modelId
-          );
+          let targetIndex = components.findIndex((comp: any) => comp.getId() === modelId);
           let nearestSection = null;
           // Go upwards from targetIndex - 1 to 0, looking for a section whose data-gjs-type matches "info-*-section"
           for (let i = targetIndex - 1; i >= 0; i--) {
@@ -313,9 +277,7 @@ export class EditorUIManager {
           }
 
           // if dragged to the first item at the top of the container, nearestSection will be null
-          const nearestSectionId = nearestSection
-            ? nearestSection.getId()
-            : null;
+          const nearestSectionId = nearestSection ? nearestSection.getId() : null;
           infoContentMapper.handleDragAndDropToNewTileArea(
             targetId,
             sourceParentId,
@@ -326,19 +288,13 @@ export class EditorUIManager {
         if (parentEl && parentEl.classList.contains("container-column-info")) {
           // Same logic for info content rows
           const siblings = Array.from(parentEl.children).filter(
-            (el) =>
-              !(el as Element).classList.contains(
-                "info-section-spacing-container"
-              )
+            (el) => !(el as Element).classList.contains("info-section-spacing-container")
           );
           const modelEl = model.target.getEl();
           const filteredIndex = siblings.findIndex((el) => el === modelEl);
 
           const infoContentMapper = new InfoContentMapper(this.pageId);
-          infoContentMapper.moveContentRow(
-            modelEl.getAttribute("id"),
-            filteredIndex
-          );
+          infoContentMapper.moveContentRow(modelEl.getAttribute("id"), filteredIndex);
         }
       }
 
@@ -351,10 +307,7 @@ export class EditorUIManager {
   }
 
   onTileUpdate(containerRow: any) {
-    if (
-      containerRow &&
-      containerRow.getEl()?.classList.contains("container-row")
-    ) {
+    if (containerRow && containerRow.getEl()?.classList.contains("container-row")) {
       this.editor.off("component:add", this.handleComponentAdd);
       this.editor.on("component:add", this.handleComponentAdd);
     }
@@ -411,23 +364,21 @@ export class EditorUIManager {
   }
 
   activateEditor(frameId: any) {
-    const mobileFrame = document.getElementById(
-      `${frameId}-frame`
-    ) as HTMLDivElement;
+    const mobileFrame = document.getElementById(`${frameId}-frame`) as HTMLDivElement;
     if (!mobileFrame) return;
     (globalThis as any).pageId = mobileFrame.dataset.pageid;
-    const currentPageId = mobileFrame.dataset.pageid;
+
+    const currentPageId: string = mobileFrame.dataset.pageid as string;
     const currentPage = this.appVersionManager
       .getPages()
       ?.find((page: any) => page.PageId === currentPageId);
+    // console.log("currentPage", currentPage);
     this.pageData = currentPage;
     const framelist = document.querySelectorAll(".mobile-frame");
     framelist.forEach((frame: any) => {
       // deselect in active editors
       const editors = (window as any).app.editors;
-      const inactiveEditors = Object.entries(editors).filter(
-        ([key]) => key !== frameId
-      );
+      const inactiveEditors = Object.entries(editors).filter(([key]) => key !== frameId);
       inactiveEditors.forEach(([key, editor]: [string, any]) => {
         editor.select(null);
       });
@@ -442,19 +393,34 @@ export class EditorUIManager {
     });
     this.showPageInfo();
     (globalThis as any).activeEditor = this.editor;
-    (globalThis as any).currentPageId = this.pageId;
+    // (globalThis as any).currentPageId = this.pageId;
+    (globalThis as any).currentPageId = currentPageId;
     (globalThis as any).pageData = this.pageData;
     (globalThis as any).frameId = frameId;
 
+    this.updateActivePages(frameId, currentPageId);
 
-    //log (globalThis as any).currentPageId
-
-    // new TreeViewSection().refresh();
-
-    // const treeViewSection = new TreeViewSection();
-    // treeViewSection.init();
+    new TreeViewSection().refresh();
 
     new ToolboxManager().unDoReDo();
+  }
+
+  updateActivePages(frameId: string, pageId: string): { frameId: string; pageId: string }[] {
+    // console.log("Updating active pages with frameId:", frameId, "and pageId:", pageId);
+    const activePages = (globalThis as any).activePages as { frameId: string; pageId: string }[];
+
+    // Find the index of the target page
+    const targetIndex = activePages.findIndex((p) => p.frameId === frameId && p.pageId === pageId);
+
+    if (targetIndex !== -1) {
+      // Keep everything up to and including the target page
+      (globalThis as any).activePages = activePages.slice(0, targetIndex + 1);
+    } else {
+      // Add the new frameId/pageId if not found
+      (globalThis as any).activePages.push({ frameId, pageId });
+    }
+
+    return (globalThis as any).activePages;
   }
 
   showPageInfo() {
@@ -462,15 +428,10 @@ export class EditorUIManager {
       return;
     }
     let listHTML = ``;
-    const pageInfoSection = document.querySelector(
-      "#page-info-section"
-    ) as HTMLDivElement;
+    const pageInfoSection = document.querySelector("#page-info-section") as HTMLDivElement;
     if (!this.pageData) return;
 
-    if (
-      this.pageData?.PageType === "Information" &&
-      this.pageData?.PageInfoStructure.InfoContent
-    ) {
+    if (this.pageData?.PageType === "Information" && this.pageData?.PageInfoStructure.InfoContent) {
       this.pageData.PageInfoStructure.InfoContent.forEach((info: any) => {
         if (info.InfoType === "TileRow") {
           info.Tiles?.forEach((tile: Tile) => {
@@ -496,9 +457,7 @@ export class EditorUIManager {
         ${listHTML}
       </ul>
     `;
-    const pageTitle = document.getElementById(
-      "page-info-title"
-    ) as HTMLDivElement;
+    const pageTitle = document.getElementById("page-info-title") as HTMLDivElement;
     pageTitle.innerHTML = `
       <h3>${this.pageData.PageName.toUpperCase()}</h3>
       <hr/>
@@ -507,16 +466,12 @@ export class EditorUIManager {
   }
 
   hidePageInfo() {
-    const pageInfoSection = document.querySelector(
-      "#page-info-section"
-    ) as HTMLElement;
+    const pageInfoSection = document.querySelector("#page-info-section") as HTMLElement;
     pageInfoSection.style.display = "none";
   }
 
   activateMiniatureFrame(frameId: string) {
-    const thumbsList = document.querySelector(
-      ".editor-thumbs-list"
-    ) as HTMLElement;
+    const thumbsList = document.querySelector(".editor-thumbs-list") as HTMLElement;
     const highlighters = thumbsList.querySelectorAll(".tb-highlighter");
     highlighters.forEach((el: any) => {
       el.style.display = "none";
@@ -524,10 +479,9 @@ export class EditorUIManager {
 
     const activeThumb = thumbsList.querySelector(`div[id="${frameId}"]`);
     if (activeThumb) {
-      const highlighter =
-        activeThumb.parentElement?.parentElement?.querySelector(
-          ".tb-highlighter"
-        ) as HTMLElement;
+      const highlighter = activeThumb.parentElement?.parentElement?.querySelector(
+        ".tb-highlighter"
+      ) as HTMLElement;
       if (highlighter) {
         highlighter.style.display = "block";
       }
@@ -545,16 +499,13 @@ export class EditorUIManager {
   }
 
   toggleSidebar(show: boolean = false) {
-    const toolSection = document.getElementById(
-      "tools-section"
-    ) as HTMLDivElement;
+    const toolSection = document.getElementById("tools-section") as HTMLDivElement;
     // hide sidebar if no active content to work with
     if (show) {
       // console.log('show sidebar :>> ', show);
       toolSection.style.display = "block";
-      const menuSection = document.getElementById(
-        "menu-page-section"
-      ) as HTMLElement;
+      const menuSection = document.getElementById("menu-page-section") as HTMLElement;
+      const contentection = document.getElementById("content-page-section");
       if (menuSection) menuSection.style.display = "block";
       // if (contentection) contentection.remove();
     } else toolSection.style.display = "none";
@@ -573,14 +524,14 @@ export class EditorUIManager {
     const tileWrapper = selectedComponent.parent();
     // const rowComponent = tileWrapper.parent();
 
-    const rowComponent = tileWrapper.closest('.container-row')
-    const colComponent = tileWrapper.closest('.tile-column')
+    const rowComponent = tileWrapper.closest(".container-row");
+    const colComponent = tileWrapper.closest(".tile-column");
 
     const tileAttributes = this.tileManager.getTileAttrs(
       rowComponent.getId(),
       colComponent.getId(),
       tileWrapper.getId()
-    )
+    );
 
     // const tileAttributes = (globalThis as any).tileMapper.getTile(
     //   rowComponent.getId(),
@@ -588,16 +539,12 @@ export class EditorUIManager {
     // );
 
     if (selectedComponent && tileAttributes) {
-      this.tileProperties = new TileProperties(
-        selectedComponent,
-        tileAttributes
-      );
+      this.tileProperties = new TileProperties(selectedComponent, tileAttributes);
       this.tileProperties.setTileAttributes();
     }
   }
 
   setInfoTileProperties() {
-
     if (this.pageData.PageType !== "Information") return;
     const selectedComponent = (globalThis as any).selectedComponent;
     const tileWrapper = selectedComponent.parent();
@@ -609,19 +556,14 @@ export class EditorUIManager {
       const tileAttributes = tileInfoSectionAttributes?.Tiles?.find(
         (tile: any) => tile.Id === tileWrapper.getId()
       );
-      this.tileProperties = new TileProperties(
-        selectedComponent,
-        tileAttributes
-      );
+      this.tileProperties = new TileProperties(selectedComponent, tileAttributes);
       this.tileProperties.setTileAttributes();
     }
   }
 
   setInfoCtaProperties() {
     // render cta component
-    (
-      window as any
-    ).app.toolsSection.pagesTabContent.contentSection.renderComponents();
+    (window as any).app.toolsSection.pagesTabContent.contentSection.renderComponents();
 
     const selectedComponent = (globalThis as any).selectedComponent;
     if (this.pageData.PageType !== "Information") return;
@@ -636,10 +578,7 @@ export class EditorUIManager {
 
     if (selectedComponent && tileInfoSectionAttributes) {
       const ctaAttributes = tileInfoSectionAttributes?.CtaAttributes;
-      const ctaProperties = new CtaButtonProperties(
-        selectedComponent,
-        ctaAttributes
-      );
+      const ctaProperties = new CtaButtonProperties(selectedComponent, ctaAttributes);
       ctaProperties.setctaAttributes();
     }
   }
@@ -655,7 +594,9 @@ export class EditorUIManager {
     if (buttonLayoutContainer) buttonLayoutContainer.style.display = "flex";
     const contentSection = document.querySelector("#content-page-section");
     const colorItems = contentSection?.querySelectorAll(".color-item > input");
-    colorItems?.forEach((input: any) => { input.checked = false; });
+    colorItems?.forEach((input: any) => {
+      input.checked = false;
+    });
 
     const buttonLabel = contentSection?.querySelector(".cta-action-input");
     if (buttonLabel) buttonLabel.remove();
@@ -664,13 +605,16 @@ export class EditorUIManager {
   async createChildEditor() {
     const selectedComponent = (globalThis as any).selectedComponent;
     const tileWrapper = selectedComponent.parent();
-    const colComponent = tileWrapper.closest('.tile-column');
-    const rowComponent = tileWrapper.closest('.container-row');
+    const colComponent = tileWrapper.closest(".tile-column");
+    const rowComponent = tileWrapper.closest(".container-row");
     let tileAttributes;
 
-
     if (this.pageData.PageType === "Information") {
-      tileAttributes = this.tileManager.getTileAttrs(rowComponent.getId(), colComponent.getId(), tileWrapper.getId())
+      tileAttributes = this.tileManager.getTileAttrs(
+        rowComponent.getId(),
+        colComponent.getId(),
+        tileWrapper.getId()
+      );
     } else {
       tileAttributes = (globalThis as any).tileMapper.getTile(
         rowComponent.getId(),
@@ -687,9 +631,7 @@ export class EditorUIManager {
         return;
       }
       const objectId = tileAttributes.Action.ObjectId;
-      const data: any = JSON.parse(
-        localStorage.getItem(`data-${objectId}`) || "{}"
-      );
+      const data: any = JSON.parse(localStorage.getItem(`data-${objectId}`) || "{}");
       let childPage;
       if (Object.keys(data).length > 0) {
         childPage = data;
@@ -706,18 +648,14 @@ export class EditorUIManager {
 
   removeEditor(): void {
     const frameId = (globalThis as any).frameId;
-    const editorContainer = document.querySelector(
-      `#${frameId}-frame`
-    ) as HTMLElement;
+    const editorContainer = document.querySelector(`#${frameId}-frame`) as HTMLElement;
     if (editorContainer) {
       this.removeOtherEditors();
       editorContainer.remove();
     }
 
     // Remove the corresponding thumbnail from the thumbs list
-    const thumbsList = document.querySelector(
-      ".editor-thumbs-list"
-    ) as HTMLElement;
+    const thumbsList = document.querySelector(".editor-thumbs-list") as HTMLElement;
     const thumbToRemove = thumbsList.querySelector(`div[id="${frameId}"]`);
     if (thumbToRemove) {
       thumbToRemove.parentElement?.parentElement?.parentElement?.remove();
@@ -733,12 +671,8 @@ export class EditorUIManager {
           const elementToRemove = nextElement;
           nextElement = nextElement.nextElementSibling;
           if (elementToRemove) {
-            const thumbsList = document.querySelector(
-              ".editor-thumbs-list"
-            ) as HTMLElement;
-            const thumbToRemove = thumbsList.querySelector(
-              `div[id="${elementToRemove.id}"]`
-            );
+            const thumbsList = document.querySelector(".editor-thumbs-list") as HTMLElement;
+            const thumbToRemove = thumbsList.querySelector(`div[id="${elementToRemove.id}"]`);
             if (thumbToRemove) {
               thumbToRemove.parentElement?.parentElement?.parentElement?.remove();
             }
@@ -753,9 +687,7 @@ export class EditorUIManager {
   clearAllEditors(): void {
     const framelist = document.querySelectorAll(".mobile-frame");
     framelist.forEach((frame: any) => {
-      const thumbsList = document.querySelector(
-        ".editor-thumbs-list"
-      ) as HTMLElement;
+      const thumbsList = document.querySelector(".editor-thumbs-list") as HTMLElement;
       const thumbToRemove = thumbsList.querySelector(`div[id="${frame.id}"]`);
       if (thumbToRemove) {
         thumbToRemove.parentElement?.parentElement?.parentElement?.remove();
@@ -766,13 +698,9 @@ export class EditorUIManager {
   }
 
   activateNavigators(): any {
-    const scrollContainer = document.getElementById(
-      "child-container"
-    ) as HTMLElement;
+    const scrollContainer = document.getElementById("child-container") as HTMLElement;
     const frames = document.querySelectorAll("#child-container .mobile-frame");
-    const menuContainer = document.querySelector(
-      ".menu-container"
-    ) as HTMLElement;
+    const menuContainer = document.querySelector(".menu-container") as HTMLElement;
 
     // Show navigation buttons only when content overflows
     const menuWidth = menuContainer ? menuContainer.clientWidth : 0;
@@ -780,10 +708,10 @@ export class EditorUIManager {
     const alignment =
       window.innerWidth <= 1440
         ? frames.length > 2
-          ? "right"
+          ? "center"
           : "center"
         : frames.length > 2
-          ? "right"
+          ? "center"
           : "center";
 
     scrollContainer.style.setProperty("justify-content", alignment);
@@ -806,18 +734,10 @@ export class EditorUIManager {
   }
 
   resetTitleFromDOM() {
-    const pageTitle = document.querySelector(
-      ".app-bar .title"
-    ) as HTMLHeadingElement;
-    const editHeader = document.getElementById(
-      "edit_page_title"
-    ) as HTMLElement;
-    const saveChange = document.getElementById(
-      "save_page_title"
-    ) as HTMLElement;
-    const titleDiv = document.querySelector(
-      ".app-bar .appbar-title-container"
-    ) as HTMLDivElement;
+    const pageTitle = document.querySelector(".app-bar .title") as HTMLHeadingElement;
+    const editHeader = document.getElementById("edit_page_title") as HTMLElement;
+    const saveChange = document.getElementById("save_page_title") as HTMLElement;
+    const titleDiv = document.querySelector(".app-bar .appbar-title-container") as HTMLDivElement;
 
     if (!pageTitle || !editHeader || !saveChange || !titleDiv) {
       // Required elements not found, exit the function
@@ -840,8 +760,7 @@ export class EditorUIManager {
     if (pageTitle.textContent && this.pageData.PageName) {
       pageTitle.title = this.pageData.PageName;
       if (pageTitle.textContent.length > length) {
-        pageTitle.textContent =
-          this.pageData.PageName.substring(0, length) + "...";
+        pageTitle.textContent = this.pageData.PageName.substring(0, length) + "...";
       } else {
         pageTitle.textContent = this.pageData.PageName;
       }

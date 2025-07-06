@@ -49,7 +49,7 @@ export class PageTreeRendererInfoPage {
     return date;
   }
 
-  createMenuHTML(page: any) {
+  createInfoHTML(page: any) {
     const json = page.PageInfoStructure;
     const container = document.createElement("div");
     container.style.padding = "2.5px";
@@ -253,10 +253,8 @@ export class PageTreeRendererInfoPage {
     const body = document.createElement("div");
 
     let pageData = `
-                <div class="tb-date-selector"  
-                  style="background-color: ${
-  this.currentTheme.ThemeColors["backgroundColor"]
-}; font-size: 6px; padding:2px;">
+                <div class="tb-date-selector-tree"  
+                  style="background-color: ${this.currentTheme.ThemeColors["backgroundColor"]}">
                   <span class="tb-arrow">❮</span>
                   <span class="tb-date-text" id="current-date" > ${this.formatDate()}</span>
                   <span class="tb-arrow">❯</span>
@@ -271,12 +269,12 @@ export class PageTreeRendererInfoPage {
                       <div class="tb-time" >${formattedHour}</div>
                       <div class="tb-events" ></div>
                       ${
-  hour === new Date().getHours()
-    ? `
+                        hour === new Date().getHours()
+                          ? `
                         <div class="tb-current-time-indicator" ></div>
                         <div class="tb-current-time-dot" ></div>`
-    : ""
-}
+                          : ""
+                      }
 
                     </div>
                   `;
@@ -290,7 +288,7 @@ export class PageTreeRendererInfoPage {
 
   createMapHTML(page: any) {
     const container = document.createElement("div");
-    container.style.padding = "2px";
+    container.style.padding = "5px";
 
     const header = this.createHeaderHTML(page);
     container.appendChild(header);
@@ -300,11 +298,12 @@ export class PageTreeRendererInfoPage {
     const lng = 5.1214;
 
     body.innerHTML = `
-      <iframe>
-        
+      <iframe
+        width="100%"
+        height="300"
         frameborder="0"
-        style="height:300px; width:100%; border:0;"
-        src="https://www.google.com/maps/embed/v1/view?key=AIzaSyBBaQo7_sF2xk3uNIyKp_Z-4BbaTebGGa4&center=${lat},${lng}&zoom=18"
+        style="border:0"
+        src="https://www.google.com/maps/embed/v1/view?key=${process.env.MAPS_API_KEY}&center=${lat},${lng}&zoom=18"
         allowfullscreen>
       </iframe>
     `;
@@ -385,19 +384,19 @@ export class PageTreeRendererInfoPage {
             `,
       Image: (cta: any) => `
               <div class="cta-image-button-tree" style="background:${this.getCtaColor(
-    cta.CtaBGColor
-  )}">
+                cta.CtaBGColor
+              )}">
                 <div class="cta-image-button-image-tree"> <img src= "${
-  cta.CtaButtonImgUrl
-}" alt="Image" style="width: 18px; height: 18px; object-fit: cover; border-radius: 5px;"/></div>
+                  cta.CtaButtonImgUrl
+                }" alt="Image" style="width: 18px; height: 18px; object-fit: cover; border-radius: 5px;"/></div>
                 <div class="cta-image-button-label-tree">${cta.CtaLabel}</div>
                 <i class="fa fa-angle-right img-button-arrow-tree"></i>
               </div>
               `,
       Icon: (cta: any) => `
               <div class="cta-icon-button-tree" style="background:${this.getCtaColor(
-    cta.CtaBGColor
-  )}">
+                cta.CtaBGColor
+              )}">
                 <div class="cta-icon-button-icon-tree" >${icons[cta.CtaButtonIcon]}</div>
                 <div class="cta-icon-button-label-tree">
                   ${cta.CtaLabel}

@@ -1,6 +1,6 @@
+import { constant } from "lodash";
 import { AppConfig } from "../../../AppConfig";
 import { ThemeManager } from "../../../controls/themes/ThemeManager";
-import { PageTreeRenderer } from "./PageTreeRenderer";
 import { PageTreeRendererInfoPage } from "./PageTreeRendererInfoPage";
 
 interface PageNode {
@@ -35,72 +35,20 @@ export class PageBubbleTree {
   arrows: any;
   graphContainer!: HTMLDivElement;
   treeContainer!: HTMLDivElement;
+  sectionTreeMinimize!: HTMLDivElement;
+  treeFeatures!: HTMLDivElement;
+
   zoom: any;
-  pageTreeRenderer: PageTreeRenderer;
+
   PageTreeRendererInfoPage: PageTreeRendererInfoPage;
   primaryNodeId: string | null = null; // Fixed type to string
   appVersionManager: any;
   navigationHistory: { id: string; name: string }[] = [];
   parentNodeId: string | null = null;
-
-  // constructor(primaryNodeId?: string) {
-  //   this.pageTreeRenderer = new PageTreeRenderer();
-  //   this.PageTreeRendererInfoPage = new PageTreeRendererInfoPage();
-  //   const config = AppConfig.getInstance();
-  //   this.d3 = config.UC.d3;
-  //   this.themeManager = new ThemeManager();
-  //   const appVersionManager = this.themeManager.appVersionManager;
-  //   this.appVersionManager = appVersionManager;
-  //   this.pages = appVersionManager.getPages();
-
-  //   this.processedPages = this.processPageData(this.pages);
-  //   // const homePage = this.processedPages.find((page) => page.title === "Home");
-
-  //   // if (homePage) {
-  //   //   this.primaryNodeId = homePage.id;
-  //   //   // Initialize navigation history with home page
-  //   //   this.navigationHistory = [{ id: homePage.id, name: homePage.title }];
-  //   //   // Use the same logic as onNodeClick for initialization
-  //   //   this.updateNodeDisplay(homePage);
-  //   // }
-
-  //   // If primaryNodeId is provided, use it; otherwise, use "Home"
-  //   let initialNode = null;
-  //   if (primaryNodeId) {
-  //     this.primaryNodeId = primaryNodeId;
-  //     initialNode = this.processedPages.find(
-  //       (page) => page.id === primaryNodeId
-  //     );
-  //   } else {
-  //     const homePage = this.processedPages.find(
-  //       (page) => page.title === "Home"
-  //     );
-  //     if (homePage) {
-  //       this.primaryNodeId = homePage.id;
-  //       initialNode = homePage;
-  //     }
-  //   }
-
-  //   if (initialNode) {
-  //     // Optionally initialize navigation history
-  //     this.navigationHistory = [
-  //       { id: initialNode.id, name: initialNode.title },
-  //     ];
-  //     this.updateNodeDisplay(initialNode);
-  //   }
-
-  //   // this.init();
-  // }
-
-  // init() {
-  //   this.refreshPages();
-
-  //   this.graphContainer = this.build();
-  //   this.buildTree();
-  // }
+  mainContainer!: HTMLDivElement;
+  sectionAllPages!: HTMLDivElement;
 
   constructor(primaryNodeId?: string) {
-    this.pageTreeRenderer = new PageTreeRenderer();
     this.PageTreeRendererInfoPage = new PageTreeRendererInfoPage();
     const config = AppConfig.getInstance();
     this.d3 = config.UC.d3;
@@ -110,13 +58,38 @@ export class PageBubbleTree {
     this.pages = appVersionManager.getPages();
     this.processedPages = this.processPageData(this.pages);
     const homePage = this.processedPages.find((page) => page.title === "Home");
+
     if (homePage) {
+      //get page trail
+      const pageTrail = (globalThis as any).activePages;
+      // console.log("pageTrail)", pageTrail);
+
+      //get pageids from the trail
+      const pageIdsOnly = Array.isArray(pageTrail)
+        ? pageTrail.filter((item: any) => item && item.pageId).map((item: any) => item.pageId)
+        : [];
+      // console.log("pageIdsOnly", pageIdsOnly);
+
       this.primaryNodeId = homePage.id;
       this.navigationHistory = [{ id: homePage.id, name: homePage.title }];
 
       // If a different primaryNodeId is provided, trace path from Home to that node
       if (primaryNodeId && primaryNodeId !== homePage.id) {
-        const path = this.findPathFromHome(homePage.id, primaryNodeId);
+        // Try to find a path that matches the pageIdsOnly sequence
+        let path: string[] | null = null;
+        if (
+          pageIdsOnly.length > 1 &&
+          pageIdsOnly[0] === homePage.id &&
+          pageIdsOnly[pageIdsOnly.length - 1] === primaryNodeId
+        ) {
+          // If the pageIdsOnly path starts with homePage and ends with primaryNodeId, use it
+          path = pageIdsOnly;
+        } else {
+          // Otherwise, use the DFS path
+          path = this.findPathFromHome(homePage.id, primaryNodeId);
+          // alert("no path");
+        }
+
         if (path && path.length > 1) {
           // Build navigation history from Home to the target node
           this.navigationHistory = path.map((id) => {
@@ -161,6 +134,8 @@ export class PageBubbleTree {
   }
 
   refreshPages() {
+    // console.log("Refreshing pages...");
+
     this.pages = this.appVersionManager.getPages();
     this.processedPages = this.processPageData(this.pages);
     // console.log("Processed Pages:", this.processedPages);
@@ -172,6 +147,26 @@ export class PageBubbleTree {
     this.buildPreviewTree();
   }
 
+  hide() {
+    const editorSections = document.getElementsByClassName("editor-main-section");
+    const toolSection = document.getElementById("tools-section") as HTMLDivElement;
+    const treeSection = document.getElementById("tree-view-section") as HTMLDivElement;
+    const menuPageSection = document.getElementById("menu-page-section") as HTMLDivElement;
+    const contentPageSection = document.getElementById("content-page-section") as HTMLDivElement;
+
+    if (editorSections.length > 0) {
+      // toggle display
+      const div = editorSections[0] as HTMLDivElement;
+      div.style.display = "block";
+      this.graphContainer.style.display = "none";
+      menuPageSection.style.display = "none";
+      contentPageSection.style.display = "none";
+      toolSection.style.display = "block";
+      treeSection.style.display = "block";
+      this.mainContainer.style.background = "#6a747f";
+      this.treeFeatures.style.visibility = "hidden";
+    }
+  }
   show() {
     this.refreshPages();
 
@@ -180,40 +175,31 @@ export class PageBubbleTree {
 
     const editorSections = document.getElementsByClassName("editor-main-section");
     const toolSection = document.getElementById("tools-section") as HTMLDivElement;
+    const treeSection = document.getElementById("tree-view-section") as HTMLDivElement;
 
-    const treeSection = document.getElementById("tree-container") as HTMLDivElement;
-
-    const sidebarSection = document.getElementById("tb-sidebar") as HTMLDivElement;
-
-    //set display to none for editor section
+    // Hide editor sections and tool/tree sections, show graphContainer
     if (editorSections.length > 0) {
-      // toggle display
       const div = editorSections[0] as HTMLDivElement;
-      if (div.style.display === "none") {
-        div.style.display = "block";
-        this.graphContainer.style.display = "none";
-        toolSection.style.display = "block";
-        treeSection.style.display = "none";
-        sidebarSection.style.display = "block";
-      } else {
-        toolSection.style.display = "none";
-        sidebarSection.style.display = "none";
-        div.style.display = "none";
-        this.graphContainer.style.display = "block";
-        this.graphContainer.style.width = "100%";
-        this.graphContainer.style.height = "100%";
-        // const tree = new TreeComponent(this.appVersionManager);
-      }
+      div.style.display = "none";
+      this.graphContainer.style.display = "block";
+      this.graphContainer.style.width = "100%";
+      this.graphContainer.style.height = "100%";
+      toolSection.style.display = "none";
+      treeSection.style.display = "none";
+      this.treeFeatures.style.visibility = "visible";
     }
   }
 
   build() {
-    const mainContainer = document.getElementById("main-content") as HTMLDivElement;
+    this.mainContainer = document.getElementById("main-content") as HTMLDivElement;
 
-    if (!mainContainer) {
+    if (!this.mainContainer) {
       // console.error("Main content container not found");
       return document.createElement("div");
     }
+
+    //add style to mainContainer
+    this.mainContainer.style.background = "#E9EBF0";
 
     this.graphContainer = document.getElementById("graph-container-1") as HTMLDivElement;
 
@@ -225,10 +211,71 @@ export class PageBubbleTree {
     // Clear any existing content
     this.graphContainer.innerHTML = ""; // Clear existing content
     this.graphContainer.innerHTML = "<svg></svg>";
+    this.mainContainer.appendChild(this.graphContainer);
 
-    mainContainer.appendChild(this.graphContainer);
+    this.treeFeatures = document.getElementById("tree-features") as HTMLDivElement;
+    if (!this.treeFeatures) {
+      // Create tree features container if it doesn't exist
+      this.treeFeatures = document.createElement("div");
+      this.treeFeatures.id = "tree-features";
+      this.treeFeatures.className = "tree-features";
+    }
+
+    this.sectionTreeMinimize = document.getElementById("section-tree-minimize") as HTMLDivElement;
+    if (!this.sectionTreeMinimize) {
+      this.sectionTreeMinimize = document.createElement("div");
+      this.sectionTreeMinimize.id = "section-tree-minimize";
+      this.sectionTreeMinimize.className = "section-tree-items";
+      this.sectionTreeMinimize.title = "Minimize Tree";
+      this.sectionTreeMinimize.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="19.483" height="19.482" viewBox="0 0 19.483 19.482">
+      <path id="Group_2527-converted" data-name="Group 2527-converted" d="M18.914.334a.862.862,0,0,0-.2.066c-.047.023-1.393,1.35-2.993,2.949l-2.91,2.9V4.108c0-1.449-.012-2.19-.037-2.28a.819.819,0,0,0-.529-.486.745.745,0,0,0-.854.385l-.072.134v6.4l.074.139a.769.769,0,0,0,.419.362,23.639,23.639,0,0,0,3.3.045L18.26,8.8l.139-.075a.758.758,0,0,0,.377-.9.914.914,0,0,0-.489-.483c-.084-.024-.864-.036-2.274-.036H13.867L16.773,4.4c1.6-1.6,2.933-2.962,2.966-3.026a.765.765,0,0,0,.062-.321.55.55,0,0,0-.1-.368.757.757,0,0,0-.787-.352m-17,11a.7.7,0,0,0-.533.439.682.682,0,0,0,.16.809.756.756,0,0,0,.29.193c.091.025.814.037,2.28.037H6.254L3.348,15.72C1.75,17.32.415,18.682.382,18.746a.765.765,0,0,0-.062.321.718.718,0,0,0,.366.634.55.55,0,0,0,.368.1.765.765,0,0,0,.321-.062c.064-.033,1.426-1.368,3.026-2.966l2.91-2.906v2.146c0,1.466.012,2.189.037,2.28a.888.888,0,0,0,.482.483.756.756,0,0,0,.9-.377L8.8,18.26l.009-3.152a23.639,23.639,0,0,0-.045-3.3.769.769,0,0,0-.362-.419l-.139-.074-3.118-.005c-1.716,0-3.172.006-3.237.019" transform="translate(-0.32 -0.321)" fill="#7c8791" fill-rule="evenodd"/>
+    </svg>
+  `;
+      this.sectionTreeMinimize.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.hide();
+      });
+    }
+
+    this.sectionAllPages = document.getElementById("section-all-pages") as HTMLDivElement;
+    if (!this.sectionAllPages) {
+      this.sectionAllPages = document.createElement("div");
+      this.sectionAllPages.id = "section-all-pages";
+      this.sectionAllPages.className = "section-tree-items";
+      this.sectionAllPages.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="19.48" height="19.48" viewBox="0 0 19.48 19.48">
+          <path id="overview" d="M1.34.049A1.865,1.865,0,0,0,.2.928C0,1.318,0,1.265,0,4.256,0,7.208,0,7.143.185,7.532A2.195,2.195,0,0,0,.9,8.274c.432.229.27.219,3.353.219H7.03l.232-.073A1.81,1.81,0,0,0,8.42,7.259c.072-.228.072-.231.072-3,0-3.084.01-2.922-.219-3.354a2.141,2.141,0,0,0-.75-.716C7.145,0,7.139,0,4.221,0,2.094,0,1.5.014,1.34.049m11.012,0a1.6,1.6,0,0,0-.807.444,1.7,1.7,0,0,0-.493.791,17.676,17.676,0,0,0-.06,2.972c0,2.773,0,2.776.072,3A1.81,1.81,0,0,0,12.222,8.42l.232.073h2.776a17.635,17.635,0,0,0,2.97-.06,1.637,1.637,0,0,0,.722-.421,1.745,1.745,0,0,0,.472-.692l.073-.192.01-2.784c.01-3.079.014-3.019-.2-3.416A2.092,2.092,0,0,0,18.55.2c-.38-.2-.366-.2-3.321-.2-2.1,0-2.721.011-2.878.045M6.913,1.572l.068.062V4.243c0,2.534,0,2.611-.062,2.672a.424.424,0,0,1-.2.083c-.078.011-1.247.016-2.6.011L1.658,7l-.074-.074L1.51,6.851,1.5,4.294c-.007-1.789,0-2.582.026-2.642a.266.266,0,0,1,.106-.12c.049-.023.88-.032,2.641-.028,2.478.006,2.573.008,2.639.068M17.84,1.531a.27.27,0,0,1,.116.122c.025.059.033.857.026,2.641l-.008,2.557-.074.074L17.826,7l-2.459.01c-1.353,0-2.522,0-2.6-.011a.424.424,0,0,1-.2-.083c-.061-.061-.062-.138-.062-2.672a12.422,12.422,0,0,1,.056-2.658.424.424,0,0,1,.106-.068c.027-.01,1.184-.019,2.572-.02,1.811,0,2.546.007,2.6.034M1.2,11.083a2.093,2.093,0,0,0-.381.181,2.185,2.185,0,0,0-.636.693C0,12.342,0,12.28,0,15.23c0,2.991,0,2.938.2,3.328a2.106,2.106,0,0,0,.725.724c.4.211.337.207,3.415.2l2.784-.01L7.32,19.4a1.745,1.745,0,0,0,.691-.472,1.638,1.638,0,0,0,.421-.722,17.642,17.642,0,0,0,.06-2.971V12.455l-.073-.232a1.827,1.827,0,0,0-1.242-1.178c-.095-.022-1.133-.034-2.955-.034H1.413l-.212.072m11.093-.037a1.844,1.844,0,0,0-1.229,1.177l-.073.232v2.776a17.642,17.642,0,0,0,.06,2.971,1.638,1.638,0,0,0,.421.722,1.745,1.745,0,0,0,.691.472l.192.073,2.784.01c3.078.01,3.018.014,3.415-.2a2.1,2.1,0,0,0,.725-.725c.211-.4.207-.337.2-3.416l-.01-2.784-.072-.19a1.607,1.607,0,0,0-.381-.6,1.831,1.831,0,0,0-.757-.491,16.118,16.118,0,0,0-3.022-.061c-1.582,0-2.869.016-2.94.033M6.917,12.569c.063.063.064.108.064,2.676v2.612l-.085.068c-.085.066-.1.067-2.629.067-1.821,0-2.566-.01-2.624-.037a.27.27,0,0,1-.116-.122c-.025-.059-.033-.857-.026-2.639.008-2.459.011-2.556.07-2.622l.062-.068H4.242c2.566,0,2.611,0,2.675.065m10.995,0c.059.066.062.163.07,2.622.007,1.782,0,2.58-.026,2.639a.27.27,0,0,1-.116.122c-.058.027-.8.037-2.624.037-2.524,0-2.544,0-2.629-.067l-.085-.068V15.245c0-2.568,0-2.613.065-2.676s.108-.065,2.674-.065H17.85l.062.068" transform="translate(0 -0.003)" fill="#7c8791" fill-rule="evenodd"/>
+        </svg>
+        `;
+      this.sectionAllPages.addEventListener("click", (e) => {
+        e.preventDefault();
+        // Exclude MyActivity, Calendar, Map, Maps from those that are not connected to
+        const excludedTypes = ["MyActivity", "My Activity", "Calendar", "Map", "Maps"];
+
+        // Find all connected page IDs
+        const connectedIds = new Set<string>();
+        this.processedPages.forEach((page: any) => {
+          (page.children || []).forEach((childId: string) => connectedIds.add(childId));
+        });
+
+        // Always include pages that are connected to, or are not of excluded types
+        const filteredPages = this.processedPages.filter((page: any) => {
+          if (connectedIds.has(page.id)) return true;
+          return !excludedTypes.includes(page.title) && !excludedTypes.includes(page.PageType);
+        });
+
+        this.nodes = this.createNodes(filteredPages);
+        this.links = this.createLinks(filteredPages);
+        this.buildTree();
+      });
+    }
+
+    this.treeFeatures.appendChild(this.sectionTreeMinimize);
+    this.treeFeatures.appendChild(this.sectionAllPages);
+
+    this.mainContainer.appendChild(this.treeFeatures);
     this.graphContainer.setAttribute("style", "display:block;width:100%;");
-    // console.log("this.graphContainer", this.graphContainer);
 
     return this.graphContainer;
   }
@@ -274,8 +321,39 @@ export class PageBubbleTree {
 
       if (page.PageType === "Information") {
         if (page.PageInfoStructure.InfoContent) {
-          ret.structure = this.PageTreeRendererInfoPage.createMenuHTML(page);
+          ret.structure = this.PageTreeRendererInfoPage.createInfoHTML(page);
           page.PageInfoStructure.InfoContent.forEach((row: any) => {
+            if (row.InfoType === "TileGrid") {
+              row.Columns.forEach((column: any) => {
+                // console.log("column", column);
+                column.Tiles.forEach((tile: any) => {
+                  if (tile.Action.ObjectId) {
+                    ret.children.push(tile.Action.ObjectId);
+                  } else if (row.InfoType === "Cta") {
+                    // console.log("row.CtaAttributes", row.CtaAttributes);
+
+                    if (
+                      row.CtaAttributes.CtaType === "Form" ||
+                      row.CtaAttributes.CtaType === "WebLink"
+                    ) {
+                      const title =
+                        row.CtaAttributes.CtaType === "Form" ? "Dynamic Form" : "Web Link";
+
+                      linkPages.push({
+                        id: row.CtaAttributes.Action.ObjectId,
+                        title: title,
+                        structure: "",
+                        thumbnail: page.PageThumbnailUrl,
+                        children: [],
+                        x: 0,
+                        y: 0,
+                      });
+                      ret.children.push(row.CtaAttributes.Action.ObjectId);
+                    }
+                  }
+                });
+              });
+            }
             if (row.InfoType === "TileRow") {
               row.Tiles.forEach((tile: any) => {
                 // if (
@@ -316,8 +394,8 @@ export class PageBubbleTree {
             } else if (row.InfoType === "Cta") {
               // console.log("row.CtaAttributes", row.CtaAttributes);
 
-              if (row.CtaAttributes.CtaType == "Form" || row.CtaAttributes.CtaType == "WebLink") {
-                const title = row.CtaAttributes.CtaType == "Form" ? "Dynamic Form" : "Web Link";
+              if (row.CtaAttributes.CtaType === "Form" || row.CtaAttributes.CtaType === "WebLink") {
+                const title = row.CtaAttributes.CtaType === "Form" ? "Dynamic Form" : "Web Link";
 
                 linkPages.push({
                   id: row.CtaAttributes.Action.ObjectId,
@@ -334,11 +412,11 @@ export class PageBubbleTree {
           });
         }
       } else if (page.PageType === "Calendar") {
-        ret.structure = this.pageTreeRenderer.createAgendaHTML(page);
+        ret.structure = this.PageTreeRendererInfoPage.createAgendaHTML(page);
       } else if (page.PageType === "MyActivity") {
-        ret.structure = this.pageTreeRenderer.createMyActivityHTML(page);
+        ret.structure = this.PageTreeRendererInfoPage.createMyActivityHTML(page);
       } else if (page.PageType === "Map") {
-        ret.structure = this.pageTreeRenderer.createMapHTML(page);
+        ret.structure = this.PageTreeRendererInfoPage.createMapHTML(page);
       }
       return ret;
     });
@@ -451,20 +529,20 @@ export class PageBubbleTree {
     // Normal links (lines)
     this.link = this.container
       .append("g")
-      .attr("stroke", "#fff")
+      .attr("stroke", "#222F54")
       .attr("stroke-opacity", 0.6)
       .selectAll("line")
       .data(this.normalLinks)
       .join("line")
-      .attr("stroke-width", 2.0)
-      .style("cursor", "pointer") // Make it look clickable
-      // .on("click", (event: any, d: any) => {
-      //   // const editorManager = new EditorManager();
-      //   // editorManager.currentPage(d.source.id);
-      //   // alert(
-      //   //   `Parent (source): ${d.source.id}\nChild (target): ${d.target.id}`
-      //   // );
-      // });
+      .attr("stroke-width", 1.0)
+      .style("cursor", "pointer"); // Make it look clickable
+    // .on("click", (event: any, d: any) => {
+    //   // const editorManager = new EditorManager();
+    //   // editorManager.currentPage(d.source.id);
+    //   // alert(
+    //   //   `Parent (source): ${d.source.id}\nChild (target): ${d.target.id}`
+    //   // );
+    // });
   }
 
   createLinkArrows() {
@@ -481,7 +559,7 @@ export class PageBubbleTree {
       .attr("orient", "auto")
       .append("path")
       .attr("d", "M0,-5L10,0L0,5")
-      .attr("fill", "#fff");
+      .attr("fill", "#222F54");
 
     // Arrows at midpoint
     this.arrows = this.container
@@ -489,7 +567,7 @@ export class PageBubbleTree {
       .selectAll("path")
       .data(this.normalLinks)
       .join("path")
-      .attr("fill", "#fff")
+      .attr("fill", "#222F54")
       .attr("marker-end", "url(#arrow)");
   }
 
@@ -501,7 +579,7 @@ export class PageBubbleTree {
       .data(this.selfLinks)
       .join("path")
       .attr("fill", "none")
-      .attr("stroke", "#fff")
+      .attr("stroke", "#222F54")
       .attr("stroke-width", 2)
       .attr("marker-end", "url(#arrow)");
   }
@@ -546,6 +624,10 @@ export class PageBubbleTree {
       })
       .on("mouseout", () => {
         tooltip.style.display = "none";
+      })
+      .on("contextmenu", (event: any, d: any) => {
+        event.preventDefault();
+        alert(`Right-clicked node: ${d.name} (ID: ${d.id})`);
       });
 
     // Nodes
@@ -571,11 +653,11 @@ export class PageBubbleTree {
       .attr("y", -nodeHeight / 2 - 5)
       .attr("rx", 10)
       .attr("ry", 10)
-      .attr("fill", "#fff")
-      .attr("stroke", "#d3d3d3")
+      .attr("fill", "#EFEEEC")
+      // .attr("stroke", "#d3d3d3")
       .attr("stroke-width", 1.5)
       .attr("opacity", 1)
-      .attr("stroke", "#222f54")
+      .attr("stroke", "#8F8F8F")
       .lower(); // Ensure it's behind the main rect
 
     // Node rectangle
@@ -585,7 +667,7 @@ export class PageBubbleTree {
       .attr("height", nodeHeight)
       .attr("x", -nodeWidth / 2) // Center the rectangle horizontally
       .attr("y", -nodeHeight / 2) // Center the rectangle vertically
-      .attr("stroke", (d: any) => (d.id === this.primaryNodeId ? "#FF5722" : "#222f54"))
+      .attr("stroke", (d: any) => (d.id === this.primaryNodeId ? "#222F54" : "#8F8F8F73"))
       .attr("fill", "#efeeec")
       .attr("rx", 10)
       .attr("ry", 10);
@@ -599,7 +681,7 @@ export class PageBubbleTree {
       .attr("text-anchor", "middle")
       .attr("font-size", "12px")
       .attr("font-weight", "bold")
-      .attr("fill", "#ffffff");
+      .attr("fill", "#EFEEEC");
 
     this.node
       .append("foreignObject")

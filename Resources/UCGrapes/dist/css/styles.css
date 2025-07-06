@@ -1053,8 +1053,8 @@ h5#current-page-title {
 }
 
 .sidebar-section {
-  margin-top: 12px;
-  padding: 18px 0;
+  /* margin-top: 12px;
+  padding: 18px 0; */
   /* margin-bottom: 45px; */
   /* border-bottom: 1px solid #d6d3d3; */
 }
@@ -2880,6 +2880,28 @@ details .tb_debug_details-content {
 
 /* TREE */
 
+.tb-date-selector-tree {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 5px;
+  margin: 0px;
+  border-radius: 5px;
+  font-size: 6px;
+}
+
+.header-tree {
+  font-size: 6px;
+  padding: 2px;
+  justify-content: space-between;
+}
+
+.graph-container svg {
+  background: #e9ebf0;
+  opacity: 1;
+}
+
 .plain-button-tree {
   position: relative;
   width: 90px;
@@ -2981,7 +3003,8 @@ details .tb_debug_details-content {
   display: flex;
   border-top: 2px solid #dcdbd9;
   position: relative;
-  padding: 5px;
+  padding: 2px;
+  font-size: 6px;
 }
 
 .section-tree {
@@ -3002,13 +3025,27 @@ details .tb_debug_details-content {
   cursor: pointer;
 }
 
+.section-tree-items {
+  cursor: pointer;
+  margin: 10px;
+}
+
+/* .section-tree-minimize {
+  width: 18px;
+  height: 18px;
+  top: 18px;
+  left: 706px;
+  cursor: pointer;
+  position: absolute;
+}
+
 .section-tree-minimize svg {
   background: transparent;
   width: 18px;
   height: 18px;
   position: absolute;
   border-radius: 3px;
-}
+} */
 
 #graph-container {
   width: 100%;

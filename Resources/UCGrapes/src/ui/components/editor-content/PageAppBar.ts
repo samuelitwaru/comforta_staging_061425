@@ -2,7 +2,8 @@ import { EditorEvents } from "../../../controls/editor/EditorEvents";
 import { EditorManager } from "../../../controls/editor/EditorManager";
 import { AppVersionManager } from "../../../controls/versions/AppVersionManager";
 import { i18n } from "../../../i18n/i18n";
-
+import { TreeViewSection } from "../tools-section/TreeViewSection";
+(globalThis as any).activePages = (globalThis as any).activePages || [];
 export class PageAppBar {
   private container: HTMLElement;
   private editor: EditorManager;
@@ -54,6 +55,7 @@ export class PageAppBar {
 
       if (previousFrame && previousFrame?.classList.contains("mobile-frame")) {
         (globalThis as any).pageId = previousFrame.dataset.pageid;
+
         (globalThis as any).uiManager.activateEditor(previousFrame.id.replace("-frame", ""));
       }
       if (currentFrame) {
@@ -74,7 +76,7 @@ export class PageAppBar {
           thumbToRemove.parentElement?.parentElement?.parentElement?.remove();
         }
         currentFrame.remove();
-        new EditorEvents().activateNavigators();
+        // new EditorEvents().activateNavigators();
       }
     });
 
@@ -172,6 +174,17 @@ export class PageAppBar {
     titleDiv.appendChild(pageTitle);
     titleDiv.appendChild(iconContainer);
     this.container.appendChild(titleDiv);
+  }
+
+  trimActivePagesAfterFrameId(frameId: string) {
+    console.log("called me");
+    const activePages = (globalThis as any).activePages as { frameId: string; pageId: string }[];
+    const lastIndex = activePages.map((p) => p.frameId).lastIndexOf(frameId);
+
+    if (lastIndex !== -1) {
+      // Keep entries up to and including the found frameId
+      (globalThis as any).activePages = activePages.slice(0, lastIndex + 1);
+    }
   }
 
   private updatePlaceholderVisibility() {
