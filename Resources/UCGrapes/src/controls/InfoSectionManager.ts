@@ -1,13 +1,10 @@
 import Quill from "quill";
-import { baseURL } from "../services/ToolBoxService";
 import { Modal } from "../ui/components/Modal";
 import { InfoSectionUI } from "../ui/views/InfoSectionUI";
 import { randomIdGenerator } from "../utils/helpers";
 import { InfoContentMapper } from "./editor/InfoContentMapper";
 import { AddInfoSectionButton } from "../ui/components/AddInfoSectionButton";
 import { Column, CtaAttributes, InfoType } from "../types";
-import { JSONToGrapesJSMenu } from "./editor/JSONToGrapesJSMenu";
-import { ToolboxManager } from "./toolbox/ToolboxManager";
 import { i18n } from "../i18n/i18n";
 
 export class InfoSectionManager {
@@ -17,7 +14,6 @@ export class InfoSectionManager {
   constructor() {
     this.infoSectionUI = new InfoSectionUI();
     this.editor = (globalThis as any).activeEditor;
-    if (!this.editor) return;
   }
 
   createMenuItem(item: any, onCloseCallback?: () => void): HTMLElement {
@@ -418,37 +414,39 @@ export class InfoSectionManager {
     }
 
     const copiedTile = JSON.parse(copiedTileRaw);
-    if (copiedTile?.InfoType === "TileRow") {
-      const pageId = (globalThis as any).currentPageId
+    const pageId = (globalThis as any).currentPageId;
+    const infoMapper = new InfoContentMapper(pageId);
+
+    if (copiedTile?.ColId && copiedTile?.Tiles) {
       if (copiedTile.Tiles && Array.isArray(copiedTile.Tiles)) {
         copiedTile.Tiles.forEach((tile: any) => {
           // Generate a new random ID for each 'Tile' element's 'Id' property
           tile.Id = randomIdGenerator(8);
         });
       }
-      const newPastePayload = { ...copiedTile, InfoId: randomIdGenerator(15) };
-      const infoMapper = new InfoContentMapper(pageId);
-      infoMapper.pasteSingleInfoType(newPastePayload, nextSectionId);
-    } else if (copiedTile?.Action) {
-      // If the copied tile is a single tile (not a row)
-      const pageId = (globalThis as any).currentPageId
-      const infoMapper = new InfoContentMapper(pageId);
-
+      const content: InfoType = {
+        InfoId: randomIdGenerator(8),
+        InfoType: "TileGrid",
+        InfoValue: "",
+        Columns: [{ ...copiedTile, ColId: randomIdGenerator(8) }]
+      };
+      // console.log("Pasting col as a new row:", content);
+      infoMapper.pasteSingleInfoType(content, nextSectionId);
+    } else if (copiedTile?.Action && copiedTile?.Id) {
+      // If the copied tile is a single tile (not a col)
       // create a new section for the dragged tile
       const content: InfoType = {
         InfoId: randomIdGenerator(15),
-        InfoType: "TileRow",
+        InfoType: "TileGrid",
         InfoValue: "",
-        Tiles: [{ ...copiedTile, Id: randomIdGenerator(8) }],
+        Columns: [{
+          ColId: randomIdGenerator(15),
+          Tiles: [{ ...copiedTile, Id: randomIdGenerator(8) }],
+        }]
       };
 
       // console.log("Pasting single tile as a new row:", content);
       infoMapper.pasteSingleInfoType(content, nextSectionId);
-
-      return;
-    } else {
-      // console.error("Copied tile structure is invalid.");
-      return;
     }
   }
 
@@ -464,9 +462,9 @@ export class InfoSectionManager {
     // loop through each section and change their ids
     copiedSections.forEach((section: any) => {
       section.InfoId = randomIdGenerator(15);
-      if (section.Tiles && Array.isArray(section.Tiles)) {
-        section.Tiles.forEach((tile: any) => {
-          tile.Id = randomIdGenerator(8);
+      if (section.Columns && Array.isArray(section.Columns)) {
+        section.Columns.forEach((col: any) => {
+          col.ColId = randomIdGenerator(8);
         });
       }
     });
@@ -475,9 +473,6 @@ export class InfoSectionManager {
       const pageId = (globalThis as any).currentPageId
       const infoMapper = new InfoContentMapper(pageId);
       infoMapper.pasteAllInfoSectionTypes(copiedSections, nextSectionId);
-    } else {
-      console.error("Copied tile structure is invalid.");
-      return;
     }
   }
 
@@ -560,10 +555,6 @@ export class InfoSectionManager {
       : components.length;
 
     const addInfoSectionButton = new AddInfoSectionButton().getHTML();
-    const addLastInfoSectionButton = new AddInfoSectionButton(
-      false,
-      true
-    ).getHTML();
 
     // Add plus above
     const plusAbove = this.editor?.addComponents(addInfoSectionButton);
@@ -629,9 +620,9 @@ export class InfoSectionManager {
   }
 
   updateGridTileAttribute(
-    rowId:string, 
-    colId:string, 
-    tileId:string, 
+    rowId:string,
+    colId:string,
+    tileId:string,
     attributePath:string,
     value:any
   ) {
@@ -703,8 +694,8 @@ export class InfoSectionManager {
     );
     if (data?.PageInfoStructure?.InfoContent) {
       data.PageInfoStructure.InfoContent.forEach((infoContent: any) => {
-        if (infoContent?.InfoType === "TileRow") {
-          if (!infoContent.Tiles || infoContent.Tiles.length === 0) {
+        if (infoContent?.InfoType === "TileGrid") {
+          if (!infoContent.Columns || infoContent.Columns.length === 0) {
             this.removeInfoMapper(infoContent.InfoId);
           }
         }
@@ -775,6 +766,31 @@ export class InfoSectionManager {
     if (!containerColumn) return;
 
     let components = containerColumn.components().models;
+
+    // check and remove empty info sections
+    for (let i = 0; i < components.length; i++) {
+      const comp = components[i];
+      const el = comp.getEl?.();
+      if (
+        el &&
+      el instanceof HTMLElement &&
+      el.hasAttribute("data-gjs-type")
+      ) {
+        const type = el.getAttribute("data-gjs-type") || "";
+        if (
+          /^info-.*-section$/i.test(type) &&
+        el.children.length === 0
+        ) {
+          comp.remove();
+          // Refresh components after removal
+          components = containerColumn.components().models;
+          // Restart loop since indices may have shifted
+          i = -1;
+        }
+      }
+    }
+
+    // check and fix plus button sections
 
     let i = 1; // Start from the second component
     while (i < components.length) {

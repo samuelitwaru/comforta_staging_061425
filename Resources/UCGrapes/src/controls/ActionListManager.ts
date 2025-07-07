@@ -1,4 +1,3 @@
-import { AppConfig } from "../AppConfig";
 import { baseURL, ToolBoxService } from "../services/ToolBoxService";
 import { ActionListDropDown } from "../ui/components/tools-section/action-list/ActionListDropDown";
 import { PageAttacher } from "../ui/components/tools-section/action-list/PageAttacher";
@@ -8,6 +7,7 @@ import { AppVersionManager } from "./versions/AppVersionManager";
 import { i18n } from "../i18n/i18n";
 import { MenuItem } from "../types";
 import { InfoSectionManager } from "./InfoSectionManager";
+import { getTileAttrs } from "../utils/helpers";
 
 export class ActionListManager {
   private toolboxService: ToolBoxService;
@@ -28,7 +28,7 @@ export class ActionListManager {
 
   async getMenuCategories(): Promise<MenuItem[][] | null> {
     const categoryData = await this.actionList.getCategoryData();
-    const activePage = (globalThis as any).pageData;
+    // const activePage = (globalThis as any).pageData;
 
     const secondCategory: MenuItem[] = [];
 
@@ -114,8 +114,6 @@ export class ActionListManager {
         PageType: res.MenuPage.PageType,
       };
       this.pageAttacher.attachToTile(page, "Menu", "Menu");
-    } else {
-      console.error("error", res.error.message);
     }
   }
 
@@ -123,7 +121,7 @@ export class ActionListManager {
     const appVersion = await this.appVersionManager.getActiveVersion();
     const res = await this.toolboxService.createInfoPage(appVersion.AppVersionId, title);
 
-    console.log("res", res);
+    // console.log('res', res)
     if (!res.error.message) {
       const page = {
         PageId: res.MenuPage.PageId,
@@ -133,17 +131,17 @@ export class ActionListManager {
       };
       this.pageAttacher.attachToTile(page, "Information", "Information", true);
     } else {
-      console.error("error", res.error.message);
+      // console.error("error", res.error.message);
     }
   }
 
   private handleSubMenuItemSelection(item: any, type: string): void {
-    console.log("handleSubMenuItemSelection", item);
-    console.log("handleSubMenuItemSelection", (globalThis as any).pageData);
+    // console.log('handleSubMenuItemSelection', item)
+    // console.log('handleSubMenuItemSelection', (globalThis as any).pageData)
 
     this.pageAttacher.removeOtherEditors();
 
-    console.log("handleSubMenuItemSelection:removeOtherEditors", (globalThis as any).pageData);
+    // console.log('handleSubMenuItemSelection:removeOtherEditors', (globalThis as any).pageData)
 
     if (type === "DynamicForm") {
       this.handleDynamicForms(item);
@@ -154,7 +152,7 @@ export class ActionListManager {
     } else if (type === "CtaPhone") {
       this.pageCreationService.handlePhone();
     } else if (type === "CtaWebLink") {
-      console.log("at Actionlistmanager");
+      // console.log('at Actionlistmanager')
       this.pageCreationService.handleWebLinks();
     } else {
       this.pageAttacher.attachToTile(item, type, item.PageName);
@@ -168,13 +166,22 @@ export class ActionListManager {
     if (tileTitle) tileTitle.components(form.PageName);
     tileTitle.addAttributes({ title: form.PageName });
 
-    const tileId = selectedComponent.parent().getId();
-    const rowId = selectedComponent.parent().parent().getId();
+    const tileWrapper = selectedComponent.closest(".template-wrapper");
+    const rowComponent = tileWrapper.closest(".container-row");
+    const colComponent = tileWrapper.closest(".tile-column");
+    const tileId = tileWrapper.getId();
+    const rowId = rowComponent.getId();
+    const colId = colComponent.getId();
+
+    // const rowId = selectedComponent.parent().parent().getId();
 
     const version = (globalThis as any).activeVersion;
     let childPage = version?.Pages.find((page: any) => {
-      if (page.PageType == "DynamicForm")
-        return page.PageType == "DynamicForm" && page.PageLinkStructure.WWPFormId == form.PageId;
+      if (page.PageType === "DynamicForm")
+        return (
+          page.PageType === "DynamicForm" &&
+          page.PageLinkStructure.WWPFormId === form.PageId
+        );
     });
     const parsedUrl = new URL(form.PageUrl);
     // Get the query parameters
@@ -184,8 +191,8 @@ export class ActionListManager {
     //const WWPFormInstanceId = params.get('WWPFormInstanceId');
     //const WWPDynamicFormMode = params.get('WWPDynamicFormMode');
     // Output
-    console.log("ActionListManager");
-    console.log("WWPFormReferenceName:", WWPFormReferenceName);
+    // console.log('ActionListManager');
+    // console.log('WWPFormReferenceName:', WWPFormReferenceName);
     //console.log('WWPFormInstanceId:', WWPFormInstanceId);
     //console.log('WWPDynamicFormMode:', WWPDynamicFormMode);
     if (!childPage) {
@@ -212,9 +219,25 @@ export class ActionListManager {
 
     for (const [property, value] of updates) {
       const infoSectionManager = new InfoSectionManager();
-      infoSectionManager.updateInfoTileAttributes(rowId, tileId, property, value);
+      infoSectionManager.updateGridTileAttribute(
+              rowId,
+              colId,
+              tileId,
+              property,value
+            )
     }
-    const tileAttributes = (globalThis as any).tileMapper.getTile(rowId, tileId);
+
+    
+
+    const tileAttributes = getTileAttrs(
+      childPage.PageId,
+      rowId,
+      colId,
+      tileId
+    );
+
+
+    // const tileAttributes = (globalThis as any).tileMapper.getTile(rowId, tileId);
 
     new ChildEditor(childPage?.PageId, childPage).init(tileAttributes);
   }
@@ -236,16 +259,22 @@ export class ActionListManager {
     let copiedStructure = {};
     // console.log('copySelectedTile activePage', activePage);
     if (!selectedComponent) {
-      console.error("No tile selected to copy.");
+      // console.error("No tile selected to copy.");
       return;
     }
 
     // 1. Get the tile's unique ID
-    const tileParentId = selectedComponent.parent().parent().getId?.();
-    const tileId = selectedComponent.parent().getId?.();
+    const tileWrapperComp = selectedComponent.closest('[data-gjs-type="tile-wrapper"]');
+    const tileColumnComp = selectedComponent.closest('[data-gjs-type="tile-col-wrapper"]');
+    const tilesSectionComp = selectedComponent.closest('[data-gjs-type="info-tiles-section"]');
+    // const tileParentId = selectedComponent.parent().parent().parent().parent().getId?.();
+    // const tileColId = selectedComponent.parent().parent().parent().getId?.();
+    const tileId = tileWrapperComp?.getId?.();
+    const tileColId = tileColumnComp?.getId?.();
+    const tileSectionId = tilesSectionComp?.getId?.();
 
-    if (!tileId) {
-      console.error("Selected tile does not have an ID.");
+    if (!tileColId) {
+      // console.error("Selected tile does not have an ID.");
       return;
     }
 
@@ -255,27 +284,31 @@ export class ActionListManager {
     // console.log('copySelectedTile data', data);
     if (data?.PageInfoStructure?.InfoContent) {
       data.PageInfoStructure.InfoContent.forEach((infoContent: any) => {
-        if (infoContent?.InfoType === "TileRow" && infoContent?.InfoId === tileParentId) {
+        if (infoContent?.InfoType === "TileGrid" && infoContent?.InfoId === tileSectionId) {
           // get the structure of the selected tile
-          infoContent?.Tiles.forEach((tile: any) => {
-            if (tile.Id === tileId) {
+          infoContent?.Columns.forEach((colTile: any) => {
+            if (colTile.ColId === tileColId) {
               // console.log('copySelectedTile infoContent', infoContent);
-              copiedStructure = tile;
+              // check if col has one tile - copy whole column
+              if(colTile?.Tiles.length > 1) {
+                const tileToCopy = colTile.Tiles.find((tile: any) => tile.Id === tileId);
+                if(tileToCopy) copiedStructure = tileToCopy;
+              }
+              else copiedStructure = colTile;
             }
           });
-        } else if (infoContent?.InfoType === "Tile" && infoContent?.InfoId === tileId) {
+        } else if (infoContent?.InfoType === "Tile" && infoContent?.InfoId === tileColId) {
           // If the tile itself is directly in the PageInfoStructure
           copiedStructure = infoContent;
           // console.log('copySelectedTile infoContent tile', infoContent);
           // No need to continue if we found the tile directly
 
-          return;
         }
       });
     }
 
     if (!copiedStructure) {
-      console.error("No structure found in localStorage for tile ID:", tileId);
+      // console.error("No structure found in localStorage for tile ID:", tileColId);
       return;
     }
 

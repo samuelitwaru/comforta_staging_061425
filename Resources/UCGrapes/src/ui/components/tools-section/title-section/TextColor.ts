@@ -85,13 +85,6 @@ export class TextColor {
         "Color",
         colorValue.trim()
       )
-
-      infoSectionManager.updateInfoTileAttributes(
-        selectedComponent.parent().parent().getId(),
-        selectedComponent.parent().getId(),
-        "Color",
-        colorValue
-      );
     } else {
       (globalThis as any).tileMapper.updateTile(
         selectedComponent.parent().getId(),

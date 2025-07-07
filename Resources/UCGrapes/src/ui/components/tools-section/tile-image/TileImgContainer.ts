@@ -35,10 +35,13 @@ export class TileImgContainer {
       if (!selectedComponent) return;
 
       const tileWrapper = selectedComponent.parent();
-      const rowComponent = tileWrapper.parent();
+
+      const rowComponent = tileWrapper.closest('.container-row');
+      const colComponent = tileWrapper.closest('.tile-column');
 
       const rowId = rowComponent.getId();
       const tileId = tileWrapper.getId();
+      const colId = colComponent.getId();
 
       const tileMapper = (globalThis as any).tileMapper;
       const tileAttributes = tileMapper.getTile(rowId, tileId);
@@ -71,7 +74,13 @@ export class TileImgContainer {
       };
 
       for (const [key, value] of Object.entries(updates)) {
-        infoSectionManager.updateInfoTileAttributes(rowId, tileId, key, value);
+        infoSectionManager.updateGridTileAttribute(
+          rowId,
+          colId,
+          tileId,
+          key,
+          value
+        );
       }
 
       // Hide UI elements

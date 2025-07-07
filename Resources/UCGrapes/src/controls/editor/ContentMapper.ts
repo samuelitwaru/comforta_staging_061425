@@ -10,7 +10,6 @@ export class ContentMapper {
             "ContentType": content.ContentType,
             "ContentValue": content.Content,
         }
-
         return row;
     }
 

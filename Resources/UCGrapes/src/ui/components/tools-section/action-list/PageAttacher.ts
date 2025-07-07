@@ -3,12 +3,11 @@ import { ToolBoxService } from "../../../../services/ToolBoxService";
 import { Alert } from "../../Alert";
 import { AppVersionManager } from "../../../../controls/versions/AppVersionManager";
 import { EditorEvents } from "../../../../controls/editor/EditorEvents";
-import { PageCreationService } from "./PageCreationService";
 import { TileProperties } from "../../../../controls/editor/TileProperties";
 import { i18n } from "../../../../i18n/i18n";
-import { ActionSelectContainer } from "./ActionSelectContainer";
 import { InfoSectionManager } from "../../../../controls/InfoSectionManager";
 import { ActionPage, InfoType } from "../../../../types";
+import { getTileAttrs } from "../../../../utils/helpers";
 
 export class PageAttacher {
   toolboxService: ToolBoxService;
@@ -69,21 +68,22 @@ export class PageAttacher {
             value
           )
 
-          infoSectionManager.updateInfoTileAttributes(
-            selectedComponent.parent().parent().getId(),
-            selectedComponent.parent().getId(),
-            property,
-            value
-          );
         }
 
         const tileInfoSectionAttributes: InfoType = (
           globalThis as any
         ).infoContentMapper.getInfoContent(rowId);
 
-        tileAttributes = tileInfoSectionAttributes?.Tiles?.find(
-          (tile: any) => tile.Id === tileId
+        tileAttributes = getTileAttrs(
+            currentPageId,
+            rowComp.getId(),
+            colComp.getId(),
+            tile.getId(),
         );
+
+        // tileAttributes = tileInfoSectionAttributes?.Tiles?.find(
+        //   (tile: any) => tile.Id === tileId
+        // );
       }
     } else {
       for (const [property, value] of updates) {

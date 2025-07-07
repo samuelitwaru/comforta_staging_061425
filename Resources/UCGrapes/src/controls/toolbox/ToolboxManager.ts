@@ -1,16 +1,14 @@
-import { version } from "eslint-scope";
 import { ToolBoxService } from "../../services/ToolBoxService";
 import { NavbarButtons } from "../../ui/components/NavbarButtons";
 import { ToolsSection } from "../../ui/components/ToolsSection";
 import { AppVersionManager } from "../versions/AppVersionManager";
 import { PageAttacher } from "../../ui/components/tools-section/action-list/PageAttacher";
 import { NavbarLeftButtons } from "../../ui/components/NavBarLeftButtons";
-import { TileMapper } from "../editor/TileMapper";
-import { TreeComponent } from "../../ui/components/TreeComponent";
 import { HistoryManager } from "./HistoryManager";
 import { JSONToGrapesJSInformation } from "../editor/JSONToGrapesJSInformation";
-import { TreeViewSection } from "../../ui/components/tools-section/TreeViewSection";
 import { InfoSectionManager } from "../InfoSectionManager";
+import { TileUpdate } from "../editor/TileUpdate";
+import { TreeViewSection } from "../../ui/components/tools-section/TreeViewSection";
 
 export class ToolboxManager {
   appVersions: any;
@@ -226,7 +224,7 @@ export class ToolboxManager {
     this.replaceFrameContent(stateData, pageId, frameContainer);
 
     // Restore scroll and selection
-    this.restoreUIState(editor, currentState);
+    this.restoreUIState(editor, currentState, pageId);
   }
 
   private captureCurrentState(frameContainer: any) {
@@ -266,12 +264,22 @@ export class ToolboxManager {
     this.savePages();
   }
 
-  private restoreUIState(editor: any, currentState: any) {
+  private restoreUIState(editor: any, currentState: any, pageId: string) {
     const { selectedComponent, scrollPosition } = currentState;
 
     const restoreState = () => {
       this.restoreScrollPosition(editor, scrollPosition);
       this.restoreSelectedComponent(editor, selectedComponent);
+
+      // format grid tiles
+      const tileUpdate = new TileUpdate(pageId);
+      const wrapper = editor?.getWrapper();
+      const rowComps = wrapper.find('.container-row').filter((comp:any) => comp.find('.tile-column').length > 0 )
+      rowComps.forEach((rowComp:any) => {
+        tileUpdate.updateGridTiles(rowComp)
+      });
+
+      // format plus buttons
       const infoSectionMapper = new InfoSectionManager();
       infoSectionMapper.removeConsecutivePlusButtons(editor);
     };
@@ -298,8 +306,8 @@ export class ToolboxManager {
       }
 
       newFrameContainerEl.style.visibility = "visible";
-    } catch (error) {
-      console.log("Could not restore scroll position:", error);
+    } catch {
+      // console.log("Could not restore scroll position:", error);
       this.ensureContainerVisibility(editor);
     }
   }

@@ -1,15 +1,14 @@
 import { ThemeManager } from "../../../controls/themes/ThemeManager";
 import { ToolBoxService } from "../../../services/ToolBoxService";
-import { CreateCTAComponent } from "./content-section/CreateCTAComponent";
+// import { CreateCTAComponent } from "./content-section/CreateCTAComponent";
 import { CtaButtonLayout } from "./content-section/CtaButtonLayout";
 import { CtaColorPalette } from "./content-section/CtaColorPalette";
-import { CtaIconList } from "./content-section/CtaIconList";
 
 export class ContentSection {
   container: HTMLElement;
   iconsList: any;
   themeManager: ThemeManager;
-  createCTAComponent: CreateCTAComponent | undefined;
+  // createCTAComponent: CreateCTAComponent | undefined;
   page: any;
 
   constructor() {

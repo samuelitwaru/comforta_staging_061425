@@ -1,14 +1,8 @@
-import { display } from "html2canvas/dist/types/css/property-descriptors/display";
-import { ContentDataManager } from "../../../../controls/editor/ContentDataManager";
-import { TileProperties } from "../../../../controls/editor/TileProperties";
 import { ImageUploadManager } from "../../../../controls/ImageUploadManager";
-import { InfoSectionManager } from "../../../../controls/InfoSectionManager";
 import { ToolBoxService } from "../../../../services/ToolBoxService";
 import { Image, ImageType, InfoType, Media } from "../../../../types";
 import { ConfirmationBox } from "../../ConfirmationBox";
-import { ImageUpload } from "./ImageUpload";
 import { ImageUploadUi } from "./ImageUploadUi";
-import { zIndex } from "html2canvas/dist/types/css/property-descriptors/z-index";
 import { i18n } from "../../../../i18n/i18n";
 
 export class SingleImageFile {

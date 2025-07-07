@@ -1,4 +1,3 @@
-import { ContentMapper } from "../../../../controls/editor/ContentMapper";
 import { InfoSectionManager } from "../../../../controls/InfoSectionManager";
 import { CtaAttributes } from "../../../../types";
 import { PageCreationService } from "../action-list/PageCreationService";
@@ -62,8 +61,13 @@ export class ActionInput {
       );
     } else if (this.actionType === "tile") {
       const tileWrapper = selectedComponent.parent();
-      infoSectionManager.updateInfoTileAttributes(
-        tileWrapper.parent().getId(),
+      if (!tileWrapper) return;
+      const rowComponent = tileWrapper.closest('.container-row');
+      const colComponent = tileWrapper.closest('.tile-column');
+
+      infoSectionManager.updateGridTileAttribute(
+        rowComponent.getId(),
+        colComponent.getId(),
         tileWrapper.getId(),
         "Action.ObjectUrl",
         this.input.value.trim()

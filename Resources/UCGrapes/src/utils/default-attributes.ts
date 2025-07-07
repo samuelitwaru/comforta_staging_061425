@@ -9,7 +9,7 @@ export const tileDefaultAttributes: string = `
 `;
 
 export const tileWrapperDefaultAttributes: string = `
-    data-gjs-draggable="true"
+    data-gjs-draggable="false"
     data-gjs-selectable="false"
     data-gjs-editable="false"
     data-gjs-highlightable="false"
@@ -20,7 +20,7 @@ export const tileWrapperDefaultAttributes: string = `
 `;
 
 export const firstTileWrapperDefaultAttributes: string = `
-    data-gjs-draggable="true"
+    data-gjs-draggable="false"
     data-gjs-selectable="false"
     data-gjs-editable="false"
     data-gjs-highlightable="false"
@@ -46,7 +46,7 @@ export const rowDefaultAttributes: string = `
     data-gjs-selectable="false"
     data-gjs-editable="false"
     data-gjs-highlightable="true"
-    data-gjs-droppable="[data-gjs-type='tile-wrapper']"
+    data-gjs-droppable="[data-gjs-type='tile-wrapper'], [data-gjs-type='tile-col-wrapper']"
 `;
 
 export const contentColumnDefaultAttributes: string = `
@@ -92,11 +92,20 @@ export const DefaultInfoColumnAttributes: string = `
     data-gjs-selectable="false"
     data-gjs-editable="false"
     data-gjs-highlightable="true"
-    data-gjs-droppable="[data-gjs-type='info-desc-section'], [data-gjs-type='info-image-section'], [data-gjs-type='info-cta-section'], [data-gjs-type='tile-wrapper'], [data-gjs-type='info-tiles-section']"
+    data-gjs-droppable="[data-gjs-type='info-desc-section'], [data-gjs-type='info-image-section'], [data-gjs-type='info-cta-section'], [data-gjs-type='tile-wrapper'], [data-gjs-type='info-tiles-section'], [data-gjs-type='tile-col-wrapper']"
 `;
 
 export const infoRowDefaultAttributes: string = `
     data-gjs-type="info-tiles-section"
+    data-gjs-draggable="true"
+    data-gjs-selectable="false"
+    data-gjs-editable="false"
+    data-gjs-highlightable="true"
+    data-gjs-droppable="[data-gjs-type='tile-wrapper'], [data-gjs-type='tile-col-wrapper']"
+`;
+
+export const infoColDefaultAttributes: string = `
+    data-gjs-type="tile-col-wrapper"
     data-gjs-draggable="true"
     data-gjs-selectable="false"
     data-gjs-editable="false"

@@ -241,7 +241,9 @@ export class EditorUIManager {
 
       // handle tile drag scenarios
       // 1. Check if the dragged element is a tile.
-      const isTile = modalElement && modalElement.getAttribute("data-gjs-type") === "tile-wrapper";
+      const isTile =
+        modalElement &&
+        (modalElement.getAttribute("data-gjs-type") === "tile-wrapper" || modalElement.getAttribute("data-gjs-type") === "tile-col-wrapper");
 
       if (isTile) {
         const targetId = model.target.getId();
@@ -250,10 +252,14 @@ export class EditorUIManager {
         const sourceParentId = sourceComponent?.getId();
         const infoContentMapper = new InfoContentMapper(this.pageId);
 
-        // Check if the parent is a tile container
-        const isTileContainerParent =
+        // Check if the parent is a tile section
+        const isDroppedInTileSection =
           parentEl.getAttribute("data-gjs-type") === "info-tiles-section";
-        if (isTileContainerParent) {
+        // Check if the parent is a column wrapper
+        const isDroppedInColumnWrapper =
+          parentEl.getAttribute("data-gjs-type") === "tile-col-wrapper";
+
+        if (isDroppedInTileSection) {
           // If the parent is a tile container, update the tile in the both parents
           infoContentMapper.handleDragAndDropToExistingTileArea(
             targetId,
@@ -261,9 +267,37 @@ export class EditorUIManager {
             destinationId,
             destinationRowIndex
           );
+        } else if (isDroppedInColumnWrapper) {
+          // check if the tile being dropped is a tile-wrapper or tile-col-wrapper
+          if(modalElement.getAttribute("data-gjs-type") === "tile-col-wrapper") {
+            // If the tile is a tile-col-wrapper, we need to handle it differently
+            // get parent id of the tile section that was dragged
+            const destinationTileSectionId = destinationComponent.parent().getId();
+
+            // If the parent is a tile column, update the tile in the column
+            infoContentMapper.handleDragAndDropTileToExistingTileColumn(
+              targetId,
+              sourceParentId,
+              destinationId,
+              destinationTileSectionId,
+              destinationRowIndex
+            );
+          } else if (modalElement.getAttribute("data-gjs-type") === "tile-wrapper") {
+          // get parent id of the tile column
+            const sourceParent = sourceComponent.parent();
+            const tileSectionId = sourceParent ? sourceParent.getId() : null;
+            // If the parent is a tile column, update the tile in the column
+            infoContentMapper.handleDragAndDropWithinExistingTileColumn(
+              targetId,
+              sourceParentId,
+              destinationId,
+              tileSectionId,
+              destinationRowIndex
+            );
+          }
         } else {
           // Find the index of the target element in the components array
-          let targetIndex = components.findIndex((comp: any) => comp.getId() === modelId);
+          const targetIndex = components.findIndex((comp: any) => comp.getId() === modelId);
           let nearestSection = null;
           // Go upwards from targetIndex - 1 to 0, looking for a section whose data-gjs-type matches "info-*-section"
           for (let i = targetIndex - 1; i >= 0; i--) {
@@ -277,8 +311,22 @@ export class EditorUIManager {
           }
 
           // if dragged to the first item at the top of the container, nearestSection will be null
-          const nearestSectionId = nearestSection ? nearestSection.getId() : null;
-          infoContentMapper.handleDragAndDropToNewTileArea(
+          const nearestSectionId = nearestSection
+            ? nearestSection.getId()
+            : null;
+
+          // if it's a tile-wrapper, we need to handle it differently from a tile column
+          if (modalElement.getAttribute("data-gjs-type") === "tile-wrapper") {
+            // get parent id of the tile section that was dragged
+            const sourceTileSectionId = sourceComponent.parent().getId();
+            // If the parent is a tile column, update the tile in the column
+            infoContentMapper.handleDragAndDropTileWrapperToNewTileColumn(
+              targetId,
+              sourceParentId,
+              sourceTileSectionId,
+              nearestSection ? nearestSection.getId() : null
+            );
+          } else infoContentMapper.handleDragAndDropToNewTileArea(
             targetId,
             sourceParentId,
             nearestSectionId
@@ -621,6 +669,7 @@ export class EditorUIManager {
         tileWrapper.getId()
       );
     }
+
 
     this.removeOtherEditors();
     if (tileAttributes?.Action?.ObjectId) {

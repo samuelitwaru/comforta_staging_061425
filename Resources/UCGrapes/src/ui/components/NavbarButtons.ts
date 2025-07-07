@@ -1,13 +1,9 @@
 import { PublishManager } from "../../controls/toolbox/PublishManager";
 import { AppVersionManager } from "../../controls/versions/AppVersionManager";
-import { ToolBoxService } from "../../services/ToolBoxService";
 import { Button } from "./Button";
 import { EditActions } from "./EditActions";
-import { Modal } from "./Modal";
 import { ThemeSelection } from "./ThemeSelection";
 import { i18n } from "../../i18n/i18n";
-import { PageBubbleTree } from "./page-tree/PageBubbleTree";
-import { PageTree } from "./page-tree/PageTree";
 
 export class NavbarButtons {
   container: HTMLElement;

@@ -1,4 +1,3 @@
-import { ActionSelectContainer } from "./action-list/ActionSelectContainer";
 import { IconListCategories } from "./icon-list/IconListCategories";
 import { ThemeSection } from "./ThemeSection";
 import { TileImgSection } from "./TileImgSection";
@@ -17,14 +16,12 @@ export class MenuSection {
       const themeSection = new ThemeSection();
       const tileImgSection = new TileImgSection();
       const titleSection = new TitleSection();
-      // const actionListContainer = new ActionSelectContainer();
       const iconListCategories = new IconListCategories()
 
 
       themeSection.render(this.container);
       tileImgSection.render(this.container);
       titleSection.render(this.container);
-      // actionListContainer.render(this.container);
       iconListCategories.render(this.container);
   }
 

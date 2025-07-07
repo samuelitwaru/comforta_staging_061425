@@ -73,13 +73,6 @@ export class TileAlignmentSection {
           "Align",
           "left"
         )
-
-        infoSectionManager.updateInfoTileAttributes(
-          selectedComponent.parent().parent().getId(),
-          selectedComponent.parent().getId(),
-          "Align",
-          "left"
-        );
       } else {
         (globalThis as any).tileMapper.updateTile(
           selectedComponent.parent().getId(),
@@ -128,12 +121,6 @@ export class TileAlignmentSection {
           "center"
         )
         
-        infoSectionManager.updateInfoTileAttributes(
-          selectedComponent.parent().parent().getId(),
-          selectedComponent.parent().getId(),
-          "Align",
-          "center"
-        );
       } else {
         (globalThis as any).tileMapper.updateTile(
           selectedComponent.parent().getId(),

@@ -1,6 +1,5 @@
 import { ContentSection } from "./tools-section/ContentSection";
 import { MenuSection } from "./tools-section/MenuSection";
-import { TabButtons } from "./tools-section/TabButtons";
 
 export class TabPageContent {
   container: HTMLElement;

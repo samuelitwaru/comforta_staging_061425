@@ -1,6 +1,5 @@
 import { i18n } from "../../i18n/i18n";
 import { Column, InfoType, Tile } from "../../types";
-import { ActionListPopUp } from "../../ui/views/ActionListPopUp";
 import {
   DefaultAttributes,
   infoRowDefaultAttributes,
@@ -9,10 +8,9 @@ import {
   tileDefaultAttributes,
   tileWrapperDefaultAttributes,
 } from "../../utils/default-attributes";
-import { infoSectionSpacer, newTileColumn, newTileRow, resizeButton, tileFromAttributes } from "../../utils/gjs-components";
+import { infoSectionSpacer, newTileColumn, resizeButton, tileFromAttributes } from "../../utils/gjs-components";
 import { getNextSiblingComponent, randomIdGenerator } from "../../utils/helpers";
 import { InfoSectionManager } from "../InfoSectionManager";
-import { CtaManager } from "../themes/CtaManager";
 import { ThemeManager } from "../themes/ThemeManager";
 import { EditorEvents } from "./EditorEvents";
 import { InfoContentMapper } from "./InfoContentMapper";
@@ -300,7 +298,7 @@ export class TileManager {
         const tileComponent = this.editor.Components.getWrapper().find(
           "#" + templateWrapper?.id
         )[0];
-        
+
         if (this.checkTileHasIconOrTitle(tileComponent)) {
           if (this.page?.PageType === "Information") {
             const infoSectionManager = new InfoSectionManager();
@@ -314,12 +312,6 @@ export class TileManager {
               "Icon",""
             )
 
-            // infoSectionManager.updateInfoTileAttributes(
-            //   tileComponent.parent().getId(),
-            //   tileComponent.getId(),
-            //   "Icon",
-            //   ""
-            // );
           } else {
             (globalThis as any).tileMapper.updateTile(
               tileComponent.getId(),
@@ -360,12 +352,6 @@ export class TileManager {
               tileComponent.getId(),
               "Icon",""
             )
-            // infoSectionManager.updateInfoTileAttributes(
-            //   tileComponent.parent().getId(),
-            //   tileComponent.getId(),
-            //   "Text",
-            //   ""
-            // );
           } else {
             (globalThis as any).tileMapper.updateTile(
               tileComponent.getId(),
@@ -469,7 +455,7 @@ export class TileManager {
   private getTile(isSingleTile: boolean = false) {
     return `
       <div ${tileWrapperDefaultAttributes} ${isSingleTile ? `style="height:${minTileHeight}px"` : ``
-      } class="template-wrapper" id="${randomIdGenerator(8)}">
+} class="template-wrapper" id="${randomIdGenerator(8)}">
         <div ${tileDefaultAttributes} class="template-block" style="background-color: transparent; color: #333333; justify-content: left">
             <div ${DefaultAttributes} id="igtdq" data-gjs-type="default" class="tile-icon-section">
               <span ${DefaultAttributes} id="is1dw" data-gjs-type="text" class="tile-close-icon top-right selected-tile-title">×</span>
@@ -487,21 +473,21 @@ export class TileManager {
           </svg>
         </button>
         ${isSingleTile
-        ? `
+    ? `
             ${resizeButton("Resize")}
           `
-        : ``
-      }
+    : ``
+}
         ${this.page?.PageType === "Information"
-        ? ``
-        : `
+    ? ``
+    : `
           <button ${DefaultAttributes} id="i4ubt" data-gjs-type="default" title="Add template bottom" class="action-button add-button-bottom">
           <svg ${DefaultAttributes} fill="#fff" width="15" height="15" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path ${DefaultAttributes} d="M19,11H13V5a1,1,0,0,0-2,0v6H5a1,1,0,0,0,0,2h6v6a1,1,0,0,0,2,0V13h6a1,1,0,0,0,0-2Z"/>
           </svg>
           </button>
         `
-      }
+}
         <svg ${DefaultAttributes} class="tile-open-menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 27 27">
           <g ${DefaultAttributes} id="Group_2383" data-name="Group 2383" transform="translate(-921 -417.999)">
             <g ${DefaultAttributes} id="Group_2382" data-name="Group 2382" transform="translate(921 418)">
@@ -570,7 +556,7 @@ export class TileManager {
     
 
     const infoSectionManager = new InfoSectionManager();
-      infoSectionManager.updateInfoMapper(rowId, tileSection);
+    infoSectionManager.updateInfoMapper(rowId, tileSection);
   }
 
   addTileToNewGrid(tileAttributes:Object, rowId:string, colId:string, nextRowComp:any) {
@@ -581,14 +567,14 @@ export class TileManager {
       InfoPositionId: nextRowComp?.getId(),
       InfoValue: "",
       Columns: [
-          {
+        {
 
-              ColId: colId,
-              Tiles: [
+          ColId: colId,
+          Tiles: [
                   tileAttributes as Tile
-              ]
-          },
-        ]
+          ]
+        },
+      ]
     }
     infoContentMapper.addInfoType(newInfoRow)
   }
@@ -611,7 +597,7 @@ export class TileManager {
     }
 
     const infoSectionManager = new InfoSectionManager();
-      infoSectionManager.updateInfoMapper(rowId, tileSection);
+    infoSectionManager.updateInfoMapper(rowId, tileSection);
   }
 
 

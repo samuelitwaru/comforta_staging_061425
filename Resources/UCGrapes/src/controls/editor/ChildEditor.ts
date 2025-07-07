@@ -4,13 +4,10 @@ import { randomIdGenerator } from "../../utils/helpers";
 import { ThemeManager } from "../themes/ThemeManager";
 import { EditorEvents } from "./EditorEvents";
 import { EditorManager } from "./EditorManager";
-import { JSONToGrapesJSContent } from "./JSONToGrapesJSContent";
 import { JSONToGrapesJSInformation } from "./JSONToGrapesJSInformation";
 import { JSONToGrapesJSMenu } from "./JSONToGrapesJSMenu";
 import { LoadCalendarData } from "./LoadCalendarData";
-import { LoadLocationData } from "./LoadLocationData";
 import { LoadMyActivityData } from "./LoadMyActivityData";
-import { LoadReceptionData } from "./LoadReceptionData";
 import { MapsPageEditor } from "./MapsPageEditor";
 import { UrlPageEditor } from "./UrlPageEditor";
 
@@ -60,12 +57,12 @@ export class ChildEditor {
     } else if (this.pageData?.PageType === "Information") {
       converter = new JSONToGrapesJSInformation(this.pageData, this.isNewPage);
       setUpEditor(converter);
-    } else if (this.pageData?.PageType === "Location") {
-      const locationEditor = new LoadLocationData(childEditor, this.pageData);
-      locationEditor.setupEditor();
-    } else if (this.pageData?.PageType === "Reception") {
-      const receptionEditor = new LoadReceptionData(childEditor, this.pageData);
-      receptionEditor.setupEditor();
+    // } else if (this.pageData?.PageType === "Location") {
+    //   const locationEditor = new LoadLocationData(childEditor, this.pageData);
+    //   locationEditor.setupEditor();
+    // } else if (this.pageData?.PageType === "Reception") {
+    //   const receptionEditor = new LoadReceptionData(childEditor, this.pageData);
+    //   receptionEditor.setupEditor();
     } else if (this.pageData?.PageType === "WebLink" || this.pageData?.PageType === "DynamicForm") {
       const urlPageEditor = new UrlPageEditor(childEditor);
       if (this.pageData?.PageLinkStructure?.Url) {

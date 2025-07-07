@@ -56,13 +56,6 @@ export class TitleInputSection {
           tile.getId(),
           "Text",
           titleValue.trim()
-        )
-
-        infoSectionManager.updateInfoTileAttributes(
-          selectedComponent.parent().parent().getId(),
-          selectedComponent.parent().getId(),
-          "Text",
-          titleValue.trim()
         );
       } else {
         (globalThis as any).tileMapper.updateTile(

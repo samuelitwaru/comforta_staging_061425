@@ -2,13 +2,10 @@ import { ChildEditor } from "../../../../controls/editor/ChildEditor";
 import { InfoSectionManager } from "../../../../controls/InfoSectionManager";
 import { AppVersionManager } from "../../../../controls/versions/AppVersionManager";
 import { i18n } from "../../../../i18n/i18n";
-import { baseURL, ToolBoxService } from "../../../../services/ToolBoxService";
+import { ToolBoxService } from "../../../../services/ToolBoxService";
 import { CtaAttributes, InfoType } from "../../../../types";
 import { randomIdGenerator } from "../../../../utils/helpers";
 import { InfoSectionUI } from "../../../views/InfoSectionUI";
-import { Alert } from "../../Alert";
-import { ActionListDropDown } from "./ActionListDropDown";
-import { ActionSelectContainer } from "./ActionSelectContainer";
 import { FormModalService } from "./FormModalService";
 import { PageAttacher } from "./PageAttacher";
 
@@ -191,8 +188,13 @@ export class PageCreationService {
     const tileTitle = selectedComponent.find(".tile-title")[0];
     if (tileTitle) tileTitle.components(formData.field_label);
 
-    const tileId = selectedComponent.parent().getId();
-    const rowId = selectedComponent.parent().parent().getId();
+    const rowComp = selectedComponent.closest('.container-row');
+    const colComp = selectedComponent.closest('.tile-column');
+    const tile = selectedComponent.closest('.template-wrapper');
+
+    const tileId = tile.getId();
+    const rowId = rowComp.getId();
+    const colId = colComp.getId();
 
     // Find or create child page
     let childPage;
@@ -213,8 +215,10 @@ export class PageCreationService {
 
     if (pageData.PageType === "Information") {
       for (const [property, value] of updates) {
-        this.InfoSectionManager.updateInfoTileAttributes(
+        
+        this.InfoSectionManager.updateGridTileAttribute(
           rowId,
+          colId,
           tileId,
           property,
           value

@@ -6,7 +6,6 @@ import { ConfirmationBox } from "../../ui/components/ConfirmationBox";
 import { InfoSectionManager } from "../InfoSectionManager";
 import { CtaIconsListPopup } from "../../ui/views/CtaIconsListPopup";
 import { i18n } from "../../i18n/i18n";
-import { InfoType } from "../../types";
 import { ImageUploadManager } from "../ImageUploadManager";
 
 export class ContentDataUi {

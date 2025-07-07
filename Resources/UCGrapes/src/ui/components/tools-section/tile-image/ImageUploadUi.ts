@@ -1,11 +1,7 @@
-import { backgroundImage } from "html2canvas/dist/types/css/property-descriptors/background-image";
 import { ImageUploadManager } from "../../../../controls/ImageUploadManager";
-import { InfoSectionManager } from "../../../../controls/InfoSectionManager";
 import { i18n } from "../../../../i18n/i18n";
-import { InfoType, Media, Tile } from "../../../../types";
+import { Media } from "../../../../types";
 import { SingleImageFile } from "./SingleImageFile";
-import { backgroundRepeat } from "html2canvas/dist/types/css/property-descriptors/background-repeat";
-import { randomIdGenerator } from "../../../../utils/helpers";
 import { MultipleDeleteHandler } from "./MultipleDeleteHandler";
 import { ImageEditor } from "./ImageEditor";
 

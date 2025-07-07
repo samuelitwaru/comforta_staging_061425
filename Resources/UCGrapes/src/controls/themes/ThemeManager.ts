@@ -1,9 +1,7 @@
-import ToolboxApp from "../../app";
 import { AppConfig } from "../../AppConfig";
 import { InfoType, Theme, ThemeColors, ThemeCtaColor, Tile } from "../../types";
 import { ColorPalette } from "../../ui/components/tools-section/ColorPalette";
 import { CtaColorPalette } from "../../ui/components/tools-section/content-section/CtaColorPalette";
-import { IconList } from "../../ui/components/tools-section/icon-list/IconList";
 import { IconListCategories } from "../../ui/components/tools-section/icon-list/IconListCategories";
 import { AppVersionManager } from "../versions/AppVersionManager";
 
@@ -344,7 +342,7 @@ export class ThemeManager {
 
             if (infoElement) {
               if (info.InfoType === "Cta") {
-                const ctaButton = infoElement.querySelector(
+                const ctaButton = infoElement?.querySelector(
                   ".cta-styled-btn"
                 ) as HTMLElement;
                 if (ctaButton && info.CtaAttributes?.CtaBGColor) {

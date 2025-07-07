@@ -3,7 +3,6 @@ import { InfoSectionManager } from "../../../../controls/InfoSectionManager";
 import { ThemeManager } from "../../../../controls/themes/ThemeManager";
 import { InfoType, ThemeIcon } from "../../../../types";
 import { DefaultAttributes } from "../../../../utils/default-attributes";
-import { capitalizeWords } from "../../../../utils/helpers";
 
 export class IconList {
   private themeManager: ThemeManager;
@@ -81,13 +80,6 @@ export class IconList {
       "Icon",
       themeIcon.IconCodeName
     )
-
-          infoSectionManager.updateInfoTileAttributes(
-            rowComponent.getId(),
-            tileWrapper.getId(),
-            "Icon",
-            themeIcon.IconCodeName
-          );
 
           const tileInfoSectionAttributes: InfoType = (
             globalThis as any

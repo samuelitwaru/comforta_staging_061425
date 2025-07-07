@@ -1,4 +1,3 @@
-import ToolboxApp from "../../../app";
 import { ThemeManager } from "../../../controls/themes/ThemeManager";
 import { ThemeColors } from "../../../types";
 import { ColorPalette } from "./ColorPalette";

@@ -184,13 +184,6 @@ export class ColorPalette {
         "BGColor",
         colorName
       )
-
-      infoSectionManager.updateInfoTileAttributes(
-        rowComponent.getId(),
-        tileWrapper.getId(),
-        "BGColor",
-        colorName
-      );
     } else {
       (globalThis as any).tileMapper.updateTile(
         selectedComponent.parent().getId(),

@@ -8,10 +8,8 @@ import { InfoSectionManager } from "../InfoSectionManager";
 import { HistoryManager } from "../toolbox/HistoryManager";
 import { AppVersionManager } from "../versions/AppVersionManager";
 import { ChildEditor } from "./ChildEditor";
-import { EditorManager } from "./EditorManager";
 import { EditorUIManager } from "./EditorUiManager";
 import { FrameEvent } from "./FrameEvent";
-import { PageMapper } from "./PageMapper";
 import { TileManager } from "./TileManager";
 import { TileUpdate } from "./TileUpdate";
 
@@ -104,12 +102,12 @@ export class EditorEvents {
 
   private initializeTileManager() {
     this.tileManager = new TileManager(
-          // e,
-          this.editor,
-          this.pageId,
-          this.frameId,
-          this.pageData
-        );
+      // e,
+      this.editor,
+      this.pageId,
+      this.frameId,
+      this.pageData
+    );
   }
 
   private setupGlobalReferences(): void {
@@ -139,7 +137,6 @@ export class EditorEvents {
     this.editor.on("load", () => {
       const wrapper = this.editor.getWrapper();
       if (!wrapper) {
-        console.error("Wrapper not found!");
         return;
       }
 
@@ -247,7 +244,7 @@ export class EditorEvents {
     this.resizeState.resizeYStart = e.clientY;
     this.resizeState.initialHeight = this.resizeState.resizingRow.offsetHeight;
 
-    console.log('resising row: ',  this.resizeState.resizingRowParent)
+    // console.log('resising row: ',  this.resizeState.resizingRowParent)
     
     this.setupResizeUI(targetElement);
   }
@@ -434,7 +431,6 @@ export class EditorEvents {
     const comps = wrapper.find(`#${this.resizeState.resizingRow.id}`);
 
     if (comps.length) {
-      console.log('comp', comps[0].getEl())
       const columnComp = comps[0].closest('.tile-column')
       comps[0].addStyle({ height: `${newHeight}px` });
       columnComp.addStyle({ height: `${newHeight}px` });
@@ -494,13 +490,18 @@ export class EditorEvents {
 
   private updateInfoTileAttributes(finalHeight: number): void {
     const infoSectionManager = new InfoSectionManager();
-    const parentId = this.resizeState.resizingRowParent?.id;
-
-    if (parentId && this.resizeState.resizingRow) {
-      infoSectionManager.updateInfoTileAttributes(
-        parentId,
-        this.resizeState.resizingRow.id,
-        "Size",
+    const tile = this.resizeState.resizingRow
+    const col = tile?.closest('.tile-column');
+    const row = tile?.closest('.container-row');
+    const tileId = tile?.id;
+    const colId = col?.id;
+    const rowId = row?.id;
+    if (tileId && colId && rowId) {
+      infoSectionManager.updateGridTileAttribute(
+        rowId,
+        colId,
+        tileId,
+        "Height",
         finalHeight
       );
     }
@@ -566,7 +567,7 @@ export class EditorEvents {
     }
 
     const target = e.target as HTMLElement;
-    if (target.id == "product-service-image") {
+    if (target.id === "product-service-image") {
       // Open the image upload modal for info section
       const sectionId = target.parentElement?.id;
       if (!sectionId) return;
@@ -579,7 +580,7 @@ export class EditorEvents {
       modalContent.render(modal);
 
       document.body.appendChild(modal);
-      return;
+      
     }
   }
 
@@ -708,7 +709,7 @@ export class EditorEvents {
     if (deleteTextClicked) {
       this.deleteTileText(e)
     }
-    
+
     if (addButtonClicked) {
       this.addGridTile(e)
     }
@@ -717,7 +718,6 @@ export class EditorEvents {
     }
 
     this.uiManager.activateEditor(this.frameId);
-       
     if (this.disableEditor()) return;
     this.uiManager.clearAllMenuContainers();
     this.uiManager.clearAllDropDowns();
@@ -769,7 +769,7 @@ export class EditorEvents {
   }
 
   private onComponentUpdate(): void {
-    this.editor.on("component:update", (model: any) => {
+    this.editor.on("component:update", () => {
       window.dispatchEvent(
         new CustomEvent("pageChanged", {
           detail: { pageId: this.pageId },
@@ -779,31 +779,17 @@ export class EditorEvents {
   }
 
   private onDragAndDrop(): void {
+    // initialise DnD properties
+    this.tileUpdate.updateTilesDraggableProperty(this.editor);
+
     if (this.disableEditor()) return;
     let sourceComponent: any;
     let destinationComponent: any;
 
-    // When drag starts
+    // when drag starts
     this.editor.on("component:drag:start", (model: any) => {
       sourceComponent = model.parent;
-      if (model.target.get("type") !== "tile-wrapper") return;
-
-      const allTileContainers = this.editor
-        .getWrapper()
-        .find('[data-gjs-type="info-tiles-section"]');
-      allTileContainers.forEach((container: any) => {
-        const tiles = container
-          .components()
-          .filter((comp: any) => comp.get("type") === "tile-wrapper");
-        const isSource = model.parent && model.parent.getId() === container.getId();
-        if (tiles.length >= 3 && !isSource) {
-          container.set("droppable", false);
-          container.addAttributes({ "data-gjs-droppable": "false" });
-        } else {
-          container.set("droppable", "[data-gjs-type='tile-wrapper']");
-          container.addAttributes({ "data-gjs-droppable": "[data-gjs-type='tile-wrapper']" });
-        }
-      });
+      this.handleTileColDroppableOnDrag(model);
     });
 
     this.editor.on("component:drag:end", (model: any) => {
@@ -815,12 +801,127 @@ export class EditorEvents {
         .getWrapper()
         .find('[data-gjs-type="info-tiles-section"]');
       allTileContainers.forEach((container: any) => {
-        container.set("droppable", "[data-gjs-type='tile-wrapper']");
-        container.addAttributes({ "data-gjs-droppable": "[data-gjs-type='tile-wrapper']" });
+        container.set("droppable", "[data-gjs-type='tile-wrapper'], [data-gjs-type='tile-col-wrapper']");
+        container.addAttributes({ "data-gjs-droppable": "[data-gjs-type='tile-wrapper'], [data-gjs-type='tile-col-wrapper']" });
       });
 
+      // reset any temporary draggable/droppable settings
       this.uiManager.handleDragEnd(model, sourceComponent, destinationComponent);
+      this.tileUpdate.updateTilesDraggableProperty(this.editor);
     });
+  }
+
+
+  /**
+   * Handles temporary droppable overrides for drag-and-drop in tile sections.
+   * - If an info-tiles-section has a tile-col-wrapper with exactly 3 tile-wrapper children,
+   *   restricts droppable to only allow [data-gjs-type='tile-col-wrapper'] (temporary override).
+   * - If an info-tiles-section has exactly two tile-col-wrapper children,
+   *   and one col-wrapper has >1 tile-wrapper, and the dragged col-wrapper has only 1 tile-wrapper,
+   *   sets the droppable property of the col-wrapper with >1 child to false.
+   * (Reset logic should be handled in handleDragEnd.)
+   */
+  private handleTileColDroppableOnDrag(model: any): void {
+    const sourceComponent = model.parent;
+
+    // If dragging an external tile into a grid, check and enable dropping in a column with tiles and not outside.
+    if (model.target.get("type") === "tile-col-wrapper") {
+      // Get all info-tiles-section components in the editor
+      const allSections = this.editor.getWrapper().find('[data-gjs-type="info-tiles-section"]');
+      allSections.forEach((section: any) => {
+        const colWrappers = section.components().filter(
+          (comp: any) => comp.get("type") === "tile-col-wrapper"
+        );
+        if (colWrappers.length === 2) {
+          // Check if either column has more than one tile-wrapper child
+          const hasMultiTileCol = colWrappers.some((col: any) =>
+            col.components().filter((comp: any) => comp.get("type") === "tile-wrapper").length > 1
+          );
+          // If any column has more than one tile-wrapper child, disable dropping a new column in this section
+          // This is to prevent adding a new column when there are already two columns with tiles.
+          if (hasMultiTileCol) {
+            // if the dragged column tile is one of the columns in the colWrappers, then allow drop to re-order
+            if (model.target.getId() === colWrappers[0].getId() || model.target.getId() === colWrappers[1].getId()) {
+            // Enable dropping only in columns with more than one tile-wrapper child
+              section.set("droppable", "[data-gjs-type='tile-col-wrapper']");
+              section.addAttributes({
+                "data-gjs-droppable": "[data-gjs-type='tile-col-wrapper']"
+              });
+            } else {
+            // Disable dropping a new column in this section
+              section.set("droppable", false);
+              section.addAttributes({ "data-gjs-droppable": "false" });
+            }
+          }
+        }
+      });
+    }
+
+    if (sourceComponent.get("type") === "info-tiles-section") {
+      // Get all tile-col-wrapper children
+      const colWrappers = sourceComponent.components().filter(
+        (comp: any) => comp.get("type") === "tile-col-wrapper"
+      );
+
+      // Check if the section already has 3 columns
+      if (colWrappers.length === 3) {
+        // Only allow internal reordering: set droppable to accept only tile-col-wrapper if the section already has 3 col tiles.
+        sourceComponent.set("droppable", "[data-gjs-type='tile-col-wrapper']");
+        sourceComponent.addAttributes({ "data-gjs-droppable": "[data-gjs-type='tile-col-wrapper']" });
+      }
+
+      // --- 3-tile column override: restrict section droppable to only col-wrapper drops ---
+      const hasThreeTileCol = colWrappers.some((col: any) => {
+        const tileCount = col.components().filter(
+          (comp: any) => comp.get("type") === "tile-wrapper"
+        ).length;
+        return tileCount === 3;
+      });
+      if (hasThreeTileCol) {
+        sourceComponent.set("droppable", "[data-gjs-type='tile-col-wrapper']");
+        sourceComponent.addAttributes({ "data-gjs-droppable": "[data-gjs-type='tile-col-wrapper']" });
+      }
+
+      // --- 2-column, >1 tile business rule ---
+      if (colWrappers.length === 2) {
+        // Find if any col-wrapper has >1 tile-wrapper child
+        let colWithMultipleTiles: any = null;
+        colWrappers.forEach((col: any) => {
+          const tileChildren = col.components().filter(
+            (comp: any) => comp.get("type") === "tile-wrapper"
+          );
+          if (tileChildren.length > 1) {
+            colWithMultipleTiles = col;
+            // Enable droppable for tile-col-wrapper with >1 tile-wrapper child
+            col.set("droppable", "[data-gjs-type='tile-wrapper']");
+            col.addAttributes({ "data-gjs-droppable": "[data-gjs-type='tile-wrapper']" });
+          }
+        });
+        if (model.target.get("type") === "tile-col-wrapper") {
+          // If dragging a col-wrapper with only one tile-wrapper child, set droppable of the other col to false (within a grid)
+          const draggedCol = model.target;
+          const draggedColTileCount = draggedCol.components().filter(
+            (comp: any) => comp.get("type") === "tile-wrapper"
+          ).length;
+          if (draggedColTileCount === 1 && colWithMultipleTiles) {
+            colWithMultipleTiles.set("droppable", "[data-gjs-type='tile-wrapper']");
+            colWithMultipleTiles.addAttributes({ "data-gjs-droppable": "[data-gjs-type='tile-wrapper']" });
+          }
+        }
+      }
+    }
+
+    if (sourceComponent.get("type") === "tile-col-wrapper") {
+      // If dragging a tile-col-wrapper, check if it has only one tile-wrapper child
+      const tileChildren = sourceComponent.components().filter(
+        (comp: any) => comp.get("type") === "tile-wrapper"
+      );
+      if (tileChildren.length > 1) {
+        // If so, restrict droppable to only allow tile-wrapper drops
+        sourceComponent.set("droppable", "[data-gjs-type='tile-wrapper']");
+        sourceComponent.addAttributes({ "data-gjs-droppable": "[data-gjs-type='tile-wrapper']" });
+      }
+    }
   }
 
   private onSelected(): void {
@@ -950,7 +1051,7 @@ export class EditorEvents {
     });
 
     if (tileWrappers.length === 3) {
-      console.log("more than 3");
+      // console.log("more than 3");
     }
   };
 

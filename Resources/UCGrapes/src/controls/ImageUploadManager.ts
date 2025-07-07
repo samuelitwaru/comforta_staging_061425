@@ -322,13 +322,6 @@ export class ImageUploadManager {
           key,
           value
         )
-
-        this.infoSectionManager.updateInfoTileAttributes(
-          rowId,
-          tileId,
-          key,
-          value
-        );
       }
 
       const tileAttributes = this.updateInfoTileAttributes(rowId, tileId);
@@ -435,12 +428,25 @@ export class ImageUploadManager {
         OriginalImageUrl: "",
         BGSize: "",
       };
-      const rowId = tileWrapper.parentElement?.id;
-      if (rowId) {
+
+
+      
+      const rowComp = tileWrapper.closest('.container-row')
+      const colComp = tileWrapper.closest('.tile-column')
+      const tile = tileWrapper.closest('.template-wrapper')
+      const rowId = rowComp?.id;
+      const colId = colComp?.id;
+      const tileId = tile?.id;
+      if (rowId && colId && tileId) {
         const infoSectionManager = new InfoSectionManager();
 
         for (const [key, value] of Object.entries(updates)) {
-          infoSectionManager.updateInfoTileAttributes(rowId, tileWrapper.id, key, value);
+          infoSectionManager.updateGridTileAttribute(
+              rowId,
+              colId,
+              tileId,
+              key, value
+            )
         }
       }
     }

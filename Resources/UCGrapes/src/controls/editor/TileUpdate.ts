@@ -3,7 +3,6 @@ import { minTileHeight } from "../../utils/default-attributes";
 import { addRightButton, resizeButton } from "../../utils/gjs-components";
 import { InfoSectionManager } from "../InfoSectionManager";
 import { InfoContentMapper } from "./InfoContentMapper";
-import { TileMapper } from "./TileMapper";
 
 export class TileUpdate {
   rowComponent: any;
@@ -55,7 +54,7 @@ export class TileUpdate {
       this.updateTileHeight(tile, length);
       this.updateAlignment(tile, tileAlignment, titleAlignment);
       this.updateTileTitleLength(tile, length);
-      
+
       if (!isDragging) {
         // Collect tile updates instead of updating individually
         let align = alignValue;
@@ -78,10 +77,10 @@ export class TileUpdate {
     // remove all add tile and resize components
     rowComponent.find('.add-button-right').forEach((comp:any) => comp.remove())
     rowComponent.find('.tile-resize-button').forEach((comp:any) => comp.remove())
-    
-    const columnComponents = rowComponent.find(".tile-column")    
+
+    const columnComponents = rowComponent.find(".tile-column")
     const tileCounts = columnComponents.map((comp:any) => comp.components().filter((comp:any)=>comp.get('type') === "tile-wrapper" || comp.getClasses().includes("template-wrapper")).length)
-    
+
     const maxTileCount = Math.max(...tileCounts) 
     rowComponent.addStyle('height', `${maxTileCount*minTileHeight}px`)
     const columnCount = columnComponents.length
@@ -236,6 +235,105 @@ export class TileUpdate {
         infoSectionManager.updateInfoMapper(rowId, tileInfoSectionAttributes);
       }
     }
+  }
+
+  // Utility: Set tile-wrapper draggable state based on count in tile-col-wrapper
+  updateTilesDraggableProperty(editor: any): void {
+    const wrapper = editor.getWrapper();
+    // Set all tile-wrapper components to not draggable by default
+    const allTileWrappers = wrapper.find('[data-gjs-type="tile-wrapper"]');
+    allTileWrappers.forEach((tile: any) => {
+      tile.set('draggable', false);
+      tile.addAttributes({'data-gjs-draggable': 'false'});
+      tile.trigger('change:draggable');
+    });
+
+    // Loop through all tile-col-wrapper components
+    const colWrappers = wrapper.find('[data-gjs-type="tile-col-wrapper"]');
+    colWrappers.forEach((col: any) => {
+      const tileChildren = col.components().filter((comp: any) => comp.get('type') === 'tile-wrapper');
+      if (tileChildren.length > 1) {
+        tileChildren.forEach((tile: any) => {
+          tile.set('draggable', true);
+          tile.addAttributes({'data-gjs-draggable': 'true'});
+          tile.trigger('change:draggable');
+        });
+        col.set('draggable', false);
+        col.trigger('change:draggable');
+      } else {
+        tileChildren.forEach((tile: any) => {
+          tile.set('draggable', false);
+          tile.addAttributes({'data-gjs-draggable': 'true'});
+          tile.trigger('change:draggable');
+        });
+        col.set('draggable', true);
+        col.trigger('change:draggable');
+      }
+    });
+
+    // --- Business rules for info-tiles-section and columns ---
+    const infoSections = wrapper.find('[data-gjs-type="info-tiles-section"]');
+    infoSections.forEach((section: any) => {
+      const colChildren = section.components().filter((comp: any) => comp.get('type') === 'tile-col-wrapper');
+      // 1. If section has exactly 3 tile-col-wrapper children, set droppable to false
+      if (colChildren.length === 3) {
+        section.set('droppable', false);
+        section.addAttributes({'data-gjs-droppable': 'false'});
+        section.trigger('change:droppable');
+      }
+      // 2. If section has 2 columns, apply adjacent and 2-tile/3-tile rules
+      if (colChildren.length === 2) {
+        const [colA, colB] = colChildren;
+        const colAChildren = colA.components().filter((comp: any) => comp.get('type') === 'tile-wrapper');
+        const colBChildren = colB.components().filter((comp: any) => comp.get('type') === 'tile-wrapper');
+        // 2a. If one col has >1 tile-wrapper and the other has <=1, set the other's droppable to false
+        if (colAChildren.length > 1 && colBChildren.length <= 1) {
+          colB.set('droppable', false);
+          colB.addAttributes({'data-gjs-droppable': 'false'});
+          colB.trigger('change:droppable');
+        } else if (colBChildren.length > 1 && colAChildren.length <= 1) {
+          colA.set('droppable', false);
+          colA.addAttributes({'data-gjs-droppable': 'false'});
+          colA.trigger('change:droppable');
+        }
+        // 2b. If either col has exactly 2 tile-wrapper children, set its droppable to both types
+        if (colAChildren.length === 2) {
+          colA.set('droppable', "[data-gjs-type='tile-col-wrapper'], [data-gjs-type='tile-wrapper']");
+          colA.addAttributes({'data-gjs-droppable': "[data-gjs-type='tile-col-wrapper'], [data-gjs-type='tile-wrapper']"});
+          colA.trigger('change:droppable');
+        }
+        if (colBChildren.length === 2) {
+          colB.set('droppable', "[data-gjs-type='tile-col-wrapper'], [data-gjs-type='tile-wrapper']");
+          colB.addAttributes({'data-gjs-droppable': "[data-gjs-type='tile-col-wrapper'], [data-gjs-type='tile-wrapper']"});
+          colB.trigger('change:droppable');
+        }
+        // 2c. If either col has exactly 3 tile-wrapper children, allow only tile-wrapper drops for internal re-ordering otherwise change droppable to false.
+        if (colAChildren.length === 3) {
+          colA.set('droppable', false);
+          colA.addAttributes({'data-gjs-droppable': "false"});
+          colA.trigger('change:droppable');
+        }
+        if (colBChildren.length === 3) {
+          colB.set('droppable', false);
+          colB.addAttributes({'data-gjs-droppable': "false"});
+          colB.trigger('change:droppable');
+        }
+      }
+    });
+
+    // 3. For each tile-col-wrapper, if it has exactly 3 tile-wrapper children, set its own and parent section's droppable to false
+    colWrappers.forEach((col: any) => {
+      const tileChildren = col.components().filter((comp: any) => comp.get('type') === 'tile-wrapper');
+      const infoTilesSection = col.closest('[data-gjs-type="info-tiles-section"]');
+      if (tileChildren.length === 3 && infoTilesSection) {
+        col.set('droppable', false);
+        col.addAttributes({'data-gjs-droppable': 'false'});
+        col.trigger('change:droppable');
+        infoTilesSection.set('droppable', false);
+        infoTilesSection.addAttributes({'data-gjs-droppable': 'false'});
+        infoTilesSection.trigger('change:droppable');
+      }
+    });
   }
 
   removeEmptyRows() {

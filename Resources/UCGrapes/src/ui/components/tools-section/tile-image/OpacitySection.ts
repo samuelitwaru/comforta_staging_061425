@@ -1,6 +1,5 @@
 import { ImageUploadManager } from "../../../../controls/ImageUploadManager";
 import { InfoSectionManager } from "../../../../controls/InfoSectionManager";
-import { ImageUpload } from "./ImageUpload";
 
 export class OpacitySection {
   container: HTMLElement;
@@ -104,13 +103,6 @@ export class OpacitySection {
         "Opacity",
         value
       )
-
-      // infoSectionManager.updateInfoTileAttributes(
-      //   selectedComponent.parent().parent().getId(),
-      //   selectedComponent.parent().getId(),
-      //   "Opacity",
-      //   value
-      // );
     } else {
       (globalThis as any).tileMapper.updateTile(
         selectedComponent.parent().getId(),

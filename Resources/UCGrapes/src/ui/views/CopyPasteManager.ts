@@ -108,7 +108,7 @@ export class CopyPasteManager {
 
     this.tbContainer.appendChild(this.overlay);
 
-    this.cropAreaDiv.addEventListener("mousedown", (event) => this.onMouseDown(event, onSelect));
+    this.cropAreaDiv.addEventListener("mousedown", (event) => this.onMouseDown(event));
     this.cropAreaDiv.addEventListener("mousemove", (event) => this.onMouseMove(event));
     this.cropAreaDiv.addEventListener("mouseup", (event) => this.onMouseUp(event, onSelect));
 
@@ -156,8 +156,7 @@ export class CopyPasteManager {
     if (this.editorPage) this.editorPage.style.cursor = "default";
   }
 
-  private onMouseDown(event: MouseEvent, onSelect?: (rect: DOMRect) => void) {
-    const target = event.target as HTMLElement;
+  private onMouseDown(event: MouseEvent) {
     const clickX = event.clientX;
     const clickY = event.clientY;
 
@@ -281,11 +280,11 @@ export class CopyPasteManager {
       onSelect(selectionRect);
     }
 
-    this.showActionGroup(rect, containerRect, selectionRect, onSelect);
+    this.showActionGroup(rect, containerRect, selectionRect);
     this.addCancelOnOutsideClick();
   }
 
-  private showActionGroup(rect: DOMRect, containerRect: DOMRect, selectionRect: DOMRect, onSelect?: (rect: DOMRect) => void) {
+  private showActionGroup(rect: DOMRect, containerRect: DOMRect, selectionRect: DOMRect) {
     const existingGroup = this.overlay!.querySelector('.cp-action-group');
     if (existingGroup) existingGroup.remove();
 
@@ -445,7 +444,7 @@ export class CopyPasteManager {
       localStorage.getItem(`data-${activePage.PageId}`) || "{}"
     );
 
-    let copiedStructures: any[] = [];
+    const copiedStructures: any[] = [];
 
     if (data?.PageInfoStructure?.InfoContent) {
       data.PageInfoStructure.InfoContent.forEach((infoContent: any) => {
@@ -459,7 +458,7 @@ export class CopyPasteManager {
     }
 
     if (copiedStructures.length === 0) {
-      console.error("No matching structures found in localStorage for selected section IDs:", selectedSectionIds);
+      // console.error("No matching structures found in localStorage for selected section IDs:", selectedSectionIds);
       return;
     }
 
@@ -484,7 +483,6 @@ export class CopyPasteManager {
         return;
       }
 
-      const target = event.target as HTMLElement;
       const clickX = event.clientX;
       const clickY = event.clientY;
 

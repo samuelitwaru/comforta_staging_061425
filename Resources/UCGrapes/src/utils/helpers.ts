@@ -1,4 +1,6 @@
+import { InfoContentMapper } from "../controls/editor/InfoContentMapper";
 import { i18n } from "../i18n/i18n";
+import { InfoType } from "../types";
 
 export const randomIdGenerator = (length: number) => {
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -91,4 +93,15 @@ export function getNextSiblingComponent(component:any, classFilter:string) {
   }
     
   return null; // No next sibling found
+}
+
+export function getTileAttrs(pageId:string, rowId:string, colId:string, tileId:string) {
+    const infoContentMapper = new InfoContentMapper(pageId);
+    const tileSection: InfoType | null =
+      infoContentMapper.getInfoContent(rowId);
+    if (tileSection) {
+      const col = tileSection.Columns?.find((col:any) => col.ColId == colId)
+      const tile = col?.Tiles?.find((tile:any) => tile.Id == tileId)
+      return tile
+    }
 }

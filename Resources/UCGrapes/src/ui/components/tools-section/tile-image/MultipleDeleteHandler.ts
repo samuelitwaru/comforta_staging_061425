@@ -1,10 +1,6 @@
 // MultipleDeleteManager.ts
 import { ImageUploadManager } from "../../../../controls/ImageUploadManager";
-import { HistoryManager } from "../../../../controls/toolbox/HistoryManager";
-import { ToolboxManager } from "../../../../controls/toolbox/ToolboxManager";
-import { AppVersionManager } from "../../../../controls/versions/AppVersionManager";
 import { i18n } from "../../../../i18n/i18n";
-import { AppVersion } from "../../../../types";
 import { ConfirmationBox } from "../../ConfirmationBox";
 
 export class MultipleDeleteHandler {

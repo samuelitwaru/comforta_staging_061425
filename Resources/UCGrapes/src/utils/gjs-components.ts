@@ -29,7 +29,7 @@ export function tileFromAttributes (tile: Tile, themeManager:ThemeManager): stri
   const icon = themeManager.getThemeIcon(tile.Icon as string)
   let iconSVG = ""
   if (icon) {
-    iconSVG = icon.IconSVG.replace(/fill="[^"]*"/g, `fill="${textColor}"`)
+    iconSVG = icon.IconSVG.replace(/fill="[^"]*"/g, `fill="${textColor}" ${DefaultAttributes}`)
   }
   const bgImage = tile.BGImageUrl
   const bgColor = bgImage ? '' : themeManager.getThemeColor(tile.BGColor as string)

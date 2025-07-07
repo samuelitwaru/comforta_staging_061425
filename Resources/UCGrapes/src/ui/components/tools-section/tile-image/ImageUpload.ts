@@ -4,7 +4,6 @@ import { InfoSectionManager } from "../../../../controls/InfoSectionManager";
 import { i18n } from "../../../../i18n/i18n";
 import { ToolBoxService } from "../../../../services/ToolBoxService";
 import { Image, InfoType, Media } from "../../../../types";
-import { SingleImageFile } from "./SingleImageFile";
 
 export class ImageUpload {
   private type: "tile" | "cta" | "content" | "info";
@@ -255,28 +254,34 @@ export class ImageUpload {
     selectedComponent.addStyle(styleProperties);
 
     const tileWrapper = selectedComponent.parent();
-    const rowComponent = tileWrapper.parent();
+    const rowComponent = tileWrapper.closest('.container-row');
+    const colComponent = tileWrapper.closest('.tile-column');
     const pageData = (globalThis as any).pageData;
 
     if (pageData.PageType === "Information") {
       const infoSectionManager = new InfoSectionManager();
-      infoSectionManager.updateInfoTileAttributes(
+      infoSectionManager.updateGridTileAttribute(
         rowComponent.getId(),
+        colComponent.getId(),
         tileWrapper.getId(),
         "BGImageUrl",
         safeMediaUrl
       );
 
+
       // Save position data if available
       if (this.currentPosition) {
-        infoSectionManager.updateInfoTileAttributes(
+        infoSectionManager.updateGridTileAttribute(
           rowComponent.getId(),
+          colComponent.getId(),
           tileWrapper.getId(),
           "BackgroundSize",
           this.currentPosition.backgroundSize
         );
-        infoSectionManager.updateInfoTileAttributes(
+
+        infoSectionManager.updateGridTileAttribute(
           rowComponent.getId(),
+          colComponent.getId(),
           tileWrapper.getId(),
           "BackgroundPosition",
           this.currentPosition.backgroundPosition
@@ -774,6 +779,10 @@ export class ImageUpload {
       const selectedComponent = (globalThis as any).selectedComponent;
       if (!selectedComponent) return;
 
+      const tileComponent = selectedComponent.closest('.template-wrapper');
+      const rowComponent = selectedComponent.closest('.container-row');
+      const colComponent = selectedComponent.closest('.tile-column');
+
       Object.assign(selectedComponent.getEl().style, {
         backgroundColor: `rgba(0, 0, 0, ${opacityValue})`,
         backgroundImage: `url(${img.src})`,
@@ -783,9 +792,10 @@ export class ImageUpload {
       const pageData = (globalThis as any).pageData;
       if (pageData.PageType === "Information") {
         const infoSectionManager = new InfoSectionManager();
-        infoSectionManager.updateInfoTileAttributes(
-          selectedComponent.parent().parent().getId(),
-          selectedComponent.parent().getId(),
+        infoSectionManager.updateGridTileAttribute(
+          rowComponent.getId(),
+          colComponent.getId(),
+          tileComponent.getId(),
           "Opacity",
           parseInt(opacitySlider.value)
         );

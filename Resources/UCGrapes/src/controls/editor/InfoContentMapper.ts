@@ -134,17 +134,18 @@ export class InfoContentMapper {
 
     data.PageInfoStructure.InfoContent ??= [];
     // Find the parent section of the dragged tile
+
     const draggedTileParent = data.PageInfoStructure.InfoContent.find(
       (section: any) => section.InfoId === draggedTileParentId
     );
     // remove the dragged tile from its current parent and save it
-    const draggedTile = draggedTileParent?.Tiles?.find(
-      (tile: any) => tile.Id === draggedTileId
+    const draggedTile = draggedTileParent?.Columns?.find(
+      (col: any) => col.ColId === draggedTileId
     );
     if (draggedTileParent && draggedTile) {
       // remove the dragged tile from its current parent
-      draggedTileParent.Tiles = draggedTileParent.Tiles.filter(
-        (tile: any) => tile.Id !== draggedTileId
+      draggedTileParent.Columns = draggedTileParent.Columns.filter(
+        (col: any) => col.ColId !== draggedTileId
       );
 
       // update page structure with draggedTileParent state
@@ -160,9 +161,12 @@ export class InfoContentMapper {
       // create a new section for the dragged tile
       const content: InfoType = {
         InfoId: randomIdGenerator(15),
-        InfoType: "TileRow",
+        InfoType: "TileGrid",
         InfoValue: "",
-        Tiles: [{ ...draggedTile, Id: randomIdGenerator(8) }],
+        Columns: [{
+          ...draggedTile,
+          ColId: randomIdGenerator(8)
+        }],
       };
 
       if (beforeSectionId) {
@@ -193,18 +197,19 @@ export class InfoContentMapper {
     if (!data.PageInfoStructure) return;
 
     data.PageInfoStructure.InfoContent ??= [];
+
     // Find the parent section of the dragged tile
     const draggedTileParent = data.PageInfoStructure.InfoContent.find(
       (section: any) => section.InfoId === draggedFromParentId
     );
     // remove the dragged tile from its current parent and save it
-    const draggedTile = draggedTileParent?.Tiles?.find(
-      (tile: any) => tile.Id === draggedTileId
+    const draggedTile = draggedTileParent?.Columns?.find(
+      (col: any) => col.ColId === draggedTileId
     );
     if (draggedTileParent && draggedTile) {
       // remove the dragged tile from its current parent
-      draggedTileParent.Tiles = draggedTileParent.Tiles.filter(
-        (tile: any) => tile.Id !== draggedTileId
+      draggedTileParent.Columns = draggedTileParent.Columns.filter(
+        (col: any) => col.ColId !== draggedTileId
       );
 
       // update page structure with draggedTileParent state
@@ -225,11 +230,10 @@ export class InfoContentMapper {
 
     if (targetSection && draggedTile) {
       // If the target section exists, add the dragged tile to its Tiles array
-      targetSection.Tiles ??= [];
+      targetSection.Columns ??= [];
       // Insert the dragged tile at the specified index
-      targetSection.Tiles.splice(tileDestinationIndex, 0, {
+      targetSection.Columns.splice(tileDestinationIndex, 0, {
         ...draggedTile,
-        Size: 0, // Reset size to default
         // Id: randomIdGenerator(8), // Generate a new ID for the moved tile
       });
 
@@ -245,8 +249,223 @@ export class InfoContentMapper {
     }
     // refresh updated page structure
     new ToolboxManager().applyNewState(data, this.pageId);
-    
+
     this.saveData(data);
+  }
+
+  public handleDragAndDropWithinExistingTileColumn(draggedTileId: string, draggedFromParentId: string, draggedToParentId: string, tileSectionId: string, tileDestinationIndex: string): any {
+    const storageKey = `data-${this.pageId}`;
+    const data: any = JSON.parse(localStorage.getItem(storageKey) || "{}");
+
+    if (!data.PageInfoStructure) return;
+
+    data.PageInfoStructure.InfoContent ??= [];
+
+    // Find the parent section of the dragged tile
+    const parentTileSection = data.PageInfoStructure.InfoContent.find(
+      (section: any) => section.InfoId === tileSectionId
+    );
+    const parentColumnSection = parentTileSection?.Columns?.find(
+      (col: any) => col.ColId === draggedFromParentId
+    );
+    // remove the dragged tile from its current parent and save it
+    const draggedTile = parentColumnSection?.Tiles?.find(
+      (tile: any) => tile.Id === draggedTileId
+    );
+    if (parentTileSection && parentColumnSection && draggedTile) {
+      // remove the dragged tile from its current parent
+      parentColumnSection.Tiles = parentColumnSection.Tiles.filter(
+        (tile: any) => tile.Id !== draggedTileId
+      );
+
+      // update page structure with parentTileSection state
+      data.PageInfoStructure.InfoContent = data.PageInfoStructure.InfoContent.map(
+        (section: any) => {
+          if (section.InfoId === tileSectionId) {
+            return parentTileSection;
+          }
+          return section;
+        }
+      );
+    }
+
+    // Find the target section where the tile should be moved
+    const targetSection = data.PageInfoStructure.InfoContent.find(
+      (section: any) => section.InfoId === tileSectionId
+    );
+
+    if (targetSection && draggedTile) {
+      // If the target section exists, add the dragged tile to its Tiles array
+      targetSection.Columns ??= [];
+      // Insert the dragged tile at the specified index
+      targetSection.Columns = targetSection.Columns.map((col: any) => {
+        if (col.ColId === draggedToParentId) {
+          col.Tiles ??= [];
+          // Insert the dragged tile at the specified index
+          col.Tiles.splice(tileDestinationIndex, 0, {
+            ...draggedTile,
+            // Id: randomIdGenerator(8), // Generate a new ID for the moved tile
+          });
+        }
+        return col;
+      });
+
+      // Update the target section with the modified columns
+      data.PageInfoStructure.InfoContent = data.PageInfoStructure.InfoContent.map(
+        (section: any) => {
+          if (section.InfoId === tileSectionId) {
+            return targetSection;
+          }
+          return section;
+        }
+      );
+    }
+    // refresh updated page structure
+    new ToolboxManager().applyNewState(data, this.pageId);
+
+    this.saveData(data);
+  }
+
+  public handleDragAndDropTileToExistingTileColumn(draggedTileId: string, draggedFromParentId: string, draggedToColumnId: string, destinationTileSectionId: string, tileDestinationIndex: string): any {
+    const storageKey = `data-${this.pageId}`;
+    const data: any = JSON.parse(localStorage.getItem(storageKey) || "{}");
+
+    if (!data.PageInfoStructure) return;
+
+    data.PageInfoStructure.InfoContent ??= [];
+
+    // Find the parent section of the dragged tile
+    const parentTileSection = data.PageInfoStructure.InfoContent.find(
+      (section: any) => section.InfoId === draggedFromParentId
+    );
+    // remove the dragged tile from its current parent and save it
+    const draggedTile = parentTileSection?.Columns?.find(
+      (col: any) => col.ColId === draggedTileId
+    );
+    if (parentTileSection && draggedTile) {
+      // remove the dragged tile from its current parent
+      parentTileSection.Columns = parentTileSection.Columns.filter(
+        (col: any) => col.ColId !== draggedTileId
+      );
+
+      // update page structure with parentTileSection state
+      data.PageInfoStructure.InfoContent = data.PageInfoStructure.InfoContent.map(
+        (section: any) => {
+          if (section.InfoId === draggedFromParentId) {
+            return parentTileSection;
+          }
+          return section;
+        }
+      );
+    }
+
+    // Find the target section where the tile should be moved
+    const targetSection = data.PageInfoStructure.InfoContent.find(
+      (section: any) => section.InfoId === destinationTileSectionId
+    );
+
+    if (targetSection && draggedTile) {
+      // If the target section exists, add the dragged tile to its Tiles array
+      targetSection.Columns ??= [];
+      // Insert the dragged tile at the specified index
+      targetSection.Columns = targetSection.Columns.map((col: any) => {
+        if (col.ColId === draggedToColumnId) {
+          col.Tiles ??= [];
+          // Insert the dragged tile at the specified index
+          // extract dragged tile from the draggedTile object
+          const draggedTileContent = draggedTile.Tiles ? draggedTile.Tiles[0] : draggedTile;
+          // Insert the dragged tile at the specified index
+          col.Tiles.splice(tileDestinationIndex, 0, {
+            ...draggedTileContent,
+            // Id: randomIdGenerator(8), // Generate a new ID for the moved tile
+          });
+        }
+        return col;
+      });
+
+      // Update the target section with the modified columns
+      data.PageInfoStructure.InfoContent = data.PageInfoStructure.InfoContent.map(
+        (section: any) => {
+          if (section.InfoId === destinationTileSectionId) {
+            return targetSection;
+          }
+          return section;
+        }
+      );
+    }
+    // refresh updated page structure
+    new ToolboxManager().applyNewState(data, this.pageId);
+
+    this.saveData(data);
+  }
+
+  public handleDragAndDropTileWrapperToNewTileColumn(draggedTileId: string, draggedFromColumnId: string, draggedFromTileSectionId: string, beforeSectionId?: string): any {
+    const storageKey = `data-${this.pageId}`;
+    const data: any = JSON.parse(localStorage.getItem(storageKey) || "{}");
+
+    if (!data.PageInfoStructure) return;
+
+    data.PageInfoStructure.InfoContent ??= [];
+    // Find the parent section of the dragged tile
+
+    const draggedTileParentSection = data.PageInfoStructure.InfoContent.find(
+      (section: any) => section.InfoId === draggedFromTileSectionId
+    );
+    // remove the dragged tile from its current parent and save it
+    const draggedTileParentColumn = draggedTileParentSection?.Columns?.find(
+      (col: any) => col.ColId === draggedFromColumnId
+    );
+    const draggedTile = draggedTileParentColumn?.Tiles?.find(
+      (tile: any) => tile.Id === draggedTileId
+    );
+    if (draggedTileParentColumn && draggedTile) {
+      // remove the dragged tile from its current parent
+      draggedTileParentColumn.Tiles = draggedTileParentColumn.Tiles.filter(
+        (tile: any) => tile.Id !== draggedTileId
+      );
+
+      // update page structure with draggedTileParent state
+      data.PageInfoStructure.InfoContent = data.PageInfoStructure.InfoContent.map(
+        (section: any) => {
+          if (section.InfoId === draggedFromTileSectionId) {
+            return draggedTileParentSection;
+          }
+          return section;
+        }
+      );
+
+      // create a new section for the dragged tile
+      const content: InfoType = {
+        InfoId: randomIdGenerator(15),
+        InfoType: "TileGrid",
+        InfoValue: "",
+        Columns: [{
+          Tiles: [{
+            ...draggedTile,
+          }],
+          ColId: randomIdGenerator(8)
+        }],
+      };
+
+      if (beforeSectionId) {
+
+        // Find the index of the section with id matching beforeSectionId
+        const beforeSectionIndex = data.PageInfoStructure.InfoContent.findIndex(
+          (section: any) => section.InfoId === beforeSectionId
+        );
+        if (beforeSectionIndex === -1) data.PageInfoStructure.InfoContent.push(content);
+        else data.PageInfoStructure.InfoContent.splice(beforeSectionIndex + 1, 0, content);
+
+      } else {
+        // If no match found, add to the top of the InfoContent array
+        data.PageInfoStructure.InfoContent.splice(0, 0, content);
+      }
+
+      // refresh updated page structure
+      new ToolboxManager().applyNewState(data, this.pageId);
+
+      this.saveData(data);
+    }
   }
 
   public cutInfoSectionsFromPage(sectionIdsToRemove: any[], cutPageId: string): any {

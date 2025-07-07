@@ -1,6 +1,5 @@
 import { i18n } from "../../i18n/i18n";
 import { ToolBoxService } from "../../services/ToolBoxService";
-import { ImageUpload } from "./tools-section/tile-image/ImageUpload";
 
 export class ConfirmationBox {
     private container: HTMLElement;

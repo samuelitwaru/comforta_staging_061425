@@ -1,4 +1,3 @@
-import { JSONToGrapesJSContent } from "../../../../controls/editor/JSONToGrapesJSContent";
 import { ToolBoxService } from "../../../../services/ToolBoxService";
 import {
   DefaultAttributes,

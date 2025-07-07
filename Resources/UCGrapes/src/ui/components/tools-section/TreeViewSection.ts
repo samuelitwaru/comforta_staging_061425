@@ -1,5 +1,4 @@
 import { PageBubbleTree } from "../page-tree/PageBubbleTree";
-import { EditorUIManager } from "../../../controls/editor/EditorUiManager";
 export class TreeViewSection {
   container: HTMLElement;
   sectionTree!: HTMLElement;
