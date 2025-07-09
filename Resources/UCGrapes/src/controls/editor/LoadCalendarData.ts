@@ -47,9 +47,8 @@ export class LoadCalendarData {
 
   private formatDate(): string {
     const activeVersion = (globalThis as any).activeVersion;
-    const versionLanguage = activeVersion.AppVersionLanguage;
+    const versionLanguage = activeVersion.AppVersionLanguage || "en";
     console.log(`Version Language: ${versionLanguage}`);
-
     const date: string = new Date()
       .toLocaleDateString(versionLanguage, {
         day: "2-digit",
