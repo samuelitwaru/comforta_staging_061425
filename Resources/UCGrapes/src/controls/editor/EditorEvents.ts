@@ -117,10 +117,10 @@ export class EditorEvents {
 
   private initializeEventListeners(): void {
     new FrameEvent(this.frameId);
-    this.onDragAndDrop();
     this.onSelected();
     this.onComponentUpdate();
     this.onLoad();
+    this.onDragAndDrop();
   }
 
   updateTileGrids() {
