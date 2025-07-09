@@ -152,6 +152,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
          GxWebStd.gx_hidden_field( context, "UCMENU_MPAGE_Hidescrollincompactmenu", StringUtil.BoolToStr( Ucmenu_Hidescrollincompactmenu));
          GxWebStd.gx_hidden_field( context, "UCMESSAGE_MPAGE_Defaultmessagetype", StringUtil.RTrim( Ucmessage_Defaultmessagetype));
          GxWebStd.gx_hidden_field( context, "UCMESSAGE_MPAGE_Stoponerror", StringUtil.BoolToStr( Ucmessage_Stoponerror));
+         GxWebStd.gx_hidden_field( context, "UCMESSAGE_MPAGE_Startposition", StringUtil.RTrim( Ucmessage_Startposition));
+         GxWebStd.gx_hidden_field( context, "UCMESSAGE_MPAGE_Nextmessageposition", StringUtil.RTrim( Ucmessage_Nextmessageposition));
          GxWebStd.gx_hidden_field( context, "WWPUTILITIES_MPAGE_Enablefixobjectfitcover", StringUtil.BoolToStr( Wwputilities_Enablefixobjectfitcover));
          GxWebStd.gx_hidden_field( context, "WWPUTILITIES_MPAGE_Empowertabs", StringUtil.BoolToStr( Wwputilities_Empowertabs));
          GxWebStd.gx_hidden_field( context, "WWPUTILITIES_MPAGE_Enableupdaterowselectionstatus", StringUtil.BoolToStr( Wwputilities_Enableupdaterowselectionstatus));
@@ -216,7 +218,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/daterangepicker.min.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/DatePicker/DatePickerRender.js", "", false, true);
-         context.AddJavascriptSource("wwpbaseobjects/workwithplusmasterpage.js", "?20257212543453", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/workwithplusmasterpage.js", "?20257910532267", false, true);
          context.WriteHtmlTextNl( "</body>") ;
          context.WriteHtmlTextNl( "</html>") ;
          if ( context.isSpaRequest( ) )
@@ -429,6 +431,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
             /* User Defined Control */
             ucUcmessage.SetProperty("DefaultMessageType", Ucmessage_Defaultmessagetype);
             ucUcmessage.SetProperty("StopOnError", Ucmessage_Stoponerror);
+            ucUcmessage.SetProperty("StartPosition", Ucmessage_Startposition);
+            ucUcmessage.SetProperty("NextMessagePosition", Ucmessage_Nextmessageposition);
             ucUcmessage.Render(context, "dvelop.dvmessage", Ucmessage_Internalname, "UCMESSAGE_MPAGEContainer");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -853,6 +857,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
             Ucmenu_Hidescrollincompactmenu = StringUtil.StrToBool( cgiGet( "UCMENU_MPAGE_Hidescrollincompactmenu"));
             Ucmessage_Defaultmessagetype = cgiGet( "UCMESSAGE_MPAGE_Defaultmessagetype");
             Ucmessage_Stoponerror = StringUtil.StrToBool( cgiGet( "UCMESSAGE_MPAGE_Stoponerror"));
+            Ucmessage_Startposition = cgiGet( "UCMESSAGE_MPAGE_Startposition");
+            Ucmessage_Nextmessageposition = cgiGet( "UCMESSAGE_MPAGE_Nextmessageposition");
             Wwputilities_Enablefixobjectfitcover = StringUtil.StrToBool( cgiGet( "WWPUTILITIES_MPAGE_Enablefixobjectfitcover"));
             Wwputilities_Empowertabs = StringUtil.StrToBool( cgiGet( "WWPUTILITIES_MPAGE_Empowertabs"));
             Wwputilities_Enableupdaterowselectionstatus = StringUtil.StrToBool( cgiGet( "WWPUTILITIES_MPAGE_Enableupdaterowselectionstatus"));
@@ -1302,7 +1308,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          idxLst = 1;
          while ( idxLst <= (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)(getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Jscriptsrc.Item(idxLst))), "?20257212545127", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)(getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Jscriptsrc.Item(idxLst))), "?20257910533394", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1317,7 +1323,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("wwpbaseobjects/workwithplusmasterpage.js", "?20257212545131", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/workwithplusmasterpage.js", "?20257910533397", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -1407,6 +1413,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
          Wwputilities_Enableupdaterowselectionstatus = Convert.ToBoolean( -1);
          Wwputilities_Empowertabs = Convert.ToBoolean( -1);
          Wwputilities_Enablefixobjectfitcover = Convert.ToBoolean( -1);
+         Ucmessage_Nextmessageposition = "up";
+         Ucmessage_Startposition = "BottomRight";
          Ucmessage_Stoponerror = Convert.ToBoolean( -1);
          Ucmessage_Defaultmessagetype = "notice";
          Ucmenu_Hidescrollincompactmenu = Convert.ToBoolean( 0);
@@ -1580,6 +1588,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string Ddc_adminag_Cls ;
       private string Ucmenu_Sidebarmainclass ;
       private string Ucmessage_Defaultmessagetype ;
+      private string Ucmessage_Startposition ;
+      private string Ucmessage_Nextmessageposition ;
       private string Wwputilities_Comboloadtype ;
       private string sPrefix ;
       private string divLayoutmaintable_Internalname ;

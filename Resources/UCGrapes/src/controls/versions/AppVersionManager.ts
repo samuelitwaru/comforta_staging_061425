@@ -47,10 +47,10 @@ export class AppVersionManager {
     const res = this.getPages() || [];
     const pages = res.filter(
       (page: any) =>
-        page.PageType == "Maps" ||
-        page.PageType == "Map" ||
-        page.PageType == "MyActivity" ||
-        (page.PageType == "Calendar" && page.PageName !== "Home")
+        page.PageType === "Maps" ||
+        page.PageType === "Map" ||
+        page.PageType === "MyActivity" ||
+        (page.PageType === "Calendar" && page.PageName !== "Home")
     );
     return pages;
   }
@@ -62,8 +62,6 @@ export class AppVersionManager {
 
   async updatePageTitle(pageTitle: string) {
     const pageId = (globalThis as any).currentPageId;
-    const selectedTileMapper = (globalThis as any).tileMapper;
-    const selectedComponent = (globalThis as any).selectedComponent;
 
     if (!pageId) return;
 

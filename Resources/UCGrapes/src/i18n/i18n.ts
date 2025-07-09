@@ -185,6 +185,10 @@ export const i18n = new I18n({
       copy_tile: "Copy Tile",
     },
     messages: {
+      menu: {
+        no_pages_available: "No pages available",
+        no_forms_available: "No forms available",
+      },
       success: {
         published: "App published successfully",
         page_created: "Page created successfully",
@@ -426,6 +430,10 @@ export const i18n = new I18n({
       copy_tile: "Kopieer tegel",
     },
     messages: {
+      menu: {
+        no_pages_available: "Geen pagina's beschikbaar",
+        no_forms_available: "Geen formulieren beschikbaar",
+      },
       success: {
         published: "App succesvol gepubliceerd",
         page_created: "Pagina succesvol aangemaakt",

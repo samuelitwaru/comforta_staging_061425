@@ -85,12 +85,14 @@ export class PageAttacher {
         //   (tile: any) => tile.Id === tileId
         // );
       }
-    } else {
-      for (const [property, value] of updates) {
-        (globalThis as any).tileMapper.updateTile(tileId, property, value);
-      }
-      tileAttributes = (globalThis as any).tileMapper.getTile(rowId, tileId);
-    }
+    } 
+    
+    // else {
+    //   for (const [property, value] of updates) {
+    //     (globalThis as any).tileMapper.updateTile(tileId, property, value);
+    //   }
+    //   tileAttributes = (globalThis as any).tileMapper.getTile(rowId, tileId);
+    // }
 
     const version = await this.appVersionManager.refreshActiveVersion();
     
@@ -117,7 +119,6 @@ export class PageAttacher {
       version?.Pages.find((page: any) => page.PageId === selectedItemPageId) ||
       null;
     
-    console.log('attachPage', childPage)
     this.removeOtherEditors();
     if (childPage) {
       new ChildEditor(page.PageId, childPage, isNewPage).init(tileAttributes);

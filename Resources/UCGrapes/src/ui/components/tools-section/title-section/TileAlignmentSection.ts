@@ -73,13 +73,15 @@ export class TileAlignmentSection {
           "Align",
           "left"
         )
-      } else {
-        (globalThis as any).tileMapper.updateTile(
-          selectedComponent.parent().getId(),
-          "Align",
-          "left"
-        );
-      }
+      } 
+      
+      // else {
+      //   (globalThis as any).tileMapper.updateTile(
+      //     selectedComponent.parent().getId(),
+      //     "Align",
+      //     "left"
+      //   );
+      // }
 
       leftAlignInput.checked = true;
     };
@@ -121,13 +123,15 @@ export class TileAlignmentSection {
           "center"
         )
         
-      } else {
-        (globalThis as any).tileMapper.updateTile(
-          selectedComponent.parent().getId(),
-          "Align",
-          "center"
-        );
-      }
+      } 
+      
+      // else {
+      //   (globalThis as any).tileMapper.updateTile(
+      //     selectedComponent.parent().getId(),
+      //     "Align",
+      //     "center"
+      //   );
+      // }
 
       centerAlignInput.checked = true;
     };

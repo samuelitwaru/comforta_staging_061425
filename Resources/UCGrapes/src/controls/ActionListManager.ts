@@ -89,7 +89,6 @@ export class ActionListManager {
 
   async getSubMenuItems(categoryData: any, type: string): Promise<MenuItem[]> {
     const category = categoryData.find((cat: any) => cat.name === type);
-    console.log("getSubMenuItems category", category);
     const itemsList = category?.options || [];
     return itemsList.map((item: any) => {
       return {

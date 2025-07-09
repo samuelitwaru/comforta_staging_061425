@@ -1,4 +1,5 @@
 import { ActionListManager } from "../../controls/ActionListManager";
+import { i18n } from "../../i18n/i18n";
 
 export class MenuItemManager {
   private menuContainer: HTMLElement;
@@ -20,6 +21,7 @@ export class MenuItemManager {
     if (item.expandable) {
       const icon = document.createElement("i");
       icon.classList.add("fa", "fa-chevron-right", "expandable-icon");
+      menuItem.appendChild(document.createTextNode("\u00A0"));
       menuItem.appendChild(icon);
 
       // Fix hover issue with better event handling
@@ -149,9 +151,13 @@ export class MenuItemManager {
         submenuList.appendChild(menuItem);
       });
     } else {
+      let message = i18n.t("messages.menu.no_pages_available");
+      if (type === "form") {
+        message = i18n.t("messages.menu.no_forms_available");
+      }
       const noItemsMessage = document.createElement("li");
       noItemsMessage.classList.add("menu-item", "no-items");
-      noItemsMessage.innerHTML = `No ${type.toLowerCase()} available`;
+      noItemsMessage.innerHTML = message;
       noItemsMessage.style.pointerEvents = "none";
       noItemsMessage.style.cursor = "default";
       submenuList.appendChild(noItemsMessage);
@@ -203,9 +209,13 @@ export class MenuItemManager {
         });
 
         if (filteredItems.length === 0) {
+          let message = i18n.t("messages.menu.no_pages_available");
+          if (type === "form") {
+            message = i18n.t("messages.menu.no_forms_available");
+          }
           const noItemsMessage = document.createElement("li");
           noItemsMessage.classList.add("menu-item", "no-items");
-          noItemsMessage.innerHTML = `No ${type.toLowerCase()} available`;
+          noItemsMessage.innerHTML = message;
           noItemsMessage.style.pointerEvents = "none";
           noItemsMessage.style.cursor = "default";
           submenuList.appendChild(noItemsMessage);

@@ -57,13 +57,15 @@ export class TitleInputSection {
           "Text",
           titleValue.trim()
         );
-      } else {
-        (globalThis as any).tileMapper.updateTile(
-          selectedComponent.parent().getId(),
-          "Text",
-          titleValue.trim()
-        );
-      }
+      } 
+      
+      // else {
+      //   (globalThis as any).tileMapper.updateTile(
+      //     selectedComponent.parent().getId(),
+      //     "Text",
+      //     titleValue.trim()
+      //   );
+      // }
 
       const parentComponent = tileTitle.parent();
       if (parentComponent) {

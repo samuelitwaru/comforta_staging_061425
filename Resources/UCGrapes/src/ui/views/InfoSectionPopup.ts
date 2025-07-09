@@ -102,6 +102,7 @@ export class InfoSectionPopup {
         arrowIcon.classList.add("fa", "fa-chevron-right");
         arrowIcon.style.fontSize = "10px";
         arrowIcon.style.color = "#6c757d";
+        menuItem.appendChild(document.createTextNode("\u00A0"));
         menuItem.appendChild(arrowIcon);
 
         // Create submenu for expandable items

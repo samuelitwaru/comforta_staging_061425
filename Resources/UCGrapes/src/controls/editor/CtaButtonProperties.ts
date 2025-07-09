@@ -88,7 +88,6 @@ export class CtaButtonProperties {
     const labelInput = new ActionInput(labelValue, this.ctaAttributes, "label", "cta");
     labelInput.render(contentSection as HTMLElement);
 
-    console.log('this.ctaAttributes?.CtaAction', this.ctaAttributes?.CtaAction)
     const actionValue = this.ctaAttributes?.CtaAction;
     const actionInput = new ActionInput(actionValue, this.ctaAttributes, "action", "cta");
     actionInput.render(contentSection as HTMLElement);

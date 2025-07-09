@@ -22,7 +22,9 @@ export class App {
     organisationLogo: string | null,
     currentLanguage: string,
     addServiceButtonEvent: any,
-    addTemplatesButtonEvent: any
+    addTemplatesButtonEvent: any,
+    displayMessageEvent: any,
+    displayMessageDescription: string | null
   ) {
     this.currentVersion = currentVersion;
     (globalThis as any).activeVersion = currentVersion
@@ -42,7 +44,9 @@ export class App {
       organisationLogo,
       currentLanguage,
       addServiceButtonEvent,
-      addTemplatesButtonEvent
+      addTemplatesButtonEvent,
+      displayMessageEvent,
+      displayMessageDescription
     );
 
     (window as any).app = this;
@@ -80,7 +84,9 @@ export class App {
       config.organisationLogo,
       config.currentLanguage,
       config.addServiceButtonEvent,
-      config.addTemplatesButtonEvent
+      config.addTemplatesButtonEvent,
+      config.displayMessageEvent,
+      config.displayMessageDescription
     );
   }
 

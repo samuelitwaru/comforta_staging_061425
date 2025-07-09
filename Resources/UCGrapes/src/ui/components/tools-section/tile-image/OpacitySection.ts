@@ -103,13 +103,15 @@ export class OpacitySection {
         "Opacity",
         value
       )
-    } else {
-      (globalThis as any).tileMapper.updateTile(
-        selectedComponent.parent().getId(),
-        "Opacity",
-        value
-      );
-    }
+    } 
+    
+    // else {
+    //   (globalThis as any).tileMapper.updateTile(
+    //     selectedComponent.parent().getId(),
+    //     "Opacity",
+    //     value
+    //   );
+    // }
   }
 
   render(container: HTMLElement) {

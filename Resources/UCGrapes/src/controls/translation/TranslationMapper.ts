@@ -1,125 +1,120 @@
+// TranslationMapper.ts
+import { ToolBoxService } from "../../services/ToolBoxService";
+import { InfoType } from "../../types";
 import { ThemeManager } from "../themes/ThemeManager";
+import { TranslationUI } from "./TranslationUI ";
 
 export class TranslationMapper {
   data: any;
+  pageId: string;
+  language: string;
   themeManager: ThemeManager;
-  constructor(data: any) {
+  private translationUI: TranslationUI;
+
+  constructor(data: any, pageId: string, language: string) {
     this.data = data;
+    this.pageId = pageId;
+    this.language = language;
     this.themeManager = new ThemeManager();
+    this.translationUI = new TranslationUI(this.themeManager);
   }
 
-  private createTileRowSection(section: any): string {
-    const tiles = section.Tiles || [];
-    let tilesHtml = "";
+  private updateDataPath(path: string, value: string): void {
+    const pathParts = path.split(".");
+    let current = this.data;
 
-    tiles.forEach((tile: any) => {
-      const hasBackgroundImage = tile.BGImageUrl && tile.BGImageUrl.trim() !== "";
-      const backgroundColor = this.themeManager.getThemeColor(tile.BGColor);
-
-      const backgroundStyle = hasBackgroundImage
-        ? `background-image: url('${tile.BGImageUrl}'); background-size: cover; background-position: center;`
-        : `background-color: ${backgroundColor};`;
-
-      tilesHtml += `
-        <div
-          class="translated-tile"
-         style="
-          ${backgroundStyle}
-          color: ${tile.Color || "#333"};
-          align-items: center;
-          justify-content: ${tile.Align || "left"};
-          ">
-          ${tile.Text || tile.Name || ""}
-        </div>
-      `;
-    });
-
-    return `<div class="translated-tile-row">${tilesHtml}</div>`;
-  }
-
-  private createDescSection(section: any): string {
-    const description = section.InfoValue || "";
-    return `
-      <div class="translated-description">
-        ${description}
-      </div>
-    `;
-  }
-
-  private createImageSlideSection(section: any): string {
-    const images = section.Images || [];
-
-    if (images.length === 0) return "";
-
-    if (images.length === 1) {
-      // Single image
-      return `
-        <div class="translated-images">
-          <img src="${images[0].InfoImageValue}" 
-               alt="Content Image" >
-        </div>
-      `;
+    for (let i = 0; i < pathParts.length - 1; i++) {
+      const part = pathParts[i];
+      if (current[part] === undefined) {
+        current[part] = {};
+      }
+      current = current[part];
     }
 
-    // Multiple images - show only first image with counter
-    return `
-      <div class="translated-images" style="position: relative;">
-          <img src="${images[0].InfoImageValue}" 
-               alt="Content Image" >
-          <div style="
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: bold;
-          ">1/${images.length}</div>
-        </div>
-    `;
+    const finalKey = pathParts[pathParts.length - 1];
+    current[finalKey] = value;
+
+    this.saveUpdatedData(this.data);
   }
 
-  private createCtaSection(section: any): string {
-    // This method can be used for future CTA sections
-    return `
-      <div class="translated-cta">
-        ${section.InfoValue || ""}
-      </div>
-    `;
+  private async saveUpdatedData(data: any): Promise<void> {
+    const toolboxService = new ToolBoxService();
+    await toolboxService.updateTranslatedVersion(
+      this.pageId,
+      this.language,
+      data
+    );
   }
 
   public convertToHTML(): string {
     const infoContent = this.data.InfoContent || [];
     let htmlContent = "";
+    let i = 0;
 
-    infoContent.forEach((section: any) => {
-      switch (section.InfoType) {
-        case "TileRow":
-          htmlContent += this.createTileRowSection(section);
-          break;
-        case "Description":
-          htmlContent += this.createDescSection(section);
-          break;
-        case "Images":
-          htmlContent += this.createImageSlideSection(section);
-          break;
-        case "Cta":
-          htmlContent += this.createCtaSection(section);
-          break;
-        default:
-          console.log("Unknown section type:", section.InfoType);
+    while (i < infoContent.length) {
+      const section = infoContent[i];
+
+      if (section.InfoType === "Cta" && section.CtaAttributes?.CtaButtonType === "Round") {
+        const roundCtaSections = [section];
+        let j = i + 1;
+
+        while (
+          j < infoContent.length &&
+          infoContent[j].InfoType === "Cta" &&
+          infoContent[j].CtaAttributes?.CtaButtonType === "Round"
+        ) {
+          roundCtaSections.push(infoContent[j]);
+          j++;
+        }
+
+        if (roundCtaSections.length > 1) {
+          htmlContent += this.translationUI.createMergedRoundCtaSection(roundCtaSections, i);
+          i = j;
+        } else {
+          htmlContent += this.translationUI.createCtaSection(section, i);
+          i++;
+        }
+      } else {
+        switch (section.InfoType) {
+          case "TileRow":
+            htmlContent += this.translationUI.createTileRowSection(section, i);
+            break;
+          case "TileGrid": // Add this case for TileGrid
+            htmlContent += this.translationUI.createTileGridSection(section, i);
+            break;
+          case "Description":
+            htmlContent += this.translationUI.createDescSection(section, i);
+            break;
+          case "Images":
+            htmlContent += this.translationUI.createImageSlideSection(section);
+            break;
+          case "Cta":
+            htmlContent += this.translationUI.createCtaSection(section, i);
+            break;
+          default:
+            console.log("Unknown section type:", section.InfoType);
+        }
+        i++;
       }
+    }
+
+    this.translationUI.setupEditableElements((dataPath, newValue) => {
+      this.updateDataPath(dataPath, newValue);
+      this.onContentChanged?.(dataPath, newValue);
     });
 
-    // Wrap everything in a container div with JavaScript for slider functionality
     return `
-      <div class="translate-container"
-      style="font-family: ${this.themeManager.getFontFamily()}"
-      ">
-        ${htmlContent}
-      </div>
-    `;
+    <div class="translate-column"
+    style="font-family: ${this.themeManager.getFontFamily()}"
+    ">
+      ${htmlContent}
+    </div>
+  `;
   }
+
+  public getUpdatedData(): any {
+    return this.data;
+  }
+
+  public onContentChanged?: (dataPath: string, newValue: string) => void;
 }

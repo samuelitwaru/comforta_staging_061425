@@ -1,6 +1,6 @@
-import { TileMapper } from "../../../controls/editor/TileMapper";
 import { InfoSectionManager } from "../../../controls/InfoSectionManager";
 import { InfoType, ThemeColors } from "../../../types";
+import { getTileAttrs } from "../../../utils/helpers";
 
 export class ColorPalette {
   private paletteContainer: HTMLDivElement;
@@ -95,15 +95,11 @@ export class ColorPalette {
     if (!selectedComponent) return;
 
     const tileWrapper = selectedComponent.parent();
-    const rowComponent = tileWrapper.parent();
+    
+    const rowComponent = tileWrapper.closest('.container-row');
+    const colComponent = tileWrapper.closest('.tile-column');
     const pageData = this.getPageData();
-
-    const tileAttributes = this.getTileAttributes(
-      pageData,
-      rowComponent,
-      tileWrapper,
-      selectedComponent
-    );
+    const tileAttributes = getTileAttrs(pageData.PageId, rowComponent.getId(), colComponent.getId(), tileWrapper.getId())
     if (tileAttributes?.BGImageUrl) return;
 
     const currentColor = selectedComponent.getStyle()["background-color"];
@@ -184,12 +180,14 @@ export class ColorPalette {
         "BGColor",
         colorName
       )
-    } else {
-      (globalThis as any).tileMapper.updateTile(
-        selectedComponent.parent().getId(),
-        "BGColor",
-        colorName
-      );
-    }
+    } 
+    
+    // else {
+    //   (globalThis as any).tileMapper.updateTile(
+    //     selectedComponent.parent().getId(),
+    //     "BGColor",
+    //     colorName
+    //   );
+    // }
   }
 }

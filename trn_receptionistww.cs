@@ -2795,7 +2795,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257218191038", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257910544392", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2811,7 +2811,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("trn_receptionistww.js", "?20257218191043", false, true);
+         context.AddJavascriptSource("trn_receptionistww.js", "?20257910544393", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3077,7 +3077,6 @@ namespace GeneXus.Programs {
                GXCCtl = "RECEPTIONISTGENDER_" + sGXsfl_39_idx;
                cmbReceptionistGender.Name = GXCCtl;
                cmbReceptionistGender.WebTags = "";
-               cmbReceptionistGender.addItem("", context.GetMessage( "GX_EmptyItemText", ""), 0);
                cmbReceptionistGender.addItem("Male", context.GetMessage( "Male", ""), 0);
                cmbReceptionistGender.addItem("Female", context.GetMessage( "Female", ""), 0);
                cmbReceptionistGender.addItem("Other", context.GetMessage( "Other", ""), 0);
@@ -3146,7 +3145,6 @@ namespace GeneXus.Programs {
          GXCCtl = "RECEPTIONISTGENDER_" + sGXsfl_39_idx;
          cmbReceptionistGender.Name = GXCCtl;
          cmbReceptionistGender.WebTags = "";
-         cmbReceptionistGender.addItem("", context.GetMessage( "GX_EmptyItemText", ""), 0);
          cmbReceptionistGender.addItem("Male", context.GetMessage( "Male", ""), 0);
          cmbReceptionistGender.addItem("Female", context.GetMessage( "Female", ""), 0);
          cmbReceptionistGender.addItem("Other", context.GetMessage( "Other", ""), 0);

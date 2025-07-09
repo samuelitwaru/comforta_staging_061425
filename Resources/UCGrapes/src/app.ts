@@ -1,6 +1,5 @@
 import { AppConfig } from "./AppConfig";
 import { EditorManager } from "./controls/editor/EditorManager";
-import { Localisation } from "./controls/Localisation";
 import { ToolboxManager } from "./controls/toolbox/ToolboxManager";
 import { i18n, i18nModule } from "./i18n/i18n";
 
@@ -15,7 +14,7 @@ class ToolboxApp {
     this.toolboxManager = new ToolboxManager();
     this.editor = new EditorManager();
     if (!this.config.isInitialized) {
-      console.error("ToolboxApp created before AppConfig was initialized!");
+      throw new Error("ToolboxApp created before AppConfig was initialized!");
     }
 
     this.initialiseLocalisation();
@@ -30,7 +29,7 @@ class ToolboxApp {
   }
 
   initialiseLocalisation() {
-    if (this.config.currentLanguage == "Dutch") {
+    if (this.config.currentLanguage === "Dutch") {
       i18n.locale = "nl";
     } else {
       i18n.locale = "en";
@@ -57,7 +56,7 @@ class ToolboxApp {
         target.classList.contains("popup-modal-link") ||
         target.classList.contains("popup-modal")
       ) {
-        target.style.display = "none";
+        target.remove();
       }
     });
   }

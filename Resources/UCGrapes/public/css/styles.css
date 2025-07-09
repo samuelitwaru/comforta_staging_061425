@@ -280,7 +280,7 @@ span#scroll-right:hover {
   border-radius: 20px;
   /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); */
   position: relative;
-  border: #373737 solid 5px;
+  border: #9C9A9A solid 5px;
   min-height: 400px;
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
@@ -300,7 +300,7 @@ span#scroll-right:hover {
 }
 
 .active-editor {
-  border: 5px solid #5068a8;
+  border: 5px solid #373737;
   /* box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); */
 }
 
@@ -1572,7 +1572,9 @@ div#cta-selected-actions {
   font-weight: 500;
   text-transform: uppercase;
   border-radius: 4px;
-  transition: background-color 0.3s, color 0.3s;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 }
 
 .tb-tabs .tb-tab-button:hover {
@@ -1784,7 +1786,9 @@ div#cta-selected-actions {
   opacity: 0;
   cursor: pointer;
   margin-top: 40px;
-  transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+  transition:
+    color 0.3s ease,
+    background-color 0.3s ease; /* Smooth transition */
 }
 
 .file-info .file-info-details {
@@ -1970,7 +1974,9 @@ div#cta-selected-actions {
   color: #333;
   cursor: pointer;
   text-align: center;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  transition:
+    background-color 0.3s,
+    box-shadow 0.3s;
 }
 
 .context-menu ul li:hover {
@@ -2648,7 +2654,9 @@ details .tb_debug_details-content {
   z-index: 9;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.2s, visibility 0.2s;
+  transition:
+    opacity 0.2s,
+    visibility 0.2s;
   border-radius: 9px;
   margin-bottom: 10px;
   width: 180px;
@@ -2686,7 +2694,9 @@ details .tb_debug_details-content {
   cursor: pointer;
   z-index: 10;
   color: #303030;
-  transition: opacity 0.2s, visibility 0.2s;
+  transition:
+    opacity 0.2s,
+    visibility 0.2s;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -3445,7 +3455,10 @@ input[type="range"]::-webkit-slider-thumb {
   opacity: 0;
   cursor: pointer;
   margin: 0;
-  transition: opacity 0.3s, background 0.3s, color 0.3s;
+  transition:
+    opacity 0.3s,
+    background 0.3s,
+    color 0.3s;
 }
 /* Show icons on hover */
 .file-item:hover .add-image,
@@ -3734,32 +3747,51 @@ input[type="range"]::-webkit-slider-thumb {
 
 /* translationf frame */
 .translate-page-frame {
-  flex-shrink: 0;
-  width: 50vw;
-  height: 90vh;
-  max-width: 272px;
-  max-height: 578px;
-  background-color: #fdfdfd;
-  border-radius: 20px;
   position: relative;
-  border: #9f9d9d solid 5px;
-  min-height: 400px;
+  width: 320px;
+  height: 680px;
+  background-color: #efeeec;
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 6px solid #373737;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  padding: 0 12px;
+}
+
+@media screen and (max-width: 1440px) {
+  .translate-page-frame {
+    width: 280px;
+    height: 575px;
+  }
 }
 
 .translate-container {
-  padding: 8px;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   width: 100%;
+  height: 100%;
   background-color: #efeeec;
   box-sizing: border-box;
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 460px;
+  scrollbar-width: none;
 }
 
-.translated-tile-row {
+.translate-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 20px 0;
+  margin-top: 4px;
+  width: 100%;
+  overflow-y: visible;
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+
+.tile-grid-section, .translated-tile-row {
   display: flex;
   flex-wrap: nowrap;
   width: 100%;
@@ -3772,13 +3804,14 @@ input[type="range"]::-webkit-slider-thumb {
   color: #ffffff;
   align-items: center;
   display: flex;
-  height: 6rem;
+  height: 5.5rem;
   border-radius: 8px;
   justify-content: left;
   min-width: calc(76px - 0.3rem);
   max-width: 100%;
   flex: 1 1 30%;
   padding: 0.4rem;
+  border: 1px #00000017 solid;
 }
 
 .translate-container::-webkit-scrollbar {
@@ -3805,4 +3838,226 @@ input[type="range"]::-webkit-slider-thumb {
   width: 100%;
   object-fit: cover;
   border-radius: 13px;
+}
+
+.translated-cta {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+  cursor: pointer;
+}
+
+.translated-cta-img-button {
+  width: 100%;
+}
+
+.translated-cta-img-button__button {
+  position: relative;
+  width: 100%;
+  border-radius: 13px;
+  background-color: #5068a8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  padding: 10px;
+}
+
+.translated-cta-img-button__img {
+  border-radius: 8px;
+  max-width: 70px;
+  height: 65px;
+  object-fit: cover;
+}
+
+.translated-cta-img-button__label {
+  flex: 1;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.translated-cta-img-button__icon {
+  font-size: 18px;
+  margin-left: 10px;
+}
+
+.translated-cta-icon-button {
+  width: 100%;
+}
+
+.translated-cta-icon-button__button {
+  position: relative;
+  width: 100%;
+  border-radius: 13px;
+  background-color: #5068a8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  padding: 10px;
+}
+
+.translated-cta-iconSvg-button__iconSvg {
+  font-size: 24px;
+  margin: 0.5rem;
+}
+
+.translated-cta-icon-button__label {
+  flex: 1;
+  font-size: 16px;
+}
+
+.translated-cta-icon-button__icon {
+  font-size: 18px;
+  margin-left: 10px;
+}
+
+.translated-cta-plain-button {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.translated-cta-plain-button__button {
+  position: relative;
+  width: 100%;
+  border-radius: 13px;
+  border: none;
+  background-color: #5068a8;
+  display: inline-block;
+  vertical-align: middle;
+  color: white;
+  padding: 10px;
+}
+
+.translated-cta-plain-button__label {
+  font-size: 16px;
+}
+
+.translated-cta-round-button {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem;
+  text-transform: uppercase;
+}
+
+.translated-cta-round-button__button {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  background-color: #5068a8;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 28px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.translated-cta-round-button__label {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #555;
+  text-align: center;
+  max-width: 80px;
+}
+
+.translated-cta-merged-round {
+  flex-direction: row !important;
+  gap: 0.2rem;
+  margin: 1rem 0;
+  flex-wrap: nowrap;
+}
+
+.translate-column .editable-content {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 3px;
+  padding: 2px 4px;
+  margin: -2px -4px;
+}
+
+.translate-column .editable-content:not(.html-content):hover {
+  background-color: rgba(0, 123, 255, 0.1);
+  outline: 1px dashed rgba(0, 123, 255, 0.3);
+}
+
+.translate-column .editable-content:not(.html-content).editing {
+  background-color: rgba(0, 123, 255, 0);
+  outline: 1px solid #007bff;
+  cursor: text;
+}
+
+.translate-column .editable-content:not(.html-content):focus {
+  outline: 1px solid #007bff;
+  background-color: rgba(0, 123, 255, 0);
+}
+
+/* Enable text selection in Quill editor */
+.translate-column .ql-editor {
+  user-select: text !important;
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  min-height: 100px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Ensure toolbar is accessible */
+.translate-column .ql-toolbar {
+  position: relative;
+  z-index: 1000;
+  border-radius: 4px 4px 0 0;
+  border: 1px solid #ddd !important;
+  border-bottom: none !important;
+}
+
+.translate-column .ql-container {
+  height: auto !important;
+  font-family: inherit;
+  font-size: inherit;
+  border-radius: 4px;
+  border: 1px solid #ddd !important;
+}
+
+
+.translate-column .quill-editor-container {
+  height: 200px;
+  margin-bottom: 8px;
+}
+
+.translate-column .character-counter {
+  text-align: right;
+  font-size: 12px;
+  color: #666;
+  margin-top: -5px;
+  margin-bottom: 10px;
+}
+
+.translate-column .character-counter.warning {
+  color: orange;
+}
+
+.translate-column .character-counter.error {
+  color: red;
+}
+
+.translated-tile-grid {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0;
+  align-items: stretch;
+}
+
+.translated-tile-grid-column {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }

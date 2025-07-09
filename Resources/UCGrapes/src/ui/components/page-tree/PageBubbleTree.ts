@@ -478,9 +478,6 @@ export class PageBubbleTree {
     this.onTick();
     this.panAndZoom();
 
-    // console.log("svg", this.svg);
-
-    // console.log("container", this.container);
   }
 
   buildTree() {

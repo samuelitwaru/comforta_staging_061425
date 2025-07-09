@@ -15,16 +15,14 @@ export class IconList {
     this.init(searchQuery);
   }
 
-  init(searchQuery:string) {
+  init(searchQuery: string) {
     this.icons = [];
     let themeIcons: ThemeIcon[] = this.themeManager.getActiveThemeIcons();
     // Filter icons by category and theme
     if (searchQuery) {
       themeIcons = this.searchIcons(searchQuery, themeIcons);
-    }else {
-      themeIcons = themeIcons.filter(
-        (icon) => icon.IconCategory === this.iconsCategory 
-      );
+    } else {
+      themeIcons = themeIcons.filter((icon) => icon.IconCategory === this.iconsCategory);
     }
     themeIcons.forEach((themeIcon) => {
       const icon = document.createElement("div");
@@ -45,10 +43,7 @@ export class IconList {
           /fill="#[^"]*"/g,
           `fill="${currentTileColor || "white"}"`
         );
-        const iconSVGWithAttributes = whiteSVG.replace(
-          "<svg",
-          `<svg ${DefaultAttributes}`
-        );
+        const iconSVGWithAttributes = whiteSVG.replace("<svg", `<svg ${DefaultAttributes}`);
 
         iconComponent.components(iconSVGWithAttributes);
         iconComponent.addAttributes({
@@ -69,17 +64,17 @@ export class IconList {
         if (pageData.PageType === "Information") {
           const infoSectionManager = new InfoSectionManager();
 
-          const rowComp = selectedComponent.closest('.container-row')
-    const colComp = selectedComponent.closest('.tile-column')
-    const tile = selectedComponent.closest('.template-wrapper')
-    
-    infoSectionManager.updateGridTileAttribute(
-      rowComp.getId(),
-      colComp.getId(),
-      tile.getId(),
-      "Icon",
-      themeIcon.IconCodeName
-    )
+          const rowComp = selectedComponent.closest(".container-row");
+          const colComp = selectedComponent.closest(".tile-column");
+          const tile = selectedComponent.closest(".template-wrapper");
+
+          infoSectionManager.updateGridTileAttribute(
+            rowComp.getId(),
+            colComp.getId(),
+            tile.getId(),
+            "Icon",
+            themeIcon.IconCodeName
+          );
 
           const tileInfoSectionAttributes: InfoType = (
             globalThis as any
@@ -88,22 +83,21 @@ export class IconList {
           tileAttributes = tileInfoSectionAttributes?.Tiles?.find(
             (tile: any) => tile.Id === tileWrapper.getId()
           );
-        } else {
-          (globalThis as any).tileMapper.updateTile(
-            selectedComponent.parent().getId(),
-            "Icon",
-            themeIcon.IconName
-          );
-          tileAttributes = (globalThis as any).tileMapper.getTile(
-            rowComponent.getId(),
-            tileWrapper.getId()
-          );
-        }
+        } 
+        
+        // else {
+        //   (globalThis as any).tileMapper.updateTile(
+        //     selectedComponent.parent().getId(),
+        //     "Icon",
+        //     themeIcon.IconName
+        //   );
+        //   tileAttributes = (globalThis as any).tileMapper.getTile(
+        //     rowComponent.getId(),
+        //     tileWrapper.getId()
+        //   );
+        // }
 
-        const tileProperties = new TileProperties(
-          selectedComponent,
-          tileAttributes
-        );
+        const tileProperties = new TileProperties(selectedComponent, tileAttributes);
         tileProperties.setTileAttributes();
       });
 
@@ -111,14 +105,14 @@ export class IconList {
     });
   }
 
-  searchIcons(query:string, iconList: any[]) {
+  searchIcons(query: string, iconList: any[]) {
     if (!query || !iconList || !Array.isArray(iconList)) return [];
 
     const normalizedQuery = query.trim().toLowerCase();
     return iconList
-      .map((icon:any) => {
+      .map((icon: any) => {
         const name = icon.IconName?.toLowerCase() || "";
-        const tags = icon.IconTags?.split(",").map((tag:any) => tag.toLowerCase()) || [];
+        const tags = icon.IconTags?.split(",").map((tag: any) => tag.toLowerCase()) || [];
 
         let score = 0;
 
@@ -143,7 +137,7 @@ export class IconList {
 
         return { ...icon, _score: score };
       })
-      .filter(icon => icon._score > 0)
+      .filter((icon) => icon._score > 0)
       .sort((a, b) => b._score - a._score)
       .map(({ _score, ...icon }) => icon); // remove internal score
   }

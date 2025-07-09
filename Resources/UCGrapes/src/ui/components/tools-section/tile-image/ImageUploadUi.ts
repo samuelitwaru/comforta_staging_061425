@@ -178,15 +178,15 @@ export class ImageUploadUi {
   }
 
   public async loadExistingImageAndFiles() {
-    const backgroundImageUrl = this.controller.getBackgroundImage();
-    if (backgroundImageUrl) {
-      await this.loadMediaFiles(backgroundImageUrl);
+    const image : {backgroundImage: string, originalImage: string | undefined} | null = this.controller.getBackgroundImage();
+    if (image) {
+      await this.loadMediaFiles(image);
       return;
     }
     await this.loadMediaFiles();
   }
 
-  public async loadMediaFiles(backgroundImageUrl?: string) {
+  public async loadMediaFiles(image?: {backgroundImage: string, originalImage: string | undefined}) {
     try {
       const media = await this.controller.loadMediaFiles();
       const selectContainer = this.modalContent.querySelector(
@@ -208,9 +208,9 @@ export class ImageUploadUi {
               this
             );
             singleImageFile.render(this.fileListElement as HTMLElement);
+            const backgroundImageUrl = image?.originalImage;
 
             if (
-              !editorDisplayed &&
               backgroundImageUrl &&
               item.MediaUrl === backgroundImageUrl
             ) {
@@ -236,11 +236,11 @@ export class ImageUploadUi {
         }
       }
     } catch (error) {
-      console.error("Error loading media files:", error);
       if (this.fileListElement) {
         this.fileListElement.innerHTML =
           '<div class="error-message">Error loading media files. Please try again.</div>';
       }
+      throw new Error("Error loading media files. Please try again.");
     }
   }
 

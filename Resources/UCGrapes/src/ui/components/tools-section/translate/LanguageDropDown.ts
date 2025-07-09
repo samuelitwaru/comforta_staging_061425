@@ -1,5 +1,4 @@
-import { TranslateFrame } from "./TranslateFrame";
-import { TranslationodeUIManager } from "../../../../controls/translation/TranslationModeUIManager";
+// LanguageDropDown.ts
 import { i18n } from "../../../../i18n/i18n";
 
 interface Language {
@@ -8,29 +7,7 @@ interface Language {
   flag: string;
 }
 
-export class TranslateSection {
-  private static readonly SECTION_IDS = {
-    TRANSLATE_SECTION: "translate-page-section",
-    MENU_SECTION: "menu-page-section",
-    TREE_SECTION: "tree-view-section",
-    CONTENT_SECTION: "content-page-section",
-    TRANSLATE_BUTTON: "translateBtn",
-    LANGUAGE_SELECTION: "tb-custom-language-selection",
-  } as const;
-
-  private static readonly CSS_CLASSES = {
-    TRANSLATE_SECTION: "translate-page-section",
-    THEME_SELECTION: "tb-custom-theme-selection",
-    SELECT_BUTTON: "theme-select-button",
-    SELECTED_LANGUAGE: "selected-theme-language",
-    OPTIONS_LIST: "theme-options-list",
-    THEME_OPTION: "theme-option",
-    THEME: "theme",
-    CLOSE_BUTTON: "translate-close-button",
-    LANGUAGE_FLAG: "language-flag",
-    LANGUAGE_LABEL: "language-label",
-  } as const;
-
+export class LanguageDropDown {
   private static readonly LANGUAGES: Language[] = [
     {
       code: "en",
@@ -44,153 +21,24 @@ export class TranslateSection {
     },
   ];
 
-  private readonly container: HTMLDivElement;
-  private readonly languageList: Language[];
-  private readonly data: any;
-  private readonly versionLanguage: string;
+  private selectedLanguageSpan: HTMLSpanElement;
+  private languageDropDown: HTMLDivElement;
+  private selectButton: HTMLButtonElement;
+  private selectedLanguageCode: string;
+  private versionLanguage: string;
+  private onLanguageChange: (languageCode: string) => void;
 
-  private selectedLanguageSpan!: HTMLSpanElement;
-  private languageDropDown!: HTMLDivElement;
-  private selectButton!: HTMLButtonElement;
-
-  private selectedLanguageCode!: string;
-
-  constructor(data: any, versionLanguage: string) {
-    this.data = data;
+  constructor(versionLanguage: string, onLanguageChange: (languageCode: string) => void) {
     this.versionLanguage = versionLanguage;
-    this.languageList = [...TranslateSection.LANGUAGES];
-    this.container = this.createElement("div");
-    this.initializeComponent();
+    this.onLanguageChange = onLanguageChange;
+    this.selectedLanguageSpan = document.createElement("span");
+    this.languageDropDown = document.createElement("div");
+    this.selectButton = document.createElement("button");
+    this.selectedLanguageCode = "";
   }
 
-  private createElement<T extends keyof HTMLElementTagNameMap>(
-    tagName: T
-  ): HTMLElementTagNameMap[T] {
-    return document.createElement(tagName);
-  }
-
-  private initializeComponent(): void {
-    this.hideSidebarSections();
-    this.setupContainer();
-    this.setupHeaderSection();
-    this.setDefaultLanguage();
-    this.setupTranslateFrame();
-  }
-
-  private setupContainer(): void {
-    this.container.id = TranslateSection.SECTION_IDS.TRANSLATE_SECTION;
-    this.container.classList.add(TranslateSection.CSS_CLASSES.TRANSLATE_SECTION);
-    this.container.style.marginTop = "10px";
-    this.container.style.position = "relative";
-  }
-
-  private setupHeaderSection(): void {
-    const headerSection = this.createHeaderSection();
-    const languageDropdown = this.createLanguageDropdown();
-
-    const translateButton = this.createElement("button");
-    translateButton.id = "translateBtn";
-    translateButton.className = "btn-transparent";
-    translateButton.title = `${i18n.t("translate")}`;
-    translateButton.innerHTML = this.getTranslateSvg();
-    const closeButton = this.createCloseButton();
-
-    // headerSection.appendChild(translateButton);
-    headerSection.appendChild(languageDropdown);
-    // headerSection.appendChild(closeButton);
-    this.container.appendChild(closeButton);
-  }
-
-  private createHeaderSection(): HTMLDivElement {
-    const headerSection = this.createElement("div");
-    this.applyHeaderStyles(headerSection);
-    return headerSection;
-  }
-
-  private applyHeaderStyles(element: HTMLDivElement): void {
-    Object.assign(element.style, {
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      borderBottom: "1px #9f9d9d solid",
-      paddingBottom: "12px",
-      marginBottom: "40px",
-    });
-  }
-
-  private setupTranslateFrame(): void {
-    const pageId = (globalThis as any).currentPageId;
-    // language code
-    const frame = new TranslateFrame(this.data, pageId, this.selectedLanguageCode);
-    frame.render(this.container);
-  }
-
-  private setDefaultLanguage(): void {
-    const availableLanguages = this.getAvailableLanguages();
-    const defaultLanguage = availableLanguages[0];
-
-    if (defaultLanguage) {
-      this.setSelectedLanguage(defaultLanguage);
-    }
-  }
-
-  private getAvailableLanguages(): Language[] {
-    return this.languageList.filter((lang) => lang.code !== this.versionLanguage);
-  }
-
-  private createCloseButton(): HTMLSpanElement {
-    const closeButton = this.createElement("span");
-    closeButton.className = TranslateSection.CSS_CLASSES.CLOSE_BUTTON;
-    closeButton.style.cursor = "pointer";
-    closeButton.style.position = "absolute";
-    closeButton.style.right = "0";
-    closeButton.innerHTML = this.getCloseButtonSvg();
-    closeButton.setAttribute("aria-label", "Close translate section");
-
-    closeButton.addEventListener("click", this.handleCloseButtonClick.bind(this));
-
-    return closeButton;
-  }
-
-  private getCloseButtonSvg(): string {
-    return `
-    <svg xmlns="http://www.w3.org/2000/svg" id="Group_456" data-name="Group 456" width="12" height="12" viewBox="0 0 8.059 8.059">
-      <path id="Линия_201" data-name="Линия 201" d="M7.013,7.559a.544.544,0,0,1-.386-.16L-.34.431A.546.546,0,1,1,.432-.34L7.4,6.627a.546.546,0,0,1-.386.931Z" transform="translate(0.5 0.5)" fill="#bdbdbd"/>
-      <path id="Линия_202" data-name="Линия 202" d="M.046,7.559A.544.544,0,0,1-.34,7.4a.546.546,0,0,1,0-.772L6.628-.34A.546.546,0,0,1,7.4.431L.432,7.4A.544.544,0,0,1,.046,7.559Z" transform="translate(0.5 0.5)" fill="#bdbdbd"/>
-    </svg>
-    `;
-  }
-
-  private handleCloseButtonClick(): void {
-    this.disableTranslationMode();
-    this.resetTranslateButtonIcon();
-  }
-
-  private disableTranslationMode(): void {
-    (globalThis as any).isTranslationMode = false;
-    const translationModeUI = new TranslationodeUIManager();
-    translationModeUI.disableTranslationMode();
-    translationModeUI.toggleSidebar();
-  }
-
-  private resetTranslateButtonIcon(): void {
-    const translateButton = document.getElementById(
-      TranslateSection.SECTION_IDS.TRANSLATE_BUTTON
-    ) as HTMLButtonElement;
-    const svg = translateButton?.querySelector("svg");
-    const path = svg?.querySelector("path");
-
-    if (path) {
-      path.setAttribute("fill", "#7c8791");
-    }
-  }
-
-  private createLanguageDropdown(): HTMLDivElement {
-    const dropdownContainer = this.createElement("div");
-
-    this.selectButton = this.createElement("button");
-    this.selectedLanguageSpan = this.createElement("span");
-    this.languageDropDown = this.createDropdownList();
+  public createLanguageDropdown(): HTMLDivElement {
+    const dropdownContainer = document.createElement("div");
 
     this.setupDropdownContainer(dropdownContainer);
     this.setupSelectButton();
@@ -201,22 +49,19 @@ export class TranslateSection {
     dropdownContainer.appendChild(this.selectButton);
     dropdownContainer.appendChild(this.languageDropDown);
 
+    this.setDefaultLanguage();
+
     return dropdownContainer;
   }
 
-  public getLanguageSelectionElement(): HTMLDivElement {
-    return this.createLanguageDropdown();
-  }
-
   private setupDropdownContainer(container: HTMLDivElement): void {
-    container.className = TranslateSection.CSS_CLASSES.THEME_SELECTION;
-    container.id = TranslateSection.SECTION_IDS.LANGUAGE_SELECTION;
+    container.className = "tb-custom-language-selection";
   }
 
   private setupSelectButton(): void {
-    this.selectButton.className = TranslateSection.CSS_CLASSES.SELECT_BUTTON;
+    this.selectButton.className = "theme-select-button";
 
-    const translateButton = this.createElement("button");
+    const translateButton = document.createElement("button");
     translateButton.id = "translateBtn";
     translateButton.className = "btn-transparent";
     translateButton.title = `${i18n.t("translate")}`;
@@ -227,7 +72,7 @@ export class TranslateSection {
   }
 
   private setupSelectedLanguageSpan(): void {
-    this.selectedLanguageSpan.className = TranslateSection.CSS_CLASSES.SELECTED_LANGUAGE;
+    this.selectedLanguageSpan.className = "selected-theme-language";
 
     Object.assign(this.selectedLanguageSpan.style, {
       display: "flex",
@@ -250,8 +95,8 @@ export class TranslateSection {
   }
 
   private createDropdownList(): HTMLDivElement {
-    const dropdown = this.createElement("div");
-    dropdown.classList.add(TranslateSection.CSS_CLASSES.OPTIONS_LIST);
+    const dropdown = document.createElement("div");
+    dropdown.classList.add("theme-options-list");
     dropdown.style.display = "none";
 
     const availableLanguages = this.getAvailableLanguages();
@@ -264,11 +109,8 @@ export class TranslateSection {
   }
 
   private createLanguageOption(language: Language): HTMLDivElement {
-    const option = this.createElement("div");
-    option.classList.add(
-      TranslateSection.CSS_CLASSES.THEME_OPTION,
-      TranslateSection.CSS_CLASSES.THEME
-    );
+    const option = document.createElement("div");
+    option.classList.add("theme-option", "theme");
 
     this.applyOptionStyles(option);
     this.setOptionAttributes(option, language.code);
@@ -295,13 +137,11 @@ export class TranslateSection {
   private setOptionAttributes(option: HTMLDivElement, languageCode: string) {
     option.setAttribute("role", "option");
     option.setAttribute("data-value", languageCode);
-
-    return languageCode;
   }
 
   private createLanguageFlag(flagSvg: string): HTMLSpanElement {
-    const flagSpan = this.createElement("span");
-    flagSpan.className = TranslateSection.CSS_CLASSES.LANGUAGE_FLAG;
+    const flagSpan = document.createElement("span");
+    flagSpan.className = "language-flag";
 
     Object.assign(flagSpan.style, {
       display: "inline-block",
@@ -313,8 +153,8 @@ export class TranslateSection {
   }
 
   private createLanguageLabel(labelText: string): HTMLSpanElement {
-    const labelSpan = this.createElement("span");
-    labelSpan.className = TranslateSection.CSS_CLASSES.LANGUAGE_LABEL;
+    const labelSpan = document.createElement("span");
+    labelSpan.className = "language-label";
 
     Object.assign(labelSpan.style, {
       display: "inline-block",
@@ -328,6 +168,7 @@ export class TranslateSection {
   private handleLanguageSelection(language: Language): void {
     this.setSelectedLanguage(language);
     this.hideDropdown();
+    this.onLanguageChange(language.code);
   }
 
   private toggleDropdown(): void {
@@ -352,28 +193,26 @@ export class TranslateSection {
 
   private setSelectedLanguage(language: Language): void {
     this.selectedLanguageSpan.innerHTML = "";
-
     const flagSpan = this.createLanguageFlag(language.flag);
-
     this.selectedLanguageSpan.appendChild(flagSpan);
-
     this.selectedLanguageCode = language.code;
   }
 
-  private hideSidebarSections(): void {
-    const sectionsToHide = [
-      TranslateSection.SECTION_IDS.MENU_SECTION,
-      TranslateSection.SECTION_IDS.CONTENT_SECTION,
-      TranslateSection.SECTION_IDS.TRANSLATE_SECTION,
-      TranslateSection.SECTION_IDS.TREE_SECTION,
-    ];
+  private setDefaultLanguage(): void {
+    const availableLanguages = this.getAvailableLanguages();
+    const defaultLanguage = availableLanguages[0];
 
-    sectionsToHide.forEach((sectionId) => {
-      const section = document.getElementById(sectionId);
-      if (section) {
-        section.style.display = "none";
-      }
-    });
+    if (defaultLanguage) {
+      this.setSelectedLanguage(defaultLanguage);
+    }
+  }
+
+  private getAvailableLanguages(): Language[] {
+    return LanguageDropDown.LANGUAGES.filter((lang) => lang.code !== this.versionLanguage);
+  }
+
+  public getSelectedLanguageCode(): string {
+    return this.selectedLanguageCode;
   }
 
   private getTranslateSvg(): string {
@@ -381,17 +220,5 @@ export class TranslateSection {
     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 21 21">
       <path id="Translation" d="M5.33.066a.725.725,0,0,0-.055,1.3c.148.078.193.083.826.083.728,0,.818-.019,1-.2A.71.71,0,0,0,7.146.259C6.944.029,6.834,0,6.112,0A1.94,1.94,0,0,0,5.33.066M.46,2.986a.7.7,0,0,0-.37.354.671.671,0,0,0-.023.612.887.887,0,0,0,.471.419c.06.012,2.021.021,4.357.021H9.141l-.6.895-.6.894-.916.912-.916.912-.992-.994C4.574,6.464,4.069,5.987,4,5.948a.786.786,0,0,0-.868.15.816.816,0,0,0-.15.762A15.436,15.436,0,0,0,4.049,8L5.084,9.033,3.555,10.564c-1.614,1.618-1.606,1.609-1.605,1.923a.82.82,0,0,0,.449.642.835.835,0,0,0,.6-.02a20.971,20.971,0,0,0,1.63-1.558L6.112,10.06l1.523,1.521c.838.837,1.568,1.539,1.623,1.559a.886.886,0,0,0,.574-.029.729.729,0,0,0,.339-1c-.025-.048-.717-.761-1.538-1.584l-1.493-1.5L8.168,8,9.2,6.961l.848-1.283.849-1.284h.872c.842,0,.876,0,1.027-.083a.686.686,0,0,0,.378-.6.68.68,0,0,0-.3-.645l-.153-.106L6.631,2.949c-4.961-.008-6.1,0-6.171.037m14.669,6.83c-.277.11-.2-.028-2.836,5.242-2.3,4.6-2.514,5.042-2.511,5.2a.7.7,0,0,0,.192.51.707.707,0,0,0,1.074-.021c.065-.074.5-.9.992-1.883l.874-1.75h4.961l.912,1.822c.965,1.927.97,1.935,1.264,2.034A.736.736,0,0,0,21,20.174c-.012-.093-.886-1.879-2.5-5.107-1.9-3.8-2.511-4.994-2.606-5.087a.782.782,0,0,0-.763-.164m1.981,5.778c0,.015-.772.027-1.717.027s-1.719-.008-1.719-.018.387-.791.86-1.736l.859-1.718.857,1.71c.472.94.859,1.721.86,1.735" transform="translate(-0.004 -0.002)" fill="#7c8791" fill-rule="evenodd"/>
     </svg>`;
-  }
-
-  public render(container: HTMLDivElement): void {
-    this.removeExistingTranslateSection();
-    container.appendChild(this.container);
-  }
-
-  private removeExistingTranslateSection(): void {
-    const existingSection = document.getElementById(TranslateSection.SECTION_IDS.TRANSLATE_SECTION);
-    if (existingSection) {
-      existingSection.remove();
-    }
   }
 }

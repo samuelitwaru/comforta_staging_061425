@@ -152,7 +152,6 @@ export class ActionListDropDown {
           IsConnectedFromHome: this.isPageConnectedFromHome(page.PageId),
         }));
 
-      console.log("Pages fetched:", pages);
       return pages;
     } catch (error) {
       console.error("Error fetching pages:", error);

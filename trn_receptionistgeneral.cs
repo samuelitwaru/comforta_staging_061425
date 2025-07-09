@@ -1582,7 +1582,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257218151113", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257910523421", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1598,7 +1598,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("trn_receptionistgeneral.js", "?20257218151113", false, true);
+         context.AddJavascriptSource("trn_receptionistgeneral.js", "?20257910523421", false, true);
          /* End function include_jscripts */
       }
 
@@ -1618,7 +1618,6 @@ namespace GeneXus.Programs {
          }
          cmbReceptionistGender.Name = "RECEPTIONISTGENDER";
          cmbReceptionistGender.WebTags = "";
-         cmbReceptionistGender.addItem("", context.GetMessage( "GX_EmptyItemText", ""), 0);
          cmbReceptionistGender.addItem("Male", context.GetMessage( "Male", ""), 0);
          cmbReceptionistGender.addItem("Female", context.GetMessage( "Female", ""), 0);
          cmbReceptionistGender.addItem("Other", context.GetMessage( "Other", ""), 0);

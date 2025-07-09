@@ -231,12 +231,14 @@ export class PageCreationService {
       tileAttributes = tileInfoSectionAttributes?.Tiles?.find(
         (tile: any) => tile.Id === tileId
       );
-    } else {
-      for (const [property, value] of updates) {
-        (globalThis as any).tileMapper.updateTile(tileId, property, value);
-      }
-      tileAttributes = (globalThis as any).tileMapper.getTile(rowId, tileId);
-    }
+    } 
+    
+    // else {
+    //   for (const [property, value] of updates) {
+    //     (globalThis as any).tileMapper.updateTile(tileId, property, value);
+    //   }
+    //   tileAttributes = (globalThis as any).tileMapper.getTile(rowId, tileId);
+    // }
     
     new PageAttacher().removeOtherEditors();
     if (childPage) {

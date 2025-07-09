@@ -310,6 +310,22 @@ export class ToolBoxService {
     });
   }
 
+  async updateTranslatedVersion(pageId: string, selectedLanguageCode: string, data: any) {
+    console.log('selectedLanguageCode', selectedLanguageCode);
+    return await this.fetchAPI(
+      "/api/toolbox/V2/update-translated-page",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          DynamicTranslationPrimaryKey: pageId,
+          Language: selectedLanguageCode,
+          SDT_InfoContent: data,
+        }),
+      },
+      true
+    );
+  }
+
   async getPagesService() {
     return await this.fetchAPI("/api/toolbox/pages/tree");
   }
@@ -409,17 +425,18 @@ export class ToolBoxService {
     });
   }
 
-  async TranslateSinglePage(
-    pageId: string,
-    language: string
-  ) {
-    return await this.fetchAPI("/api/toolbox/v2/get-translated-page", {
-      method: "POST",
-      body: JSON.stringify({
-        DynamicTranslationPrimaryKey: pageId,
-        Language: language,
-      }),
-    });
+  async TranslateSinglePage(pageId: string, language: string) {
+    return await this.fetchAPI(
+      "/api/toolbox/v2/get-translated-page",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          DynamicTranslationPrimaryKey: pageId,
+          Language: language,
+        }),
+      },
+      true
+    );
   }
 
   // Media API methods

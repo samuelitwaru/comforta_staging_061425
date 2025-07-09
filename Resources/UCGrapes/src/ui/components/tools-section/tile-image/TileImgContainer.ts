@@ -27,7 +27,6 @@ export class TileImgContainer {
     </svg>
     `;
 
-    let tileAttributes;
     this.container.addEventListener("click", (e) => {
       e.preventDefault();
 

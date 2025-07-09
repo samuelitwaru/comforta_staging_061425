@@ -39,10 +39,10 @@ export class ImageUploadManager {
     this.infoId = infoId;
     this.sectionId = sectionId;
     this.saveCallback = saveCallback;
+    this.infoSectionManager = new InfoSectionManager();
     this.toolboxService = new ToolBoxService();
     this.selectedImages = new Map();
     this.imageUploadUi = new ImageUploadUi(this);
-    this.infoSectionManager = new InfoSectionManager();
   }
 
   /* State Management Methods */
@@ -293,7 +293,8 @@ export class ImageUploadManager {
     const pageData = (globalThis as any).pageData;
 
     if (pageData.PageType === "Information") {
-      const rowId = rowComponent.getId();
+      const parentComponent = tileWrapper.closest('[data-gjs-type="info-tiles-section"]');
+      const rowId = parentComponent.getId();
       const tileId = tileWrapper.getId();
 
       const updates: Record<any, any> = {
@@ -312,8 +313,8 @@ export class ImageUploadManager {
       }
 
       for (const [key, value] of Object.entries(updates)) {
-        const rowComponent = tileWrapper.closest('.container-row')
-        const colComponent = tileWrapper.closest('.tile-column')
+        const rowComponent = tileWrapper.closest(".container-row");
+        const colComponent = tileWrapper.closest(".tile-column");
 
         this.infoSectionManager.updateGridTileAttribute(
           rowComponent.getId(),
@@ -321,22 +322,30 @@ export class ImageUploadManager {
           tileWrapper.getId(),
           key,
           value
-        )
+        );
+
+        this.infoSectionManager.updateInfoTileAttributes(rowId, tileId, key, value);
       }
 
-      const tileAttributes = this.updateInfoTileAttributes(rowId, tileId);
+      const tileAttributes = this.getInfoTileAttributes(rowId, tileId);
       const tileProperties = new TileProperties(selectedComponent, tileAttributes);
       tileProperties.setTileAttributes();
     }
   }
 
-  private updateInfoTileAttributes(rowComponentId: any, tileWrapperId: any): any {
+  private getInfoTileAttributes(rowComponentId: any, tileWrapperId: any): any {
     if (!rowComponentId || !tileWrapperId) return;
-    const tileInfoSectionAttributes: InfoType = (
-      globalThis as any
-    ).infoContentMapper.getInfoContent(rowComponentId);
+    const tileInfoSectionAttributes: InfoType | null =
+      this.infoSectionManager.getInfoContent(rowComponentId);
+    return this.findTileById(tileInfoSectionAttributes, tileWrapperId);
+  }
 
-    return tileInfoSectionAttributes?.Tiles?.find((tile: any) => tile.Id === tileWrapperId);
+  public findTileById(tileInfoSectionAttributes: any, tileWrapperId: string) : Tile | null {
+    for (const column of tileInfoSectionAttributes?.Columns || []) {
+      const foundTile: Tile = column.Tiles?.find((tile: any) => tile.Id === tileWrapperId);
+      if (foundTile) return foundTile;
+    }
+    return null;
   }
 
   private updateInfoCtaButtonImage(image: { Id: string; Url: string }) {
@@ -539,22 +548,25 @@ export class ImageUploadManager {
     if (!selectedComponent) return null;
 
     const tileWrapper = selectedComponent.parent();
-    const rowComponent = tileWrapper.parent();
-    const pageData = (globalThis as any).pageData;
+    const parentComponent = tileWrapper.closest('[data-gjs-type="info-tiles-section"]');
 
-    const tileAttributes: Tile = this.updateInfoTileAttributes(
-      rowComponent.getId(),
+    const tileAttributes: Tile = this.getInfoTileAttributes(
+      parentComponent.getId(),
       tileWrapper.getId()
     );
     let backgroundImage;
     if (tileAttributes?.OriginalImageUrl) {
-      backgroundImage = tileAttributes?.OriginalImageUrl;
+      backgroundImage = tileAttributes?.BGImageUrl;
     } else {
       const tileElement = selectedComponent.getStyle();
       backgroundImage = tileElement["background-image"];
       if (!backgroundImage) return null;
     }
-    return backgroundImage.replace(/url\(["']?|["']?\)/g, "");
+    const image = {
+      backgroundImage: backgroundImage.replace(/url\(["']?|["']?\)/g, ""),
+      originalImage: tileAttributes?.OriginalImageUrl,
+    };
+    return image;
   }
 
   private readFileAsDataURL(file: File): Promise<string> {

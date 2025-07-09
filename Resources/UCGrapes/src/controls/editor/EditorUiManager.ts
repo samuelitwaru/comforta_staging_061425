@@ -15,6 +15,7 @@ import { AppVersionManager } from "../versions/AppVersionManager";
 import { i18n } from "../../i18n/i18n";
 import { TreeViewSection } from "../../ui/components/tools-section/TreeViewSection";
 (globalThis as any).activePages = (globalThis as any).activePages || [];
+import { LanguageTranslate } from "../translation/LanguageTranslate";
 
 export class EditorUIManager {
   editor: any;
@@ -414,6 +415,7 @@ export class EditorUIManager {
   activateEditor(frameId: any) {
     const mobileFrame = document.getElementById(`${frameId}-frame`) as HTMLDivElement;
     if (!mobileFrame) return;
+
     (globalThis as any).pageId = mobileFrame.dataset.pageid;
 
     const currentPageId: string = mobileFrame.dataset.pageid as string;
@@ -439,6 +441,9 @@ export class EditorUIManager {
         this.activateMiniatureFrame(frame.id);
       }
     });
+
+    this.translatePage((globalThis as any).pageId);
+
     this.showPageInfo();
     (globalThis as any).activeEditor = this.editor;
     // (globalThis as any).currentPageId = this.pageId;
@@ -469,6 +474,12 @@ export class EditorUIManager {
     }
 
     return (globalThis as any).activePages;
+  }
+
+  private translatePage(pageId: string) {
+    const isTranslationMode = (globalThis as any).isTranslationMode;
+    if (!isTranslationMode) return;
+    new LanguageTranslate().translatePage(pageId);
   }
 
   showPageInfo() {
@@ -510,10 +521,16 @@ export class EditorUIManager {
       <h3>${this.pageData.PageName.toUpperCase()}</h3>
       <hr/>
     `;
+    
+    const isTranslationMode = (globalThis as any).isTranslationMode;
+    if (isTranslationMode === true) return;
+
     pageInfoSection.style.display = "block";
   }
 
   hidePageInfo() {
+    const isTranslationMode = (globalThis as any).isTranslationMode;
+    if (isTranslationMode === true) return;
     const pageInfoSection = document.querySelector("#page-info-section") as HTMLElement;
     pageInfoSection.style.display = "none";
   }
@@ -663,12 +680,13 @@ export class EditorUIManager {
         colComponent.getId(),
         tileWrapper.getId()
       );
-    } else {
-      tileAttributes = (globalThis as any).tileMapper.getTile(
-        rowComponent.getId(),
-        tileWrapper.getId()
-      );
-    }
+    } 
+    // else {
+    //   tileAttributes = (globalThis as any).tileMapper.getTile(
+    //     rowComponent.getId(),
+    //     tileWrapper.getId()
+    //   );
+    // }
 
 
     this.removeOtherEditors();

@@ -5,6 +5,7 @@ import { minTileHeight } from "../../utils/default-attributes";
 import { newTile } from "../../utils/gjs-components";
 import { ImageUploadManager } from "../ImageUploadManager";
 import { InfoSectionManager } from "../InfoSectionManager";
+import { CtaManager } from "../themes/CtaManager";
 import { HistoryManager } from "../toolbox/HistoryManager";
 import { AppVersionManager } from "../versions/AppVersionManager";
 import { ChildEditor } from "./ChildEditor";
@@ -701,6 +702,8 @@ export class EditorEvents {
 
     const deleteTextClicked = (e.target as Element).classList.contains('tile-close-title') || 
                               (e.target as Element).closest('.tile-close-title')
+    const deleteCTAButtonClicked = (e.target as Element).classList.contains('cta-badge') || 
+                                    (e.target as Element).closest('.cta-badge')
 
     if (deleteIconClicked) {
       this.deleteIcon(e)
@@ -716,7 +719,10 @@ export class EditorEvents {
     if (deleteButtonClicked) {
       this.deleteGridTile(e)
     }
-
+    
+    if (deleteCTAButtonClicked) {
+      this.tileManager.removeCTa(e)
+    }
     this.uiManager.activateEditor(this.frameId);
     if (this.disableEditor()) return;
     this.uiManager.clearAllMenuContainers();
@@ -972,6 +978,7 @@ export class EditorEvents {
   }
 
   private async handleCtaSelection(component: any): Promise<void> {
+    if (this.disableEditor()) return;
     this.uiManager.toggleSidebar(true);
     this.uiManager.setInfoCtaProperties();
     this.uiManager.showCtaTools();
@@ -1016,6 +1023,10 @@ export class EditorEvents {
   }
 
   private handleTileSelection(): void {
+    if (this.disableEditor()) {
+      this.uiManager.createChildEditor();
+      return;
+    }
     this.uiManager.toggleSidebar(true);
     this.uiManager.setTileProperties();
     this.uiManager.setInfoTileProperties();
@@ -1025,12 +1036,14 @@ export class EditorEvents {
   }
 
   private handleDefaultSelection(): void {
+    if (this.disableEditor()) return;
     this.uiManager.toggleSidebar(false);
     this.uiManager.showPageInfo();
   }
 
   handleComponentDeselected(): void {
     (globalThis as any).selectedComponent = null;
+    if (this.disableEditor()) return;
     this.uiManager.toggleSidebar(false);
     this.uiManager.showPageInfo();
   }
@@ -1084,6 +1097,16 @@ export class EditorEvents {
   public activateEditor(frameId: any): void {
     this.ensureUIManager();
     this.uiManager.activateEditor(frameId);
+  }
+
+  public hidePageInfo(): void {
+    this.ensureUIManager();
+    this.uiManager.hidePageInfo();
+  }
+
+  public showPageInfo(): void {
+    this.ensureUIManager();
+    this.uiManager.showPageInfo();
   }
 
   private activateFrameEvents(wrapper: any): void {

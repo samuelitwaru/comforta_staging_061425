@@ -3068,7 +3068,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257218193671", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257910542454", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3084,7 +3084,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("wp_createlocationandreceptioniststep2.js", "?20257218193678", false, true);
+         context.AddJavascriptSource("wp_createlocationandreceptioniststep2.js", "?20257910542456", false, true);
          context.AddJavascriptSource("FileUpload/fileupload.min.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
@@ -3289,7 +3289,6 @@ namespace GeneXus.Programs {
                GXCCtl = "SDT_RECEPTIONISTS__RECEPTIONISTGENDER_" + sGXsfl_93_idx;
                cmbavSdt_receptionists__receptionistgender.Name = GXCCtl;
                cmbavSdt_receptionists__receptionistgender.WebTags = "";
-               cmbavSdt_receptionists__receptionistgender.addItem("", context.GetMessage( "GX_EmptyItemText", ""), 0);
                cmbavSdt_receptionists__receptionistgender.addItem("Male", context.GetMessage( "Male", ""), 0);
                cmbavSdt_receptionists__receptionistgender.addItem("Female", context.GetMessage( "Female", ""), 0);
                cmbavSdt_receptionists__receptionistgender.addItem("Other", context.GetMessage( "Other", ""), 0);
@@ -3408,7 +3407,6 @@ namespace GeneXus.Programs {
          }
          cmbavReceptionistgender.Name = "vRECEPTIONISTGENDER";
          cmbavReceptionistgender.WebTags = "";
-         cmbavReceptionistgender.addItem("", context.GetMessage( "GX_EmptyItemText", ""), 0);
          cmbavReceptionistgender.addItem("Male", context.GetMessage( "Male", ""), 0);
          cmbavReceptionistgender.addItem("Female", context.GetMessage( "Female", ""), 0);
          cmbavReceptionistgender.addItem("Other", context.GetMessage( "Other", ""), 0);
@@ -3432,7 +3430,6 @@ namespace GeneXus.Programs {
          GXCCtl = "SDT_RECEPTIONISTS__RECEPTIONISTGENDER_" + sGXsfl_93_idx;
          cmbavSdt_receptionists__receptionistgender.Name = GXCCtl;
          cmbavSdt_receptionists__receptionistgender.WebTags = "";
-         cmbavSdt_receptionists__receptionistgender.addItem("", context.GetMessage( "GX_EmptyItemText", ""), 0);
          cmbavSdt_receptionists__receptionistgender.addItem("Male", context.GetMessage( "Male", ""), 0);
          cmbavSdt_receptionists__receptionistgender.addItem("Female", context.GetMessage( "Female", ""), 0);
          cmbavSdt_receptionists__receptionistgender.addItem("Other", context.GetMessage( "Other", ""), 0);

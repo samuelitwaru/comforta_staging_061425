@@ -42,7 +42,7 @@ export class JSONToGrapesJSInformation {
   )}">
                         <span ${DefaultAttributes} class="img-button-section">
                             <img ${DefaultAttributes} src="${cta.CtaButtonImgUrl}" />
-                            <span ${DefaultAttributes} class="edit-cta-image">
+                            <span ${DefaultAttributes} class="edit-cta-image readonly-mode">
                                 ${
   cta.CtaButtonImgUrl
     ? `
@@ -51,7 +51,7 @@ export class JSONToGrapesJSInformation {
                                     <circle ${DefaultAttributes} cx="16.5" cy="16.5" r="16.5" stroke="none"/>
                                     <circle ${DefaultAttributes} cx="16.5" cy="16.5" r="16" fill="none"/>
                                   </g>
-                                  <path ${DefaultAttributes} id="Icon_feather-edit-2" data-name="Icon feather-edit-2" d="M12.834,3.8a1.854,1.854,0,0,1,2.622,2.622L6.606,15.274,3,16.257l.983-3.606Z" transform="translate(7 6.742)" fill="#5068a8" stroke="#5068a8" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+                                  <path ${DefaultAttributes} id="Icon_feather-edit-2" data-name="Icon feather-edit-2" d="M12.834,3.8a1.854,1.854,0,0,1,2.622,2.622L6.606,15.274,3,16.257l.983-3.606Z" transform="translate(7 6.742)" fill="#fff" stroke="#5068a8" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
                                 </svg>
                                 `
     : `
@@ -70,7 +70,7 @@ export class JSONToGrapesJSInformation {
 }
                             </span>
                         </span>
-                        <div${DefaultAttributes} class="cta-badge">
+                        <div${DefaultAttributes} class="cta-badge readonly-mode">
                             <svg fill="#5068a8" ${DefaultAttributes} width="14px" height="14px" viewBox="0 0 36 36" version="1.1"  preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title ${DefaultAttributes}>${i18n.t("section.delete")}</title>
                 <path fill="#5068a8" ${DefaultAttributes} class="clr-i-outline clr-i-outline-path-1" d="M27.14,34H8.86A2.93,2.93,0,0,1,6,31V11.23H8V31a.93.93,0,0,0,.86,1H27.14A.93.93,0,0,0,28,31V11.23h2V31A2.93,2.93,0,0,1,27.14,34Z"></path><path class="clr-i-outline clr-i-outline-path-2" d="M30.78,9H5A1,1,0,0,1,5,7H30.78a1,1,0,0,1,0,2Z"></path>
@@ -99,7 +99,7 @@ export class JSONToGrapesJSInformation {
             >
                 <button ${DefaultAttributes} id="ibob6" data-gjs-type="default" class="plain-button cta-styled-btn"
                   style="background-color: ${this.themeManager.getThemeCtaColor(cta.CtaBGColor)}">
-                    <div ${DefaultAttributes} id="iyocy" data-gjs-type="default" class="cta-badge">
+                    <div ${DefaultAttributes} id="iyocy" data-gjs-type="default" class="cta-badge readonly-mode">
                     <svg id="ifxn6" fill="#5068a8" ${DefaultAttributes} width="14px" height="14px" viewBox="0 0 36 36" version="1.1"  preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <title ${DefaultAttributes}>${i18n.t("section.delete")}</title>
                         <path fill="#5068a8" ${DefaultAttributes} class="clr-i-outline clr-i-outline-path-1" d="M27.14,34H8.86A2.93,2.93,0,0,1,6,31V11.23H8V31a.93.93,0,0,0,.86,1H27.14A.93.93,0,0,0,28,31V11.23h2V31A2.93,2.93,0,0,1,27.14,34Z"></path><path class="clr-i-outline clr-i-outline-path-2" d="M30.78,9H5A1,1,0,0,1,5,7H30.78a1,1,0,0,1,0,2Z"></path>
@@ -126,7 +126,7 @@ export class JSONToGrapesJSInformation {
                     style="background-color: ${this.themeManager.getThemeCtaColor(cta.CtaBGColor)}">
                     <span ${DefaultAttributes} class="img-button-icon">
                       ${this.ctaIcon(cta)}
-                      <svg class="icon-edit-button" title="Change icon" ${DefaultAttributes} xmlns="http://www.w3.org/2000/svg" id="Component_57_1" data-name="Component 57 – 1" width="20" height="20" viewBox="0 0 33 33">
+                      <svg class="icon-edit-button readonly-mode" title="Change icon" ${DefaultAttributes} xmlns="http://www.w3.org/2000/svg" id="Component_57_1" data-name="Component 57 – 1" width="20" height="20" viewBox="0 0 33 33">
                         <g ${DefaultAttributes} id="Ellipse_532" data-name="Ellipse 532" fill="#fff" stroke="#5068a8" stroke-width="2">
                           <circle ${DefaultAttributes} cx="16.5" cy="16.5" r="16.5" stroke="none"/>
                           <circle ${DefaultAttributes} cx="16.5" cy="16.5" r="16" fill="none"/>
@@ -134,7 +134,7 @@ export class JSONToGrapesJSInformation {
                         <path ${DefaultAttributes} id="Icon_feather-edit-2" data-name="Icon feather-edit-2" d="M12.834,3.8a1.854,1.854,0,0,1,2.622,2.622L6.606,15.274,3,16.257l.983-3.606Z" transform="translate(7 6.742)" fill="#5068a8" stroke="#5068a8" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
                       </svg>
                     </span>
-                    <div${DefaultAttributes} class="cta-badge">
+                    <div${DefaultAttributes} class="cta-badge readonly-mode">
                         <svg fill="#5068a8" ${DefaultAttributes} width="14px" height="14px" viewBox="0 0 36 36" version="1.1"  preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                           <title ${DefaultAttributes}>${i18n.t("section.delete")}</title>
                           <path fill="#5068a8" ${DefaultAttributes} class="clr-i-outline clr-i-outline-path-1" d="M27.14,34H8.86A2.93,2.93,0,0,1,6,31V11.23H8V31a.93.93,0,0,0,.86,1H27.14A.93.93,0,0,0,28,31V11.23h2V31A2.93,2.93,0,0,1,27.14,34Z"></path><path class="clr-i-outline clr-i-outline-path-2" d="M30.78,9H5A1,1,0,0,1,5,7H30.78a1,1,0,0,1,0,2Z"></path>
@@ -164,7 +164,7 @@ export class JSONToGrapesJSInformation {
                   style="background-color: ${this.themeManager.getThemeCtaColor(cta.CtaBGColor)}">
                     <span ${DefaultAttributes} class="img-button-icon">
                       ${this.ctaIcon(cta)}
-                      <svg class="icon-edit-button" title="Change icon" ${DefaultAttributes} xmlns="http://www.w3.org/2000/svg" id="Component_57_1" data-name="Component 57 – 1" width="20" height="20" viewBox="0 0 33 33">
+                      <svg class="icon-edit-button readonly-mode" title="Change icon" ${DefaultAttributes} xmlns="http://www.w3.org/2000/svg" id="Component_57_1" data-name="Component 57 – 1" width="20" height="20" viewBox="0 0 33 33">
                         <g ${DefaultAttributes} id="Ellipse_532" data-name="Ellipse 532" fill="#fff" stroke="#5068a8" stroke-width="2">
                           <circle ${DefaultAttributes} cx="16.5" cy="16.5" r="16.5" stroke="none"/>
                           <circle ${DefaultAttributes} cx="16.5" cy="16.5" r="16" fill="none"/>
@@ -172,7 +172,7 @@ export class JSONToGrapesJSInformation {
                         <path ${DefaultAttributes} id="Icon_feather-edit-2" data-name="Icon feather-edit-2" d="M12.834,3.8a1.854,1.854,0,0,1,2.622,2.622L6.606,15.274,3,16.257l.983-3.606Z" transform="translate(7 6.742)" fill="#5068a8" stroke="#5068a8" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
                       </svg>
                     </span>
-                    <div class="cta-badge" ${DefaultAttributes}>
+                    <div class="cta-badge readonly-mode" ${DefaultAttributes}>
                     <svg fill="#5068a8" ${DefaultAttributes} width="14px" height="14px" viewBox="0 0 36 36" version="1.1"  preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title ${DefaultAttributes}>${i18n.t("section.delete")}</title>
                 <path fill="#5068a8" ${DefaultAttributes} class="clr-i-outline clr-i-outline-path-1" d="M27.14,34H8.86A2.93,2.93,0,0,1,6,31V11.23H8V31a.93.93,0,0,0,.86,1H27.14A.93.93,0,0,0,28,31V11.23h2V31A2.93,2.93,0,0,1,27.14,34Z"></path><path class="clr-i-outline clr-i-outline-path-2" d="M30.78,9H5A1,1,0,0,1,5,7H30.78a1,1,0,0,1,0,2Z"></path>
@@ -373,9 +373,9 @@ export class JSONToGrapesJSInformation {
   contentInfoImage(content: InfoType) {
     return `
     <div ${contentDefaultAttributes} class="info-image-section" id="${
-  content?.InfoId ? content?.InfoId : randomIdGenerator(15)
-}" data-gjs-type="info-image-section">
-    <button ${DefaultAttributes} class="tb-edit-image-icon"
+      content?.InfoId ? content?.InfoId : randomIdGenerator(15)
+    }" data-gjs-type="info-image-section">
+    <button ${DefaultAttributes} class="tb-edit-image-icon readonly-mode"
         title = ${i18n.t("section.edit")}
         ${
   this.data?.PageType === "Location" || this.data?.PageType === "Reception"
@@ -387,10 +387,10 @@ export class JSONToGrapesJSInformation {
             </svg>
           </button>
           ${
-  this.data?.PageType === "Location" || this.data?.PageType === "Reception"
-    ? ``
-    : `
-          <button ${DefaultAttributes} class="tb-delete-image-icon">
+            this.data?.PageType === "Location" || this.data?.PageType === "Reception"
+              ? ``
+              : `
+          <button ${DefaultAttributes} class="tb-delete-image-icon readonly-mode">
             <svg fill="#5068a8" ${DefaultAttributes} width="14px" height="14px" viewBox="0 0 36 36" version="1.1"  preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title ${DefaultAttributes}>${i18n.t("section.delete")}</title>
                 <path fill="#5068a8" ${DefaultAttributes} class="clr-i-outline clr-i-outline-path-1" d="M27.14,34H8.86A2.93,2.93,0,0,1,6,31V11.23H8V31a.93.93,0,0,0,.86,1H27.14A.93.93,0,0,0,28,31V11.23h2V31A2.93,2.93,0,0,1,27.14,34Z"></path><path class="clr-i-outline clr-i-outline-path-2" d="M30.78,9H5A1,1,0,0,1,5,7H30.78a1,1,0,0,1,0,2Z"></path>
@@ -419,9 +419,9 @@ export class JSONToGrapesJSInformation {
     const length = values.length;
     return `
     <div ${contentDefaultAttributes} class="info-image-section" id="${
-  content?.InfoId ? content?.InfoId : randomIdGenerator(15)
-}" data-gjs-type="info-image-section">
-      <button ${DefaultAttributes} class="tb-edit-image-icon" title = ${i18n.t("section.edit")}>
+      content?.InfoId ? content?.InfoId : randomIdGenerator(15)
+    }" data-gjs-type="info-image-section">
+      <button ${DefaultAttributes} class="tb-edit-image-icon readonly-mode" title = ${i18n.t("section.edit")}>
           <svg ${DefaultAttributes} width="14px" height="14px" viewBox="0 0 24 24"
               fill="none" xmlns="http://www.w3.org/2000/svg">
               <path ${DefaultAttributes} fill-rule="evenodd" clip-rule="evenodd"
@@ -429,7 +429,7 @@ export class JSONToGrapesJSInformation {
                   fill="#5068a8"></path>
           </svg>
       </button>
-      <button ${DefaultAttributes} class="tb-delete-image-icon">
+      <button ${DefaultAttributes} class="tb-delete-image-icon readonly-mode">
           <svg ${DefaultAttributes} fill="#5068a8" width="14px" height="14px"
               viewBox="0 0 36 36" version="1.1" preserveAspectRatio="xMidYMid meet"
               xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -512,9 +512,9 @@ export class JSONToGrapesJSInformation {
   getDefaultContent() {
     return `
     <div ${contentDefaultAttributes} class="info-image-section" id="${randomIdGenerator(
-  15
-)}" data-gjs-type="info-image-section">
-              <button ${DefaultAttributes} class="tb-edit-image-icon"
+      15
+    )}" data-gjs-type="info-image-section">
+              <button ${DefaultAttributes} class="tb-edit-image-icon readonly-mode"
               title = ${i18n.t("section.edit")}
               ${
   this.data?.PageType === "Location" || this.data?.PageType === "Reception"
@@ -526,10 +526,10 @@ export class JSONToGrapesJSInformation {
             </svg>
           </button>
           ${
-  this.data?.PageType === "Location" || this.data?.PageType === "Reception"
-    ? ``
-    : `
-          <button ${DefaultAttributes} class="tb-delete-image-icon">
+            this.data?.PageType === "Location" || this.data?.PageType === "Reception"
+              ? ``
+              : `
+          <button ${DefaultAttributes} class="tb-delete-image-icon readonly-mode">
             <svg fill="#5068a8" ${DefaultAttributes} width="14px" height="14px" viewBox="0 0 36 36" version="1.1"  preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title ${DefaultAttributes}>${i18n.t("section.delete")}</title>
                 <path fill="#5068a8" ${DefaultAttributes} class="clr-i-outline clr-i-outline-path-1" d="M27.14,34H8.86A2.93,2.93,0,0,1,6,31V11.23H8V31a.93.93,0,0,0,.86,1H27.14A.93.93,0,0,0,28,31V11.23h2V31A2.93,2.93,0,0,1,27.14,34Z"></path><path class="clr-i-outline clr-i-outline-path-2" d="M30.78,9H5A1,1,0,0,1,5,7H30.78a1,1,0,0,1,0,2Z"></path>

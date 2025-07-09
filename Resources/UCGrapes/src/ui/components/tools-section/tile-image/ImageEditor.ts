@@ -145,7 +145,7 @@ export class ImageEditor {
   private async setupPositionFrame(frame: HTMLElement, container: HTMLElement) {
     const selectedComponent = (globalThis as any).selectedComponent;
     let aspectRatio = 1;
-    const tile: Tile | undefined = this.getTile(selectedComponent);
+    const tile: Tile | null = this.getTile(selectedComponent);
     let frameWidth: number;
     let frameHeight: number;
 
@@ -292,17 +292,14 @@ export class ImageEditor {
   }
 
   private getTile(selectedComponent: any) {
-    let tile;
     const infoContent: InfoType | null = this.controller.getInfoContent();
     if (infoContent) {
       const tileId = selectedComponent.parent().getId();
-      const tiles: Tile[] | undefined = infoContent?.Tiles;
-      if (tiles?.length) {
-        tile = tiles.find((t) => t.Id === tileId);
-      }
+      const tile: Tile | null = this.controller.findTileById(infoContent, tileId);
+      return tile;
     }
 
-    return tile;
+    return null;
   }
 
   private addResizeHandles(frame: HTMLElement, container: HTMLElement, tileAspectRatio: number) {
@@ -459,7 +456,7 @@ export class ImageEditor {
     const selectedComponent = (globalThis as any).selectedComponent;
     const modalFooter = document.createElement("div");
     modalFooter.className = "modal-footer-slider";
-    const tile: Tile | undefined = this.getTile(selectedComponent);
+    const tile: Tile | null = this.getTile(selectedComponent);
 
     const opacitySlider = document.createElement("input");
     Object.assign(opacitySlider, {

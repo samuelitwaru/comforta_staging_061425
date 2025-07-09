@@ -361,7 +361,7 @@ export class CtaManager {
                 ${ctaTileDEfaultAttributes}>
                 <button ${DefaultAttributes} class="plain-button cta-styled-btn"
                     style="background-color: ${bgColor}">
-                    <div ${DefaultAttributes} id="ihd0f" class="cta-badge">
+                    <div ${DefaultAttributes} id="ihd0f" class="cta-badge readonly-mode">
                             <svg fill="#5068a8" ${DefaultAttributes} width="14px" height="14px" viewBox="0 0 36 36" version="1.1"  preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title ${DefaultAttributes}>delete</title>
                             <path fill="#5068a8" ${DefaultAttributes} class="clr-i-outline clr-i-outline-path-1" d="M27.14,34H8.86A2.93,2.93,0,0,1,6,31V11.23H8V31a.93.93,0,0,0,.86,1H27.14A.93.93,0,0,0,28,31V11.23h2V31A2.93,2.93,0,0,1,27.14,34Z"></path><path class="clr-i-outline clr-i-outline-path-2" d="M30.78,9H5A1,1,0,0,1,5,7H30.78a1,1,0,0,1,0,2Z"></path>
@@ -398,7 +398,7 @@ export class CtaManager {
                     style="background-color: ${bgColor}">
                     <span ${DefaultAttributes} class="img-button-icon">
                         ${ctaSVG} 
-                        <svg class="icon-edit-button" title="Change icon" ${DefaultAttributes} xmlns="http://www.w3.org/2000/svg" id="Component_57_1" data-name="Component 57 – 1" width="20" height="20" viewBox="0 0 33 33">
+                        <svg class="icon-edit-button readonly-mode" title="Change icon" ${DefaultAttributes} xmlns="http://www.w3.org/2000/svg" id="Component_57_1" data-name="Component 57 – 1" width="20" height="20" viewBox="0 0 33 33">
                             <g ${DefaultAttributes} id="Ellipse_532" data-name="Ellipse 532" fill="#fff" stroke="#5068a8" stroke-width="2">
                                 <circle ${DefaultAttributes} cx="16.5" cy="16.5" r="16.5" stroke="none"/>
                                 <circle ${DefaultAttributes} cx="16.5" cy="16.5" r="16" fill="none"/>
@@ -406,7 +406,7 @@ export class CtaManager {
                             <path ${DefaultAttributes} id="Icon_feather-edit-2" data-name="Icon feather-edit-2" d="M12.834,3.8a1.854,1.854,0,0,1,2.622,2.622L6.606,15.274,3,16.257l.983-3.606Z" transform="translate(7 6.742)" fill="#5068a8" stroke="#5068a8" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
                         </svg>
                     </span>
-                    <div${DefaultAttributes} class="cta-badge">
+                    <div${DefaultAttributes} class="cta-badge readonly-mode">
                         <svg fill="#5068a8" ${DefaultAttributes} width="14px" height="14px" viewBox="0 0 36 36" version="1.1"  preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title ${DefaultAttributes}>delete</title>
                             <path fill="#5068a8" ${DefaultAttributes} class="clr-i-outline clr-i-outline-path-1" d="M27.14,34H8.86A2.93,2.93,0,0,1,6,31V11.23H8V31a.93.93,0,0,0,.86,1H27.14A.93.93,0,0,0,28,31V11.23h2V31A2.93,2.93,0,0,1,27.14,34Z"></path><path class="clr-i-outline clr-i-outline-path-2" d="M30.78,9H5A1,1,0,0,1,5,7H30.78a1,1,0,0,1,0,2Z"></path>
@@ -438,7 +438,7 @@ export class CtaManager {
                     <circle ${DefaultAttributes} cx="16.5" cy="16.5" r="16.5" stroke="none"/>
                     <circle ${DefaultAttributes} cx="16.5" cy="16.5" r="16" fill="none"/>
                 </g>
-                <path ${DefaultAttributes} id="Icon_feather-edit-2" data-name="Icon feather-edit-2" d="M12.834,3.8a1.854,1.854,0,0,1,2.622,2.622L6.606,15.274,3,16.257l.983-3.606Z" transform="translate(7 6.742)" fill="#5068a8" stroke="#5068a8" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+                <path ${DefaultAttributes} id="Icon_feather-edit-2" data-name="Icon feather-edit-2" d="M12.834,3.8a1.854,1.854,0,0,1,2.622,2.622L6.606,15.274,3,16.257l.983-3.606Z" transform="translate(7 6.742)" fill="#fff" stroke="#5068a8" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
               </svg>`
       : `<svg ${DefaultAttributes} xmlns="http://www.w3.org/2000/svg" id="Component_53_4" data-name="Component 53 – 4" width="22" height="22" viewBox="0 0 22 22">
                 <g ${DefaultAttributes} id="Group_2309" data-name="Group 2309">
@@ -462,11 +462,11 @@ export class CtaManager {
                     style="background-color: ${bgColor}">
                     <span ${DefaultAttributes} class="img-button-section">
                         <img ${DefaultAttributes} src="${imgUrl}" />
-                        <span ${DefaultAttributes} class="edit-cta-image">
+                        <span ${DefaultAttributes} class="edit-cta-image readonly-mode">
                             ${editIconSVG}
                         </span>
                     </span>
-                    <div${DefaultAttributes} class="cta-badge">
+                    <div${DefaultAttributes} class="cta-badge readonly-mode">
                         <svg fill="#5068a8" ${DefaultAttributes} width="14px" height="14px" viewBox="0 0 36 36" version="1.1"  preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title ${DefaultAttributes}>delete</title>
                             <path fill="#5068a8" ${DefaultAttributes} class="clr-i-outline clr-i-outline-path-1" d="M27.14,34H8.86A2.93,2.93,0,0,1,6,31V11.23H8V31a.93.93,0,0,0,.86,1H27.14A.93.93,0,0,0,28,31V11.23h2V31A2.93,2.93,0,0,1,27.14,34Z"></path><path class="clr-i-outline clr-i-outline-path-2" d="M30.78,9H5A1,1,0,0,1,5,7H30.78a1,1,0,0,1,0,2Z"></path>
@@ -504,7 +504,7 @@ export class CtaManager {
               style="background-color: ${bgColor}">
                 <span ${DefaultAttributes} class="img-button-icon">
                   ${ctaSVG}
-                  <svg class="icon-edit-button" title="Change icon" ${DefaultAttributes} xmlns="http://www.w3.org/2000/svg" id="Component_57_1" data-name="Component 57 – 1" width="20" height="20" viewBox="0 0 33 33">
+                  <svg class="icon-edit-button readonly-mode" title="Change icon" ${DefaultAttributes} xmlns="http://www.w3.org/2000/svg" id="Component_57_1" data-name="Component 57 – 1" width="20" height="20" viewBox="0 0 33 33">
                     <g ${DefaultAttributes} id="Ellipse_532" data-name="Ellipse 532" fill="#fff" stroke="#5068a8" stroke-width="2">
                       <circle ${DefaultAttributes} cx="16.5" cy="16.5" r="16.5" stroke="none"/>
                       <circle ${DefaultAttributes} cx="16.5" cy="16.5" r="16" fill="none"/>

@@ -11,6 +11,7 @@ import {
 import { infoSectionSpacer, newTileColumn, resizeButton, tileFromAttributes } from "../../utils/gjs-components";
 import { getNextSiblingComponent, randomIdGenerator } from "../../utils/helpers";
 import { InfoSectionManager } from "../InfoSectionManager";
+import { CtaManager } from "../themes/CtaManager";
 import { ThemeManager } from "../themes/ThemeManager";
 import { EditorEvents } from "./EditorEvents";
 import { InfoContentMapper } from "./InfoContentMapper";
@@ -42,7 +43,7 @@ export class TileManager {
     this.tileUpdate = new TileUpdate(pageId);
     // (globalThis as any).pageData = pageData;
     (globalThis as any).tileMapper = new TileMapper(this.pageId);
-    this.page = (globalThis as any).pageData;
+    this.page = pageData;
     this.themeManager = new ThemeManager();
     this.init();
   }
@@ -136,11 +137,6 @@ export class TileManager {
         const infoSectionManager = new InfoSectionManager();
         infoSectionManager.removeConsecutivePlusButtons();
         infoSectionManager.restoreEmptyStateIfNoSections();
-      } else {
-        (globalThis as any).tileMapper.removeTile(
-          tileComponent.getId() as string,
-          columnComponent.getId() as string
-        );
       }
 
       this.removeEditor(tileComponent.getId() as string);
@@ -312,13 +308,14 @@ export class TileManager {
               "Icon",""
             )
 
-          } else {
-            (globalThis as any).tileMapper.updateTile(
-              tileComponent.getId(),
-              "Icon",
-              ""
-            );
-          }
+          } 
+          // else {
+            // (globalThis as any).tileMapper.updateTile(
+            //   tileComponent.getId(),
+            //   "Icon",
+            //   ""
+            // );
+          // }
           const iconSection = tileComponent.find(".tile-icon-section")[0];
           if (iconSection) {
             iconSection.addStyle({ display: "none" });
@@ -352,13 +349,15 @@ export class TileManager {
               tileComponent.getId(),
               "Icon",""
             )
-          } else {
-            (globalThis as any).tileMapper.updateTile(
-              tileComponent.getId(),
-              "Text",
-              ""
-            );
-          }
+          } 
+          
+          // else {
+          //   (globalThis as any).tileMapper.updateTile(
+          //     tileComponent.getId(),
+          //     "Text",
+          //     ""
+          //   );
+          // }
           const tileSection = tileComponent.find(".tile-title-section")[0];
           if (tileSection) {
             tileSection.addStyle({ display: "none" });
@@ -404,14 +403,14 @@ export class TileManager {
     return false;
   }
 
-  // removeCTa() {
-  //   const ctaBadgeBtn = (this.event.target as Element).closest(
-  //     ".cta-badge"
-  //   ) as HTMLElement;
-  //   if (ctaBadgeBtn) {
-  //     new CtaManager().removeCta(ctaBadgeBtn);
-  //   }
-  // }
+  removeCTa(event:MouseEvent) {
+    const ctaBadgeBtn = (event.target as Element).closest(
+      ".cta-badge"
+    ) as HTMLElement;
+    if (ctaBadgeBtn) {
+      new CtaManager().removeCta(ctaBadgeBtn);
+    }
+  }
 
   removeEditor(tileId: string): void {
     const framelist = document.querySelectorAll(".mobile-frame");
@@ -458,16 +457,16 @@ export class TileManager {
 } class="template-wrapper" id="${randomIdGenerator(8)}">
         <div ${tileDefaultAttributes} class="template-block" style="background-color: transparent; color: #333333; justify-content: left">
             <div ${DefaultAttributes} id="igtdq" data-gjs-type="default" class="tile-icon-section">
-              <span ${DefaultAttributes} id="is1dw" data-gjs-type="text" class="tile-close-icon top-right selected-tile-title">×</span>
+              <span ${DefaultAttributes} id="is1dw" data-gjs-type="text" class="tile-close-icon top-right selected-tile-title readonly-mode">×</span>
               <span ${DefaultAttributes} id="ic26t" data-gjs-type="text" class="tile-icon"></span>
             </div>
             <div ${DefaultAttributes} id="igtdq" data-gjs-type="default" class="tile-title-section">
-              <span ${DefaultAttributes} id="is1dw" data-gjs-type="text" class="tile-close-title top-right selected-tile-title">×</span>
+              <span ${DefaultAttributes} id="is1dw" data-gjs-type="text" class="tile-close-title top-right selected-tile-title readonly-mode">×</span>
               <span ${DefaultAttributes} style="display: block" id="ic26t" data-gjs-type="text" is-hidden="false" title="${i18n.t('tile.title')}" class="tile-title">${i18n.t('tile.title')}</span>
             </div>
         </div>
-        <button ${DefaultAttributes} id="i9sxl" data-gjs-type="default" title="Delete tile" class="action-button delete-button">&minus;</button>
-        <button ${DefaultAttributes} id="ifvvi" data-gjs-type="default" title="Add tile right" class="action-button add-button-right">
+        <button ${DefaultAttributes} id="i9sxl" data-gjs-type="default" title="Delete tile" class="action-button delete-button readonly-mode">&minus;</button>
+        <button ${DefaultAttributes} id="ifvvi" data-gjs-type="default" title="Add tile right" class="action-button add-button-right readonly-mode">
           <svg ${DefaultAttributes} fill="#fff" width="15" height="15" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path ${DefaultAttributes} d="M19,11H13V5a1,1,0,0,0-2,0v6H5a1,1,0,0,0,0,2h6v6a1,1,0,0,0,2,0V13h6a1,1,0,0,0,0-2Z"/>
           </svg>
@@ -487,8 +486,8 @@ export class TileManager {
           </svg>
           </button>
         `
-}
-        <svg ${DefaultAttributes} class="tile-open-menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 27 27">
+      }
+        <svg ${DefaultAttributes} class="tile-open-menu readonly-mode" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 27 27">
           <g ${DefaultAttributes} id="Group_2383" data-name="Group 2383" transform="translate(-921 -417.999)">
             <g ${DefaultAttributes} id="Group_2382" data-name="Group 2382" transform="translate(921 418)">
               <circle ${DefaultAttributes} id="Ellipse_534" data-name="Ellipse 534" cx="13.5" cy="13.5" r="13.5" transform="translate(0 -0.001)" fill="#6a747f"/>

@@ -747,6 +747,11 @@ img.content-page-block {
   fill: #fdfdfd;
 }
 
+.img-button-section .edit-cta-image:hover path {
+  fill: transparent !important;
+  stroke: #fff !important;
+}
+
 @media (min-width: 350px) {
   .cta-button-container {
     gap: 1rem;
@@ -1355,7 +1360,7 @@ img.content-page-block {
 /* Image edit styles */
 .img-button-icon .icon-edit-button {
   position: absolute;
-  bottom: 0;
+  top: 0;
   right: -15px;
   display: none;
 }

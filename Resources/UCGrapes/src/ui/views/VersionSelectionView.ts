@@ -278,6 +278,7 @@ export class VersionSelectionView {
     (globalThis as any).ctaContainerId = null;
     (globalThis as any).frameId = null;
     (globalThis as any).wrapper = null;
+    (globalThis as any).isTranslationMode = false;
   }
 
   private updateTheme(themeId: string): void {
