@@ -12,13 +12,14 @@ import { getTileAttrs } from "../utils/helpers";
 export class ActionListManager {
   private toolboxService: ToolBoxService;
   private appVersionManager: AppVersionManager;
-  private pageAttacher: PageAttacher;
-  actionList: ActionListDropDown;
+  private pageAttacher!: PageAttacher;
+  actionList!: ActionListDropDown;
   private selectedComponent: any;
-  pageCreationService: PageCreationService;
+  pageCreationService!: PageCreationService;
 
   constructor() {
     this.toolboxService = new ToolBoxService();
+
     this.appVersionManager = new AppVersionManager();
     this.pageAttacher = new PageAttacher();
     this.actionList = new ActionListDropDown();

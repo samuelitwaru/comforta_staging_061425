@@ -1,4 +1,3 @@
-import { constant } from "lodash";
 import { AppConfig } from "../../../AppConfig";
 import { ThemeManager } from "../../../controls/themes/ThemeManager";
 import { PageTreeRendererInfoPage } from "./PageTreeRendererInfoPage";
@@ -323,7 +322,7 @@ export class PageBubbleTree {
         if (page.PageInfoStructure.InfoContent) {
           ret.structure = this.PageTreeRendererInfoPage.createInfoHTML(page);
           page.PageInfoStructure.InfoContent.forEach((row: any) => {
-            if (row.InfoType === "TileGrid") {
+            if (row.InfoType === "TileGrid" && row.Columns) {
               row.Columns.forEach((column: any) => {
                 // console.log("column", column);
                 column.Tiles.forEach((tile: any) => {
@@ -348,7 +347,7 @@ export class PageBubbleTree {
                         x: 0,
                         y: 0,
                       });
-                      ret.children.push(row.CtaAttributes.Action.ObjectId);
+                      ret.children.push(row.CtaAttributes.Action?.ObjectId);
                     }
                   }
                 });
@@ -406,7 +405,7 @@ export class PageBubbleTree {
                   x: 0,
                   y: 0,
                 });
-                ret.children.push(row.CtaAttributes.Action.ObjectId);
+                ret.children.push(row.CtaAttributes.Action?.ObjectId);
               }
             }
           });

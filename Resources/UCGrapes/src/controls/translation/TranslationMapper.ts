@@ -38,12 +38,36 @@ export class TranslationMapper {
   }
 
   private async saveUpdatedData(data: any): Promise<void> {
+    const autoSaveSection = document.querySelector(
+      ".auto-saving-section-content-text"
+    ) as HTMLElement;
+    const autoSavedSection = document.querySelector(
+      ".auto-saved-section-content-text"
+    ) as HTMLElement;
+    autoSaveSection.style.display = "none";
+    autoSavedSection.style.display = "none";
+
     const toolboxService = new ToolBoxService();
-    await toolboxService.updateTranslatedVersion(
-      this.pageId,
-      this.language,
-      data
-    );
+    try {
+
+      const startTime = Date.now();
+      const minDelay = 500; // Minimum 500ms delay
+
+      // Run save operation and minimum delay in parallel
+      const [saveResult] = await Promise.all([
+        await toolboxService.updateTranslatedVersion(this.pageId, this.language, data),
+        new Promise((resolve) => setTimeout(resolve, minDelay)),
+      ]);
+
+      autoSaveSection.style.display = "none";
+      autoSavedSection.style.display = "flex";
+    } catch (error) {
+      throw error;
+    } finally {
+      setTimeout(() => {
+        autoSavedSection.style.display = "none";
+      }, 1000);
+    }
   }
 
   public convertToHTML(): string {
@@ -80,7 +104,7 @@ export class TranslationMapper {
             htmlContent += this.translationUI.createTileRowSection(section, i);
             break;
           case "TileGrid": // Add this case for TileGrid
-            htmlContent += this.translationUI.createTileGridSection(section, i);
+            htmlContent += this.translationUI.createTileGridSection(section);
             break;
           case "Description":
             htmlContent += this.translationUI.createDescSection(section, i);
@@ -92,7 +116,7 @@ export class TranslationMapper {
             htmlContent += this.translationUI.createCtaSection(section, i);
             break;
           default:
-            console.log("Unknown section type:", section.InfoType);
+            htmlContent += "";
         }
         i++;
       }

@@ -138,6 +138,7 @@ export class InfoContentMapper {
     const draggedTileParent = data.PageInfoStructure.InfoContent.find(
       (section: any) => section.InfoId === draggedTileParentId
     );
+
     // remove the dragged tile from its current parent and save it
     const draggedTile = draggedTileParent?.Columns?.find(
       (col: any) => col.ColId === draggedTileId
@@ -147,6 +148,36 @@ export class InfoContentMapper {
       draggedTileParent.Columns = draggedTileParent.Columns.filter(
         (col: any) => col.ColId !== draggedTileId
       );
+
+      // check if dragged tile parent is left with one column containing more than one tile
+      if (draggedTileParent.Columns.length === 1 && draggedTileParent.Columns[0].Tiles?.length > 1) {
+        // If it has only one column with more than one tile, we create a new info section for each tile except the first one
+        const tiles = draggedTileParent.Columns[0].Tiles;
+        tiles.slice(1).forEach((tile: any, index: number) => {
+          const newSectionId = randomIdGenerator(15);
+          const content: InfoType = {
+            InfoId: newSectionId,
+            InfoType: "TileGrid",
+            InfoValue: "",
+            Columns: [{
+              Tiles: [tile],
+              ColId: randomIdGenerator(8)
+            }],
+          };
+
+          const draggedTileParentIndex = data.PageInfoStructure.InfoContent.findIndex(
+            (section: any) => section.InfoId === draggedTileParentId
+          );
+
+          if (draggedTileParentIndex === -1) {
+            data.PageInfoStructure.InfoContent.push(content);
+          } else {
+            data.PageInfoStructure.InfoContent.splice(draggedTileParentIndex + 1 + index, 0, content);
+          }
+        });
+        // Remove the copied tiles from the parent column, keep only the first tile
+        draggedTileParent.Columns[0].Tiles = [tiles[0]];
+      }
 
       // update page structure with draggedTileParent state
       data.PageInfoStructure.InfoContent = data.PageInfoStructure.InfoContent.map(
@@ -183,10 +214,12 @@ export class InfoContentMapper {
         data.PageInfoStructure.InfoContent.splice(0, 0, content);
       }
 
-      // refresh updated page structure
-      new ToolboxManager().applyNewState(data, this.pageId);
+      const cleanData = this.checkAndRemoveEmptyTileSections(data);
 
-      this.saveData(data);
+      // refresh updated page structure
+      new ToolboxManager().applyNewState(cleanData, this.pageId);
+
+      this.saveData(cleanData);
     }
   }
 
@@ -247,10 +280,12 @@ export class InfoContentMapper {
         }
       );
     }
-    // refresh updated page structure
-    new ToolboxManager().applyNewState(data, this.pageId);
 
-    this.saveData(data);
+    const cleanData = this.checkAndRemoveEmptyTileSections(data);
+    // refresh updated page structure
+    new ToolboxManager().applyNewState(cleanData, this.pageId);
+
+    this.saveData(cleanData);
   }
 
   public handleDragAndDropWithinExistingTileColumn(draggedTileId: string, draggedFromParentId: string, draggedToParentId: string, tileSectionId: string, tileDestinationIndex: string): any {
@@ -320,10 +355,12 @@ export class InfoContentMapper {
         }
       );
     }
-    // refresh updated page structure
-    new ToolboxManager().applyNewState(data, this.pageId);
 
-    this.saveData(data);
+    const cleanData = this.checkAndRemoveEmptyTileSections(data);
+    // refresh updated page structure
+    new ToolboxManager().applyNewState(cleanData, this.pageId);
+
+    this.saveData(cleanData);
   }
 
   public handleDragAndDropTileToExistingTileColumn(draggedTileId: string, draggedFromParentId: string, draggedToColumnId: string, destinationTileSectionId: string, tileDestinationIndex: string): any {
@@ -393,10 +430,12 @@ export class InfoContentMapper {
         }
       );
     }
-    // refresh updated page structure
-    new ToolboxManager().applyNewState(data, this.pageId);
 
-    this.saveData(data);
+    const cleanData = this.checkAndRemoveEmptyTileSections(data);
+    // refresh updated page structure
+    new ToolboxManager().applyNewState(cleanData, this.pageId);
+
+    this.saveData(cleanData);
   }
 
   public handleDragAndDropTileWrapperToNewTileColumn(draggedTileId: string, draggedFromColumnId: string, draggedFromTileSectionId: string, beforeSectionId?: string): any {
@@ -423,6 +462,13 @@ export class InfoContentMapper {
       draggedTileParentColumn.Tiles = draggedTileParentColumn.Tiles.filter(
         (tile: any) => tile.Id !== draggedTileId
       );
+
+      // remove the parent column if it has no tiles left
+      if (draggedTileParentColumn.Tiles.length === 0) {
+        draggedTileParentSection.Columns = draggedTileParentSection.Columns.filter(
+          (col: any) => col.ColId !== draggedFromColumnId
+        );
+      }
 
       // update page structure with draggedTileParent state
       data.PageInfoStructure.InfoContent = data.PageInfoStructure.InfoContent.map(
@@ -461,11 +507,35 @@ export class InfoContentMapper {
         data.PageInfoStructure.InfoContent.splice(0, 0, content);
       }
 
-      // refresh updated page structure
-      new ToolboxManager().applyNewState(data, this.pageId);
+      const cleanData = this.checkAndRemoveEmptyTileSections(data);
 
-      this.saveData(data);
+      // refresh updated page structure
+      new ToolboxManager().applyNewState(cleanData, this.pageId);
+
+      this.saveData(cleanData);
     }
+  }
+
+  checkAndRemoveEmptyTileSections(data: any): any {
+    if (!data?.PageInfoStructure?.InfoContent) return data;
+    data.PageInfoStructure.InfoContent = data.PageInfoStructure.InfoContent.filter(
+      (section: any) => {
+        // Remove sections with empty InfoId or InfoType
+        if (!section.InfoId || !section.InfoType) {
+          return false;
+        }
+        // Only remove sections with InfoType 'TileGrid' if their columns are empty
+        if (section.InfoType === 'TileGrid') {
+          if (section.Columns && section.Columns.length > 0) {
+            return section.Columns.some((col: any) => col.Tiles && col.Tiles.length > 0);
+          }
+          return false; // Remove empty TileGrid sections
+        }
+        // Keep all other InfoTypes
+        return true;
+      }
+    );
+    return data;
   }
 
   public cutInfoSectionsFromPage(sectionIdsToRemove: any[], cutPageId: string): any {

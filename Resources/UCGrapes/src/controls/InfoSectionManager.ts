@@ -4,7 +4,7 @@ import { InfoSectionUI } from "../ui/views/InfoSectionUI";
 import { randomIdGenerator } from "../utils/helpers";
 import { InfoContentMapper } from "./editor/InfoContentMapper";
 import { AddInfoSectionButton } from "../ui/components/AddInfoSectionButton";
-import { Column, CtaAttributes, InfoType } from "../types";
+import { Column, CtaAttributes, InfoType, Tile } from "../types";
 import { i18n } from "../i18n/i18n";
 
 export class InfoSectionManager {
@@ -630,7 +630,7 @@ export class InfoSectionManager {
     if (tileInfoSectionAttributes) {
       const col = tileInfoSectionAttributes.Columns?.find((col:Column) => colId === col.ColId)
       if (col) {
-        const tile = col.Tiles?.find((tile:any) => tile.Id === tileId);
+        const tile = col.Tiles?.find((tile:Tile) => tile.Id === tileId);
         if (tile) {
           this.setNestedProperty(tile, attributePath, value);
         }

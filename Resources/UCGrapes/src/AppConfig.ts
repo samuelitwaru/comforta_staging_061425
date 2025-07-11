@@ -16,8 +16,7 @@ export class AppConfig {
     private _isInitialized: boolean = false;
     addServiceButtonEvent: any;
     addTemplatesButtonEvent: any;
-    displayMessageEvent: any;
-    displayMessageDescription: string | null = null;
+    displayMessageEvent: ((title: string, status: string, description: string) => void) | undefined;
     UC: any;
   
     private constructor() {}
@@ -44,8 +43,7 @@ export class AppConfig {
       currentLanguage: string,
       addServiceButtonEvent: any,
       addTemplatesButtonEvent: any,
-      displayMessageEvent: any,
-      displayMessageDescription: string | null
+      displayMessageEvent: ((title: string, status: string, description:string) => void) | undefined
     ): void {
       if (this._isInitialized) {
         console.warn("AppConfig already initialized - ignoring new data");
@@ -63,7 +61,6 @@ export class AppConfig {
       this.addServiceButtonEvent = addServiceButtonEvent;
       this.addTemplatesButtonEvent = addTemplatesButtonEvent;
       this.displayMessageEvent = displayMessageEvent;
-      this.displayMessageDescription = displayMessageDescription;
       this.currentLanguage = currentLanguage;
       this._isInitialized = true;
     }

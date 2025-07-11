@@ -12,7 +12,7 @@ import {
 } from "../themes/ThemeManager";
 import { i18n } from "../../i18n/i18n";
 import { resizeButton } from "../../utils/gjs-components";
-import { InfoType } from "../../types";
+import { InfoType, Tile } from "../../types";
 
 export class JSONToGrapesJSMenu {
   private data: any;
@@ -45,16 +45,17 @@ export class JSONToGrapesJSMenu {
   }
 
   private generateTile(
-    tile: any,
+    tile: Tile,
     row: any,
     isFirstSingleTile: boolean,
     isThreeTiles: boolean,
     isInfoPage?: boolean
   ): string {
+    console.log('tile?.Height', tile?.Height)
     return `
       <div ${
   isFirstSingleTile ? firstTileWrapperDefaultAttributes : tileWrapperDefaultAttributes
-} class="template-wrapper" id="${tile.Id}" style="height:${tile.Size || minTileHeight}px;">
+} class="template-wrapper" id="${tile.Id}" style="height:${tile?.Height || minTileHeight}px;">
         <div ${tileDefaultAttributes} class="template-block${
   isFirstSingleTile ? " first-tile high-priority-template" : ""
 }" 
@@ -66,13 +67,13 @@ export class JSONToGrapesJSMenu {
 }; 
         ${
   tile.BGImageUrl
-    ? `background-color: rgba(0,0,0, ${tile.Opacity / 100});
+    ? `background-color: rgba(0,0,0, ${tile?.Opacity ? tile.Opacity / 100 : 1});
                background-image: url('${tile.BGImageUrl}');
                background-size: cover;
                background-position: center;
                background-blend-mode: overlay;`
     : `
-            background-color: ${this.themeManager.getThemeColor(tile.BGColor)}; 
+            background-color: ${this.themeManager.getThemeColor(tile.BGColor || "")}; 
             `
 }">
         
@@ -89,7 +90,7 @@ export class JSONToGrapesJSMenu {
                   <span ${DefaultAttributes} class="tile-close-title top-right">×</span>
                   <span ${DefaultAttributes} class="tile-title" title="${tile.Text}" style="${
   isThreeTiles ? "text-align: center;" : `text-align: ${tile.Align}`
-}">${this.truncateText(tile, tile.Text, isThreeTiles)}</span>
+}">${this.truncateText(tile, tile.Text || "", isThreeTiles)}</span>
         </div>
       </div>
       ${

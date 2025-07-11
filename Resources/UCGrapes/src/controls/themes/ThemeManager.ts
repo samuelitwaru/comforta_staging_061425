@@ -1,8 +1,9 @@
 import { AppConfig } from "../../AppConfig";
-import { InfoType, Theme, ThemeColors, ThemeCtaColor, Tile } from "../../types";
+import { Column, InfoType, Theme, ThemeColors, ThemeCtaColor, Tile } from "../../types";
 import { ColorPalette } from "../../ui/components/tools-section/ColorPalette";
 import { CtaColorPalette } from "../../ui/components/tools-section/content-section/CtaColorPalette";
 import { IconListCategories } from "../../ui/components/tools-section/icon-list/IconListCategories";
+import { LanguageTranslate } from "../translation/LanguageTranslate";
 import { AppVersionManager } from "../versions/AppVersionManager";
 
 interface WindowApp {
@@ -50,12 +51,9 @@ export class ThemeManager {
   setThemes(themes: Theme[]): void {
     this._themes = themes;
     this._currentTheme =
-      this.getThemes().find(
-        (theme: Theme) => theme.ThemeId === this.config.currentThemeId
-      ) || null;
+      this.getThemes().find((theme: Theme) => theme.ThemeId === this.config.currentThemeId) || null;
     if (this._currentTheme) {
-      window.DynamicFormSubmitButtonColor =
-        this._currentTheme.ThemeColors.backgroundColor;
+      window.DynamicFormSubmitButtonColor = this._currentTheme.ThemeColors.backgroundColor;
     }
   }
 
@@ -80,7 +78,7 @@ export class ThemeManager {
   }
 
   getFontFamily() {
-    return this._currentTheme?.ThemeFontFamily || 'Roboto';
+    return this._currentTheme?.ThemeFontFamily || "Roboto";
   }
 
   setTheme(theme: Theme): void {
@@ -90,31 +88,23 @@ export class ThemeManager {
     this.config.currentThemeId = theme.ThemeId;
     this.applyTheme(theme.ThemeId);
     if (this._currentTheme) {
-      window.DynamicFormSubmitButtonColor =
-        this._currentTheme.ThemeColors.backgroundColor;
-      if (
-        window.DynamicFormSubmitButtons &&
-        window.DynamicFormSubmitButtons.length != 0
-      ) {
+      window.DynamicFormSubmitButtonColor = this._currentTheme.ThemeColors.backgroundColor;
+      if (window.DynamicFormSubmitButtons && window.DynamicFormSubmitButtons.length != 0) {
         window.DynamicFormSubmitButtons.forEach((button) => {
           button.style.backgroundColor = window.DynamicFormSubmitButtonColor;
         });
       }
 
       if (window.DynamicFormstepNumberBulletSelecteds) {
-        window.DynamicFormstepNumberBulletSelecteds.forEach(
-          (span: HTMLDivElement) => {
-            span.style.backgroundColor = window.DynamicFormSubmitButtonColor;
-          }
-        );
+        window.DynamicFormstepNumberBulletSelecteds.forEach((span: HTMLDivElement) => {
+          span.style.backgroundColor = window.DynamicFormSubmitButtonColor;
+        });
       }
 
       if (window.DynamicFormtableStepBulletCheckeds) {
-        window.DynamicFormtableStepBulletCheckeds.forEach(
-          (span: HTMLDivElement) => {
-            span.style.backgroundColor = window.DynamicFormSubmitButtonColor;
-          }
-        );
+        window.DynamicFormtableStepBulletCheckeds.forEach((span: HTMLDivElement) => {
+          span.style.backgroundColor = window.DynamicFormSubmitButtonColor;
+        });
       }
 
       if (window.DynamicFormFileInputButtons) {
@@ -136,12 +126,10 @@ export class ThemeManager {
       }
 
       if (window.DynamicFormWizardPrevious) {
-        window.DynamicFormWizardPrevious.forEach(
-          (button: HTMLButtonElement) => {
-            button.style.backgroundColor = window.DynamicFormSubmitButtonColor;
-            button.style.border = "0px";
-          }
-        );
+        window.DynamicFormWizardPrevious.forEach((button: HTMLButtonElement) => {
+          button.style.backgroundColor = window.DynamicFormSubmitButtonColor;
+          button.style.border = "0px";
+        });
       }
     }
   }
@@ -149,9 +137,7 @@ export class ThemeManager {
   updateColorPallete(colors: ThemeColors): void {
     try {
       const colorPallete = new ColorPalette(colors, "theme-color-palette");
-      const parent = document.querySelector(
-        ".sidebar-section.theme-section"
-      ) as HTMLElement;
+      const parent = document.querySelector(".sidebar-section.theme-section") as HTMLElement;
 
       if (colorPallete && parent) {
         colorPallete.refresh(parent);
@@ -164,9 +150,7 @@ export class ThemeManager {
   updateCtaColorPallete(ctaColors: ThemeCtaColor): void {
     try {
       const ctaColorPallete = new CtaColorPalette(ctaColors);
-      const container = document.getElementById(
-        "content-page-section"
-      ) as HTMLElement;
+      const container = document.getElementById("content-page-section") as HTMLElement;
       if (container) {
         ctaColorPallete.refresh(container);
       }
@@ -177,9 +161,7 @@ export class ThemeManager {
 
   updateThemeIcons(categoryTitle: string = "Technical Services & Support"): void {
     try {
-      const menuPageSection = document.getElementById(
-        "menu-page-section"
-      ) as HTMLElement;
+      const menuPageSection = document.getElementById("menu-page-section") as HTMLElement;
       if (menuPageSection) {
         const themeIcons = new IconListCategories(categoryTitle);
         themeIcons.render(menuPageSection);
@@ -187,17 +169,6 @@ export class ThemeManager {
     } catch (error) {
       console.error("Error updating theme icons:", error);
     }
-  }
-
-  getThemeColor(colorName: string): string | null {
-    if (!this._currentTheme || !this._currentTheme.ThemeColors) {
-      console.error("ThemeColors is undefined or invalid:", this._currentTheme);
-      return null;
-    }
-    return (
-      this._currentTheme.ThemeColors[colorName as keyof ThemeColors] ||
-      "transparent"
-    );
   }
 
   getThemeCtaColor(colorName: string = "ctaColor1"): string {
@@ -210,24 +181,18 @@ export class ThemeManager {
       ? this._currentTheme.ThemeCtaColors
       : [];
     return (
-      ctaColors.find((color: any) => color.CtaColorName === colorName)
-        ?.CtaColorCode || "#5068a8"
+      ctaColors.find((color: any) => color.CtaColorName === colorName)?.CtaColorCode || "#5068a8"
     );
   }
 
   getThemeIcon(iconName: string): any | null {
     const icons = this.getActiveThemeIcons();
-    return (
-      icons?.find((icon: any) => icon.IconCodeName === iconName) || null
-    );
+    return icons?.find((icon: any) => icon.IconCodeName === iconName) || null;
   }
 
   getIconCategory(iconName: string): string | null {
     const icons = this.getActiveThemeIcons();
-    return (
-      icons?.find((icon: any) => icon.IconCodeName === iconName)?.IconCategory ||
-      null
-    );
+    return icons?.find((icon: any) => icon.IconCodeName === iconName)?.IconCategory || null;
   }
 
   async applyTheme(themeId?: string): Promise<void> {
@@ -253,10 +218,24 @@ export class ThemeManager {
         this.updateColorPallete(theme.ThemeColors);
         this.updateCtaColorPallete(theme.ThemeCtaColors);
         this.updateThemeIcons();
+        this.updateTranslationFrame();
       }
     } catch (error) {
-      console.error("Error applying theme:", error);
+      throw error;
     }
+  }
+
+  private updateTranslationFrame() {
+    const isTranslationMode = (globalThis as any).isTranslationMode;
+    const pageId = (globalThis as any).currentPageId;
+    if (!isTranslationMode || !pageId) return;
+    new LanguageTranslate().translatePage(pageId);
+  }
+  getThemeColor(colorName: string): string | null {
+    if (!this._currentTheme || !this._currentTheme.ThemeColors) {
+      return null;
+    }
+    return this._currentTheme.ThemeColors[colorName as keyof ThemeColors] || "transparent";
   }
 
   private async processPage(
@@ -271,19 +250,11 @@ export class ThemeManager {
       const pageData: PageData = pageDataStr ? JSON.parse(pageDataStr) : {};
 
       if (pageData.PageContentStructure?.Cta) {
-        this.processPageContentCtas(
-          pageData.PageContentStructure.Cta,
-          iframes,
-          theme
-        );
+        this.processPageContentCtas(pageData.PageContentStructure.Cta, iframes, theme);
       }
 
       if (pageData.PageInfoStructure?.InfoContent) {
-        this.processPageInfoContent(
-          pageData.PageInfoStructure.InfoContent,
-          iframes,
-          theme
-        );
+        this.processPageInfoContent(pageData.PageInfoStructure.InfoContent, iframes, theme);
       }
     } catch (error) {
       console.error(`Error processing page ${page.PageId}:`, error);
@@ -301,18 +272,12 @@ export class ThemeManager {
           const iframeDoc = this.getIframeDocument(iframe);
           if (iframeDoc) {
             this.updateFontFamily(iframeDoc, theme.ThemeFontFamily);
-            const ctaElement = iframeDoc.querySelector(
-              `#${cta.CtaId}`
-            ) as HTMLElement;
+            const ctaElement = iframeDoc.querySelector(`#${cta.CtaId}`) as HTMLElement;
 
             if (ctaElement) {
-              const ctaButton = ctaElement.querySelector(
-                ".cta-styled-btn"
-              ) as HTMLElement;
+              const ctaButton = ctaElement.querySelector(".cta-styled-btn") as HTMLElement;
               if (ctaButton) {
-                ctaButton.style.backgroundColor = this.getThemeCtaColor(
-                  cta.CtaBGColor
-                );
+                ctaButton.style.backgroundColor = this.getThemeCtaColor(cta.CtaBGColor);
               }
             }
 
@@ -336,15 +301,11 @@ export class ThemeManager {
           const iframeDoc = this.getIframeDocument(iframe);
           if (iframeDoc) {
             this.updateFontFamily(iframeDoc, theme.ThemeFontFamily);
-            const infoElement = iframeDoc.querySelector(
-              `#${info.InfoId}`
-            ) as HTMLElement;
+            const infoElement = iframeDoc.querySelector(`#${info.InfoId}`) as HTMLElement;
 
             if (infoElement) {
               if (info.InfoType === "Cta") {
-                const ctaButton = infoElement?.querySelector(
-                  ".cta-styled-btn"
-                ) as HTMLElement;
+                const ctaButton = infoElement?.querySelector(".cta-styled-btn") as HTMLElement;
                 if (ctaButton && info.CtaAttributes?.CtaBGColor) {
                   ctaButton.style.backgroundColor = this.getThemeCtaColor(
                     info.CtaAttributes.CtaBGColor
@@ -352,6 +313,12 @@ export class ThemeManager {
                 }
               } else if (info.InfoType === "TileRow" && info.Tiles) {
                 this.processTiles(info.Tiles, iframeDoc, theme);
+              } else if (info.InfoType === "TileGrid" && info.Columns) {
+                const columns: Column[] | undefined = info.Columns;
+                if (!columns) return;
+                columns.forEach((col: Column) => {
+                  this.processTiles(col.Tiles, iframeDoc, theme);
+                });
               }
             }
             this.updateFrameColor(iframeDoc);
@@ -368,12 +335,9 @@ export class ThemeManager {
       try {
         const tileWrapper = iframeDoc.getElementById(tile.Id);
         if (tileWrapper) {
-          const tileEl = tileWrapper.querySelector(
-            ".template-block"
-          ) as HTMLElement;
+          const tileEl = tileWrapper.querySelector(".template-block") as HTMLElement;
           if (tileEl && !tile.BGImageUrl && tile.BGColor) {
-            const bgColor =
-              theme.ThemeColors?.[tile.BGColor as keyof ThemeColors];
+            const bgColor = theme.ThemeColors?.[tile.BGColor as keyof ThemeColors];
             if (bgColor) {
               tileEl.style.backgroundColor = bgColor;
             }
@@ -400,10 +364,7 @@ export class ThemeManager {
       if (!newIconSVG) return;
 
       if (tile.Color) {
-        newIconSVG = newIconSVG.replace(
-          'fill="#7c8791"',
-          `fill="${tile.Color}"`
-        );
+        newIconSVG = newIconSVG.replace('fill="#7c8791"', `fill="${tile.Color}"`);
       }
 
       const tempDiv = document.createElement("div");
@@ -419,10 +380,7 @@ export class ThemeManager {
     }
   }
 
-  private updateFontFamily(
-    iframeDoc: Document,
-    fontFamily: string = "Comic Sans MS"
-  ): void {
+  private updateFontFamily(iframeDoc: Document, fontFamily: string = "Comic Sans MS"): void {
     try {
       const root = iframeDoc.documentElement;
       if (root) {
@@ -441,20 +399,12 @@ export class ThemeManager {
       const toggleButtons = iframeDoc.querySelector(".tb-toggle-buttons");
       const myActivityMessageButton = toggleButtons?.children[0] as HTMLElement;
       if (myActivityMessageButton) {
-        myActivityMessageButton.style.setProperty(
-          "background-color",
-          backgroundColor
-        );
+        myActivityMessageButton.style.setProperty("background-color", backgroundColor);
       }
 
-      const calendarDateSelector = iframeDoc.querySelector(
-        ".tb-date-selector"
-      ) as HTMLElement;
+      const calendarDateSelector = iframeDoc.querySelector(".tb-date-selector") as HTMLElement;
       if (calendarDateSelector) {
-        calendarDateSelector.style.setProperty(
-          "background-color",
-          backgroundColor
-        );
+        calendarDateSelector.style.setProperty("background-color", backgroundColor);
       }
     } catch (error) {
       console.error("Error updating frame color:", error);

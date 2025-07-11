@@ -12,6 +12,7 @@ export class TreeViewSection {
     this.container.id = "tree-view-section";
     this.container.className = "sidebar-section tree-view-section";
 
+    const hr = document.createElement("hr");
     this.sectionTree = document.createElement("div");
     this.sectionTree.id = "section-tree";
     this.sectionTree.className = "section-tree";
@@ -25,6 +26,7 @@ export class TreeViewSection {
 
     // treeContainer.innerHTML = "<svg></svg>";
 
+    this.container.appendChild(hr);
     this.sectionTree.appendChild(treeContainer);
     this.container.appendChild(this.sectionTree);
 
@@ -49,9 +51,25 @@ export class TreeViewSection {
 
   render(container: HTMLElement) {
     container.appendChild(this.container);
+    this.updateTreeViewSectionTop();
 
     const pageBubbleTree = new PageBubbleTree((globalThis as any).currentPageId);
     pageBubbleTree.intializePreviewTree();
+
+    // Also update on window resize/scroll
+    window.addEventListener('resize', () => this.updateTreeViewSectionTop());
+    window.addEventListener('scroll', () => this.updateTreeViewSectionTop());
+  }
+
+  updateTreeViewSectionTop() {
+    const activeEditor = document.querySelector('.active-editor');
+    const treeViewSection = document.querySelector('.tree-view-section');
+    if (activeEditor && treeViewSection) {
+      const rect = activeEditor.getBoundingClientRect();
+      // Calculate the bottom position relative to the viewport, then add scroll offset
+      const topPx = rect.height;
+      (treeViewSection as HTMLElement).style.top = `${topPx+30}px`;
+    }
   }
 
   //refresh container to render the tree view

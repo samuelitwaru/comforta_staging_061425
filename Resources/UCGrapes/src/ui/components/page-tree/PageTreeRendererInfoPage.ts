@@ -269,12 +269,12 @@ export class PageTreeRendererInfoPage {
                       <div class="tb-time" >${formattedHour}</div>
                       <div class="tb-events" ></div>
                       ${
-                        hour === new Date().getHours()
-                          ? `
+  hour === new Date().getHours()
+    ? `
                         <div class="tb-current-time-indicator" ></div>
                         <div class="tb-current-time-dot" ></div>`
-                          : ""
-                      }
+    : ""
+}
 
                     </div>
                   `;
@@ -384,19 +384,19 @@ export class PageTreeRendererInfoPage {
             `,
       Image: (cta: any) => `
               <div class="cta-image-button-tree" style="background:${this.getCtaColor(
-                cta.CtaBGColor
-              )}">
+    cta.CtaBGColor
+  )}">
                 <div class="cta-image-button-image-tree"> <img src= "${
-                  cta.CtaButtonImgUrl
-                }" alt="Image" style="width: 18px; height: 18px; object-fit: cover; border-radius: 5px;"/></div>
+  cta.CtaButtonImgUrl
+}" alt="Image" style="width: 18px; height: 18px; object-fit: cover; border-radius: 5px;"/></div>
                 <div class="cta-image-button-label-tree">${cta.CtaLabel}</div>
                 <i class="fa fa-angle-right img-button-arrow-tree"></i>
               </div>
               `,
       Icon: (cta: any) => `
               <div class="cta-icon-button-tree" style="background:${this.getCtaColor(
-                cta.CtaBGColor
-              )}">
+    cta.CtaBGColor
+  )}">
                 <div class="cta-icon-button-icon-tree" >${icons[cta.CtaButtonIcon]}</div>
                 <div class="cta-icon-button-label-tree">
                   ${cta.CtaLabel}

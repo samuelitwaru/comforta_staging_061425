@@ -25,9 +25,9 @@ export async function imageToBase64(url: string) {
 }
 
 export function rgbToHex(rgb: string): string {
-  if (!rgb) return ""; 
+  if (!rgb) return "";
 
-  const rgbArray = rgb.match(/\d+/g); 
+  const rgbArray = rgb.match(/\d+/g);
   return rgbArray && rgbArray.length === 3
     ? `#${rgbArray.map((x) => Number(x).toString(16).padStart(2, "0")).join("")}`
     : "";
@@ -37,71 +37,72 @@ export function truncateString(str: string, n: number): string {
   return str.length > n ? str.slice(0, n) + "..." : str;
 }
 
-export function capitalizeWords(str:string) {
-  return str.replace(/\b\w/g, char => char.toUpperCase());
+export function capitalizeWords(str: string) {
+  return str.replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
 export function getIconCategories() {
   let categories: { name: string; label: string }[] = [
-        {
-          name: "Technical Services & Support",
-          label: i18n.t("sidebar.icon_category.general"),
-        },
-        {
-          name: "Real Estate & Rental",
-          label: i18n.t("sidebar.icon_category.real_estate_rental"),
-        },
-        {
-          name: "Community & Connection",
-          label: i18n.t("sidebar.icon_category.community_connection"),
-        },
-        {
-          name: "Building & Furnishing",
-          label: i18n.t("sidebar.icon_category.building_furnishing"),
-        },
-        {
-          name: "Services & Hospitality",
-          label: i18n.t("sidebar.icon_category.services_hospitality"),
-        },
-        {
-          name: "Mobility & Transport",
-          label: i18n.t("sidebar.icon_category.mobility_transport"),
-        },
-        {
-          name: "Care & Wellbeing",
-          label: i18n.t("sidebar.icon_category.care_wellbeing"),
-        },
-        {
-          name: "Communication & Media",
-          label: i18n.t("sidebar.icon_category.communication_media"),
-        },
-      ];
-      return categories;
+    {
+      name: "Technical Services & Support",
+      label: i18n.t("sidebar.icon_category.general"),
+    },
+    {
+      name: "Real Estate & Rental",
+      label: i18n.t("sidebar.icon_category.real_estate_rental"),
+    },
+    {
+      name: "Community & Connection",
+      label: i18n.t("sidebar.icon_category.community_connection"),
+    },
+    {
+      name: "Building & Furnishing",
+      label: i18n.t("sidebar.icon_category.building_furnishing"),
+    },
+    {
+      name: "Services & Hospitality",
+      label: i18n.t("sidebar.icon_category.services_hospitality"),
+    },
+    {
+      name: "Mobility & Transport",
+      label: i18n.t("sidebar.icon_category.mobility_transport"),
+    },
+    {
+      name: "Care & Wellbeing",
+      label: i18n.t("sidebar.icon_category.care_wellbeing"),
+    },
+    {
+      name: "Communication & Media",
+      label: i18n.t("sidebar.icon_category.communication_media"),
+    },
+  ];
+  return categories;
 }
 
-export function getNextSiblingComponent(component:any, classFilter:string) {
+export function getNextSiblingComponent(component: any, classFilter: string) {
   const parent = component.parent(); // Get the parent component
   if (!parent) {
     return null; // No parent means no siblings
   }
 
-  const siblings = parent.components().filter((comp:any) => comp.getClasses().includes(classFilter)); // Get all children of the parent (which are siblings of the component)
+  const siblings = parent
+    .components()
+    .filter((comp: any) => comp.getClasses().includes(classFilter)); // Get all children of the parent (which are siblings of the component)
   const currentIndex = siblings.indexOf(component); // Find the index of the current component
 
   if (currentIndex !== -1 && currentIndex < siblings.length - 1) {
     return siblings.at(currentIndex + 1); // Return the component at the next index
   }
-    
+
   return null; // No next sibling found
 }
 
-export function getTileAttrs(pageId:string, rowId:string, colId:string, tileId:string) {
-    const infoContentMapper = new InfoContentMapper(pageId);
-    const tileSection: InfoType | null =
-      infoContentMapper.getInfoContent(rowId);
-    if (tileSection) {
-      const col = tileSection.Columns?.find((col:any) => col.ColId == colId)
-      const tile = col?.Tiles?.find((tile:any) => tile.Id == tileId)
-      return tile
-    }
+export function getTileAttrs(pageId: string, rowId: string, colId: string, tileId: string) {
+  const infoContentMapper = new InfoContentMapper(pageId);
+  const tileSection: InfoType | null = infoContentMapper.getInfoContent(rowId);
+  if (tileSection) {
+    const col = tileSection.Columns?.find((col: any) => col.ColId === colId);
+    const tile = col?.Tiles?.find((tile: any) => tile.Id === tileId);
+    return tile;
+  }
 }

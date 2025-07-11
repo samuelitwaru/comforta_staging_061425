@@ -1,5 +1,5 @@
 // TranslationUI.ts
-import { Column, CtaAttributes, InfoType } from "../../types";
+import { Column, CtaAttributes, InfoType, Tile } from "../../types";
 import { ctaIcons } from "../../utils/cta-icons";
 import { ThemeManager } from "../themes/ThemeManager";
 import Quill from "quill";
@@ -42,6 +42,7 @@ export class TranslationUI {
               data-original-content="${this.escapeHtml(content)}"
               data-full-content="${this.escapeHtml(fullContent || content)}"
               contenteditable="false"
+              style="width: 100%; display: inline-block; font-size: 15px;"
               ${titleAttr}>
           ${isHtml ? content : this.escapeHtml(content)}
         </span>`;
@@ -90,22 +91,27 @@ export class TranslationUI {
   }
 
   // In TranslationUI.ts
-  public createTileGridSection(section: any, index: number): string {
+  public createTileGridSection(section: any): string {
     const columns = section.Columns || [];
     let columnsHtml = "";
 
-    columns?.forEach((column: Column, colIndex: number) => {
+    columns?.forEach((column: Column) => {
       const tiles = column.Tiles || [];
       let tilesHtml = "";
-      const tileHeightStyle =
-          tiles.length === 1 ? "height: 100%;" : `height: 80px;`;
 
-      tiles.forEach((tile: any, tileIndex: number) => {
+      const columnHeightStyle =
+        tiles.length === 1 ? `min-height: 100%;` : `min-height: ${80 * tiles.length}px`;
+
+      tiles.forEach((tile: Tile, tileIndex: number) => {
         const hasBackgroundImage = tile.BGImageUrl && tile.BGImageUrl.trim() !== "";
-        const backgroundColor = this.themeManager.getThemeColor(tile.BGColor);
+        const backgroundColor = this.themeManager.getThemeColor(tile.BGColor || "");
 
         const backgroundStyle = hasBackgroundImage
-          ? `background-image: url('${tile.BGImageUrl}'); background-size: cover; background-position: center;`
+          ? `background-color: rgba(0,0,0, ${tile?.Opacity ? tile.Opacity / 100 : 0});
+               background-image: url('${tile.BGImageUrl}');
+               background-size: cover;
+               background-position: center;
+               background-blend-mode: overlay;`
           : `background-color: ${backgroundColor};`;
 
         const tileContent = tile.Text || tile.Name || "";
@@ -120,12 +126,18 @@ export class TranslationUI {
          style="
           ${backgroundStyle}
           color: ${tile.Color || "#333"};
-          align-items: center;
+          align-items: ${tile.Align === "left" ? "start" : tile.Align}; 
+          justify-content: ${tile.Align === "left" ? "start" : tile.Align};
           justify-content: ${tile.Align || "left"};
           text-align: ${tile.Align || "left"};
-          ${tileHeightStyle}
+          min-height: ${tile?.Height ? tile.Height : 80}px;
           ">
           ${editableTileContent}
+          <div class="tile-icon-section" ${tile.Icon ? 'style="display: block;"' : ""}>
+            <span title="${tile.Icon}" class="tile-icon">
+              ${this.getTileIcon(tile)}
+            </span>
+          </div>
         </div>
       `;
       });
@@ -136,7 +148,8 @@ export class TranslationUI {
                      flex: 1;
                      display: flex;
                      flex-direction: column;
-                     height: 80px
+                     gap: 8px;
+                     ${columnHeightStyle}
                  ">
                 ${tilesHtml}
             </div>
@@ -148,6 +161,16 @@ export class TranslationUI {
             ${columnsHtml}
         </div>
     `;
+  }
+
+  private getTileIcon(tile: any) {
+    const iconSVG = this.themeManager.getThemeIcon(tile.Icon);
+    let cleanedSVG = "";
+    if (iconSVG) {
+      // replace path fill with tile.icon
+      cleanedSVG = iconSVG.replace('fill="#7c8791"', `fill="${tile.Color}"`);
+    }
+    return cleanedSVG;
   }
 
   public createDescSection(section: any, sectionIndex: number): string {
@@ -234,7 +257,7 @@ export class TranslationUI {
         );
 
         const label = section.CtaAttributes.CtaLabel || "";
-        const truncatedLabel = label.length > 12 ? label.slice(0, 12) + "..." : label;
+        const truncatedLabel = label.length > 18 ? label.slice(0, 18) + "..." : label;
         const editableLabel = this.makeEditable(
           truncatedLabel,
           `InfoContent.${sectionIndex}.CtaAttributes.CtaLabel`,
@@ -694,8 +717,8 @@ export class TranslationUI {
       element.closest(".translated-cta-icon-button__label") ||
       element.closest(".translated-cta-plain-button__label");
 
-    if (isCTALabel && !editableInfo.isHtml && fullContent.length > 12) {
-      element.textContent = fullContent.slice(0, 12) + "...";
+    if (isCTALabel && !editableInfo.isHtml && fullContent.length > 18) {
+      element.textContent = fullContent.slice(0, 18) + "...";
     } else {
       if (editableInfo.isHtml) {
         element.innerHTML = fullContent;

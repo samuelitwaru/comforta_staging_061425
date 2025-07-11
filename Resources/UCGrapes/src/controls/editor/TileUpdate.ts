@@ -239,15 +239,13 @@ export class TileUpdate {
   updateTilesDraggableProperty(editor: any): void {
     const wrapper = editor.getWrapper();
     // Set all tile-wrapper components to not draggable by default
-    console.log('wrapper1', wrapper.find)
     const allTileWrappers = wrapper.find('[data-gjs-type="tile-wrapper"]');
-
     allTileWrappers.forEach((tile: any) => {
       tile.set('draggable', false);
       tile.addAttributes({'data-gjs-draggable': 'false'});
       tile.trigger('change:draggable');
     });
-    console.log('wrapper2', wrapper)
+
     // Loop through all tile-col-wrapper components
     const colWrappers = wrapper.find('[data-gjs-type="tile-col-wrapper"]');
     colWrappers.forEach((col: any) => {

@@ -1,44 +1,49 @@
 import { ThemeManager } from "../controls/themes/ThemeManager";
 import { i18n } from "../i18n/i18n";
 import { Tile } from "../types";
-import { DefaultAttributes, infoRowDefaultAttributes, minTileHeight, tileDefaultAttributes, tileWrapperDefaultAttributes } from "./default-attributes";
+import {
+  DefaultAttributes,
+  infoRowDefaultAttributes,
+  minTileHeight,
+  tileDefaultAttributes,
+  tileWrapperDefaultAttributes,
+} from "./default-attributes";
 import { randomIdGenerator, truncateString } from "./helpers";
 
-export function resizeButton (title:string) {
-    return `
+export function resizeButton(title: string) {
+  return `
         <button ${DefaultAttributes} title="${title}" class="tile-resize-button">
         </button>
-    `
+    `;
 }
 
-export function addRightButton (title:string) {
-    return `
+export function addRightButton(title: string) {
+  return `
         <button ${DefaultAttributes} data-gjs-type="default" title="${title}" class="action-button add-button-right readonly-mode">
           <svg ${DefaultAttributes} fill="#fff" width="15" height="15" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path ${DefaultAttributes} d="M19,11H13V5a1,1,0,0,0-2,0v6H5a1,1,0,0,0,0,2h6v6a1,1,0,0,0,2,0V13h6a1,1,0,0,0,0-2Z"/>
           </svg>
         </button>
-    `
+    `;
 }
 
-export function tileFromAttributes (tile: Tile, themeManager:ThemeManager): string {
-  const id = tile.Id
-  const text = tile.Text
-  const textColor = tile.Color
-  const align = tile.Align
-  const icon = themeManager.getThemeIcon(tile.Icon as string)
-  let iconSVG = ""
+export function tileFromAttributes(tile: Tile, themeManager: ThemeManager): string {
+  const id = tile.Id;
+  const text = tile.Text;
+  const textColor = tile.Color;
+  const align = tile.Align;
+  const icon = themeManager.getThemeIcon(tile.Icon as string);
+  let iconSVG = "";
   if (icon) {
-    iconSVG = icon.IconSVG.replace(/fill="[^"]*"/g, `fill="${textColor}" ${DefaultAttributes}`)
+    iconSVG = icon.IconSVG.replace(/fill="[^"]*"/g, `fill="${textColor}" ${DefaultAttributes}`);
   }
-  const bgImage = tile.BGImageUrl
-  const bgColor = bgImage ? '' : themeManager.getThemeColor(tile.BGColor as string)
+  const bgImage = tile.BGImageUrl;
+  const bgColor = bgImage ? "" : themeManager.getThemeColor(tile.BGColor as string);
   const opacity = tile.Opacity || 0;
-
   return `
-    <div ${tileWrapperDefaultAttributes} class="template-wrapper" id="${ id }" style="text-align:${align}">
-        <div ${tileDefaultAttributes} class="template-block" style="background-color: ${bgColor}; ${bgImage?`background-image:url(${bgImage});background-color: rgba(0,0,0, ${opacity / 100}); background-image: url('${tile.BGImageUrl}'); background-size: cover; background-position: center; background-blend-mode: overlay`:``}; color: ${textColor}; justify-content: ${align}; align-items: ${align}">
-            <div ${DefaultAttributes} class="tile-icon-section"  style="display: ${icon?'block':'none'}; " >
+    <div ${tileWrapperDefaultAttributes} class="template-wrapper" id="${id}" style="text-align:${align}; height:${tile?.Height || minTileHeight}px;">
+        <div ${tileDefaultAttributes} class="template-block" style="background-color: ${bgColor}; ${bgImage ? `background-image:url(${bgImage});background-color: rgba(0,0,0, ${opacity / 100}); background-image: url('${tile.BGImageUrl}'); background-size: cover; background-position: center; background-blend-mode: overlay` : ``}; color: ${textColor}; justify-content: ${align}; align-items: ${align}">
+            <div ${DefaultAttributes} class="tile-icon-section"  style="display: ${icon ? "block" : "none"}; " >
                 <span ${DefaultAttributes} data-gjs-type="text" class="tile-close-icon top-right selected-tile-title readonly-mode">×</span>
                 <span ${DefaultAttributes} data-gjs-type="text" title="${icon?.IconName}" class="tile-icon">
                   ${iconSVG}
@@ -63,9 +68,9 @@ export function tileFromAttributes (tile: Tile, themeManager:ThemeManager): stri
   `;
 }
 
-export  function newTile(tileId?:String){
+export function newTile(tileId?: String) {
   return `
-      <div ${tileWrapperDefaultAttributes} class="template-wrapper" id="${ tileId || randomIdGenerator(8)}">
+      <div ${tileWrapperDefaultAttributes} class="template-wrapper" id="${tileId || randomIdGenerator(8)}">
           <div ${tileDefaultAttributes} class="template-block" style="background-color: transparent; color: #333333; justify-content: left">
               <div ${DefaultAttributes} id="igtdq" data-gjs-type="default" class="tile-icon-section">
                   <span ${DefaultAttributes} id="is1dw" data-gjs-type="text" class="tile-close-icon top-right selected-tile-title readonly-mode">×</span>
@@ -73,7 +78,7 @@ export  function newTile(tileId?:String){
               </div>
               <div ${DefaultAttributes} id="igtdq" data-gjs-type="default" class="tile-title-section">
                   <span ${DefaultAttributes} id="is1dw" data-gjs-type="text" class="tile-close-title top-right selected-tile-title readonly-mode">×</span>
-                  <span ${DefaultAttributes} style="display: block" id="ic26t" data-gjs-type="text" is-hidden="false" title="${i18n.t('tile.title')}" class="tile-title">${i18n.t('tile.title')}</span>
+                  <span ${DefaultAttributes} style="display: block" id="ic26t" data-gjs-type="text" is-hidden="false" title="${i18n.t("tile.title")}" class="tile-title">${i18n.t("tile.title")}</span>
               </div>
           </div>
           <button ${DefaultAttributes} id="ifvvi" data-gjs-type="default" title="Add tile right" class="action-button add-button-right readonly-mode">+</button>
@@ -88,46 +93,46 @@ export  function newTile(tileId?:String){
               </g>
           </svg>
       </div>
-    `
+    `;
 }
 
-export function newTileRow(tileHTML?:string) {
-    const col = newTileColumn(tileHTML)
-    const rowId =  randomIdGenerator(8)
-    const html = `
+export function newTileRow(tileHTML?: string) {
+  const col = newTileColumn(tileHTML);
+  const rowId = randomIdGenerator(8);
+  const html = `
       <div class="container-row" ${infoRowDefaultAttributes} id="${rowId}">
         ${col.html}
       </div>
     `;
-    return {
-      html: html,
-      rowId: rowId,
-      colId: col.colId,
-      tileId: col.tileId
-    } 
+  return {
+    html: html,
+    rowId: rowId,
+    colId: col.colId,
+    tileId: col.tileId,
+  };
 }
 
-export function newTileColumn(tileHTML?:string) {
-    const colId = randomIdGenerator(8)
-    const tileId = randomIdGenerator(8)
-    if (!tileHTML) {
-        tileHTML = newTile(tileId)
-    }
+export function newTileColumn(tileHTML?: string) {
+  const colId = randomIdGenerator(8);
+  const tileId = randomIdGenerator(8);
+  if (!tileHTML) {
+    tileHTML = newTile(tileId);
+  }
 
-    const html =  `
+  const html = `
         <div ${DefaultAttributes} id="${colId}" class="tile-column" data-gjs-type="tile-column">
             ${tileHTML}
         </div>
     `;
-    return {
-        html: html,
-        colId: colId,
-        tileId: tileId
-    }
+  return {
+    html: html,
+    colId: colId,
+    tileId: tileId,
+  };
 }
 
 export function infoSectionSpacer() {
-    return `
+  return `
     <div ${DefaultAttributes} data-type="add-button" data-custom="add-button" class="info-section-spacing-container">
         <div ${DefaultAttributes} class="add-new-info-section">
           <hr ${DefaultAttributes} class="add-new-info-hr" />
@@ -146,5 +151,5 @@ export function infoSectionSpacer() {
           </svg>
         </div>
     </div>
-    `
+    `;
 }

@@ -459,7 +459,6 @@ export class EditorUIManager {
   }
 
   updateActivePages(frameId: string, pageId: string): { frameId: string; pageId: string }[] {
-    // console.log("Updating active pages with frameId:", frameId, "and pageId:", pageId);
     const activePages = (globalThis as any).activePages as { frameId: string; pageId: string }[];
 
     // Find the index of the target page

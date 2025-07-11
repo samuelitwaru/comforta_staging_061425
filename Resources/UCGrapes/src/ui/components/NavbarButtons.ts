@@ -4,6 +4,7 @@ import { Button } from "./Button";
 import { EditActions } from "./EditActions";
 import { ThemeSelection } from "./ThemeSelection";
 import { i18n } from "../../i18n/i18n";
+import { TranslateDropDown } from "./tools-section/translate/TranslateDropDown";
 
 export class NavbarButtons {
   container: HTMLElement;
@@ -20,6 +21,11 @@ export class NavbarButtons {
 
     const themeSelection = new ThemeSelection();
 
+    const activeVersion = new AppVersionManager().getActiveVersion();
+    const activeVersionLanguage = activeVersion.AppVersionLanguage;
+
+    const translateDropDown = new TranslateDropDown(activeVersionLanguage);
+
     const publishButtonSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="13" height="16" viewBox="0 0 13 18">
         <path id="Path_958" data-name="Path 958" d="M13.5,3.594l-.519.507L7.925,9.263l1.038,1.06,3.814-3.9V18.644h1.444V6.429l3.814,3.9,1.038-1.06L14.019,4.1ZM7,20.119v1.475H20V20.119Z" transform="translate(-7 -3.594)" fill="#fff"></path>
       </svg>`;
@@ -30,6 +36,8 @@ export class NavbarButtons {
     });
 
     editActions.render(this.container);
+
+    translateDropDown.render(this.container);
 
     themeSelection.render(this.container);
 

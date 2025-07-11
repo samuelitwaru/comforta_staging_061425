@@ -1,4 +1,5 @@
-// LanguageDropDown.ts
+import { LanguageTranslate } from "../../../../controls/translation/LanguageTranslate";
+import { TranslationodeUIManager } from "../../../../controls/translation/TranslationModeUIManager";
 import { i18n } from "../../../../i18n/i18n";
 
 interface Language {
@@ -7,7 +8,30 @@ interface Language {
   flag: string;
 }
 
-export class LanguageDropDown {
+export class TranslateDropDown {
+  private static readonly SECTION_IDS = {
+    TRANSLATE_SECTION: "translate-page-section",
+    MENU_SECTION: "menu-page-section",
+    TREE_SECTION: "tree-view-section",
+    CONTENT_SECTION: "content-page-section",
+    TRANSLATE_BUTTON: "translateBtn",
+    LANGUAGE_SELECTION: "tb-custom-language-selection",
+  } as const;
+
+  private static readonly CSS_CLASSES = {
+    TRANSLATE_SECTION: "translate-page-section",
+    THEME_SELECTION: "tb-custom-theme-selection",
+    SELECT_BUTTON: "theme-select-button",
+    SELECT_LANGUAGE_BUTTON: "select-language-button",
+    SELECTED_LANGUAGE: "selected-theme-language",
+    OPTIONS_LIST: "theme-options-list",
+    THEME_OPTION: "theme-option",
+    THEME: "theme",
+    CLOSE_BUTTON: "translate-close-button",
+    LANGUAGE_FLAG: "language-flag",
+    LANGUAGE_LABEL: "language-label",
+  } as const;
+
   private static readonly LANGUAGES: Language[] = [
     {
       code: "en",
@@ -19,26 +43,91 @@ export class LanguageDropDown {
       label: "Nederlands",
       flag: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><g id="Group_2534" data-name="Group 2534" transform="translate(-4 -4)"><path id="Path_2500" data-name="Path 2500" d="M22.128,31H5.284a8.988,8.988,0,0,0,16.844,0Z" transform="translate(-0.706 -14.85)" fill="#3f51b5"/><path id="Path_2501" data-name="Path 2501" d="M13.706,4A9,9,0,0,0,5.284,9.85H22.128A8.994,8.994,0,0,0,13.706,4Z" transform="translate(-0.706)" fill="#ff3d00"/><path id="Path_2502" data-name="Path 2502" d="M22,20.15A8.966,8.966,0,0,0,21.422,17H4.578a8.875,8.875,0,0,0,0,6.3H21.422A8.956,8.956,0,0,0,22,20.15Z" transform="translate(0 -7.15)" fill="#eceff1"/></g></svg>`,
     },
+    // {
+    //   code: "de",
+    //   label: "German",
+    //   flag: `<svg height=18 viewBox="0 0 32 32"width=18 xmlns=http://www.w3.org/2000/svg><path d="M1 11H31V21H1z"fill=#cc2b1d></path><path d=M5,4H27c2.208,0,4,1.792,4,4v4H1v-4c0-2.208,1.792-4,4-4Z></path><path d=M5,20H27c2.208,0,4,1.792,4,4v4H1v-4c0-2.208,1.792-4,4-4Z fill=#f8d147 transform="rotate(180 16 24)"></path><path d=M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z opacity=.15></path><path d=M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z fill=#fff opacity=.2></path></svg>`,
+    // },
   ];
 
-  private selectedLanguageSpan: HTMLSpanElement;
-  private languageDropDown: HTMLDivElement;
-  private selectButton: HTMLButtonElement;
-  private selectedLanguageCode: string;
-  private versionLanguage: string;
-  private onLanguageChange: (languageCode: string) => void;
+  private readonly container: HTMLDivElement;
+  private readonly languageList: Language[];
+  private readonly data: any;
+  private readonly versionLanguage: string;
 
-  constructor(versionLanguage: string, onLanguageChange: (languageCode: string) => void) {
+  private selectedLanguageSpan!: HTMLSpanElement;
+  private languageDropDown!: HTMLDivElement;
+  private selectButton!: HTMLButtonElement;
+  private translateButton!: HTMLButtonElement;
+
+  private selectedLanguageCode!: string;
+
+  constructor(versionLanguage: string) {
     this.versionLanguage = versionLanguage;
-    this.onLanguageChange = onLanguageChange;
-    this.selectedLanguageSpan = document.createElement("span");
-    this.languageDropDown = document.createElement("div");
-    this.selectButton = document.createElement("button");
-    this.selectedLanguageCode = "";
+    this.languageList = [...TranslateDropDown.LANGUAGES];
+    this.container = this.createElement("div");
+    this.initializeComponent();
   }
 
-  public createLanguageDropdown(): HTMLDivElement {
-    const dropdownContainer = document.createElement("div");
+  private createElement<T extends keyof HTMLElementTagNameMap>(
+    tagName: T
+  ): HTMLElementTagNameMap[T] {
+    return document.createElement(tagName);
+  }
+
+  private initializeComponent(): void {
+    this.setDropDown();
+    this.setDefaultLanguage();
+  }
+
+  private setDropDown(): void {
+    const languageDropdown = this.createLanguageDropdown();
+    this.container.appendChild(languageDropdown);
+  }
+
+  private setDefaultLanguage(): void {
+    const availableLanguages = this.getAvailableLanguages();
+    const defaultLanguage = availableLanguages[0];
+
+    if (defaultLanguage) {
+      this.setSelectedLanguage(defaultLanguage);
+    }
+  }
+
+  private getAvailableLanguages(): Language[] {
+    return this.languageList.filter((lang) => lang.code !== this.versionLanguage);
+  }
+
+  private handleCloseButtonClick(): void {
+    this.disableTranslationMode();
+    this.resetTranslateButtonIcon();
+  }
+
+  private disableTranslationMode(): void {
+    (globalThis as any).isTranslationMode = false;
+    const translationModeUI = new TranslationodeUIManager();
+    translationModeUI.disableTranslationMode();
+    translationModeUI.toggleSidebar();
+  }
+
+  private resetTranslateButtonIcon(): void {
+    const translateButton = document.getElementById(
+      TranslateDropDown.SECTION_IDS.TRANSLATE_BUTTON
+    ) as HTMLButtonElement;
+    const svg = translateButton?.querySelector("svg");
+    const path = svg?.querySelector("path");
+
+    if (path) {
+      path.setAttribute("fill", "#7c8791");
+    }
+  }
+
+  private createLanguageDropdown(): HTMLDivElement {
+    const dropdownContainer = this.createElement("div");
+
+    this.selectButton = this.createElement("button");
+    this.selectedLanguageSpan = this.createElement("span");
+    this.languageDropDown = this.createDropdownList();
 
     this.setupDropdownContainer(dropdownContainer);
     this.setupSelectButton();
@@ -49,30 +138,44 @@ export class LanguageDropDown {
     dropdownContainer.appendChild(this.selectButton);
     dropdownContainer.appendChild(this.languageDropDown);
 
-    this.setDefaultLanguage();
-
     return dropdownContainer;
   }
 
+  public getLanguageSelectionElement(): HTMLDivElement {
+    return this.createLanguageDropdown();
+  }
+
   private setupDropdownContainer(container: HTMLDivElement): void {
-    container.className = "tb-custom-language-selection";
+    container.className = TranslateDropDown.CSS_CLASSES.THEME_SELECTION;
+    container.style.width = "auto";
+    container.style.padding = "4px";
+    container.id = TranslateDropDown.SECTION_IDS.LANGUAGE_SELECTION;
   }
 
   private setupSelectButton(): void {
-    this.selectButton.className = "theme-select-button";
+    this.selectButton.classList.add(TranslateDropDown.CSS_CLASSES.SELECT_LANGUAGE_BUTTON);
+    this.selectButton.style.padding = "6px";
+    this.selectButton.style.gap = "6px";
 
-    const translateButton = document.createElement("button");
-    translateButton.id = "translateBtn";
-    translateButton.className = "btn-transparent";
-    translateButton.title = `${i18n.t("translate")}`;
-    translateButton.innerHTML = this.getTranslateSvg();
-    this.selectButton.appendChild(translateButton);
+    this.translateButton = this.createElement("button");
+    this.translateButton.id = "translateBtn";
+    this.translateButton.className = "btn-transparent";
+    this.translateButton.title = `${i18n.t("translate")}`;
+    this.translateButton.style.height = "20px";
+    this.translateButton.style.borderRight = "1px solid #e2e2e2";
+    this.translateButton.style.paddingRight = "4px";
+    this.translateButton.style.paddingLeft = "2px";
+    this.translateButton.innerHTML = this.getTranslateSvg();
+
+    this.translateButton.addEventListener("click", this.handleTranslateButtonClick.bind(this));
+
+    this.selectButton.appendChild(this.translateButton);
 
     this.selectButton.addEventListener("click", this.handleSelectButtonClick.bind(this));
   }
 
   private setupSelectedLanguageSpan(): void {
-    this.selectedLanguageSpan.className = "selected-theme-language";
+    this.selectedLanguageSpan.className = TranslateDropDown.CSS_CLASSES.SELECTED_LANGUAGE;
 
     Object.assign(this.selectedLanguageSpan.style, {
       display: "flex",
@@ -94,10 +197,38 @@ export class LanguageDropDown {
     this.toggleDropdown();
   }
 
+  private handleTranslateButtonClick(e: Event): void {
+    e.preventDefault();
+    e.stopPropagation();
+    const isOpen = this.selectButton.classList.contains("open");
+
+    if (isOpen) {
+      this.hideDropdown();
+    }
+
+    let isTranslationMode = (globalThis as any).isTranslationMode;
+    isTranslationMode = !isTranslationMode;
+
+    this.updateTranslateButtonIcon("#5068a8");
+
+    const translationModeUi = new TranslationodeUIManager();
+
+    if (!isTranslationMode) {
+      (globalThis as any).isTranslationMode = false;
+      translationModeUi.disableTranslationMode();
+      this.updateTranslateButtonIcon("#7c8791");
+      translationModeUi.toggleSidebar();
+      return;
+    }
+
+    new LanguageTranslate().translate();
+  }
+
   private createDropdownList(): HTMLDivElement {
-    const dropdown = document.createElement("div");
-    dropdown.classList.add("theme-options-list");
+    const dropdown = this.createElement("div");
+    dropdown.classList.add(TranslateDropDown.CSS_CLASSES.OPTIONS_LIST);
     dropdown.style.display = "none";
+    dropdown.style.width = "140px";
 
     const availableLanguages = this.getAvailableLanguages();
     availableLanguages.forEach((language) => {
@@ -109,8 +240,11 @@ export class LanguageDropDown {
   }
 
   private createLanguageOption(language: Language): HTMLDivElement {
-    const option = document.createElement("div");
-    option.classList.add("theme-option", "theme");
+    const option = this.createElement("div");
+    option.classList.add(
+      TranslateDropDown.CSS_CLASSES.THEME_OPTION,
+      TranslateDropDown.CSS_CLASSES.THEME
+    );
 
     this.applyOptionStyles(option);
     this.setOptionAttributes(option, language.code);
@@ -137,15 +271,17 @@ export class LanguageDropDown {
   private setOptionAttributes(option: HTMLDivElement, languageCode: string) {
     option.setAttribute("role", "option");
     option.setAttribute("data-value", languageCode);
+
+    return languageCode;
   }
 
   private createLanguageFlag(flagSvg: string): HTMLSpanElement {
-    const flagSpan = document.createElement("span");
-    flagSpan.className = "language-flag";
+    const flagSpan = this.createElement("span");
+    flagSpan.className = TranslateDropDown.CSS_CLASSES.LANGUAGE_FLAG;
 
     Object.assign(flagSpan.style, {
       display: "inline-block",
-      height: "24px",
+      height: "20px",
     });
 
     flagSpan.innerHTML = flagSvg;
@@ -153,12 +289,12 @@ export class LanguageDropDown {
   }
 
   private createLanguageLabel(labelText: string): HTMLSpanElement {
-    const labelSpan = document.createElement("span");
-    labelSpan.className = "language-label";
+    const labelSpan = this.createElement("span");
+    labelSpan.className = TranslateDropDown.CSS_CLASSES.LANGUAGE_LABEL;
 
     Object.assign(labelSpan.style, {
       display: "inline-block",
-      height: "24px",
+      height: "20px",
     });
 
     labelSpan.textContent = labelText;
@@ -168,7 +304,6 @@ export class LanguageDropDown {
   private handleLanguageSelection(language: Language): void {
     this.setSelectedLanguage(language);
     this.hideDropdown();
-    this.onLanguageChange(language.code);
   }
 
   private toggleDropdown(): void {
@@ -193,26 +328,22 @@ export class LanguageDropDown {
 
   private setSelectedLanguage(language: Language): void {
     this.selectedLanguageSpan.innerHTML = "";
+
     const flagSpan = this.createLanguageFlag(language.flag);
+
     this.selectedLanguageSpan.appendChild(flagSpan);
+
     this.selectedLanguageCode = language.code;
   }
 
-  private setDefaultLanguage(): void {
-    const availableLanguages = this.getAvailableLanguages();
-    const defaultLanguage = availableLanguages[0];
-
-    if (defaultLanguage) {
-      this.setSelectedLanguage(defaultLanguage);
+  private updateTranslateButtonIcon(fillColor: string): void {
+    const svg = this.translateButton.querySelector("svg");
+    if (svg) {
+      const path = svg.querySelector("path");
+      if (path) {
+        path.setAttribute("fill", fillColor);
+      }
     }
-  }
-
-  private getAvailableLanguages(): Language[] {
-    return LanguageDropDown.LANGUAGES.filter((lang) => lang.code !== this.versionLanguage);
-  }
-
-  public getSelectedLanguageCode(): string {
-    return this.selectedLanguageCode;
   }
 
   private getTranslateSvg(): string {
@@ -220,5 +351,9 @@ export class LanguageDropDown {
     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 21 21">
       <path id="Translation" d="M5.33.066a.725.725,0,0,0-.055,1.3c.148.078.193.083.826.083.728,0,.818-.019,1-.2A.71.71,0,0,0,7.146.259C6.944.029,6.834,0,6.112,0A1.94,1.94,0,0,0,5.33.066M.46,2.986a.7.7,0,0,0-.37.354.671.671,0,0,0-.023.612.887.887,0,0,0,.471.419c.06.012,2.021.021,4.357.021H9.141l-.6.895-.6.894-.916.912-.916.912-.992-.994C4.574,6.464,4.069,5.987,4,5.948a.786.786,0,0,0-.868.15.816.816,0,0,0-.15.762A15.436,15.436,0,0,0,4.049,8L5.084,9.033,3.555,10.564c-1.614,1.618-1.606,1.609-1.605,1.923a.82.82,0,0,0,.449.642.835.835,0,0,0,.6-.02a20.971,20.971,0,0,0,1.63-1.558L6.112,10.06l1.523,1.521c.838.837,1.568,1.539,1.623,1.559a.886.886,0,0,0,.574-.029.729.729,0,0,0,.339-1c-.025-.048-.717-.761-1.538-1.584l-1.493-1.5L8.168,8,9.2,6.961l.848-1.283.849-1.284h.872c.842,0,.876,0,1.027-.083a.686.686,0,0,0,.378-.6.68.68,0,0,0-.3-.645l-.153-.106L6.631,2.949c-4.961-.008-6.1,0-6.171.037m14.669,6.83c-.277.11-.2-.028-2.836,5.242-2.3,4.6-2.514,5.042-2.511,5.2a.7.7,0,0,0,.192.51.707.707,0,0,0,1.074-.021c.065-.074.5-.9.992-1.883l.874-1.75h4.961l.912,1.822c.965,1.927.97,1.935,1.264,2.034A.736.736,0,0,0,21,20.174c-.012-.093-.886-1.879-2.5-5.107-1.9-3.8-2.511-4.994-2.606-5.087a.782.782,0,0,0-.763-.164m1.981,5.778c0,.015-.772.027-1.717.027s-1.719-.008-1.719-.018.387-.791.86-1.736l.859-1.718.857,1.71c.472.94.859,1.721.86,1.735" transform="translate(-0.004 -0.002)" fill="#7c8791" fill-rule="evenodd"/>
     </svg>`;
+  }
+
+  public render(container: HTMLElement): void {
+    container.appendChild(this.container);
   }
 }

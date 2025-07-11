@@ -117,9 +117,9 @@ export class EditorEvents {
 
   private initializeEventListeners(): void {
     new FrameEvent(this.frameId);
+    this.onLoad();
     this.onSelected();
     this.onComponentUpdate();
-    this.onLoad();
     this.onDragAndDrop();
   }
 
@@ -560,6 +560,7 @@ export class EditorEvents {
   }
 
   private handleDoubleClick(e: MouseEvent): void {
+    if (this.disableEditor()) return;
     e.preventDefault();
     const selectedComponent = (globalThis as any).selectedComponent;
     if (selectedComponent) {

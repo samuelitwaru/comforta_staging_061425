@@ -7,10 +7,6 @@ import { ConfirmationBox } from "../components/ConfirmationBox";
 import { truncateString } from "../../utils/helpers";
 import { AppVersion } from "../../types";
 import { FormField } from "../components/FormField";
-import { EditorEvents } from "../../controls/editor/EditorEvents";
-import { EditorManager } from "../../controls/editor/EditorManager";
-import { ThemeManager } from "../../controls/themes/ThemeManager";
-import { ThemeSelection } from "../components/ThemeSelection";
 import { App } from "../..";
 
 export class VersionSelectionView {
@@ -89,6 +85,9 @@ export class VersionSelectionView {
 
     const versions = await this.versionController.getVersions();
     this.appVersions = versions;
+    if (versions.length === 0) {
+      this.openVersionModal()
+    }
     versions.forEach((version: AppVersion) => this.createVersionOption(version));
 
     // this.addTemplatesButton();
@@ -98,6 +97,7 @@ export class VersionSelectionView {
   private addNewVersionButton(): void {
     const newVersionBtn = document.createElement("div");
     newVersionBtn.className = "theme-option";
+    newVersionBtn.id = "create-new-version";
     newVersionBtn.style.justifyContent = "start";
     newVersionBtn.innerHTML = `<i class="fa fa-plus"></i> &nbsp; ${i18n.t(
       "navbar.appversion.create_new"

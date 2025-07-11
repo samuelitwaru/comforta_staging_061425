@@ -81,17 +81,15 @@ export class DeletePageButton {
         })
     
         deleteButton.addEventListener('click', (e)=>{
-            this.toolboxService.deletePage(this.appVersion.appVersion.AppVersionId, this.pageData.PageId).then((res)=>{
+            const appVersionId = this.appVersion.getActiveVersionId();
+            this.toolboxService.deletePage(appVersionId, this.pageData.PageId).then((res)=>{
                 if(!res.error.message) {
                     deleteModal.close();
-                    console.log('data-${this.pageData.PageId}', `data-${this.pageData.PageId}`);
                     localStorage.removeItem(`data-${this.pageData.PageId}`);
                     const versionManager = new AppVersionManager();
                     versionManager.refreshVersion();
                     const editorEvents = new EditorEvents();
                     editorEvents.removeEditor()
-                    //console.log((globalThis as any).activeVersion)
-                    //(window as any).app.toolboxApp.editor.init((globalThis as any).activeVersion)
                 }else {
                     new Alert("error", res.error.message)
                 }

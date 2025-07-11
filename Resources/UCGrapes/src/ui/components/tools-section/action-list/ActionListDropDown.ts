@@ -44,12 +44,12 @@ export class ActionListDropDown {
         activePage.PageType === "MyService" ||
         activePage.PageType === "MyLiving")
         ? {
-            name: "Content",
-            displayName: i18n.t("sidebar.action_list.services"),
-            label: i18n.t("sidebar.action_list.services"),
-            options: this.getServices(activePage),
-            canCreatePage: true,
-          }
+          name: "Content",
+          displayName: i18n.t("sidebar.action_list.services"),
+          label: i18n.t("sidebar.action_list.services"),
+          options: this.getServices(activePage),
+          canCreatePage: true,
+        }
         : null,
       {
         name: "DynamicForm",
@@ -178,7 +178,7 @@ export class ActionListDropDown {
                     row.CtaAttributes?.CtaType === "WebLink"
                   ) {
                     if (row.CtaAttributes.Action?.ObjectId) {
-                      children.push(row.CtaAttributes.Action.ObjectId);
+                      children.push(row.CtaAttributes.Action?.ObjectId);
                     }
                   }
                 }
@@ -194,7 +194,7 @@ export class ActionListDropDown {
           } else if (row.InfoType === "Cta") {
             if (row.CtaAttributes?.CtaType === "Form" || row.CtaAttributes?.CtaType === "WebLink") {
               if (row.CtaAttributes.Action?.ObjectId) {
-                children.push(row.CtaAttributes.Action.ObjectId);
+                children.push(row.CtaAttributes.Action?.ObjectId);
               }
             }
           }

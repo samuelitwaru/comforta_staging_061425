@@ -75,7 +75,7 @@ export class ToolboxManager {
   //   }, 10000);
   // }
 
-  async savePages(publish = false) {
+  async savePages() {
     try {
       const lastSavedStates = new Map<string, string>();
       const activeVersion = await this.appVersions.getActiveVersion();
@@ -108,12 +108,11 @@ export class ToolboxManager {
 
           const localStructureString = JSON.stringify(pageData[localStructureProperty]);
 
-          // Ensure page.PageStructure is a string for comparison
           const pageStructureString =
             typeof page.PageStructure === "string"
               ? page.PageStructure
               : JSON.stringify(page.PageStructure);
-          // Compare serialized versions to avoid hidden character differences
+
           if (localStructureString !== pageStructureString) {
             const pageInfo = {
               AppVersionId: activeVersion.AppVersionId,
@@ -122,15 +121,38 @@ export class ToolboxManager {
               PageType: page.PageType,
               PageStructure: localStructureString,
             };
+            const autoSaveSection = document.querySelector(
+              ".auto-saving-section-content-text"
+            ) as HTMLElement;
+            const autoSavedSection = document.querySelector(
+              ".auto-saved-section-content-text"
+            ) as HTMLElement;
+            autoSaveSection.style.display = "none";
+            autoSavedSection.style.display = "none";
 
             try {
-              // console.log(`Saving page: ${page.PageName}`);
-              await this.toolboxService.autoSavePage(pageInfo);
+              autoSaveSection.style.display = "flex";
+
+              // Start timing and create minimum delay promise
+              const startTime = Date.now();
+              const minDelay = 500; // Minimum 500ms delay
+
+              // Run save operation and minimum delay in parallel
+              const [saveResult] = await Promise.all([
+                this.toolboxService.autoSavePage(pageInfo),
+                new Promise((resolve) => setTimeout(resolve, minDelay)),
+              ]);
+
+              // Update state after both save and minimum delay complete
               lastSavedStates.set(pageId, localStructureString);
-              // if (!publish) this.openToastMessage();
+              autoSaveSection.style.display = "none";
+              autoSavedSection.style.display = "flex";
             } catch (error) {
-              console.error(`Failed to save page ${page.PageName}:`, error);
-              throw error; // Re-throw to be caught by the outer try/catch
+              throw error;
+            } finally {
+              setTimeout(() => {
+                autoSavedSection.style.display = "none";
+              }, 1000);
             }
           }
         })
@@ -138,7 +160,6 @@ export class ToolboxManager {
 
       return lastSavedStates; // Return something meaningful
     } catch (error) {
-      console.error("Error saving pages:", error);
       throw error; // Re-throw so caller knows something went wrong
     }
   }
@@ -274,9 +295,11 @@ export class ToolboxManager {
       // format grid tiles
       const tileUpdate = new TileUpdate(pageId);
       const wrapper = editor?.getWrapper();
-      const rowComps = wrapper.find('.container-row').filter((comp:any) => comp.find('.tile-column').length > 0 )
-      rowComps.forEach((rowComp:any) => {
-        tileUpdate.updateGridTiles(rowComp)
+      const rowComps = wrapper
+        .find(".container-row")
+        .filter((comp: any) => comp.find(".tile-column").length > 0);
+      rowComps.forEach((rowComp: any) => {
+        tileUpdate.updateGridTiles(rowComp);
       });
 
       // format plus buttons

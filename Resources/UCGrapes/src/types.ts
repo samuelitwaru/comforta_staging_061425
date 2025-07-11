@@ -163,6 +163,8 @@ export interface Tile {
   Icon?: string;
   BGColor?: string;
   BGImageUrl?: string;
+  Size?: string|number;
+  Height?: string;
   OriginalImageUrl?: string;
   Opacity?: number;
   Permissions?: [];

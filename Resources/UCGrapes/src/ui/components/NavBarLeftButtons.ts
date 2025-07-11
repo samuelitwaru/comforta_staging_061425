@@ -43,9 +43,9 @@ export class NavbarLeftButtons {
 
     const debugButton = document.createElement("button");
     debugButton.innerHTML = debugSvg;
-    debugButton.setAttribute("title", i18n.t("navbar.debug.label"))
+    debugButton.setAttribute("title", i18n.t("navbar.debug.label"));
 
-    debugButton.classList.add("tb-icon-button")
+    debugButton.classList.add("tb-icon-button");
     debugButton.addEventListener("click", (e) => {
       e.preventDefault();
       this.initialiseDebug();
@@ -64,10 +64,10 @@ export class NavbarLeftButtons {
         </svg>
     `;
 
-    const shareButton = document.createElement("button")
-    shareButton.setAttribute("title", i18n.t("navbar.share.label"))
+    const shareButton = document.createElement("button");
+    shareButton.setAttribute("title", i18n.t("navbar.share.label"));
     shareButton.innerHTML = shareButtonSvg;
-    shareButton.classList.add("tb-icon-button")
+    shareButton.classList.add("tb-icon-button");
 
     const trashButtonSvg = `
     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
@@ -82,7 +82,7 @@ export class NavbarLeftButtons {
     </svg>
     `;
 
-    const trashButton = document.createElement("button")
+    const trashButton = document.createElement("button");
     trashButton.setAttribute("title", i18n.t("navbar.trash.label"));
     trashButton.innerHTML = trashButtonSvg;
     trashButton.classList.add("tb-icon-button");
@@ -110,9 +110,31 @@ export class NavbarLeftButtons {
     const versionSelection = new VersionSelectionView();
 
     versionSelection.render(this.container);
+
+    const autoSaveSection = document.createElement("div");
+    autoSaveSection.classList.add("auto-save-section");
+    autoSaveSection.style.marginTop = "10px";
+    autoSaveSection.innerHTML = `
+      <div class="auto-save-section-content">
+        <div class="auto-saving-section-content-text">
+          <svg fill=#7c8791 height=20 viewBox="0 0 16 16"width=20 xmlns=http://www.w3.org/2000/svg>
+            <path clip-rule=evenodd d="M11.957 6h.05a2.99 2.99 0 0 1 2.116.879 3.003 3.003 0 0 1 0 4.242 2.99 2.99 0 0 1-2.117.879v-.013L12 12H4.523a3.486 3.486 0 0 1-2.628-1.16 3.502 3.502 0 0 1 1.958-5.78 3.462 3.462 0 0 1 1.468.04 3.486 3.486 0 0 1 3.657-2.06A3.479 3.479 0 0 1 11.957 6zM5 11h7.01a1.994 1.994 0 0 0 1.992-2 2.002 2.002 0 0 0-1.996-2h-.914l-.123-.857a2.49 2.49 0 0 0-2.126-2.122A2.478 2.478 0 0 0 6.231 5.5l-.333.762-.809-.189A2.49 2.49 0 0 0 4.523 6c-.662 0-1.297.263-1.764.732A2.503 2.503 0 0 0 4.523 11H5z"fill-rule=evenodd />
+          </svg>
+          ${i18n.t("navbar.autoSave.saving")}
+        </div>
+        <div class="auto-saved-section-content-text">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="#7c8791" width="20" height="20" viewBox="0 0 24 24">
+          <path fill-rule="evenodd" d="M23,14 C23,16.7614237 20.7614237,19 18,19 L7,19 C3.6862915,19 1,16.3137085 1,13 C1,9.95876977 3.26703071,7.43346119 6.21989093,7.05027488 C7.50901474,5.16507238 9.65343535,4 12,4 C15.1586186,4 17.8750012,6.1056212 18.7254431,9.0522437 C21.1430685,9.40362782 23,11.4849591 23,14 Z M18,17 C19.6568542,17 21,15.6568542 21,14 C21,12.3431458 19.6568542,11 18,11 C17.9686786,11.0001061 17.9686786,11.0001061 17.9374883,11.0006341 L17.0737589,11.0181765 L16.9309417,10.1661557 C16.5303438,7.77626335 14.4511274,6 12,6 C10.1923998,6 8.55429829,6.96642863 7.6664163,8.50398349 L7.39066076,8.98151234 L6.83965518,9.0031404 C4.69934052,9.08715198 3,10.8504451 3,13 C3,15.209139 4.790861,17 7,17 L18,17 Z M10,12.5857864 L13.2928932,9.29289322 L14.7071068,10.7071068 L10,15.4142136 L7.29289322,12.7071068 L8.70710678,11.2928932 L10,12.5857864 Z"/>
+        </svg>
+          ${i18n.t("navbar.autoSave.saved")}
+        </div>
+      </div>
+    `;
+    
     this.container.appendChild(debugButton);
-    this.container.appendChild(shareButton)
+    this.container.appendChild(shareButton);
     this.container.appendChild(copySelectButton);
+    this.container.appendChild(autoSaveSection);
     // this.container.appendChild(trashButton);
     // shareButton.render(this.container);
 
@@ -124,8 +146,7 @@ export class NavbarLeftButtons {
     trashButton.addEventListener("click", (e) => {
       e.preventDefault();
       new TrashView().openTrashModal();
-    })
-
+    });
   }
 
   initialiseDebug() {

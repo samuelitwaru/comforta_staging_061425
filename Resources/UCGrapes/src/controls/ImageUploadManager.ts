@@ -549,10 +549,11 @@ export class ImageUploadManager {
 
     const tileWrapper = selectedComponent.parent();
     const parentComponent = tileWrapper.closest('[data-gjs-type="info-tiles-section"]');
-
+    if (!parentComponent || !tileWrapper) return null;
+    
     const tileAttributes: Tile = this.getInfoTileAttributes(
-      parentComponent.getId(),
-      tileWrapper.getId()
+      parentComponent?.getId(),
+      tileWrapper?.getId()
     );
     let backgroundImage;
     if (tileAttributes?.OriginalImageUrl) {

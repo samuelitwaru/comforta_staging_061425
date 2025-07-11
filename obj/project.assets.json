@@ -9010,11 +9010,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\KBs\\Comforta_version2.1\\Data018\\web\\GxDeps.csproj",
+      "projectUniqueName": "C:\\KBs\\Comforta_version2.1\\Data018\\Web\\GxDeps.csproj",
       "projectName": "GxDeps",
-      "projectPath": "C:\\KBs\\Comforta_version2.1\\Data018\\web\\GxDeps.csproj",
+      "projectPath": "C:\\KBs\\Comforta_version2.1\\Data018\\Web\\GxDeps.csproj",
       "packagesPath": "C:\\Users\\samuelitwaru\\.nuget\\packages\\",
-      "outputPath": "C:\\KBs\\Comforta_version2.1\\Data018\\web\\obj\\",
+      "outputPath": "C:\\KBs\\Comforta_version2.1\\Data018\\Web\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\KBs\\Comforta_version2.1\\Data018\\NuGet.Config",
@@ -9112,7 +9112,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.411/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.412/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

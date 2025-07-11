@@ -16,6 +16,10 @@ export const i18nModule = new I18n({
 export const i18n = new I18n({
   en: {
     navbar: {
+      autoSave: {
+        saving: "Saving...",
+        saved: "Saved",
+      },
       tree: "Tree",
       publish: {
         label: "Publish",
@@ -268,6 +272,11 @@ export const i18n = new I18n({
 
   nl: {
     navbar: {
+      autoSave: {
+        saving: "Opslaan...",
+        saved: "Opgeslagen",
+      },
+
       tree: "Boom",
       publish: {
         label: "Publiceren",

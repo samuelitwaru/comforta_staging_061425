@@ -10,11 +10,13 @@ export class ActionListPopUp {
   private menuItemManager: MenuItemManager;
 
   constructor(templateContainer: HTMLElement, parentContainer: HTMLElement) {
+    
     this.controller = new ActionListManager();
     this.templateContainer = templateContainer;
     this.parentContainer = parentContainer;
     this.menuContainer = document.createElement("div");
     this.menuList = document.createElement("ul");
+    
     this.menuItemManager = new MenuItemManager(
       this.menuContainer,
       this.controller
@@ -28,6 +30,7 @@ export class ActionListPopUp {
     this.menuList.innerHTML = "";
 
     const menuCategories = await this.controller.getMenuCategories();
+    console.log("Menu Categories:", menuCategories);
     menuCategories?.forEach((category) => {
       const menuCategory = document.createElement("div");
       menuCategory.classList.add("menu-category");
