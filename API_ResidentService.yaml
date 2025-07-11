@@ -2,9 +2,9 @@ openapi: 3.0.0
 info:
   title: "API_ResidentService"
   description: "API Services"
-  version: "20250709075459"
+  version: "20250711065603"
 servers:
-  - url: https://staging.comforta.yukon.software/api
+  - url: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/api
 paths:
   /auth/resident-login:
     post:
@@ -2127,7 +2127,7 @@ components:
       description: GAM OAuth 2
       flows:
         password:          
-          tokenUrl: https://staging.comforta.yukon.software/oauth/gam/v2.0/access_token
+          tokenUrl: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/oauth/gam/v2.0/access_token
           scopes: 
             fullcontrol: Full access
 

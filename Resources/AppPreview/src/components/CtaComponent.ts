@@ -1,6 +1,5 @@
 import { ThemeManager } from "../controls/ThemeManager";
-import { Cta } from "../interfaces/Cta";
-import { CtaAttributes } from "../interfaces/CtaAttributes";
+import { CtaAttributes } from "../types";
 import { ctaIcons } from "../utils/cta-icons";
 
 export class CtaComponent {

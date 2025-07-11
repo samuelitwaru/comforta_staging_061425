@@ -6,7 +6,7 @@ import { InfoPageMapper } from "../controls/InfoPageMapper";
 import { MenuPageMapper } from "../controls/MenuPageMapper";
 import MyActivityPageMapper from "../controls/MyActivityPageMapper";
 import { WebLinkPageMapper } from "../controls/WebLinkPageMapper";
-import { Page } from "../interfaces/Page";
+import { Page } from "../types";
 import { MenuAppBarComponent } from "./PageAppBarComponent";
 
 export class MenuPageComponent {

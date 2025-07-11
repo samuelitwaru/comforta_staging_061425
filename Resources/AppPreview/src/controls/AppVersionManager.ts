@@ -1,8 +1,4 @@
-import { AppVersion } from "../interfaces/AppVersion";
-import { Page } from "../interfaces/Page";
-import { PageContentStructure } from "../interfaces/PageContentStructure";
-import { PageMenuStructure } from "../interfaces/PageMenuStructure";
-import { SDT_Theme } from "../interfaces/SDT_Theme";
+import { AppVersion, Page, PageContentStructure, PageMenuStructure, SDT_Theme } from "../types";
 
 export class AppVersionManager {
     private static instance: AppVersionManager | null = null;

@@ -1,6 +1,6 @@
 import { HomePageMapper } from "../controls/HomePageMapper";
 import { InfoPageMapper } from "../controls/InfoPageMapper";
-import { Page } from "../interfaces/Page";
+import { Page } from "../types";
 import { HeaderComponent } from "./HeaderComponent";
 import { HomeAppBarComponent } from "./HomeAppBarComponent";
 

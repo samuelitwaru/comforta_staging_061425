@@ -1,7 +1,6 @@
 import { HeaderComponent } from "../components/HeaderComponent";
 import { WebLinkPageMapper } from "../controls/WebLinkPageMapper";
-import { Page } from "../interfaces/Page";
-import { Tile } from "../interfaces/Tile";
+import { Page, Tile } from "../types";
 import { MenuAppBarComponent } from "./PageAppBarComponent";
 
 export class WebLinkPageComponent {
@@ -12,8 +11,6 @@ export class WebLinkPageComponent {
     constructor(tile: Tile, page: Page) {
         this.page = page;
         this.tile = tile;
-        console.log('tile', tile)
-        console.log('page', page)
         this.pageElement = document.createElement("div");
         this.init();
     }

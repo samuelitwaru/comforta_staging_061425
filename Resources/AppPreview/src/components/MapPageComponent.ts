@@ -1,8 +1,7 @@
 import { HeaderComponent } from "../components/HeaderComponent";
 import { MapPageMapper } from "../controls/MapPageMapper";
 import { WebLinkPageMapper } from "../controls/WebLinkPageMapper";
-import { Page } from "../interfaces/Page";
-import { Tile } from "../interfaces/Tile";
+import { Page, Tile } from "../types";
 import { MenuAppBarComponent } from "./PageAppBarComponent";
 
 export class MapPageComponent {

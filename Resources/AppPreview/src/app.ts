@@ -1,5 +1,4 @@
 import { HomePageController } from "./controls/HomePageController";
-import { AppVersion } from "./interfaces/AppVersion";
 
 export class ToolboxPreview {
   constructor() {

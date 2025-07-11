@@ -1,6 +1,6 @@
 import { HomePageComponent } from "../components/HomePageComponent";
 import { MenuPageComponent } from "../components/MenuPageComponent";
-import { Page } from "../interfaces/Page";
+import { Page } from "../types";
 import { AppVersionManager } from "./AppVersionManager";
 
 export class MenuPageController {

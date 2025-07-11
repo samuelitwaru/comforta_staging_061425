@@ -1,6 +1,6 @@
 import { ToolboxPreview } from "./app";
 import { AppVersionManager } from "./controls/AppVersionManager";
-import { AppVersion } from "./interfaces/AppVersion";
+import { AppVersion } from "./types";
 
 class PreviewApp {
   constructor(

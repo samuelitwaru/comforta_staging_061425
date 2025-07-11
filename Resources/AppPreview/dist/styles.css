@@ -130,7 +130,7 @@
 .tbap-tile {
   border: 1px solid #4c535726;
   border-radius: 8px;
-  height: 4.5rem;
+  min-height: 80px;
   padding: 0.4rem;
   background-color: transparent;
   display: flex;
@@ -347,16 +347,16 @@
   .tbap-cta-container {
     gap: 0.5rem;
   }
-  
+
   .tbap-cta-container--row {
     gap: 1rem;
   }
-  
+
   .tbap-cta-round-button .tbap-cta-round-button__button {
     width: 80px;
     height: 80px;
   }
-  
+
   .tbap-cta-round-button .tbap-cta-round-button__button svg {
     width: 40px;
     height: 40px;
@@ -503,4 +503,12 @@
   z-index: 5;
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 13px 0 0 0;
+}
+
+.tile-grid-section {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  gap: 0.5rem;
+  box-sizing: border-box;
 }

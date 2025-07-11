@@ -1,7 +1,7 @@
 import { ThemeManager } from "../controls/ThemeManager";
 import { TileController } from "../controls/TileController";
-import { NavigationData } from "../interfaces/Navigation";
-import { Tile } from "../interfaces/Tile";
+import { NavigationData, Tile } from "../types";
+
 
 
 export class TileComponent {
@@ -25,11 +25,12 @@ export class TileComponent {
     private init() {
         // Apply appropriate CSS class based on priority
         this.tileContainer.classList.add("tbap-tile");
+        this.tileContainer.style.minHeight = this.tile?.Height || 80 + "px";
         if (this.isHighPriority) {
             // this.tileContainer.classList.add("high-priority-tile");
-            const sizeFactor = this.tile.Size || 80;
+            const sizeFactor = this.tile?.Height || 80;
             // console.log(`size ${sizeFactor}`)
-            this.tileContainer.style.height = `${sizeFactor}px`  
+            this.tileContainer.style.minHeight = `${sizeFactor}px`;  
         }
 
         // Set alignment

@@ -1,4 +1,4 @@
-import { Tile } from "../interfaces/Tile";
+import { Tile } from "../types";
 
 export class WebLinkPageMapper {
     tile: Tile;

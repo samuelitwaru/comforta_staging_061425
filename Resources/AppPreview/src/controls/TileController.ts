@@ -1,6 +1,4 @@
-import { Page } from "../interfaces/Page";
-import { Tile } from "../interfaces/Tile";
-import { TileAction } from "../interfaces/TileAction";
+import { Tile } from "../types";
 import { AppVersionManager } from "./AppVersionManager";
 import { MapPageController } from "./MapPageController";
 import { MenuPageController } from "./MenuPageController";
@@ -12,7 +10,6 @@ export class TileController {
     constructor(tile: Tile) {
         this.version = AppVersionManager.getInstance();
         this.tile = tile;
-        console.log('tile', tile);
     }
 
     public navigate() {

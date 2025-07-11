@@ -1,6 +1,5 @@
 import { HomePageComponent } from "../components/HomePageComponent";
-import { NavigationData, NavigationEntry } from "../interfaces/Navigation";
-import { Page } from "../interfaces/Page";
+import { NavigationData, NavigationEntry, Page } from "../types";
 import { AppVersionManager } from "./AppVersionManager";
 
 export class HomePageController {

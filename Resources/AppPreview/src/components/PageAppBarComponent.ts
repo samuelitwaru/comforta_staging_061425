@@ -1,7 +1,5 @@
 import { BackButtonController } from "../controls/BackButtonController";
-import { NavigationData } from "../interfaces/Navigation";
-import { Page } from "../interfaces/Page";
-
+import { NavigationData, Page } from "../types";
 export class MenuAppBarComponent {
     appBar: HTMLElement;
     page: Page;

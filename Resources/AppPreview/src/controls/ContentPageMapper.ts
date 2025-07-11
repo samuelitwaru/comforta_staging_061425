@@ -1,13 +1,5 @@
 import { CtaComponent } from "../components/CtaComponent";
-import { TileComponent } from "../components/TileComponent";
-import { Content } from "../interfaces/Content";
-import { Cta } from "../interfaces/Cta";
-import { CtaAttributes } from "../interfaces/CtaAttributes";
-import { Page } from "../interfaces/Page";
-import { PageContentStructure } from "../interfaces/PageContentStructure";
-import { Row } from "../interfaces/Row";
-import { Tile } from "../interfaces/Tile";
-
+import { Content, CtaAttributes, Page, PageContentStructure } from "../types";
 export class ContentPageMapper {
     pageData: PageContentStructure;
     pageId: string;

@@ -2,7 +2,7 @@ import { HomePageComponent } from "../components/HomePageComponent";
 import { MapPageComponent } from "../components/MapPageComponent";
 import { MenuPageComponent } from "../components/MenuPageComponent";
 import { WebLinkPageComponent } from "../components/WebLinkComponent";
-import { Page } from "../interfaces/Page";
+import { Page } from "../types";
 import { AppVersionManager } from "./AppVersionManager";
 
 export class MapPageController {

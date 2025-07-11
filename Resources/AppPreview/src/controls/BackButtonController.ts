@@ -1,4 +1,3 @@
-import { Page } from "../interfaces/Page";
 import { AppVersionManager } from "./AppVersionManager";
 import { HomePageController } from "./HomePageController";
 import { MenuPageController } from "./MenuPageController";

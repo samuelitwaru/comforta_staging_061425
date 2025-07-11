@@ -1,7 +1,7 @@
 import { HomePageComponent } from "../components/HomePageComponent";
 import { MenuPageComponent } from "../components/MenuPageComponent";
 import { WebLinkPageComponent } from "../components/WebLinkComponent";
-import { Page } from "../interfaces/Page";
+import { Page } from "../types";
 import { AppVersionManager } from "./AppVersionManager";
 
 export class WebLinkController {
@@ -13,7 +13,6 @@ export class WebLinkController {
             this.version = AppVersionManager.getInstance();
             this.tile = tile;
             this.pageId = pageId;
-            console.log('tile', tile);
         }
     
         init() {

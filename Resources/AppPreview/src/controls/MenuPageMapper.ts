@@ -1,8 +1,5 @@
 import { TileComponent } from "../components/TileComponent";
-import { Page } from "../interfaces/Page";
-import { PageMenuStructure } from "../interfaces/PageMenuStructure";
-import { Row } from "../interfaces/Row";
-import { Tile } from "../interfaces/Tile";
+import { Page, PageMenuStructure, Row } from "../types";
 
 export class MenuPageMapper {
     pageData: PageMenuStructure;
