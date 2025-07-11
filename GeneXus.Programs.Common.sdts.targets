@@ -59,6 +59,7 @@
  	<Compile Include="$(WebDirectory)\type_SdtSDT_DiscussionTranslation.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_DynamicForms.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_DynamicFormTranslation.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtSDT_DynamicTranslation.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_Error.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_ErrorResponse.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_FileUploadData.cs" />
@@ -116,6 +117,7 @@
  	<Compile Include="$(WebDirectory)\type_SdtSDT_OrganisationSetting.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_Page.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_PageChildren.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtSDT_PageNameTranslation.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_PageStructure.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_PageStructure_ChildrenItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_PageUrl.cs" />
@@ -142,6 +144,7 @@
  	<Compile Include="$(WebDirectory)\type_SdtSDT_Theme_CtaColorsItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_Tile.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_TileAction.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtSDT_TranslatedPage.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_TrashItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_TrnAttributes.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_TrnAttributes_Transaction.cs" />

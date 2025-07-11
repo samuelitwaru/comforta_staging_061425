@@ -1042,6 +1042,7 @@ namespace GeneXus.Programs {
                               cmbResidentSalutation.Name = cmbResidentSalutation_Internalname;
                               cmbResidentSalutation.CurrentValue = cgiGet( cmbResidentSalutation_Internalname);
                               A72ResidentSalutation = cgiGet( cmbResidentSalutation_Internalname);
+                              n72ResidentSalutation = false;
                               A64ResidentGivenName = cgiGet( edtResidentGivenName_Internalname);
                               A65ResidentLastName = cgiGet( edtResidentLastName_Internalname);
                               A71ResidentGUID = cgiGet( edtResidentGUID_Internalname);
@@ -1357,7 +1358,7 @@ namespace GeneXus.Programs {
                                               A65ResidentLastName ,
                                               A71ResidentGUID } ,
                                               new int[]{
-                                              TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN, TypeConstants.DECIMAL, TypeConstants.BOOLEAN
+                                              TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN, TypeConstants.DECIMAL, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN
                                               }
          });
          /* Using cursor H00BS2 */
@@ -1372,6 +1373,7 @@ namespace GeneXus.Programs {
             A65ResidentLastName = H00BS2_A65ResidentLastName[0];
             A64ResidentGivenName = H00BS2_A64ResidentGivenName[0];
             A72ResidentSalutation = H00BS2_A72ResidentSalutation[0];
+            n72ResidentSalutation = H00BS2_n72ResidentSalutation[0];
             A62ResidentId = H00BS2_A62ResidentId[0];
             A564MemoRemoveDate = H00BS2_A564MemoRemoveDate[0];
             n564MemoRemoveDate = H00BS2_n564MemoRemoveDate[0];
@@ -1392,6 +1394,7 @@ namespace GeneXus.Programs {
             A65ResidentLastName = H00BS2_A65ResidentLastName[0];
             A64ResidentGivenName = H00BS2_A64ResidentGivenName[0];
             A72ResidentSalutation = H00BS2_A72ResidentSalutation[0];
+            n72ResidentSalutation = H00BS2_n72ResidentSalutation[0];
             if ( String.IsNullOrEmpty(StringUtil.RTrim( AV15FilterFullText)) || ( ( StringUtil.Like( StringUtil.Lower( A550MemoTitle) , StringUtil.PadR( "%" + StringUtil.Lower( AV15FilterFullText) , 255 , "%"),  ' ' ) ) || ( StringUtil.Like( StringUtil.Lower( A551MemoDescription) , StringUtil.PadR( "%" + StringUtil.Lower( AV15FilterFullText) , 255 , "%"),  ' ' ) ) || ( StringUtil.Like( StringUtil.Lower( A552MemoImage) , StringUtil.PadR( "%" + StringUtil.Lower( AV15FilterFullText) , 255 , "%"),  ' ' ) ) || ( StringUtil.Like( StringUtil.Lower( A553MemoDocument) , StringUtil.PadR( "%" + StringUtil.Lower( AV15FilterFullText) , 255 , "%"),  ' ' ) ) || ( StringUtil.Like( StringUtil.Str( A563MemoDuration, 6, 3) , StringUtil.PadR( "%" + AV15FilterFullText , 254 , "%"),  ' ' ) ) || ( StringUtil.Like( context.GetMessage( "mr", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV15FilterFullText) , 255 , "%"),  ' ' ) && ( StringUtil.StrCmp(A72ResidentSalutation, "Mr") == 0 ) ) || ( StringUtil.Like( context.GetMessage( "mrs", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV15FilterFullText) , 255 , "%"),  ' ' ) && ( StringUtil.StrCmp(A72ResidentSalutation, "Mrs") == 0 ) ) || ( StringUtil.Like( context.GetMessage( "dr", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV15FilterFullText) , 255 , "%"),  ' ' ) && ( StringUtil.StrCmp(A72ResidentSalutation, "Dr") == 0 ) ) || ( StringUtil.Like( context.GetMessage( "miss", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV15FilterFullText) , 255 , "%"),  ' ' ) && ( StringUtil.StrCmp(A72ResidentSalutation, "Miss") == 0 ) ) || ( StringUtil.Like( StringUtil.Lower( A64ResidentGivenName) , StringUtil.PadR( "%" + StringUtil.Lower( AV15FilterFullText) , 255 , "%"),  ' ' ) ) || ( StringUtil.Like( StringUtil.Lower( A65ResidentLastName) , StringUtil.PadR( "%" + StringUtil.Lower( AV15FilterFullText) , 255 , "%"),  ' ' ) ) || ( StringUtil.Like( StringUtil.Lower( A71ResidentGUID) , StringUtil.PadR( "%" + StringUtil.Lower( AV15FilterFullText) , 255 , "%"),  ' ' ) ) ) )
             {
                GRID_nRecordCount = (long)(GRID_nRecordCount+1);
@@ -1448,7 +1451,7 @@ namespace GeneXus.Programs {
                                                  A65ResidentLastName ,
                                                  A71ResidentGUID } ,
                                                  new int[]{
-                                                 TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN, TypeConstants.DECIMAL, TypeConstants.BOOLEAN
+                                                 TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN, TypeConstants.DECIMAL, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN
                                                  }
             });
             /* Using cursor H00BS3 */
@@ -1468,6 +1471,7 @@ namespace GeneXus.Programs {
                A65ResidentLastName = H00BS3_A65ResidentLastName[0];
                A64ResidentGivenName = H00BS3_A64ResidentGivenName[0];
                A72ResidentSalutation = H00BS3_A72ResidentSalutation[0];
+               n72ResidentSalutation = H00BS3_n72ResidentSalutation[0];
                A62ResidentId = H00BS3_A62ResidentId[0];
                A564MemoRemoveDate = H00BS3_A564MemoRemoveDate[0];
                n564MemoRemoveDate = H00BS3_n564MemoRemoveDate[0];
@@ -1488,6 +1492,7 @@ namespace GeneXus.Programs {
                A65ResidentLastName = H00BS3_A65ResidentLastName[0];
                A64ResidentGivenName = H00BS3_A64ResidentGivenName[0];
                A72ResidentSalutation = H00BS3_A72ResidentSalutation[0];
+               n72ResidentSalutation = H00BS3_n72ResidentSalutation[0];
                if ( String.IsNullOrEmpty(StringUtil.RTrim( AV15FilterFullText)) || ( ( StringUtil.Like( StringUtil.Lower( A550MemoTitle) , StringUtil.PadR( "%" + StringUtil.Lower( AV15FilterFullText) , 255 , "%"),  ' ' ) ) || ( StringUtil.Like( StringUtil.Lower( A551MemoDescription) , StringUtil.PadR( "%" + StringUtil.Lower( AV15FilterFullText) , 255 , "%"),  ' ' ) ) || ( StringUtil.Like( StringUtil.Lower( A552MemoImage) , StringUtil.PadR( "%" + StringUtil.Lower( AV15FilterFullText) , 255 , "%"),  ' ' ) ) || ( StringUtil.Like( StringUtil.Lower( A553MemoDocument) , StringUtil.PadR( "%" + StringUtil.Lower( AV15FilterFullText) , 255 , "%"),  ' ' ) ) || ( StringUtil.Like( StringUtil.Str( A563MemoDuration, 6, 3) , StringUtil.PadR( "%" + AV15FilterFullText , 254 , "%"),  ' ' ) ) || ( StringUtil.Like( context.GetMessage( "mr", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV15FilterFullText) , 255 , "%"),  ' ' ) && ( StringUtil.StrCmp(A72ResidentSalutation, "Mr") == 0 ) ) || ( StringUtil.Like( context.GetMessage( "mrs", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV15FilterFullText) , 255 , "%"),  ' ' ) && ( StringUtil.StrCmp(A72ResidentSalutation, "Mrs") == 0 ) ) || ( StringUtil.Like( context.GetMessage( "dr", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV15FilterFullText) , 255 , "%"),  ' ' ) && ( StringUtil.StrCmp(A72ResidentSalutation, "Dr") == 0 ) ) || ( StringUtil.Like( context.GetMessage( "miss", "") , StringUtil.PadR( "%" + StringUtil.Lower( AV15FilterFullText) , 255 , "%"),  ' ' ) && ( StringUtil.StrCmp(A72ResidentSalutation, "Miss") == 0 ) ) || ( StringUtil.Like( StringUtil.Lower( A64ResidentGivenName) , StringUtil.PadR( "%" + StringUtil.Lower( AV15FilterFullText) , 255 , "%"),  ' ' ) ) || ( StringUtil.Like( StringUtil.Lower( A65ResidentLastName) , StringUtil.PadR( "%" + StringUtil.Lower( AV15FilterFullText) , 255 , "%"),  ' ' ) ) || ( StringUtil.Like( StringUtil.Lower( A71ResidentGUID) , StringUtil.PadR( "%" + StringUtil.Lower( AV15FilterFullText) , 255 , "%"),  ' ' ) ) ) )
                {
                   /* Execute user event: Grid.Load */
@@ -2466,7 +2471,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257212431678", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202571111451260", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2482,7 +2487,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("trn_memocategorytrn_memowc.js", "?20257212431679", false, true);
+         context.AddJavascriptSource("trn_memocategorytrn_memowc.js", "?202571111451261", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2691,13 +2696,15 @@ namespace GeneXus.Programs {
             GXCCtl = "RESIDENTSALUTATION_" + sGXsfl_35_idx;
             cmbResidentSalutation.Name = GXCCtl;
             cmbResidentSalutation.WebTags = "";
+            cmbResidentSalutation.addItem("", context.GetMessage( "GX_EmptyItemText", ""), 0);
             cmbResidentSalutation.addItem("Mr", context.GetMessage( "Mr", ""), 0);
             cmbResidentSalutation.addItem("Mrs", context.GetMessage( "Mrs", ""), 0);
-            cmbResidentSalutation.addItem("Dr", context.GetMessage( "Dr", ""), 0);
-            cmbResidentSalutation.addItem("Miss", context.GetMessage( "Miss", ""), 0);
+            cmbResidentSalutation.addItem("Ms", context.GetMessage( "Ms", ""), 0);
+            cmbResidentSalutation.addItem("Other", context.GetMessage( "Other", ""), 0);
             if ( cmbResidentSalutation.ItemCount > 0 )
             {
                A72ResidentSalutation = cmbResidentSalutation.getValidValue(A72ResidentSalutation);
+               n72ResidentSalutation = false;
             }
             /* ComboBox */
             GridRow.AddColumnProperties("combobox", 2, isAjaxCallMode( ), new Object[] {(GXCombobox)cmbResidentSalutation,(string)cmbResidentSalutation_Internalname,StringUtil.RTrim( A72ResidentSalutation),(short)1,(string)cmbResidentSalutation_Jsonclick,(short)0,(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"char",(string)"",(short)-1,(short)0,(short)1,(short)0,(short)0,(string)"px",(short)0,(string)"px",(string)"",(string)"Attribute",(string)"WWColumn hidden-xs",(string)"",(string)"",(string)"",(bool)true,(short)0});
@@ -2768,10 +2775,11 @@ namespace GeneXus.Programs {
          GXCCtl = "RESIDENTSALUTATION_" + sGXsfl_35_idx;
          cmbResidentSalutation.Name = GXCCtl;
          cmbResidentSalutation.WebTags = "";
+         cmbResidentSalutation.addItem("", context.GetMessage( "GX_EmptyItemText", ""), 0);
          cmbResidentSalutation.addItem("Mr", context.GetMessage( "Mr", ""), 0);
          cmbResidentSalutation.addItem("Mrs", context.GetMessage( "Mrs", ""), 0);
-         cmbResidentSalutation.addItem("Dr", context.GetMessage( "Dr", ""), 0);
-         cmbResidentSalutation.addItem("Miss", context.GetMessage( "Miss", ""), 0);
+         cmbResidentSalutation.addItem("Ms", context.GetMessage( "Ms", ""), 0);
+         cmbResidentSalutation.addItem("Other", context.GetMessage( "Other", ""), 0);
          if ( cmbResidentSalutation.ItemCount > 0 )
          {
          }
@@ -3219,6 +3227,7 @@ namespace GeneXus.Programs {
          H00BS2_A65ResidentLastName = new string[] {""} ;
          H00BS2_A64ResidentGivenName = new string[] {""} ;
          H00BS2_A72ResidentSalutation = new string[] {""} ;
+         H00BS2_n72ResidentSalutation = new bool[] {false} ;
          H00BS2_A62ResidentId = new Guid[] {Guid.Empty} ;
          H00BS2_A564MemoRemoveDate = new DateTime[] {DateTime.MinValue} ;
          H00BS2_n564MemoRemoveDate = new bool[] {false} ;
@@ -3245,6 +3254,7 @@ namespace GeneXus.Programs {
          H00BS3_A65ResidentLastName = new string[] {""} ;
          H00BS3_A64ResidentGivenName = new string[] {""} ;
          H00BS3_A72ResidentSalutation = new string[] {""} ;
+         H00BS3_n72ResidentSalutation = new bool[] {false} ;
          H00BS3_A62ResidentId = new Guid[] {Guid.Empty} ;
          H00BS3_A564MemoRemoveDate = new DateTime[] {DateTime.MinValue} ;
          H00BS3_n564MemoRemoveDate = new bool[] {false} ;
@@ -3282,14 +3292,14 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.trn_memocategorytrn_memowc__default(),
             new Object[][] {
                 new Object[] {
-               H00BS2_A528SG_LocationId, H00BS2_A529SG_OrganisationId, H00BS2_A29LocationId, H00BS2_A11OrganisationId, H00BS2_A71ResidentGUID, H00BS2_A65ResidentLastName, H00BS2_A64ResidentGivenName, H00BS2_A72ResidentSalutation, H00BS2_A62ResidentId, H00BS2_A564MemoRemoveDate,
-               H00BS2_n564MemoRemoveDate, H00BS2_A563MemoDuration, H00BS2_n563MemoDuration, H00BS2_A562MemoEndDateTime, H00BS2_n562MemoEndDateTime, H00BS2_A561MemoStartDateTime, H00BS2_n561MemoStartDateTime, H00BS2_A553MemoDocument, H00BS2_n553MemoDocument, H00BS2_A552MemoImage,
-               H00BS2_n552MemoImage, H00BS2_A551MemoDescription, H00BS2_A550MemoTitle, H00BS2_A549MemoId
+               H00BS2_A528SG_LocationId, H00BS2_A529SG_OrganisationId, H00BS2_A29LocationId, H00BS2_A11OrganisationId, H00BS2_A71ResidentGUID, H00BS2_A65ResidentLastName, H00BS2_A64ResidentGivenName, H00BS2_A72ResidentSalutation, H00BS2_n72ResidentSalutation, H00BS2_A62ResidentId,
+               H00BS2_A564MemoRemoveDate, H00BS2_n564MemoRemoveDate, H00BS2_A563MemoDuration, H00BS2_n563MemoDuration, H00BS2_A562MemoEndDateTime, H00BS2_n562MemoEndDateTime, H00BS2_A561MemoStartDateTime, H00BS2_n561MemoStartDateTime, H00BS2_A553MemoDocument, H00BS2_n553MemoDocument,
+               H00BS2_A552MemoImage, H00BS2_n552MemoImage, H00BS2_A551MemoDescription, H00BS2_A550MemoTitle, H00BS2_A549MemoId
                }
                , new Object[] {
-               H00BS3_A528SG_LocationId, H00BS3_A529SG_OrganisationId, H00BS3_A29LocationId, H00BS3_A11OrganisationId, H00BS3_A71ResidentGUID, H00BS3_A65ResidentLastName, H00BS3_A64ResidentGivenName, H00BS3_A72ResidentSalutation, H00BS3_A62ResidentId, H00BS3_A564MemoRemoveDate,
-               H00BS3_n564MemoRemoveDate, H00BS3_A563MemoDuration, H00BS3_n563MemoDuration, H00BS3_A562MemoEndDateTime, H00BS3_n562MemoEndDateTime, H00BS3_A561MemoStartDateTime, H00BS3_n561MemoStartDateTime, H00BS3_A553MemoDocument, H00BS3_n553MemoDocument, H00BS3_A552MemoImage,
-               H00BS3_n552MemoImage, H00BS3_A551MemoDescription, H00BS3_A550MemoTitle, H00BS3_A549MemoId
+               H00BS3_A528SG_LocationId, H00BS3_A529SG_OrganisationId, H00BS3_A29LocationId, H00BS3_A11OrganisationId, H00BS3_A71ResidentGUID, H00BS3_A65ResidentLastName, H00BS3_A64ResidentGivenName, H00BS3_A72ResidentSalutation, H00BS3_n72ResidentSalutation, H00BS3_A62ResidentId,
+               H00BS3_A564MemoRemoveDate, H00BS3_n564MemoRemoveDate, H00BS3_A563MemoDuration, H00BS3_n563MemoDuration, H00BS3_A562MemoEndDateTime, H00BS3_n562MemoEndDateTime, H00BS3_A561MemoStartDateTime, H00BS3_n561MemoStartDateTime, H00BS3_A553MemoDocument, H00BS3_n553MemoDocument,
+               H00BS3_A552MemoImage, H00BS3_n552MemoImage, H00BS3_A551MemoDescription, H00BS3_A550MemoTitle, H00BS3_A549MemoId
                }
             }
          );
@@ -3513,6 +3523,7 @@ namespace GeneXus.Programs {
       private bool n562MemoEndDateTime ;
       private bool n563MemoDuration ;
       private bool n564MemoRemoveDate ;
+      private bool n72ResidentSalutation ;
       private bool gxdyncontrolsrefreshing ;
       private bool returnInSub ;
       private bool gx_refresh_fired ;
@@ -3563,6 +3574,7 @@ namespace GeneXus.Programs {
       private string[] H00BS2_A65ResidentLastName ;
       private string[] H00BS2_A64ResidentGivenName ;
       private string[] H00BS2_A72ResidentSalutation ;
+      private bool[] H00BS2_n72ResidentSalutation ;
       private Guid[] H00BS2_A62ResidentId ;
       private DateTime[] H00BS2_A564MemoRemoveDate ;
       private bool[] H00BS2_n564MemoRemoveDate ;
@@ -3587,6 +3599,7 @@ namespace GeneXus.Programs {
       private string[] H00BS3_A65ResidentLastName ;
       private string[] H00BS3_A64ResidentGivenName ;
       private string[] H00BS3_A72ResidentSalutation ;
+      private bool[] H00BS3_n72ResidentSalutation ;
       private Guid[] H00BS3_A62ResidentId ;
       private DateTime[] H00BS3_A564MemoRemoveDate ;
       private bool[] H00BS3_n564MemoRemoveDate ;
@@ -3941,22 +3954,23 @@ namespace GeneXus.Programs {
                 ((string[]) buf[5])[0] = rslt.getVarchar(6);
                 ((string[]) buf[6])[0] = rslt.getVarchar(7);
                 ((string[]) buf[7])[0] = rslt.getString(8, 20);
-                ((Guid[]) buf[8])[0] = rslt.getGuid(9);
-                ((DateTime[]) buf[9])[0] = rslt.getGXDate(10);
-                ((bool[]) buf[10])[0] = rslt.wasNull(10);
-                ((decimal[]) buf[11])[0] = rslt.getDecimal(11);
-                ((bool[]) buf[12])[0] = rslt.wasNull(11);
-                ((DateTime[]) buf[13])[0] = rslt.getGXDateTime(12);
-                ((bool[]) buf[14])[0] = rslt.wasNull(12);
-                ((DateTime[]) buf[15])[0] = rslt.getGXDateTime(13);
-                ((bool[]) buf[16])[0] = rslt.wasNull(13);
-                ((string[]) buf[17])[0] = rslt.getVarchar(14);
-                ((bool[]) buf[18])[0] = rslt.wasNull(14);
-                ((string[]) buf[19])[0] = rslt.getLongVarchar(15);
-                ((bool[]) buf[20])[0] = rslt.wasNull(15);
-                ((string[]) buf[21])[0] = rslt.getVarchar(16);
-                ((string[]) buf[22])[0] = rslt.getVarchar(17);
-                ((Guid[]) buf[23])[0] = rslt.getGuid(18);
+                ((bool[]) buf[8])[0] = rslt.wasNull(8);
+                ((Guid[]) buf[9])[0] = rslt.getGuid(9);
+                ((DateTime[]) buf[10])[0] = rslt.getGXDate(10);
+                ((bool[]) buf[11])[0] = rslt.wasNull(10);
+                ((decimal[]) buf[12])[0] = rslt.getDecimal(11);
+                ((bool[]) buf[13])[0] = rslt.wasNull(11);
+                ((DateTime[]) buf[14])[0] = rslt.getGXDateTime(12);
+                ((bool[]) buf[15])[0] = rslt.wasNull(12);
+                ((DateTime[]) buf[16])[0] = rslt.getGXDateTime(13);
+                ((bool[]) buf[17])[0] = rslt.wasNull(13);
+                ((string[]) buf[18])[0] = rslt.getVarchar(14);
+                ((bool[]) buf[19])[0] = rslt.wasNull(14);
+                ((string[]) buf[20])[0] = rslt.getLongVarchar(15);
+                ((bool[]) buf[21])[0] = rslt.wasNull(15);
+                ((string[]) buf[22])[0] = rslt.getVarchar(16);
+                ((string[]) buf[23])[0] = rslt.getVarchar(17);
+                ((Guid[]) buf[24])[0] = rslt.getGuid(18);
                 return;
              case 1 :
                 ((Guid[]) buf[0])[0] = rslt.getGuid(1);
@@ -3967,22 +3981,23 @@ namespace GeneXus.Programs {
                 ((string[]) buf[5])[0] = rslt.getVarchar(6);
                 ((string[]) buf[6])[0] = rslt.getVarchar(7);
                 ((string[]) buf[7])[0] = rslt.getString(8, 20);
-                ((Guid[]) buf[8])[0] = rslt.getGuid(9);
-                ((DateTime[]) buf[9])[0] = rslt.getGXDate(10);
-                ((bool[]) buf[10])[0] = rslt.wasNull(10);
-                ((decimal[]) buf[11])[0] = rslt.getDecimal(11);
-                ((bool[]) buf[12])[0] = rslt.wasNull(11);
-                ((DateTime[]) buf[13])[0] = rslt.getGXDateTime(12);
-                ((bool[]) buf[14])[0] = rslt.wasNull(12);
-                ((DateTime[]) buf[15])[0] = rslt.getGXDateTime(13);
-                ((bool[]) buf[16])[0] = rslt.wasNull(13);
-                ((string[]) buf[17])[0] = rslt.getVarchar(14);
-                ((bool[]) buf[18])[0] = rslt.wasNull(14);
-                ((string[]) buf[19])[0] = rslt.getLongVarchar(15);
-                ((bool[]) buf[20])[0] = rslt.wasNull(15);
-                ((string[]) buf[21])[0] = rslt.getVarchar(16);
-                ((string[]) buf[22])[0] = rslt.getVarchar(17);
-                ((Guid[]) buf[23])[0] = rslt.getGuid(18);
+                ((bool[]) buf[8])[0] = rslt.wasNull(8);
+                ((Guid[]) buf[9])[0] = rslt.getGuid(9);
+                ((DateTime[]) buf[10])[0] = rslt.getGXDate(10);
+                ((bool[]) buf[11])[0] = rslt.wasNull(10);
+                ((decimal[]) buf[12])[0] = rslt.getDecimal(11);
+                ((bool[]) buf[13])[0] = rslt.wasNull(11);
+                ((DateTime[]) buf[14])[0] = rslt.getGXDateTime(12);
+                ((bool[]) buf[15])[0] = rslt.wasNull(12);
+                ((DateTime[]) buf[16])[0] = rslt.getGXDateTime(13);
+                ((bool[]) buf[17])[0] = rslt.wasNull(13);
+                ((string[]) buf[18])[0] = rslt.getVarchar(14);
+                ((bool[]) buf[19])[0] = rslt.wasNull(14);
+                ((string[]) buf[20])[0] = rslt.getLongVarchar(15);
+                ((bool[]) buf[21])[0] = rslt.wasNull(15);
+                ((string[]) buf[22])[0] = rslt.getVarchar(16);
+                ((string[]) buf[23])[0] = rslt.getVarchar(17);
+                ((Guid[]) buf[24])[0] = rslt.getGuid(18);
                 return;
        }
     }

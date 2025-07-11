@@ -52,6 +52,8 @@ namespace GeneXus.Programs
 			gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistimage_gxi = "";
 			gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistsalutation = "";
 
+			gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionisttitle = "";
+
 			gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistgender = "";
 
 		}
@@ -126,6 +128,9 @@ namespace GeneXus.Programs
 
 
 			AddObjectProperty("ReceptionistSalutation", gxTpr_Receptionistsalutation, false);
+
+
+			AddObjectProperty("ReceptionistTitle", gxTpr_Receptionisttitle, false);
 
 
 			AddObjectProperty("ReceptionistGender", gxTpr_Receptionistgender, false);
@@ -389,6 +394,22 @@ namespace GeneXus.Programs
 
 
 
+		[SoapElement(ElementName="ReceptionistTitle")]
+		[XmlElement(ElementName="ReceptionistTitle")]
+		public string gxTpr_Receptionisttitle
+		{
+			get {
+				return gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionisttitle; 
+			}
+			set {
+				gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionisttitle = value;
+				SetDirty("Receptionisttitle");
+			}
+		}
+
+
+
+
 		[SoapElement(ElementName="ReceptionistGender")]
 		[XmlElement(ElementName="ReceptionistGender")]
 		public string gxTpr_Receptionistgender
@@ -437,6 +458,7 @@ namespace GeneXus.Programs
 			gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistgamguid = "";
 			gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistimage = "";gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistimage_gxi = "";
 			gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistsalutation = "";
+			gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionisttitle = "";
 			gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistgender = "";
 			return  ;
 		}
@@ -490,6 +512,9 @@ namespace GeneXus.Programs
 		 
 
 		protected string gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistsalutation;
+		 
+
+		protected string gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionisttitle;
 		 
 
 		protected string gxTv_SdtSDT_Receptionists_SDT_ReceptionistsItem_Receptionistgender;
@@ -693,7 +718,19 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ReceptionistGender", Order=15)]
+		[DataMember(Name="ReceptionistTitle", Order=15)]
+		public  string gxTpr_Receptionisttitle
+		{
+			get { 
+				return sdt.gxTpr_Receptionisttitle;
+
+			}
+			set { 
+				 sdt.gxTpr_Receptionisttitle = value;
+			}
+		}
+
+		[DataMember(Name="ReceptionistGender", Order=16)]
 		public  string gxTpr_Receptionistgender
 		{
 			get { 

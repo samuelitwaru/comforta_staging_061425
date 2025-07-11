@@ -240,6 +240,7 @@ export class TileUpdate {
     const wrapper = editor.getWrapper();
     // Set all tile-wrapper components to not draggable by default
     const allTileWrappers = wrapper.find('[data-gjs-type="tile-wrapper"]');
+    console.log(allTileWrappers, "tile wrappers found");
     allTileWrappers.forEach((tile: any) => {
       tile.set('draggable', false);
       tile.addAttributes({'data-gjs-draggable': 'false'});

@@ -80,22 +80,23 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         AV63GXV1 = 1;
-         while ( AV63GXV1 <= AV35SDT_InfoPageTranslationCollection.Count )
+         AV76GXV1 = 1;
+         while ( AV76GXV1 <= AV35SDT_InfoPageTranslationCollection.Count )
          {
-            AV34SDT_InfoPageTranslation = ((SdtSDT_InfoPageTranslation)AV35SDT_InfoPageTranslationCollection.Item(AV63GXV1));
+            AV34SDT_InfoPageTranslation = ((SdtSDT_InfoPageTranslation)AV35SDT_InfoPageTranslationCollection.Item(AV76GXV1));
             AV21SDT_InfoContent = new SdtSDT_InfoContent(context);
             AV21SDT_InfoContent.FromJSonString(AV34SDT_InfoPageTranslation.gxTpr_Pagestructure, null);
-            AV64GXLvl7 = 0;
+            AV77GXLvl7 = 0;
             /* Using cursor P00GV2 */
-            pr_default.execute(0, new Object[] {AV34SDT_InfoPageTranslation.gxTpr_Pageid});
+            pr_default.execute(0, new Object[] {AV34SDT_InfoPageTranslation.gxTpr_Pageid, AV34SDT_InfoPageTranslation.gxTpr_Pageattributetype});
             while ( (pr_default.getStatus(0) != 101) )
             {
+               A581DynamicTranslationAttributeNam = P00GV2_A581DynamicTranslationAttributeNam[0];
                A580DynamicTranslationPrimaryKey = P00GV2_A580DynamicTranslationPrimaryKey[0];
                A582DynamicTranslationEnglish = P00GV2_A582DynamicTranslationEnglish[0];
                A583DynamicTranslationDutch = P00GV2_A583DynamicTranslationDutch[0];
                A578DynamicTranslationId = P00GV2_A578DynamicTranslationId[0];
-               AV64GXLvl7 = 1;
+               AV77GXLvl7 = 1;
                AV38SDT_InfoContentEnglish = new SdtSDT_InfoContent(context);
                AV39SDT_InfoContentDutch = new SdtSDT_InfoContent(context);
                AV54SDT_InfoContentItemFinal = new SdtSDT_InfoContent(context);
@@ -144,7 +145,7 @@ namespace GeneXus.Programs {
                pr_default.readNext(0);
             }
             pr_default.close(0);
-            if ( AV64GXLvl7 == 0 )
+            if ( AV77GXLvl7 == 0 )
             {
                if ( StringUtil.StrCmp(AV57LanguageFrom, "en") == 0 )
                {
@@ -194,7 +195,7 @@ namespace GeneXus.Programs {
                }
                /* End Insert */
             }
-            AV63GXV1 = (int)(AV63GXV1+1);
+            AV76GXV1 = (int)(AV76GXV1+1);
          }
          context.CommitDataStores("prc_addappversionpagetodynamictransalation3",pr_default);
          cleanup();
@@ -204,10 +205,10 @@ namespace GeneXus.Programs {
       {
          /* 'TRANSLATENEWPAGE' Routine */
          returnInSub = false;
-         AV65GXV2 = 1;
-         while ( AV65GXV2 <= AV21SDT_InfoContent.gxTpr_Infocontent.Count )
+         AV78GXV2 = 1;
+         while ( AV78GXV2 <= AV21SDT_InfoContent.gxTpr_Infocontent.Count )
          {
-            AV22SDT_InfoContentItem = ((SdtSDT_InfoContent_InfoContentItem)AV21SDT_InfoContent.gxTpr_Infocontent.Item(AV65GXV2));
+            AV22SDT_InfoContentItem = ((SdtSDT_InfoContent_InfoContentItem)AV21SDT_InfoContent.gxTpr_Infocontent.Item(AV78GXV2));
             if ( StringUtil.StrCmp(AV22SDT_InfoContentItem.gxTpr_Infotype, "Description") == 0 )
             {
                GXt_char1 = "";
@@ -216,14 +217,32 @@ namespace GeneXus.Programs {
             }
             else if ( StringUtil.StrCmp(AV22SDT_InfoContentItem.gxTpr_Infotype, "TileRow") == 0 )
             {
-               AV66GXV3 = 1;
-               while ( AV66GXV3 <= AV22SDT_InfoContentItem.gxTpr_Tiles.Count )
+               AV79GXV3 = 1;
+               while ( AV79GXV3 <= AV22SDT_InfoContentItem.gxTpr_Tiles.Count )
                {
-                  AV24SDT_InfoTileItem = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV22SDT_InfoContentItem.gxTpr_Tiles.Item(AV66GXV3));
+                  AV24SDT_InfoTileItem = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV22SDT_InfoContentItem.gxTpr_Tiles.Item(AV79GXV3));
                   GXt_char1 = "";
                   new prc_translatelanguage(context ).execute(  AV57LanguageFrom,  AV58languageTo,  AV24SDT_InfoTileItem.gxTpr_Text, out  GXt_char1) ;
                   AV24SDT_InfoTileItem.gxTpr_Text = GXt_char1;
-                  AV66GXV3 = (int)(AV66GXV3+1);
+                  AV79GXV3 = (int)(AV79GXV3+1);
+               }
+            }
+            else if ( StringUtil.StrCmp(AV22SDT_InfoContentItem.gxTpr_Infotype, "TileGrid") == 0 )
+            {
+               AV80GXV4 = 1;
+               while ( AV80GXV4 <= AV22SDT_InfoContentItem.gxTpr_Columns.Count )
+               {
+                  AV63Column = ((SdtSDT_InfoContent_InfoContentItem_ColumnsItem)AV22SDT_InfoContentItem.gxTpr_Columns.Item(AV80GXV4));
+                  AV81GXV5 = 1;
+                  while ( AV81GXV5 <= AV63Column.gxTpr_Tiles.Count )
+                  {
+                     AV24SDT_InfoTileItem = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV63Column.gxTpr_Tiles.Item(AV81GXV5));
+                     GXt_char1 = "";
+                     new prc_translatelanguage(context ).execute(  AV57LanguageFrom,  AV58languageTo,  AV24SDT_InfoTileItem.gxTpr_Text, out  GXt_char1) ;
+                     AV24SDT_InfoTileItem.gxTpr_Text = GXt_char1;
+                     AV81GXV5 = (int)(AV81GXV5+1);
+                  }
+                  AV80GXV4 = (int)(AV80GXV4+1);
                }
             }
             else if ( StringUtil.StrCmp(AV22SDT_InfoContentItem.gxTpr_Infotype, "Cta") == 0 )
@@ -236,7 +255,7 @@ namespace GeneXus.Programs {
             {
                new prc_logtofile(context ).execute(  context.GetMessage( "Non translatable", "")) ;
             }
-            AV65GXV2 = (int)(AV65GXV2+1);
+            AV78GXV2 = (int)(AV78GXV2+1);
          }
       }
 
@@ -244,36 +263,36 @@ namespace GeneXus.Programs {
       {
          /* 'TRANSLATEEXISTINGPAGEUPDATE' Routine */
          returnInSub = false;
-         AV67GXV4 = 1;
-         while ( AV67GXV4 <= AV26SDT_InfoContentOld.gxTpr_Infocontent.Count )
+         AV82GXV6 = 1;
+         while ( AV82GXV6 <= AV26SDT_InfoContentOld.gxTpr_Infocontent.Count )
          {
-            AV59SDT_InfoContentItemOld = ((SdtSDT_InfoContent_InfoContentItem)AV26SDT_InfoContentOld.gxTpr_Infocontent.Item(AV67GXV4));
+            AV59SDT_InfoContentItemOld = ((SdtSDT_InfoContent_InfoContentItem)AV26SDT_InfoContentOld.gxTpr_Infocontent.Item(AV82GXV6));
             AV40oldInfoIds.Add(AV59SDT_InfoContentItemOld.gxTpr_Infoid, 0);
-            AV67GXV4 = (int)(AV67GXV4+1);
+            AV82GXV6 = (int)(AV82GXV6+1);
          }
-         AV68GXV5 = 1;
-         while ( AV68GXV5 <= AV21SDT_InfoContent.gxTpr_Infocontent.Count )
+         AV83GXV7 = 1;
+         while ( AV83GXV7 <= AV21SDT_InfoContent.gxTpr_Infocontent.Count )
          {
-            AV22SDT_InfoContentItem = ((SdtSDT_InfoContent_InfoContentItem)AV21SDT_InfoContent.gxTpr_Infocontent.Item(AV68GXV5));
+            AV22SDT_InfoContentItem = ((SdtSDT_InfoContent_InfoContentItem)AV21SDT_InfoContent.gxTpr_Infocontent.Item(AV83GXV7));
             AV41newInfoIds.Add(AV22SDT_InfoContentItem.gxTpr_Infoid, 0);
-            AV68GXV5 = (int)(AV68GXV5+1);
+            AV83GXV7 = (int)(AV83GXV7+1);
          }
-         AV69GXV6 = 1;
-         while ( AV69GXV6 <= AV21SDT_InfoContent.gxTpr_Infocontent.Count )
+         AV84GXV8 = 1;
+         while ( AV84GXV8 <= AV21SDT_InfoContent.gxTpr_Infocontent.Count )
          {
-            AV22SDT_InfoContentItem = ((SdtSDT_InfoContent_InfoContentItem)AV21SDT_InfoContent.gxTpr_Infocontent.Item(AV69GXV6));
+            AV22SDT_InfoContentItem = ((SdtSDT_InfoContent_InfoContentItem)AV21SDT_InfoContent.gxTpr_Infocontent.Item(AV84GXV8));
             if ( (AV40oldInfoIds.IndexOf(AV22SDT_InfoContentItem.gxTpr_Infoid)>0) )
             {
-               AV70GXV7 = 1;
-               while ( AV70GXV7 <= AV26SDT_InfoContentOld.gxTpr_Infocontent.Count )
+               AV85GXV9 = 1;
+               while ( AV85GXV9 <= AV26SDT_InfoContentOld.gxTpr_Infocontent.Count )
                {
-                  AV59SDT_InfoContentItemOld = ((SdtSDT_InfoContent_InfoContentItem)AV26SDT_InfoContentOld.gxTpr_Infocontent.Item(AV70GXV7));
+                  AV59SDT_InfoContentItemOld = ((SdtSDT_InfoContent_InfoContentItem)AV26SDT_InfoContentOld.gxTpr_Infocontent.Item(AV85GXV9));
                   if ( StringUtil.StrCmp(AV59SDT_InfoContentItemOld.gxTpr_Infoid, AV22SDT_InfoContentItem.gxTpr_Infoid) == 0 )
                   {
-                     AV71GXV8 = 1;
-                     while ( AV71GXV8 <= AV60SDT_InfoContentTranslate.gxTpr_Infocontent.Count )
+                     AV86GXV10 = 1;
+                     while ( AV86GXV10 <= AV60SDT_InfoContentTranslate.gxTpr_Infocontent.Count )
                      {
-                        AV61SDT_InfoContentItemTranslate = ((SdtSDT_InfoContent_InfoContentItem)AV60SDT_InfoContentTranslate.gxTpr_Infocontent.Item(AV71GXV8));
+                        AV61SDT_InfoContentItemTranslate = ((SdtSDT_InfoContent_InfoContentItem)AV60SDT_InfoContentTranslate.gxTpr_Infocontent.Item(AV86GXV10));
                         if ( StringUtil.StrCmp(AV59SDT_InfoContentItemOld.gxTpr_Infoid, AV61SDT_InfoContentItemTranslate.gxTpr_Infoid) == 0 )
                         {
                            if ( StringUtil.StrCmp(AV22SDT_InfoContentItem.gxTpr_Infotype, "Description") == 0 )
@@ -287,37 +306,37 @@ namespace GeneXus.Programs {
                            }
                            else if ( StringUtil.StrCmp(AV22SDT_InfoContentItem.gxTpr_Infotype, "TileRow") == 0 )
                            {
-                              AV72GXV9 = 1;
-                              while ( AV72GXV9 <= AV59SDT_InfoContentItemOld.gxTpr_Tiles.Count )
+                              AV87GXV11 = 1;
+                              while ( AV87GXV11 <= AV59SDT_InfoContentItemOld.gxTpr_Tiles.Count )
                               {
-                                 AV28SDT_InfoTileItemOld = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV59SDT_InfoContentItemOld.gxTpr_Tiles.Item(AV72GXV9));
+                                 AV28SDT_InfoTileItemOld = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV59SDT_InfoContentItemOld.gxTpr_Tiles.Item(AV87GXV11));
                                  AV46existingtiles.Add(AV28SDT_InfoTileItemOld.gxTpr_Id, 0);
-                                 AV72GXV9 = (int)(AV72GXV9+1);
+                                 AV87GXV11 = (int)(AV87GXV11+1);
                               }
-                              AV73GXV10 = 1;
-                              while ( AV73GXV10 <= AV22SDT_InfoContentItem.gxTpr_Tiles.Count )
+                              AV88GXV12 = 1;
+                              while ( AV88GXV12 <= AV22SDT_InfoContentItem.gxTpr_Tiles.Count )
                               {
-                                 AV24SDT_InfoTileItem = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV22SDT_InfoContentItem.gxTpr_Tiles.Item(AV73GXV10));
+                                 AV24SDT_InfoTileItem = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV22SDT_InfoContentItem.gxTpr_Tiles.Item(AV88GXV12));
                                  AV49newtiles.Add(AV24SDT_InfoTileItem.gxTpr_Id, 0);
-                                 AV73GXV10 = (int)(AV73GXV10+1);
+                                 AV88GXV12 = (int)(AV88GXV12+1);
                               }
                               AV55SDT_InfoTileItemFinal = new SdtSDT_InfoContent_InfoContentItem(context);
-                              AV74GXV11 = 1;
-                              while ( AV74GXV11 <= AV22SDT_InfoContentItem.gxTpr_Tiles.Count )
+                              AV89GXV13 = 1;
+                              while ( AV89GXV13 <= AV22SDT_InfoContentItem.gxTpr_Tiles.Count )
                               {
-                                 AV24SDT_InfoTileItem = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV22SDT_InfoContentItem.gxTpr_Tiles.Item(AV74GXV11));
+                                 AV24SDT_InfoTileItem = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV22SDT_InfoContentItem.gxTpr_Tiles.Item(AV89GXV13));
                                  if ( (AV46existingtiles.IndexOf(AV24SDT_InfoTileItem.gxTpr_Id)>0) )
                                  {
-                                    AV75GXV12 = 1;
-                                    while ( AV75GXV12 <= AV59SDT_InfoContentItemOld.gxTpr_Tiles.Count )
+                                    AV90GXV14 = 1;
+                                    while ( AV90GXV14 <= AV59SDT_InfoContentItemOld.gxTpr_Tiles.Count )
                                     {
-                                       AV28SDT_InfoTileItemOld = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV59SDT_InfoContentItemOld.gxTpr_Tiles.Item(AV75GXV12));
+                                       AV28SDT_InfoTileItemOld = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV59SDT_InfoContentItemOld.gxTpr_Tiles.Item(AV90GXV14));
                                        if ( StringUtil.StrCmp(AV28SDT_InfoTileItemOld.gxTpr_Id, AV24SDT_InfoTileItem.gxTpr_Id) == 0 )
                                        {
-                                          AV76GXV13 = 1;
-                                          while ( AV76GXV13 <= AV61SDT_InfoContentItemTranslate.gxTpr_Tiles.Count )
+                                          AV91GXV15 = 1;
+                                          while ( AV91GXV15 <= AV61SDT_InfoContentItemTranslate.gxTpr_Tiles.Count )
                                           {
-                                             AV62SDT_InfoTileItemTranslate = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV61SDT_InfoContentItemTranslate.gxTpr_Tiles.Item(AV76GXV13));
+                                             AV62SDT_InfoTileItemTranslate = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV61SDT_InfoContentItemTranslate.gxTpr_Tiles.Item(AV91GXV15));
                                              if ( StringUtil.StrCmp(AV62SDT_InfoTileItemTranslate.gxTpr_Id, AV28SDT_InfoTileItemOld.gxTpr_Id) == 0 )
                                              {
                                                 AV62SDT_InfoTileItemTranslate.gxTpr_Action = AV24SDT_InfoTileItem.gxTpr_Action;
@@ -329,6 +348,7 @@ namespace GeneXus.Programs {
                                                 AV62SDT_InfoTileItemTranslate.gxTpr_Name = AV24SDT_InfoTileItem.gxTpr_Name;
                                                 AV62SDT_InfoTileItemTranslate.gxTpr_Opacity = AV24SDT_InfoTileItem.gxTpr_Opacity;
                                                 AV62SDT_InfoTileItemTranslate.gxTpr_Size = AV24SDT_InfoTileItem.gxTpr_Size;
+                                                AV62SDT_InfoTileItemTranslate.gxTpr_Height = AV24SDT_InfoTileItem.gxTpr_Height;
                                                 if ( ! ( StringUtil.StrCmp(AV28SDT_InfoTileItemOld.gxTpr_Text, AV24SDT_InfoTileItem.gxTpr_Text) == 0 ) )
                                                 {
                                                    GXt_char1 = "";
@@ -336,10 +356,10 @@ namespace GeneXus.Programs {
                                                    AV62SDT_InfoTileItemTranslate.gxTpr_Text = GXt_char1;
                                                 }
                                              }
-                                             AV76GXV13 = (int)(AV76GXV13+1);
+                                             AV91GXV15 = (int)(AV91GXV15+1);
                                           }
                                        }
-                                       AV75GXV12 = (int)(AV75GXV12+1);
+                                       AV90GXV14 = (int)(AV90GXV14+1);
                                     }
                                  }
                                  else
@@ -349,46 +369,293 @@ namespace GeneXus.Programs {
                                     AV24SDT_InfoTileItem.gxTpr_Text = GXt_char1;
                                     AV61SDT_InfoContentItemTranslate.gxTpr_Tiles.Add(AV24SDT_InfoTileItem, 0);
                                  }
-                                 AV74GXV11 = (int)(AV74GXV11+1);
+                                 AV89GXV13 = (int)(AV89GXV13+1);
                               }
-                              AV77GXV14 = 1;
-                              while ( AV77GXV14 <= AV59SDT_InfoContentItemOld.gxTpr_Tiles.Count )
+                              AV92GXV16 = 1;
+                              while ( AV92GXV16 <= AV59SDT_InfoContentItemOld.gxTpr_Tiles.Count )
                               {
-                                 AV28SDT_InfoTileItemOld = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV59SDT_InfoContentItemOld.gxTpr_Tiles.Item(AV77GXV14));
+                                 AV28SDT_InfoTileItemOld = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV59SDT_InfoContentItemOld.gxTpr_Tiles.Item(AV92GXV16));
                                  if ( ! (AV49newtiles.IndexOf(AV28SDT_InfoTileItemOld.gxTpr_Id)>0) )
                                  {
-                                    AV78GXV15 = 1;
-                                    while ( AV78GXV15 <= AV61SDT_InfoContentItemTranslate.gxTpr_Tiles.Count )
+                                    AV93GXV17 = 1;
+                                    while ( AV93GXV17 <= AV61SDT_InfoContentItemTranslate.gxTpr_Tiles.Count )
                                     {
-                                       AV62SDT_InfoTileItemTranslate = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV61SDT_InfoContentItemTranslate.gxTpr_Tiles.Item(AV78GXV15));
+                                       AV62SDT_InfoTileItemTranslate = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV61SDT_InfoContentItemTranslate.gxTpr_Tiles.Item(AV93GXV17));
                                        if ( StringUtil.StrCmp(AV62SDT_InfoTileItemTranslate.gxTpr_Id, AV28SDT_InfoTileItemOld.gxTpr_Id) == 0 )
                                        {
                                           AV51indextileToRemove = (short)(AV61SDT_InfoContentItemTranslate.gxTpr_Tiles.IndexOf(AV62SDT_InfoTileItemTranslate));
                                           AV61SDT_InfoContentItemTranslate.gxTpr_Tiles.RemoveItem(AV51indextileToRemove);
                                        }
-                                       AV78GXV15 = (int)(AV78GXV15+1);
+                                       AV93GXV17 = (int)(AV93GXV17+1);
                                     }
                                  }
-                                 AV77GXV14 = (int)(AV77GXV14+1);
+                                 AV92GXV16 = (int)(AV92GXV16+1);
                               }
-                              AV79GXV16 = 1;
-                              while ( AV79GXV16 <= AV22SDT_InfoContentItem.gxTpr_Tiles.Count )
+                              AV94GXV18 = 1;
+                              while ( AV94GXV18 <= AV22SDT_InfoContentItem.gxTpr_Tiles.Count )
                               {
-                                 AV24SDT_InfoTileItem = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV22SDT_InfoContentItem.gxTpr_Tiles.Item(AV79GXV16));
+                                 AV24SDT_InfoTileItem = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV22SDT_InfoContentItem.gxTpr_Tiles.Item(AV94GXV18));
                                  AV56indextilenew = (short)(AV22SDT_InfoContentItem.gxTpr_Tiles.IndexOf(AV24SDT_InfoTileItem));
-                                 AV80GXV17 = 1;
-                                 while ( AV80GXV17 <= AV61SDT_InfoContentItemTranslate.gxTpr_Tiles.Count )
+                                 AV95GXV19 = 1;
+                                 while ( AV95GXV19 <= AV61SDT_InfoContentItemTranslate.gxTpr_Tiles.Count )
                                  {
-                                    AV62SDT_InfoTileItemTranslate = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV61SDT_InfoContentItemTranslate.gxTpr_Tiles.Item(AV80GXV17));
+                                    AV62SDT_InfoTileItemTranslate = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV61SDT_InfoContentItemTranslate.gxTpr_Tiles.Item(AV95GXV19));
                                     if ( StringUtil.StrCmp(AV24SDT_InfoTileItem.gxTpr_Id, AV62SDT_InfoTileItemTranslate.gxTpr_Id) == 0 )
                                     {
                                        AV55SDT_InfoTileItemFinal.gxTpr_Tiles.Add(AV62SDT_InfoTileItemTranslate, AV56indextilenew);
                                     }
-                                    AV80GXV17 = (int)(AV80GXV17+1);
+                                    AV95GXV19 = (int)(AV95GXV19+1);
                                  }
-                                 AV79GXV16 = (int)(AV79GXV16+1);
+                                 AV94GXV18 = (int)(AV94GXV18+1);
                               }
                               AV61SDT_InfoContentItemTranslate.gxTpr_Tiles = AV55SDT_InfoTileItemFinal.gxTpr_Tiles;
+                           }
+                           else if ( StringUtil.StrCmp(AV22SDT_InfoContentItem.gxTpr_Infotype, "TileGrid") == 0 )
+                           {
+                              AV65existingColumn = (GxSimpleCollection<string>)(new GxSimpleCollection<string>());
+                              AV66newColumns = (GxSimpleCollection<string>)(new GxSimpleCollection<string>());
+                              AV96GXV20 = 1;
+                              while ( AV96GXV20 <= AV59SDT_InfoContentItemOld.gxTpr_Columns.Count )
+                              {
+                                 AV64ColumnOld = ((SdtSDT_InfoContent_InfoContentItem_ColumnsItem)AV59SDT_InfoContentItemOld.gxTpr_Columns.Item(AV96GXV20));
+                                 AV65existingColumn.Add(AV64ColumnOld.gxTpr_Colid, 0);
+                                 AV96GXV20 = (int)(AV96GXV20+1);
+                              }
+                              AV97GXV21 = 1;
+                              while ( AV97GXV21 <= AV22SDT_InfoContentItem.gxTpr_Columns.Count )
+                              {
+                                 AV67ColumnNew = ((SdtSDT_InfoContent_InfoContentItem_ColumnsItem)AV22SDT_InfoContentItem.gxTpr_Columns.Item(AV97GXV21));
+                                 AV66newColumns.Add(AV67ColumnNew.gxTpr_Colid, 0);
+                                 AV97GXV21 = (int)(AV97GXV21+1);
+                              }
+                              AV55SDT_InfoTileItemFinal = new SdtSDT_InfoContent_InfoContentItem(context);
+                              AV98GXV22 = 1;
+                              while ( AV98GXV22 <= AV22SDT_InfoContentItem.gxTpr_Columns.Count )
+                              {
+                                 AV63Column = ((SdtSDT_InfoContent_InfoContentItem_ColumnsItem)AV22SDT_InfoContentItem.gxTpr_Columns.Item(AV98GXV22));
+                                 if ( (AV65existingColumn.IndexOf(AV63Column.gxTpr_Colid)>0) )
+                                 {
+                                    AV99GXV23 = 1;
+                                    while ( AV99GXV23 <= AV59SDT_InfoContentItemOld.gxTpr_Columns.Count )
+                                    {
+                                       AV73OldColumn = ((SdtSDT_InfoContent_InfoContentItem_ColumnsItem)AV59SDT_InfoContentItemOld.gxTpr_Columns.Item(AV99GXV23));
+                                       if ( StringUtil.StrCmp(AV73OldColumn.gxTpr_Colid, AV63Column.gxTpr_Colid) == 0 )
+                                       {
+                                          AV46existingtiles = (GxSimpleCollection<string>)(new GxSimpleCollection<string>());
+                                          AV49newtiles = (GxSimpleCollection<string>)(new GxSimpleCollection<string>());
+                                          AV100GXV24 = 1;
+                                          while ( AV100GXV24 <= AV73OldColumn.gxTpr_Tiles.Count )
+                                          {
+                                             AV28SDT_InfoTileItemOld = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV73OldColumn.gxTpr_Tiles.Item(AV100GXV24));
+                                             AV46existingtiles.Add(AV28SDT_InfoTileItemOld.gxTpr_Id, 0);
+                                             AV100GXV24 = (int)(AV100GXV24+1);
+                                          }
+                                          AV101GXV25 = 1;
+                                          while ( AV101GXV25 <= AV63Column.gxTpr_Tiles.Count )
+                                          {
+                                             AV24SDT_InfoTileItem = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV63Column.gxTpr_Tiles.Item(AV101GXV25));
+                                             AV49newtiles.Add(AV24SDT_InfoTileItem.gxTpr_Id, 0);
+                                             AV101GXV25 = (int)(AV101GXV25+1);
+                                          }
+                                          AV102GXV26 = 1;
+                                          while ( AV102GXV26 <= AV63Column.gxTpr_Tiles.Count )
+                                          {
+                                             AV24SDT_InfoTileItem = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV63Column.gxTpr_Tiles.Item(AV102GXV26));
+                                             if ( (AV46existingtiles.IndexOf(AV24SDT_InfoTileItem.gxTpr_Id)>0) )
+                                             {
+                                                AV103GXV27 = 1;
+                                                while ( AV103GXV27 <= AV73OldColumn.gxTpr_Tiles.Count )
+                                                {
+                                                   AV28SDT_InfoTileItemOld = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV73OldColumn.gxTpr_Tiles.Item(AV103GXV27));
+                                                   if ( StringUtil.StrCmp(AV28SDT_InfoTileItemOld.gxTpr_Id, AV24SDT_InfoTileItem.gxTpr_Id) == 0 )
+                                                   {
+                                                      AV104GXV28 = 1;
+                                                      while ( AV104GXV28 <= AV61SDT_InfoContentItemTranslate.gxTpr_Columns.Count )
+                                                      {
+                                                         AV74TranslateColumn = ((SdtSDT_InfoContent_InfoContentItem_ColumnsItem)AV61SDT_InfoContentItemTranslate.gxTpr_Columns.Item(AV104GXV28));
+                                                         if ( StringUtil.StrCmp(AV74TranslateColumn.gxTpr_Colid, AV73OldColumn.gxTpr_Colid) == 0 )
+                                                         {
+                                                            AV105GXV29 = 1;
+                                                            while ( AV105GXV29 <= AV74TranslateColumn.gxTpr_Tiles.Count )
+                                                            {
+                                                               AV62SDT_InfoTileItemTranslate = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV74TranslateColumn.gxTpr_Tiles.Item(AV105GXV29));
+                                                               if ( StringUtil.StrCmp(AV62SDT_InfoTileItemTranslate.gxTpr_Id, AV28SDT_InfoTileItemOld.gxTpr_Id) == 0 )
+                                                               {
+                                                                  AV62SDT_InfoTileItemTranslate.gxTpr_Action = AV24SDT_InfoTileItem.gxTpr_Action;
+                                                                  AV62SDT_InfoTileItemTranslate.gxTpr_Align = AV24SDT_InfoTileItem.gxTpr_Align;
+                                                                  AV62SDT_InfoTileItemTranslate.gxTpr_Bgcolor = AV24SDT_InfoTileItem.gxTpr_Bgcolor;
+                                                                  AV62SDT_InfoTileItemTranslate.gxTpr_Bgimageurl = AV24SDT_InfoTileItem.gxTpr_Bgimageurl;
+                                                                  AV62SDT_InfoTileItemTranslate.gxTpr_Color = AV24SDT_InfoTileItem.gxTpr_Color;
+                                                                  AV62SDT_InfoTileItemTranslate.gxTpr_Icon = AV24SDT_InfoTileItem.gxTpr_Icon;
+                                                                  AV62SDT_InfoTileItemTranslate.gxTpr_Name = AV24SDT_InfoTileItem.gxTpr_Name;
+                                                                  AV62SDT_InfoTileItemTranslate.gxTpr_Opacity = AV24SDT_InfoTileItem.gxTpr_Opacity;
+                                                                  AV62SDT_InfoTileItemTranslate.gxTpr_Size = AV24SDT_InfoTileItem.gxTpr_Size;
+                                                                  AV62SDT_InfoTileItemTranslate.gxTpr_Height = AV24SDT_InfoTileItem.gxTpr_Height;
+                                                                  AV62SDT_InfoTileItemTranslate.gxTpr_Bgposition = AV24SDT_InfoTileItem.gxTpr_Bgposition;
+                                                                  AV62SDT_InfoTileItemTranslate.gxTpr_Bgsize = AV24SDT_InfoTileItem.gxTpr_Bgsize;
+                                                                  AV62SDT_InfoTileItemTranslate.gxTpr_Left = AV24SDT_InfoTileItem.gxTpr_Left;
+                                                                  AV62SDT_InfoTileItemTranslate.gxTpr_Originalimageurl = AV24SDT_InfoTileItem.gxTpr_Originalimageurl;
+                                                                  AV62SDT_InfoTileItemTranslate.gxTpr_Top = AV24SDT_InfoTileItem.gxTpr_Top;
+                                                                  if ( ! ( StringUtil.StrCmp(AV28SDT_InfoTileItemOld.gxTpr_Text, AV24SDT_InfoTileItem.gxTpr_Text) == 0 ) )
+                                                                  {
+                                                                     GXt_char1 = "";
+                                                                     new prc_translatelanguage(context ).execute(  AV57LanguageFrom,  AV58languageTo,  AV24SDT_InfoTileItem.gxTpr_Text, out  GXt_char1) ;
+                                                                     AV62SDT_InfoTileItemTranslate.gxTpr_Text = GXt_char1;
+                                                                  }
+                                                               }
+                                                               AV105GXV29 = (int)(AV105GXV29+1);
+                                                            }
+                                                         }
+                                                         AV104GXV28 = (int)(AV104GXV28+1);
+                                                      }
+                                                   }
+                                                   AV103GXV27 = (int)(AV103GXV27+1);
+                                                }
+                                             }
+                                             else
+                                             {
+                                                AV106GXV30 = 1;
+                                                while ( AV106GXV30 <= AV61SDT_InfoContentItemTranslate.gxTpr_Columns.Count )
+                                                {
+                                                   AV74TranslateColumn = ((SdtSDT_InfoContent_InfoContentItem_ColumnsItem)AV61SDT_InfoContentItemTranslate.gxTpr_Columns.Item(AV106GXV30));
+                                                   if ( StringUtil.StrCmp(AV74TranslateColumn.gxTpr_Colid, AV63Column.gxTpr_Colid) == 0 )
+                                                   {
+                                                      GXt_char1 = "";
+                                                      new prc_translatelanguage(context ).execute(  AV57LanguageFrom,  AV58languageTo,  AV24SDT_InfoTileItem.gxTpr_Text, out  GXt_char1) ;
+                                                      AV24SDT_InfoTileItem.gxTpr_Text = GXt_char1;
+                                                      AV74TranslateColumn.gxTpr_Tiles.Add(AV24SDT_InfoTileItem, 0);
+                                                   }
+                                                   AV106GXV30 = (int)(AV106GXV30+1);
+                                                }
+                                             }
+                                             AV102GXV26 = (int)(AV102GXV26+1);
+                                          }
+                                          AV107GXV31 = 1;
+                                          while ( AV107GXV31 <= AV73OldColumn.gxTpr_Tiles.Count )
+                                          {
+                                             AV28SDT_InfoTileItemOld = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV73OldColumn.gxTpr_Tiles.Item(AV107GXV31));
+                                             if ( ! (AV49newtiles.IndexOf(AV28SDT_InfoTileItemOld.gxTpr_Id)>0) )
+                                             {
+                                                AV108GXV32 = 1;
+                                                while ( AV108GXV32 <= AV61SDT_InfoContentItemTranslate.gxTpr_Columns.Count )
+                                                {
+                                                   AV74TranslateColumn = ((SdtSDT_InfoContent_InfoContentItem_ColumnsItem)AV61SDT_InfoContentItemTranslate.gxTpr_Columns.Item(AV108GXV32));
+                                                   if ( StringUtil.StrCmp(AV74TranslateColumn.gxTpr_Colid, AV73OldColumn.gxTpr_Colid) == 0 )
+                                                   {
+                                                      AV109GXV33 = 1;
+                                                      while ( AV109GXV33 <= AV74TranslateColumn.gxTpr_Tiles.Count )
+                                                      {
+                                                         AV62SDT_InfoTileItemTranslate = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV74TranslateColumn.gxTpr_Tiles.Item(AV109GXV33));
+                                                         if ( StringUtil.StrCmp(AV62SDT_InfoTileItemTranslate.gxTpr_Id, AV28SDT_InfoTileItemOld.gxTpr_Id) == 0 )
+                                                         {
+                                                            AV51indextileToRemove = (short)(AV74TranslateColumn.gxTpr_Tiles.IndexOf(AV62SDT_InfoTileItemTranslate));
+                                                            AV74TranslateColumn.gxTpr_Tiles.RemoveItem(AV51indextileToRemove);
+                                                         }
+                                                         AV109GXV33 = (int)(AV109GXV33+1);
+                                                      }
+                                                   }
+                                                   AV108GXV32 = (int)(AV108GXV32+1);
+                                                }
+                                             }
+                                             AV107GXV31 = (int)(AV107GXV31+1);
+                                          }
+                                          AV75FinalColumn = new SdtSDT_InfoContent_InfoContentItem_ColumnsItem(context);
+                                          AV110GXV34 = 1;
+                                          while ( AV110GXV34 <= AV63Column.gxTpr_Tiles.Count )
+                                          {
+                                             AV24SDT_InfoTileItem = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV63Column.gxTpr_Tiles.Item(AV110GXV34));
+                                             AV56indextilenew = (short)(AV63Column.gxTpr_Tiles.IndexOf(AV24SDT_InfoTileItem));
+                                             AV111GXV35 = 1;
+                                             while ( AV111GXV35 <= AV61SDT_InfoContentItemTranslate.gxTpr_Columns.Count )
+                                             {
+                                                AV74TranslateColumn = ((SdtSDT_InfoContent_InfoContentItem_ColumnsItem)AV61SDT_InfoContentItemTranslate.gxTpr_Columns.Item(AV111GXV35));
+                                                if ( StringUtil.StrCmp(AV74TranslateColumn.gxTpr_Colid, AV63Column.gxTpr_Colid) == 0 )
+                                                {
+                                                   AV112GXV36 = 1;
+                                                   while ( AV112GXV36 <= AV74TranslateColumn.gxTpr_Tiles.Count )
+                                                   {
+                                                      AV62SDT_InfoTileItemTranslate = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV74TranslateColumn.gxTpr_Tiles.Item(AV112GXV36));
+                                                      if ( StringUtil.StrCmp(AV24SDT_InfoTileItem.gxTpr_Id, AV62SDT_InfoTileItemTranslate.gxTpr_Id) == 0 )
+                                                      {
+                                                         AV75FinalColumn.gxTpr_Tiles.Add(AV62SDT_InfoTileItemTranslate, AV56indextilenew);
+                                                      }
+                                                      AV112GXV36 = (int)(AV112GXV36+1);
+                                                   }
+                                                }
+                                                AV111GXV35 = (int)(AV111GXV35+1);
+                                             }
+                                             AV110GXV34 = (int)(AV110GXV34+1);
+                                          }
+                                          AV113GXV37 = 1;
+                                          while ( AV113GXV37 <= AV61SDT_InfoContentItemTranslate.gxTpr_Columns.Count )
+                                          {
+                                             AV74TranslateColumn = ((SdtSDT_InfoContent_InfoContentItem_ColumnsItem)AV61SDT_InfoContentItemTranslate.gxTpr_Columns.Item(AV113GXV37));
+                                             if ( StringUtil.StrCmp(AV74TranslateColumn.gxTpr_Colid, AV63Column.gxTpr_Colid) == 0 )
+                                             {
+                                                AV74TranslateColumn.gxTpr_Tiles = AV75FinalColumn.gxTpr_Tiles;
+                                             }
+                                             AV113GXV37 = (int)(AV113GXV37+1);
+                                          }
+                                       }
+                                       AV99GXV23 = (int)(AV99GXV23+1);
+                                    }
+                                 }
+                                 else
+                                 {
+                                    new prc_logtofile(context ).execute(  context.GetMessage( "new column", "")) ;
+                                    AV114GXV38 = 1;
+                                    while ( AV114GXV38 <= AV63Column.gxTpr_Tiles.Count )
+                                    {
+                                       AV24SDT_InfoTileItem = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV63Column.gxTpr_Tiles.Item(AV114GXV38));
+                                       GXt_char1 = "";
+                                       new prc_translatelanguage(context ).execute(  AV57LanguageFrom,  AV58languageTo,  AV24SDT_InfoTileItem.gxTpr_Text, out  GXt_char1) ;
+                                       AV24SDT_InfoTileItem.gxTpr_Text = GXt_char1;
+                                       AV114GXV38 = (int)(AV114GXV38+1);
+                                    }
+                                    AV61SDT_InfoContentItemTranslate.gxTpr_Columns.Add(AV63Column, 0);
+                                 }
+                                 AV98GXV22 = (int)(AV98GXV22+1);
+                              }
+                              AV115GXV39 = 1;
+                              while ( AV115GXV39 <= AV59SDT_InfoContentItemOld.gxTpr_Columns.Count )
+                              {
+                                 AV64ColumnOld = ((SdtSDT_InfoContent_InfoContentItem_ColumnsItem)AV59SDT_InfoContentItemOld.gxTpr_Columns.Item(AV115GXV39));
+                                 if ( ! (AV66newColumns.IndexOf(AV64ColumnOld.gxTpr_Colid)>0) )
+                                 {
+                                    new prc_logtofile(context ).execute(  context.GetMessage( "Delete column", "")) ;
+                                    AV116GXV40 = 1;
+                                    while ( AV116GXV40 <= AV61SDT_InfoContentItemTranslate.gxTpr_Columns.Count )
+                                    {
+                                       AV69ColumnTranslate = ((SdtSDT_InfoContent_InfoContentItem_ColumnsItem)AV61SDT_InfoContentItemTranslate.gxTpr_Columns.Item(AV116GXV40));
+                                       if ( StringUtil.StrCmp(AV69ColumnTranslate.gxTpr_Colid, AV64ColumnOld.gxTpr_Colid) == 0 )
+                                       {
+                                          AV70indexColumnToRemove = (short)(AV61SDT_InfoContentItemTranslate.gxTpr_Columns.IndexOf(AV69ColumnTranslate));
+                                          new prc_logtofile(context ).execute(  context.GetMessage( "found you at index ", "")+StringUtil.Str( (decimal)(AV70indexColumnToRemove), 4, 0)) ;
+                                          AV61SDT_InfoContentItemTranslate.gxTpr_Columns.RemoveItem(AV70indexColumnToRemove);
+                                       }
+                                       AV116GXV40 = (int)(AV116GXV40+1);
+                                    }
+                                 }
+                                 AV115GXV39 = (int)(AV115GXV39+1);
+                              }
+                              AV117GXV41 = 1;
+                              while ( AV117GXV41 <= AV22SDT_InfoContentItem.gxTpr_Columns.Count )
+                              {
+                                 AV63Column = ((SdtSDT_InfoContent_InfoContentItem_ColumnsItem)AV22SDT_InfoContentItem.gxTpr_Columns.Item(AV117GXV41));
+                                 AV72indexColumnew = (short)(AV22SDT_InfoContentItem.gxTpr_Columns.IndexOf(AV63Column));
+                                 AV118GXV42 = 1;
+                                 while ( AV118GXV42 <= AV61SDT_InfoContentItemTranslate.gxTpr_Columns.Count )
+                                 {
+                                    AV69ColumnTranslate = ((SdtSDT_InfoContent_InfoContentItem_ColumnsItem)AV61SDT_InfoContentItemTranslate.gxTpr_Columns.Item(AV118GXV42));
+                                    if ( StringUtil.StrCmp(AV63Column.gxTpr_Colid, AV69ColumnTranslate.gxTpr_Colid) == 0 )
+                                    {
+                                       AV55SDT_InfoTileItemFinal.gxTpr_Columns.Add(AV69ColumnTranslate, AV72indexColumnew);
+                                    }
+                                    AV118GXV42 = (int)(AV118GXV42+1);
+                                 }
+                                 AV117GXV41 = (int)(AV117GXV41+1);
+                              }
+                              AV61SDT_InfoContentItemTranslate.gxTpr_Columns = AV55SDT_InfoTileItemFinal.gxTpr_Columns;
                            }
                            else if ( StringUtil.StrCmp(AV22SDT_InfoContentItem.gxTpr_Infotype, "Cta") == 0 )
                            {
@@ -415,10 +682,10 @@ namespace GeneXus.Programs {
                               AV61SDT_InfoContentItemTranslate = AV22SDT_InfoContentItem;
                            }
                         }
-                        AV71GXV8 = (int)(AV71GXV8+1);
+                        AV86GXV10 = (int)(AV86GXV10+1);
                      }
                   }
-                  AV70GXV7 = (int)(AV70GXV7+1);
+                  AV85GXV9 = (int)(AV85GXV9+1);
                }
             }
             else
@@ -431,14 +698,32 @@ namespace GeneXus.Programs {
                }
                else if ( StringUtil.StrCmp(AV22SDT_InfoContentItem.gxTpr_Infotype, "TileRow") == 0 )
                {
-                  AV81GXV18 = 1;
-                  while ( AV81GXV18 <= AV22SDT_InfoContentItem.gxTpr_Tiles.Count )
+                  AV119GXV43 = 1;
+                  while ( AV119GXV43 <= AV22SDT_InfoContentItem.gxTpr_Tiles.Count )
                   {
-                     AV24SDT_InfoTileItem = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV22SDT_InfoContentItem.gxTpr_Tiles.Item(AV81GXV18));
+                     AV24SDT_InfoTileItem = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV22SDT_InfoContentItem.gxTpr_Tiles.Item(AV119GXV43));
                      GXt_char1 = "";
                      new prc_translatelanguage(context ).execute(  AV57LanguageFrom,  AV58languageTo,  AV24SDT_InfoTileItem.gxTpr_Text, out  GXt_char1) ;
                      AV24SDT_InfoTileItem.gxTpr_Text = GXt_char1;
-                     AV81GXV18 = (int)(AV81GXV18+1);
+                     AV119GXV43 = (int)(AV119GXV43+1);
+                  }
+               }
+               else if ( StringUtil.StrCmp(AV22SDT_InfoContentItem.gxTpr_Infotype, "TileGrid") == 0 )
+               {
+                  AV120GXV44 = 1;
+                  while ( AV120GXV44 <= AV22SDT_InfoContentItem.gxTpr_Columns.Count )
+                  {
+                     AV63Column = ((SdtSDT_InfoContent_InfoContentItem_ColumnsItem)AV22SDT_InfoContentItem.gxTpr_Columns.Item(AV120GXV44));
+                     AV121GXV45 = 1;
+                     while ( AV121GXV45 <= AV63Column.gxTpr_Tiles.Count )
+                     {
+                        AV24SDT_InfoTileItem = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV63Column.gxTpr_Tiles.Item(AV121GXV45));
+                        GXt_char1 = "";
+                        new prc_translatelanguage(context ).execute(  AV57LanguageFrom,  AV58languageTo,  AV24SDT_InfoTileItem.gxTpr_Text, out  GXt_char1) ;
+                        AV24SDT_InfoTileItem.gxTpr_Text = GXt_char1;
+                        AV121GXV45 = (int)(AV121GXV45+1);
+                     }
+                     AV120GXV44 = (int)(AV120GXV44+1);
                   }
                }
                else if ( StringUtil.StrCmp(AV22SDT_InfoContentItem.gxTpr_Infotype, "Cta") == 0 )
@@ -452,44 +737,44 @@ namespace GeneXus.Programs {
                }
                AV60SDT_InfoContentTranslate.gxTpr_Infocontent.Add(AV22SDT_InfoContentItem, 0);
             }
-            AV69GXV6 = (int)(AV69GXV6+1);
+            AV84GXV8 = (int)(AV84GXV8+1);
          }
-         AV82GXV19 = 1;
-         while ( AV82GXV19 <= AV26SDT_InfoContentOld.gxTpr_Infocontent.Count )
+         AV122GXV46 = 1;
+         while ( AV122GXV46 <= AV26SDT_InfoContentOld.gxTpr_Infocontent.Count )
          {
-            AV59SDT_InfoContentItemOld = ((SdtSDT_InfoContent_InfoContentItem)AV26SDT_InfoContentOld.gxTpr_Infocontent.Item(AV82GXV19));
+            AV59SDT_InfoContentItemOld = ((SdtSDT_InfoContent_InfoContentItem)AV26SDT_InfoContentOld.gxTpr_Infocontent.Item(AV122GXV46));
             if ( ! (AV41newInfoIds.IndexOf(AV59SDT_InfoContentItemOld.gxTpr_Infoid)>0) )
             {
-               AV83GXV20 = 1;
-               while ( AV83GXV20 <= AV60SDT_InfoContentTranslate.gxTpr_Infocontent.Count )
+               AV123GXV47 = 1;
+               while ( AV123GXV47 <= AV60SDT_InfoContentTranslate.gxTpr_Infocontent.Count )
                {
-                  AV61SDT_InfoContentItemTranslate = ((SdtSDT_InfoContent_InfoContentItem)AV60SDT_InfoContentTranslate.gxTpr_Infocontent.Item(AV83GXV20));
+                  AV61SDT_InfoContentItemTranslate = ((SdtSDT_InfoContent_InfoContentItem)AV60SDT_InfoContentTranslate.gxTpr_Infocontent.Item(AV123GXV47));
                   if ( StringUtil.StrCmp(AV61SDT_InfoContentItemTranslate.gxTpr_Infoid, AV59SDT_InfoContentItemOld.gxTpr_Infoid) == 0 )
                   {
                      AV48indexToRemove = (short)(AV60SDT_InfoContentTranslate.gxTpr_Infocontent.IndexOf(AV61SDT_InfoContentItemTranslate));
                      AV60SDT_InfoContentTranslate.gxTpr_Infocontent.RemoveItem(AV48indexToRemove);
                   }
-                  AV83GXV20 = (int)(AV83GXV20+1);
+                  AV123GXV47 = (int)(AV123GXV47+1);
                }
             }
-            AV82GXV19 = (int)(AV82GXV19+1);
+            AV122GXV46 = (int)(AV122GXV46+1);
          }
-         AV84GXV21 = 1;
-         while ( AV84GXV21 <= AV21SDT_InfoContent.gxTpr_Infocontent.Count )
+         AV124GXV48 = 1;
+         while ( AV124GXV48 <= AV21SDT_InfoContent.gxTpr_Infocontent.Count )
          {
-            AV22SDT_InfoContentItem = ((SdtSDT_InfoContent_InfoContentItem)AV21SDT_InfoContent.gxTpr_Infocontent.Item(AV84GXV21));
+            AV22SDT_InfoContentItem = ((SdtSDT_InfoContent_InfoContentItem)AV21SDT_InfoContent.gxTpr_Infocontent.Item(AV124GXV48));
             AV52indexrow = (short)(AV21SDT_InfoContent.gxTpr_Infocontent.IndexOf(AV22SDT_InfoContentItem));
-            AV85GXV22 = 1;
-            while ( AV85GXV22 <= AV60SDT_InfoContentTranslate.gxTpr_Infocontent.Count )
+            AV125GXV49 = 1;
+            while ( AV125GXV49 <= AV60SDT_InfoContentTranslate.gxTpr_Infocontent.Count )
             {
-               AV61SDT_InfoContentItemTranslate = ((SdtSDT_InfoContent_InfoContentItem)AV60SDT_InfoContentTranslate.gxTpr_Infocontent.Item(AV85GXV22));
+               AV61SDT_InfoContentItemTranslate = ((SdtSDT_InfoContent_InfoContentItem)AV60SDT_InfoContentTranslate.gxTpr_Infocontent.Item(AV125GXV49));
                if ( StringUtil.StrCmp(AV22SDT_InfoContentItem.gxTpr_Infoid, AV61SDT_InfoContentItemTranslate.gxTpr_Infoid) == 0 )
                {
                   AV54SDT_InfoContentItemFinal.gxTpr_Infocontent.Add(AV61SDT_InfoContentItemTranslate, AV52indexrow);
                }
-               AV85GXV22 = (int)(AV85GXV22+1);
+               AV125GXV49 = (int)(AV125GXV49+1);
             }
-            AV84GXV21 = (int)(AV84GXV21+1);
+            AV124GXV48 = (int)(AV124GXV48+1);
          }
       }
 
@@ -508,10 +793,12 @@ namespace GeneXus.Programs {
       {
          AV34SDT_InfoPageTranslation = new SdtSDT_InfoPageTranslation(context);
          AV21SDT_InfoContent = new SdtSDT_InfoContent(context);
+         P00GV2_A581DynamicTranslationAttributeNam = new string[] {""} ;
          P00GV2_A580DynamicTranslationPrimaryKey = new Guid[] {Guid.Empty} ;
          P00GV2_A582DynamicTranslationEnglish = new string[] {""} ;
          P00GV2_A583DynamicTranslationDutch = new string[] {""} ;
          P00GV2_A578DynamicTranslationId = new Guid[] {Guid.Empty} ;
+         A581DynamicTranslationAttributeNam = "";
          A580DynamicTranslationPrimaryKey = Guid.Empty;
          A582DynamicTranslationEnglish = "";
          A583DynamicTranslationDutch = "";
@@ -523,10 +810,10 @@ namespace GeneXus.Programs {
          AV60SDT_InfoContentTranslate = new SdtSDT_InfoContent(context);
          AV19DynamicTranslationEnglish = "";
          AV20DynamicTranslationDutch = "";
-         A581DynamicTranslationAttributeNam = "";
          Gx_emsg = "";
          AV22SDT_InfoContentItem = new SdtSDT_InfoContent_InfoContentItem(context);
          AV24SDT_InfoTileItem = new SdtSDT_InfoTile_SDT_InfoTileItem(context);
+         AV63Column = new SdtSDT_InfoContent_InfoContentItem_ColumnsItem(context);
          AV59SDT_InfoContentItemOld = new SdtSDT_InfoContent_InfoContentItem(context);
          AV40oldInfoIds = new GxSimpleCollection<string>();
          AV41newInfoIds = new GxSimpleCollection<string>();
@@ -536,6 +823,14 @@ namespace GeneXus.Programs {
          AV49newtiles = new GxSimpleCollection<string>();
          AV55SDT_InfoTileItemFinal = new SdtSDT_InfoContent_InfoContentItem(context);
          AV62SDT_InfoTileItemTranslate = new SdtSDT_InfoTile_SDT_InfoTileItem(context);
+         AV65existingColumn = new GxSimpleCollection<string>();
+         AV66newColumns = new GxSimpleCollection<string>();
+         AV64ColumnOld = new SdtSDT_InfoContent_InfoContentItem_ColumnsItem(context);
+         AV67ColumnNew = new SdtSDT_InfoContent_InfoContentItem_ColumnsItem(context);
+         AV73OldColumn = new SdtSDT_InfoContent_InfoContentItem_ColumnsItem(context);
+         AV74TranslateColumn = new SdtSDT_InfoContent_InfoContentItem_ColumnsItem(context);
+         AV75FinalColumn = new SdtSDT_InfoContent_InfoContentItem_ColumnsItem(context);
+         AV69ColumnTranslate = new SdtSDT_InfoContent_InfoContentItem_ColumnsItem(context);
          GXt_char1 = "";
          pr_datastore1 = new DataStoreProvider(context, new GeneXus.Programs.prc_addappversionpagetodynamictransalation3__datastore1(),
             new Object[][] {
@@ -548,7 +843,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.prc_addappversionpagetodynamictransalation3__default(),
             new Object[][] {
                 new Object[] {
-               P00GV2_A580DynamicTranslationPrimaryKey, P00GV2_A582DynamicTranslationEnglish, P00GV2_A583DynamicTranslationDutch, P00GV2_A578DynamicTranslationId
+               P00GV2_A581DynamicTranslationAttributeNam, P00GV2_A580DynamicTranslationPrimaryKey, P00GV2_A582DynamicTranslationEnglish, P00GV2_A583DynamicTranslationDutch, P00GV2_A578DynamicTranslationId
                }
                , new Object[] {
                }
@@ -559,34 +854,63 @@ namespace GeneXus.Programs {
          /* GeneXus formulas. */
       }
 
-      private short AV64GXLvl7 ;
+      private short AV77GXLvl7 ;
       private short AV51indextileToRemove ;
       private short AV56indextilenew ;
+      private short AV70indexColumnToRemove ;
+      private short AV72indexColumnew ;
       private short AV48indexToRemove ;
       private short AV52indexrow ;
-      private int AV63GXV1 ;
+      private int AV76GXV1 ;
       private int GX_INS101 ;
-      private int AV65GXV2 ;
-      private int AV66GXV3 ;
-      private int AV67GXV4 ;
-      private int AV68GXV5 ;
-      private int AV69GXV6 ;
-      private int AV70GXV7 ;
-      private int AV71GXV8 ;
-      private int AV72GXV9 ;
-      private int AV73GXV10 ;
-      private int AV74GXV11 ;
-      private int AV75GXV12 ;
-      private int AV76GXV13 ;
-      private int AV77GXV14 ;
-      private int AV78GXV15 ;
-      private int AV79GXV16 ;
-      private int AV80GXV17 ;
-      private int AV81GXV18 ;
-      private int AV82GXV19 ;
-      private int AV83GXV20 ;
-      private int AV84GXV21 ;
-      private int AV85GXV22 ;
+      private int AV78GXV2 ;
+      private int AV79GXV3 ;
+      private int AV80GXV4 ;
+      private int AV81GXV5 ;
+      private int AV82GXV6 ;
+      private int AV83GXV7 ;
+      private int AV84GXV8 ;
+      private int AV85GXV9 ;
+      private int AV86GXV10 ;
+      private int AV87GXV11 ;
+      private int AV88GXV12 ;
+      private int AV89GXV13 ;
+      private int AV90GXV14 ;
+      private int AV91GXV15 ;
+      private int AV92GXV16 ;
+      private int AV93GXV17 ;
+      private int AV94GXV18 ;
+      private int AV95GXV19 ;
+      private int AV96GXV20 ;
+      private int AV97GXV21 ;
+      private int AV98GXV22 ;
+      private int AV99GXV23 ;
+      private int AV100GXV24 ;
+      private int AV101GXV25 ;
+      private int AV102GXV26 ;
+      private int AV103GXV27 ;
+      private int AV104GXV28 ;
+      private int AV105GXV29 ;
+      private int AV106GXV30 ;
+      private int AV107GXV31 ;
+      private int AV108GXV32 ;
+      private int AV109GXV33 ;
+      private int AV110GXV34 ;
+      private int AV111GXV35 ;
+      private int AV112GXV36 ;
+      private int AV113GXV37 ;
+      private int AV114GXV38 ;
+      private int AV115GXV39 ;
+      private int AV116GXV40 ;
+      private int AV117GXV41 ;
+      private int AV118GXV42 ;
+      private int AV119GXV43 ;
+      private int AV120GXV44 ;
+      private int AV121GXV45 ;
+      private int AV122GXV46 ;
+      private int AV123GXV47 ;
+      private int AV124GXV48 ;
+      private int AV125GXV49 ;
       private string AV57LanguageFrom ;
       private string AV58languageTo ;
       private string Gx_emsg ;
@@ -608,6 +932,7 @@ namespace GeneXus.Programs {
       private SdtSDT_InfoPageTranslation AV34SDT_InfoPageTranslation ;
       private SdtSDT_InfoContent AV21SDT_InfoContent ;
       private IDataStoreProvider pr_default ;
+      private string[] P00GV2_A581DynamicTranslationAttributeNam ;
       private Guid[] P00GV2_A580DynamicTranslationPrimaryKey ;
       private string[] P00GV2_A582DynamicTranslationEnglish ;
       private string[] P00GV2_A583DynamicTranslationDutch ;
@@ -619,6 +944,7 @@ namespace GeneXus.Programs {
       private SdtSDT_InfoContent AV60SDT_InfoContentTranslate ;
       private SdtSDT_InfoContent_InfoContentItem AV22SDT_InfoContentItem ;
       private SdtSDT_InfoTile_SDT_InfoTileItem AV24SDT_InfoTileItem ;
+      private SdtSDT_InfoContent_InfoContentItem_ColumnsItem AV63Column ;
       private SdtSDT_InfoContent_InfoContentItem AV59SDT_InfoContentItemOld ;
       private GxSimpleCollection<string> AV40oldInfoIds ;
       private GxSimpleCollection<string> AV41newInfoIds ;
@@ -628,6 +954,14 @@ namespace GeneXus.Programs {
       private GxSimpleCollection<string> AV49newtiles ;
       private SdtSDT_InfoContent_InfoContentItem AV55SDT_InfoTileItemFinal ;
       private SdtSDT_InfoTile_SDT_InfoTileItem AV62SDT_InfoTileItemTranslate ;
+      private GxSimpleCollection<string> AV65existingColumn ;
+      private GxSimpleCollection<string> AV66newColumns ;
+      private SdtSDT_InfoContent_InfoContentItem_ColumnsItem AV64ColumnOld ;
+      private SdtSDT_InfoContent_InfoContentItem_ColumnsItem AV67ColumnNew ;
+      private SdtSDT_InfoContent_InfoContentItem_ColumnsItem AV73OldColumn ;
+      private SdtSDT_InfoContent_InfoContentItem_ColumnsItem AV74TranslateColumn ;
+      private SdtSDT_InfoContent_InfoContentItem_ColumnsItem AV75FinalColumn ;
+      private SdtSDT_InfoContent_InfoContentItem_ColumnsItem AV69ColumnTranslate ;
       private IDataStoreProvider pr_datastore1 ;
       private IDataStoreProvider pr_gam ;
    }
@@ -715,7 +1049,8 @@ public class prc_addappversionpagetodynamictransalation3__default : DataStoreHel
     {
        Object[] prmP00GV2;
        prmP00GV2 = new Object[] {
-       new ParDef("AV34SDT__1Pageid",GXType.UniqueIdentifier,36,0)
+       new ParDef("AV34SDT__1Pageid",GXType.UniqueIdentifier,36,0) ,
+       new ParDef("AV34SDT__2Pageattributetype",GXType.VarChar,40,0)
        };
        Object[] prmP00GV3;
        prmP00GV3 = new Object[] {
@@ -732,7 +1067,7 @@ public class prc_addappversionpagetodynamictransalation3__default : DataStoreHel
        new ParDef("DynamicTranslationDutch",GXType.LongVarChar,2097152,0)
        };
        def= new CursorDef[] {
-           new CursorDef("P00GV2", "SELECT DynamicTranslationPrimaryKey, DynamicTranslationEnglish, DynamicTranslationDutch, DynamicTranslationId FROM Trn_DynamicTranslation WHERE DynamicTranslationPrimaryKey = :AV34SDT__1Pageid ORDER BY DynamicTranslationId  FOR UPDATE OF Trn_DynamicTranslation",true, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00GV2,1, GxCacheFrequency.OFF ,true,false )
+           new CursorDef("P00GV2", "SELECT DynamicTranslationAttributeNam, DynamicTranslationPrimaryKey, DynamicTranslationEnglish, DynamicTranslationDutch, DynamicTranslationId FROM Trn_DynamicTranslation WHERE (DynamicTranslationPrimaryKey = :AV34SDT__1Pageid) AND (DynamicTranslationAttributeNam = ( :AV34SDT__2Pageattributetype)) ORDER BY DynamicTranslationId  FOR UPDATE OF Trn_DynamicTranslation",true, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00GV2,1, GxCacheFrequency.OFF ,true,false )
           ,new CursorDef("P00GV3", "SAVEPOINT gxupdate;UPDATE Trn_DynamicTranslation SET DynamicTranslationEnglish=:DynamicTranslationEnglish, DynamicTranslationDutch=:DynamicTranslationDutch  WHERE DynamicTranslationId = :DynamicTranslationId;RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK,prmP00GV3)
           ,new CursorDef("P00GV4", "SAVEPOINT gxupdate;INSERT INTO Trn_DynamicTranslation(DynamicTranslationId, DynamicTranslationPrimaryKey, DynamicTranslationAttributeNam, DynamicTranslationEnglish, DynamicTranslationDutch, DynamicTranslationTrnName) VALUES(:DynamicTranslationId, :DynamicTranslationPrimaryKey, :DynamicTranslationAttributeNam, :DynamicTranslationEnglish, :DynamicTranslationDutch, '');RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_MASKLOOPLOCK,prmP00GV4)
        };
@@ -746,10 +1081,11 @@ public class prc_addappversionpagetodynamictransalation3__default : DataStoreHel
     switch ( cursor )
     {
           case 0 :
-             ((Guid[]) buf[0])[0] = rslt.getGuid(1);
-             ((string[]) buf[1])[0] = rslt.getLongVarchar(2);
+             ((string[]) buf[0])[0] = rslt.getVarchar(1);
+             ((Guid[]) buf[1])[0] = rslt.getGuid(2);
              ((string[]) buf[2])[0] = rslt.getLongVarchar(3);
-             ((Guid[]) buf[3])[0] = rslt.getGuid(4);
+             ((string[]) buf[3])[0] = rslt.getLongVarchar(4);
+             ((Guid[]) buf[4])[0] = rslt.getGuid(5);
              return;
     }
  }

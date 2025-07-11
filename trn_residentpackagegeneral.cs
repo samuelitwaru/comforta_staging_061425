@@ -65,7 +65,6 @@ namespace GeneXus.Programs {
 
       protected override void createObjects( )
       {
-         chkResidentPackageDefault = new GXCheckbox();
       }
 
       protected void INITWEB( )
@@ -431,7 +430,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtResidentPackageName_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, edtResidentPackageName_Internalname, context.GetMessage( "Access Rights Name", ""), "col-sm-4 AttributeLabel", 1, true, "");
+            GxWebStd.gx_label_element( context, edtResidentPackageName_Internalname, context.GetMessage( "Group Name", ""), "col-sm-4 AttributeLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-8 gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
@@ -448,31 +447,12 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtavResidentpackagemodules_description_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, edtavResidentpackagemodules_description_Internalname, context.GetMessage( "Access rights", ""), "col-sm-4 AttributeLabel", 1, true, "");
+            GxWebStd.gx_label_element( context, edtavResidentpackagemodules_description_Internalname, context.GetMessage( "Group Access Rights", ""), "col-sm-4 AttributeLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-8 gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 19,'" + sPrefix + "',false,'',0)\"";
             GxWebStd.gx_single_line_edit( context, edtavResidentpackagemodules_description_Internalname, AV12ResidentPackageModules_Description, StringUtil.RTrim( context.localUtil.Format( AV12ResidentPackageModules_Description, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,19);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavResidentpackagemodules_description_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavResidentpackagemodules_description_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_Trn_ResidentPackageGeneral.htm");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-6 DataContentCell", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+chkResidentPackageDefault_Internalname+"\"", "", "div");
-            /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, chkResidentPackageDefault_Internalname, " ", "col-sm-4 AttributeLabel", 1, true, "");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-8 gx-attribute", "start", "top", "", "", "div");
-            /* Check box */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 24,'" + sPrefix + "',false,'',0)\"";
-            ClassString = "Attribute";
-            StyleString = "";
-            GxWebStd.gx_checkbox_ctrl( context, chkResidentPackageDefault_Internalname, StringUtil.BoolToStr( A533ResidentPackageDefault), "", " ", 1, chkResidentPackageDefault.Enabled, "true", context.GetMessage( "Default access rights", ""), StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(24, this, 'true', 'false',"+"'"+sPrefix+"'"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,24);\"");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -488,7 +468,7 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-action-group CellMarginTop10", "start", "top", " "+"data-gx-actiongroup-type=\"toolbar\""+" ", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 29,'" + sPrefix + "',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 24,'" + sPrefix + "',false,'',0)\"";
             ClassString = "ButtonMaterialDefault";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtncancel_Internalname, "", context.GetMessage( "GX_BtnCancel", ""), bttBtncancel_Jsonclick, 1, context.GetMessage( "GX_BtnCancel", ""), "", StyleString, ClassString, 1, 1, "standard", "'"+sPrefix+"'"+",false,"+"'"+sPrefix+"ECANCEL."+"'", TempTags, "", context.GetButtonType( ), "HLP_Trn_ResidentPackageGeneral.htm");
@@ -511,6 +491,8 @@ namespace GeneXus.Programs {
             GxWebStd.gx_single_line_edit( context, edtSG_OrganisationId_Internalname, A529SG_OrganisationId.ToString(), A529SG_OrganisationId.ToString(), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtSG_OrganisationId_Jsonclick, 0, "Attribute", "", "", "", "", edtSG_OrganisationId_Visible, 0, 0, "text", "", 36, "chr", 1, "row", 36, 0, 0, 0, 0, 0, 0, true, "Id", "", false, "", "HLP_Trn_ResidentPackageGeneral.htm");
             /* Single line edit */
             GxWebStd.gx_single_line_edit( context, edtSG_LocationId_Internalname, A528SG_LocationId.ToString(), A528SG_LocationId.ToString(), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtSG_LocationId_Jsonclick, 0, "Attribute", "", "", "", "", edtSG_LocationId_Visible, 0, 0, "text", "", 36, "chr", 1, "row", 36, 0, 0, 0, 0, 0, 0, true, "Id", "", false, "", "HLP_Trn_ResidentPackageGeneral.htm");
+            /* Single line edit */
+            GxWebStd.gx_single_line_edit( context, edtResidentPackageDefault_Internalname, StringUtil.BoolToStr( A533ResidentPackageDefault), StringUtil.BoolToStr( A533ResidentPackageDefault), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtResidentPackageDefault_Jsonclick, 0, "Attribute", "", "", "", "", edtResidentPackageDefault_Visible, 0, 0, "text", "", 4, "chr", 1, "row", 4, 0, 0, 0, 0, 0, 0, true, "", "end", false, "", "HLP_Trn_ResidentPackageGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -807,8 +789,6 @@ namespace GeneXus.Programs {
 
       protected void fix_multi_value_controls( )
       {
-         A533ResidentPackageDefault = StringUtil.StrToBool( StringUtil.BoolToStr( A533ResidentPackageDefault));
-         AssignAttri(sPrefix, false, "A533ResidentPackageDefault", A533ResidentPackageDefault);
       }
 
       public void Refresh( )
@@ -842,12 +822,12 @@ namespace GeneXus.Programs {
             pr_default.execute(0, new Object[] {A527ResidentPackageId});
             while ( (pr_default.getStatus(0) != 101) )
             {
+               A533ResidentPackageDefault = H00AF2_A533ResidentPackageDefault[0];
+               AssignAttri(sPrefix, false, "A533ResidentPackageDefault", A533ResidentPackageDefault);
                A528SG_LocationId = H00AF2_A528SG_LocationId[0];
                AssignAttri(sPrefix, false, "A528SG_LocationId", A528SG_LocationId.ToString());
                A529SG_OrganisationId = H00AF2_A529SG_OrganisationId[0];
                AssignAttri(sPrefix, false, "A529SG_OrganisationId", A529SG_OrganisationId.ToString());
-               A533ResidentPackageDefault = H00AF2_A533ResidentPackageDefault[0];
-               AssignAttri(sPrefix, false, "A533ResidentPackageDefault", A533ResidentPackageDefault);
                A531ResidentPackageName = H00AF2_A531ResidentPackageName[0];
                AssignAttri(sPrefix, false, "A531ResidentPackageName", A531ResidentPackageName);
                /* Execute user event: Load */
@@ -871,14 +851,14 @@ namespace GeneXus.Programs {
          AssignProp(sPrefix, false, edtavResidentpackagemodules_description_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavResidentpackagemodules_description_Enabled), 5, 0), true);
          edtResidentPackageName_Enabled = 0;
          AssignProp(sPrefix, false, edtResidentPackageName_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtResidentPackageName_Enabled), 5, 0), true);
-         chkResidentPackageDefault.Enabled = 0;
-         AssignProp(sPrefix, false, chkResidentPackageDefault_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(chkResidentPackageDefault.Enabled), 5, 0), true);
          edtResidentPackageId_Enabled = 0;
          AssignProp(sPrefix, false, edtResidentPackageId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtResidentPackageId_Enabled), 5, 0), true);
          edtSG_OrganisationId_Enabled = 0;
          AssignProp(sPrefix, false, edtSG_OrganisationId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtSG_OrganisationId_Enabled), 5, 0), true);
          edtSG_LocationId_Enabled = 0;
          AssignProp(sPrefix, false, edtSG_LocationId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtSG_LocationId_Enabled), 5, 0), true);
+         edtResidentPackageDefault_Enabled = 0;
+         AssignProp(sPrefix, false, edtResidentPackageDefault_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtResidentPackageDefault_Enabled), 5, 0), true);
          fix_multi_value_controls( ) ;
       }
 
@@ -904,12 +884,12 @@ namespace GeneXus.Programs {
             AssignAttri(sPrefix, false, "A531ResidentPackageName", A531ResidentPackageName);
             AV12ResidentPackageModules_Description = cgiGet( edtavResidentpackagemodules_description_Internalname);
             AssignAttri(sPrefix, false, "AV12ResidentPackageModules_Description", AV12ResidentPackageModules_Description);
-            A533ResidentPackageDefault = StringUtil.StrToBool( cgiGet( chkResidentPackageDefault_Internalname));
-            AssignAttri(sPrefix, false, "A533ResidentPackageDefault", A533ResidentPackageDefault);
             A529SG_OrganisationId = StringUtil.StrToGuid( cgiGet( edtSG_OrganisationId_Internalname));
             AssignAttri(sPrefix, false, "A529SG_OrganisationId", A529SG_OrganisationId.ToString());
             A528SG_LocationId = StringUtil.StrToGuid( cgiGet( edtSG_LocationId_Internalname));
             AssignAttri(sPrefix, false, "A528SG_LocationId", A528SG_LocationId.ToString());
+            A533ResidentPackageDefault = StringUtil.StrToBool( cgiGet( edtResidentPackageDefault_Internalname));
+            AssignAttri(sPrefix, false, "A533ResidentPackageDefault", A533ResidentPackageDefault);
             /* Read subfile selected row values. */
             /* Read hidden variables. */
             GXKey = Crypto.GetSiteKey( );
@@ -985,6 +965,8 @@ namespace GeneXus.Programs {
             }
             AV19GXV1 = (int)(AV19GXV1+1);
          }
+         edtResidentPackageDefault_Visible = 0;
+         AssignProp(sPrefix, false, edtResidentPackageDefault_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtResidentPackageDefault_Visible), 5, 0), true);
       }
 
       protected void S112( )
@@ -1200,7 +1182,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257212424924", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202571111434275", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1216,17 +1198,12 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("trn_residentpackagegeneral.js", "?20257212424924", false, true);
+         context.AddJavascriptSource("trn_residentpackagegeneral.js", "?202571111434275", false, true);
          /* End function include_jscripts */
       }
 
       protected void init_web_controls( )
       {
-         chkResidentPackageDefault.Name = "RESIDENTPACKAGEDEFAULT";
-         chkResidentPackageDefault.WebTags = "";
-         chkResidentPackageDefault.Caption = " ";
-         AssignProp(sPrefix, false, chkResidentPackageDefault_Internalname, "TitleCaption", chkResidentPackageDefault.Caption, true);
-         chkResidentPackageDefault.CheckedValue = "false";
          /* End function init_web_controls */
       }
 
@@ -1234,13 +1211,13 @@ namespace GeneXus.Programs {
       {
          edtResidentPackageName_Internalname = sPrefix+"RESIDENTPACKAGENAME";
          edtavResidentpackagemodules_description_Internalname = sPrefix+"vRESIDENTPACKAGEMODULES_DESCRIPTION";
-         chkResidentPackageDefault_Internalname = sPrefix+"RESIDENTPACKAGEDEFAULT";
          divTransactiondetail_tableattributes_Internalname = sPrefix+"TRANSACTIONDETAIL_TABLEATTRIBUTES";
          bttBtncancel_Internalname = sPrefix+"BTNCANCEL";
          divTable_Internalname = sPrefix+"TABLE";
          edtResidentPackageId_Internalname = sPrefix+"RESIDENTPACKAGEID";
          edtSG_OrganisationId_Internalname = sPrefix+"SG_ORGANISATIONID";
          edtSG_LocationId_Internalname = sPrefix+"SG_LOCATIONID";
+         edtResidentPackageDefault_Internalname = sPrefix+"RESIDENTPACKAGEDEFAULT";
          divHtml_bottomauxiliarcontrols_Internalname = sPrefix+"HTML_BOTTOMAUXILIARCONTROLS";
          divLayoutmaintable_Internalname = sPrefix+"LAYOUTMAINTABLE";
          Form.Internalname = sPrefix+"FORM";
@@ -1260,17 +1237,18 @@ namespace GeneXus.Programs {
             }
          }
          init_default_properties( ) ;
-         chkResidentPackageDefault.Caption = " ";
+         edtResidentPackageDefault_Enabled = 0;
          edtSG_LocationId_Enabled = 0;
          edtSG_OrganisationId_Enabled = 0;
          edtResidentPackageId_Enabled = 0;
+         edtResidentPackageDefault_Jsonclick = "";
+         edtResidentPackageDefault_Visible = 1;
          edtSG_LocationId_Jsonclick = "";
          edtSG_LocationId_Visible = 1;
          edtSG_OrganisationId_Jsonclick = "";
          edtSG_OrganisationId_Visible = 1;
          edtResidentPackageId_Jsonclick = "";
          edtResidentPackageId_Visible = 1;
-         chkResidentPackageDefault.Enabled = 0;
          edtavResidentpackagemodules_description_Jsonclick = "";
          edtavResidentpackagemodules_description_Enabled = 1;
          edtResidentPackageName_Jsonclick = "";
@@ -1291,7 +1269,7 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"A527ResidentPackageId","fld":"RESIDENTPACKAGEID"},{"av":"A533ResidentPackageDefault","fld":"RESIDENTPACKAGEDEFAULT"}]}""");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"A527ResidentPackageId","fld":"RESIDENTPACKAGEID"}]}""");
          setEventMetadata("VALID_RESIDENTPACKAGEID","""{"handler":"Valid_Residentpackageid","iparms":[]}""");
          return  ;
       }
@@ -1334,9 +1312,9 @@ namespace GeneXus.Programs {
          sEvtType = "";
          GXDecQS = "";
          H00AF2_A527ResidentPackageId = new Guid[] {Guid.Empty} ;
+         H00AF2_A533ResidentPackageDefault = new bool[] {false} ;
          H00AF2_A528SG_LocationId = new Guid[] {Guid.Empty} ;
          H00AF2_A529SG_OrganisationId = new Guid[] {Guid.Empty} ;
-         H00AF2_A533ResidentPackageDefault = new bool[] {false} ;
          H00AF2_A531ResidentPackageName = new string[] {""} ;
          AV6WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          AV13Combo_Data = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item>( context, "Item", "");
@@ -1354,7 +1332,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.trn_residentpackagegeneral__default(),
             new Object[][] {
                 new Object[] {
-               H00AF2_A527ResidentPackageId, H00AF2_A528SG_LocationId, H00AF2_A529SG_OrganisationId, H00AF2_A533ResidentPackageDefault, H00AF2_A531ResidentPackageName
+               H00AF2_A527ResidentPackageId, H00AF2_A533ResidentPackageDefault, H00AF2_A528SG_LocationId, H00AF2_A529SG_OrganisationId, H00AF2_A531ResidentPackageName
                }
             }
          );
@@ -1378,9 +1356,11 @@ namespace GeneXus.Programs {
       private int edtResidentPackageId_Visible ;
       private int edtSG_OrganisationId_Visible ;
       private int edtSG_LocationId_Visible ;
+      private int edtResidentPackageDefault_Visible ;
       private int edtResidentPackageId_Enabled ;
       private int edtSG_OrganisationId_Enabled ;
       private int edtSG_LocationId_Enabled ;
+      private int edtResidentPackageDefault_Enabled ;
       private int AV19GXV1 ;
       private int AV20GXV2 ;
       private int idxLst ;
@@ -1404,7 +1384,6 @@ namespace GeneXus.Programs {
       private string TempTags ;
       private string edtResidentPackageName_Jsonclick ;
       private string edtavResidentpackagemodules_description_Jsonclick ;
-      private string chkResidentPackageDefault_Internalname ;
       private string ClassString ;
       private string StyleString ;
       private string bttBtncancel_Internalname ;
@@ -1416,6 +1395,8 @@ namespace GeneXus.Programs {
       private string edtSG_OrganisationId_Jsonclick ;
       private string edtSG_LocationId_Internalname ;
       private string edtSG_LocationId_Jsonclick ;
+      private string edtResidentPackageDefault_Internalname ;
+      private string edtResidentPackageDefault_Jsonclick ;
       private string sXEvt ;
       private string sEvt ;
       private string EvtGridId ;
@@ -1445,12 +1426,11 @@ namespace GeneXus.Programs {
       private IGxDataStore dsDataStore1 ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
-      private GXCheckbox chkResidentPackageDefault ;
       private IDataStoreProvider pr_default ;
       private Guid[] H00AF2_A527ResidentPackageId ;
+      private bool[] H00AF2_A533ResidentPackageDefault ;
       private Guid[] H00AF2_A528SG_LocationId ;
       private Guid[] H00AF2_A529SG_OrganisationId ;
-      private bool[] H00AF2_A533ResidentPackageDefault ;
       private string[] H00AF2_A531ResidentPackageName ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV6WWPContext ;
       private GXBaseCollection<WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item> AV13Combo_Data ;
@@ -1482,7 +1462,7 @@ namespace GeneXus.Programs {
           new ParDef("ResidentPackageId",GXType.UniqueIdentifier,36,0)
           };
           def= new CursorDef[] {
-              new CursorDef("H00AF2", "SELECT ResidentPackageId, SG_LocationId, SG_OrganisationId, ResidentPackageDefault, ResidentPackageName FROM Trn_ResidentPackage WHERE ResidentPackageId = :ResidentPackageId ORDER BY ResidentPackageId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00AF2,1, GxCacheFrequency.OFF ,true,true )
+              new CursorDef("H00AF2", "SELECT ResidentPackageId, ResidentPackageDefault, SG_LocationId, SG_OrganisationId, ResidentPackageName FROM Trn_ResidentPackage WHERE ResidentPackageId = :ResidentPackageId ORDER BY ResidentPackageId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00AF2,1, GxCacheFrequency.OFF ,true,true )
           };
        }
     }
@@ -1495,9 +1475,9 @@ namespace GeneXus.Programs {
        {
              case 0 :
                 ((Guid[]) buf[0])[0] = rslt.getGuid(1);
-                ((Guid[]) buf[1])[0] = rslt.getGuid(2);
+                ((bool[]) buf[1])[0] = rslt.getBool(2);
                 ((Guid[]) buf[2])[0] = rslt.getGuid(3);
-                ((bool[]) buf[3])[0] = rslt.getBool(4);
+                ((Guid[]) buf[3])[0] = rslt.getGuid(4);
                 ((string[]) buf[4])[0] = rslt.getVarchar(5);
                 return;
        }

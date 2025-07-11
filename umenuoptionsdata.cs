@@ -308,7 +308,7 @@ namespace GeneXus.Programs {
          Gxm3dvelop_menu_subitems.gxTpr_Link = formatLink("trn_residentpackageww.aspx") ;
          Gxm3dvelop_menu_subitems.gxTpr_Linktarget = "";
          Gxm3dvelop_menu_subitems.gxTpr_Iconclass = "";
-         Gxm3dvelop_menu_subitems.gxTpr_Caption = AV10ResidentTitle+" "+context.GetMessage( "Access", "");
+         Gxm3dvelop_menu_subitems.gxTpr_Caption = AV10ResidentTitle+" "+context.GetMessage( "Groups", "");
          Gxm3dvelop_menu_subitems = new WorkWithPlus.workwithplus_web.SdtDVelop_Menu_Item(context);
          Gxm1dvelop_menu.gxTpr_Subitems.Add(Gxm3dvelop_menu_subitems, 0);
          AV5id = (short)(AV5id+1);

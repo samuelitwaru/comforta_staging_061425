@@ -128,7 +128,7 @@ export class ActionListDropDown {
 
   async getPages() {
     try {
-      const result = this.appVersion.refreshVersion();
+      const result = this.appVersion.getActiveVersion();
       if (result instanceof Promise) {
         await result;
       }

@@ -105,6 +105,7 @@ namespace GeneXus.Programs {
          state.Add("gxTpr_Memoenddatetime_N");
          state.Add("gxTpr_Memoduration_N");
          state.Add("gxTpr_Memoremovedate_N");
+         state.Add("gxTpr_Residentsalutation_N");
          state.Add("gxTpr_Memobgcolorcode_N");
          state.Add("gxTpr_Memocreatedat_N");
          return state ;
@@ -183,6 +184,7 @@ namespace GeneXus.Programs {
          gxTv_SdtTrn_Memo_Memoenddatetime_N = sdt.gxTv_SdtTrn_Memo_Memoenddatetime_N ;
          gxTv_SdtTrn_Memo_Memoduration_N = sdt.gxTv_SdtTrn_Memo_Memoduration_N ;
          gxTv_SdtTrn_Memo_Memoremovedate_N = sdt.gxTv_SdtTrn_Memo_Memoremovedate_N ;
+         gxTv_SdtTrn_Memo_Residentsalutation_N = sdt.gxTv_SdtTrn_Memo_Residentsalutation_N ;
          gxTv_SdtTrn_Memo_Memobgcolorcode_N = sdt.gxTv_SdtTrn_Memo_Memobgcolorcode_N ;
          gxTv_SdtTrn_Memo_Memocreatedat_N = sdt.gxTv_SdtTrn_Memo_Memocreatedat_N ;
          return  ;
@@ -267,6 +269,7 @@ namespace GeneXus.Programs {
          AddObjectProperty("MemoRemoveDate_N", gxTv_SdtTrn_Memo_Memoremovedate_N, false, includeNonInitialized);
          AddObjectProperty("ResidentId", gxTv_SdtTrn_Memo_Residentid, false, includeNonInitialized);
          AddObjectProperty("ResidentSalutation", gxTv_SdtTrn_Memo_Residentsalutation, false, includeNonInitialized);
+         AddObjectProperty("ResidentSalutation_N", gxTv_SdtTrn_Memo_Residentsalutation_N, false, includeNonInitialized);
          AddObjectProperty("ResidentGivenName", gxTv_SdtTrn_Memo_Residentgivenname, false, includeNonInitialized);
          AddObjectProperty("ResidentLastName", gxTv_SdtTrn_Memo_Residentlastname, false, includeNonInitialized);
          AddObjectProperty("ResidentGUID", gxTv_SdtTrn_Memo_Residentguid, false, includeNonInitialized);
@@ -414,6 +417,7 @@ namespace GeneXus.Programs {
             AddObjectProperty("MemoEndDateTime_N", gxTv_SdtTrn_Memo_Memoenddatetime_N, false, includeNonInitialized);
             AddObjectProperty("MemoDuration_N", gxTv_SdtTrn_Memo_Memoduration_N, false, includeNonInitialized);
             AddObjectProperty("MemoRemoveDate_N", gxTv_SdtTrn_Memo_Memoremovedate_N, false, includeNonInitialized);
+            AddObjectProperty("ResidentSalutation_N", gxTv_SdtTrn_Memo_Residentsalutation_N, false, includeNonInitialized);
             AddObjectProperty("MemoBgColorCode_N", gxTv_SdtTrn_Memo_Memobgcolorcode_N, false, includeNonInitialized);
             AddObjectProperty("MemoCreatedAt_N", gxTv_SdtTrn_Memo_Memocreatedat_N, false, includeNonInitialized);
          }
@@ -480,6 +484,7 @@ namespace GeneXus.Programs {
          }
          if ( sdt.IsDirty("ResidentSalutation") )
          {
+            gxTv_SdtTrn_Memo_Residentsalutation_N = (short)(sdt.gxTv_SdtTrn_Memo_Residentsalutation_N);
             sdtIsNull = 0;
             gxTv_SdtTrn_Memo_Residentsalutation = sdt.gxTv_SdtTrn_Memo_Residentsalutation ;
          }
@@ -935,11 +940,25 @@ namespace GeneXus.Programs {
          }
 
          set {
+            gxTv_SdtTrn_Memo_Residentsalutation_N = 0;
             sdtIsNull = 0;
             gxTv_SdtTrn_Memo_Residentsalutation = value;
             SetDirty("Residentsalutation");
          }
 
+      }
+
+      public void gxTv_SdtTrn_Memo_Residentsalutation_SetNull( )
+      {
+         gxTv_SdtTrn_Memo_Residentsalutation_N = 1;
+         gxTv_SdtTrn_Memo_Residentsalutation = "";
+         SetDirty("Residentsalutation");
+         return  ;
+      }
+
+      public bool gxTv_SdtTrn_Memo_Residentsalutation_IsNull( )
+      {
+         return (gxTv_SdtTrn_Memo_Residentsalutation_N==1) ;
       }
 
       [  SoapElement( ElementName = "ResidentGivenName" )]
@@ -2450,6 +2469,34 @@ namespace GeneXus.Programs {
          return false ;
       }
 
+      [  SoapElement( ElementName = "ResidentSalutation_N" )]
+      [  XmlElement( ElementName = "ResidentSalutation_N"   )]
+      public short gxTpr_Residentsalutation_N
+      {
+         get {
+            return gxTv_SdtTrn_Memo_Residentsalutation_N ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtTrn_Memo_Residentsalutation_N = value;
+            SetDirty("Residentsalutation_N");
+         }
+
+      }
+
+      public void gxTv_SdtTrn_Memo_Residentsalutation_N_SetNull( )
+      {
+         gxTv_SdtTrn_Memo_Residentsalutation_N = 0;
+         SetDirty("Residentsalutation_N");
+         return  ;
+      }
+
+      public bool gxTv_SdtTrn_Memo_Residentsalutation_N_IsNull( )
+      {
+         return false ;
+      }
+
       [  SoapElement( ElementName = "MemoBgColorCode_N" )]
       [  XmlElement( ElementName = "MemoBgColorCode_N"   )]
       public short gxTpr_Memobgcolorcode_N
@@ -2594,6 +2641,7 @@ namespace GeneXus.Programs {
       private short gxTv_SdtTrn_Memo_Memoenddatetime_N ;
       private short gxTv_SdtTrn_Memo_Memoduration_N ;
       private short gxTv_SdtTrn_Memo_Memoremovedate_N ;
+      private short gxTv_SdtTrn_Memo_Residentsalutation_N ;
       private short gxTv_SdtTrn_Memo_Memobgcolorcode_N ;
       private short gxTv_SdtTrn_Memo_Memocreatedat_N ;
       private decimal gxTv_SdtTrn_Memo_Memoduration ;

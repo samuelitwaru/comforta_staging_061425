@@ -5,11 +5,6 @@ using GeneXus.Resources;
 using GeneXus.Application;
 using GeneXus.Metadata;
 using GeneXus.Cryptography;
-using GeneXus.Reorg;
-using System.Threading;
-using GeneXus.Programs;
-using System.Data;
-using GeneXus.Data;
 using GeneXus.Data.ADO;
 using GeneXus.Data.NTier;
 using GeneXus.Data.NTier.ADO;
@@ -18,6 +13,7 @@ using GeneXus.Search;
 using GeneXus.Encryption;
 using GeneXus.Http.Client;
 using System.Xml.Serialization;
+using System.Runtime.Serialization;
 namespace GeneXus.Programs {
    public class gxdomainsalutation
    {
@@ -27,8 +23,8 @@ namespace GeneXus.Programs {
       {
          domain["Mr"] = "Mr";
          domain["Mrs"] = "Mrs";
-         domain["Dr"] = "Dr";
-         domain["Miss"] = "Miss";
+         domain["Ms"] = "Ms";
+         domain["Other"] = "Other";
       }
 
       public static string getDescription( IGxContext context ,
@@ -60,8 +56,8 @@ namespace GeneXus.Programs {
             domainMap = new Hashtable();
             domainMap["Mr"] = "Mr";
             domainMap["Mrs"] = "Mrs";
-            domainMap["Dr"] = "Dr";
-            domainMap["Miss"] = "Miss";
+            domainMap["Ms"] = "Ms";
+            domainMap["Other"] = "Other";
          }
          return (string)domainMap[key] ;
       }

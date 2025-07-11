@@ -368,6 +368,9 @@ namespace GeneXus.Programs {
          {
             context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vICONS", AV66Icons);
          }
+         GxWebStd.gx_hidden_field( context, "vTOOLBOXMESSAGEDESCRIPTION", AV68ToolboxMessageDescription);
+         GxWebStd.gx_hidden_field( context, "vTOOLBOXMESSAGESTATUS", AV69ToolboxMessageStatus);
+         GxWebStd.gx_hidden_field( context, "vTOOLBOXMESSAGETITLE", AV70ToolboxMessageTitle);
          GxWebStd.gx_hidden_field( context, "vTRN_PAGEID", AV14Trn_PageId.ToString());
          GxWebStd.gx_hidden_field( context, "APPTOOLBOX1_Current_language", StringUtil.RTrim( Apptoolbox1_Current_language));
          GxWebStd.gx_hidden_field( context, "APPTOOLBOX1_Locationid", StringUtil.RTrim( Apptoolbox1_Locationid));
@@ -378,8 +381,6 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "APPTOOLBOX1_Organisationlogo", StringUtil.RTrim( Apptoolbox1_Organisationlogo));
          GxWebStd.gx_hidden_field( context, "PREVENTACCESSMODAL_Previewlink", StringUtil.RTrim( Preventaccessmodal_Previewlink));
          GxWebStd.gx_hidden_field( context, "PREVENTACCESSMODAL_Visible", StringUtil.BoolToStr( Preventaccessmodal_Visible));
-         GxWebStd.gx_hidden_field( context, "APPTOOLBOX1_Displaymessagedescription", StringUtil.RTrim( Apptoolbox1_Displaymessagedescription));
-         GxWebStd.gx_hidden_field( context, "APPTOOLBOX1_Displaymessagedescription", StringUtil.RTrim( Apptoolbox1_Displaymessagedescription));
       }
 
       public override void RenderHtmlCloseForm( )
@@ -605,18 +606,17 @@ namespace GeneXus.Programs {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                            }
-                           else if ( StringUtil.StrCmp(sEvt, "APPTOOLBOX1.DISPLAYMESSAGE") == 0 )
-                           {
-                              context.wbHandled = 1;
-                              dynload_actions( ) ;
-                              /* Execute user event: Apptoolbox1.Displaymessage */
-                              E115C2 ();
-                           }
                            else if ( StringUtil.StrCmp(sEvt, "START") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               /* Execute user event: Start */
+                              E115C2 ();
+                           }
+                           else if ( StringUtil.StrCmp(sEvt, "GLOBALEVENTS.DISPLAYTOOLBOXMESSAGE") == 0 )
+                           {
+                              context.wbHandled = 1;
+                              dynload_actions( ) ;
                               E125C2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "LOAD") == 0 )
@@ -808,7 +808,7 @@ namespace GeneXus.Programs {
          /* Execute Start event if defined. */
          context.wbGlbDoneStart = 0;
          /* Execute user event: Start */
-         E125C2 ();
+         E115C2 ();
          context.wbGlbDoneStart = 1;
          /* After Start, stand alone formulas. */
          if ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 )
@@ -834,7 +834,6 @@ namespace GeneXus.Programs {
             Apptoolbox1_Organisationlogo = cgiGet( "APPTOOLBOX1_Organisationlogo");
             Preventaccessmodal_Previewlink = cgiGet( "PREVENTACCESSMODAL_Previewlink");
             Preventaccessmodal_Visible = StringUtil.StrToBool( cgiGet( "PREVENTACCESSMODAL_Visible"));
-            Apptoolbox1_Displaymessagedescription = cgiGet( "APPTOOLBOX1_Displaymessagedescription");
             /* Read variables values. */
             /* Read subfile selected row values. */
             /* Read hidden variables. */
@@ -849,11 +848,11 @@ namespace GeneXus.Programs {
       protected void GXStart( )
       {
          /* Execute user event: Start */
-         E125C2 ();
+         E115C2 ();
          if (returnInSub) return;
       }
 
-      protected void E125C2( )
+      protected void E115C2( )
       {
          /* Start Routine */
          returnInSub = false;
@@ -1096,11 +1095,11 @@ namespace GeneXus.Programs {
          AssignProp("", false, divPreventaccessmodaltable_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(divPreventaccessmodaltable_Visible), 5, 0), true);
       }
 
-      protected void E115C2( )
+      protected void E125C2( )
       {
-         /* Apptoolbox1_Displaymessage Routine */
+         /* General\GlobalEvents_Displaytoolboxmessage Routine */
          returnInSub = false;
-         GX_msglist.addItem(new WorkWithPlus.workwithplus_web.dvmessagegetbasicnotificationmsg(context).executeUdp(  "Success",  Apptoolbox1_Displaymessagedescription,  "success",  "",  "true",  ""));
+         GX_msglist.addItem(new WorkWithPlus.workwithplus_web.dvmessagegetbasicnotificationmsg(context).executeUdp(  AV70ToolboxMessageTitle,  AV68ToolboxMessageDescription,  AV69ToolboxMessageStatus,  "",  "true",  ""));
       }
 
       protected void nextLoad( )
@@ -1154,7 +1153,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257119554978", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202571111483810", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1170,7 +1169,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wp_applicationdesign.js", "?20257119554979", false, true);
+         context.AddJavascriptSource("wp_applicationdesign.js", "?202571111483812", false, true);
          context.AddJavascriptSource("UserControls/UC_AppToolBox1Render.js", "", false, true);
          context.AddJavascriptSource("UserControls/UC_PreventAccessModalRender.js", "", false, true);
          /* End function include_jscripts */
@@ -1201,7 +1200,6 @@ namespace GeneXus.Programs {
          }
          init_default_properties( ) ;
          divPreventaccessmodaltable_Visible = 1;
-         Apptoolbox1_Displaymessagedescription = "";
          Preventaccessmodal_Visible = Convert.ToBoolean( -1);
          Preventaccessmodal_Previewlink = "";
          Apptoolbox1_Organisationlogo = "&OrganisationLogo";
@@ -1231,7 +1229,7 @@ namespace GeneXus.Programs {
       public override void InitializeDynEvents( )
       {
          setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[]}""");
-         setEventMetadata("APPTOOLBOX1.DISPLAYMESSAGE","""{"handler":"E115C2","iparms":[{"av":"Apptoolbox1_Displaymessagedescription","ctrl":"APPTOOLBOX1","prop":"DisplayMessageDescription"}]}""");
+         setEventMetadata("GLOBALEVENTS.DISPLAYTOOLBOXMESSAGE","""{"handler":"E125C2","iparms":[{"av":"AV68ToolboxMessageDescription","fld":"vTOOLBOXMESSAGEDESCRIPTION"},{"av":"AV69ToolboxMessageStatus","fld":"vTOOLBOXMESSAGESTATUS"},{"av":"AV70ToolboxMessageTitle","fld":"vTOOLBOXMESSAGETITLE"}]}""");
          return  ;
       }
 
@@ -1269,6 +1267,9 @@ namespace GeneXus.Programs {
          AV42BC_Trn_Location = new SdtTrn_Location(context);
          AV57CurrentAppVersion = new SdtSDT_AppVersion(context);
          AV66Icons = new GXBaseCollection<SdtSDT_Icon>( context, "SDT_Icon", "Comforta_version2");
+         AV68ToolboxMessageDescription = "";
+         AV69ToolboxMessageStatus = "";
+         AV70ToolboxMessageTitle = "";
          GX_FocusControl = "";
          Form = new GXWebForm();
          sPrefix = "";
@@ -1442,7 +1443,6 @@ namespace GeneXus.Programs {
       private short nGXWrapped ;
       private int divPreventaccessmodaltable_Visible ;
       private int idxLst ;
-      private string Apptoolbox1_Displaymessagedescription ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string sDynURL ;
@@ -1490,7 +1490,10 @@ namespace GeneXus.Programs {
       private bool n584ActiveAppVersionId ;
       private bool n598PublishedActiveAppVersionId ;
       private bool n424PageChildren ;
+      private string AV68ToolboxMessageDescription ;
       private string A424PageChildren ;
+      private string AV69ToolboxMessageStatus ;
+      private string AV70ToolboxMessageTitle ;
       private string AV62ReferrerUrl ;
       private string AV38UserName ;
       private string A40000OrganisationLogo_GXI ;

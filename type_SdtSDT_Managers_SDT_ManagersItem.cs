@@ -52,6 +52,8 @@ namespace GeneXus.Programs
 
 			gxTv_SdtSDT_Managers_SDT_ManagersItem_Managersalutation = "";
 
+			gxTv_SdtSDT_Managers_SDT_ManagersItem_Managertitle = "";
+
 		}
 
 		public SdtSDT_Managers_SDT_ManagersItem(IGxContext context)
@@ -121,6 +123,9 @@ namespace GeneXus.Programs
 
 
 			AddObjectProperty("ManagerSalutation", gxTpr_Managersalutation, false);
+
+
+			AddObjectProperty("ManagerTitle", gxTpr_Managertitle, false);
 
 			return;
 		}
@@ -364,6 +369,22 @@ namespace GeneXus.Programs
 
 
 
+
+		[SoapElement(ElementName="ManagerTitle")]
+		[XmlElement(ElementName="ManagerTitle")]
+		public string gxTpr_Managertitle
+		{
+			get {
+				return gxTv_SdtSDT_Managers_SDT_ManagersItem_Managertitle; 
+			}
+			set {
+				gxTv_SdtSDT_Managers_SDT_ManagersItem_Managertitle = value;
+				SetDirty("Managertitle");
+			}
+		}
+
+
+
 		public override bool ShouldSerializeSdtJson()
 		{
 			return true;
@@ -397,6 +418,7 @@ namespace GeneXus.Programs
 			gxTv_SdtSDT_Managers_SDT_ManagersItem_Managerimage = "";gxTv_SdtSDT_Managers_SDT_ManagersItem_Managerimage_gxi = "";
 			gxTv_SdtSDT_Managers_SDT_ManagersItem_Managergender = "";
 			gxTv_SdtSDT_Managers_SDT_ManagersItem_Managersalutation = "";
+			gxTv_SdtSDT_Managers_SDT_ManagersItem_Managertitle = "";
 			return  ;
 		}
 
@@ -446,6 +468,9 @@ namespace GeneXus.Programs
 		 
 
 		protected string gxTv_SdtSDT_Managers_SDT_ManagersItem_Managersalutation;
+		 
+
+		protected string gxTv_SdtSDT_Managers_SDT_ManagersItem_Managertitle;
 		 
 
 
@@ -631,6 +656,18 @@ namespace GeneXus.Programs
 			}
 			set { 
 				 sdt.gxTpr_Managersalutation = value;
+			}
+		}
+
+		[DataMember(Name="ManagerTitle", Order=14)]
+		public  string gxTpr_Managertitle
+		{
+			get { 
+				return sdt.gxTpr_Managertitle;
+
+			}
+			set { 
+				 sdt.gxTpr_Managertitle = value;
 			}
 		}
 

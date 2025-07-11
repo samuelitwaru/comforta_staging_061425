@@ -200,6 +200,10 @@ namespace GeneXus.Programs.workwithplus {
                AssignProp(sPrefix, false, edtavTodatedisplay_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavTodatedisplay_Enabled), 5, 0), true);
                edtavDuration_Enabled = 0;
                AssignProp(sPrefix, false, edtavDuration_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavDuration_Enabled), 5, 0), true);
+               edtavListofgroups_Enabled = 0;
+               AssignProp(sPrefix, false, edtavListofgroups_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavListofgroups_Enabled), 5, 0), true);
+               edtavListofresidents_Enabled = 0;
+               AssignProp(sPrefix, false, edtavListofresidents_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavListofresidents_Enabled), 5, 0), true);
                WS4T2( ) ;
                if ( ! isAjaxCallMode( ) )
                {
@@ -861,6 +865,23 @@ namespace GeneXus.Programs.workwithplus {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
+            GxWebStd.gx_div_start( context, divListofgroups_cell_Internalname, 1, 0, "px", 0, "px", divListofgroups_cell_Class, "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", edtavListofgroups_Visible, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtavListofgroups_Internalname+"\"", "", "div");
+            /* Attribute/Variable Label */
+            GxWebStd.gx_label_element( context, edtavListofgroups_Internalname, context.GetMessage( "Groups", ""), "col-sm-3 AttributeLabel", 1, true, "");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-9 gx-attribute", "start", "top", "", "", "div");
+            /* Single line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 112,'" + sPrefix + "',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavListofgroups_Internalname, AV68ListOfGroups, AV68ListOfGroups, TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,112);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavListofgroups_Jsonclick, 0, "Attribute", "", "", "", "", edtavListofgroups_Visible, edtavListofgroups_Enabled, 0, "text", "", 80, "chr", 1, "row", 2097152, 0, 0, 0, 0, 0, -1, true, "", "start", false, "", "HLP_WorkWithPlus/WWP_EventInfoWC.htm");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
             GxWebStd.gx_div_start( context, divCombo_addressgroup_cell_Internalname, 1, 0, "px", 0, "px", divCombo_addressgroup_cell_Class, "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, divTablesplittedaddressgroup_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
@@ -891,33 +912,50 @@ namespace GeneXus.Programs.workwithplus {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
+            GxWebStd.gx_div_start( context, divListofresidents_cell_Internalname, 1, 0, "px", 0, "px", divListofresidents_cell_Class, "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", edtavListofresidents_Visible, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtavListofresidents_Internalname+"\"", "", "div");
+            /* Attribute/Variable Label */
+            GxWebStd.gx_label_element( context, edtavListofresidents_Internalname, edtavListofresidents_Caption, "col-sm-3 AttributeLabel", 1, true, "");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-9 gx-attribute", "start", "top", "", "", "div");
+            /* Single line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 125,'" + sPrefix + "',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavListofresidents_Internalname, AV69ListOfResidents, AV69ListOfResidents, TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,125);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavListofresidents_Jsonclick, 0, "Attribute", "", "", "", "", edtavListofresidents_Visible, edtavListofresidents_Enabled, 0, "text", "", 80, "chr", 1, "row", 2097152, 0, 0, 0, 0, 0, -1, true, "", "start", false, "", "HLP_WorkWithPlus/WWP_EventInfoWC.htm");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 CellMarginTop", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-action-group ActionGroup", "start", "top", " "+"data-gx-actiongroup-type=\"toolbar\""+" ", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 120,'" + sPrefix + "',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 130,'" + sPrefix + "',false,'',0)\"";
             ClassString = "Button";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtnenter_Internalname, "", context.GetMessage( "GX_BtnEnter", ""), bttBtnenter_Jsonclick, 5, context.GetMessage( "GX_BtnEnter", ""), "", StyleString, ClassString, bttBtnenter_Visible, bttBtnenter_Enabled, "standard", "'"+sPrefix+"'"+",false,"+"'"+sPrefix+"EENTER."+"'", TempTags, "", context.GetButtonType( ), "HLP_WorkWithPlus/WWP_EventInfoWC.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 122,'" + sPrefix + "',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 132,'" + sPrefix + "',false,'',0)\"";
             ClassString = "BtnDefault";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtnuacancel_Internalname, "", context.GetMessage( "Cancel", ""), bttBtnuacancel_Jsonclick, 7, context.GetMessage( "Cancel", ""), "", StyleString, ClassString, bttBtnuacancel_Visible, 1, "standard", "'"+sPrefix+"'"+",false,"+"'"+"e114t1_client"+"'", TempTags, "", 2, "HLP_WorkWithPlus/WWP_EventInfoWC.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 124,'" + sPrefix + "',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 134,'" + sPrefix + "',false,'',0)\"";
             ClassString = "Button";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtnuaupdate_Internalname, "", context.GetMessage( "Update", ""), bttBtnuaupdate_Jsonclick, 5, context.GetMessage( "Update", ""), "", StyleString, ClassString, bttBtnuaupdate_Visible, 1, "standard", "'"+sPrefix+"'"+",false,"+"'"+sPrefix+"E\\'DOUAUPDATE\\'."+"'", TempTags, "", context.GetButtonType( ), "HLP_WorkWithPlus/WWP_EventInfoWC.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 126,'" + sPrefix + "',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 136,'" + sPrefix + "',false,'',0)\"";
             ClassString = "BtnDefault";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtnuadelete_Internalname, "", context.GetMessage( "GX_BtnDelete", ""), bttBtnuadelete_Jsonclick, 7, context.GetMessage( "GX_BtnDelete", ""), "", StyleString, ClassString, bttBtnuadelete_Visible, 1, "standard", "'"+sPrefix+"'"+",false,"+"'"+"e124t1_client"+"'", TempTags, "", 2, "HLP_WorkWithPlus/WWP_EventInfoWC.htm");
@@ -938,32 +976,32 @@ namespace GeneXus.Programs.workwithplus {
             /* Div Control */
             GxWebStd.gx_div_start( context, divHtml_bottomauxiliarcontrols_Internalname, 1, 0, "px", 0, "px", "Section", "start", "top", "", "", "div");
             /* Check box */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 130,'" + sPrefix + "',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 140,'" + sPrefix + "',false,'',0)\"";
             ClassString = "Attribute";
             StyleString = "";
-            GxWebStd.gx_checkbox_ctrl( context, chkavRecurringevent_Internalname, StringUtil.BoolToStr( AV42RecurringEvent), "", "", chkavRecurringevent.Visible, 1, "true", "", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(130, this, 'true', 'false',"+"'"+sPrefix+"'"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,130);\"");
+            GxWebStd.gx_checkbox_ctrl( context, chkavRecurringevent_Internalname, StringUtil.BoolToStr( AV42RecurringEvent), "", "", chkavRecurringevent.Visible, 1, "true", "", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(140, this, 'true', 'false',"+"'"+sPrefix+"'"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,140);\"");
             /* Check box */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 131,'" + sPrefix + "',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 141,'" + sPrefix + "',false,'',0)\"";
             ClassString = "Attribute";
             StyleString = "";
-            GxWebStd.gx_checkbox_ctrl( context, chkavAddrsvp_Internalname, StringUtil.BoolToStr( AV41AddRSVP), "", "", chkavAddrsvp.Visible, 1, "true", "", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(131, this, 'true', 'false',"+"'"+sPrefix+"'"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,131);\"");
+            GxWebStd.gx_checkbox_ctrl( context, chkavAddrsvp_Internalname, StringUtil.BoolToStr( AV41AddRSVP), "", "", chkavAddrsvp.Visible, 1, "true", "", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(141, this, 'true', 'false',"+"'"+sPrefix+"'"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,141);\"");
             /* Multiple line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 132,'" + sPrefix + "',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 142,'" + sPrefix + "',false,'',0)\"";
             ClassString = "Attribute";
             StyleString = "";
             ClassString = "Attribute";
             StyleString = "";
-            GxWebStd.gx_html_textarea( context, edtavRecuringeventtype_Internalname, AV43RecuringEventType, "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,132);\"", 0, edtavRecuringeventtype_Visible, 1, 0, 80, "chr", 7, "row", 0, StyleString, ClassString, "", "", "500", -1, 0, "", "", -1, true, "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", 0, "", "HLP_WorkWithPlus/WWP_EventInfoWC.htm");
-            wb_table6_133_4T2( true) ;
+            GxWebStd.gx_html_textarea( context, edtavRecuringeventtype_Internalname, AV43RecuringEventType, "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,142);\"", 0, edtavRecuringeventtype_Visible, 1, 0, 80, "chr", 7, "row", 0, StyleString, ClassString, "", "", "500", -1, 0, "", "", -1, true, "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", 0, "", "HLP_WorkWithPlus/WWP_EventInfoWC.htm");
+            wb_table6_143_4T2( true) ;
          }
          else
          {
-            wb_table6_133_4T2( false) ;
+            wb_table6_143_4T2( false) ;
          }
          return  ;
       }
 
-      protected void wb_table6_133_4T2e( bool wbgen )
+      protected void wb_table6_143_4T2e( bool wbgen )
       {
          if ( wbgen )
          {
@@ -1401,6 +1439,10 @@ namespace GeneXus.Programs.workwithplus {
          AssignProp(sPrefix, false, edtavTodatedisplay_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavTodatedisplay_Enabled), 5, 0), true);
          edtavDuration_Enabled = 0;
          AssignProp(sPrefix, false, edtavDuration_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavDuration_Enabled), 5, 0), true);
+         edtavListofgroups_Enabled = 0;
+         AssignProp(sPrefix, false, edtavListofgroups_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavListofgroups_Enabled), 5, 0), true);
+         edtavListofresidents_Enabled = 0;
+         AssignProp(sPrefix, false, edtavListofresidents_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavListofresidents_Enabled), 5, 0), true);
       }
 
       protected void RF4T2( )
@@ -1452,6 +1494,10 @@ namespace GeneXus.Programs.workwithplus {
          AssignProp(sPrefix, false, edtavTodatedisplay_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavTodatedisplay_Enabled), 5, 0), true);
          edtavDuration_Enabled = 0;
          AssignProp(sPrefix, false, edtavDuration_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavDuration_Enabled), 5, 0), true);
+         edtavListofgroups_Enabled = 0;
+         AssignProp(sPrefix, false, edtavListofgroups_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavListofgroups_Enabled), 5, 0), true);
+         edtavListofresidents_Enabled = 0;
+         AssignProp(sPrefix, false, edtavListofresidents_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavListofresidents_Enabled), 5, 0), true);
          fix_multi_value_controls( ) ;
       }
 
@@ -1576,6 +1622,10 @@ namespace GeneXus.Programs.workwithplus {
             }
             AV7AllDay = StringUtil.StrToBool( cgiGet( chkavAllday_Internalname));
             AssignAttri(sPrefix, false, "AV7AllDay", AV7AllDay);
+            AV68ListOfGroups = cgiGet( edtavListofgroups_Internalname);
+            AssignAttri(sPrefix, false, "AV68ListOfGroups", AV68ListOfGroups);
+            AV69ListOfResidents = cgiGet( edtavListofresidents_Internalname);
+            AssignAttri(sPrefix, false, "AV69ListOfResidents", AV69ListOfResidents);
             AV42RecurringEvent = StringUtil.StrToBool( cgiGet( chkavRecurringevent_Internalname));
             AssignAttri(sPrefix, false, "AV42RecurringEvent", AV42RecurringEvent);
             AV41AddRSVP = StringUtil.StrToBool( cgiGet( chkavAddrsvp_Internalname));
@@ -1614,6 +1664,8 @@ namespace GeneXus.Programs.workwithplus {
          ucCombo_addressgroup.SendProperty(context, sPrefix, false, Combo_addressgroup_Internalname, "Caption", Combo_addressgroup_Caption);
          Combo_addressgroup_Emptyitemtext = context.GetMessage( "Select ", "")+AV65ResidentsTitle;
          ucCombo_addressgroup.SendProperty(context, sPrefix, false, Combo_addressgroup_Internalname, "EmptyItemText", Combo_addressgroup_Emptyitemtext);
+         edtavListofresidents_Caption = AV65ResidentsTitle;
+         AssignProp(sPrefix, false, edtavListofresidents_Internalname, "Caption", edtavListofresidents_Caption, true);
          if ( ( StringUtil.StrCmp(Gx_mode, "DSP") == 0 ) || ( StringUtil.StrCmp(Gx_mode, "UPD") == 0 ) )
          {
             GXt_SdtWWP_Calendar_Events_Item2 = AV9CalendarSDT;
@@ -1780,6 +1832,12 @@ namespace GeneXus.Programs.workwithplus {
          AssignProp(sPrefix, false, chkavAddrsvp_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(chkavAddrsvp.Visible), 5, 0), true);
          edtavRecuringeventtype_Visible = 0;
          AssignProp(sPrefix, false, edtavRecuringeventtype_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavRecuringeventtype_Visible), 5, 0), true);
+         if ( StringUtil.StrCmp(Gx_mode, "DSP") == 0 )
+         {
+            /* Execute user subroutine: 'LOADDEFAULTDISPLAYLISTS' */
+            S162 ();
+            if (returnInSub) return;
+         }
       }
 
       protected void E154T2( )
@@ -1824,7 +1882,7 @@ namespace GeneXus.Programs.workwithplus {
          S152 ();
          if (returnInSub) return;
          /* Execute user subroutine: 'CHECKSECURITYFORACTIONS' */
-         S162 ();
+         S172 ();
          if (returnInSub) return;
          /*  Sending Event outputs  */
       }
@@ -1846,12 +1904,12 @@ namespace GeneXus.Programs.workwithplus {
          if ( StringUtil.StrCmp(Dvelop_confirmpanel_uadelete_Result, "Yes") == 0 )
          {
             /* Execute user subroutine: 'DO ACTION UADELETE' */
-            S172 ();
+            S182 ();
             if (returnInSub) return;
          }
       }
 
-      protected void S162( )
+      protected void S172( )
       {
          /* 'CHECKSECURITYFORACTIONS' Routine */
          returnInSub = false;
@@ -1897,7 +1955,7 @@ namespace GeneXus.Programs.workwithplus {
          }
       }
 
-      protected void S172( )
+      protected void S182( )
       {
          /* 'DO ACTION UADELETE' Routine */
          returnInSub = false;
@@ -1906,7 +1964,7 @@ namespace GeneXus.Programs.workwithplus {
          context.wjLocDisableFrm = 1;
       }
 
-      protected void S192( )
+      protected void S202( )
       {
          /* 'CHECKREQUIREDFIELDS' Routine */
          returnInSub = false;
@@ -2102,6 +2160,20 @@ namespace GeneXus.Programs.workwithplus {
             divCombo_grouplist_cell_Class = "col-xs-12 ExtendedComboCell";
             AssignProp(sPrefix, false, divCombo_grouplist_cell_Internalname, "Class", divCombo_grouplist_cell_Class, true);
          }
+         if ( ! ( ( StringUtil.StrCmp(Gx_mode, "DSP") == 0 ) ) )
+         {
+            edtavListofgroups_Visible = 0;
+            AssignProp(sPrefix, false, edtavListofgroups_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavListofgroups_Visible), 5, 0), true);
+            divListofgroups_cell_Class = "Invisible";
+            AssignProp(sPrefix, false, divListofgroups_cell_Internalname, "Class", divListofgroups_cell_Class, true);
+         }
+         else
+         {
+            edtavListofgroups_Visible = 1;
+            AssignProp(sPrefix, false, edtavListofgroups_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavListofgroups_Visible), 5, 0), true);
+            divListofgroups_cell_Class = "col-xs-12";
+            AssignProp(sPrefix, false, divListofgroups_cell_Internalname, "Class", divListofgroups_cell_Class, true);
+         }
          if ( ! ( ( StringUtil.StrCmp(Gx_mode, "DSP") != 0 ) ) )
          {
             Combo_addressgroup_Visible = false;
@@ -2115,6 +2187,20 @@ namespace GeneXus.Programs.workwithplus {
             ucCombo_addressgroup.SendProperty(context, sPrefix, false, Combo_addressgroup_Internalname, "Visible", StringUtil.BoolToStr( Combo_addressgroup_Visible));
             divCombo_addressgroup_cell_Class = "col-xs-12 ExtendedComboCell";
             AssignProp(sPrefix, false, divCombo_addressgroup_cell_Internalname, "Class", divCombo_addressgroup_cell_Class, true);
+         }
+         if ( ! ( ( StringUtil.StrCmp(Gx_mode, "DSP") == 0 ) ) )
+         {
+            edtavListofresidents_Visible = 0;
+            AssignProp(sPrefix, false, edtavListofresidents_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavListofresidents_Visible), 5, 0), true);
+            divListofresidents_cell_Class = "Invisible";
+            AssignProp(sPrefix, false, divListofresidents_cell_Internalname, "Class", divListofresidents_cell_Class, true);
+         }
+         else
+         {
+            edtavListofresidents_Visible = 1;
+            AssignProp(sPrefix, false, edtavListofresidents_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavListofresidents_Visible), 5, 0), true);
+            divListofresidents_cell_Class = "col-xs-12";
+            AssignProp(sPrefix, false, divListofresidents_cell_Internalname, "Class", divListofresidents_cell_Class, true);
          }
          divRecurringtypestable_Visible = (((StringUtil.StrCmp(Gx_mode, "DSP")!=0)&&(AV42RecurringEvent)) ? 1 : 0);
          AssignProp(sPrefix, false, divRecurringtypestable_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(divRecurringtypestable_Visible), 5, 0), true);
@@ -2138,18 +2224,18 @@ namespace GeneXus.Programs.workwithplus {
       {
          /* 'LOADCOMBOADDRESSGROUP' Routine */
          returnInSub = false;
-         AV69GXV2 = 1;
-         GXt_objcol_SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem4 = AV68GXV1;
+         AV74GXV2 = 1;
+         GXt_objcol_SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem4 = AV73GXV1;
          new dp_locationresident(context ).execute( out  GXt_objcol_SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem4) ;
-         AV68GXV1 = GXt_objcol_SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem4;
-         while ( AV69GXV2 <= AV68GXV1.Count )
+         AV73GXV1 = GXt_objcol_SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem4;
+         while ( AV74GXV2 <= AV73GXV1.Count )
          {
-            AV48AddressGroup_DPItem = ((SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem)AV68GXV1.Item(AV69GXV2));
+            AV48AddressGroup_DPItem = ((SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem)AV73GXV1.Item(AV74GXV2));
             AV38Combo_DataItem = new WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item(context);
             AV38Combo_DataItem.gxTpr_Id = StringUtil.Trim( AV48AddressGroup_DPItem.gxTpr_Residentid.ToString());
             AV38Combo_DataItem.gxTpr_Title = AV48AddressGroup_DPItem.gxTpr_Residentfullname;
             AV45AddressGroup_Data.Add(AV38Combo_DataItem, 0);
-            AV69GXV2 = (int)(AV69GXV2+1);
+            AV74GXV2 = (int)(AV74GXV2+1);
          }
          AV45AddressGroup_Data.Sort("Title");
          Combo_addressgroup_Selectedvalue_set = AV44AddressGroup.ToJSonString(false);
@@ -2160,18 +2246,18 @@ namespace GeneXus.Programs.workwithplus {
       {
          /* 'LOADCOMBOGROUPLIST' Routine */
          returnInSub = false;
-         AV71GXV4 = 1;
-         GXt_objcol_SdtSDT_ResidentPackage_SDT_ResidentPackageItem5 = AV70GXV3;
+         AV76GXV4 = 1;
+         GXt_objcol_SdtSDT_ResidentPackage_SDT_ResidentPackageItem5 = AV75GXV3;
          new dp_residentaccessgroups(context ).execute( out  GXt_objcol_SdtSDT_ResidentPackage_SDT_ResidentPackageItem5) ;
-         AV70GXV3 = GXt_objcol_SdtSDT_ResidentPackage_SDT_ResidentPackageItem5;
-         while ( AV71GXV4 <= AV70GXV3.Count )
+         AV75GXV3 = GXt_objcol_SdtSDT_ResidentPackage_SDT_ResidentPackageItem5;
+         while ( AV76GXV4 <= AV75GXV3.Count )
          {
-            AV64GroupList_DPItem = ((SdtSDT_ResidentPackage_SDT_ResidentPackageItem)AV70GXV3.Item(AV71GXV4));
+            AV64GroupList_DPItem = ((SdtSDT_ResidentPackage_SDT_ResidentPackageItem)AV75GXV3.Item(AV76GXV4));
             AV38Combo_DataItem = new WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item(context);
             AV38Combo_DataItem.gxTpr_Id = StringUtil.Trim( AV64GroupList_DPItem.gxTpr_Residentpackageid.ToString());
             AV38Combo_DataItem.gxTpr_Title = AV64GroupList_DPItem.gxTpr_Residentpackagename;
             AV56GroupList_Data.Add(AV38Combo_DataItem, 0);
-            AV71GXV4 = (int)(AV71GXV4+1);
+            AV76GXV4 = (int)(AV76GXV4+1);
          }
          AV56GroupList_Data.Sort("Title");
          Combo_grouplist_Selectedvalue_set = AV54GroupList.ToJSonString(false);
@@ -2185,7 +2271,7 @@ namespace GeneXus.Programs.workwithplus {
          AV27FixStartDate = true;
          AssignAttri(sPrefix, false, "AV27FixStartDate", AV27FixStartDate);
          /* Execute user subroutine: 'CHECKDATES' */
-         S182 ();
+         S192 ();
          if (returnInSub) return;
          /* Execute user subroutine: 'CHECKDISABLEDDAYS' */
          S112 ();
@@ -2200,7 +2286,7 @@ namespace GeneXus.Programs.workwithplus {
          AV27FixStartDate = false;
          AssignAttri(sPrefix, false, "AV27FixStartDate", AV27FixStartDate);
          /* Execute user subroutine: 'CHECKDATES' */
-         S182 ();
+         S192 ();
          if (returnInSub) return;
          /* Execute user subroutine: 'CHECKDISABLEDDAYS' */
          S112 ();
@@ -2220,20 +2306,20 @@ namespace GeneXus.Programs.workwithplus {
          /* Enter Routine */
          returnInSub = false;
          /* Execute user subroutine: 'CHECKREQUIREDFIELDS' */
-         S192 ();
+         S202 ();
          if (returnInSub) return;
          /* Execute user subroutine: 'CHECKDATES' */
-         S182 ();
+         S192 ();
          if (returnInSub) return;
          /* Execute user subroutine: 'CHECKRECURRINGEVENT' */
-         S202 ();
+         S212 ();
          if (returnInSub) return;
          if ( AV11CheckRequiredFieldsResult )
          {
             if ( ( AV44AddressGroup.Count > 0 ) || ( AV54GroupList.Count > 0 ) )
             {
                /* Execute user subroutine: 'LOADSELECTEDRESIDENTSANDGROUPS' */
-               S212 ();
+               S222 ();
                if (returnInSub) return;
             }
             if ( new GeneXus.Programs.workwithplus.wwp_calendar_editevent(context).executeUdp(  Gx_mode,  AV18Title,  AV12CurrentDate,  AV17FromTime,  AV19ToTime,  AV7AllDay,  AV16EndDate,  AV8CalendarEventId,  AV40EventType,  AV42RecurringEvent,  AV43RecuringEventType,  AV41AddRSVP,  AV51ResidentAddressGroup,  AV60ResidentPackageIdCollection, out  AV6ErrorMessages) )
@@ -2243,12 +2329,12 @@ namespace GeneXus.Programs.workwithplus {
             }
             else
             {
-               AV72GXV5 = 1;
-               while ( AV72GXV5 <= AV6ErrorMessages.Count )
+               AV77GXV5 = 1;
+               while ( AV77GXV5 <= AV6ErrorMessages.Count )
                {
-                  AV5Message = ((GeneXus.Utils.SdtMessages_Message)AV6ErrorMessages.Item(AV72GXV5));
+                  AV5Message = ((GeneXus.Utils.SdtMessages_Message)AV6ErrorMessages.Item(AV77GXV5));
                   GX_msglist.addItem(AV5Message.gxTpr_Description);
-                  AV72GXV5 = (int)(AV72GXV5+1);
+                  AV77GXV5 = (int)(AV77GXV5+1);
                }
             }
          }
@@ -2267,7 +2353,7 @@ namespace GeneXus.Programs.workwithplus {
          /*  Sending Event outputs  */
       }
 
-      protected void S202( )
+      protected void S212( )
       {
          /* 'CHECKRECURRINGEVENT' Routine */
          returnInSub = false;
@@ -2278,7 +2364,7 @@ namespace GeneXus.Programs.workwithplus {
          }
       }
 
-      protected void S182( )
+      protected void S192( )
       {
          /* 'CHECKDATES' Routine */
          returnInSub = false;
@@ -2325,16 +2411,16 @@ namespace GeneXus.Programs.workwithplus {
          /* 'CHECKDISABLEDDAYS' Routine */
          returnInSub = false;
          AV26IncludedInADisableDay = false;
-         AV73GXV6 = 1;
-         while ( AV73GXV6 <= AV14DisabledDays.Count )
+         AV78GXV6 = 1;
+         while ( AV78GXV6 <= AV14DisabledDays.Count )
          {
-            AV13DisabledDay = AV14DisabledDays.GetDatetime(AV73GXV6);
+            AV13DisabledDay = AV14DisabledDays.GetDatetime(AV78GXV6);
             if ( ( ( DateTimeUtil.ResetTime ( AV12CurrentDate ) >= DateTimeUtil.ResetTime ( AV13DisabledDay ) ) && ( DateTimeUtil.ResetTime ( AV12CurrentDate ) <= DateTimeUtil.ResetTime ( AV13DisabledDay ) ) ) || ( ( DateTimeUtil.ResetTime ( AV16EndDate ) >= DateTimeUtil.ResetTime ( AV13DisabledDay ) ) && ( DateTimeUtil.ResetTime ( AV16EndDate ) <= DateTimeUtil.ResetTime ( AV13DisabledDay ) ) ) || ( ( DateTimeUtil.ResetTime ( AV13DisabledDay ) >= DateTimeUtil.ResetTime ( AV12CurrentDate ) ) && ( DateTimeUtil.ResetTime ( AV13DisabledDay ) <= DateTimeUtil.ResetTime ( AV16EndDate ) ) ) )
             {
                AV26IncludedInADisableDay = true;
                if (true) break;
             }
-            AV73GXV6 = (int)(AV73GXV6+1);
+            AV78GXV6 = (int)(AV78GXV6+1);
          }
          if ( AV26IncludedInADisableDay )
          {
@@ -2371,25 +2457,75 @@ namespace GeneXus.Programs.workwithplus {
          }
       }
 
-      protected void S212( )
+      protected void S222( )
       {
          /* 'LOADSELECTEDRESIDENTSANDGROUPS' Routine */
          returnInSub = false;
          AV51ResidentAddressGroup = (GxSimpleCollection<Guid>)(new GxSimpleCollection<Guid>());
-         AV74GXV7 = 1;
-         while ( AV74GXV7 <= AV44AddressGroup.Count )
+         AV79GXV7 = 1;
+         while ( AV79GXV7 <= AV44AddressGroup.Count )
          {
-            AV52AddressGroupItem = ((Guid)AV44AddressGroup.Item(AV74GXV7));
+            AV52AddressGroupItem = ((Guid)AV44AddressGroup.Item(AV79GXV7));
             AV51ResidentAddressGroup.Add(AV52AddressGroupItem, 0);
-            AV74GXV7 = (int)(AV74GXV7+1);
+            AV79GXV7 = (int)(AV79GXV7+1);
          }
          AV60ResidentPackageIdCollection = (GxSimpleCollection<Guid>)(new GxSimpleCollection<Guid>());
-         AV75GXV8 = 1;
-         while ( AV75GXV8 <= AV54GroupList.Count )
+         AV80GXV8 = 1;
+         while ( AV80GXV8 <= AV54GroupList.Count )
          {
-            AV61ResidentPackageId = ((Guid)AV54GroupList.Item(AV75GXV8));
+            AV61ResidentPackageId = ((Guid)AV54GroupList.Item(AV80GXV8));
             AV60ResidentPackageIdCollection.Add(AV61ResidentPackageId, 0);
-            AV75GXV8 = (int)(AV75GXV8+1);
+            AV80GXV8 = (int)(AV80GXV8+1);
+         }
+      }
+
+      protected void S162( )
+      {
+         /* 'LOADDEFAULTDISPLAYLISTS' Routine */
+         returnInSub = false;
+         AV69ListOfResidents = "";
+         AssignAttri(sPrefix, false, "AV69ListOfResidents", AV69ListOfResidents);
+         AV81GXV9 = 1;
+         while ( AV81GXV9 <= AV45AddressGroup_Data.Count )
+         {
+            AV66ComboListDataItem = ((WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item)AV45AddressGroup_Data.Item(AV81GXV9));
+            if ( (StringUtil.StringSearch( AV44AddressGroup.ToJSonString(false), AV66ComboListDataItem.gxTpr_Id, 1)>0) )
+            {
+               if ( String.IsNullOrEmpty(StringUtil.RTrim( AV69ListOfResidents)) )
+               {
+                  AV69ListOfResidents = AV66ComboListDataItem.gxTpr_Title;
+                  AssignAttri(sPrefix, false, "AV69ListOfResidents", AV69ListOfResidents);
+               }
+               else
+               {
+                  AV69ListOfResidents += ", " + AV66ComboListDataItem.gxTpr_Title;
+                  AssignAttri(sPrefix, false, "AV69ListOfResidents", AV69ListOfResidents);
+               }
+            }
+            AV81GXV9 = (int)(AV81GXV9+1);
+         }
+         AV68ListOfGroups = "";
+         AssignAttri(sPrefix, false, "AV68ListOfGroups", AV68ListOfGroups);
+         AV82GXV10 = 1;
+         while ( AV82GXV10 <= AV56GroupList_Data.Count )
+         {
+            AV67ComboGroupDataItem = ((WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item)AV56GroupList_Data.Item(AV82GXV10));
+            AV70ItemGUID = Guid.Empty;
+            AV70ItemGUID = StringUtil.StrToGuid( AV67ComboGroupDataItem.gxTpr_Id);
+            if ( (StringUtil.StringSearch( AV54GroupList.ToJSonString(false), AV67ComboGroupDataItem.gxTpr_Id, 1)>0) )
+            {
+               if ( String.IsNullOrEmpty(StringUtil.RTrim( AV68ListOfGroups)) )
+               {
+                  AV68ListOfGroups = AV67ComboGroupDataItem.gxTpr_Title;
+                  AssignAttri(sPrefix, false, "AV68ListOfGroups", AV68ListOfGroups);
+               }
+               else
+               {
+                  AV68ListOfGroups += ", " + AV67ComboGroupDataItem.gxTpr_Title;
+                  AssignAttri(sPrefix, false, "AV68ListOfGroups", AV68ListOfGroups);
+               }
+            }
+            AV82GXV10 = (int)(AV82GXV10+1);
          }
       }
 
@@ -2403,7 +2539,7 @@ namespace GeneXus.Programs.workwithplus {
          returnInSub = false;
       }
 
-      protected void wb_table6_133_4T2( bool wbgen )
+      protected void wb_table6_143_4T2( bool wbgen )
       {
          if ( wbgen )
          {
@@ -2429,11 +2565,11 @@ namespace GeneXus.Programs.workwithplus {
             context.WriteHtmlText( "</tbody>") ;
             /* End of table */
             context.WriteHtmlText( "</table>") ;
-            wb_table6_133_4T2e( true) ;
+            wb_table6_143_4T2e( true) ;
          }
          else
          {
-            wb_table6_133_4T2e( false) ;
+            wb_table6_143_4T2e( false) ;
          }
       }
 
@@ -2906,7 +3042,7 @@ namespace GeneXus.Programs.workwithplus {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257616584715", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202571111443389", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2922,7 +3058,7 @@ namespace GeneXus.Programs.workwithplus {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("workwithplus/wwp_eventinfowc.js", "?20257616584717", false, true);
+         context.AddJavascriptSource("workwithplus/wwp_eventinfowc.js", "?202571111443393", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3009,10 +3145,14 @@ namespace GeneXus.Programs.workwithplus {
          Combo_grouplist_Internalname = sPrefix+"COMBO_GROUPLIST";
          divTablesplittedgrouplist_Internalname = sPrefix+"TABLESPLITTEDGROUPLIST";
          divCombo_grouplist_cell_Internalname = sPrefix+"COMBO_GROUPLIST_CELL";
+         edtavListofgroups_Internalname = sPrefix+"vLISTOFGROUPS";
+         divListofgroups_cell_Internalname = sPrefix+"LISTOFGROUPS_CELL";
          lblTextblockcombo_addressgroup_Internalname = sPrefix+"TEXTBLOCKCOMBO_ADDRESSGROUP";
          Combo_addressgroup_Internalname = sPrefix+"COMBO_ADDRESSGROUP";
          divTablesplittedaddressgroup_Internalname = sPrefix+"TABLESPLITTEDADDRESSGROUP";
          divCombo_addressgroup_cell_Internalname = sPrefix+"COMBO_ADDRESSGROUP_CELL";
+         edtavListofresidents_Internalname = sPrefix+"vLISTOFRESIDENTS";
+         divListofresidents_cell_Internalname = sPrefix+"LISTOFRESIDENTS_CELL";
          bttBtnenter_Internalname = sPrefix+"BTNENTER";
          bttBtnuacancel_Internalname = sPrefix+"BTNUACANCEL";
          bttBtnuaupdate_Internalname = sPrefix+"BTNUAUPDATE";
@@ -3080,7 +3220,16 @@ namespace GeneXus.Programs.workwithplus {
          bttBtnuacancel_Visible = 1;
          bttBtnenter_Enabled = 1;
          bttBtnenter_Visible = 1;
+         edtavListofresidents_Jsonclick = "";
+         edtavListofresidents_Enabled = 1;
+         edtavListofresidents_Caption = context.GetMessage( "Residents", "");
+         edtavListofresidents_Visible = 1;
+         divListofresidents_cell_Class = "col-xs-12";
          divCombo_addressgroup_cell_Class = "col-xs-12";
+         edtavListofgroups_Jsonclick = "";
+         edtavListofgroups_Enabled = 1;
+         edtavListofgroups_Visible = 1;
+         divListofgroups_cell_Class = "col-xs-12";
          Combo_grouplist_Caption = "";
          divCombo_grouplist_cell_Class = "col-xs-12";
          divTextblockallday_cell_Class = "col-xs-12 col-sm-3";
@@ -3112,7 +3261,7 @@ namespace GeneXus.Programs.workwithplus {
          Combo_addressgroup_Includeonlyselectedoption = Convert.ToBoolean( -1);
          Combo_addressgroup_Allowmultipleselection = Convert.ToBoolean( -1);
          Combo_addressgroup_Visible = Convert.ToBoolean( -1);
-         Combo_addressgroup_Cls = "ExtendedCombo MultiSelectCombo";
+         Combo_addressgroup_Cls = "ExtendedCombo Attribute";
          Combo_addressgroup_Caption = "";
          Combo_grouplist_Emptyitemtext = "All Location Residents";
          Combo_grouplist_Multiplevaluestype = "Tags";
@@ -3138,7 +3287,7 @@ namespace GeneXus.Programs.workwithplus {
       public override void InitializeDynEvents( )
       {
          setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"Gx_mode","fld":"vMODE","pic":"@!"},{"av":"AV12CurrentDate","fld":"vCURRENTDATE"},{"av":"AV16EndDate","fld":"vENDDATE"},{"av":"AV7AllDay","fld":"vALLDAY"},{"av":"AV42RecurringEvent","fld":"vRECURRINGEVENT"},{"av":"AV41AddRSVP","fld":"vADDRSVP"},{"av":"AV31DurationHours","fld":"vDURATIONHOURS","pic":"ZZZ9","hsh":true},{"av":"AV14DisabledDays","fld":"vDISABLEDDAYS","hsh":true},{"av":"AV6ErrorMessages","fld":"vERRORMESSAGES","hsh":true}]""");
-         setEventMetadata("REFRESH",""","oparms":[{"av":"edtavCurrentdate_Enabled","ctrl":"vCURRENTDATE","prop":"Enabled"},{"av":"edtavEnddate_Enabled","ctrl":"vENDDATE","prop":"Enabled"},{"av":"edtavFromtime_Enabled","ctrl":"vFROMTIME","prop":"Enabled"},{"av":"edtavTotime_Enabled","ctrl":"vTOTIME","prop":"Enabled"},{"av":"edtavTitle_Enabled","ctrl":"vTITLE","prop":"Enabled"},{"av":"chkavAllday.Visible","ctrl":"vALLDAY","prop":"Visible"},{"av":"edtavFromdatedisplay_Visible","ctrl":"vFROMDATEDISPLAY","prop":"Visible"},{"av":"divFromdatedisplay_cell_Class","ctrl":"FROMDATEDISPLAY_CELL","prop":"Class"},{"av":"edtavTodatedisplay_Visible","ctrl":"vTODATEDISPLAY","prop":"Visible"},{"av":"divTodatedisplay_cell_Class","ctrl":"TODATEDISPLAY_CELL","prop":"Class"},{"av":"edtavDuration_Visible","ctrl":"vDURATION","prop":"Visible"},{"av":"divDuration_cell_Class","ctrl":"DURATION_CELL","prop":"Class"},{"av":"edtavTitle_Visible","ctrl":"vTITLE","prop":"Visible"},{"av":"divTitle_cell_Class","ctrl":"TITLE_CELL","prop":"Class"},{"av":"cmbavEventtype"},{"av":"divEventtype_cell_Class","ctrl":"EVENTTYPE_CELL","prop":"Class"},{"av":"edtavCurrentdate_Visible","ctrl":"vCURRENTDATE","prop":"Visible"},{"av":"cellCurrentdate_cell_Class","ctrl":"CURRENTDATE_CELL","prop":"Class"},{"av":"divTextblockcurrentdate_cell_Class","ctrl":"TEXTBLOCKCURRENTDATE_CELL","prop":"Class"},{"av":"edtavFromtime_Visible","ctrl":"vFROMTIME","prop":"Visible"},{"av":"cellFromtime_cell_Class","ctrl":"FROMTIME_CELL","prop":"Class"},{"av":"edtavEnddate_Visible","ctrl":"vENDDATE","prop":"Visible"},{"av":"cellEnddate_cell_Class","ctrl":"ENDDATE_CELL","prop":"Class"},{"av":"divTextblockenddate_cell_Class","ctrl":"TEXTBLOCKENDDATE_CELL","prop":"Class"},{"av":"edtavTotime_Visible","ctrl":"vTOTIME","prop":"Visible"},{"av":"cellTotime_cell_Class","ctrl":"TOTIME_CELL","prop":"Class"},{"av":"cellAllday_cell_Class","ctrl":"ALLDAY_CELL","prop":"Class"},{"av":"divTextblockallday_cell_Class","ctrl":"TEXTBLOCKALLDAY_CELL","prop":"Class"},{"av":"Combo_grouplist_Visible","ctrl":"COMBO_GROUPLIST","prop":"Visible"},{"av":"divCombo_grouplist_cell_Class","ctrl":"COMBO_GROUPLIST_CELL","prop":"Class"},{"av":"Combo_addressgroup_Visible","ctrl":"COMBO_ADDRESSGROUP","prop":"Visible"},{"av":"divCombo_addressgroup_cell_Class","ctrl":"COMBO_ADDRESSGROUP_CELL","prop":"Class"},{"av":"divRecurringtypestable_Visible","ctrl":"RECURRINGTYPESTABLE","prop":"Visible"},{"av":"lblFromdatedisplay_tags_Caption","ctrl":"FROMDATEDISPLAY_TAGS","prop":"Caption"},{"av":"lblTodatedisplay_tags_Caption","ctrl":"TODATEDISPLAY_TAGS","prop":"Caption"},{"ctrl":"BTNENTER","prop":"Visible"},{"ctrl":"BTNUACANCEL","prop":"Visible"},{"ctrl":"BTNUAUPDATE","prop":"Visible"},{"ctrl":"BTNUADELETE","prop":"Visible"}]}""");
+         setEventMetadata("REFRESH",""","oparms":[{"av":"edtavCurrentdate_Enabled","ctrl":"vCURRENTDATE","prop":"Enabled"},{"av":"edtavEnddate_Enabled","ctrl":"vENDDATE","prop":"Enabled"},{"av":"edtavFromtime_Enabled","ctrl":"vFROMTIME","prop":"Enabled"},{"av":"edtavTotime_Enabled","ctrl":"vTOTIME","prop":"Enabled"},{"av":"edtavTitle_Enabled","ctrl":"vTITLE","prop":"Enabled"},{"av":"chkavAllday.Visible","ctrl":"vALLDAY","prop":"Visible"},{"av":"edtavFromdatedisplay_Visible","ctrl":"vFROMDATEDISPLAY","prop":"Visible"},{"av":"divFromdatedisplay_cell_Class","ctrl":"FROMDATEDISPLAY_CELL","prop":"Class"},{"av":"edtavTodatedisplay_Visible","ctrl":"vTODATEDISPLAY","prop":"Visible"},{"av":"divTodatedisplay_cell_Class","ctrl":"TODATEDISPLAY_CELL","prop":"Class"},{"av":"edtavDuration_Visible","ctrl":"vDURATION","prop":"Visible"},{"av":"divDuration_cell_Class","ctrl":"DURATION_CELL","prop":"Class"},{"av":"edtavTitle_Visible","ctrl":"vTITLE","prop":"Visible"},{"av":"divTitle_cell_Class","ctrl":"TITLE_CELL","prop":"Class"},{"av":"cmbavEventtype"},{"av":"divEventtype_cell_Class","ctrl":"EVENTTYPE_CELL","prop":"Class"},{"av":"edtavCurrentdate_Visible","ctrl":"vCURRENTDATE","prop":"Visible"},{"av":"cellCurrentdate_cell_Class","ctrl":"CURRENTDATE_CELL","prop":"Class"},{"av":"divTextblockcurrentdate_cell_Class","ctrl":"TEXTBLOCKCURRENTDATE_CELL","prop":"Class"},{"av":"edtavFromtime_Visible","ctrl":"vFROMTIME","prop":"Visible"},{"av":"cellFromtime_cell_Class","ctrl":"FROMTIME_CELL","prop":"Class"},{"av":"edtavEnddate_Visible","ctrl":"vENDDATE","prop":"Visible"},{"av":"cellEnddate_cell_Class","ctrl":"ENDDATE_CELL","prop":"Class"},{"av":"divTextblockenddate_cell_Class","ctrl":"TEXTBLOCKENDDATE_CELL","prop":"Class"},{"av":"edtavTotime_Visible","ctrl":"vTOTIME","prop":"Visible"},{"av":"cellTotime_cell_Class","ctrl":"TOTIME_CELL","prop":"Class"},{"av":"cellAllday_cell_Class","ctrl":"ALLDAY_CELL","prop":"Class"},{"av":"divTextblockallday_cell_Class","ctrl":"TEXTBLOCKALLDAY_CELL","prop":"Class"},{"av":"Combo_grouplist_Visible","ctrl":"COMBO_GROUPLIST","prop":"Visible"},{"av":"divCombo_grouplist_cell_Class","ctrl":"COMBO_GROUPLIST_CELL","prop":"Class"},{"av":"edtavListofgroups_Visible","ctrl":"vLISTOFGROUPS","prop":"Visible"},{"av":"divListofgroups_cell_Class","ctrl":"LISTOFGROUPS_CELL","prop":"Class"},{"av":"Combo_addressgroup_Visible","ctrl":"COMBO_ADDRESSGROUP","prop":"Visible"},{"av":"divCombo_addressgroup_cell_Class","ctrl":"COMBO_ADDRESSGROUP_CELL","prop":"Class"},{"av":"edtavListofresidents_Visible","ctrl":"vLISTOFRESIDENTS","prop":"Visible"},{"av":"divListofresidents_cell_Class","ctrl":"LISTOFRESIDENTS_CELL","prop":"Class"},{"av":"divRecurringtypestable_Visible","ctrl":"RECURRINGTYPESTABLE","prop":"Visible"},{"av":"lblFromdatedisplay_tags_Caption","ctrl":"FROMDATEDISPLAY_TAGS","prop":"Caption"},{"av":"lblTodatedisplay_tags_Caption","ctrl":"TODATEDISPLAY_TAGS","prop":"Caption"},{"ctrl":"BTNENTER","prop":"Visible"},{"ctrl":"BTNUACANCEL","prop":"Visible"},{"ctrl":"BTNUAUPDATE","prop":"Visible"},{"ctrl":"BTNUADELETE","prop":"Visible"}]}""");
          setEventMetadata("'DOUACANCEL'","""{"handler":"E114T1","iparms":[]}""");
          setEventMetadata("'DOUAUPDATE'","""{"handler":"E164T2","iparms":[]""");
          setEventMetadata("'DOUAUPDATE'",""","oparms":[{"av":"Gx_mode","fld":"vMODE","pic":"@!"}]}""");
@@ -3152,7 +3301,7 @@ namespace GeneXus.Programs.workwithplus {
          setEventMetadata("ENTER","""{"handler":"E194T2","iparms":[{"av":"AV11CheckRequiredFieldsResult","fld":"vCHECKREQUIREDFIELDSRESULT"},{"av":"AV44AddressGroup","fld":"vADDRESSGROUP"},{"av":"AV54GroupList","fld":"vGROUPLIST"},{"av":"AV6ErrorMessages","fld":"vERRORMESSAGES","hsh":true},{"av":"AV60ResidentPackageIdCollection","fld":"vRESIDENTPACKAGEIDCOLLECTION"},{"av":"AV51ResidentAddressGroup","fld":"vRESIDENTADDRESSGROUP"},{"av":"AV41AddRSVP","fld":"vADDRSVP"},{"av":"AV43RecuringEventType","fld":"vRECURINGEVENTTYPE"},{"av":"AV42RecurringEvent","fld":"vRECURRINGEVENT"},{"av":"cmbavEventtype"},{"av":"AV40EventType","fld":"vEVENTTYPE"},{"av":"AV8CalendarEventId","fld":"vCALENDAREVENTID"},{"av":"AV16EndDate","fld":"vENDDATE"},{"av":"AV7AllDay","fld":"vALLDAY"},{"av":"AV19ToTime","fld":"vTOTIME","pic":"99:99"},{"av":"AV17FromTime","fld":"vFROMTIME","pic":"99:99"},{"av":"AV12CurrentDate","fld":"vCURRENTDATE"},{"av":"AV18Title","fld":"vTITLE"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"},{"av":"AV27FixStartDate","fld":"vFIXSTARTDATE"},{"av":"AV28FixStartTime","fld":"vFIXSTARTTIME"}]""");
          setEventMetadata("ENTER",""","oparms":[{"av":"AV11CheckRequiredFieldsResult","fld":"vCHECKREQUIREDFIELDSRESULT"},{"av":"AV12CurrentDate","fld":"vCURRENTDATE"},{"av":"AV16EndDate","fld":"vENDDATE"},{"av":"AV17FromTime","fld":"vFROMTIME","pic":"99:99"},{"av":"AV19ToTime","fld":"vTOTIME","pic":"99:99"},{"av":"AV42RecurringEvent","fld":"vRECURRINGEVENT"},{"av":"AV51ResidentAddressGroup","fld":"vRESIDENTADDRESSGROUP"},{"av":"AV60ResidentPackageIdCollection","fld":"vRESIDENTPACKAGEIDCOLLECTION"}]}""");
          setEventMetadata("VALLDAY.CLICK","""{"handler":"E214T2","iparms":[{"av":"Gx_mode","fld":"vMODE","pic":"@!"},{"av":"AV12CurrentDate","fld":"vCURRENTDATE"},{"av":"AV16EndDate","fld":"vENDDATE"},{"av":"AV7AllDay","fld":"vALLDAY"},{"av":"AV31DurationHours","fld":"vDURATIONHOURS","pic":"ZZZ9","hsh":true},{"av":"AV42RecurringEvent","fld":"vRECURRINGEVENT"}]""");
-         setEventMetadata("VALLDAY.CLICK",""","oparms":[{"av":"edtavFromdatedisplay_Visible","ctrl":"vFROMDATEDISPLAY","prop":"Visible"},{"av":"divFromdatedisplay_cell_Class","ctrl":"FROMDATEDISPLAY_CELL","prop":"Class"},{"av":"edtavTodatedisplay_Visible","ctrl":"vTODATEDISPLAY","prop":"Visible"},{"av":"divTodatedisplay_cell_Class","ctrl":"TODATEDISPLAY_CELL","prop":"Class"},{"av":"edtavDuration_Visible","ctrl":"vDURATION","prop":"Visible"},{"av":"divDuration_cell_Class","ctrl":"DURATION_CELL","prop":"Class"},{"av":"edtavTitle_Visible","ctrl":"vTITLE","prop":"Visible"},{"av":"divTitle_cell_Class","ctrl":"TITLE_CELL","prop":"Class"},{"av":"cmbavEventtype"},{"av":"divEventtype_cell_Class","ctrl":"EVENTTYPE_CELL","prop":"Class"},{"av":"edtavCurrentdate_Visible","ctrl":"vCURRENTDATE","prop":"Visible"},{"av":"cellCurrentdate_cell_Class","ctrl":"CURRENTDATE_CELL","prop":"Class"},{"av":"divTextblockcurrentdate_cell_Class","ctrl":"TEXTBLOCKCURRENTDATE_CELL","prop":"Class"},{"av":"edtavFromtime_Visible","ctrl":"vFROMTIME","prop":"Visible"},{"av":"cellFromtime_cell_Class","ctrl":"FROMTIME_CELL","prop":"Class"},{"av":"edtavEnddate_Visible","ctrl":"vENDDATE","prop":"Visible"},{"av":"cellEnddate_cell_Class","ctrl":"ENDDATE_CELL","prop":"Class"},{"av":"divTextblockenddate_cell_Class","ctrl":"TEXTBLOCKENDDATE_CELL","prop":"Class"},{"av":"edtavTotime_Visible","ctrl":"vTOTIME","prop":"Visible"},{"av":"cellTotime_cell_Class","ctrl":"TOTIME_CELL","prop":"Class"},{"av":"chkavAllday.Visible","ctrl":"vALLDAY","prop":"Visible"},{"av":"cellAllday_cell_Class","ctrl":"ALLDAY_CELL","prop":"Class"},{"av":"divTextblockallday_cell_Class","ctrl":"TEXTBLOCKALLDAY_CELL","prop":"Class"},{"av":"Combo_grouplist_Visible","ctrl":"COMBO_GROUPLIST","prop":"Visible"},{"av":"divCombo_grouplist_cell_Class","ctrl":"COMBO_GROUPLIST_CELL","prop":"Class"},{"av":"Combo_addressgroup_Visible","ctrl":"COMBO_ADDRESSGROUP","prop":"Visible"},{"av":"divCombo_addressgroup_cell_Class","ctrl":"COMBO_ADDRESSGROUP_CELL","prop":"Class"},{"av":"divRecurringtypestable_Visible","ctrl":"RECURRINGTYPESTABLE","prop":"Visible"},{"av":"lblFromdatedisplay_tags_Caption","ctrl":"FROMDATEDISPLAY_TAGS","prop":"Caption"},{"av":"lblTodatedisplay_tags_Caption","ctrl":"TODATEDISPLAY_TAGS","prop":"Caption"}]}""");
+         setEventMetadata("VALLDAY.CLICK",""","oparms":[{"av":"edtavFromdatedisplay_Visible","ctrl":"vFROMDATEDISPLAY","prop":"Visible"},{"av":"divFromdatedisplay_cell_Class","ctrl":"FROMDATEDISPLAY_CELL","prop":"Class"},{"av":"edtavTodatedisplay_Visible","ctrl":"vTODATEDISPLAY","prop":"Visible"},{"av":"divTodatedisplay_cell_Class","ctrl":"TODATEDISPLAY_CELL","prop":"Class"},{"av":"edtavDuration_Visible","ctrl":"vDURATION","prop":"Visible"},{"av":"divDuration_cell_Class","ctrl":"DURATION_CELL","prop":"Class"},{"av":"edtavTitle_Visible","ctrl":"vTITLE","prop":"Visible"},{"av":"divTitle_cell_Class","ctrl":"TITLE_CELL","prop":"Class"},{"av":"cmbavEventtype"},{"av":"divEventtype_cell_Class","ctrl":"EVENTTYPE_CELL","prop":"Class"},{"av":"edtavCurrentdate_Visible","ctrl":"vCURRENTDATE","prop":"Visible"},{"av":"cellCurrentdate_cell_Class","ctrl":"CURRENTDATE_CELL","prop":"Class"},{"av":"divTextblockcurrentdate_cell_Class","ctrl":"TEXTBLOCKCURRENTDATE_CELL","prop":"Class"},{"av":"edtavFromtime_Visible","ctrl":"vFROMTIME","prop":"Visible"},{"av":"cellFromtime_cell_Class","ctrl":"FROMTIME_CELL","prop":"Class"},{"av":"edtavEnddate_Visible","ctrl":"vENDDATE","prop":"Visible"},{"av":"cellEnddate_cell_Class","ctrl":"ENDDATE_CELL","prop":"Class"},{"av":"divTextblockenddate_cell_Class","ctrl":"TEXTBLOCKENDDATE_CELL","prop":"Class"},{"av":"edtavTotime_Visible","ctrl":"vTOTIME","prop":"Visible"},{"av":"cellTotime_cell_Class","ctrl":"TOTIME_CELL","prop":"Class"},{"av":"chkavAllday.Visible","ctrl":"vALLDAY","prop":"Visible"},{"av":"cellAllday_cell_Class","ctrl":"ALLDAY_CELL","prop":"Class"},{"av":"divTextblockallday_cell_Class","ctrl":"TEXTBLOCKALLDAY_CELL","prop":"Class"},{"av":"Combo_grouplist_Visible","ctrl":"COMBO_GROUPLIST","prop":"Visible"},{"av":"divCombo_grouplist_cell_Class","ctrl":"COMBO_GROUPLIST_CELL","prop":"Class"},{"av":"edtavListofgroups_Visible","ctrl":"vLISTOFGROUPS","prop":"Visible"},{"av":"divListofgroups_cell_Class","ctrl":"LISTOFGROUPS_CELL","prop":"Class"},{"av":"Combo_addressgroup_Visible","ctrl":"COMBO_ADDRESSGROUP","prop":"Visible"},{"av":"divCombo_addressgroup_cell_Class","ctrl":"COMBO_ADDRESSGROUP_CELL","prop":"Class"},{"av":"edtavListofresidents_Visible","ctrl":"vLISTOFRESIDENTS","prop":"Visible"},{"av":"divListofresidents_cell_Class","ctrl":"LISTOFRESIDENTS_CELL","prop":"Class"},{"av":"divRecurringtypestable_Visible","ctrl":"RECURRINGTYPESTABLE","prop":"Visible"},{"av":"lblFromdatedisplay_tags_Caption","ctrl":"FROMDATEDISPLAY_TAGS","prop":"Caption"},{"av":"lblTodatedisplay_tags_Caption","ctrl":"TODATEDISPLAY_TAGS","prop":"Caption"}]}""");
          setEventMetadata("VALIDV_EVENTTYPE","""{"handler":"Validv_Eventtype","iparms":[]}""");
          return  ;
       }
@@ -3209,8 +3358,10 @@ namespace GeneXus.Programs.workwithplus {
          lblTextblockallday_Jsonclick = "";
          lblTextblockcombo_grouplist_Jsonclick = "";
          ucCombo_grouplist = new GXUserControl();
+         AV68ListOfGroups = "";
          lblTextblockcombo_addressgroup_Jsonclick = "";
          ucCombo_addressgroup = new GXUserControl();
+         AV69ListOfResidents = "";
          bttBtnenter_Jsonclick = "";
          bttBtnuacancel_Jsonclick = "";
          bttBtnuaupdate_Jsonclick = "";
@@ -3243,17 +3394,20 @@ namespace GeneXus.Programs.workwithplus {
          AV63Trn_AgendaCalendar = new SdtTrn_AgendaCalendar(context);
          AV25CurrentTime = (DateTime)(DateTime.MinValue);
          GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons3 = new WorkWithPlus.workwithplus_web.SdtDVB_SDTDropDownOptionsTitleSettingsIcons(context);
-         AV68GXV1 = new GXBaseCollection<SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem>( context, "SDT_ResidentAddressBookItem", "Comforta_version2");
+         AV73GXV1 = new GXBaseCollection<SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem>( context, "SDT_ResidentAddressBookItem", "Comforta_version2");
          GXt_objcol_SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem4 = new GXBaseCollection<SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem>( context, "SDT_ResidentAddressBookItem", "Comforta_version2");
          AV48AddressGroup_DPItem = new SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem(context);
          AV38Combo_DataItem = new WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item(context);
-         AV70GXV3 = new GXBaseCollection<SdtSDT_ResidentPackage_SDT_ResidentPackageItem>( context, "SDT_ResidentPackageItem", "Comforta_version2");
+         AV75GXV3 = new GXBaseCollection<SdtSDT_ResidentPackage_SDT_ResidentPackageItem>( context, "SDT_ResidentPackageItem", "Comforta_version2");
          GXt_objcol_SdtSDT_ResidentPackage_SDT_ResidentPackageItem5 = new GXBaseCollection<SdtSDT_ResidentPackage_SDT_ResidentPackageItem>( context, "SDT_ResidentPackageItem", "Comforta_version2");
          AV64GroupList_DPItem = new SdtSDT_ResidentPackage_SDT_ResidentPackageItem(context);
          AV5Message = new GeneXus.Utils.SdtMessages_Message(context);
          AV13DisabledDay = DateTime.MinValue;
          AV52AddressGroupItem = Guid.Empty;
          AV61ResidentPackageId = Guid.Empty;
+         AV66ComboListDataItem = new WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item(context);
+         AV67ComboGroupDataItem = new WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item(context);
+         AV70ItemGUID = Guid.Empty;
          sStyleString = "";
          ucDvelop_confirmpanel_uadelete = new GXUserControl();
          lblTodatedisplay_tags_Jsonclick = "";
@@ -3275,6 +3429,8 @@ namespace GeneXus.Programs.workwithplus {
          edtavFromdatedisplay_Enabled = 0;
          edtavTodatedisplay_Enabled = 0;
          edtavDuration_Enabled = 0;
+         edtavListofgroups_Enabled = 0;
+         edtavListofresidents_Enabled = 0;
       }
 
       private short nRcdExists_3 ;
@@ -3294,9 +3450,13 @@ namespace GeneXus.Programs.workwithplus {
       private int edtavFromdatedisplay_Enabled ;
       private int edtavTodatedisplay_Enabled ;
       private int edtavDuration_Enabled ;
+      private int edtavListofgroups_Enabled ;
+      private int edtavListofresidents_Enabled ;
       private int edtavDuration_Visible ;
       private int edtavTitle_Visible ;
       private int edtavTitle_Enabled ;
+      private int edtavListofgroups_Visible ;
+      private int edtavListofresidents_Visible ;
       private int bttBtnenter_Visible ;
       private int bttBtnenter_Enabled ;
       private int bttBtnuacancel_Visible ;
@@ -3314,12 +3474,14 @@ namespace GeneXus.Programs.workwithplus {
       private int edtavEnddate_Visible ;
       private int edtavTotime_Visible ;
       private int divRecurringtypestable_Visible ;
-      private int AV69GXV2 ;
-      private int AV71GXV4 ;
-      private int AV72GXV5 ;
-      private int AV73GXV6 ;
-      private int AV74GXV7 ;
-      private int AV75GXV8 ;
+      private int AV74GXV2 ;
+      private int AV76GXV4 ;
+      private int AV77GXV5 ;
+      private int AV78GXV6 ;
+      private int AV79GXV7 ;
+      private int AV80GXV8 ;
+      private int AV81GXV9 ;
+      private int AV82GXV10 ;
       private int idxLst ;
       private string Gx_mode ;
       private string wcpOGx_mode ;
@@ -3334,6 +3496,8 @@ namespace GeneXus.Programs.workwithplus {
       private string edtavFromdatedisplay_Internalname ;
       private string edtavTodatedisplay_Internalname ;
       private string edtavDuration_Internalname ;
+      private string edtavListofgroups_Internalname ;
+      private string edtavListofresidents_Internalname ;
       private string sDynURL ;
       private string FormProcess ;
       private string bodyStyle ;
@@ -3406,12 +3570,19 @@ namespace GeneXus.Programs.workwithplus {
       private string lblTextblockcombo_grouplist_Jsonclick ;
       private string Combo_grouplist_Caption ;
       private string Combo_grouplist_Internalname ;
+      private string divListofgroups_cell_Internalname ;
+      private string divListofgroups_cell_Class ;
+      private string edtavListofgroups_Jsonclick ;
       private string divCombo_addressgroup_cell_Internalname ;
       private string divCombo_addressgroup_cell_Class ;
       private string divTablesplittedaddressgroup_Internalname ;
       private string lblTextblockcombo_addressgroup_Internalname ;
       private string lblTextblockcombo_addressgroup_Jsonclick ;
       private string Combo_addressgroup_Internalname ;
+      private string divListofresidents_cell_Internalname ;
+      private string divListofresidents_cell_Class ;
+      private string edtavListofresidents_Caption ;
+      private string edtavListofresidents_Jsonclick ;
       private string bttBtnenter_Internalname ;
       private string bttBtnenter_Jsonclick ;
       private string bttBtnuacancel_Internalname ;
@@ -3499,6 +3670,8 @@ namespace GeneXus.Programs.workwithplus {
       private string AV15DisabledDaysJson ;
       private string wcpOAV10CalendarSDTJson ;
       private string wcpOAV15DisabledDaysJson ;
+      private string AV68ListOfGroups ;
+      private string AV69ListOfResidents ;
       private string AV8CalendarEventId ;
       private string wcpOAV8CalendarEventId ;
       private string AV29Duration ;
@@ -3513,6 +3686,7 @@ namespace GeneXus.Programs.workwithplus {
       private Guid AV49AgendCalendarId ;
       private Guid AV52AddressGroupItem ;
       private Guid AV61ResidentPackageId ;
+      private Guid AV70ItemGUID ;
       private GXUserControl ucCombo_grouplist ;
       private GXUserControl ucCombo_addressgroup ;
       private GXUserControl ucDvelop_confirmpanel_uadelete ;
@@ -3545,14 +3719,16 @@ namespace GeneXus.Programs.workwithplus {
       private Guid[] H004T2_A62ResidentId ;
       private SdtTrn_AgendaCalendar AV63Trn_AgendaCalendar ;
       private WorkWithPlus.workwithplus_web.SdtDVB_SDTDropDownOptionsTitleSettingsIcons GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons3 ;
-      private GXBaseCollection<SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem> AV68GXV1 ;
+      private GXBaseCollection<SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem> AV73GXV1 ;
       private GXBaseCollection<SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem> GXt_objcol_SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem4 ;
       private SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem AV48AddressGroup_DPItem ;
       private WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item AV38Combo_DataItem ;
-      private GXBaseCollection<SdtSDT_ResidentPackage_SDT_ResidentPackageItem> AV70GXV3 ;
+      private GXBaseCollection<SdtSDT_ResidentPackage_SDT_ResidentPackageItem> AV75GXV3 ;
       private GXBaseCollection<SdtSDT_ResidentPackage_SDT_ResidentPackageItem> GXt_objcol_SdtSDT_ResidentPackage_SDT_ResidentPackageItem5 ;
       private SdtSDT_ResidentPackage_SDT_ResidentPackageItem AV64GroupList_DPItem ;
       private GeneXus.Utils.SdtMessages_Message AV5Message ;
+      private WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item AV66ComboListDataItem ;
+      private WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item AV67ComboGroupDataItem ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
    }

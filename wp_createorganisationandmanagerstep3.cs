@@ -1449,6 +1449,10 @@ namespace GeneXus.Programs {
                AV50Trn_Manager.gxTpr_Organisationid = AV51Trn_Organisation.gxTpr_Organisationid;
                AV50Trn_Manager.gxTpr_Managergender = AV48SDT_Manager.gxTpr_Managergender;
                AV50Trn_Manager.gxTpr_Managersalutation = AV48SDT_Manager.gxTpr_Managersalutation;
+               if ( StringUtil.StrCmp(AV48SDT_Manager.gxTpr_Managersalutation, "Other") == 0 )
+               {
+                  AV50Trn_Manager.gxTpr_Managertitle = AV48SDT_Manager.gxTpr_Managertitle;
+               }
                AV50Trn_Manager.gxTpr_Managergamguid = Guid.NewGuid( ).ToString();
                AV50Trn_Manager.gxTpr_Managerismainmanager = AV48SDT_Manager.gxTpr_Managerismainmanager;
                AV18isManagerInserted = AV50Trn_Manager.Insert();
@@ -1842,7 +1846,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257218154095", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202571111452725", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1858,7 +1862,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("wp_createorganisationandmanagerstep3.js", "?20257218154096", false, true);
+         context.AddJavascriptSource("wp_createorganisationandmanagerstep3.js", "?202571111452726", false, true);
          context.AddJavascriptSource("UserControls/UC_ThemeSelectorRender.js", "", false, true);
          context.AddJavascriptSource("UserControls/UC_CtaThemeSelectorRender.js", "", false, true);
          context.AddJavascriptSource("UserControls/UC_FileUploadRender.js", "", false, true);

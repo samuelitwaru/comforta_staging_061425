@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: "Development"
-  version: "20250711065603"
+  version: "20250711090259"
 servers:
   - url: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/rest
 paths:
@@ -2610,6 +2610,9 @@ components:
         OriginalImageUrl:
           description: "Original Image Url"
           type: "string"
+        Height:
+          description: "Height"
+          type: "string"
         Action:
           $ref: "#/components/schemas/SDT_InfoTile.Action"
     SDT_InfoTile.Action:
@@ -3278,6 +3281,9 @@ components:
         ResidentSalutation:
           description: "Resident Salutation"
           type: "string"
+        ResidentTitle:
+          description: "Resident Title"
+          type: "string"
         ResidentBsnNumber:
           description: "Resident Bsn Number"
           type: "string"
@@ -3479,6 +3485,14 @@ components:
         ObjectUrl:
           description: "Object Url"
           type: "string"
+    SDT_TranslatedPage:
+      properties:
+        PageName:
+          description: "Page Name"
+          type: "string"
+        PageStructure:
+          description: "SDT_Info Content"
+          $ref: "#/components/schemas/SDT_InfoContent"
     SDT_TrashItem:
       properties:
         Type:

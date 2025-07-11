@@ -131,6 +131,8 @@ namespace GeneXus.Programs {
             A369ReceptionistIsActive = P007T2_A369ReceptionistIsActive[0];
             A659ReceptionistSalutation = P007T2_A659ReceptionistSalutation[0];
             n659ReceptionistSalutation = P007T2_n659ReceptionistSalutation[0];
+            A665ReceptionistTitle = P007T2_A665ReceptionistTitle[0];
+            n665ReceptionistTitle = P007T2_n665ReceptionistTitle[0];
             A660ReceptionistGender = P007T2_A660ReceptionistGender[0];
             n660ReceptionistGender = P007T2_n660ReceptionistGender[0];
             AV11AuditingObject = new WorkWithPlus.workwithplus_web.SdtAuditingObject(context);
@@ -231,6 +233,13 @@ namespace GeneXus.Programs {
             AV13AuditingObjectRecordItemAttributeItem.gxTpr_Oldvalue = A659ReceptionistSalutation;
             AV12AuditingObjectRecordItem.gxTpr_Attribute.Add(AV13AuditingObjectRecordItemAttributeItem, 0);
             AV13AuditingObjectRecordItemAttributeItem = new WorkWithPlus.workwithplus_web.SdtAuditingObject_RecordItem_AttributeItem(context);
+            AV13AuditingObjectRecordItemAttributeItem.gxTpr_Name = "ReceptionistTitle";
+            AV13AuditingObjectRecordItemAttributeItem.gxTpr_Description = context.GetMessage( "Title", "");
+            AV13AuditingObjectRecordItemAttributeItem.gxTpr_Ispartofkey = false;
+            AV13AuditingObjectRecordItemAttributeItem.gxTpr_Isdescriptionattribute = false;
+            AV13AuditingObjectRecordItemAttributeItem.gxTpr_Oldvalue = A665ReceptionistTitle;
+            AV12AuditingObjectRecordItem.gxTpr_Attribute.Add(AV13AuditingObjectRecordItemAttributeItem, 0);
+            AV13AuditingObjectRecordItemAttributeItem = new WorkWithPlus.workwithplus_web.SdtAuditingObject_RecordItem_AttributeItem(context);
             AV13AuditingObjectRecordItemAttributeItem.gxTpr_Name = "ReceptionistGender";
             AV13AuditingObjectRecordItemAttributeItem.gxTpr_Description = context.GetMessage( "Gender", "");
             AV13AuditingObjectRecordItemAttributeItem.gxTpr_Ispartofkey = false;
@@ -265,6 +274,8 @@ namespace GeneXus.Programs {
             A369ReceptionistIsActive = P007T3_A369ReceptionistIsActive[0];
             A659ReceptionistSalutation = P007T3_A659ReceptionistSalutation[0];
             n659ReceptionistSalutation = P007T3_n659ReceptionistSalutation[0];
+            A665ReceptionistTitle = P007T3_A665ReceptionistTitle[0];
+            n665ReceptionistTitle = P007T3_n665ReceptionistTitle[0];
             A660ReceptionistGender = P007T3_A660ReceptionistGender[0];
             n660ReceptionistGender = P007T3_n660ReceptionistGender[0];
             if ( StringUtil.StrCmp(AV15ActualMode, "INS") == 0 )
@@ -366,6 +377,13 @@ namespace GeneXus.Programs {
                AV13AuditingObjectRecordItemAttributeItem.gxTpr_Newvalue = A659ReceptionistSalutation;
                AV12AuditingObjectRecordItem.gxTpr_Attribute.Add(AV13AuditingObjectRecordItemAttributeItem, 0);
                AV13AuditingObjectRecordItemAttributeItem = new WorkWithPlus.workwithplus_web.SdtAuditingObject_RecordItem_AttributeItem(context);
+               AV13AuditingObjectRecordItemAttributeItem.gxTpr_Name = "ReceptionistTitle";
+               AV13AuditingObjectRecordItemAttributeItem.gxTpr_Description = context.GetMessage( "Title", "");
+               AV13AuditingObjectRecordItemAttributeItem.gxTpr_Ispartofkey = false;
+               AV13AuditingObjectRecordItemAttributeItem.gxTpr_Isdescriptionattribute = false;
+               AV13AuditingObjectRecordItemAttributeItem.gxTpr_Newvalue = A665ReceptionistTitle;
+               AV12AuditingObjectRecordItem.gxTpr_Attribute.Add(AV13AuditingObjectRecordItemAttributeItem, 0);
+               AV13AuditingObjectRecordItemAttributeItem = new WorkWithPlus.workwithplus_web.SdtAuditingObject_RecordItem_AttributeItem(context);
                AV13AuditingObjectRecordItemAttributeItem.gxTpr_Name = "ReceptionistGender";
                AV13AuditingObjectRecordItemAttributeItem.gxTpr_Description = context.GetMessage( "Gender", "");
                AV13AuditingObjectRecordItemAttributeItem.gxTpr_Ispartofkey = false;
@@ -435,6 +453,10 @@ namespace GeneXus.Programs {
                      {
                         AV13AuditingObjectRecordItemAttributeItem.gxTpr_Newvalue = A659ReceptionistSalutation;
                      }
+                     else if ( StringUtil.StrCmp(AV13AuditingObjectRecordItemAttributeItem.gxTpr_Name, "ReceptionistTitle") == 0 )
+                     {
+                        AV13AuditingObjectRecordItemAttributeItem.gxTpr_Newvalue = A665ReceptionistTitle;
+                     }
                      else if ( StringUtil.StrCmp(AV13AuditingObjectRecordItemAttributeItem.gxTpr_Name, "ReceptionistGender") == 0 )
                      {
                         AV13AuditingObjectRecordItemAttributeItem.gxTpr_Newvalue = A660ReceptionistGender;
@@ -476,6 +498,8 @@ namespace GeneXus.Programs {
          P007T2_A369ReceptionistIsActive = new bool[] {false} ;
          P007T2_A659ReceptionistSalutation = new string[] {""} ;
          P007T2_n659ReceptionistSalutation = new bool[] {false} ;
+         P007T2_A665ReceptionistTitle = new string[] {""} ;
+         P007T2_n665ReceptionistTitle = new bool[] {false} ;
          P007T2_A660ReceptionistGender = new string[] {""} ;
          P007T2_n660ReceptionistGender = new bool[] {false} ;
          A29LocationId = Guid.Empty;
@@ -490,6 +514,7 @@ namespace GeneXus.Programs {
          A346ReceptionistPhoneNumber = "";
          A95ReceptionistGAMGUID = "";
          A659ReceptionistSalutation = "";
+         A665ReceptionistTitle = "";
          A660ReceptionistGender = "";
          AV12AuditingObjectRecordItem = new WorkWithPlus.workwithplus_web.SdtAuditingObject_RecordItem(context);
          AV13AuditingObjectRecordItemAttributeItem = new WorkWithPlus.workwithplus_web.SdtAuditingObject_RecordItem_AttributeItem(context);
@@ -507,17 +532,19 @@ namespace GeneXus.Programs {
          P007T3_A369ReceptionistIsActive = new bool[] {false} ;
          P007T3_A659ReceptionistSalutation = new string[] {""} ;
          P007T3_n659ReceptionistSalutation = new bool[] {false} ;
+         P007T3_A665ReceptionistTitle = new string[] {""} ;
+         P007T3_n665ReceptionistTitle = new bool[] {false} ;
          P007T3_A660ReceptionistGender = new string[] {""} ;
          P007T3_n660ReceptionistGender = new bool[] {false} ;
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.loadaudittrn_receptionist__default(),
             new Object[][] {
                 new Object[] {
                P007T2_A29LocationId, P007T2_A11OrganisationId, P007T2_A89ReceptionistId, P007T2_A90ReceptionistGivenName, P007T2_A91ReceptionistLastName, P007T2_A92ReceptionistInitials, P007T2_A93ReceptionistEmail, P007T2_A345ReceptionistPhoneCode, P007T2_A94ReceptionistPhone, P007T2_A346ReceptionistPhoneNumber,
-               P007T2_A95ReceptionistGAMGUID, P007T2_A369ReceptionistIsActive, P007T2_A659ReceptionistSalutation, P007T2_n659ReceptionistSalutation, P007T2_A660ReceptionistGender, P007T2_n660ReceptionistGender
+               P007T2_A95ReceptionistGAMGUID, P007T2_A369ReceptionistIsActive, P007T2_A659ReceptionistSalutation, P007T2_n659ReceptionistSalutation, P007T2_A665ReceptionistTitle, P007T2_n665ReceptionistTitle, P007T2_A660ReceptionistGender, P007T2_n660ReceptionistGender
                }
                , new Object[] {
                P007T3_A29LocationId, P007T3_A11OrganisationId, P007T3_A89ReceptionistId, P007T3_A90ReceptionistGivenName, P007T3_A91ReceptionistLastName, P007T3_A92ReceptionistInitials, P007T3_A93ReceptionistEmail, P007T3_A345ReceptionistPhoneCode, P007T3_A94ReceptionistPhone, P007T3_A346ReceptionistPhoneNumber,
-               P007T3_A95ReceptionistGAMGUID, P007T3_A369ReceptionistIsActive, P007T3_A659ReceptionistSalutation, P007T3_n659ReceptionistSalutation, P007T3_A660ReceptionistGender, P007T3_n660ReceptionistGender
+               P007T3_A95ReceptionistGAMGUID, P007T3_A369ReceptionistIsActive, P007T3_A659ReceptionistSalutation, P007T3_n659ReceptionistSalutation, P007T3_A665ReceptionistTitle, P007T3_n665ReceptionistTitle, P007T3_A660ReceptionistGender, P007T3_n660ReceptionistGender
                }
             }
          );
@@ -534,6 +561,7 @@ namespace GeneXus.Programs {
       private bool returnInSub ;
       private bool A369ReceptionistIsActive ;
       private bool n659ReceptionistSalutation ;
+      private bool n665ReceptionistTitle ;
       private bool n660ReceptionistGender ;
       private string A90ReceptionistGivenName ;
       private string A91ReceptionistLastName ;
@@ -541,6 +569,7 @@ namespace GeneXus.Programs {
       private string A345ReceptionistPhoneCode ;
       private string A346ReceptionistPhoneNumber ;
       private string A95ReceptionistGAMGUID ;
+      private string A665ReceptionistTitle ;
       private string A660ReceptionistGender ;
       private Guid AV17ReceptionistId ;
       private Guid AV18OrganisationId ;
@@ -568,6 +597,8 @@ namespace GeneXus.Programs {
       private bool[] P007T2_A369ReceptionistIsActive ;
       private string[] P007T2_A659ReceptionistSalutation ;
       private bool[] P007T2_n659ReceptionistSalutation ;
+      private string[] P007T2_A665ReceptionistTitle ;
+      private bool[] P007T2_n665ReceptionistTitle ;
       private string[] P007T2_A660ReceptionistGender ;
       private bool[] P007T2_n660ReceptionistGender ;
       private WorkWithPlus.workwithplus_web.SdtAuditingObject_RecordItem AV12AuditingObjectRecordItem ;
@@ -586,6 +617,8 @@ namespace GeneXus.Programs {
       private bool[] P007T3_A369ReceptionistIsActive ;
       private string[] P007T3_A659ReceptionistSalutation ;
       private bool[] P007T3_n659ReceptionistSalutation ;
+      private string[] P007T3_A665ReceptionistTitle ;
+      private bool[] P007T3_n665ReceptionistTitle ;
       private string[] P007T3_A660ReceptionistGender ;
       private bool[] P007T3_n660ReceptionistGender ;
    }
@@ -619,8 +652,8 @@ namespace GeneXus.Programs {
           new ParDef("AV19LocationId",GXType.UniqueIdentifier,36,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P007T2", "SELECT LocationId, OrganisationId, ReceptionistId, ReceptionistGivenName, ReceptionistLastName, ReceptionistInitials, ReceptionistEmail, ReceptionistPhoneCode, ReceptionistPhone, ReceptionistPhoneNumber, ReceptionistGAMGUID, ReceptionistIsActive, ReceptionistSalutation, ReceptionistGender FROM Trn_Receptionist WHERE ReceptionistId = :AV17ReceptionistId and OrganisationId = :AV18OrganisationId and LocationId = :AV19LocationId ORDER BY ReceptionistId, OrganisationId, LocationId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP007T2,1, GxCacheFrequency.OFF ,false,true )
-             ,new CursorDef("P007T3", "SELECT LocationId, OrganisationId, ReceptionistId, ReceptionistGivenName, ReceptionistLastName, ReceptionistInitials, ReceptionistEmail, ReceptionistPhoneCode, ReceptionistPhone, ReceptionistPhoneNumber, ReceptionistGAMGUID, ReceptionistIsActive, ReceptionistSalutation, ReceptionistGender FROM Trn_Receptionist WHERE ReceptionistId = :AV17ReceptionistId and OrganisationId = :AV18OrganisationId and LocationId = :AV19LocationId ORDER BY ReceptionistId, OrganisationId, LocationId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP007T3,1, GxCacheFrequency.OFF ,false,true )
+              new CursorDef("P007T2", "SELECT LocationId, OrganisationId, ReceptionistId, ReceptionistGivenName, ReceptionistLastName, ReceptionistInitials, ReceptionistEmail, ReceptionistPhoneCode, ReceptionistPhone, ReceptionistPhoneNumber, ReceptionistGAMGUID, ReceptionistIsActive, ReceptionistSalutation, ReceptionistTitle, ReceptionistGender FROM Trn_Receptionist WHERE ReceptionistId = :AV17ReceptionistId and OrganisationId = :AV18OrganisationId and LocationId = :AV19LocationId ORDER BY ReceptionistId, OrganisationId, LocationId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP007T2,1, GxCacheFrequency.OFF ,false,true )
+             ,new CursorDef("P007T3", "SELECT LocationId, OrganisationId, ReceptionistId, ReceptionistGivenName, ReceptionistLastName, ReceptionistInitials, ReceptionistEmail, ReceptionistPhoneCode, ReceptionistPhone, ReceptionistPhoneNumber, ReceptionistGAMGUID, ReceptionistIsActive, ReceptionistSalutation, ReceptionistTitle, ReceptionistGender FROM Trn_Receptionist WHERE ReceptionistId = :AV17ReceptionistId and OrganisationId = :AV18OrganisationId and LocationId = :AV19LocationId ORDER BY ReceptionistId, OrganisationId, LocationId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP007T3,1, GxCacheFrequency.OFF ,false,true )
           };
        }
     }
@@ -648,6 +681,8 @@ namespace GeneXus.Programs {
                 ((bool[]) buf[13])[0] = rslt.wasNull(13);
                 ((string[]) buf[14])[0] = rslt.getVarchar(14);
                 ((bool[]) buf[15])[0] = rslt.wasNull(14);
+                ((string[]) buf[16])[0] = rslt.getVarchar(15);
+                ((bool[]) buf[17])[0] = rslt.wasNull(15);
                 return;
              case 1 :
                 ((Guid[]) buf[0])[0] = rslt.getGuid(1);
@@ -666,6 +701,8 @@ namespace GeneXus.Programs {
                 ((bool[]) buf[13])[0] = rslt.wasNull(13);
                 ((string[]) buf[14])[0] = rslt.getVarchar(14);
                 ((bool[]) buf[15])[0] = rslt.wasNull(14);
+                ((string[]) buf[16])[0] = rslt.getVarchar(15);
+                ((bool[]) buf[17])[0] = rslt.wasNull(15);
                 return;
        }
     }

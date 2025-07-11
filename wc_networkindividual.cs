@@ -1496,7 +1496,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257616572228", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257111146455", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1514,7 +1514,7 @@ namespace GeneXus.Programs {
       {
          if ( nGXWrapped != 1 )
          {
-            context.AddJavascriptSource("wc_networkindividual.js", "?20257616572229", false, true);
+            context.AddJavascriptSource("wc_networkindividual.js", "?20257111146455", false, true);
          }
          /* End function include_jscripts */
       }
@@ -1525,8 +1525,8 @@ namespace GeneXus.Programs {
          cmbavTrn_networkindividual_networkindividualsalutation.WebTags = "";
          cmbavTrn_networkindividual_networkindividualsalutation.addItem("Mr", context.GetMessage( "Mr", ""), 0);
          cmbavTrn_networkindividual_networkindividualsalutation.addItem("Mrs", context.GetMessage( "Mrs", ""), 0);
-         cmbavTrn_networkindividual_networkindividualsalutation.addItem("Dr", context.GetMessage( "Dr", ""), 0);
-         cmbavTrn_networkindividual_networkindividualsalutation.addItem("Miss", context.GetMessage( "Miss", ""), 0);
+         cmbavTrn_networkindividual_networkindividualsalutation.addItem("Ms", context.GetMessage( "Ms", ""), 0);
+         cmbavTrn_networkindividual_networkindividualsalutation.addItem("Other", context.GetMessage( "Other", ""), 0);
          if ( cmbavTrn_networkindividual_networkindividualsalutation.ItemCount > 0 )
          {
          }

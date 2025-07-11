@@ -108,7 +108,7 @@ namespace GeneXus.Programs {
                CheckExtendedTable1M96( ) ;
                if ( AnyError == 0 )
                {
-                  ZM1M96( 13) ;
+                  ZM1M96( 12) ;
                }
                CloseExtendedTableCursors1M96( ) ;
             }
@@ -151,17 +151,17 @@ namespace GeneXus.Programs {
 
       protected void ZM1M96( short GX_JID )
       {
-         if ( ( GX_JID == 12 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 11 ) || ( GX_JID == 0 ) )
          {
             Z531ResidentPackageName = A531ResidentPackageName;
             Z533ResidentPackageDefault = A533ResidentPackageDefault;
             Z528SG_LocationId = A528SG_LocationId;
             Z529SG_OrganisationId = A529SG_OrganisationId;
          }
-         if ( ( GX_JID == 13 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 12 ) || ( GX_JID == 0 ) )
          {
          }
-         if ( GX_JID == -12 )
+         if ( GX_JID == -11 )
          {
             Z527ResidentPackageId = A527ResidentPackageId;
             Z531ResidentPackageName = A531ResidentPackageName;
@@ -207,7 +207,7 @@ namespace GeneXus.Programs {
             A533ResidentPackageDefault = BC001M5_A533ResidentPackageDefault[0];
             A528SG_LocationId = BC001M5_A528SG_LocationId[0];
             A529SG_OrganisationId = BC001M5_A529SG_OrganisationId[0];
-            ZM1M96( -12) ;
+            ZM1M96( -11) ;
          }
          pr_default.close(3);
          OnLoadActions1M96( ) ;
@@ -235,11 +235,6 @@ namespace GeneXus.Programs {
          if ( String.IsNullOrEmpty(StringUtil.RTrim( A531ResidentPackageName)) )
          {
             GX_msglist.addItem(StringUtil.Format( context.GetMessage( "WWP_RequiredAttribute", ""), context.GetMessage( "Resident Package Name", ""), "", "", "", "", "", "", "", ""), 1, "");
-            AnyError = 1;
-         }
-         if ( StringUtil.Len( A532ResidentPackageModules) <= 2 )
-         {
-            GX_msglist.addItem(StringUtil.Format( context.GetMessage( "WWP_RequiredAttribute", ""), context.GetMessage( "Resident Package Modules", ""), "", "", "", "", "", "", "", ""), 1, "");
             AnyError = 1;
          }
       }
@@ -274,7 +269,7 @@ namespace GeneXus.Programs {
          pr_default.execute(1, new Object[] {n527ResidentPackageId, A527ResidentPackageId});
          if ( (pr_default.getStatus(1) != 101) )
          {
-            ZM1M96( 12) ;
+            ZM1M96( 11) ;
             RcdFound96 = 1;
             A527ResidentPackageId = BC001M3_A527ResidentPackageId[0];
             n527ResidentPackageId = BC001M3_n527ResidentPackageId[0];
@@ -768,7 +763,7 @@ namespace GeneXus.Programs {
             Gx_mode = "UPD";
             Z527ResidentPackageId = A527ResidentPackageId;
          }
-         ZM1M96( -12) ;
+         ZM1M96( -11) ;
          OnLoadActions1M96( ) ;
          AddRow1M96( ) ;
          ScanKeyEnd1M96( ) ;
@@ -797,7 +792,7 @@ namespace GeneXus.Programs {
             Gx_mode = "UPD";
             Z527ResidentPackageId = A527ResidentPackageId;
          }
-         ZM1M96( -12) ;
+         ZM1M96( -11) ;
          OnLoadActions1M96( ) ;
          AddRow1M96( ) ;
          ScanKeyEnd1M96( ) ;

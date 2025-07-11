@@ -2255,6 +2255,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
             AV23WWPForm = GXt_SdtWWP_Form3;
             gxgrFsgrid_refresh( AV10IsFirstElement, AV11IsLastElement, AV5AllowDeletion, AV23WWPForm, AV25WWPFormElementId, AV22WWPDynamicFormMode, AV15SessionId, AV6Columns, AV12IsStep, sPrefix) ;
          }
+         this.executeExternalObjectMethod(sPrefix, false, "GlobalEvents", "UserCreateDynamicFormUpdate", new Object[] {(GeneXus.Programs.workwithplus.dynamicforms.SdtWWP_Form)AV23WWPForm}, true);
          /*  Sending Event outputs  */
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, "AV23WWPForm", AV23WWPForm);
       }
@@ -2716,7 +2717,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025721244212", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202571111444555", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2732,7 +2733,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("workwithplus/dynamicforms/wwp_dfc_fs_wc.js", "?2025721244213", false, true);
+         context.AddJavascriptSource("workwithplus/dynamicforms/wwp_dfc_fs_wc.js", "?202571111444556", false, true);
          context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
          context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
          context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);

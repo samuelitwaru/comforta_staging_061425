@@ -56,6 +56,8 @@ namespace GeneXus.Programs
 
 			gxTv_SdtSDT_InfoTile_SDT_InfoTileItem_Originalimageurl = "";
 
+			gxTv_SdtSDT_InfoTile_SDT_InfoTileItem_Height = "";
+
 		}
 
 		public SdtSDT_InfoTile_SDT_InfoTileItem(IGxContext context)
@@ -126,6 +128,9 @@ namespace GeneXus.Programs
 
 
 			AddObjectProperty("OriginalImageUrl", gxTpr_Originalimageurl, false);
+
+
+			AddObjectProperty("Height", gxTpr_Height, false);
 
 			if (gxTv_SdtSDT_InfoTile_SDT_InfoTileItem_Action != null)
 			{
@@ -385,6 +390,22 @@ namespace GeneXus.Programs
 
 
 
+
+		[SoapElement(ElementName="Height")]
+		[XmlElement(ElementName="Height")]
+		public string gxTpr_Height
+		{
+			get {
+				return gxTv_SdtSDT_InfoTile_SDT_InfoTileItem_Height; 
+			}
+			set {
+				gxTv_SdtSDT_InfoTile_SDT_InfoTileItem_Height = value;
+				SetDirty("Height");
+			}
+		}
+
+
+
 		[SoapElement(ElementName="Action" )]
 		[XmlElement(ElementName="Action" )]
 		public SdtSDT_InfoTile_SDT_InfoTileItem_Action gxTpr_Action
@@ -458,6 +479,7 @@ namespace GeneXus.Programs
 			gxTv_SdtSDT_InfoTile_SDT_InfoTileItem_Left = "";
 			gxTv_SdtSDT_InfoTile_SDT_InfoTileItem_Top = "";
 			gxTv_SdtSDT_InfoTile_SDT_InfoTileItem_Originalimageurl = "";
+			gxTv_SdtSDT_InfoTile_SDT_InfoTileItem_Height = "";
 
 			gxTv_SdtSDT_InfoTile_SDT_InfoTileItem_Action_N = true;
 
@@ -513,6 +535,9 @@ namespace GeneXus.Programs
 		 
 
 		protected string gxTv_SdtSDT_InfoTile_SDT_InfoTileItem_Originalimageurl;
+		 
+
+		protected string gxTv_SdtSDT_InfoTile_SDT_InfoTileItem_Height;
 		 
 		protected bool gxTv_SdtSDT_InfoTile_SDT_InfoTileItem_Action_N;
 		protected SdtSDT_InfoTile_SDT_InfoTileItem_Action gxTv_SdtSDT_InfoTile_SDT_InfoTileItem_Action = null; 
@@ -715,7 +740,19 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Action", Order=15, EmitDefaultValue=false)]
+		[DataMember(Name="Height", Order=15)]
+		public  string gxTpr_Height
+		{
+			get { 
+				return sdt.gxTpr_Height;
+
+			}
+			set { 
+				 sdt.gxTpr_Height = value;
+			}
+		}
+
+		[DataMember(Name="Action", Order=16, EmitDefaultValue=false)]
 		public SdtSDT_InfoTile_SDT_InfoTileItem_Action_RESTInterface gxTpr_Action
 		{
 			get {

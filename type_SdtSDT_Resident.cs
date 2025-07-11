@@ -32,6 +32,8 @@ namespace GeneXus.Programs
 			/* Constructor for serialization */
 			gxTv_SdtSDT_Resident_Residentsalutation = "";
 
+			gxTv_SdtSDT_Resident_Residenttitle = "";
+
 			gxTv_SdtSDT_Resident_Residentbsnnumber = "";
 
 			gxTv_SdtSDT_Resident_Residentgivenname = "";
@@ -95,6 +97,9 @@ namespace GeneXus.Programs
 
 
 			AddObjectProperty("ResidentSalutation", gxTpr_Residentsalutation, false);
+
+
+			AddObjectProperty("ResidentTitle", gxTpr_Residenttitle, false);
 
 
 			AddObjectProperty("ResidentBsnNumber", gxTpr_Residentbsnnumber, false);
@@ -218,6 +223,22 @@ namespace GeneXus.Programs
 			set {
 				gxTv_SdtSDT_Resident_Residentsalutation = value;
 				SetDirty("Residentsalutation");
+			}
+		}
+
+
+
+
+		[SoapElement(ElementName="ResidentTitle")]
+		[XmlElement(ElementName="ResidentTitle")]
+		public string gxTpr_Residenttitle
+		{
+			get {
+				return gxTv_SdtSDT_Resident_Residenttitle; 
+			}
+			set {
+				gxTv_SdtSDT_Resident_Residenttitle = value;
+				SetDirty("Residenttitle");
 			}
 		}
 
@@ -512,6 +533,7 @@ namespace GeneXus.Programs
 		public void initialize( )
 		{
 			gxTv_SdtSDT_Resident_Residentsalutation = "";
+			gxTv_SdtSDT_Resident_Residenttitle = "";
 			gxTv_SdtSDT_Resident_Residentbsnnumber = "";
 			gxTv_SdtSDT_Resident_Residentgivenname = "";
 			gxTv_SdtSDT_Resident_Residentlastname = "";
@@ -551,6 +573,9 @@ namespace GeneXus.Programs
 		 
 
 		protected string gxTv_SdtSDT_Resident_Residentsalutation;
+		 
+
+		protected string gxTv_SdtSDT_Resident_Residenttitle;
 		 
 
 		protected string gxTv_SdtSDT_Resident_Residentbsnnumber;
@@ -666,7 +691,19 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ResidentBsnNumber", Order=4)]
+		[DataMember(Name="ResidentTitle", Order=4)]
+		public  string gxTpr_Residenttitle
+		{
+			get { 
+				return sdt.gxTpr_Residenttitle;
+
+			}
+			set { 
+				 sdt.gxTpr_Residenttitle = value;
+			}
+		}
+
+		[DataMember(Name="ResidentBsnNumber", Order=5)]
 		public  string gxTpr_Residentbsnnumber
 		{
 			get { 
@@ -678,7 +715,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ResidentGivenName", Order=5)]
+		[DataMember(Name="ResidentGivenName", Order=6)]
 		public  string gxTpr_Residentgivenname
 		{
 			get { 
@@ -690,7 +727,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ResidentLastName", Order=6)]
+		[DataMember(Name="ResidentLastName", Order=7)]
 		public  string gxTpr_Residentlastname
 		{
 			get { 
@@ -702,7 +739,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ResidentInitials", Order=7)]
+		[DataMember(Name="ResidentInitials", Order=8)]
 		public  string gxTpr_Residentinitials
 		{
 			get { 
@@ -714,7 +751,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ResidentEmail", Order=8)]
+		[DataMember(Name="ResidentEmail", Order=9)]
 		public  string gxTpr_Residentemail
 		{
 			get { 
@@ -726,7 +763,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ResidentGender", Order=9)]
+		[DataMember(Name="ResidentGender", Order=10)]
 		public  string gxTpr_Residentgender
 		{
 			get { 
@@ -738,7 +775,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ResidentAddress", Order=10)]
+		[DataMember(Name="ResidentAddress", Order=11)]
 		public  string gxTpr_Residentaddress
 		{
 			get { 
@@ -750,7 +787,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ResidentPhone", Order=11)]
+		[DataMember(Name="ResidentPhone", Order=12)]
 		public  string gxTpr_Residentphone
 		{
 			get { 
@@ -762,7 +799,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ResidentBirthDate", Order=12)]
+		[DataMember(Name="ResidentBirthDate", Order=13)]
 		public  string gxTpr_Residentbirthdate
 		{
 			get { 
@@ -774,7 +811,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ResidentGUID", Order=13)]
+		[DataMember(Name="ResidentGUID", Order=14)]
 		public  string gxTpr_Residentguid
 		{
 			get { 
@@ -786,7 +823,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ResidentTypeId", Order=14)]
+		[DataMember(Name="ResidentTypeId", Order=15)]
 		public Guid gxTpr_Residenttypeid
 		{
 			get { 
@@ -798,7 +835,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ResidentTypeName", Order=15)]
+		[DataMember(Name="ResidentTypeName", Order=16)]
 		public  string gxTpr_Residenttypename
 		{
 			get { 
@@ -810,7 +847,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="MedicalIndicationId", Order=16)]
+		[DataMember(Name="MedicalIndicationId", Order=17)]
 		public Guid gxTpr_Medicalindicationid
 		{
 			get { 
@@ -822,7 +859,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="MedicalIndicationName", Order=17)]
+		[DataMember(Name="MedicalIndicationName", Order=18)]
 		public  string gxTpr_Medicalindicationname
 		{
 			get { 
@@ -834,7 +871,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ResidentImage", Order=18)]
+		[DataMember(Name="ResidentImage", Order=19)]
 		public  string gxTpr_Residentimage
 		{
 			get { 
@@ -846,7 +883,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ResidentLanguage", Order=19)]
+		[DataMember(Name="ResidentLanguage", Order=20)]
 		public  string gxTpr_Residentlanguage
 		{
 			get { 

@@ -118,9 +118,9 @@ namespace GeneXus.Programs {
                if (true) return;
             }
          }
-         else if ( StringUtil.StrCmp(AV17ComboName, "ResidentPackageId") == 0 )
+         else if ( StringUtil.StrCmp(AV17ComboName, "ResidentGroups") == 0 )
          {
-            /* Execute user subroutine: 'LOADCOMBOITEMS_RESIDENTPACKAGEID' */
+            /* Execute user subroutine: 'LOADCOMBOITEMS_RESIDENTGROUPS' */
             S121 ();
             if ( returnInSub )
             {
@@ -200,7 +200,7 @@ namespace GeneXus.Programs {
 
       protected void S121( )
       {
-         /* 'LOADCOMBOITEMS_RESIDENTPACKAGEID' Routine */
+         /* 'LOADCOMBOITEMS_RESIDENTGROUPS' Routine */
          returnInSub = false;
          AV52Udparg1 = new prc_getuserlocationid(context).executeUdp( );
          /* Using cursor P006Q4 */
@@ -209,7 +209,6 @@ namespace GeneXus.Programs {
          {
             A528SG_LocationId = P006Q4_A528SG_LocationId[0];
             A527ResidentPackageId = P006Q4_A527ResidentPackageId[0];
-            n527ResidentPackageId = P006Q4_n527ResidentPackageId[0];
             A531ResidentPackageName = P006Q4_A531ResidentPackageName[0];
             AV16Combo_DataItem = new WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item(context);
             AV16Combo_DataItem.gxTpr_Id = StringUtil.Trim( A527ResidentPackageId.ToString());
@@ -227,9 +226,9 @@ namespace GeneXus.Programs {
                A11OrganisationId = P006Q5_A11OrganisationId[0];
                A29LocationId = P006Q5_A29LocationId[0];
                A62ResidentId = P006Q5_A62ResidentId[0];
-               A527ResidentPackageId = P006Q5_A527ResidentPackageId[0];
-               n527ResidentPackageId = P006Q5_n527ResidentPackageId[0];
-               AV24SelectedValue = ((Guid.Empty==A527ResidentPackageId) ? "" : StringUtil.Trim( A527ResidentPackageId.ToString()));
+               A670ResidentGroups = P006Q5_A670ResidentGroups[0];
+               n670ResidentGroups = P006Q5_n670ResidentGroups[0];
+               AV24SelectedValue = A670ResidentGroups;
                /* Exiting from a For First loop. */
                if (true) break;
             }
@@ -435,7 +434,6 @@ namespace GeneXus.Programs {
          AV52Udparg1 = Guid.Empty;
          P006Q4_A528SG_LocationId = new Guid[] {Guid.Empty} ;
          P006Q4_A527ResidentPackageId = new Guid[] {Guid.Empty} ;
-         P006Q4_n527ResidentPackageId = new bool[] {false} ;
          P006Q4_A531ResidentPackageName = new string[] {""} ;
          A528SG_LocationId = Guid.Empty;
          A527ResidentPackageId = Guid.Empty;
@@ -443,8 +441,9 @@ namespace GeneXus.Programs {
          P006Q5_A11OrganisationId = new Guid[] {Guid.Empty} ;
          P006Q5_A29LocationId = new Guid[] {Guid.Empty} ;
          P006Q5_A62ResidentId = new Guid[] {Guid.Empty} ;
-         P006Q5_A527ResidentPackageId = new Guid[] {Guid.Empty} ;
-         P006Q5_n527ResidentPackageId = new bool[] {false} ;
+         P006Q5_A670ResidentGroups = new string[] {""} ;
+         P006Q5_n670ResidentGroups = new bool[] {false} ;
+         A670ResidentGroups = "";
          AV54GXV1 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
          AV39ResidentCountry_DPItem = new SdtSDT_Country_SDT_CountryItem(context);
          AV38ComboTitles = new GxSimpleCollection<string>();
@@ -480,7 +479,7 @@ namespace GeneXus.Programs {
                P006Q4_A528SG_LocationId, P006Q4_A527ResidentPackageId, P006Q4_A531ResidentPackageName
                }
                , new Object[] {
-               P006Q5_A11OrganisationId, P006Q5_A29LocationId, P006Q5_A62ResidentId, P006Q5_A527ResidentPackageId, P006Q5_n527ResidentPackageId
+               P006Q5_A11OrganisationId, P006Q5_A29LocationId, P006Q5_A62ResidentId, P006Q5_A670ResidentGroups, P006Q5_n670ResidentGroups
                }
                , new Object[] {
                P006Q6_A11OrganisationId, P006Q6_A29LocationId, P006Q6_A62ResidentId, P006Q6_A312ResidentCountry
@@ -505,7 +504,8 @@ namespace GeneXus.Programs {
       private string AV18TrnMode ;
       private bool returnInSub ;
       private bool n96ResidentTypeId ;
-      private bool n527ResidentPackageId ;
+      private bool n670ResidentGroups ;
+      private string A670ResidentGroups ;
       private string AV17ComboName ;
       private string AV24SelectedValue ;
       private string AV25SelectedText ;
@@ -541,13 +541,12 @@ namespace GeneXus.Programs {
       private bool[] P006Q3_n96ResidentTypeId ;
       private Guid[] P006Q4_A528SG_LocationId ;
       private Guid[] P006Q4_A527ResidentPackageId ;
-      private bool[] P006Q4_n527ResidentPackageId ;
       private string[] P006Q4_A531ResidentPackageName ;
       private Guid[] P006Q5_A11OrganisationId ;
       private Guid[] P006Q5_A29LocationId ;
       private Guid[] P006Q5_A62ResidentId ;
-      private Guid[] P006Q5_A527ResidentPackageId ;
-      private bool[] P006Q5_n527ResidentPackageId ;
+      private string[] P006Q5_A670ResidentGroups ;
+      private bool[] P006Q5_n670ResidentGroups ;
       private GXBaseCollection<SdtSDT_Country_SDT_CountryItem> AV54GXV1 ;
       private SdtSDT_Country_SDT_CountryItem AV39ResidentCountry_DPItem ;
       private GxSimpleCollection<string> AV38ComboTitles ;
@@ -635,7 +634,7 @@ namespace GeneXus.Programs {
               new CursorDef("P006Q2", "SELECT ResidentTypeId, ResidentTypeName FROM Trn_ResidentType ORDER BY ResidentTypeName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP006Q2,100, GxCacheFrequency.OFF ,false,false )
              ,new CursorDef("P006Q3", "SELECT OrganisationId, LocationId, ResidentId, ResidentTypeId FROM Trn_Resident WHERE ResidentId = :AV20ResidentId and LocationId = :AV21LocationId and OrganisationId = :AV22OrganisationId ORDER BY ResidentId, LocationId, OrganisationId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP006Q3,1, GxCacheFrequency.OFF ,false,true )
              ,new CursorDef("P006Q4", "SELECT SG_LocationId, ResidentPackageId, ResidentPackageName FROM Trn_ResidentPackage WHERE SG_LocationId = :AV52Udparg1 ORDER BY ResidentPackageName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP006Q4,100, GxCacheFrequency.OFF ,false,false )
-             ,new CursorDef("P006Q5", "SELECT OrganisationId, LocationId, ResidentId, ResidentPackageId FROM Trn_Resident WHERE ResidentId = :AV20ResidentId and LocationId = :AV21LocationId and OrganisationId = :AV22OrganisationId ORDER BY ResidentId, LocationId, OrganisationId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP006Q5,1, GxCacheFrequency.OFF ,false,true )
+             ,new CursorDef("P006Q5", "SELECT OrganisationId, LocationId, ResidentId, ResidentGroups FROM Trn_Resident WHERE ResidentId = :AV20ResidentId and LocationId = :AV21LocationId and OrganisationId = :AV22OrganisationId ORDER BY ResidentId, LocationId, OrganisationId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP006Q5,1, GxCacheFrequency.OFF ,false,true )
              ,new CursorDef("P006Q6", "SELECT OrganisationId, LocationId, ResidentId, ResidentCountry FROM Trn_Resident WHERE ResidentId = :AV20ResidentId and LocationId = :AV21LocationId and OrganisationId = :AV22OrganisationId ORDER BY ResidentId, LocationId, OrganisationId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP006Q6,1, GxCacheFrequency.OFF ,false,true )
              ,new CursorDef("P006Q7", "SELECT OrganisationId, LocationId, ResidentId, ResidentHomePhoneCode FROM Trn_Resident WHERE ResidentId = :AV20ResidentId and LocationId = :AV21LocationId and OrganisationId = :AV22OrganisationId ORDER BY ResidentId, LocationId, OrganisationId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP006Q7,1, GxCacheFrequency.OFF ,false,true )
              ,new CursorDef("P006Q8", "SELECT OrganisationId, LocationId, ResidentId, ResidentPhoneCode FROM Trn_Resident WHERE ResidentId = :AV20ResidentId and LocationId = :AV21LocationId and OrganisationId = :AV22OrganisationId ORDER BY ResidentId, LocationId, OrganisationId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP006Q8,1, GxCacheFrequency.OFF ,false,true )
@@ -669,7 +668,7 @@ namespace GeneXus.Programs {
                 ((Guid[]) buf[0])[0] = rslt.getGuid(1);
                 ((Guid[]) buf[1])[0] = rslt.getGuid(2);
                 ((Guid[]) buf[2])[0] = rslt.getGuid(3);
-                ((Guid[]) buf[3])[0] = rslt.getGuid(4);
+                ((string[]) buf[3])[0] = rslt.getLongVarchar(4);
                 ((bool[]) buf[4])[0] = rslt.wasNull(4);
                 return;
              case 4 :

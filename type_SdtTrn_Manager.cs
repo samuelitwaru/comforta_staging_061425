@@ -85,8 +85,10 @@ namespace GeneXus.Programs {
          state.Add("gxTpr_Managerismainmanager_Z");
          state.Add("gxTpr_Managerisactive_Z");
          state.Add("gxTpr_Managersalutation_Z");
+         state.Add("gxTpr_Managertitle_Z");
          state.Add("gxTpr_Managerimage_gxi_Z");
          state.Add("gxTpr_Managersalutation_N");
+         state.Add("gxTpr_Managertitle_N");
          return state ;
       }
 
@@ -110,6 +112,7 @@ namespace GeneXus.Programs {
          gxTv_SdtTrn_Manager_Managerimage = sdt.gxTv_SdtTrn_Manager_Managerimage ;
          gxTv_SdtTrn_Manager_Managerimage_gxi = sdt.gxTv_SdtTrn_Manager_Managerimage_gxi ;
          gxTv_SdtTrn_Manager_Managersalutation = sdt.gxTv_SdtTrn_Manager_Managersalutation ;
+         gxTv_SdtTrn_Manager_Managertitle = sdt.gxTv_SdtTrn_Manager_Managertitle ;
          gxTv_SdtTrn_Manager_Mode = sdt.gxTv_SdtTrn_Manager_Mode ;
          gxTv_SdtTrn_Manager_Initialized = sdt.gxTv_SdtTrn_Manager_Initialized ;
          gxTv_SdtTrn_Manager_Managerid_Z = sdt.gxTv_SdtTrn_Manager_Managerid_Z ;
@@ -126,8 +129,10 @@ namespace GeneXus.Programs {
          gxTv_SdtTrn_Manager_Managerismainmanager_Z = sdt.gxTv_SdtTrn_Manager_Managerismainmanager_Z ;
          gxTv_SdtTrn_Manager_Managerisactive_Z = sdt.gxTv_SdtTrn_Manager_Managerisactive_Z ;
          gxTv_SdtTrn_Manager_Managersalutation_Z = sdt.gxTv_SdtTrn_Manager_Managersalutation_Z ;
+         gxTv_SdtTrn_Manager_Managertitle_Z = sdt.gxTv_SdtTrn_Manager_Managertitle_Z ;
          gxTv_SdtTrn_Manager_Managerimage_gxi_Z = sdt.gxTv_SdtTrn_Manager_Managerimage_gxi_Z ;
          gxTv_SdtTrn_Manager_Managersalutation_N = sdt.gxTv_SdtTrn_Manager_Managersalutation_N ;
+         gxTv_SdtTrn_Manager_Managertitle_N = sdt.gxTv_SdtTrn_Manager_Managertitle_N ;
          return  ;
       }
 
@@ -162,6 +167,8 @@ namespace GeneXus.Programs {
          AddObjectProperty("ManagerImage", gxTv_SdtTrn_Manager_Managerimage, false, includeNonInitialized);
          AddObjectProperty("ManagerSalutation", gxTv_SdtTrn_Manager_Managersalutation, false, includeNonInitialized);
          AddObjectProperty("ManagerSalutation_N", gxTv_SdtTrn_Manager_Managersalutation_N, false, includeNonInitialized);
+         AddObjectProperty("ManagerTitle", gxTv_SdtTrn_Manager_Managertitle, false, includeNonInitialized);
+         AddObjectProperty("ManagerTitle_N", gxTv_SdtTrn_Manager_Managertitle_N, false, includeNonInitialized);
          if ( includeState )
          {
             AddObjectProperty("ManagerImage_GXI", gxTv_SdtTrn_Manager_Managerimage_gxi, false, includeNonInitialized);
@@ -181,8 +188,10 @@ namespace GeneXus.Programs {
             AddObjectProperty("ManagerIsMainManager_Z", gxTv_SdtTrn_Manager_Managerismainmanager_Z, false, includeNonInitialized);
             AddObjectProperty("ManagerIsActive_Z", gxTv_SdtTrn_Manager_Managerisactive_Z, false, includeNonInitialized);
             AddObjectProperty("ManagerSalutation_Z", gxTv_SdtTrn_Manager_Managersalutation_Z, false, includeNonInitialized);
+            AddObjectProperty("ManagerTitle_Z", gxTv_SdtTrn_Manager_Managertitle_Z, false, includeNonInitialized);
             AddObjectProperty("ManagerImage_GXI_Z", gxTv_SdtTrn_Manager_Managerimage_gxi_Z, false, includeNonInitialized);
             AddObjectProperty("ManagerSalutation_N", gxTv_SdtTrn_Manager_Managersalutation_N, false, includeNonInitialized);
+            AddObjectProperty("ManagerTitle_N", gxTv_SdtTrn_Manager_Managertitle_N, false, includeNonInitialized);
          }
          return  ;
       }
@@ -270,6 +279,12 @@ namespace GeneXus.Programs {
             sdtIsNull = 0;
             gxTv_SdtTrn_Manager_Managersalutation = sdt.gxTv_SdtTrn_Manager_Managersalutation ;
          }
+         if ( sdt.IsDirty("ManagerTitle") )
+         {
+            gxTv_SdtTrn_Manager_Managertitle_N = (short)(sdt.gxTv_SdtTrn_Manager_Managertitle_N);
+            sdtIsNull = 0;
+            gxTv_SdtTrn_Manager_Managertitle = sdt.gxTv_SdtTrn_Manager_Managertitle ;
+         }
          return  ;
       }
 
@@ -300,6 +315,7 @@ namespace GeneXus.Programs {
                this.gxTv_SdtTrn_Manager_Managerismainmanager_Z_SetNull( );
                this.gxTv_SdtTrn_Manager_Managerisactive_Z_SetNull( );
                this.gxTv_SdtTrn_Manager_Managersalutation_Z_SetNull( );
+               this.gxTv_SdtTrn_Manager_Managertitle_Z_SetNull( );
                this.gxTv_SdtTrn_Manager_Managerimage_gxi_Z_SetNull( );
             }
             gxTv_SdtTrn_Manager_Managerid = value;
@@ -335,6 +351,7 @@ namespace GeneXus.Programs {
                this.gxTv_SdtTrn_Manager_Managerismainmanager_Z_SetNull( );
                this.gxTv_SdtTrn_Manager_Managerisactive_Z_SetNull( );
                this.gxTv_SdtTrn_Manager_Managersalutation_Z_SetNull( );
+               this.gxTv_SdtTrn_Manager_Managertitle_Z_SetNull( );
                this.gxTv_SdtTrn_Manager_Managerimage_gxi_Z_SetNull( );
             }
             gxTv_SdtTrn_Manager_Organisationid = value;
@@ -580,6 +597,36 @@ namespace GeneXus.Programs {
       public bool gxTv_SdtTrn_Manager_Managersalutation_IsNull( )
       {
          return (gxTv_SdtTrn_Manager_Managersalutation_N==1) ;
+      }
+
+      [  SoapElement( ElementName = "ManagerTitle" )]
+      [  XmlElement( ElementName = "ManagerTitle"   )]
+      public string gxTpr_Managertitle
+      {
+         get {
+            return gxTv_SdtTrn_Manager_Managertitle ;
+         }
+
+         set {
+            gxTv_SdtTrn_Manager_Managertitle_N = 0;
+            sdtIsNull = 0;
+            gxTv_SdtTrn_Manager_Managertitle = value;
+            SetDirty("Managertitle");
+         }
+
+      }
+
+      public void gxTv_SdtTrn_Manager_Managertitle_SetNull( )
+      {
+         gxTv_SdtTrn_Manager_Managertitle_N = 1;
+         gxTv_SdtTrn_Manager_Managertitle = "";
+         SetDirty("Managertitle");
+         return  ;
+      }
+
+      public bool gxTv_SdtTrn_Manager_Managertitle_IsNull( )
+      {
+         return (gxTv_SdtTrn_Manager_Managertitle_N==1) ;
       }
 
       [  SoapElement( ElementName = "Mode" )]
@@ -1030,6 +1077,34 @@ namespace GeneXus.Programs {
          return false ;
       }
 
+      [  SoapElement( ElementName = "ManagerTitle_Z" )]
+      [  XmlElement( ElementName = "ManagerTitle_Z"   )]
+      public string gxTpr_Managertitle_Z
+      {
+         get {
+            return gxTv_SdtTrn_Manager_Managertitle_Z ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtTrn_Manager_Managertitle_Z = value;
+            SetDirty("Managertitle_Z");
+         }
+
+      }
+
+      public void gxTv_SdtTrn_Manager_Managertitle_Z_SetNull( )
+      {
+         gxTv_SdtTrn_Manager_Managertitle_Z = "";
+         SetDirty("Managertitle_Z");
+         return  ;
+      }
+
+      public bool gxTv_SdtTrn_Manager_Managertitle_Z_IsNull( )
+      {
+         return false ;
+      }
+
       [  SoapElement( ElementName = "ManagerImage_GXI_Z" )]
       [  XmlElement( ElementName = "ManagerImage_GXI_Z"   )]
       public string gxTpr_Managerimage_gxi_Z
@@ -1086,6 +1161,34 @@ namespace GeneXus.Programs {
          return false ;
       }
 
+      [  SoapElement( ElementName = "ManagerTitle_N" )]
+      [  XmlElement( ElementName = "ManagerTitle_N"   )]
+      public short gxTpr_Managertitle_N
+      {
+         get {
+            return gxTv_SdtTrn_Manager_Managertitle_N ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtTrn_Manager_Managertitle_N = value;
+            SetDirty("Managertitle_N");
+         }
+
+      }
+
+      public void gxTv_SdtTrn_Manager_Managertitle_N_SetNull( )
+      {
+         gxTv_SdtTrn_Manager_Managertitle_N = 0;
+         SetDirty("Managertitle_N");
+         return  ;
+      }
+
+      public bool gxTv_SdtTrn_Manager_Managertitle_N_IsNull( )
+      {
+         return false ;
+      }
+
       [XmlIgnore]
       private static GXTypeInfo _typeProps;
       protected override GXTypeInfo TypeInfo
@@ -1118,6 +1221,7 @@ namespace GeneXus.Programs {
          gxTv_SdtTrn_Manager_Managerimage = "";
          gxTv_SdtTrn_Manager_Managerimage_gxi = "";
          gxTv_SdtTrn_Manager_Managersalutation = "";
+         gxTv_SdtTrn_Manager_Managertitle = "";
          gxTv_SdtTrn_Manager_Mode = "";
          gxTv_SdtTrn_Manager_Managerid_Z = Guid.Empty;
          gxTv_SdtTrn_Manager_Organisationid_Z = Guid.Empty;
@@ -1131,6 +1235,7 @@ namespace GeneXus.Programs {
          gxTv_SdtTrn_Manager_Managergender_Z = "";
          gxTv_SdtTrn_Manager_Managergamguid_Z = "";
          gxTv_SdtTrn_Manager_Managersalutation_Z = "";
+         gxTv_SdtTrn_Manager_Managertitle_Z = "";
          gxTv_SdtTrn_Manager_Managerimage_gxi_Z = "";
          IGxSilentTrn obj;
          obj = (IGxSilentTrn)ClassLoader.FindInstance( "trn_manager", "GeneXus.Programs.trn_manager_bc", new Object[] {context}, constructorCallingAssembly);;
@@ -1149,6 +1254,7 @@ namespace GeneXus.Programs {
       private short sdtIsNull ;
       private short gxTv_SdtTrn_Manager_Initialized ;
       private short gxTv_SdtTrn_Manager_Managersalutation_N ;
+      private short gxTv_SdtTrn_Manager_Managertitle_N ;
       private string gxTv_SdtTrn_Manager_Managerinitials ;
       private string gxTv_SdtTrn_Manager_Managerphone ;
       private string gxTv_SdtTrn_Manager_Managersalutation ;
@@ -1168,6 +1274,7 @@ namespace GeneXus.Programs {
       private string gxTv_SdtTrn_Manager_Managergender ;
       private string gxTv_SdtTrn_Manager_Managergamguid ;
       private string gxTv_SdtTrn_Manager_Managerimage_gxi ;
+      private string gxTv_SdtTrn_Manager_Managertitle ;
       private string gxTv_SdtTrn_Manager_Managergivenname_Z ;
       private string gxTv_SdtTrn_Manager_Managerlastname_Z ;
       private string gxTv_SdtTrn_Manager_Manageremail_Z ;
@@ -1175,6 +1282,7 @@ namespace GeneXus.Programs {
       private string gxTv_SdtTrn_Manager_Managerphonenumber_Z ;
       private string gxTv_SdtTrn_Manager_Managergender_Z ;
       private string gxTv_SdtTrn_Manager_Managergamguid_Z ;
+      private string gxTv_SdtTrn_Manager_Managertitle_Z ;
       private string gxTv_SdtTrn_Manager_Managerimage_gxi_Z ;
       private string gxTv_SdtTrn_Manager_Managerimage ;
       private Guid gxTv_SdtTrn_Manager_Managerid ;
@@ -1405,6 +1513,20 @@ namespace GeneXus.Programs {
 
       }
 
+      [DataMember( Name = "ManagerTitle" , Order = 15 )]
+      [GxSeudo()]
+      public string gxTpr_Managertitle
+      {
+         get {
+            return sdt.gxTpr_Managertitle ;
+         }
+
+         set {
+            sdt.gxTpr_Managertitle = value;
+         }
+
+      }
+
       public SdtTrn_Manager sdt
       {
          get {
@@ -1426,7 +1548,7 @@ namespace GeneXus.Programs {
          }
       }
 
-      [DataMember( Name = "gx_md5_hash", Order = 15 )]
+      [DataMember( Name = "gx_md5_hash", Order = 16 )]
       public string Hash
       {
          get {

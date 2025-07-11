@@ -46,12 +46,12 @@ namespace GeneXus.Programs {
 
       public void execute( Guid aP0_DynamicTranslationPrimaryKey ,
                            string aP1_Language ,
-                           SdtSDT_InfoContent aP2_SDT_InfoContent ,
+                           SdtSDT_TranslatedPage aP2_SDT_TranslatedPage ,
                            out SdtSDT_Error aP3_SDT_Error )
       {
          this.AV9DynamicTranslationPrimaryKey = aP0_DynamicTranslationPrimaryKey;
          this.AV12Language = aP1_Language;
-         this.AV15SDT_InfoContent = aP2_SDT_InfoContent;
+         this.AV16SDT_TranslatedPage = aP2_SDT_TranslatedPage;
          this.AV14SDT_Error = new SdtSDT_Error(context) ;
          initialize();
          ExecuteImpl();
@@ -60,20 +60,20 @@ namespace GeneXus.Programs {
 
       public SdtSDT_Error executeUdp( Guid aP0_DynamicTranslationPrimaryKey ,
                                       string aP1_Language ,
-                                      SdtSDT_InfoContent aP2_SDT_InfoContent )
+                                      SdtSDT_TranslatedPage aP2_SDT_TranslatedPage )
       {
-         execute(aP0_DynamicTranslationPrimaryKey, aP1_Language, aP2_SDT_InfoContent, out aP3_SDT_Error);
+         execute(aP0_DynamicTranslationPrimaryKey, aP1_Language, aP2_SDT_TranslatedPage, out aP3_SDT_Error);
          return AV14SDT_Error ;
       }
 
       public void executeSubmit( Guid aP0_DynamicTranslationPrimaryKey ,
                                  string aP1_Language ,
-                                 SdtSDT_InfoContent aP2_SDT_InfoContent ,
+                                 SdtSDT_TranslatedPage aP2_SDT_TranslatedPage ,
                                  out SdtSDT_Error aP3_SDT_Error )
       {
          this.AV9DynamicTranslationPrimaryKey = aP0_DynamicTranslationPrimaryKey;
          this.AV12Language = aP1_Language;
-         this.AV15SDT_InfoContent = aP2_SDT_InfoContent;
+         this.AV16SDT_TranslatedPage = aP2_SDT_TranslatedPage;
          this.AV14SDT_Error = new SdtSDT_Error(context) ;
          SubmitImpl();
          aP3_SDT_Error=this.AV14SDT_Error;
@@ -91,22 +91,37 @@ namespace GeneXus.Programs {
             if (true) return;
          }
          AV12Language = StringUtil.Trim( AV12Language);
-         AV13TranslatedValue = AV15SDT_InfoContent.ToJSonString(false, true);
+         AV13TranslatedValue = AV16SDT_TranslatedPage.gxTpr_Pagestructure.ToJSonString(false, true);
          /* Using cursor P00H02 */
          pr_default.execute(0, new Object[] {AV9DynamicTranslationPrimaryKey});
          while ( (pr_default.getStatus(0) != 101) )
          {
             A580DynamicTranslationPrimaryKey = P00H02_A580DynamicTranslationPrimaryKey[0];
+            A581DynamicTranslationAttributeNam = P00H02_A581DynamicTranslationAttributeNam[0];
             A583DynamicTranslationDutch = P00H02_A583DynamicTranslationDutch[0];
             A582DynamicTranslationEnglish = P00H02_A582DynamicTranslationEnglish[0];
             A578DynamicTranslationId = P00H02_A578DynamicTranslationId[0];
-            if ( StringUtil.StrCmp(AV12Language, "nl") == 0 )
+            if ( StringUtil.StrCmp(A581DynamicTranslationAttributeNam, "PageStructure") == 0 )
             {
-               A583DynamicTranslationDutch = AV13TranslatedValue;
+               if ( StringUtil.StrCmp(AV12Language, "nl") == 0 )
+               {
+                  A583DynamicTranslationDutch = AV13TranslatedValue;
+               }
+               else if ( StringUtil.StrCmp(AV12Language, "en") == 0 )
+               {
+                  A582DynamicTranslationEnglish = AV13TranslatedValue;
+               }
             }
-            else if ( StringUtil.StrCmp(AV12Language, "en") == 0 )
+            if ( StringUtil.StrCmp(A581DynamicTranslationAttributeNam, "PageName") == 0 )
             {
-               A582DynamicTranslationEnglish = AV13TranslatedValue;
+               if ( StringUtil.StrCmp(AV12Language, "nl") == 0 )
+               {
+                  A583DynamicTranslationDutch = AV16SDT_TranslatedPage.gxTpr_Pagename;
+               }
+               else if ( StringUtil.StrCmp(AV12Language, "en") == 0 )
+               {
+                  A582DynamicTranslationEnglish = AV16SDT_TranslatedPage.gxTpr_Pagename;
+               }
             }
             /* Using cursor P00H03 */
             pr_default.execute(1, new Object[] {A583DynamicTranslationDutch, A582DynamicTranslationEnglish, A578DynamicTranslationId});
@@ -135,10 +150,12 @@ namespace GeneXus.Programs {
          AV14SDT_Error = new SdtSDT_Error(context);
          AV13TranslatedValue = "";
          P00H02_A580DynamicTranslationPrimaryKey = new Guid[] {Guid.Empty} ;
+         P00H02_A581DynamicTranslationAttributeNam = new string[] {""} ;
          P00H02_A583DynamicTranslationDutch = new string[] {""} ;
          P00H02_A582DynamicTranslationEnglish = new string[] {""} ;
          P00H02_A578DynamicTranslationId = new Guid[] {Guid.Empty} ;
          A580DynamicTranslationPrimaryKey = Guid.Empty;
+         A581DynamicTranslationAttributeNam = "";
          A583DynamicTranslationDutch = "";
          A582DynamicTranslationEnglish = "";
          A578DynamicTranslationId = Guid.Empty;
@@ -153,7 +170,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.prc_updatepagetranslation__default(),
             new Object[][] {
                 new Object[] {
-               P00H02_A580DynamicTranslationPrimaryKey, P00H02_A583DynamicTranslationDutch, P00H02_A582DynamicTranslationEnglish, P00H02_A578DynamicTranslationId
+               P00H02_A580DynamicTranslationPrimaryKey, P00H02_A581DynamicTranslationAttributeNam, P00H02_A583DynamicTranslationDutch, P00H02_A582DynamicTranslationEnglish, P00H02_A578DynamicTranslationId
                }
                , new Object[] {
                }
@@ -166,16 +183,18 @@ namespace GeneXus.Programs {
       private string A583DynamicTranslationDutch ;
       private string A582DynamicTranslationEnglish ;
       private string AV12Language ;
+      private string A581DynamicTranslationAttributeNam ;
       private Guid AV9DynamicTranslationPrimaryKey ;
       private Guid A580DynamicTranslationPrimaryKey ;
       private Guid A578DynamicTranslationId ;
       private IGxDataStore dsDataStore1 ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
-      private SdtSDT_InfoContent AV15SDT_InfoContent ;
+      private SdtSDT_TranslatedPage AV16SDT_TranslatedPage ;
       private SdtSDT_Error AV14SDT_Error ;
       private IDataStoreProvider pr_default ;
       private Guid[] P00H02_A580DynamicTranslationPrimaryKey ;
+      private string[] P00H02_A581DynamicTranslationAttributeNam ;
       private string[] P00H02_A583DynamicTranslationDutch ;
       private string[] P00H02_A582DynamicTranslationEnglish ;
       private Guid[] P00H02_A578DynamicTranslationId ;
@@ -275,7 +294,7 @@ public class prc_updatepagetranslation__default : DataStoreHelperBase, IDataStor
        new ParDef("DynamicTranslationId",GXType.UniqueIdentifier,36,0)
        };
        def= new CursorDef[] {
-           new CursorDef("P00H02", "SELECT DynamicTranslationPrimaryKey, DynamicTranslationDutch, DynamicTranslationEnglish, DynamicTranslationId FROM Trn_DynamicTranslation WHERE DynamicTranslationPrimaryKey = :AV9DynamicTranslationPrimaryKey ORDER BY DynamicTranslationId  FOR UPDATE OF Trn_DynamicTranslation",true, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00H02,1, GxCacheFrequency.OFF ,true,false )
+           new CursorDef("P00H02", "SELECT DynamicTranslationPrimaryKey, DynamicTranslationAttributeNam, DynamicTranslationDutch, DynamicTranslationEnglish, DynamicTranslationId FROM Trn_DynamicTranslation WHERE DynamicTranslationPrimaryKey = :AV9DynamicTranslationPrimaryKey ORDER BY DynamicTranslationId  FOR UPDATE OF Trn_DynamicTranslation",true, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00H02,1, GxCacheFrequency.OFF ,true,false )
           ,new CursorDef("P00H03", "SAVEPOINT gxupdate;UPDATE Trn_DynamicTranslation SET DynamicTranslationDutch=:DynamicTranslationDutch, DynamicTranslationEnglish=:DynamicTranslationEnglish  WHERE DynamicTranslationId = :DynamicTranslationId;RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK,prmP00H03)
        };
     }
@@ -289,9 +308,10 @@ public class prc_updatepagetranslation__default : DataStoreHelperBase, IDataStor
     {
           case 0 :
              ((Guid[]) buf[0])[0] = rslt.getGuid(1);
-             ((string[]) buf[1])[0] = rslt.getLongVarchar(2);
+             ((string[]) buf[1])[0] = rslt.getVarchar(2);
              ((string[]) buf[2])[0] = rslt.getLongVarchar(3);
-             ((Guid[]) buf[3])[0] = rslt.getGuid(4);
+             ((string[]) buf[3])[0] = rslt.getLongVarchar(4);
+             ((Guid[]) buf[4])[0] = rslt.getGuid(5);
              return;
     }
  }

@@ -82,6 +82,7 @@ namespace GeneXus.Programs {
             A29LocationId = P00752_A29LocationId[0];
             A11OrganisationId = P00752_A11OrganisationId[0];
             A72ResidentSalutation = P00752_A72ResidentSalutation[0];
+            n72ResidentSalutation = P00752_n72ResidentSalutation[0];
             A63ResidentBsnNumber = P00752_A63ResidentBsnNumber[0];
             A73ResidentBirthDate = P00752_A73ResidentBirthDate[0];
             A64ResidentGivenName = P00752_A64ResidentGivenName[0];
@@ -165,6 +166,7 @@ namespace GeneXus.Programs {
          P00752_A29LocationId = new Guid[] {Guid.Empty} ;
          P00752_A11OrganisationId = new Guid[] {Guid.Empty} ;
          P00752_A72ResidentSalutation = new string[] {""} ;
+         P00752_n72ResidentSalutation = new bool[] {false} ;
          P00752_A63ResidentBsnNumber = new string[] {""} ;
          P00752_A73ResidentBirthDate = new DateTime[] {DateTime.MinValue} ;
          P00752_A64ResidentGivenName = new string[] {""} ;
@@ -218,9 +220,9 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.prc_getresidentinformation__default(),
             new Object[][] {
                 new Object[] {
-               P00752_A71ResidentGUID, P00752_A29LocationId, P00752_A11OrganisationId, P00752_A72ResidentSalutation, P00752_A63ResidentBsnNumber, P00752_A73ResidentBirthDate, P00752_A64ResidentGivenName, P00752_A65ResidentLastName, P00752_A66ResidentInitials, P00752_A40000ResidentImage_GXI,
-               P00752_n40000ResidentImage_GXI, P00752_A68ResidentGender, P00752_A67ResidentEmail, P00752_A70ResidentPhone, P00752_A312ResidentCountry, P00752_A313ResidentCity, P00752_A314ResidentZipCode, P00752_A315ResidentAddressLine1, P00752_A316ResidentAddressLine2, P00752_A96ResidentTypeId,
-               P00752_n96ResidentTypeId, P00752_A97ResidentTypeName, P00752_A98MedicalIndicationId, P00752_n98MedicalIndicationId, P00752_A99MedicalIndicationName, P00752_A599ResidentLanguage, P00752_A62ResidentId
+               P00752_A71ResidentGUID, P00752_A29LocationId, P00752_A11OrganisationId, P00752_A72ResidentSalutation, P00752_n72ResidentSalutation, P00752_A63ResidentBsnNumber, P00752_A73ResidentBirthDate, P00752_A64ResidentGivenName, P00752_A65ResidentLastName, P00752_A66ResidentInitials,
+               P00752_A40000ResidentImage_GXI, P00752_n40000ResidentImage_GXI, P00752_A68ResidentGender, P00752_A67ResidentEmail, P00752_A70ResidentPhone, P00752_A312ResidentCountry, P00752_A313ResidentCity, P00752_A314ResidentZipCode, P00752_A315ResidentAddressLine1, P00752_A316ResidentAddressLine2,
+               P00752_A96ResidentTypeId, P00752_n96ResidentTypeId, P00752_A97ResidentTypeName, P00752_A98MedicalIndicationId, P00752_n98MedicalIndicationId, P00752_A99MedicalIndicationName, P00752_A599ResidentLanguage, P00752_A62ResidentId
                }
             }
          );
@@ -234,6 +236,7 @@ namespace GeneXus.Programs {
       private string A599ResidentLanguage ;
       private string GXt_char1 ;
       private DateTime A73ResidentBirthDate ;
+      private bool n72ResidentSalutation ;
       private bool n40000ResidentImage_GXI ;
       private bool n96ResidentTypeId ;
       private bool n98MedicalIndicationId ;
@@ -267,6 +270,7 @@ namespace GeneXus.Programs {
       private Guid[] P00752_A29LocationId ;
       private Guid[] P00752_A11OrganisationId ;
       private string[] P00752_A72ResidentSalutation ;
+      private bool[] P00752_n72ResidentSalutation ;
       private string[] P00752_A63ResidentBsnNumber ;
       private DateTime[] P00752_A73ResidentBirthDate ;
       private string[] P00752_A64ResidentGivenName ;
@@ -331,29 +335,30 @@ namespace GeneXus.Programs {
                 ((Guid[]) buf[1])[0] = rslt.getGuid(2);
                 ((Guid[]) buf[2])[0] = rslt.getGuid(3);
                 ((string[]) buf[3])[0] = rslt.getString(4, 20);
-                ((string[]) buf[4])[0] = rslt.getVarchar(5);
-                ((DateTime[]) buf[5])[0] = rslt.getGXDate(6);
-                ((string[]) buf[6])[0] = rslt.getVarchar(7);
-                ((string[]) buf[7])[0] = rslt.getVarchar(8);
-                ((string[]) buf[8])[0] = rslt.getString(9, 20);
-                ((string[]) buf[9])[0] = rslt.getMultimediaUri(10);
-                ((bool[]) buf[10])[0] = rslt.wasNull(10);
-                ((string[]) buf[11])[0] = rslt.getVarchar(11);
-                ((string[]) buf[12])[0] = rslt.getVarchar(12);
-                ((string[]) buf[13])[0] = rslt.getString(13, 20);
-                ((string[]) buf[14])[0] = rslt.getVarchar(14);
-                ((string[]) buf[15])[0] = rslt.getVarchar(15);
-                ((string[]) buf[16])[0] = rslt.getVarchar(16);
-                ((string[]) buf[17])[0] = rslt.getVarchar(17);
-                ((string[]) buf[18])[0] = rslt.getVarchar(18);
-                ((Guid[]) buf[19])[0] = rslt.getGuid(19);
-                ((bool[]) buf[20])[0] = rslt.wasNull(19);
-                ((string[]) buf[21])[0] = rslt.getVarchar(20);
-                ((Guid[]) buf[22])[0] = rslt.getGuid(21);
-                ((bool[]) buf[23])[0] = rslt.wasNull(21);
-                ((string[]) buf[24])[0] = rslt.getVarchar(22);
-                ((string[]) buf[25])[0] = rslt.getString(23, 20);
-                ((Guid[]) buf[26])[0] = rslt.getGuid(24);
+                ((bool[]) buf[4])[0] = rslt.wasNull(4);
+                ((string[]) buf[5])[0] = rslt.getVarchar(5);
+                ((DateTime[]) buf[6])[0] = rslt.getGXDate(6);
+                ((string[]) buf[7])[0] = rslt.getVarchar(7);
+                ((string[]) buf[8])[0] = rslt.getVarchar(8);
+                ((string[]) buf[9])[0] = rslt.getString(9, 20);
+                ((string[]) buf[10])[0] = rslt.getMultimediaUri(10);
+                ((bool[]) buf[11])[0] = rslt.wasNull(10);
+                ((string[]) buf[12])[0] = rslt.getVarchar(11);
+                ((string[]) buf[13])[0] = rslt.getVarchar(12);
+                ((string[]) buf[14])[0] = rslt.getString(13, 20);
+                ((string[]) buf[15])[0] = rslt.getVarchar(14);
+                ((string[]) buf[16])[0] = rslt.getVarchar(15);
+                ((string[]) buf[17])[0] = rslt.getVarchar(16);
+                ((string[]) buf[18])[0] = rslt.getVarchar(17);
+                ((string[]) buf[19])[0] = rslt.getVarchar(18);
+                ((Guid[]) buf[20])[0] = rslt.getGuid(19);
+                ((bool[]) buf[21])[0] = rslt.wasNull(19);
+                ((string[]) buf[22])[0] = rslt.getVarchar(20);
+                ((Guid[]) buf[23])[0] = rslt.getGuid(21);
+                ((bool[]) buf[24])[0] = rslt.wasNull(21);
+                ((string[]) buf[25])[0] = rslt.getVarchar(22);
+                ((string[]) buf[26])[0] = rslt.getString(23, 20);
+                ((Guid[]) buf[27])[0] = rslt.getGuid(24);
                 return;
        }
     }

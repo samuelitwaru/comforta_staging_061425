@@ -198,10 +198,6 @@ namespace GeneXus.Programs {
             {
                AV14TFResidentPackageModules_Sel = AV30GridStateFilterValue.gxTpr_Value;
             }
-            else if ( StringUtil.StrCmp(AV30GridStateFilterValue.gxTpr_Name, "TFRESIDENTPACKAGEDEFAULT_SEL") == 0 )
-            {
-               AV15TFResidentPackageDefault_Sel = (short)(Math.Round(NumberUtil.Val( AV30GridStateFilterValue.gxTpr_Value, "."), 18, MidpointRounding.ToEven));
-            }
             AV39GXV1 = (int)(AV39GXV1+1);
          }
       }
@@ -217,22 +213,18 @@ namespace GeneXus.Programs {
          AV43Trn_residentpackagewwds_3_tfresidentpackagename_sel = AV12TFResidentPackageName_Sel;
          AV44Trn_residentpackagewwds_4_tfresidentpackagemodules = AV13TFResidentPackageModules;
          AV45Trn_residentpackagewwds_5_tfresidentpackagemodules_sel = AV14TFResidentPackageModules_Sel;
-         AV46Trn_residentpackagewwds_6_tfresidentpackagedefault_sel = AV15TFResidentPackageDefault_Sel;
-         AV47Udparg7 = new prc_getuserlocationid(context).executeUdp( );
+         AV46Udparg6 = new prc_getuserlocationid(context).executeUdp( );
          pr_default.dynParam(0, new Object[]{ new Object[]{
                                               AV41Trn_residentpackagewwds_1_filterfulltext ,
                                               AV43Trn_residentpackagewwds_3_tfresidentpackagename_sel ,
                                               AV42Trn_residentpackagewwds_2_tfresidentpackagename ,
                                               AV45Trn_residentpackagewwds_5_tfresidentpackagemodules_sel ,
                                               AV44Trn_residentpackagewwds_4_tfresidentpackagemodules ,
-                                              AV46Trn_residentpackagewwds_6_tfresidentpackagedefault_sel ,
                                               A531ResidentPackageName ,
                                               A532ResidentPackageModules ,
-                                              A533ResidentPackageDefault ,
                                               A528SG_LocationId ,
-                                              AV47Udparg7 } ,
+                                              AV46Udparg6 } ,
                                               new int[]{
-                                              TypeConstants.SHORT, TypeConstants.BOOLEAN
                                               }
          });
          lV41Trn_residentpackagewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV41Trn_residentpackagewwds_1_filterfulltext), "%", "");
@@ -240,13 +232,12 @@ namespace GeneXus.Programs {
          lV42Trn_residentpackagewwds_2_tfresidentpackagename = StringUtil.Concat( StringUtil.RTrim( AV42Trn_residentpackagewwds_2_tfresidentpackagename), "%", "");
          lV44Trn_residentpackagewwds_4_tfresidentpackagemodules = StringUtil.Concat( StringUtil.RTrim( AV44Trn_residentpackagewwds_4_tfresidentpackagemodules), "%", "");
          /* Using cursor P00B52 */
-         pr_default.execute(0, new Object[] {AV47Udparg7, lV41Trn_residentpackagewwds_1_filterfulltext, lV41Trn_residentpackagewwds_1_filterfulltext, lV42Trn_residentpackagewwds_2_tfresidentpackagename, AV43Trn_residentpackagewwds_3_tfresidentpackagename_sel, lV44Trn_residentpackagewwds_4_tfresidentpackagemodules, AV45Trn_residentpackagewwds_5_tfresidentpackagemodules_sel});
+         pr_default.execute(0, new Object[] {AV46Udparg6, lV41Trn_residentpackagewwds_1_filterfulltext, lV41Trn_residentpackagewwds_1_filterfulltext, lV42Trn_residentpackagewwds_2_tfresidentpackagename, AV43Trn_residentpackagewwds_3_tfresidentpackagename_sel, lV44Trn_residentpackagewwds_4_tfresidentpackagemodules, AV45Trn_residentpackagewwds_5_tfresidentpackagemodules_sel});
          while ( (pr_default.getStatus(0) != 101) )
          {
             BRKB52 = false;
             A528SG_LocationId = P00B52_A528SG_LocationId[0];
             A531ResidentPackageName = P00B52_A531ResidentPackageName[0];
-            A533ResidentPackageDefault = P00B52_A533ResidentPackageDefault[0];
             A532ResidentPackageModules = P00B52_A532ResidentPackageModules[0];
             A527ResidentPackageId = P00B52_A527ResidentPackageId[0];
             AV26count = 0;
@@ -293,22 +284,18 @@ namespace GeneXus.Programs {
          AV43Trn_residentpackagewwds_3_tfresidentpackagename_sel = AV12TFResidentPackageName_Sel;
          AV44Trn_residentpackagewwds_4_tfresidentpackagemodules = AV13TFResidentPackageModules;
          AV45Trn_residentpackagewwds_5_tfresidentpackagemodules_sel = AV14TFResidentPackageModules_Sel;
-         AV46Trn_residentpackagewwds_6_tfresidentpackagedefault_sel = AV15TFResidentPackageDefault_Sel;
-         AV47Udparg7 = new prc_getuserlocationid(context).executeUdp( );
+         AV46Udparg6 = new prc_getuserlocationid(context).executeUdp( );
          pr_default.dynParam(1, new Object[]{ new Object[]{
                                               AV41Trn_residentpackagewwds_1_filterfulltext ,
                                               AV43Trn_residentpackagewwds_3_tfresidentpackagename_sel ,
                                               AV42Trn_residentpackagewwds_2_tfresidentpackagename ,
                                               AV45Trn_residentpackagewwds_5_tfresidentpackagemodules_sel ,
                                               AV44Trn_residentpackagewwds_4_tfresidentpackagemodules ,
-                                              AV46Trn_residentpackagewwds_6_tfresidentpackagedefault_sel ,
                                               A531ResidentPackageName ,
                                               A532ResidentPackageModules ,
-                                              A533ResidentPackageDefault ,
                                               A528SG_LocationId ,
-                                              AV47Udparg7 } ,
+                                              AV46Udparg6 } ,
                                               new int[]{
-                                              TypeConstants.SHORT, TypeConstants.BOOLEAN
                                               }
          });
          lV41Trn_residentpackagewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV41Trn_residentpackagewwds_1_filterfulltext), "%", "");
@@ -316,13 +303,12 @@ namespace GeneXus.Programs {
          lV42Trn_residentpackagewwds_2_tfresidentpackagename = StringUtil.Concat( StringUtil.RTrim( AV42Trn_residentpackagewwds_2_tfresidentpackagename), "%", "");
          lV44Trn_residentpackagewwds_4_tfresidentpackagemodules = StringUtil.Concat( StringUtil.RTrim( AV44Trn_residentpackagewwds_4_tfresidentpackagemodules), "%", "");
          /* Using cursor P00B53 */
-         pr_default.execute(1, new Object[] {AV47Udparg7, lV41Trn_residentpackagewwds_1_filterfulltext, lV41Trn_residentpackagewwds_1_filterfulltext, lV42Trn_residentpackagewwds_2_tfresidentpackagename, AV43Trn_residentpackagewwds_3_tfresidentpackagename_sel, lV44Trn_residentpackagewwds_4_tfresidentpackagemodules, AV45Trn_residentpackagewwds_5_tfresidentpackagemodules_sel});
+         pr_default.execute(1, new Object[] {AV46Udparg6, lV41Trn_residentpackagewwds_1_filterfulltext, lV41Trn_residentpackagewwds_1_filterfulltext, lV42Trn_residentpackagewwds_2_tfresidentpackagename, AV43Trn_residentpackagewwds_3_tfresidentpackagename_sel, lV44Trn_residentpackagewwds_4_tfresidentpackagemodules, AV45Trn_residentpackagewwds_5_tfresidentpackagemodules_sel});
          while ( (pr_default.getStatus(1) != 101) )
          {
             BRKB54 = false;
             A528SG_LocationId = P00B53_A528SG_LocationId[0];
             A532ResidentPackageModules = P00B53_A532ResidentPackageModules[0];
-            A533ResidentPackageDefault = P00B53_A533ResidentPackageDefault[0];
             A531ResidentPackageName = P00B53_A531ResidentPackageName[0];
             A527ResidentPackageId = P00B53_A527ResidentPackageId[0];
             AV26count = 0;
@@ -391,7 +377,7 @@ namespace GeneXus.Programs {
          AV43Trn_residentpackagewwds_3_tfresidentpackagename_sel = "";
          AV44Trn_residentpackagewwds_4_tfresidentpackagemodules = "";
          AV45Trn_residentpackagewwds_5_tfresidentpackagemodules_sel = "";
-         AV47Udparg7 = Guid.Empty;
+         AV46Udparg6 = Guid.Empty;
          lV41Trn_residentpackagewwds_1_filterfulltext = "";
          lV42Trn_residentpackagewwds_2_tfresidentpackagename = "";
          lV44Trn_residentpackagewwds_4_tfresidentpackagemodules = "";
@@ -400,23 +386,21 @@ namespace GeneXus.Programs {
          A528SG_LocationId = Guid.Empty;
          P00B52_A528SG_LocationId = new Guid[] {Guid.Empty} ;
          P00B52_A531ResidentPackageName = new string[] {""} ;
-         P00B52_A533ResidentPackageDefault = new bool[] {false} ;
          P00B52_A532ResidentPackageModules = new string[] {""} ;
          P00B52_A527ResidentPackageId = new Guid[] {Guid.Empty} ;
          A527ResidentPackageId = Guid.Empty;
          AV21Option = "";
          P00B53_A528SG_LocationId = new Guid[] {Guid.Empty} ;
          P00B53_A532ResidentPackageModules = new string[] {""} ;
-         P00B53_A533ResidentPackageDefault = new bool[] {false} ;
          P00B53_A531ResidentPackageName = new string[] {""} ;
          P00B53_A527ResidentPackageId = new Guid[] {Guid.Empty} ;
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.trn_residentpackagewwgetfilterdata__default(),
             new Object[][] {
                 new Object[] {
-               P00B52_A528SG_LocationId, P00B52_A531ResidentPackageName, P00B52_A533ResidentPackageDefault, P00B52_A532ResidentPackageModules, P00B52_A527ResidentPackageId
+               P00B52_A528SG_LocationId, P00B52_A531ResidentPackageName, P00B52_A532ResidentPackageModules, P00B52_A527ResidentPackageId
                }
                , new Object[] {
-               P00B53_A528SG_LocationId, P00B53_A532ResidentPackageModules, P00B53_A533ResidentPackageDefault, P00B53_A531ResidentPackageName, P00B53_A527ResidentPackageId
+               P00B53_A528SG_LocationId, P00B53_A532ResidentPackageModules, P00B53_A531ResidentPackageName, P00B53_A527ResidentPackageId
                }
             }
          );
@@ -426,12 +410,9 @@ namespace GeneXus.Programs {
       private short AV19MaxItems ;
       private short AV18PageIndex ;
       private short AV17SkipItems ;
-      private short AV15TFResidentPackageDefault_Sel ;
-      private short AV46Trn_residentpackagewwds_6_tfresidentpackagedefault_sel ;
       private int AV39GXV1 ;
       private long AV26count ;
       private bool returnInSub ;
-      private bool A533ResidentPackageDefault ;
       private bool BRKB52 ;
       private bool BRKB54 ;
       private string AV35OptionsJson ;
@@ -457,7 +438,7 @@ namespace GeneXus.Programs {
       private string lV44Trn_residentpackagewwds_4_tfresidentpackagemodules ;
       private string A531ResidentPackageName ;
       private string AV21Option ;
-      private Guid AV47Udparg7 ;
+      private Guid AV46Udparg6 ;
       private Guid A528SG_LocationId ;
       private Guid A527ResidentPackageId ;
       private IGxSession AV27Session ;
@@ -473,12 +454,10 @@ namespace GeneXus.Programs {
       private IDataStoreProvider pr_default ;
       private Guid[] P00B52_A528SG_LocationId ;
       private string[] P00B52_A531ResidentPackageName ;
-      private bool[] P00B52_A533ResidentPackageDefault ;
       private string[] P00B52_A532ResidentPackageModules ;
       private Guid[] P00B52_A527ResidentPackageId ;
       private Guid[] P00B53_A528SG_LocationId ;
       private string[] P00B53_A532ResidentPackageModules ;
-      private bool[] P00B53_A533ResidentPackageDefault ;
       private string[] P00B53_A531ResidentPackageName ;
       private Guid[] P00B53_A527ResidentPackageId ;
       private string aP3_OptionsJson ;
@@ -494,19 +473,17 @@ namespace GeneXus.Programs {
                                              string AV42Trn_residentpackagewwds_2_tfresidentpackagename ,
                                              string AV45Trn_residentpackagewwds_5_tfresidentpackagemodules_sel ,
                                              string AV44Trn_residentpackagewwds_4_tfresidentpackagemodules ,
-                                             short AV46Trn_residentpackagewwds_6_tfresidentpackagedefault_sel ,
                                              string A531ResidentPackageName ,
                                              string A532ResidentPackageModules ,
-                                             bool A533ResidentPackageDefault ,
                                              Guid A528SG_LocationId ,
-                                             Guid AV47Udparg7 )
+                                             Guid AV46Udparg6 )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
          short[] GXv_int1 = new short[7];
          Object[] GXv_Object2 = new Object[2];
-         scmdbuf = "SELECT SG_LocationId, ResidentPackageName, ResidentPackageDefault, ResidentPackageModules, ResidentPackageId FROM Trn_ResidentPackage";
-         AddWhere(sWhereString, "(SG_LocationId = :AV47Udparg7)");
+         scmdbuf = "SELECT SG_LocationId, ResidentPackageName, ResidentPackageModules, ResidentPackageId FROM Trn_ResidentPackage";
+         AddWhere(sWhereString, "(SG_LocationId = :AV46Udparg6)");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV41Trn_residentpackagewwds_1_filterfulltext)) )
          {
             AddWhere(sWhereString, "(( LOWER(ResidentPackageName) like '%' || LOWER(:lV41Trn_residentpackagewwds_1_filterfulltext)) or ( LOWER(ResidentPackageModules) like '%' || LOWER(:lV41Trn_residentpackagewwds_1_filterfulltext)))");
@@ -556,14 +533,6 @@ namespace GeneXus.Programs {
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from ResidentPackageModules))=0))");
          }
-         if ( AV46Trn_residentpackagewwds_6_tfresidentpackagedefault_sel == 1 )
-         {
-            AddWhere(sWhereString, "(ResidentPackageDefault = TRUE)");
-         }
-         if ( AV46Trn_residentpackagewwds_6_tfresidentpackagedefault_sel == 2 )
-         {
-            AddWhere(sWhereString, "(ResidentPackageDefault = FALSE)");
-         }
          scmdbuf += sWhereString;
          scmdbuf += " ORDER BY ResidentPackageName";
          GXv_Object2[0] = scmdbuf;
@@ -577,19 +546,17 @@ namespace GeneXus.Programs {
                                              string AV42Trn_residentpackagewwds_2_tfresidentpackagename ,
                                              string AV45Trn_residentpackagewwds_5_tfresidentpackagemodules_sel ,
                                              string AV44Trn_residentpackagewwds_4_tfresidentpackagemodules ,
-                                             short AV46Trn_residentpackagewwds_6_tfresidentpackagedefault_sel ,
                                              string A531ResidentPackageName ,
                                              string A532ResidentPackageModules ,
-                                             bool A533ResidentPackageDefault ,
                                              Guid A528SG_LocationId ,
-                                             Guid AV47Udparg7 )
+                                             Guid AV46Udparg6 )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
          short[] GXv_int3 = new short[7];
          Object[] GXv_Object4 = new Object[2];
-         scmdbuf = "SELECT SG_LocationId, ResidentPackageModules, ResidentPackageDefault, ResidentPackageName, ResidentPackageId FROM Trn_ResidentPackage";
-         AddWhere(sWhereString, "(SG_LocationId = :AV47Udparg7)");
+         scmdbuf = "SELECT SG_LocationId, ResidentPackageModules, ResidentPackageName, ResidentPackageId FROM Trn_ResidentPackage";
+         AddWhere(sWhereString, "(SG_LocationId = :AV46Udparg6)");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV41Trn_residentpackagewwds_1_filterfulltext)) )
          {
             AddWhere(sWhereString, "(( LOWER(ResidentPackageName) like '%' || LOWER(:lV41Trn_residentpackagewwds_1_filterfulltext)) or ( LOWER(ResidentPackageModules) like '%' || LOWER(:lV41Trn_residentpackagewwds_1_filterfulltext)))");
@@ -639,14 +606,6 @@ namespace GeneXus.Programs {
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from ResidentPackageModules))=0))");
          }
-         if ( AV46Trn_residentpackagewwds_6_tfresidentpackagedefault_sel == 1 )
-         {
-            AddWhere(sWhereString, "(ResidentPackageDefault = TRUE)");
-         }
-         if ( AV46Trn_residentpackagewwds_6_tfresidentpackagedefault_sel == 2 )
-         {
-            AddWhere(sWhereString, "(ResidentPackageDefault = FALSE)");
-         }
          scmdbuf += sWhereString;
          scmdbuf += " ORDER BY ResidentPackageModules";
          GXv_Object4[0] = scmdbuf;
@@ -661,9 +620,9 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_P00B52(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (short)dynConstraints[5] , (string)dynConstraints[6] , (string)dynConstraints[7] , (bool)dynConstraints[8] , (Guid)dynConstraints[9] , (Guid)dynConstraints[10] );
+                     return conditional_P00B52(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (Guid)dynConstraints[7] , (Guid)dynConstraints[8] );
                case 1 :
-                     return conditional_P00B53(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (short)dynConstraints[5] , (string)dynConstraints[6] , (string)dynConstraints[7] , (bool)dynConstraints[8] , (Guid)dynConstraints[9] , (Guid)dynConstraints[10] );
+                     return conditional_P00B53(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (Guid)dynConstraints[7] , (Guid)dynConstraints[8] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -684,7 +643,7 @@ namespace GeneXus.Programs {
        {
           Object[] prmP00B52;
           prmP00B52 = new Object[] {
-          new ParDef("AV47Udparg7",GXType.UniqueIdentifier,36,0) ,
+          new ParDef("AV46Udparg6",GXType.UniqueIdentifier,36,0) ,
           new ParDef("lV41Trn_residentpackagewwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV41Trn_residentpackagewwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV42Trn_residentpackagewwds_2_tfresidentpackagename",GXType.VarChar,100,0) ,
@@ -694,7 +653,7 @@ namespace GeneXus.Programs {
           };
           Object[] prmP00B53;
           prmP00B53 = new Object[] {
-          new ParDef("AV47Udparg7",GXType.UniqueIdentifier,36,0) ,
+          new ParDef("AV46Udparg6",GXType.UniqueIdentifier,36,0) ,
           new ParDef("lV41Trn_residentpackagewwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV41Trn_residentpackagewwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV42Trn_residentpackagewwds_2_tfresidentpackagename",GXType.VarChar,100,0) ,
@@ -718,16 +677,14 @@ namespace GeneXus.Programs {
              case 0 :
                 ((Guid[]) buf[0])[0] = rslt.getGuid(1);
                 ((string[]) buf[1])[0] = rslt.getVarchar(2);
-                ((bool[]) buf[2])[0] = rslt.getBool(3);
-                ((string[]) buf[3])[0] = rslt.getLongVarchar(4);
-                ((Guid[]) buf[4])[0] = rslt.getGuid(5);
+                ((string[]) buf[2])[0] = rslt.getLongVarchar(3);
+                ((Guid[]) buf[3])[0] = rslt.getGuid(4);
                 return;
              case 1 :
                 ((Guid[]) buf[0])[0] = rslt.getGuid(1);
                 ((string[]) buf[1])[0] = rslt.getLongVarchar(2);
-                ((bool[]) buf[2])[0] = rslt.getBool(3);
-                ((string[]) buf[3])[0] = rslt.getVarchar(4);
-                ((Guid[]) buf[4])[0] = rslt.getGuid(5);
+                ((string[]) buf[2])[0] = rslt.getVarchar(3);
+                ((Guid[]) buf[3])[0] = rslt.getGuid(4);
                 return;
        }
     }

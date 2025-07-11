@@ -337,6 +337,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "vMODE", StringUtil.RTrim( Gx_mode));
          GxWebStd.gx_hidden_field( context, "vCALENDAREVENTSJSON", AV9CalendarEventsJson);
          GxWebStd.gx_hidden_field( context, "vDISABLEDDAYSJSON", AV22DisabledDaysJson);
+         GxWebStd.gx_boolean_hidden_field( context, "vISEVENTSELECTED", AV39isEventSelected);
          GxWebStd.gx_hidden_field( context, "vACTIONSELECTED", AV5ActionSelected);
          if ( context.isAjaxRequest( ) )
          {
@@ -1243,6 +1244,8 @@ namespace GeneXus.Programs {
          if (returnInSub) return;
          edtavDate_showingdatesfrom_Visible = 0;
          AssignProp("", false, edtavDate_showingdatesfrom_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavDate_showingdatesfrom_Visible), 5, 0), true);
+         AV39isEventSelected = false;
+         AssignAttri("", false, "AV39isEventSelected", AV39isEventSelected);
       }
 
       protected void E214U2( )
@@ -1461,6 +1464,8 @@ namespace GeneXus.Programs {
       {
          /* Createevent_modal_Close Routine */
          returnInSub = false;
+         AV39isEventSelected = false;
+         AssignAttri("", false, "AV39isEventSelected", AV39isEventSelected);
          if ( StringUtil.StrCmp(Createevent_modal_Result, "OK") == 0 )
          {
             AV29ForceLoadDots = true;
@@ -1517,14 +1522,19 @@ namespace GeneXus.Programs {
       {
          /* Calendaruc_Eventselected Routine */
          returnInSub = false;
-         AV7CalendarEventId = Calendaruc_Itemselected;
-         AssignAttri("", false, "AV7CalendarEventId", AV7CalendarEventId);
-         Gx_mode = "DSP";
-         AssignAttri("", false, "Gx_mode", Gx_mode);
-         GXt_SdtWWP_Calendar_Events_Item2 = AV8CalendarEvents;
-         new GeneXus.Programs.workwithplus.wwp_calendar_getevent(context ).execute(  AV7CalendarEventId, out  GXt_SdtWWP_Calendar_Events_Item2) ;
-         AV8CalendarEvents = GXt_SdtWWP_Calendar_Events_Item2;
-         this.executeUsercontrolMethod("", false, "CREATEEVENT_MODALContainer", "Confirm", "", new Object[] {});
+         if ( ! AV39isEventSelected )
+         {
+            AV7CalendarEventId = Calendaruc_Itemselected;
+            AssignAttri("", false, "AV7CalendarEventId", AV7CalendarEventId);
+            Gx_mode = "DSP";
+            AssignAttri("", false, "Gx_mode", Gx_mode);
+            GXt_SdtWWP_Calendar_Events_Item2 = AV8CalendarEvents;
+            new GeneXus.Programs.workwithplus.wwp_calendar_getevent(context ).execute(  AV7CalendarEventId, out  GXt_SdtWWP_Calendar_Events_Item2) ;
+            AV8CalendarEvents = GXt_SdtWWP_Calendar_Events_Item2;
+            this.executeUsercontrolMethod("", false, "CREATEEVENT_MODALContainer", "Confirm", "", new Object[] {});
+            AV39isEventSelected = true;
+            AssignAttri("", false, "AV39isEventSelected", AV39isEventSelected);
+         }
          /*  Sending Event outputs  */
       }
 
@@ -1833,7 +1843,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257212552867", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257111148410", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1849,7 +1859,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wp_calendaragenda.js", "?20257212552867", false, true);
+         context.AddJavascriptSource("wp_calendaragenda.js", "?20257111148410", false, true);
          context.AddJavascriptSource("DVelop/Calendar/index.global.min.js", "", false, true);
          context.AddJavascriptSource("DVelop/Calendar/WWPCalendarRender.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/locales.js", "", false, true);
@@ -2011,13 +2021,13 @@ namespace GeneXus.Programs {
          setEventMetadata("'DOUASEARCH'","""{"handler":"E244U2","iparms":[{"av":"Calendaruc_Filtermode","ctrl":"CALENDARUC","prop":"FilterMode"},{"av":"AV29ForceLoadDots","fld":"vFORCELOADDOTS"},{"av":"AV27EventsLoaded","fld":"vEVENTSLOADED"},{"av":"AV10CalendarLoadFromDate","fld":"vCALENDARLOADFROMDATE"},{"av":"AV11CalendarLoadToDate","fld":"vCALENDARLOADTODATE"},{"av":"cmbavDatetypefilter"},{"av":"AV20DateTypeFilter","fld":"vDATETYPEFILTER","pic":"9"},{"av":"Gx_date","fld":"vTODAY","hsh":true},{"av":"AV14DateFilter","fld":"vDATEFILTER"},{"av":"AV15DateRangeFilter","fld":"vDATERANGEFILTER"},{"av":"AV17DateRangeFilter_To","fld":"vDATERANGEFILTER_TO"},{"av":"AV36TitleFilter","fld":"vTITLEFILTER"},{"av":"AV19DateToSearchFrom","fld":"vDATETOSEARCHFROM"},{"av":"AV18DatesToSearchTo","fld":"vDATESTOSEARCHTO"},{"av":"AV13Date_ShowingDatesFrom","fld":"vDATE_SHOWINGDATESFROM"},{"av":"AV31LoadedDotsFromDate","fld":"vLOADEDDOTSFROMDATE"},{"av":"AV32LoadedDotsToDate","fld":"vLOADEDDOTSTODATE"},{"av":"AV33LoadedFromDate","fld":"vLOADEDFROMDATE"},{"av":"AV34LoadedToDate","fld":"vLOADEDTODATE"},{"av":"Calendaruc_Defaulteventstyle","ctrl":"CALENDARUC","prop":"DefaultEventStyle"},{"av":"AV25Events","fld":"vEVENTS"}]""");
          setEventMetadata("'DOUASEARCH'",""","oparms":[{"av":"Calendaruc_Filtermode","ctrl":"CALENDARUC","prop":"FilterMode"},{"av":"AV29ForceLoadDots","fld":"vFORCELOADDOTS"},{"ctrl":"BTNDUMMYDELETE","prop":"Visible"},{"ctrl":"BTNUACLEAR","prop":"Visible"},{"av":"AV27EventsLoaded","fld":"vEVENTSLOADED"},{"av":"AV33LoadedFromDate","fld":"vLOADEDFROMDATE"},{"av":"AV34LoadedToDate","fld":"vLOADEDTODATE"},{"av":"AV25Events","fld":"vEVENTS"},{"av":"AV31LoadedDotsFromDate","fld":"vLOADEDDOTSFROMDATE"},{"av":"AV32LoadedDotsToDate","fld":"vLOADEDDOTSTODATE"},{"av":"AV21DisabledDays","fld":"vDISABLEDDAYS"},{"av":"AV22DisabledDaysJson","fld":"vDISABLEDDAYSJSON"},{"av":"AV19DateToSearchFrom","fld":"vDATETOSEARCHFROM"},{"av":"AV18DatesToSearchTo","fld":"vDATESTOSEARCHTO"}]}""");
          setEventMetadata("CREATEEVENT_MODAL.CLOSE","""{"handler":"E184U2","iparms":[{"av":"Createevent_modal_Result","ctrl":"CREATEEVENT_MODAL","prop":"Result"},{"av":"AV29ForceLoadDots","fld":"vFORCELOADDOTS"},{"av":"AV27EventsLoaded","fld":"vEVENTSLOADED"},{"av":"AV10CalendarLoadFromDate","fld":"vCALENDARLOADFROMDATE"},{"av":"AV11CalendarLoadToDate","fld":"vCALENDARLOADTODATE"},{"av":"Calendaruc_Filtermode","ctrl":"CALENDARUC","prop":"FilterMode"},{"av":"AV7CalendarEventId","fld":"vCALENDAREVENTID"},{"av":"cmbavDatetypefilter"},{"av":"AV20DateTypeFilter","fld":"vDATETYPEFILTER","pic":"9"},{"av":"Gx_date","fld":"vTODAY","hsh":true},{"av":"AV14DateFilter","fld":"vDATEFILTER"},{"av":"AV15DateRangeFilter","fld":"vDATERANGEFILTER"},{"av":"AV17DateRangeFilter_To","fld":"vDATERANGEFILTER_TO"},{"av":"AV36TitleFilter","fld":"vTITLEFILTER"},{"av":"AV19DateToSearchFrom","fld":"vDATETOSEARCHFROM"},{"av":"AV18DatesToSearchTo","fld":"vDATESTOSEARCHTO"},{"av":"AV13Date_ShowingDatesFrom","fld":"vDATE_SHOWINGDATESFROM"},{"av":"AV31LoadedDotsFromDate","fld":"vLOADEDDOTSFROMDATE"},{"av":"AV32LoadedDotsToDate","fld":"vLOADEDDOTSTODATE"},{"av":"AV33LoadedFromDate","fld":"vLOADEDFROMDATE"},{"av":"AV34LoadedToDate","fld":"vLOADEDTODATE"},{"av":"Calendaruc_Defaulteventstyle","ctrl":"CALENDARUC","prop":"DefaultEventStyle"},{"av":"AV25Events","fld":"vEVENTS"}]""");
-         setEventMetadata("CREATEEVENT_MODAL.CLOSE",""","oparms":[{"av":"AV29ForceLoadDots","fld":"vFORCELOADDOTS"},{"av":"AV27EventsLoaded","fld":"vEVENTSLOADED"},{"av":"AV33LoadedFromDate","fld":"vLOADEDFROMDATE"},{"av":"AV34LoadedToDate","fld":"vLOADEDTODATE"},{"av":"AV25Events","fld":"vEVENTS"},{"av":"AV31LoadedDotsFromDate","fld":"vLOADEDDOTSFROMDATE"},{"av":"AV32LoadedDotsToDate","fld":"vLOADEDDOTSTODATE"},{"av":"AV21DisabledDays","fld":"vDISABLEDDAYS"},{"av":"AV22DisabledDaysJson","fld":"vDISABLEDDAYSJSON"},{"av":"Dvelop_confirmpanel_btndummydelete_Confirmationtext","ctrl":"DVELOP_CONFIRMPANEL_BTNDUMMYDELETE","prop":"ConfirmationText"},{"av":"AV19DateToSearchFrom","fld":"vDATETOSEARCHFROM"},{"av":"AV18DatesToSearchTo","fld":"vDATESTOSEARCHTO"}]}""");
+         setEventMetadata("CREATEEVENT_MODAL.CLOSE",""","oparms":[{"av":"AV39isEventSelected","fld":"vISEVENTSELECTED"},{"av":"AV29ForceLoadDots","fld":"vFORCELOADDOTS"},{"av":"AV27EventsLoaded","fld":"vEVENTSLOADED"},{"av":"AV33LoadedFromDate","fld":"vLOADEDFROMDATE"},{"av":"AV34LoadedToDate","fld":"vLOADEDTODATE"},{"av":"AV25Events","fld":"vEVENTS"},{"av":"AV31LoadedDotsFromDate","fld":"vLOADEDDOTSFROMDATE"},{"av":"AV32LoadedDotsToDate","fld":"vLOADEDDOTSTODATE"},{"av":"AV21DisabledDays","fld":"vDISABLEDDAYS"},{"av":"AV22DisabledDaysJson","fld":"vDISABLEDDAYSJSON"},{"av":"Dvelop_confirmpanel_btndummydelete_Confirmationtext","ctrl":"DVELOP_CONFIRMPANEL_BTNDUMMYDELETE","prop":"ConfirmationText"},{"av":"AV19DateToSearchFrom","fld":"vDATETOSEARCHFROM"},{"av":"AV18DatesToSearchTo","fld":"vDATESTOSEARCHTO"}]}""");
          setEventMetadata("VDATE.CONTROLVALUECHANGED","""{"handler":"E254U2","iparms":[{"av":"AV12Date","fld":"vDATE"}]""");
          setEventMetadata("VDATE.CONTROLVALUECHANGED",""","oparms":[{"av":"AV6CalendarCurrentDate","fld":"vCALENDARCURRENTDATE"}]}""");
          setEventMetadata("CALENDARUC.EVENTDATEUPDATED","""{"handler":"E144U2","iparms":[{"av":"Calendaruc_Datetimeselected","ctrl":"CALENDARUC","prop":"DateTimeSelected"},{"av":"AV29ForceLoadDots","fld":"vFORCELOADDOTS"},{"av":"AV27EventsLoaded","fld":"vEVENTSLOADED"},{"av":"AV10CalendarLoadFromDate","fld":"vCALENDARLOADFROMDATE"},{"av":"AV11CalendarLoadToDate","fld":"vCALENDARLOADTODATE"},{"av":"Calendaruc_Filtermode","ctrl":"CALENDARUC","prop":"FilterMode"},{"av":"cmbavDatetypefilter"},{"av":"AV20DateTypeFilter","fld":"vDATETYPEFILTER","pic":"9"},{"av":"Gx_date","fld":"vTODAY","hsh":true},{"av":"AV14DateFilter","fld":"vDATEFILTER"},{"av":"AV15DateRangeFilter","fld":"vDATERANGEFILTER"},{"av":"AV17DateRangeFilter_To","fld":"vDATERANGEFILTER_TO"},{"av":"AV36TitleFilter","fld":"vTITLEFILTER"},{"av":"AV19DateToSearchFrom","fld":"vDATETOSEARCHFROM"},{"av":"AV18DatesToSearchTo","fld":"vDATESTOSEARCHTO"},{"av":"AV13Date_ShowingDatesFrom","fld":"vDATE_SHOWINGDATESFROM"},{"av":"AV31LoadedDotsFromDate","fld":"vLOADEDDOTSFROMDATE"},{"av":"AV32LoadedDotsToDate","fld":"vLOADEDDOTSTODATE"},{"av":"AV33LoadedFromDate","fld":"vLOADEDFROMDATE"},{"av":"AV34LoadedToDate","fld":"vLOADEDTODATE"},{"av":"Calendaruc_Defaulteventstyle","ctrl":"CALENDARUC","prop":"DefaultEventStyle"},{"av":"AV25Events","fld":"vEVENTS"}]""");
          setEventMetadata("CALENDARUC.EVENTDATEUPDATED",""","oparms":[{"av":"AV29ForceLoadDots","fld":"vFORCELOADDOTS"},{"av":"AV27EventsLoaded","fld":"vEVENTSLOADED"},{"av":"AV33LoadedFromDate","fld":"vLOADEDFROMDATE"},{"av":"AV34LoadedToDate","fld":"vLOADEDTODATE"},{"av":"AV25Events","fld":"vEVENTS"},{"av":"AV31LoadedDotsFromDate","fld":"vLOADEDDOTSFROMDATE"},{"av":"AV32LoadedDotsToDate","fld":"vLOADEDDOTSTODATE"},{"av":"AV21DisabledDays","fld":"vDISABLEDDAYS"},{"av":"AV22DisabledDaysJson","fld":"vDISABLEDDAYSJSON"},{"av":"AV19DateToSearchFrom","fld":"vDATETOSEARCHFROM"},{"av":"AV18DatesToSearchTo","fld":"vDATESTOSEARCHTO"}]}""");
-         setEventMetadata("CALENDARUC.EVENTSELECTED","""{"handler":"E134U2","iparms":[{"av":"Calendaruc_Itemselected","ctrl":"CALENDARUC","prop":"ItemSelected"}]""");
-         setEventMetadata("CALENDARUC.EVENTSELECTED",""","oparms":[{"av":"AV7CalendarEventId","fld":"vCALENDAREVENTID"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"}]}""");
+         setEventMetadata("CALENDARUC.EVENTSELECTED","""{"handler":"E134U2","iparms":[{"av":"AV39isEventSelected","fld":"vISEVENTSELECTED"},{"av":"Calendaruc_Itemselected","ctrl":"CALENDARUC","prop":"ItemSelected"}]""");
+         setEventMetadata("CALENDARUC.EVENTSELECTED",""","oparms":[{"av":"AV7CalendarEventId","fld":"vCALENDAREVENTID"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"},{"av":"AV39isEventSelected","fld":"vISEVENTSELECTED"}]}""");
          setEventMetadata("CALENDARUC.DELETEEVENT","""{"handler":"E154U2","iparms":[{"av":"Calendaruc_Itemselected","ctrl":"CALENDARUC","prop":"ItemSelected"},{"av":"AV7CalendarEventId","fld":"vCALENDAREVENTID"}]""");
          setEventMetadata("CALENDARUC.DELETEEVENT",""","oparms":[{"av":"AV7CalendarEventId","fld":"vCALENDAREVENTID"},{"av":"Dvelop_confirmpanel_btndummydelete_Confirmationtext","ctrl":"DVELOP_CONFIRMPANEL_BTNDUMMYDELETE","prop":"ConfirmationText"}]}""");
          setEventMetadata("CALENDARUC.VISIBLEDATESCHANGED","""{"handler":"E164U2","iparms":[{"av":"AV10CalendarLoadFromDate","fld":"vCALENDARLOADFROMDATE"},{"av":"AV33LoadedFromDate","fld":"vLOADEDFROMDATE"},{"av":"AV11CalendarLoadToDate","fld":"vCALENDARLOADTODATE"},{"av":"AV34LoadedToDate","fld":"vLOADEDTODATE"},{"av":"AV6CalendarCurrentDate","fld":"vCALENDARCURRENTDATE"},{"av":"AV29ForceLoadDots","fld":"vFORCELOADDOTS"},{"av":"AV27EventsLoaded","fld":"vEVENTSLOADED"},{"av":"Calendaruc_Filtermode","ctrl":"CALENDARUC","prop":"FilterMode"},{"av":"cmbavDatetypefilter"},{"av":"AV20DateTypeFilter","fld":"vDATETYPEFILTER","pic":"9"},{"av":"Gx_date","fld":"vTODAY","hsh":true},{"av":"AV14DateFilter","fld":"vDATEFILTER"},{"av":"AV15DateRangeFilter","fld":"vDATERANGEFILTER"},{"av":"AV17DateRangeFilter_To","fld":"vDATERANGEFILTER_TO"},{"av":"AV36TitleFilter","fld":"vTITLEFILTER"},{"av":"AV19DateToSearchFrom","fld":"vDATETOSEARCHFROM"},{"av":"AV18DatesToSearchTo","fld":"vDATESTOSEARCHTO"},{"av":"AV13Date_ShowingDatesFrom","fld":"vDATE_SHOWINGDATESFROM"},{"av":"AV31LoadedDotsFromDate","fld":"vLOADEDDOTSFROMDATE"},{"av":"AV32LoadedDotsToDate","fld":"vLOADEDDOTSTODATE"},{"av":"Calendaruc_Defaulteventstyle","ctrl":"CALENDARUC","prop":"DefaultEventStyle"},{"av":"AV25Events","fld":"vEVENTS"}]""");
@@ -2254,6 +2264,7 @@ namespace GeneXus.Programs {
       private bool toggleJsOutput ;
       private bool AV29ForceLoadDots ;
       private bool AV27EventsLoaded ;
+      private bool AV39isEventSelected ;
       private bool Calendaruc_Selectable ;
       private bool Calendaruc_Fixedweekcount ;
       private bool Calendaruc_Enabledayheaders ;

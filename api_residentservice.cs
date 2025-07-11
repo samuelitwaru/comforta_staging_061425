@@ -1507,7 +1507,7 @@ namespace GeneXus.Programs {
 
       public void gxep_getpagetranslation( Guid aP0_DynamicTranslationPrimaryKey ,
                                            string aP1_Language ,
-                                           out SdtSDT_InfoContent aP2_SDT_InfoContent ,
+                                           out SdtSDT_TranslatedPage aP2_SDT_TranslatedPage ,
                                            out SdtSDT_Error aP3_error )
       {
          this.AV212DynamicTranslationPrimaryKey = aP0_DynamicTranslationPrimaryKey;
@@ -1515,23 +1515,23 @@ namespace GeneXus.Programs {
          AV69error = new SdtSDT_Error(context);
          initialize();
          /* GetPageTranslation Constructor */
-         new prc_getpagetranslation(context ).execute(  AV212DynamicTranslationPrimaryKey,  AV131Language, out  AV211SDT_InfoContent, out  AV69error) ;
-         aP2_SDT_InfoContent=this.AV211SDT_InfoContent;
+         new prc_getpagetranslation(context ).execute(  AV212DynamicTranslationPrimaryKey,  AV131Language, out  AV213SDT_TranslatedPage, out  AV69error) ;
+         aP2_SDT_TranslatedPage=this.AV213SDT_TranslatedPage;
          aP3_error=this.AV69error;
       }
 
       public void gxep_updatepagetranslation( Guid aP0_DynamicTranslationPrimaryKey ,
                                               string aP1_Language ,
-                                              SdtSDT_InfoContent aP2_SDT_InfoContent ,
+                                              SdtSDT_TranslatedPage aP2_SDT_TranslatedPage ,
                                               out SdtSDT_Error aP3_error )
       {
          this.AV212DynamicTranslationPrimaryKey = aP0_DynamicTranslationPrimaryKey;
          this.AV131Language = aP1_Language;
-         this.AV211SDT_InfoContent = aP2_SDT_InfoContent;
+         this.AV213SDT_TranslatedPage = aP2_SDT_TranslatedPage;
          AV69error = new SdtSDT_Error(context);
          initialize();
          /* UpdatePageTranslation Constructor */
-         new prc_updatepagetranslation(context ).execute(  AV212DynamicTranslationPrimaryKey,  AV131Language,  AV211SDT_InfoContent, out  AV69error) ;
+         new prc_updatepagetranslation(context ).execute(  AV212DynamicTranslationPrimaryKey,  AV131Language,  AV213SDT_TranslatedPage, out  AV69error) ;
          aP3_error=this.AV69error;
       }
 
@@ -2087,8 +2087,8 @@ namespace GeneXus.Programs {
       protected string aP4_result ;
       protected SdtSDT_AppVersion_PagesItem AV97MenuPage ;
       protected SdtSDT_AppVersion_PagesItem aP2_MenuPage ;
-      protected SdtSDT_InfoContent AV211SDT_InfoContent ;
-      protected SdtSDT_InfoContent aP2_SDT_InfoContent ;
+      protected SdtSDT_TranslatedPage AV213SDT_TranslatedPage ;
+      protected SdtSDT_TranslatedPage aP2_SDT_TranslatedPage ;
       protected SdtSDT_AppVersion_PagesItem aP5_MenuPage ;
       protected SdtSDT_AppVersion_PagesItem AV95ContentPage ;
       protected SdtSDT_AppVersion_PagesItem aP2_ContentPage ;

@@ -17,6 +17,7 @@ using GeneXus.XML;
 using GeneXus.Search;
 using GeneXus.Encryption;
 using GeneXus.Http.Client;
+using GeneXus.Http.Server;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
@@ -300,6 +301,15 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "gxhash_vRECORDDESCRIPTION", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV17RecordDescription, "")), context));
          GxWebStd.gx_boolean_hidden_field( context, "vISAUTHORIZED_DISCUSSIONS", AV19IsAuthorized_Discussions);
          GxWebStd.gx_hidden_field( context, "gxhash_vISAUTHORIZED_DISCUSSIONS", GetSecureSignedToken( "", AV19IsAuthorized_Discussions, context));
+         if ( context.isAjaxRequest( ) )
+         {
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vWWPCONTEXT", AV6WWPContext);
+         }
+         else
+         {
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vWWPCONTEXT", AV6WWPContext);
+         }
+         GxWebStd.gx_hidden_field( context, "gxhash_vWWPCONTEXT", GetSecureSignedToken( "", AV6WWPContext, context));
          GxWebStd.gx_hidden_field( context, "vWWPFORMTYPE", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV20WWPFormType), 1, 0, context.GetLanguageProperty( "decimal_point"), "")));
          GxWebStd.gx_hidden_field( context, "gxhash_vWWPFORMTYPE", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV20WWPFormType), "9"), context));
          GxWebStd.gx_boolean_hidden_field( context, "vWWPFORMISFORDYNAMICVALIDATIONS", AV21WWPFormIsForDynamicValidations);
@@ -325,6 +335,15 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "WWPFORMTYPE", StringUtil.LTrim( StringUtil.NToC( (decimal)(A240WWPFormType), 1, 0, context.GetLanguageProperty( "decimal_point"), "")));
          GxWebStd.gx_boolean_hidden_field( context, "vWWPFORMISFORDYNAMICVALIDATIONS", AV21WWPFormIsForDynamicValidations);
          GxWebStd.gx_hidden_field( context, "gxhash_vWWPFORMISFORDYNAMICVALIDATIONS", GetSecureSignedToken( "", AV21WWPFormIsForDynamicValidations, context));
+         if ( context.isAjaxRequest( ) )
+         {
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vWWPCONTEXT", AV6WWPContext);
+         }
+         else
+         {
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vWWPCONTEXT", AV6WWPContext);
+         }
+         GxWebStd.gx_hidden_field( context, "gxhash_vWWPCONTEXT", GetSecureSignedToken( "", AV6WWPContext, context));
          GxWebStd.gx_boolean_hidden_field( context, "vLOADALLTABS", AV12LoadAllTabs);
          GxWebStd.gx_hidden_field( context, "vSELECTEDTABCODE", StringUtil.RTrim( AV13SelectedTabCode));
          GxWebStd.gx_hidden_field( context, "vWWPFORMTYPE", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV20WWPFormType), 1, 0, context.GetLanguageProperty( "decimal_point"), "")));
@@ -1159,6 +1178,15 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "gxhash_vRECORDDESCRIPTION", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV17RecordDescription, "")), context));
          GxWebStd.gx_boolean_hidden_field( context, "vISAUTHORIZED_DISCUSSIONS", AV19IsAuthorized_Discussions);
          GxWebStd.gx_hidden_field( context, "gxhash_vISAUTHORIZED_DISCUSSIONS", GetSecureSignedToken( "", AV19IsAuthorized_Discussions, context));
+         if ( context.isAjaxRequest( ) )
+         {
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vWWPCONTEXT", AV6WWPContext);
+         }
+         else
+         {
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vWWPCONTEXT", AV6WWPContext);
+         }
+         GxWebStd.gx_hidden_field( context, "gxhash_vWWPCONTEXT", GetSecureSignedToken( "", AV6WWPContext, context));
       }
 
       protected void before_start_formulas( )
@@ -1222,18 +1250,18 @@ namespace GeneXus.Programs {
          /* Start Routine */
          returnInSub = false;
          new GeneXus.Programs.wwpbaseobjects.loadwwpcontext(context ).execute( out  AV6WWPContext) ;
-         AV24GXLvl8 = 0;
+         AV25GXLvl8 = 0;
          /* Using cursor H00B23 */
          pr_default.execute(1, new Object[] {AV20WWPFormType});
          while ( (pr_default.getStatus(1) != 101) )
          {
             A240WWPFormType = H00B23_A240WWPFormType[0];
-            AV24GXLvl8 = 1;
+            AV25GXLvl8 = 1;
             AV9Exists = true;
             pr_default.readNext(1);
          }
          pr_default.close(1);
-         if ( AV24GXLvl8 == 0 )
+         if ( AV25GXLvl8 == 0 )
          {
             Form.Caption = context.GetMessage( "WWP_RecordNotFound", "");
             AssignProp("", false, "FORM", "Caption", Form.Caption, true);
@@ -1277,6 +1305,19 @@ namespace GeneXus.Programs {
          {
             AV13SelectedTabCode = "GeneralDynamicForm";
             AssignAttri("", false, "AV13SelectedTabCode", AV13SelectedTabCode);
+            if ( AV6WWPContext.gxTpr_Isorganisationmanager )
+            {
+               AV13SelectedTabCode = "OrganisationDynamicForm";
+               AssignAttri("", false, "AV13SelectedTabCode", AV13SelectedTabCode);
+            }
+            else
+            {
+               if ( AV6WWPContext.gxTpr_Isreceptionist )
+               {
+                  AV13SelectedTabCode = "LocationDynamicForm";
+                  AssignAttri("", false, "AV13SelectedTabCode", AV13SelectedTabCode);
+               }
+            }
          }
          Tabs_Activepagecontrolname = AV13SelectedTabCode;
          ucTabs.SendProperty(context, "", false, Tabs_Internalname, "ActivePageControlName", Tabs_Activepagecontrolname);
@@ -1430,6 +1471,12 @@ namespace GeneXus.Programs {
       {
          /* 'LOADTABS' Routine */
          returnInSub = false;
+         if ( ! AV6WWPContext.gxTpr_Isorganisationmanager && ! AV6WWPContext.gxTpr_Isreceptionist )
+         {
+            this.executeUsercontrolMethod("", false, "TABSContainer", "HideTab", "", new Object[] {(short)2});
+            this.executeUsercontrolMethod("", false, "TABSContainer", "HideTab", "", new Object[] {(short)3});
+            this.executeUsercontrolMethod("", false, "TABSContainer", "HideTab", "", new Object[] {(short)4});
+         }
          if ( AV12LoadAllTabs || ( StringUtil.StrCmp(AV13SelectedTabCode, "") == 0 ) || ( StringUtil.StrCmp(AV13SelectedTabCode, "GeneralDynamicForm") == 0 ) )
          {
             /* Object Property */
@@ -1623,7 +1670,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025721313058", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202571111491154", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1639,7 +1686,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wp_dynamicform.js", "?2025721313058", false, true);
+         context.AddJavascriptSource("wp_dynamicform.js", "?202571111491154", false, true);
          context.AddJavascriptSource("shared/HistoryManager/HistoryManager.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/json2005.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/rsh.js", "", false, true);
@@ -1722,13 +1769,13 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV17RecordDescription","fld":"vRECORDDESCRIPTION","hsh":true},{"av":"AV19IsAuthorized_Discussions","fld":"vISAUTHORIZED_DISCUSSIONS","hsh":true},{"av":"AV21WWPFormIsForDynamicValidations","fld":"vWWPFORMISFORDYNAMICVALIDATIONS","hsh":true},{"av":"AV20WWPFormType","fld":"vWWPFORMTYPE","pic":"9","hsh":true},{"av":"AV8TabCode","fld":"vTABCODE","hsh":true},{"av":"A206WWPFormId","fld":"WWPFORMID","pic":"ZZZ9","hsh":true},{"av":"A207WWPFormVersionNumber","fld":"WWPFORMVERSIONNUMBER","pic":"ZZZ9","hsh":true}]""");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV17RecordDescription","fld":"vRECORDDESCRIPTION","hsh":true},{"av":"AV19IsAuthorized_Discussions","fld":"vISAUTHORIZED_DISCUSSIONS","hsh":true},{"av":"AV21WWPFormIsForDynamicValidations","fld":"vWWPFORMISFORDYNAMICVALIDATIONS","hsh":true},{"av":"AV6WWPContext","fld":"vWWPCONTEXT","hsh":true},{"av":"AV20WWPFormType","fld":"vWWPFORMTYPE","pic":"9","hsh":true},{"av":"AV8TabCode","fld":"vTABCODE","hsh":true},{"av":"A206WWPFormId","fld":"WWPFORMID","pic":"ZZZ9","hsh":true},{"av":"A207WWPFormVersionNumber","fld":"WWPFORMVERSIONNUMBER","pic":"ZZZ9","hsh":true}]""");
          setEventMetadata("REFRESH",""","oparms":[{"av":"Ddc_discussions_Icon","ctrl":"DDC_DISCUSSIONS","prop":"Icon"},{"av":"Ddc_subscriptions_Visible","ctrl":"DDC_SUBSCRIPTIONS","prop":"Visible"},{"av":"AV19IsAuthorized_Discussions","fld":"vISAUTHORIZED_DISCUSSIONS","hsh":true},{"av":"Ddc_discussions_Visible","ctrl":"DDC_DISCUSSIONS","prop":"Visible"}]}""");
          setEventMetadata("DDC_SUBSCRIPTIONS.ONLOADCOMPONENT","""{"handler":"E11B22","iparms":[{"av":"A206WWPFormId","fld":"WWPFORMID","pic":"ZZZ9","hsh":true},{"av":"A207WWPFormVersionNumber","fld":"WWPFORMVERSIONNUMBER","pic":"ZZZ9","hsh":true},{"av":"AV17RecordDescription","fld":"vRECORDDESCRIPTION","hsh":true}]""");
          setEventMetadata("DDC_SUBSCRIPTIONS.ONLOADCOMPONENT",""","oparms":[{"ctrl":"WWPAUX_WC"}]}""");
          setEventMetadata("DDC_DISCUSSIONS.ONLOADCOMPONENT","""{"handler":"E12B22","iparms":[{"av":"AV19IsAuthorized_Discussions","fld":"vISAUTHORIZED_DISCUSSIONS","hsh":true},{"av":"A206WWPFormId","fld":"WWPFORMID","pic":"ZZZ9","hsh":true},{"av":"A207WWPFormVersionNumber","fld":"WWPFORMVERSIONNUMBER","pic":"ZZZ9","hsh":true},{"av":"AV17RecordDescription","fld":"vRECORDDESCRIPTION","hsh":true},{"av":"A240WWPFormType","fld":"WWPFORMTYPE","pic":"9"},{"av":"AV21WWPFormIsForDynamicValidations","fld":"vWWPFORMISFORDYNAMICVALIDATIONS","hsh":true}]""");
          setEventMetadata("DDC_DISCUSSIONS.ONLOADCOMPONENT",""","oparms":[{"ctrl":"WWPAUX_WC"}]}""");
-         setEventMetadata("TABS.TABCHANGED","""{"handler":"E13B22","iparms":[{"av":"Tabs_Activepagecontrolname","ctrl":"TABS","prop":"ActivePageControlName"},{"av":"AV12LoadAllTabs","fld":"vLOADALLTABS"},{"av":"AV13SelectedTabCode","fld":"vSELECTEDTABCODE"},{"av":"AV20WWPFormType","fld":"vWWPFORMTYPE","pic":"9","hsh":true},{"av":"AV21WWPFormIsForDynamicValidations","fld":"vWWPFORMISFORDYNAMICVALIDATIONS","hsh":true}]""");
+         setEventMetadata("TABS.TABCHANGED","""{"handler":"E13B22","iparms":[{"av":"Tabs_Activepagecontrolname","ctrl":"TABS","prop":"ActivePageControlName"},{"av":"AV6WWPContext","fld":"vWWPCONTEXT","hsh":true},{"av":"AV12LoadAllTabs","fld":"vLOADALLTABS"},{"av":"AV13SelectedTabCode","fld":"vSELECTEDTABCODE"},{"av":"AV20WWPFormType","fld":"vWWPFORMTYPE","pic":"9","hsh":true},{"av":"AV21WWPFormIsForDynamicValidations","fld":"vWWPFORMISFORDYNAMICVALIDATIONS","hsh":true}]""");
          setEventMetadata("TABS.TABCHANGED",""","oparms":[{"av":"AV13SelectedTabCode","fld":"vSELECTEDTABCODE"},{"av":"AV12LoadAllTabs","fld":"vLOADALLTABS"},{"ctrl":"GENERALDYNAMICFORMWC"},{"ctrl":"ORGANISATIONDYNAMICFORMWC"},{"ctrl":"LOCATIONDYNAMICFORMWC"},{"ctrl":"SUPPLIERDYNAMICFORMWC"}]}""");
          return  ;
       }
@@ -1754,6 +1801,7 @@ namespace GeneXus.Programs {
          GXKey = "";
          GXEncryptionTmp = "";
          AV17RecordDescription = "";
+         AV6WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          AV13SelectedTabCode = "";
          GX_FocusControl = "";
          Form = new GXWebForm();
@@ -1783,7 +1831,6 @@ namespace GeneXus.Programs {
          H00B22_A207WWPFormVersionNumber = new short[1] ;
          H00B22_A206WWPFormId = new short[1] ;
          H00B22_A240WWPFormType = new short[1] ;
-         AV6WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          H00B23_A206WWPFormId = new short[1] ;
          H00B23_A207WWPFormVersionNumber = new short[1] ;
          H00B23_A240WWPFormType = new short[1] ;
@@ -1824,7 +1871,7 @@ namespace GeneXus.Programs {
       private short wbStart ;
       private short nCmpId ;
       private short nDonePA ;
-      private short AV24GXLvl8 ;
+      private short AV25GXLvl8 ;
       private short nGXWrapped ;
       private int Tabs_Pagecount ;
       private int idxLst ;
@@ -1925,11 +1972,11 @@ namespace GeneXus.Programs {
       private IGxDataStore dsDataStore1 ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV6WWPContext ;
       private IDataStoreProvider pr_default ;
       private short[] H00B22_A207WWPFormVersionNumber ;
       private short[] H00B22_A206WWPFormId ;
       private short[] H00B22_A240WWPFormType ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV6WWPContext ;
       private short[] H00B23_A206WWPFormId ;
       private short[] H00B23_A207WWPFormVersionNumber ;
       private short[] H00B23_A240WWPFormType ;

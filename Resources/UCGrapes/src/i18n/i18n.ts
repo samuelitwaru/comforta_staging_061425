@@ -33,7 +33,8 @@ export const i18n = new I18n({
         current_version: "Current published version: ",
         new_version: "Version being published: ",
         select_default_language: "Select default language",
-        select_default_language_info: "select language you want to build the application",
+        select_default_language_info:
+          "Select the default language from which all translated versions of the application will be derived.",
       },
       debug: {
         label: "Debug",
@@ -290,7 +291,8 @@ export const i18n = new I18n({
         current_version: "Huidige gepubliceerde versie: ",
         new_version: "Versie wordt gepubliceerd: ",
         select_default_language: "Selecteer standaardtaal",
-        select_default_language_info: "selecteer de taal waarin je de applicatie wilt bouwen",
+        select_default_language_info:
+          "Selecteer de standaardtaal van waaruit alle vertaalde versies van de applicatie zullen worden afgeleid.",
       },
       debug: {
         label: "Debug",

@@ -3061,7 +3061,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257616593435", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202571111491586", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3077,7 +3077,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wp_organisationgeneralsuppliers.js", "?20257616593438", false, true);
+         context.AddJavascriptSource("wp_organisationgeneralsuppliers.js", "?202571111491588", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3349,8 +3349,8 @@ namespace GeneXus.Programs {
                cmbSupplierGenContactSalutation.WebTags = "";
                cmbSupplierGenContactSalutation.addItem("Mr", context.GetMessage( "Mr", ""), 0);
                cmbSupplierGenContactSalutation.addItem("Mrs", context.GetMessage( "Mrs", ""), 0);
-               cmbSupplierGenContactSalutation.addItem("Dr", context.GetMessage( "Dr", ""), 0);
-               cmbSupplierGenContactSalutation.addItem("Miss", context.GetMessage( "Miss", ""), 0);
+               cmbSupplierGenContactSalutation.addItem("Ms", context.GetMessage( "Ms", ""), 0);
+               cmbSupplierGenContactSalutation.addItem("Other", context.GetMessage( "Other", ""), 0);
                if ( cmbSupplierGenContactSalutation.ItemCount > 0 )
                {
                   A662SupplierGenContactSalutation = cmbSupplierGenContactSalutation.getValidValue(A662SupplierGenContactSalutation);
@@ -3483,8 +3483,8 @@ namespace GeneXus.Programs {
          cmbSupplierGenContactSalutation.WebTags = "";
          cmbSupplierGenContactSalutation.addItem("Mr", context.GetMessage( "Mr", ""), 0);
          cmbSupplierGenContactSalutation.addItem("Mrs", context.GetMessage( "Mrs", ""), 0);
-         cmbSupplierGenContactSalutation.addItem("Dr", context.GetMessage( "Dr", ""), 0);
-         cmbSupplierGenContactSalutation.addItem("Miss", context.GetMessage( "Miss", ""), 0);
+         cmbSupplierGenContactSalutation.addItem("Ms", context.GetMessage( "Ms", ""), 0);
+         cmbSupplierGenContactSalutation.addItem("Other", context.GetMessage( "Other", ""), 0);
          if ( cmbSupplierGenContactSalutation.ItemCount > 0 )
          {
             A662SupplierGenContactSalutation = cmbSupplierGenContactSalutation.getValidValue(A662SupplierGenContactSalutation);

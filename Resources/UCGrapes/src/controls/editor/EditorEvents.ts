@@ -1,3 +1,4 @@
+import { set } from "lodash";
 import { ToolBoxService } from "../../services/ToolBoxService";
 import { ResizeState, TileHeights } from "../../types";
 import { EditorThumbs } from "../../ui/components/editor-content/EditorThumbs";
@@ -110,7 +111,6 @@ export class EditorEvents {
       this.pageData
     );
   }
-
   private setupGlobalReferences(): void {
     (globalThis as any).uiManager = this.uiManager;
   }
@@ -120,7 +120,10 @@ export class EditorEvents {
     this.onLoad();
     this.onSelected();
     this.onComponentUpdate();
-    this.onDragAndDrop();
+    // delay the drag and drop initialization
+    setTimeout(() => {
+      this.onDragAndDrop();
+    }, 1000);
   }
 
   updateTileGrids() {
