@@ -2,33 +2,33 @@ import { CtaButtonProperties } from "../../../../controls/editor/CtaButtonProper
 import { CtaManager } from "../../../../controls/themes/CtaManager";
 
 export class CtaButtonLayout {
-    container: HTMLElement;
-    ctaManager: any;
-    constructor() {
-        this.ctaManager = new CtaManager();
-        this.container = document.createElement('div');
-        this.init();
-    }
+  container: HTMLElement;
+  ctaManager: any;
+  constructor() {
+    this.ctaManager = new CtaManager();
+    this.container = document.createElement("div");
+    this.init();
+  }
 
-    private init() {
-        this.container.classList.add('cta-button-layout-container');
-        this.container.style.display = "flex";
-        this.container.style.flexDirection = "column";
+  private init() {
+    this.container.classList.add("cta-button-layout-container");
+    this.container.style.display = "flex";
+    this.container.style.flexDirection = "column";
 
-        // --- Top row container for ellipseBtn and plainBtn ---
-        const topRow = document.createElement('div');
-        topRow.style.display = "flex";
-        topRow.style.flexDirection = "row";
-        topRow.style.gap = "9.73px"; // Optional: space between buttons
+    // --- Top row container for ellipseBtn and plainBtn ---
+    const topRow = document.createElement("div");
+    topRow.style.display = "flex";
+    topRow.style.flexDirection = "row";
+    topRow.style.gap = "9.73px"; // Optional: space between buttons
 
-        const plainBtn = document.createElement('button');
-        plainBtn.classList.add('cta-button-layout');
-        plainBtn.id = 'plain-button-layout';
-        plainBtn.innerHTML = "<label>Button</label>";
+    const plainBtn = document.createElement("button");
+    plainBtn.classList.add("cta-button-layout");
+    plainBtn.id = "plain-button-layout";
+    plainBtn.innerHTML = "<label>Button</label>";
 
-        const ellipseBtn = document.createElement('div');
-        // ellipseBtn.classList.add("call-to-action-item");
-        ellipseBtn.innerHTML = `
+    const ellipseBtn = document.createElement("div");
+    // ellipseBtn.classList.add("call-to-action-item");
+    ellipseBtn.innerHTML = `
         <svg class="cta-button-layout" id="round-button-layout" xmlns="http://www.w3.org/2000/svg" width="36.269" height="36.269" viewBox="0 0 36.269 36.269">
                 <g id="Group_2511" data-name="Group 2511" transform="translate(-1615 -188)">
                     <g id="Group_2503" data-name="Group 2503" transform="translate(-73 -180)">
@@ -44,25 +44,25 @@ export class CtaButtonLayout {
             </svg>
     `;
 
-        // Add event listeners as before...
-        plainBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            this.ctaManager.changeToPlainButton();
-        });
-        ellipseBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            this.ctaManager.changeToElipseButton();
-        });
+    // Add event listeners as before...
+    plainBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      this.ctaManager.changeToPlainButton();
+    });
+    ellipseBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      this.ctaManager.changeToElipseButton();
+    });
 
-        // Add both to the top row
-        topRow.appendChild(ellipseBtn);
-        topRow.appendChild(plainBtn);
+    // Add both to the top row
+    topRow.appendChild(ellipseBtn);
+    topRow.appendChild(plainBtn);
 
-        // --- Other buttons as before ---
-        const imgBtn = document.createElement('button');
-        imgBtn.classList.add('cta-button-layout');
-        imgBtn.id = 'image-button-layout';
-        imgBtn.innerHTML = `
+    // --- Other buttons as before ---
+    const imgBtn = document.createElement("button");
+    imgBtn.classList.add("cta-button-layout");
+    imgBtn.id = "image-button-layout";
+    imgBtn.innerHTML = `
         <span class="img-button-icon">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
             <g id="Group_2502" data-name="Group 2502" transform="translate(-1629 -379)">
@@ -75,10 +75,10 @@ export class CtaButtonLayout {
         <i class="fa fa-angle-right img-button-arrow"></i>
     `;
 
-        const iconBtn = document.createElement('button');
-        iconBtn.classList.add('cta-button-layout');
-        iconBtn.id = 'icon-button-layout';
-        iconBtn.innerHTML = `
+    const iconBtn = document.createElement("button");
+    iconBtn.classList.add("cta-button-layout");
+    iconBtn.id = "icon-button-layout";
+    iconBtn.innerHTML = `
         <span style="display: flex; align-items: center; justify-content: center;">
             <svg xmlns="http://www.w3.org/2000/svg" width="36.269" height="36.269" viewBox="0 0 36.269 36.269">
                 <g id="Group_2511" data-name="Group 2511" transform="translate(-1615 -188)">
@@ -98,23 +98,23 @@ export class CtaButtonLayout {
         <i class="fa fa-angle-right img-button-arrow"></i>
     `;
 
-        iconBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            this.ctaManager.changeToIconButton();
-        });
+    iconBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      this.ctaManager.changeToIconButton();
+    });
 
-        imgBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            this.ctaManager.changeToImgButton();
-        });
+    imgBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      this.ctaManager.changeToImgButton();
+    });
 
-        // Append the top row first, then the other buttons
-        this.container.appendChild(topRow);
-        this.container.appendChild(iconBtn);
-        this.container.appendChild(imgBtn);
-    }
+    // Append the top row first, then the other buttons
+    this.container.appendChild(topRow);
+    this.container.appendChild(iconBtn);
+    this.container.appendChild(imgBtn);
+  }
 
-    public render(container: HTMLElement) {
-        container.appendChild(this.container);
-    }
+  public render(container: HTMLElement) {
+    container.appendChild(this.container);
+  }
 }

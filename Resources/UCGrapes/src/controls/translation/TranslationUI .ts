@@ -91,11 +91,11 @@ export class TranslationUI {
   }
 
   // In TranslationUI.ts
-  public createTileGridSection(section: any): string {
+  public createTileGridSection(section: any, sectionIndex: number): string {
     const columns = section.Columns || [];
     let columnsHtml = "";
 
-    columns?.forEach((column: Column) => {
+    columns?.forEach((column: Column, columnIndex: number) => {
       const tiles = column.Tiles || [];
       let tilesHtml = "";
 
@@ -117,7 +117,7 @@ export class TranslationUI {
         const tileContent = tile.Text || tile.Name || "";
         const editableTileContent = this.makeEditable(
           tileContent,
-          `${tiles}.${tileIndex}.${tile.Text ? "Text" : "Name"}`
+          `InfoContent.${sectionIndex}.Columns.${columnIndex}.Tiles.${tileIndex}.${tile.Text ? "Text" : "Name"}`
         );
 
         tilesHtml += `
@@ -132,12 +132,12 @@ export class TranslationUI {
           text-align: ${tile.Align || "left"};
           min-height: ${tile?.Height ? tile.Height : 80}px;
           ">
-          ${editableTileContent}
           <div class="tile-icon-section" ${tile.Icon ? 'style="display: block;"' : ""}>
-            <span title="${tile.Icon}" class="tile-icon">
+            <span title="${tile.Icon}" class="tile-icon" style="width: 30px; display: block;">
               ${this.getTileIcon(tile)}
             </span>
           </div>
+          ${editableTileContent}
         </div>
       `;
       });
@@ -163,12 +163,12 @@ export class TranslationUI {
     `;
   }
 
-  private getTileIcon(tile: any) {
-    const iconSVG = this.themeManager.getThemeIcon(tile.Icon);
+  private getTileIcon(tile: Tile) {
+    const iconData = this.themeManager.getThemeIcon(tile.Icon || "");
     let cleanedSVG = "";
-    if (iconSVG) {
-      // replace path fill with tile.icon
-      cleanedSVG = iconSVG.replace('fill="#7c8791"', `fill="${tile.Color}"`);
+
+    if (iconData && typeof iconData === "object" && iconData.IconSVG) {
+      cleanedSVG = iconData.IconSVG.replace('fill="#7c8791"', `fill="${tile.Color}"`);
     }
     return cleanedSVG;
   }

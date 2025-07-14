@@ -11,18 +11,17 @@ export class MenuSection {
   }
 
   init() {
-      this.container.id = 'menu-page-section';
-      
-      const themeSection = new ThemeSection();
-      const tileImgSection = new TileImgSection();
-      const titleSection = new TitleSection();
-      const iconListCategories = new IconListCategories()
+    this.container.id = "menu-page-section";
 
+    const themeSection = new ThemeSection();
+    const tileImgSection = new TileImgSection();
+    const titleSection = new TitleSection();
+    const iconListCategories = new IconListCategories();
 
-      themeSection.render(this.container);
-      tileImgSection.render(this.container);
-      titleSection.render(this.container);
-      iconListCategories.render(this.container);
+    themeSection.render(this.container);
+    tileImgSection.render(this.container);
+    titleSection.render(this.container);
+    iconListCategories.render(this.container);
   }
 
   render(container: HTMLElement) {

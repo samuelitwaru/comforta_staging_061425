@@ -1,11 +1,12 @@
 import { TranslationMapper } from "../../../../controls/translation/TranslationMapper";
+import { TranslationStructure } from "../../../../types";
 
 export class TranslateFrame {
   frame!: HTMLDivElement;
-  data: any;
+  data: TranslationStructure;
   pageId: string;
   language: string;
-  constructor(data: any, pageId: string, language: string) {
+  constructor(data: TranslationStructure, pageId: string, language: string) {
     this.data = data;
     this.pageId = pageId;
     this.language = language;
@@ -17,12 +18,14 @@ export class TranslateFrame {
     this.frame.classList.add("translate-page-frame");
     this.frame.id = "translate-page-frame";
 
+    const pageTitle = this.data.PageName;
+
     const container = document.createElement("div");
     container.classList.add("translate-container");
 
     const header = this.header();
     const homeAppbar = this.homePageAppBar();
-    const otherAppbar = this.otherPageAppBar();
+    const otherAppbar = this.otherPageAppBar(pageTitle);
     const body = this.body();
 
     const frameContainer = body.querySelector(".translate-column") as HTMLElement | null;

@@ -37,7 +37,9 @@ export class LanguageTranslate {
         filteredLanguages
       );
 
+
       if (this.isTranslationSuccessful(translateResult)) {
+        console.log("translateResult", translateResult);
         await this.handleSuccessfulTranslation(translationContext);
       }
     } catch (error) {
@@ -51,7 +53,7 @@ export class LanguageTranslate {
       pageId,
       LanguageTranslate.TARGET_LANGUAGE
     );
-    this.setUpSideBar(translatedPageData.SDT_InfoContent, translationContext.versionLanguage);
+    this.setUpSideBar(translatedPageData.SDT_TranslatedPage, translationContext.versionLanguage);
   }
 
   private getTranslationContext(): TranslationContext {
@@ -99,7 +101,7 @@ export class LanguageTranslate {
       LanguageTranslate.TARGET_LANGUAGE
     );
 
-    this.setUpSideBar(translatedPageData.SDT_InfoContent, context.versionLanguage);
+    this.setUpSideBar(translatedPageData.SDT_TranslatedPage, context.versionLanguage);
   }
 
   private async translateSinglePage(pageId: string, language: string): Promise<any> {
@@ -120,6 +122,8 @@ export class LanguageTranslate {
 
     this.enableTranslationMode();
     this.hideSidebarSections(sidebarElements);
+    
+      console.log("renderTranslateSection line 126");
     this.renderTranslateSection(sidebarElements.sidebar, data, versionLanguage);
     this.toggleTranslationUI();
   }

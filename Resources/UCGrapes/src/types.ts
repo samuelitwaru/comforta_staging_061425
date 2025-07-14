@@ -76,6 +76,15 @@ export const defaultUrlEntry: Pick<UrlEntry, "IsFixed"> = {
   IsFixed: false,
 };
 
+export interface TranslationStructure {
+  PageName: string;
+  PageStructure: PageStructure;
+}
+
+export interface PageStructure {
+  InfoContent: InfoType[];
+}
+
 export interface InfoType {
   InfoId: string;
   InfoType: string;

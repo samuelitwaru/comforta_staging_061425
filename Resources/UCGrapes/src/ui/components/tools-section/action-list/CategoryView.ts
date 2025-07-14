@@ -52,10 +52,10 @@ export class CategoryView {
               new Alert("error", i18n.t("messages.error.select_tile"));
               return;
             }
-            if (this.categoryData.name == "Content Page") {
+            if (this.categoryData.name === "Content Page") {
               // this.pageCreationService.addNewContentPage();
             }
-            if (this.categoryData.name == "Service/Product Page") {
+            if (this.categoryData.name === "Service/Product Page") {
               // open popup
               const config = AppConfig.getInstance();
               // config.addServiceButtonEvent()
@@ -83,7 +83,7 @@ export class CategoryView {
 
         if (this.categoryData.name === "DynamicForm") {
           new ActionListManager().handleDynamicForms(page);
-        } else if (this.categoryData.name == "Modules") {
+        } else if (this.categoryData.name === "Modules") {
           this.pageAttacher.attachToTile(
             page,
             page.PageType,

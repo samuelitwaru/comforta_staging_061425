@@ -64,11 +64,16 @@ export class VersionSelectionView {
   private toggleSelection(button: HTMLButtonElement): void {
     this.versionSelection.classList.toggle("show");
     button.classList.toggle("open");
-    button.setAttribute("aria-expanded", button.classList.contains("open").toString());
+    button.setAttribute(
+      "aria-expanded",
+      button.classList.contains("open").toString()
+    );
   }
 
   public async initializeVersionOptions(): Promise<void> {
-    const existingVersionSelection = this.selectionDiv.querySelector(".theme-options-list");
+    const existingVersionSelection = this.selectionDiv.querySelector(
+      ".theme-options-list"
+    );
     if (existingVersionSelection) {
       existingVersionSelection.remove();
     }
@@ -86,9 +91,11 @@ export class VersionSelectionView {
     const versions = await this.versionController.getVersions();
     this.appVersions = versions;
     if (versions.length === 0) {
-      this.openVersionModal()
+      this.openVersionModal();
     }
-    versions.forEach((version: AppVersion) => this.createVersionOption(version));
+    versions.forEach((version: AppVersion) =>
+      this.createVersionOption(version)
+    );
 
     // this.addTemplatesButton();
     this.selectionDiv.appendChild(this.versionSelection);
@@ -130,17 +137,23 @@ export class VersionSelectionView {
 
     // Check if this is the active version
     const activeVersion =
-      (globalThis as any).activeVersion || (await this.versionController.getActiveVersion());
+      (globalThis as any).activeVersion ||
+      (await this.versionController.getActiveVersion());
     // console.log('activeVersion', activeVersion);
     // console.log('version', version);
     const isActive = version.AppVersionId === activeVersion?.AppVersionId;
 
     if (isActive) {
       versionOption.classList.add("selected");
-      this.activeVersion.textContent = truncateString(version.AppVersionName, 15);
+      this.activeVersion.textContent = truncateString(
+        version.AppVersionName,
+        15
+      );
     }
 
-    versionOption.addEventListener("click", (e) => this.handleVersionSelection(e, version));
+    versionOption.addEventListener("click", (e) =>
+      this.handleVersionSelection(e, version)
+    );
 
     // Create submenu with options
     const subMenu = this.createVersionSubMenu(version, isActive);
@@ -149,7 +162,10 @@ export class VersionSelectionView {
     this.versionList.appendChild(versionOption);
   }
 
-  private createVersionSubMenu(version: AppVersion, isActive: boolean): HTMLDivElement {
+  private createVersionSubMenu(
+    version: AppVersion,
+    isActive: boolean
+  ): HTMLDivElement {
     const subMenu = document.createElement("div");
     subMenu.className = "submenu-list";
 
@@ -218,11 +234,18 @@ export class VersionSelectionView {
       }
     };
 
-    const confirmationBox = new ConfirmationBox(message, title, handleConfirmation);
+    const confirmationBox = new ConfirmationBox(
+      message,
+      title,
+      handleConfirmation
+    );
     confirmationBox.render(document.body);
   }
 
-  private async handleVersionSelection(e: Event, version: AppVersion): Promise<void> {
+  private async handleVersionSelection(
+    e: Event,
+    version: AppVersion
+  ): Promise<void> {
     // Skip if clicking on a submenu item
     if ((e.target as HTMLElement).closest(".submenu-list")) {
       return;
@@ -230,17 +253,23 @@ export class VersionSelectionView {
 
     try {
       // Mark selected in UI
-      const allOptions = this.versionSelection.querySelectorAll(".theme-option");
+      const allOptions =
+        this.versionSelection.querySelectorAll(".theme-option");
       allOptions.forEach((opt) => opt.classList.remove("selected"));
 
       const selectedOption = e.currentTarget as HTMLElement;
       selectedOption.classList.add("selected");
 
       // Update display
-      this.activeVersion.textContent = truncateString(version.AppVersionName, 15);
+      this.activeVersion.textContent = truncateString(
+        version.AppVersionName,
+        15
+      );
 
       // Activate version and reload if successful
-      const activationResult = await this.versionController.activateVersion(version.AppVersionId);
+      const activationResult = await this.versionController.activateVersion(
+        version.AppVersionId
+      );
       if (activationResult) {
         this.reloadPage(activationResult.AppVersion);
       }
@@ -283,7 +312,9 @@ export class VersionSelectionView {
 
   private updateTheme(themeId: string): void {
     if (!themeId) return;
-    const themeSelectionEl = document.getElementById("tb-custom-theme-selection");
+    const themeSelectionEl = document.getElementById(
+      "tb-custom-theme-selection"
+    );
     if (themeSelectionEl) {
       const themeList = themeSelectionEl.querySelectorAll(
         ".theme-option"
@@ -320,15 +351,21 @@ export class VersionSelectionView {
       errorMessage: "",
       validate: (value: string) => {
         if (!value.trim()) {
-          versionNameField?.showError(i18n.t("messages.error.empty_version_name"));
+          versionNameField?.showError(
+            i18n.t("messages.error.empty_version_name")
+          );
           return false;
         }
         if (this.appVersions.some((v) => v.AppVersionName === value.trim())) {
-          versionNameField?.showError(i18n.t("messages.error.existing_version_name"));
+          versionNameField?.showError(
+            i18n.t("messages.error.existing_version_name")
+          );
           return false;
         }
         if (value.length > 50) {
-          versionNameField?.showError(i18n.t("messages.error.long_version_name"));
+          versionNameField?.showError(
+            i18n.t("messages.error.long_version_name")
+          );
           return false;
         }
         versionNameField?.hideError();
@@ -352,7 +389,9 @@ export class VersionSelectionView {
 
       validate: (value: string) => {
         if (value === "") {
-          this.VersionLanguageField?.showError(i18n.t("messages.error.select_language"));
+          this.VersionLanguageField?.showError(
+            i18n.t("messages.error.select_language")
+          );
           return false;
         }
         this.VersionLanguageField?.hideError();
@@ -391,7 +430,11 @@ export class VersionSelectionView {
     submitSection.classList.add("popup-footer");
     submitSection.style.marginBottom = "-12px";
 
-    const saveBtn = this.createButton("submit_form", "tb-btn-primary", buttonText);
+    const saveBtn = this.createButton(
+      "submit_form",
+      "tb-btn-primary",
+      buttonText
+    );
 
     const cancelBtn = this.createButton(
       "cancel_form",
@@ -415,13 +458,19 @@ export class VersionSelectionView {
     const cancelBtn = div.querySelector("#cancel_form");
 
     const inputElement = div.querySelector("#version_name") as HTMLInputElement;
-    inputElement?.addEventListener("input", () => this.versionNameField?.hideError());
+    inputElement?.addEventListener("input", () =>
+      this.versionNameField?.hideError()
+    );
 
     // Add language field validation
-    const languageField = div.querySelector("#version_language") as HTMLSelectElement;
+    const languageField = div.querySelector(
+      "#version_language"
+    ) as HTMLSelectElement;
     languageField?.addEventListener("change", () => {
       if (languageField.value === "") {
-        this.VersionLanguageField?.showError(i18n.t("messages.error.select_language"));
+        this.VersionLanguageField?.showError(
+          i18n.t("messages.error.select_language")
+        );
       } else {
         this.VersionLanguageField?.hideError();
       }
@@ -450,16 +499,25 @@ export class VersionSelectionView {
 
         switch (action) {
           case "create":
-            result = await this.versionController.createVersion(versionName, versionLanguage);
+            result = await this.versionController.createVersion(
+              versionName,
+              versionLanguage
+            );
             break;
           case "duplicate":
             if (versionId) {
-              result = await this.versionController.duplicateVersion(versionId, versionName);
+              result = await this.versionController.duplicateVersion(
+                versionId,
+                versionName
+              );
             }
             break;
           case "rename":
             if (versionId) {
-              result = await this.versionController.renameVersion(versionId, versionName);
+              result = await this.versionController.renameVersion(
+                versionId,
+                versionName
+              );
             }
             break;
         }
@@ -478,7 +536,11 @@ export class VersionSelectionView {
     cancelBtn?.addEventListener("click", () => modal.close());
   }
 
-  private createButton(id: string, className: string, text: string): HTMLButtonElement {
+  private createButton(
+    id: string,
+    className: string,
+    text: string
+  ): HTMLButtonElement {
     const btn = document.createElement("button");
     btn.id = id;
     btn.classList.add("tb-btn", className);
@@ -490,7 +552,9 @@ export class VersionSelectionView {
     if (this.versionSelection.classList.contains("show")) {
       this.versionSelection.classList.remove("show");
 
-      const button = this.container.querySelector(".theme-select-button") as HTMLElement;
+      const button = this.container.querySelector(
+        ".theme-select-button"
+      ) as HTMLElement;
       button.setAttribute("aria-expanded", "false");
       button.classList.remove("open");
     }

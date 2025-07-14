@@ -90,7 +90,6 @@ export class ContentDataUi {
     if (slides[slideIndex]) {
       slides[slideIndex].style.display = "block";
     }
-
   }
 
   private openContentEditModal() {
@@ -149,15 +148,9 @@ export class ContentDataUi {
       });
       modal.open();
 
-      const Delta = Quill.import('delta');
+      const Delta = Quill.import("delta");
       const quill = new Quill("#editor", {
-        formats: [
-          'bold',
-          'italic',
-          'underline',
-          'link',
-          'list'
-        ],
+        formats: ["bold", "italic", "underline", "link", "list"],
         modules: {
           toolbar: [
             ["bold", "italic", "underline", "link"],
@@ -165,36 +158,38 @@ export class ContentDataUi {
           ],
           clipboard: {
             matchers: [
-              [ 
+              [
                 Node.ELEMENT_NODE,
                 (node: Node, delta: any) => {
-                  return delta.compose(new Delta().retain(delta.length(), {
-                    background: false,
-                    color: false,
-                    font: false,
-                    code: false,
-                    size: false,
-                    strike: false,
-                    script: false,
-                    blockquote: false,
-                    header: false,
-                    indent: false,
-                    align: false,
-                    direction: false,
-                    formula: false,
-                    image: false,
-                    video: false
-                  }));
-                }
-              ] 
-            ]
-          }
+                  return delta.compose(
+                    new Delta().retain(delta.length(), {
+                      background: false,
+                      color: false,
+                      font: false,
+                      code: false,
+                      size: false,
+                      strike: false,
+                      script: false,
+                      blockquote: false,
+                      header: false,
+                      indent: false,
+                      align: false,
+                      direction: false,
+                      formula: false,
+                      image: false,
+                      video: false,
+                    })
+                  );
+                },
+              ],
+            ],
+          },
         },
         theme: "snow",
         placeholder: "Start typing here...",
       });
 
-      characterCounterSpan.innerHTML = (quill.getLength() - 1)+ "/1000";
+      characterCounterSpan.innerHTML = quill.getLength() - 1 + "/1000";
 
       setTimeout(() => {
         // First focus the editor
@@ -214,13 +209,13 @@ export class ContentDataUi {
 
         if (quill.getLength() > 1000) {
           quill.deleteText(1000, quill.getLength());
-          characterCounterSpan
-          characterCounterSpan.innerHTML = "1000/1000"
+          characterCounterSpan;
+          characterCounterSpan.innerHTML = "1000/1000";
           //console.log("InfoSectionManager");
-      } else {
-        const textLeft = quill.getLength() - 1;
-        characterCounterSpan.innerHTML = textLeft + "/1000"
-      }
+        } else {
+          const textLeft = quill.getLength() - 1;
+          characterCounterSpan.innerHTML = textLeft + "/1000";
+        }
 
         // Update button styling based on disabled state
         if (saveBtn.disabled) {
@@ -266,7 +261,10 @@ export class ContentDataUi {
       modal.classList.add("tb-modal");
       modal.style.display = "flex";
       const type = this.page.PageType === "Information" ? "info" : "content";
-      const modalContent = new ImageUploadManager(type, (image as HTMLElement)?.id);
+      const modalContent = new ImageUploadManager(
+        type,
+        (image as HTMLElement)?.id
+      );
       modalContent.render(modal);
 
       const uploadInput = document.createElement("input");
@@ -360,7 +358,10 @@ export class ContentDataUi {
       const modal = document.createElement("div");
       modal.classList.add("tb-modal");
       modal.style.display = "flex";
-      const modalContent = new ImageUploadManager("cta", (cta as HTMLElement).id);
+      const modalContent = new ImageUploadManager(
+        "cta",
+        (cta as HTMLElement).id
+      );
       modalContent.render(modal);
 
       const uploadInput = document.createElement("input");
@@ -384,7 +385,7 @@ export class ContentDataUi {
       ctaIconEditButton &&
       selectedComponent &&
       (selectedComponent.getClasses().includes("img-button-container") ||
-      selectedComponent.getClasses().includes("cta-container-child")) // edit-icon
+        selectedComponent.getClasses().includes("cta-container-child")) // edit-icon
     ) {
       this.e.preventDefault();
       this.e.stopPropagation();

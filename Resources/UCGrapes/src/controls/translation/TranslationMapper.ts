@@ -1,17 +1,17 @@
 // TranslationMapper.ts
 import { ToolBoxService } from "../../services/ToolBoxService";
-import { InfoType } from "../../types";
+import { TranslationStructure } from "../../types";
 import { ThemeManager } from "../themes/ThemeManager";
 import { TranslationUI } from "./TranslationUI ";
 
 export class TranslationMapper {
-  data: any;
+  data: TranslationStructure;
   pageId: string;
   language: string;
   themeManager: ThemeManager;
   private translationUI: TranslationUI;
 
-  constructor(data: any, pageId: string, language: string) {
+  constructor(data: TranslationStructure, pageId: string, language: string) {
     this.data = data;
     this.pageId = pageId;
     this.language = language;
@@ -21,7 +21,9 @@ export class TranslationMapper {
 
   private updateDataPath(path: string, value: string): void {
     const pathParts = path.split(".");
-    let current = this.data;
+
+    let current: any = this.data.PageStructure;
+
 
     for (let i = 0; i < pathParts.length - 1; i++) {
       const part = pathParts[i];
@@ -37,7 +39,7 @@ export class TranslationMapper {
     this.saveUpdatedData(this.data);
   }
 
-  private async saveUpdatedData(data: any): Promise<void> {
+  private async saveUpdatedData(data: TranslationStructure): Promise<void> {
     const autoSaveSection = document.querySelector(
       ".auto-saving-section-content-text"
     ) as HTMLElement;
@@ -49,12 +51,10 @@ export class TranslationMapper {
 
     const toolboxService = new ToolBoxService();
     try {
-
-      const startTime = Date.now();
       const minDelay = 500; // Minimum 500ms delay
 
       // Run save operation and minimum delay in parallel
-      const [saveResult] = await Promise.all([
+      await Promise.all([
         await toolboxService.updateTranslatedVersion(this.pageId, this.language, data),
         new Promise((resolve) => setTimeout(resolve, minDelay)),
       ]);
@@ -71,7 +71,7 @@ export class TranslationMapper {
   }
 
   public convertToHTML(): string {
-    const infoContent = this.data.InfoContent || [];
+    const infoContent = this.data.PageStructure.InfoContent || [];
     let htmlContent = "";
     let i = 0;
 
@@ -104,7 +104,7 @@ export class TranslationMapper {
             htmlContent += this.translationUI.createTileRowSection(section, i);
             break;
           case "TileGrid": // Add this case for TileGrid
-            htmlContent += this.translationUI.createTileGridSection(section);
+            htmlContent += this.translationUI.createTileGridSection(section, i);
             break;
           case "Description":
             htmlContent += this.translationUI.createDescSection(section, i);

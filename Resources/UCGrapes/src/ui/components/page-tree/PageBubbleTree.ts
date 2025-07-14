@@ -36,9 +36,7 @@ export class PageBubbleTree {
   treeContainer!: HTMLDivElement;
   sectionTreeMinimize!: HTMLDivElement;
   treeFeatures!: HTMLDivElement;
-
   zoom: any;
-
   PageTreeRendererInfoPage: PageTreeRendererInfoPage;
   primaryNodeId: string | null = null; // Fixed type to string
   appVersionManager: any;
@@ -46,6 +44,11 @@ export class PageBubbleTree {
   parentNodeId: string | null = null;
   mainContainer!: HTMLDivElement;
   sectionAllPages!: HTMLDivElement;
+  SelectedPage!: HTMLDivElement;
+  path: string[] | null = null;
+  previousPrimaryNodeId: string | null = null;
+  previousNavigationHistory: { id: string; name: string }[] = [];
+  previousPath: string[] | null = null;
 
   constructor(primaryNodeId?: string) {
     this.PageTreeRendererInfoPage = new PageTreeRendererInfoPage();
@@ -61,37 +64,33 @@ export class PageBubbleTree {
     if (homePage) {
       //get page trail
       const pageTrail = (globalThis as any).activePages;
-      // console.log("pageTrail)", pageTrail);
 
       //get pageids from the trail
       const pageIdsOnly = Array.isArray(pageTrail)
         ? pageTrail.filter((item: any) => item && item.pageId).map((item: any) => item.pageId)
         : [];
-      // console.log("pageIdsOnly", pageIdsOnly);
-
       this.primaryNodeId = homePage.id;
       this.navigationHistory = [{ id: homePage.id, name: homePage.title }];
 
       // If a different primaryNodeId is provided, trace path from Home to that node
       if (primaryNodeId && primaryNodeId !== homePage.id) {
         // Try to find a path that matches the pageIdsOnly sequence
-        let path: string[] | null = null;
+        // let path: string[] | null = null;
         if (
           pageIdsOnly.length > 1 &&
           pageIdsOnly[0] === homePage.id &&
           pageIdsOnly[pageIdsOnly.length - 1] === primaryNodeId
         ) {
           // If the pageIdsOnly path starts with homePage and ends with primaryNodeId, use it
-          path = pageIdsOnly;
+          this.path = pageIdsOnly;
         } else {
           // Otherwise, use the DFS path
-          path = this.findPathFromHome(homePage.id, primaryNodeId);
-          // alert("no path");
+          this.path = this.findPathFromHome(homePage.id, primaryNodeId);
         }
 
-        if (path && path.length > 1) {
+        if (this.path && this.path.length > 1) {
           // Build navigation history from Home to the target node
-          this.navigationHistory = path.map((id) => {
+          this.navigationHistory = this.path.map((id) => {
             const page = this.processedPages.find((p) => p.id === id);
             return { id, name: page ? page.title : id };
           });
@@ -133,11 +132,8 @@ export class PageBubbleTree {
   }
 
   refreshPages() {
-    // console.log("Refreshing pages...");
-
     this.pages = this.appVersionManager.getPages();
     this.processedPages = this.processPageData(this.pages);
-    // console.log("Processed Pages:", this.processedPages);
   }
 
   intializePreviewTree() {
@@ -186,29 +182,26 @@ export class PageBubbleTree {
       toolSection.style.display = "none";
       treeSection.style.display = "none";
       this.treeFeatures.style.visibility = "visible";
+      this.sectionAllPages.style.display = "block";
+      this.SelectedPage.style.display = "none";
     }
   }
 
   build() {
     this.mainContainer = document.getElementById("main-content") as HTMLDivElement;
-
     if (!this.mainContainer) {
-      // console.error("Main content container not found");
       return document.createElement("div");
     }
-
     //add style to mainContainer
     this.mainContainer.style.background = "#E9EBF0";
-
     this.graphContainer = document.getElementById("graph-container-1") as HTMLDivElement;
 
     if (!this.graphContainer) {
       this.graphContainer = document.createElement("div");
       this.graphContainer.id = "graph-container-1";
     }
-
     // Clear any existing content
-    this.graphContainer.innerHTML = ""; // Clear existing content
+    this.graphContainer.innerHTML = "";
     this.graphContainer.innerHTML = "<svg></svg>";
     this.mainContainer.appendChild(this.graphContainer);
 
@@ -249,6 +242,13 @@ export class PageBubbleTree {
         `;
       this.sectionAllPages.addEventListener("click", (e) => {
         e.preventDefault();
+        this.sectionAllPages.style.display = "none";
+        this.SelectedPage.style.display = "block";
+
+        this.previousPrimaryNodeId = this.primaryNodeId;
+        this.previousNavigationHistory = [...this.navigationHistory];
+        this.previousPath = this.path ? [...this.path] : null;
+
         // Exclude MyActivity, Calendar, Map, Maps from those that are not connected to
         const excludedTypes = ["MyActivity", "My Activity", "Calendar", "Map", "Maps"];
 
@@ -270,8 +270,36 @@ export class PageBubbleTree {
       });
     }
 
+    this.SelectedPage = document.getElementById("section-selected-page") as HTMLDivElement;
+    if (!this.SelectedPage) {
+      this.SelectedPage = document.createElement("div");
+      this.SelectedPage.id = "section-selected-page";
+      this.SelectedPage.className = "section-tree-items";
+      this.SelectedPage.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="19.48" height="19.48" viewBox="0 0 19.48 19.48">
+          <path id="Group_2542-converted" data-name="Group 2542-converted" d="M2.162.021,1.918.07A2.6,2.6,0,0,0,.182,1.546C0,2,0,2.07.008,4.423l.01,2.162.082.26A2.605,2.605,0,0,0,1.75,8.515L2,8.6H6.581l.243-.076A2.552,2.552,0,0,0,8.1,7.639a2.333,2.333,0,0,0,.423-.811L8.6,6.585V2l-.085-.25A2.616,2.616,0,0,0,7.232.263C6.72.011,6.841.022,4.4.014c-1.2,0-2.207,0-2.242.007M6.572,1.454a1.364,1.364,0,0,1,.57.559l.09.183V6.422L7.147,6.6A1.217,1.217,0,0,1,6.6,7.15l-.179.085L4.35,7.244c-2.056.008-2.07.008-2.257-.063A1.261,1.261,0,0,1,1.472,6.6l-.09-.182V2.2l.079-.162a1.2,1.2,0,0,1,.717-.624,20.779,20.779,0,0,1,2.194-.034c2.028.006,2.049.007,2.2.077m4.67,3.175a.818.818,0,0,0-.24.214.488.488,0,0,0-.1.377.475.475,0,0,0,.1.379.825.825,0,0,0,.257.221c.146.075.193.081.857.1.648.017.712.024.843.093a1.323,1.323,0,0,1,.511.5c.094.171.094.175.112.874.017.665.022.71.1.857a.826.826,0,0,0,.221.257.474.474,0,0,0,.379.1.491.491,0,0,0,.377-.1.774.774,0,0,0,.222-.259c.081-.158.083-.175.081-.828a2.753,2.753,0,0,0-.265-1.5,1.9,1.9,0,0,0-.479-.636,1.866,1.866,0,0,0-.636-.478,2.758,2.758,0,0,0-1.5-.251c-.665,0-.7,0-.838.075M5.021,10.914a.8.8,0,0,0-.411.359c-.073.149-.076.184-.073.838A2.675,2.675,0,0,0,4.8,13.591a1.9,1.9,0,0,0,.48.636,1.894,1.894,0,0,0,.636.479,2.75,2.75,0,0,0,1.5.265c.653,0,.67,0,.828-.081a.774.774,0,0,0,.259-.222.488.488,0,0,0,.1-.375.586.586,0,0,0-.289-.564c-.126-.088-.134-.089-.813-.11a6.165,6.165,0,0,1-.794-.055,1.258,1.258,0,0,1-.694-.6c-.067-.128-.074-.2-.092-.838s-.024-.711-.094-.855a.642.642,0,0,0-.551-.367,1.157,1.157,0,0,0-.249.007m7.849.027a2.158,2.158,0,0,0-.682.25,2.578,2.578,0,0,0-1.208,1.491l-.076.243v4.584l.085.25a2.6,2.6,0,0,0,1.7,1.659l.262.074h2.226a13.652,13.652,0,0,0,2.463-.061,2.588,2.588,0,0,0,1.782-1.783,13.667,13.667,0,0,0,.061-2.464V12.958L19.41,12.7a2.582,2.582,0,0,0-1.68-1.7l-.261-.082L15.276,10.9a22.668,22.668,0,0,0-2.405.038M17.4,12.325a1.3,1.3,0,0,1,.626.577l.091.185v4.226l-.1.188a1.334,1.334,0,0,1-.564.554c-.152.071-.163.071-2.266.071H13.082l-.171-.077a1.335,1.335,0,0,1-.59-.638,8.482,8.482,0,0,1-.068-2.211,8.2,8.2,0,0,1,.07-2.217,1.241,1.241,0,0,1,.629-.643l.2-.08h2.038a8.619,8.619,0,0,1,2.218.066" transform="translate(-0.004 -0.012)" fill="#7c8791" fill-rule="evenodd"/>
+        </svg>`;
+      this.SelectedPage.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.SelectedPage.style.display = "none";
+        this.sectionAllPages.style.display = "block";
+
+        if (this.previousPrimaryNodeId) {
+          this.primaryNodeId = this.previousPrimaryNodeId;
+          this.navigationHistory = [...this.previousNavigationHistory];
+          this.path = this.previousPath ? [...this.previousPath] : null;
+        }
+
+        const node = this.processedPages.find((p: any) => p.id === this.previousPrimaryNodeId);
+        if (node) {
+          this.updateNodeDisplay(node);
+        }
+      });
+    }
+
     this.treeFeatures.appendChild(this.sectionTreeMinimize);
     this.treeFeatures.appendChild(this.sectionAllPages);
+    this.treeFeatures.appendChild(this.SelectedPage);
 
     this.mainContainer.appendChild(this.treeFeatures);
     this.graphContainer.setAttribute("style", "display:block;width:100%;");
@@ -476,7 +504,6 @@ export class PageBubbleTree {
     this.createCircularNodes();
     this.onTick();
     this.panAndZoom();
-
   }
 
   buildTree() {

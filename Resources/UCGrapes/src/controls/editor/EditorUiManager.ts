@@ -244,7 +244,8 @@ export class EditorUIManager {
       // 1. Check if the dragged element is a tile.
       const isTile =
         modalElement &&
-        (modalElement.getAttribute("data-gjs-type") === "tile-wrapper" || modalElement.getAttribute("data-gjs-type") === "tile-col-wrapper");
+        (modalElement.getAttribute("data-gjs-type") === "tile-wrapper" ||
+          modalElement.getAttribute("data-gjs-type") === "tile-col-wrapper");
 
       if (isTile) {
         const targetId = model.target.getId();
@@ -270,7 +271,7 @@ export class EditorUIManager {
           );
         } else if (isDroppedInColumnWrapper) {
           // check if the tile being dropped is a tile-wrapper or tile-col-wrapper
-          if(modalElement.getAttribute("data-gjs-type") === "tile-col-wrapper") {
+          if (modalElement.getAttribute("data-gjs-type") === "tile-col-wrapper") {
             // If the tile is a tile-col-wrapper, we need to handle it differently
             // get parent id of the tile section that was dragged
             const destinationTileSectionId = destinationComponent.parent().getId();
@@ -284,7 +285,7 @@ export class EditorUIManager {
               destinationRowIndex
             );
           } else if (modalElement.getAttribute("data-gjs-type") === "tile-wrapper") {
-          // get parent id of the tile column
+            // get parent id of the tile column
             const sourceParent = sourceComponent.parent();
             const tileSectionId = sourceParent ? sourceParent.getId() : null;
             // If the parent is a tile column, update the tile in the column
@@ -312,9 +313,7 @@ export class EditorUIManager {
           }
 
           // if dragged to the first item at the top of the container, nearestSection will be null
-          const nearestSectionId = nearestSection
-            ? nearestSection.getId()
-            : null;
+          const nearestSectionId = nearestSection ? nearestSection.getId() : null;
 
           // if it's a tile-wrapper, we need to handle it differently from a tile column
           if (modalElement.getAttribute("data-gjs-type") === "tile-wrapper") {
@@ -327,11 +326,12 @@ export class EditorUIManager {
               sourceTileSectionId,
               nearestSection ? nearestSection.getId() : null
             );
-          } else infoContentMapper.handleDragAndDropToNewTileArea(
-            targetId,
-            sourceParentId,
-            nearestSectionId
-          );
+          } else
+            infoContentMapper.handleDragAndDropToNewTileArea(
+              targetId,
+              sourceParentId,
+              nearestSectionId
+            );
         }
       } else {
         if (parentEl && parentEl.classList.contains("container-column-info")) {
@@ -465,14 +465,33 @@ export class EditorUIManager {
     const targetIndex = activePages.findIndex((p) => p.frameId === frameId && p.pageId === pageId);
 
     if (targetIndex !== -1) {
-      // Keep everything up to and including the target page
-      (globalThis as any).activePages = activePages.slice(0, targetIndex + 1);
-    } else {
-      // Add the new frameId/pageId if not found
-      (globalThis as any).activePages.push({ frameId, pageId });
-    }
+      // Page exists in navigation history - just mark it as current without trimming
+      // Store the current position for future direction detection
+      (globalThis as any).currentNavigationIndex = targetIndex;
 
-    return (globalThis as any).activePages;
+      // Don't trim the array - preserve the full navigation history
+      // This allows users to navigate to any previously visited page
+      return activePages;
+    } else {
+      // This is a new page - check if we're changing direction
+      const currentIndex = (globalThis as any).currentNavigationIndex ?? activePages.length - 1;
+
+      if (currentIndex < activePages.length - 1) {
+        // We're not at the end of the navigation history, so this is a direction change
+        // Trim everything after the current position and add the new page
+        const newActivePages = activePages.slice(0, currentIndex + 1);
+        newActivePages.push({ frameId, pageId });
+        (globalThis as any).activePages = newActivePages;
+        (globalThis as any).currentNavigationIndex = newActivePages.length - 1;
+      } else {
+        // We're at the end of navigation history - just add the new page
+        activePages.push({ frameId, pageId });
+        (globalThis as any).activePages = activePages;
+        (globalThis as any).currentNavigationIndex = activePages.length - 1;
+      }
+
+      return (globalThis as any).activePages;
+    }
   }
 
   private translatePage(pageId: string) {
@@ -520,7 +539,7 @@ export class EditorUIManager {
       <h3>${this.pageData.PageName.toUpperCase()}</h3>
       <hr/>
     `;
-    
+
     const isTranslationMode = (globalThis as any).isTranslationMode;
     if (isTranslationMode === true) return;
 
@@ -679,14 +698,13 @@ export class EditorUIManager {
         colComponent.getId(),
         tileWrapper.getId()
       );
-    } 
+    }
     // else {
     //   tileAttributes = (globalThis as any).tileMapper.getTile(
     //     rowComponent.getId(),
     //     tileWrapper.getId()
     //   );
     // }
-
 
     this.removeOtherEditors();
     if (tileAttributes?.Action?.ObjectId) {

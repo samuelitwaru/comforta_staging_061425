@@ -115,7 +115,7 @@ export class ActionListDropDown {
     let services = this.toolBoxService.services || [];
     services = services
       .filter(
-        (service: any) => service.ProductServiceClass.replace(/\s+/g, "") == activePage.PageType
+        (service: any) => service.ProductServiceClass.replace(/\s+/g, "") === activePage.PageType
       )
       .map((service) => ({
         PageId: service.ProductServiceId,
@@ -138,7 +138,7 @@ export class ActionListDropDown {
       const pages = versions
         .filter(
           (page: any) =>
-            (page.PageType == "Menu" || page.PageType == "Information") &&
+            (page.PageType === "Menu" || page.PageType === "Information") &&
             page.PageName !== "Home" &&
             page.PageName !== "My Care" &&
             page.PageName !== "My Living" &&

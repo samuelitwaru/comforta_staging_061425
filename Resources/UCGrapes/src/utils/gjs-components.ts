@@ -8,7 +8,7 @@ import {
   tileDefaultAttributes,
   tileWrapperDefaultAttributes,
 } from "./default-attributes";
-import { randomIdGenerator, truncateString } from "./helpers";
+import { randomIdGenerator } from "./helpers";
 
 export function resizeButton(title: string) {
   return `
@@ -27,7 +27,10 @@ export function addRightButton(title: string) {
     `;
 }
 
-export function tileFromAttributes(tile: Tile, themeManager: ThemeManager): string {
+export function tileFromAttributes(
+  tile: Tile,
+  themeManager: ThemeManager
+): string {
   const id = tile.Id;
   const text = tile.Text;
   const textColor = tile.Color;
@@ -35,17 +38,36 @@ export function tileFromAttributes(tile: Tile, themeManager: ThemeManager): stri
   const icon = themeManager.getThemeIcon(tile.Icon as string);
   let iconSVG = "";
   if (icon) {
-    iconSVG = icon.IconSVG.replace(/fill="[^"]*"/g, `fill="${textColor}" ${DefaultAttributes}`);
+    iconSVG = icon.IconSVG.replace(
+      /fill="[^"]*"/g,
+      `fill="${textColor}" ${DefaultAttributes}`
+    );
   }
   const bgImage = tile.BGImageUrl;
-  const bgColor = bgImage ? "" : themeManager.getThemeColor(tile.BGColor as string);
+  const bgColor = bgImage
+    ? ""
+    : themeManager.getThemeColor(tile.BGColor as string);
   const opacity = tile.Opacity || 0;
   return `
-    <div ${tileWrapperDefaultAttributes} class="template-wrapper" id="${id}" style="text-align:${align}; height:${tile?.Height || minTileHeight}px;">
-        <div ${tileDefaultAttributes} class="template-block" style="background-color: ${bgColor}; ${bgImage ? `background-image:url(${bgImage});background-color: rgba(0,0,0, ${opacity / 100}); background-image: url('${tile.BGImageUrl}'); background-size: cover; background-position: center; background-blend-mode: overlay` : ``}; color: ${textColor}; justify-content: ${align}; align-items: ${align}">
-            <div ${DefaultAttributes} class="tile-icon-section"  style="display: ${icon ? "block" : "none"}; " >
+    <div ${tileWrapperDefaultAttributes} class="template-wrapper" id="${id}" style="text-align:${align}; height:${
+    tile?.Height || minTileHeight
+  }px;">
+        <div ${tileDefaultAttributes} class="template-block" style="background-color: ${bgColor}; ${
+    bgImage
+      ? `background-image:url(${bgImage});background-color: rgba(0,0,0, ${
+          opacity / 100
+        }); background-image: url('${
+          tile.BGImageUrl
+        }'); background-size: cover; background-position: center; background-blend-mode: overlay`
+      : ``
+  }; color: ${textColor}; justify-content: ${align}; align-items: ${align}">
+            <div ${DefaultAttributes} class="tile-icon-section"  style="display: ${
+    icon ? "block" : "none"
+  }; " >
                 <span ${DefaultAttributes} data-gjs-type="text" class="tile-close-icon top-right selected-tile-title readonly-mode">×</span>
-                <span ${DefaultAttributes} data-gjs-type="text" title="${icon?.IconName}" class="tile-icon">
+                <span ${DefaultAttributes} data-gjs-type="text" title="${
+    icon?.IconName
+  }" class="tile-icon">
                   ${iconSVG}
                 </span>
             </div>
@@ -70,7 +92,9 @@ export function tileFromAttributes(tile: Tile, themeManager: ThemeManager): stri
 
 export function newTile(tileId?: String) {
   return `
-      <div ${tileWrapperDefaultAttributes} class="template-wrapper" id="${tileId || randomIdGenerator(8)}">
+      <div ${tileWrapperDefaultAttributes} class="template-wrapper" id="${
+    tileId || randomIdGenerator(8)
+  }">
           <div ${tileDefaultAttributes} class="template-block" style="background-color: transparent; color: #333333; justify-content: left">
               <div ${DefaultAttributes} id="igtdq" data-gjs-type="default" class="tile-icon-section">
                   <span ${DefaultAttributes} id="is1dw" data-gjs-type="text" class="tile-close-icon top-right selected-tile-title readonly-mode">×</span>
@@ -78,7 +102,9 @@ export function newTile(tileId?: String) {
               </div>
               <div ${DefaultAttributes} id="igtdq" data-gjs-type="default" class="tile-title-section">
                   <span ${DefaultAttributes} id="is1dw" data-gjs-type="text" class="tile-close-title top-right selected-tile-title readonly-mode">×</span>
-                  <span ${DefaultAttributes} style="display: block" id="ic26t" data-gjs-type="text" is-hidden="false" title="${i18n.t("tile.title")}" class="tile-title">${i18n.t("tile.title")}</span>
+                  <span ${DefaultAttributes} style="display: block" id="ic26t" data-gjs-type="text" is-hidden="false" title="${i18n.t(
+    "tile.title"
+  )}" class="tile-title">${i18n.t("tile.title")}</span>
               </div>
           </div>
           <button ${DefaultAttributes} id="ifvvi" data-gjs-type="default" title="Add tile right" class="action-button add-button-right readonly-mode">+</button>
@@ -133,23 +159,23 @@ export function newTileColumn(tileHTML?: string) {
 
 export function infoSectionSpacer() {
   return `
-    <div ${DefaultAttributes} data-type="add-button" data-custom="add-button" class="info-section-spacing-container">
-        <div ${DefaultAttributes} class="add-new-info-section">
-          <hr ${DefaultAttributes} class="add-new-info-hr" />
-          <svg ${DefaultAttributes} xmlns="http://www.w3.org/2000/svg" id="Component_67_2" data-name="Component 67 – 2" width="30" height="30" viewBox="0 0 30 30">
-            <g ${DefaultAttributes} id="Group_2309" data-name="Group 2309">
-              <g ${DefaultAttributes} id="Group_2307" data-name="Group 2307">
-                <g ${DefaultAttributes} id="Ellipse_6" data-name="Ellipse 6" fill="#fdfdfd" stroke="#5068a8" stroke-width="1">
-                  <circle ${DefaultAttributes} cx="15" cy="15" r="15" stroke="none" />
-                  <circle ${DefaultAttributes} cx="15" cy="15" r="14.5" fill="none" />
+      <div ${DefaultAttributes} data-type="add-button" data-custom="add-button" class="info-section-spacing-container">
+          <div ${DefaultAttributes} class="add-new-info-section">
+            <hr ${DefaultAttributes} class="add-new-info-hr" />
+            <svg ${DefaultAttributes} xmlns="http://www.w3.org/2000/svg" id="Component_67_2" data-name="Component 67 – 2" width="30" height="30" viewBox="0 0 30 30">
+              <g ${DefaultAttributes} id="Group_2309" data-name="Group 2309">
+                <g ${DefaultAttributes} id="Group_2307" data-name="Group 2307">
+                  <g ${DefaultAttributes} id="Ellipse_6" data-name="Ellipse 6" fill="#fdfdfd" stroke="#5068a8" stroke-width="1">
+                    <circle ${DefaultAttributes} cx="15" cy="15" r="15" stroke="none" />
+                    <circle ${DefaultAttributes} cx="15" cy="15" r="14.5" fill="none" />
+                  </g>
                 </g>
               </g>
-            </g>
-            <path ${DefaultAttributes} id="Icon_ionic-ios-add" data-name="Icon ionic-ios-add"
-              d="M21.895,15H16.717V9.823a.858.858,0,1,0-1.717,0V15H9.823a.858.858,0,0,0,0,1.717H15v5.177a.858.858,0,1,0,1.717,0V16.717h5.177a.858.858,0,1,0,0-1.717Z"
-              transform="translate(-0.692 -1.025)" fill="#5068a8" />
-          </svg>
-        </div>
-    </div>
+              <path ${DefaultAttributes} id="Icon_ionic-ios-add" data-name="Icon ionic-ios-add"
+                d="M21.895,15H16.717V9.823a.858.858,0,1,0-1.717,0V15H9.823a.858.858,0,0,0,0,1.717H15v5.177a.858.858,0,1,0,1.717,0V16.717h5.177a.858.858,0,1,0,0-1.717Z"
+                transform="translate(-0.692 -1.025)" fill="#5068a8" />
+            </svg>
+          </div>
+      </div>
     `;
 }

@@ -1,6 +1,7 @@
 import { TranslateFrame } from "./TranslateFrame";
 import { TranslationodeUIManager } from "../../../../controls/translation/TranslationModeUIManager";
 import { i18n } from "../../../../i18n/i18n";
+import { TranslationStructure } from "../../../../types";
 
 interface Language {
   code: string;
@@ -46,7 +47,7 @@ export class TranslateSection {
 
   private readonly container: HTMLDivElement;
   private readonly languageList: Language[];
-  private readonly data: any;
+  private readonly data: TranslationStructure;
   private readonly versionLanguage: string;
 
   private selectedLanguageSpan!: HTMLSpanElement;
@@ -55,7 +56,7 @@ export class TranslateSection {
 
   private selectedLanguageCode!: string;
 
-  constructor(data: any, versionLanguage: string) {
+  constructor(data: TranslationStructure, versionLanguage: string) {
     this.data = data;
     this.versionLanguage = versionLanguage;
     this.languageList = [...TranslateSection.LANGUAGES];

@@ -311,7 +311,6 @@ export class ToolBoxService {
   }
 
   async updateTranslatedVersion(pageId: string, selectedLanguageCode: string, data: any) {
-    console.log('selectedLanguageCode', selectedLanguageCode);
     return await this.fetchAPI(
       "/api/toolbox/V2/update-translated-page",
       {
@@ -319,7 +318,7 @@ export class ToolBoxService {
         body: JSON.stringify({
           DynamicTranslationPrimaryKey: pageId,
           Language: selectedLanguageCode,
-          SDT_InfoContent: data,
+          SDT_TranslatedPage: data,
         }),
       },
       true
