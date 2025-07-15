@@ -1,4 +1,5 @@
 import { TranslationMapper } from "../../../../controls/translation/TranslationMapper";
+import { ToolBoxService } from "../../../../services/ToolBoxService";
 import { TranslationStructure } from "../../../../types";
 
 export class TranslateFrame {
@@ -41,6 +42,7 @@ export class TranslateFrame {
     }
 
     this.frame.append(container);
+    this.pageTitleEvents();
   }
 
   private header(): HTMLDivElement {
@@ -110,17 +112,10 @@ export class TranslateFrame {
 
   private otherPageAppBar(pageTitle: string = "Page Title"): HTMLDivElement {
     const appBarDiv = document.createElement("div");
-    appBarDiv.className = "app-bar";
+    appBarDiv.className = "translate-app-bar";
 
     appBarDiv.innerHTML = `
-      <div class="appbar-title-container">
-        <h1 class="title" title="${pageTitle}" data-placeholder="Enter page title">${pageTitle}</h1>
-        <div class="icon-container">
-          <svg id="edit_page_title" width="14px" height="14px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M18.4324 4C18.2266 4 18.0227 4.04055 17.8325 4.11933C17.6423 4.19811 17.4695 4.31358 17.3239 4.45914L5.25659 16.5265L4.42524 19.5748L7.47353 18.7434L19.5409 6.67608C19.6864 6.53051 19.8019 6.3577 19.8807 6.16751C19.9595 5.97732 20 5.77348 20 5.56761C20 5.36175 19.9595 5.1579 19.8807 4.96771C19.8019 4.77752 19.6864 4.60471 19.5409 4.45914C19.3953 4.31358 19.2225 4.19811 19.0323 4.11933C18.8421 4.04055 18.6383 4 18.4324 4ZM17.0671 2.27157C17.5 2.09228 17.9639 2 18.4324 2C18.9009 2 19.3648 2.09228 19.7977 2.27157C20.2305 2.45086 20.6238 2.71365 20.9551 3.04493C21.2864 3.37621 21.5492 3.7695 21.7285 4.20235C21.9077 4.63519 22 5.09911 22 5.56761C22 6.03611 21.9077 6.50003 21.7285 6.93288C21.5492 7.36572 21.2864 7.75901 20.9551 8.09029L8.69996 20.3454C8.57691 20.4685 8.42387 20.5573 8.25597 20.6031L3.26314 21.9648C2.91693 22.0592 2.54667 21.9609 2.29292 21.7071C2.03917 21.4534 1.94084 21.0831 2.03526 20.7369L3.39694 15.7441C3.44273 15.5762 3.53154 15.4231 3.6546 15.3001L15.9097 3.04493C16.241 2.71365 16.6343 2.45086 17.0671 2.27157Z" fill="#5068a8"></path>
-          </svg>
-        </div>
-      </div>
+      <h1 class="title ${this.isHomePage() ? "" : "editable-content"}" original-content="${pageTitle}" contenteditable="false" title="${pageTitle}" data-placeholder="Enter page title">${pageTitle}</h1>
     `;
 
     return appBarDiv;
@@ -142,6 +137,218 @@ export class TranslateFrame {
       minute: "2-digit",
       hour12: true,
     });
+  }
+
+  private pageTitleEvents(): void {
+    const pageTitle = this.getPageTitleElement();
+    if (!pageTitle || this.isHomePage()) return;
+
+    const editingState = this.createEditingState();
+    const handlers = this.createEventHandlers(pageTitle, editingState);
+
+    this.attachEventListeners(pageTitle, handlers);
+  }
+
+  private getPageTitleElement(): HTMLHeadingElement | null {
+    return this.frame.querySelector(".title") as HTMLHeadingElement;
+  }
+
+  private isHomePage(): boolean {
+    return this.data.PageName === "Home";
+  }
+
+  private createEditingState() {
+    return {
+      isEditing: false,
+      outsideClickHandler: null as ((e: MouseEvent) => void) | null,
+      originalContent: "",
+    };
+  }
+
+  private createEventHandlers(pageTitle: HTMLHeadingElement, editingState: any) {
+    const startEditing = () => {
+      editingState.isEditing = true;
+      editingState.originalContent =
+        pageTitle.getAttribute("original-content") || pageTitle.textContent || "";
+
+      this.setEditingMode(pageTitle, true);
+      this.setupOutsideClickHandler(pageTitle, editingState, finishEditing);
+    };
+
+    const finishEditing = () => {
+      if (!editingState.isEditing) return;
+
+      editingState.isEditing = false;
+      this.setEditingMode(pageTitle, false);
+
+      const updatedTitle = this.getUpdatedTitle(pageTitle);
+      this.savePageTitle(updatedTitle.toLocaleUpperCase());
+      this.cleanupOutsideClickHandler(editingState);
+
+      pageTitle.setAttribute("original-content", updatedTitle);
+      pageTitle.setAttribute("title", updatedTitle.toLocaleUpperCase());
+    };
+
+    const cancelEditing = () => {
+      if (!editingState.isEditing) return;
+
+      pageTitle.textContent = editingState.originalContent;
+      finishEditing();
+    };
+
+    return { startEditing, finishEditing, cancelEditing };
+  }
+
+  private setEditingMode(pageTitle: HTMLHeadingElement, isEditing: boolean): void {
+    if (isEditing) {
+      pageTitle.classList.add("editing");
+      pageTitle.setAttribute("contenteditable", "true");
+      pageTitle.focus();
+    } else {
+      pageTitle.classList.remove("editing");
+      pageTitle.setAttribute("contenteditable", "false");
+    }
+  }
+
+  private setupOutsideClickHandler(
+    pageTitle: HTMLHeadingElement,
+    editingState: any,
+    finishEditing: () => void
+  ): void {
+    editingState.outsideClickHandler = (e: MouseEvent) => {
+      if (editingState.isEditing && !pageTitle.contains(e.target as Node)) {
+        finishEditing();
+      }
+    };
+
+    // Delay to prevent immediate triggering
+    setTimeout(() => {
+      if (editingState.outsideClickHandler) {
+        document.addEventListener("click", editingState.outsideClickHandler);
+      }
+    }, 100);
+  }
+
+  private cleanupOutsideClickHandler(editingState: any): void {
+    if (editingState.outsideClickHandler) {
+      document.removeEventListener("click", editingState.outsideClickHandler);
+      editingState.outsideClickHandler = null;
+    }
+  }
+
+  private getUpdatedTitle(pageTitle: HTMLHeadingElement): string {
+    return pageTitle.textContent?.trim() || "";
+  }
+
+  private attachEventListeners(pageTitle: HTMLHeadingElement, handlers: any): void {
+    const { startEditing, finishEditing, cancelEditing } = handlers;
+
+    // Click to start editing
+    pageTitle.addEventListener("click", (e: MouseEvent) => {
+      e.stopPropagation();
+      startEditing();
+    });
+
+    // Keyboard shortcuts
+    pageTitle.addEventListener("keydown", (e: KeyboardEvent) => {
+      switch (e.key) {
+        case "Enter":
+          e.preventDefault();
+          finishEditing();
+          break;
+        case "Escape":
+          e.preventDefault();
+          cancelEditing();
+          break;
+      }
+    });
+
+    // Blur event as backup
+    pageTitle.addEventListener("blur", () => {
+      this.handleBlurEvent(finishEditing);
+    });
+  }
+
+  private handleBlurEvent(finishEditing: () => void): void {
+    setTimeout(() => {
+      if (
+        document.activeElement?.tagName !== "H1" ||
+        !document.activeElement?.classList.contains("title")
+      ) {
+        finishEditing();
+      }
+    }, 100);
+  }
+
+  private savePageTitle(pageTitle: string): void {
+    this.data.PageName = pageTitle;
+    this.saveUpdatedData(this.data).catch((error) => {
+      throw error;
+    });
+  }
+
+  private async saveUpdatedData(data: TranslationStructure): Promise<void> {
+    const autoSaveUI = this.getAutoSaveElements();
+    if (!autoSaveUI) return;
+
+    this.showAutoSaveStatus(autoSaveUI, "saving");
+
+    try {
+      const toolboxService = new ToolBoxService();
+      const minDelay = 500;
+
+      await Promise.all([
+        toolboxService.updateTranslatedVersion(this.pageId, this.language, data),
+        this.delay(minDelay),
+      ]);
+
+      this.showAutoSaveStatus(autoSaveUI, "saved");
+    } catch (error) {
+      this.showAutoSaveStatus(autoSaveUI, "error");
+      throw error;
+    } finally {
+      setTimeout(() => {
+        this.hideAutoSaveStatus(autoSaveUI);
+      }, 1000);
+    }
+  }
+
+  private getAutoSaveElements(): { saving: HTMLElement; saved: HTMLElement } | null {
+    const saving = document.querySelector(".auto-saving-section-content-text") as HTMLElement;
+    const saved = document.querySelector(".auto-saved-section-content-text") as HTMLElement;
+
+    return saving && saved ? { saving, saved } : null;
+  }
+
+  private showAutoSaveStatus(
+    autoSaveUI: { saving: HTMLElement; saved: HTMLElement },
+    status: "saving" | "saved" | "error"
+  ): void {
+    // Hide all status elements first
+    autoSaveUI.saving.style.display = "none";
+    autoSaveUI.saved.style.display = "none";
+
+    switch (status) {
+      case "saving":
+        autoSaveUI.saving.style.display = "flex";
+        break;
+      case "saved":
+        autoSaveUI.saved.style.display = "flex";
+        break;
+      case "error":
+        // You might want to show an error status element here
+        console.error("Auto-save failed");
+        break;
+    }
+  }
+
+  private hideAutoSaveStatus(autoSaveUI: { saving: HTMLElement; saved: HTMLElement }): void {
+    autoSaveUI.saving.style.display = "none";
+    autoSaveUI.saved.style.display = "none";
+  }
+
+  private delay(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   render(parent: HTMLDivElement) {

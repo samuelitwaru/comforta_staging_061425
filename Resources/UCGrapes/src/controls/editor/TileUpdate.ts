@@ -96,7 +96,7 @@ export class TileUpdate {
     rowComponent.addStyle("height", `${maxTileCount * minTileHeight}px`);
     const columnCount = columnComponents.length;
 
-    if (maxTileCount == 1) {
+    if (maxTileCount == 1 && columnCount > 1) {
       // set all tile heights to min height
       rowComponent.find(".template-wrapper").forEach((comp: any) => {
         comp.addStyle({ height: `${minTileHeight}px` });
@@ -124,6 +124,9 @@ export class TileUpdate {
       if (tiles.length === 0) {
         comp.remove();
       } else if (tiles.length === 1) {
+        if (columnCount === 1) {
+          // tiles[0].addStyle({ height: `${120}px` });
+        }
         comp.addStyle({ display: "block", height: "100%" });
         if (columnCount < 3) {
           // add resize handle

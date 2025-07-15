@@ -39,7 +39,6 @@ export class LanguageTranslate {
 
 
       if (this.isTranslationSuccessful(translateResult)) {
-        console.log("translateResult", translateResult);
         await this.handleSuccessfulTranslation(translationContext);
       }
     } catch (error) {
@@ -123,7 +122,6 @@ export class LanguageTranslate {
     this.enableTranslationMode();
     this.hideSidebarSections(sidebarElements);
     
-      console.log("renderTranslateSection line 126");
     this.renderTranslateSection(sidebarElements.sidebar, data, versionLanguage);
     this.toggleTranslationUI();
   }

@@ -1482,3 +1482,5 @@ GX_EmptyItemText=Geen
 Are you sure you want to re-send an invititation to this manager?=Weet u zeker dat u deze manager opnieuw een uitnodiging wilt sturen?
 Prompts=Meldingen
 Are you sure you want to unblock this manager's account?=Are you sure you want to unblock this manager's account?
+WWP_DF_ConfirmationDeleteContainer=Bevestig het verwijderen van de container
+WWP_DF_ConfirmationDeleteElement=Bevestig het verwijderen van het element

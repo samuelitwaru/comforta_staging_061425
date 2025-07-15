@@ -24,7 +24,6 @@ export class TranslationMapper {
 
     let current: any = this.data.PageStructure;
 
-
     for (let i = 0; i < pathParts.length - 1; i++) {
       const part = pathParts[i];
       if (current[part] === undefined) {

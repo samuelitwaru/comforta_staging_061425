@@ -36,6 +36,7 @@ export function tileFromAttributes(
   const textColor = tile.Color;
   const align = tile.Align;
   const icon = themeManager.getThemeIcon(tile.Icon as string);
+  const height = tile.Height;
   let iconSVG = "";
   if (icon) {
     iconSVG = icon.IconSVG.replace(
@@ -50,7 +51,7 @@ export function tileFromAttributes(
   const opacity = tile.Opacity || 0;
   return `
     <div ${tileWrapperDefaultAttributes} class="template-wrapper" id="${id}" style="text-align:${align}; height:${
-    tile?.Height || minTileHeight
+    height || minTileHeight
   }px;">
         <div ${tileDefaultAttributes} class="template-block" style="background-color: ${bgColor}; ${
     bgImage

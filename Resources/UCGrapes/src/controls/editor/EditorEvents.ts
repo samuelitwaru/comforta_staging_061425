@@ -63,7 +63,7 @@ export class EditorEvents {
     };
   }
 
-  private initializeTileHeights(isSingleTile=true): void {
+  private initializeTileHeights(isSingleTile = true): void {
     this.tileHeights = {
       min: minTileHeight,
       medium: minTileHeight * (isSingleTile ? 2.2 : 1.5),
@@ -128,14 +128,15 @@ export class EditorEvents {
 
   updateTileGrids() {
     const wrapper = this.editor.getWrapper();
-    const rowComps = wrapper.find('.container-row').filter((comp:any) => comp.find('.tile-column').length > 0 )
-    rowComps.forEach((rowComp:any) => {
-      this.tileUpdate.updateGridTiles(rowComp)
-    })
+    const rowComps = wrapper
+      .find(".container-row")
+      .filter((comp: any) => comp.find(".tile-column").length > 0);
+    rowComps.forEach((rowComp: any) => {
+      this.tileUpdate.updateGridTiles(rowComp);
+    });
   }
 
   private onLoad(): void {
-    
     if (!this.editor) return;
 
     this.editor.on("load", () => {
@@ -149,7 +150,7 @@ export class EditorEvents {
       this.initializePostLoadComponents();
       this.activateFrameEvents(wrapper);
       this.loadPageHistory(this.pageData);
-      this.updateTileGrids()
+      this.updateTileGrids();
     });
   }
 
@@ -174,16 +175,43 @@ export class EditorEvents {
     viewEl.addEventListener("mouseover", this.handleMouseOver.bind(this));
 
     // Document-level events for resize functionality
-    document.addEventListener("mousemove", this.handleDocumentMouseMove.bind(this));
+    document.addEventListener(
+      "mousemove",
+      this.handleDocumentMouseMove.bind(this)
+    );
     document.addEventListener("mouseup", this.handleDocumentMouseUp.bind(this));
-    document.addEventListener("mouseover", this.handleDocumentMouseOver.bind(this));
-    document.addEventListener("mouseout", this.handleDocumentMouseOut.bind(this));
-    document.addEventListener("mouseenter", this.handleDocumentMouseEnter.bind(this));
-    document.addEventListener("mouseleave", this.handleDocumentMouseLeave.bind(this));
-    document.addEventListener("pointerover", this.handleDocumentPointerOver.bind(this));
-    document.addEventListener("pointerout", this.handleDocumentPointerOut.bind(this));
-    document.addEventListener("pointerenter", this.handleDocumentPointerEnter.bind(this));
-    document.addEventListener("pointerleave", this.handleDocumentPointerLeave.bind(this));
+    document.addEventListener(
+      "mouseover",
+      this.handleDocumentMouseOver.bind(this)
+    );
+    document.addEventListener(
+      "mouseout",
+      this.handleDocumentMouseOut.bind(this)
+    );
+    document.addEventListener(
+      "mouseenter",
+      this.handleDocumentMouseEnter.bind(this)
+    );
+    document.addEventListener(
+      "mouseleave",
+      this.handleDocumentMouseLeave.bind(this)
+    );
+    document.addEventListener(
+      "pointerover",
+      this.handleDocumentPointerOver.bind(this)
+    );
+    document.addEventListener(
+      "pointerout",
+      this.handleDocumentPointerOut.bind(this)
+    );
+    document.addEventListener(
+      "pointerenter",
+      this.handleDocumentPointerEnter.bind(this)
+    );
+    document.addEventListener(
+      "pointerleave",
+      this.handleDocumentPointerLeave.bind(this)
+    );
   }
 
   private handleDocumentMouseOver(e: MouseEvent): void {
@@ -228,11 +256,11 @@ export class EditorEvents {
     }
 
     const wrapper = this.editor.getWrapper();
-    const rowComp = wrapper.find(`#${this.resizeState.resizingRowParent?.id}`)
-    if (rowComp.length && rowComp[0].find('.tile-column').length > 1) {
-      this.initializeTileHeights(true)
+    const rowComp = wrapper.find(`#${this.resizeState.resizingRowParent?.id}`);
+    if (rowComp.length && rowComp[0].find(".tile-column").length > 1) {
+      this.initializeTileHeights(true);
     } else {
-      this.initializeTileHeights(false)
+      this.initializeTileHeights(false);
     }
 
     if (targetElement.closest(".template-block")) {
@@ -242,72 +270,101 @@ export class EditorEvents {
 
   private startResize(e: MouseEvent, targetElement: Element): void {
     this.resizeState.isResizing = true;
-    this.resizeState.resizingRow = targetElement.closest(".template-wrapper") as HTMLDivElement;
-    this.resizeState.resizingRowParent = targetElement.closest(".container-row") as HTMLDivElement;
-    this.resizeState.resizingRowHeight = this.resizeState.resizingRow.offsetHeight;
+    this.resizeState.resizingRow = targetElement.closest(
+      ".template-wrapper"
+    ) as HTMLDivElement;
+    this.resizeState.resizingRowParent = targetElement.closest(
+      ".container-row"
+    ) as HTMLDivElement;
+    this.resizeState.resizingRowHeight =
+      this.resizeState.resizingRow.offsetHeight;
     this.resizeState.resizeYStart = e.clientY;
     this.resizeState.initialHeight = this.resizeState.resizingRow.offsetHeight;
 
     // console.log('resising row: ',  this.resizeState.resizingRowParent)
-    
+
     this.setupResizeUI(targetElement);
   }
 
-  private resizeGridTiles(finalHeight:number) {
+  private resizeGridTiles(finalHeight: number) {
     const verticalTileCount = Math.round(finalHeight / this.tileHeights.min);
-    const tileColumn = this.resizeState.resizingRow?.parentElement
+    const tileColumn = this.resizeState.resizingRow?.parentElement;
     if (tileColumn && tileColumn.classList.contains("tile-column")) {
-      const siblingTileColumn = (tileColumn.nextElementSibling || tileColumn.previousElementSibling) as HTMLDivElement;
+      const siblingTileColumn = (tileColumn.nextElementSibling ||
+        tileColumn.previousElementSibling) as HTMLDivElement;
       if (siblingTileColumn) {
-        const columnComponent = this.editor.Components.getWrapper().find(`#${siblingTileColumn.id}`)[0];
-        const containerRowComponent = columnComponent.closest('.container-row')
-        
-        containerRowComponent.addStyle('height', `${finalHeight}px`)
+        const columnComponent = this.editor.Components.getWrapper().find(
+          `#${siblingTileColumn.id}`
+        )[0];
+        const containerRowComponent = columnComponent.closest(".container-row");
+
+        containerRowComponent.addStyle("height", `${finalHeight}px`);
         this.applyResize(finalHeight);
 
         // this.uiManager.tileManager.updateInfoGridData(containerRowComponent)
 
         // const siblingTileCount = columnComponent.components().filter((comp: any) => (comp.get("type") === "tile-wrapper") || comp.getClasses().includes("template-wrapper")).length;
-        const siblingTileCount = columnComponent.find('.template-wrapper').length
+        const siblingTileCount =
+          columnComponent.find(".template-wrapper").length;
         const tilesToAdd = Math.ceil(verticalTileCount - siblingTileCount);
         const tilesToRemove = Math.floor(siblingTileCount - verticalTileCount);
         if (tilesToAdd > 0) {
           for (let i = 0; i < tilesToAdd; i++) {
-            const newTileComponent = this.editor.Components.addComponent(newTile());
+            const newTileComponent = this.editor.Components.addComponent(
+              newTile()
+            );
             columnComponent.append(newTileComponent);
             // DATA: add new tile to column row ..., and column ...
             this.tileManager.addNewTileToGrid(
-              containerRowComponent.getId(), 
-              columnComponent.getId(), 
+              containerRowComponent.getId(),
+              columnComponent.getId(),
               newTileComponent.getId()
-            )
+            );
           }
         } else if (tilesToRemove > 0) {
-          const tiles = columnComponent.components().filter((comp: any) => (comp.get("type") === "tile-wrapper") || comp.getClasses().includes("template-wrapper"));
+          const tiles = columnComponent
+            .components()
+            .filter(
+              (comp: any) =>
+                comp.get("type") === "tile-wrapper" ||
+                comp.getClasses().includes("template-wrapper")
+            );
           for (let i = 0; i < tilesToRemove && tiles.length > 0; i++) {
-            const lastTile = tiles.pop(); 
-            const tileAttributes = this.tileManager.getTileAttrs(containerRowComponent.getId(), columnComponent.getId(), lastTile.getId())
+            const lastTile = tiles.pop();
+            const tileAttributes = this.tileManager.getTileAttrs(
+              containerRowComponent.getId(),
+              columnComponent.getId(),
+              lastTile.getId()
+            );
             this.tileManager.removeTileFromGrid(
               containerRowComponent.getId(),
               columnComponent.getId(),
               lastTile.getId()
-            )
+            );
             if (lastTile) {
-              lastTile.remove()
-              this.tileManager.addTileOnNewRow(lastTile, tileAttributes, containerRowComponent)
+              lastTile.remove();
+              this.tileManager.addTileOnNewRow(
+                lastTile,
+                tileAttributes,
+                containerRowComponent
+              );
             }
           }
         }
-        this.tileManager.tileUpdate.updateGridTiles(containerRowComponent)
+        this.tileManager.tileUpdate.updateGridTiles(containerRowComponent);
       }
     }
   }
 
   private setupResizeUI(targetElement: Element): void {
-    const frameContainer = targetElement.closest("#frame-container") as HTMLDivElement;
+    const frameContainer = targetElement.closest(
+      "#frame-container"
+    ) as HTMLDivElement;
 
     // Setup frame children cursors
-    this.resizeState.frameChildren = Array.from(frameContainer?.querySelectorAll("*")).filter(
+    this.resizeState.frameChildren = Array.from(
+      frameContainer?.querySelectorAll("*")
+    ).filter(
       (child): child is HTMLDivElement => child !== this.resizeState.resizingRow
     );
 
@@ -324,7 +381,9 @@ export class EditorEvents {
     // Setup info section spacer
     this.setupInfoSectionSpacer(targetElement);
 
-    this.resizeState.templateBlock = targetElement.closest(".template-block") as HTMLDivElement;
+    this.resizeState.templateBlock = targetElement.closest(
+      ".template-block"
+    ) as HTMLDivElement;
   }
 
   private createResizeOverlay(): void {
@@ -362,7 +421,9 @@ export class EditorEvents {
   private setupInfoSectionSpacer(targetElement: Element): void {
     this.resizeState.infoSectionSpacer = targetElement
       ?.closest(".container-row")
-      ?.nextElementSibling?.closest(".info-section-spacing-container") as HTMLDivElement | null;
+      ?.nextElementSibling?.closest(
+        ".info-section-spacing-container"
+      ) as HTMLDivElement | null;
 
     if (this.resizeState.infoSectionSpacer) {
       this.resizeState.infoSectionSpacer.style.pointerEvents = "none";
@@ -435,7 +496,7 @@ export class EditorEvents {
     const comps = wrapper.find(`#${this.resizeState.resizingRow.id}`);
 
     if (comps.length) {
-      const columnComp = comps[0].closest('.tile-column')
+      const columnComp = comps[0].closest(".tile-column");
       comps[0].addStyle({ height: `${newHeight}px` });
       columnComp.addStyle({ height: `${newHeight}px` });
     }
@@ -450,7 +511,10 @@ export class EditorEvents {
 
   private finishResize(): void {
     const finalHeight = this.calculateFinalHeight();
-    const isTileColumn = this.resizeState.resizingRow?.parentElement?.classList.contains("tile-column")
+    const isTileColumn =
+      this.resizeState.resizingRow?.parentElement?.classList.contains(
+        "tile-column"
+      );
     if (isTileColumn) {
       this.resizeGridTiles(finalHeight);
     }
@@ -494,9 +558,9 @@ export class EditorEvents {
 
   private updateInfoTileAttributes(finalHeight: number): void {
     const infoSectionManager = new InfoSectionManager();
-    const tile = this.resizeState.resizingRow
-    const col = tile?.closest('.tile-column');
-    const row = tile?.closest('.container-row');
+    const tile = this.resizeState.resizingRow;
+    const col = tile?.closest(".tile-column");
+    const row = tile?.closest(".container-row");
     const tileId = tile?.id;
     const colId = col?.id;
     const rowId = row?.id;
@@ -543,7 +607,10 @@ export class EditorEvents {
   private resetAffectedElementCursors(): void {
     if (this.resizeState.affectedElements && this.resizeState.originalCursors) {
       this.resizeState.affectedElements.forEach((el, i) => {
-        if (this.resizeState.originalCursors && this.resizeState.originalCursors[i]) {
+        if (
+          this.resizeState.originalCursors &&
+          this.resizeState.originalCursors[i]
+        ) {
           el.style.cursor = this.resizeState.originalCursors[i];
         } else {
           el.style.removeProperty("cursor");
@@ -585,7 +652,6 @@ export class EditorEvents {
       modalContent.render(modal);
 
       document.body.appendChild(modal);
-      
     }
   }
 
@@ -594,7 +660,9 @@ export class EditorEvents {
     modal.classList.add("tb-modal");
     modal.style.display = "flex";
 
-    const tileComp = selectedComponent.closest('[data-gjs-type="info-tiles-section"]');
+    const tileComp = selectedComponent.closest(
+      '[data-gjs-type="info-tiles-section"]'
+    );
     const modalContent = new ImageUploadManager("tile", tileComp?.getId());
     modalContent.render(modal);
 
@@ -626,7 +694,10 @@ export class EditorEvents {
     if (currentSelected) {
       const clickedComponent = this.getComponentFromElement(targetElement);
 
-      if (clickedComponent && clickedComponent.getId() === currentSelected.getId()) {
+      if (
+        clickedComponent &&
+        clickedComponent.getId() === currentSelected.getId()
+      ) {
         this.retriggerSelection(currentSelected);
         return;
       }
@@ -664,68 +735,73 @@ export class EditorEvents {
     );
   }
 
-  private addGridTile(e:MouseEvent) {
-    const addTileButton = e.target as Element
-    const row = addTileButton.closest('.container-row')
-    const col = addTileButton.closest('.tile-column')
+  private addGridTile(e: MouseEvent) {
+    const addTileButton = e.target as Element;
+    const row = addTileButton.closest(".container-row");
+    const col = addTileButton.closest(".tile-column");
     if (row && col) {
-      const wrapper = this.editor.getWrapper()
-      const rowComponent = wrapper.find(`#${row.id}`)[0]
-      const colComponent = wrapper.find(`#${col.id}`)[0]
-      this.tileManager.addGridTile(rowComponent, colComponent.index())
+      const wrapper = this.editor.getWrapper();
+      const rowComponent = wrapper.find(`#${row.id}`)[0];
+      const colComponent = wrapper.find(`#${col.id}`)[0];
+      this.tileManager.addGridTile(rowComponent, colComponent.index());
     }
   }
 
-  private deleteGridTile(e:MouseEvent) {
-    const deleteTileButton = e.target as Element
-    const tile = deleteTileButton.closest('.template-wrapper')
+  private deleteGridTile(e: MouseEvent) {
+    const deleteTileButton = e.target as Element;
+    const tile = deleteTileButton.closest(".template-wrapper");
     if (tile) {
-      const wrapper = this.editor.getWrapper()
-      const tileComponent = wrapper.find(`#${tile.id}`)[0]
-      this.tileManager.deleteGridTile(tileComponent)
+      const wrapper = this.editor.getWrapper();
+      const tileComponent = wrapper.find(`#${tile.id}`)[0];
+      this.tileManager.deleteGridTile(tileComponent);
     }
   }
 
-  private deleteIcon(e:MouseEvent) {
-    this.tileManager.removeTileIcon(e)
+  private deleteIcon(e: MouseEvent) {
+    this.tileManager.removeTileIcon(e);
   }
 
-  private deleteTileText(e:MouseEvent) {
-    this.tileManager.removeTileTitle(e)
+  private deleteTileText(e: MouseEvent) {
+    this.tileManager.removeTileTitle(e);
   }
 
   private processClick(e: MouseEvent, targetElement: Element): void {
-    (globalThis as any).pageData = this.pageData
-    const addButtonClicked = (e.target as Element).classList.contains('add-button-right') || 
-                              (e.target as Element).closest('.add-button-right')
-    const deleteButtonClicked = (e.target as Element).classList.contains('delete-button') || 
-                              (e.target as Element).closest('.action-button.delete-button')
+    (globalThis as any).pageData = this.pageData;
+    const addButtonClicked =
+      (e.target as Element).classList.contains("add-button-right") ||
+      (e.target as Element).closest(".add-button-right");
+    const deleteButtonClicked =
+      (e.target as Element).classList.contains("delete-button") ||
+      (e.target as Element).closest(".action-button.delete-button");
 
-    const deleteIconClicked = (e.target as Element).classList.contains('tile-close-icon') || 
-                              (e.target as Element).closest('.tile-close-icon')
+    const deleteIconClicked =
+      (e.target as Element).classList.contains("tile-close-icon") ||
+      (e.target as Element).closest(".tile-close-icon");
 
-    const deleteTextClicked = (e.target as Element).classList.contains('tile-close-title') || 
-                              (e.target as Element).closest('.tile-close-title')
-    const deleteCTAButtonClicked = (e.target as Element).classList.contains('cta-badge') || 
-                                    (e.target as Element).closest('.cta-badge')
+    const deleteTextClicked =
+      (e.target as Element).classList.contains("tile-close-title") ||
+      (e.target as Element).closest(".tile-close-title");
+    const deleteCTAButtonClicked =
+      (e.target as Element).classList.contains("cta-badge") ||
+      (e.target as Element).closest(".cta-badge");
 
     if (deleteIconClicked) {
-      this.deleteIcon(e)
+      this.deleteIcon(e);
     }
 
     if (deleteTextClicked) {
-      this.deleteTileText(e)
+      this.deleteTileText(e);
     }
 
     if (addButtonClicked) {
-      this.addGridTile(e)
+      this.addGridTile(e);
     }
     if (deleteButtonClicked) {
-      this.deleteGridTile(e)
+      this.deleteGridTile(e);
     }
-    
+
     if (deleteCTAButtonClicked) {
-      this.tileManager.removeCTa(e)
+      this.tileManager.removeCTa(e);
     }
     this.uiManager.activateEditor(this.frameId);
     if (this.disableEditor()) return;
@@ -744,7 +820,9 @@ export class EditorEvents {
     if (this.disableEditor()) return;
     const targetElement = e.target as Element;
 
-    const infoSection = targetElement.closest(".info-section-spacing-container") as HTMLDivElement;
+    const infoSection = targetElement.closest(
+      ".info-section-spacing-container"
+    ) as HTMLDivElement;
 
     if (infoSection && infoSection.style.height !== "3.2rem") {
       this.uiManager.clearAllMenuContainers(true);
@@ -762,14 +840,23 @@ export class EditorEvents {
   }
 
   private setEditorToReadOnly(): void {
-    const readOnlyElements = this.editor?.getWrapper()?.getEl().querySelectorAll(".readonly-mode") as NodeListOf<HTMLElement>;
+    const readOnlyElements = this.editor
+      ?.getWrapper()
+      ?.getEl()
+      .querySelectorAll(".readonly-mode") as NodeListOf<HTMLElement>;
     readOnlyElements?.forEach((element: HTMLElement) => {
-      element.style.visibility = 'hidden';
+      element.style.visibility = "hidden";
     });
   }
 
   private initializePostLoadComponents(): void {
-    new EditorThumbs(this.frameId, this.pageId, this.editor, this.pageData, this.isHome);
+    new EditorThumbs(
+      this.frameId,
+      this.pageId,
+      this.editor,
+      this.pageData,
+      this.isHome
+    );
 
     this.uiManager.frameEventListener();
     this.uiManager.activateNavigators();
@@ -811,16 +898,25 @@ export class EditorEvents {
         .getWrapper()
         .find('[data-gjs-type="info-tiles-section"]');
       allTileContainers.forEach((container: any) => {
-        container.set("droppable", "[data-gjs-type='tile-wrapper'], [data-gjs-type='tile-col-wrapper']");
-        container.addAttributes({ "data-gjs-droppable": "[data-gjs-type='tile-wrapper'], [data-gjs-type='tile-col-wrapper']" });
+        container.set(
+          "droppable",
+          "[data-gjs-type='tile-wrapper'], [data-gjs-type='tile-col-wrapper']"
+        );
+        container.addAttributes({
+          "data-gjs-droppable":
+            "[data-gjs-type='tile-wrapper'], [data-gjs-type='tile-col-wrapper']",
+        });
       });
 
       // reset any temporary draggable/droppable settings
-      this.uiManager.handleDragEnd(model, sourceComponent, destinationComponent);
+      this.uiManager.handleDragEnd(
+        model,
+        sourceComponent,
+        destinationComponent
+      );
       this.tileUpdate.updateTilesDraggableProperty(this.editor);
     });
   }
-
 
   /**
    * Handles temporary droppable overrides for drag-and-drop in tile sections.
@@ -837,28 +933,37 @@ export class EditorEvents {
     // If dragging an external tile into a grid, check and enable dropping in a column with tiles and not outside.
     if (model.target.get("type") === "tile-col-wrapper") {
       // Get all info-tiles-section components in the editor
-      const allSections = this.editor.getWrapper().find('[data-gjs-type="info-tiles-section"]');
+      const allSections = this.editor
+        .getWrapper()
+        .find('[data-gjs-type="info-tiles-section"]');
       allSections.forEach((section: any) => {
-        const colWrappers = section.components().filter(
-          (comp: any) => comp.get("type") === "tile-col-wrapper"
-        );
+        const colWrappers = section
+          .components()
+          .filter((comp: any) => comp.get("type") === "tile-col-wrapper");
         if (colWrappers.length === 2) {
           // Check if either column has more than one tile-wrapper child
-          const hasMultiTileCol = colWrappers.some((col: any) =>
-            col.components().filter((comp: any) => comp.get("type") === "tile-wrapper").length > 1
+          const hasMultiTileCol = colWrappers.some(
+            (col: any) =>
+              col
+                .components()
+                .filter((comp: any) => comp.get("type") === "tile-wrapper")
+                .length > 1
           );
           // If any column has more than one tile-wrapper child, disable dropping a new column in this section
           // This is to prevent adding a new column when there are already two columns with tiles.
           if (hasMultiTileCol) {
             // if the dragged column tile is one of the columns in the colWrappers, then allow drop to re-order
-            if (model.target.getId() === colWrappers[0].getId() || model.target.getId() === colWrappers[1].getId()) {
-            // Enable dropping only in columns with more than one tile-wrapper child
+            if (
+              model.target.getId() === colWrappers[0].getId() ||
+              model.target.getId() === colWrappers[1].getId()
+            ) {
+              // Enable dropping only in columns with more than one tile-wrapper child
               section.set("droppable", "[data-gjs-type='tile-col-wrapper']");
               section.addAttributes({
-                "data-gjs-droppable": "[data-gjs-type='tile-col-wrapper']"
+                "data-gjs-droppable": "[data-gjs-type='tile-col-wrapper']",
               });
             } else {
-            // Disable dropping a new column in this section
+              // Disable dropping a new column in this section
               section.set("droppable", false);
               section.addAttributes({ "data-gjs-droppable": "false" });
             }
@@ -869,27 +974,31 @@ export class EditorEvents {
 
     if (sourceComponent.get("type") === "info-tiles-section") {
       // Get all tile-col-wrapper children
-      const colWrappers = sourceComponent.components().filter(
-        (comp: any) => comp.get("type") === "tile-col-wrapper"
-      );
+      const colWrappers = sourceComponent
+        .components()
+        .filter((comp: any) => comp.get("type") === "tile-col-wrapper");
 
       // Check if the section already has 3 columns
       if (colWrappers.length === 3) {
         // Only allow internal reordering: set droppable to accept only tile-col-wrapper if the section already has 3 col tiles.
         sourceComponent.set("droppable", "[data-gjs-type='tile-col-wrapper']");
-        sourceComponent.addAttributes({ "data-gjs-droppable": "[data-gjs-type='tile-col-wrapper']" });
+        sourceComponent.addAttributes({
+          "data-gjs-droppable": "[data-gjs-type='tile-col-wrapper']",
+        });
       }
 
       // --- 3-tile column override: restrict section droppable to only col-wrapper drops ---
       const hasThreeTileCol = colWrappers.some((col: any) => {
-        const tileCount = col.components().filter(
-          (comp: any) => comp.get("type") === "tile-wrapper"
-        ).length;
+        const tileCount = col
+          .components()
+          .filter((comp: any) => comp.get("type") === "tile-wrapper").length;
         return tileCount === 3;
       });
       if (hasThreeTileCol) {
         sourceComponent.set("droppable", "[data-gjs-type='tile-col-wrapper']");
-        sourceComponent.addAttributes({ "data-gjs-droppable": "[data-gjs-type='tile-col-wrapper']" });
+        sourceComponent.addAttributes({
+          "data-gjs-droppable": "[data-gjs-type='tile-col-wrapper']",
+        });
       }
 
       // --- 2-column, >1 tile business rule ---
@@ -897,25 +1006,32 @@ export class EditorEvents {
         // Find if any col-wrapper has >1 tile-wrapper child
         let colWithMultipleTiles: any = null;
         colWrappers.forEach((col: any) => {
-          const tileChildren = col.components().filter(
-            (comp: any) => comp.get("type") === "tile-wrapper"
-          );
+          const tileChildren = col
+            .components()
+            .filter((comp: any) => comp.get("type") === "tile-wrapper");
           if (tileChildren.length > 1) {
             colWithMultipleTiles = col;
             // Enable droppable for tile-col-wrapper with >1 tile-wrapper child
             col.set("droppable", "[data-gjs-type='tile-wrapper']");
-            col.addAttributes({ "data-gjs-droppable": "[data-gjs-type='tile-wrapper']" });
+            col.addAttributes({
+              "data-gjs-droppable": "[data-gjs-type='tile-wrapper']",
+            });
           }
         });
         if (model.target.get("type") === "tile-col-wrapper") {
           // If dragging a col-wrapper with only one tile-wrapper child, set droppable of the other col to false (within a grid)
           const draggedCol = model.target;
-          const draggedColTileCount = draggedCol.components().filter(
-            (comp: any) => comp.get("type") === "tile-wrapper"
-          ).length;
+          const draggedColTileCount = draggedCol
+            .components()
+            .filter((comp: any) => comp.get("type") === "tile-wrapper").length;
           if (draggedColTileCount === 1 && colWithMultipleTiles) {
-            colWithMultipleTiles.set("droppable", "[data-gjs-type='tile-wrapper']");
-            colWithMultipleTiles.addAttributes({ "data-gjs-droppable": "[data-gjs-type='tile-wrapper']" });
+            colWithMultipleTiles.set(
+              "droppable",
+              "[data-gjs-type='tile-wrapper']"
+            );
+            colWithMultipleTiles.addAttributes({
+              "data-gjs-droppable": "[data-gjs-type='tile-wrapper']",
+            });
           }
         }
       }
@@ -923,20 +1039,28 @@ export class EditorEvents {
 
     if (sourceComponent.get("type") === "tile-col-wrapper") {
       // If dragging a tile-col-wrapper, check if it has only one tile-wrapper child
-      const tileChildren = sourceComponent.components().filter(
-        (comp: any) => comp.get("type") === "tile-wrapper"
-      );
+      const tileChildren = sourceComponent
+        .components()
+        .filter((comp: any) => comp.get("type") === "tile-wrapper");
       if (tileChildren.length > 1) {
         // If so, restrict droppable to only allow tile-wrapper drops
         sourceComponent.set("droppable", "[data-gjs-type='tile-wrapper']");
-        sourceComponent.addAttributes({ "data-gjs-droppable": "[data-gjs-type='tile-wrapper']" });
+        sourceComponent.addAttributes({
+          "data-gjs-droppable": "[data-gjs-type='tile-wrapper']",
+        });
       }
     }
   }
 
   private onSelected(): void {
-    this.editor.on("component:selected", this.handleComponentSelected.bind(this));
-    this.editor.on("component:deselected", this.handleComponentDeselected.bind(this));
+    this.editor.on(
+      "component:selected",
+      this.handleComponentSelected.bind(this)
+    );
+    this.editor.on(
+      "component:deselected",
+      this.handleComponentDeselected.bind(this)
+    );
   }
 
   private async handleComponentSelected(component: any): Promise<void> {
@@ -961,7 +1085,8 @@ export class EditorEvents {
   private setupGlobalComponentReferences(component: any): void {
     (globalThis as any).selectedComponent = component;
     (globalThis as any).tileMapper = this.uiManager.createTileMapper();
-    (globalThis as any).infoContentMapper = this.uiManager.createInfoContentMapper();
+    (globalThis as any).infoContentMapper =
+      this.uiManager.createInfoContentMapper();
     (globalThis as any).frameId = this.frameId;
     (globalThis as any).activeEditor = this.editor;
   }
@@ -973,7 +1098,11 @@ export class EditorEvents {
       return "tile";
     }
 
-    const ctaClasses = ["img-button-container", "plain-button-container", "cta-container-child"];
+    const ctaClasses = [
+      "img-button-container",
+      "plain-button-container",
+      "cta-container-child",
+    ];
     if (ctaClasses.some((cls) => classes.includes(cls))) {
       return "cta";
     }
@@ -1008,13 +1137,15 @@ export class EditorEvents {
   }
 
   private findChildPage(ctaAttrs: any, version: any): any {
-    const pageType = ctaAttrs.CtaType === "Form" ? "DynamicForm" : ctaAttrs.CtaType;
+    const pageType =
+      ctaAttrs.CtaType === "Form" ? "DynamicForm" : ctaAttrs.CtaType;
 
     if (pageType === "DynamicForm") {
       return version?.Pages.find((page: any) => {
         return (
           page.PageType === pageType &&
-          page.PageLinkStructure?.WWPFormId === Number(ctaAttrs.Action?.ObjectId)
+          page.PageLinkStructure?.WWPFormId ===
+            Number(ctaAttrs.Action?.ObjectId)
         );
       });
     } else if (pageType === "WebLink") {
@@ -1053,7 +1184,10 @@ export class EditorEvents {
   }
 
   private onTileUpdate(containerRow: any): void {
-    if (containerRow && containerRow.getEl()?.classList.contains("container-row")) {
+    if (
+      containerRow &&
+      containerRow.getEl()?.classList.contains("container-row")
+    ) {
       this.editor.off("component:add", this.handleComponentAdd);
       this.editor.on("component:add", this.handleComponentAdd);
     }
@@ -1072,7 +1206,12 @@ export class EditorEvents {
     }
   };
 
-  public setPageFocus(editor: any, frameId: string, pageId: string, pageData: any): void {
+  public setPageFocus(
+    editor: any,
+    frameId: string,
+    pageId: string,
+    pageData: any
+  ): void {
     this.ensureUIManager();
     this.uiManager.setPageFocus(editor, frameId, pageId, pageData);
   }
@@ -1131,5 +1270,4 @@ export class EditorEvents {
       );
     }
   }
-} 
-
+}

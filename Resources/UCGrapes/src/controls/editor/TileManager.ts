@@ -8,8 +8,16 @@ import {
   tileDefaultAttributes,
   tileWrapperDefaultAttributes,
 } from "../../utils/default-attributes";
-import { infoSectionSpacer, newTileColumn, resizeButton, tileFromAttributes } from "../../utils/gjs-components";
-import { getNextSiblingComponent, randomIdGenerator } from "../../utils/helpers";
+import {
+  infoSectionSpacer,
+  newTileColumn,
+  resizeButton,
+  tileFromAttributes,
+} from "../../utils/gjs-components";
+import {
+  getNextSiblingComponent,
+  randomIdGenerator,
+} from "../../utils/helpers";
 import { InfoSectionManager } from "../InfoSectionManager";
 import { CtaManager } from "../themes/CtaManager";
 import { ThemeManager } from "../themes/ThemeManager";
@@ -94,38 +102,47 @@ export class TileManager {
   //   }
   // }
 
-  addGridTile(rowComponent:any, index:number) {
-    const newCol = newTileColumn()
-    rowComponent.append(`
+  addGridTile(rowComponent: any, index: number) {
+    const newCol = newTileColumn();
+    rowComponent.append(
+      `
         ${newCol.html}
-      `, {at:index + 1})
-    this.addNewTileToGrid(rowComponent.getId(), newCol.colId, newCol.tileId)
-    this.tileUpdate.updateGridTiles(rowComponent)
+      `,
+      { at: index + 1 }
+    );
+    this.addNewTileToGrid(rowComponent.getId(), newCol.colId, newCol.tileId);
+    this.tileUpdate.updateGridTiles(rowComponent);
   }
 
-  deleteGridTile(tileComponent:any) {
+  deleteGridTile(tileComponent: any) {
     if (tileComponent) {
-      const rowComponent = tileComponent.closest('.container-row');
+      const rowComponent = tileComponent.closest(".container-row");
       const columnComponent = tileComponent.closest(".tile-column");
-      const tileId = tileComponent.getId()
+      const tileId = tileComponent.getId();
       tileComponent.remove();
-      
-      
-      if (columnComponent && columnComponent.find('.template-wrapper').length === 0) {
-        columnComponent.remove()
-      }
-      
-      if (rowComponent && rowComponent.find('.tile-column').length === 0) {
-        rowComponent.remove()
+
+      if (
+        columnComponent &&
+        columnComponent.find(".template-wrapper").length === 0
+      ) {
+        columnComponent.remove();
       }
 
-      this.removeTileFromGrid(rowComponent.getId(), columnComponent.getId(), tileId)
-      
+      if (rowComponent && rowComponent.find(".tile-column").length === 0) {
+        rowComponent.remove();
+      }
+
+      this.removeTileFromGrid(
+        rowComponent.getId(),
+        columnComponent.getId(),
+        tileId
+      );
+
       this.tileUpdate.updateGridTiles(rowComponent);
-      const columnComponents = rowComponent.find('.tile-column')
-      const tiles = rowComponent.find('.template-wrapper')
+      const columnComponents = rowComponent.find(".tile-column");
+      const tiles = rowComponent.find(".template-wrapper");
       if (columnComponents.length === 1 && tiles.length > 1) {
-        this.splitGridTiles(rowComponent)
+        this.splitGridTiles(rowComponent);
       }
 
       if (this.page?.PageType === "Information") {
@@ -143,20 +160,27 @@ export class TileManager {
     }
   }
 
-  splitGridTiles(rowComponent:any) {
-    const tiles = rowComponent.find('.template-wrapper')
+  splitGridTiles(rowComponent: any) {
+    const tiles = rowComponent.find(".template-wrapper");
     if (tiles.length > 1) {
-      const tilesToSplit = tiles.slice(1)
-      tilesToSplit.forEach((tile:any) => {
-        const tileAttributes = this.getTileAttrs(rowComponent.getId(), tile.parent().getId(), tile.getId())
-        const columnComponent = tile.closest('.tile-column')
-        tile.remove()
-        this.removeTileFromGrid(rowComponent.getId(), columnComponent.getId(), tile.getId())
-        this.addTileOnNewRow(tile, tileAttributes, rowComponent)
-      })
+      const tilesToSplit = tiles.slice(1);
+      tilesToSplit.forEach((tile: any) => {
+        const tileAttributes = this.getTileAttrs(
+          rowComponent.getId(),
+          tile.parent().getId(),
+          tile.getId()
+        );
+        const columnComponent = tile.closest(".tile-column");
+        tile.remove();
+        this.removeTileFromGrid(
+          rowComponent.getId(),
+          columnComponent.getId(),
+          tile.getId()
+        );
+        this.addTileOnNewRow(tile, tileAttributes, rowComponent);
+      });
     }
   }
-
 
   // addTileRight() {
   //   const addRightutton = (this.event.target as Element).closest(
@@ -268,9 +292,9 @@ export class TileManager {
             ObjectType: "",
             ObjectId: "",
             ObjectUrl: "",
-            FormId: 0
+            FormId: 0,
           },
-        });        
+        });
       } else if (method === "delete") {
         const tile = tileSection.Tiles?.find((tile: any) => tile.Id === tileId);
         if (tile) {
@@ -286,7 +310,7 @@ export class TileManager {
     }
   }
 
-  removeTileIcon(event:MouseEvent) {
+  removeTileIcon(event: MouseEvent) {
     const tileIcon = (event.target as Element).closest(".tile-close-icon");
     if (tileIcon) {
       const templateWrapper = tileIcon.closest(".template-wrapper");
@@ -294,27 +318,26 @@ export class TileManager {
         const tileComponent = this.editor.Components.getWrapper().find(
           "#" + templateWrapper?.id
         )[0];
-
         if (this.checkTileHasIconOrTitle(tileComponent)) {
           if (this.page?.PageType === "Information") {
             const infoSectionManager = new InfoSectionManager();
-            const rowComponent = tileComponent.closest('.container-row')
-            const colComponent = tileComponent.closest('.tile-column')
+            const rowComponent = tileComponent.closest(".container-row");
+            const colComponent = tileComponent.closest(".tile-column");
 
             infoSectionManager.updateGridTileAttribute(
               rowComponent.getId(),
               colComponent.getId(),
               tileComponent.getId(),
-              "Icon",""
-            )
-
-          } 
+              "Icon",
+              ""
+            );
+          }
           // else {
-            // (globalThis as any).tileMapper.updateTile(
-            //   tileComponent.getId(),
-            //   "Icon",
-            //   ""
-            // );
+          // (globalThis as any).tileMapper.updateTile(
+          //   tileComponent.getId(),
+          //   "Icon",
+          //   ""
+          // );
           // }
           const iconSection = tileComponent.find(".tile-icon-section")[0];
           if (iconSection) {
@@ -327,10 +350,8 @@ export class TileManager {
     }
   }
 
-  removeTileTitle(event:MouseEvent) {
-    const tileTitle = (event.target as Element).closest(
-      ".tile-close-title"
-    );
+  removeTileTitle(event: MouseEvent) {
+    const tileTitle = (event.target as Element).closest(".tile-close-title");
     if (tileTitle) {
       const templateWrapper = tileTitle.closest(".template-wrapper");
       if (templateWrapper) {
@@ -341,16 +362,17 @@ export class TileManager {
         if (this.checkTileHasIconOrTitle(tileComponent)) {
           if (this.page?.PageType === "Information") {
             const infoSectionManager = new InfoSectionManager();
-            const rowComponent = tileComponent.closest('.container-row')
-            const colComponent = tileComponent.closest('.tile-column')
+            const rowComponent = tileComponent.closest(".container-row");
+            const colComponent = tileComponent.closest(".tile-column");
             infoSectionManager.updateGridTileAttribute(
               rowComponent.getId(),
               colComponent.getId(),
               tileComponent.getId(),
-              "Icon",""
-            )
-          } 
-          
+              "Icon",
+              ""
+            );
+          }
+
           // else {
           //   (globalThis as any).tileMapper.updateTile(
           //     tileComponent.getId(),
@@ -371,30 +393,41 @@ export class TileManager {
 
   checkTileHasIconOrTitle(component: any): boolean {
     // const parentComponent = component.parent();
-    const parentComponent = component.closest('.container-row')
-    const columnComponenet = component.closest('.tile-column')
+    const parentComponent = component.closest(".container-row");
+    const columnComponenet = component.closest(".tile-column");
+
+    console.log("component", component.getEl());
+    console.log("parent", parentComponent.getEl());
+    console.log("column", columnComponenet.getEl());
 
     if (!parentComponent) return false;
     let tileAttributes;
+    console.log("page", this.pageData);
     if (this.pageData.PageType === "Information") {
-      const tileInfoSectionAttributes: InfoType = (
-        globalThis as any
-      ).infoContentMapper.getInfoContent(parentComponent.getId());
-      console.log('tileInfoSectionAttributes', tileInfoSectionAttributes)
-      const column = tileInfoSectionAttributes?.Columns?.find((col:any) => col.ColId = columnComponenet.getId())
-      console.log('column', column)
-      
+      // const tileInfoSectionAttributes: InfoType = (
+      //   globalThis as any
+      // ).infoContentMapper.getInfoContent(parentComponent.getId());
+      const infoSectionManager = new InfoSectionManager();
+      const tileInfoSectionAttributes = infoSectionManager.getInfoContent(
+        parentComponent.getId()
+      );
+      console.log("tileInfoSectionAttributes", tileInfoSectionAttributes);
+      const column = tileInfoSectionAttributes?.Columns?.find(
+        (col: any) => (col.ColId = columnComponenet.getId())
+      );
+      console.log("column", column);
+
       tileAttributes = column?.Tiles?.find(
         (tile: any) => tile.Id === component.getId()
       );
-      console.log('tileAttributes', tileAttributes)
+      console.log("tileAttributes", tileAttributes);
     } else {
       tileAttributes = (globalThis as any).tileMapper.getTile(
         parentComponent.getId(),
         component.getId()
       );
     }
-    console.log('tileAttributes', tileAttributes)
+    console.log("tileAttributes", tileAttributes);
     if (tileAttributes) {
       if (tileAttributes.Icon && tileAttributes.Text) {
         return true;
@@ -403,7 +436,7 @@ export class TileManager {
     return false;
   }
 
-  removeCTa(event:MouseEvent) {
+  removeCTa(event: MouseEvent) {
     const ctaBadgeBtn = (event.target as Element).closest(
       ".cta-badge"
     ) as HTMLElement;
@@ -453,8 +486,9 @@ export class TileManager {
 
   private getTile(isSingleTile: boolean = false) {
     return `
-      <div ${tileWrapperDefaultAttributes} ${isSingleTile ? `style="height:${minTileHeight}px"` : ``
-} class="template-wrapper" id="${randomIdGenerator(8)}">
+      <div ${tileWrapperDefaultAttributes} ${
+      isSingleTile ? `style="height:${minTileHeight}px"` : ``
+    } class="template-wrapper" id="${randomIdGenerator(8)}">
         <div ${tileDefaultAttributes} class="template-block" style="background-color: transparent; color: #333333; justify-content: left">
             <div ${DefaultAttributes} id="igtdq" data-gjs-type="default" class="tile-icon-section">
               <span ${DefaultAttributes} id="is1dw" data-gjs-type="text" class="tile-close-icon top-right selected-tile-title readonly-mode">×</span>
@@ -462,7 +496,9 @@ export class TileManager {
             </div>
             <div ${DefaultAttributes} id="igtdq" data-gjs-type="default" class="tile-title-section">
               <span ${DefaultAttributes} id="is1dw" data-gjs-type="text" class="tile-close-title top-right selected-tile-title readonly-mode">×</span>
-              <span ${DefaultAttributes} style="display: block" id="ic26t" data-gjs-type="text" is-hidden="false" title="${i18n.t('tile.title')}" class="tile-title">${i18n.t('tile.title')}</span>
+              <span ${DefaultAttributes} style="display: block" id="ic26t" data-gjs-type="text" is-hidden="false" title="${i18n.t(
+      "tile.title"
+    )}" class="tile-title">${i18n.t("tile.title")}</span>
             </div>
         </div>
         <button ${DefaultAttributes} id="i9sxl" data-gjs-type="default" title="Delete tile" class="action-button delete-button readonly-mode">&minus;</button>
@@ -471,22 +507,24 @@ export class TileManager {
             <path ${DefaultAttributes} d="M19,11H13V5a1,1,0,0,0-2,0v6H5a1,1,0,0,0,0,2h6v6a1,1,0,0,0,2,0V13h6a1,1,0,0,0,0-2Z"/>
           </svg>
         </button>
-        ${isSingleTile
-    ? `
+        ${
+          isSingleTile
+            ? `
             ${resizeButton("Resize")}
           `
-    : ``
-}
-        ${this.page?.PageType === "Information"
-    ? ``
-    : `
+            : ``
+        }
+        ${
+          this.page?.PageType === "Information"
+            ? ``
+            : `
           <button ${DefaultAttributes} id="i4ubt" data-gjs-type="default" title="Add template bottom" class="action-button add-button-bottom">
           <svg ${DefaultAttributes} fill="#fff" width="15" height="15" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path ${DefaultAttributes} d="M19,11H13V5a1,1,0,0,0-2,0v6H5a1,1,0,0,0,0,2h6v6a1,1,0,0,0,2,0V13h6a1,1,0,0,0,0-2Z"/>
           </svg>
           </button>
         `
-      }
+        }
         <svg ${DefaultAttributes} class="tile-open-menu readonly-mode" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 27 27">
           <g ${DefaultAttributes} id="Group_2383" data-name="Group 2383" transform="translate(-921 -417.999)">
             <g ${DefaultAttributes} id="Group_2382" data-name="Group 2382" transform="translate(921 418)">
@@ -499,47 +537,55 @@ export class TileManager {
     `;
   }
 
-  addTileOnNewRow(tile:any, tileAttributes:any, previousRowComponent:any){
-    const index = previousRowComponent.index() + 1
-    const parent = previousRowComponent.parent()
-    parent.append(infoSectionSpacer(),  { at: index })
-    const colId = randomIdGenerator(8)
-    const rowId = randomIdGenerator(8)
-    const columns = [{ColId: colId, Tiles:[tileAttributes]}]
+  addTileOnNewRow(tile: any, tileAttributes: any, previousRowComponent: any) {
+    const index = previousRowComponent.index() + 1;
+    const parent = previousRowComponent.parent();
+    parent.append(infoSectionSpacer(), { at: index });
+    const colId = randomIdGenerator(8);
+    const rowId = randomIdGenerator(8);
+    const columns = [{ ColId: colId, Tiles: [tileAttributes] }];
     const rowHTML = `
           <div class="container-row" ${infoRowDefaultAttributes} id="${rowId}">
-            ${columns.map((col:any)=> `
+            ${columns
+              .map(
+                (col: any) => `
               <div class="tile-column" id="${col.ColId}">
-                ${col.Tiles.map((tile:any)=> `
+                ${col.Tiles.map(
+                  (tile: any) => `
                     ${tileFromAttributes(tileAttributes, this.themeManager)}
-                  ` ).join("")}
+                  `
+                ).join("")}
               </div>
-              ` ).join("")}
+              `
+              )
+              .join("")}
           </div>
-        `
+        `;
 
-    parent.append(`${rowHTML}`, { at: index + 1})
-    
-    const rowComponent = this.editor.Components.getWrapper().find(`#${rowId}`)[0];
-    this.tileUpdate.updateGridTiles(rowComponent)
-    const nextRowComp = getNextSiblingComponent(rowComponent, 'container-row')
-    this.addTileToNewGrid(tileAttributes, rowId, colId, nextRowComp)
-    this.tileUpdate.updateGridTiles(previousRowComponent)
+    parent.append(`${rowHTML}`, { at: index + 1 });
+
+    const rowComponent = this.editor.Components.getWrapper().find(
+      `#${rowId}`
+    )[0];
+    this.tileUpdate.updateGridTiles(rowComponent);
+    const nextRowComp = getNextSiblingComponent(rowComponent, "container-row");
+    this.addTileToNewGrid(tileAttributes, rowId, colId, nextRowComp);
+    this.tileUpdate.updateGridTiles(previousRowComponent);
   }
 
-  addNewTileToGrid(rowId:string, colId:string, tileId:string) {
+  addNewTileToGrid(rowId: string, colId: string, tileId: string) {
     const infoContentMapper = new InfoContentMapper(this.pageId);
     const tileSection: InfoType | null =
       infoContentMapper.getInfoContent(rowId);
-    if (!tileSection) return
+    if (!tileSection) return;
 
-    let col = tileSection?.Columns?.find((col:Column) => col.ColId == colId)
+    let col = tileSection?.Columns?.find((col: Column) => col.ColId == colId);
     if (!col) {
-      col = {ColId: colId, Tiles: []}
-      tileSection?.Columns?.push(col)
+      col = { ColId: colId, Tiles: [] };
+      tileSection?.Columns?.push(col);
     }
 
-    const tile:Tile = {
+    const tile: Tile = {
       Id: tileId,
       Name: "Title",
       Text: "Title",
@@ -550,15 +596,19 @@ export class TileManager {
         ObjectId: "",
         ObjectUrl: "",
       },
-    }
-    col?.Tiles?.push(tile)
-    
+    };
+    col?.Tiles?.push(tile);
 
     const infoSectionManager = new InfoSectionManager();
     infoSectionManager.updateInfoMapper(rowId, tileSection);
   }
 
-  addTileToNewGrid(tileAttributes:Object, rowId:string, colId:string, nextRowComp:any) {
+  addTileToNewGrid(
+    tileAttributes: Object,
+    rowId: string,
+    colId: string,
+    nextRowComp: any
+  ) {
     const infoContentMapper = new InfoContentMapper(this.pageId);
     const newInfoRow = {
       InfoId: rowId,
@@ -567,49 +617,45 @@ export class TileManager {
       InfoValue: "",
       Columns: [
         {
-
           ColId: colId,
-          Tiles: [
-                  tileAttributes as Tile
-          ]
+          Tiles: [tileAttributes as Tile],
         },
-      ]
-    }
-    infoContentMapper.addInfoType(newInfoRow)
+      ],
+    };
+    infoContentMapper.addInfoType(newInfoRow);
   }
 
-  removeTileFromGrid(rowId:string, colId:string, tileId:string) {
+  removeTileFromGrid(rowId: string, colId: string, tileId: string) {
     const infoContentMapper = new InfoContentMapper(this.pageId);
     const tileSection: InfoType | null =
       infoContentMapper.getInfoContent(rowId);
-    if (!tileSection) return
-    const col = tileSection?.Columns?.find((col:Column) => col.ColId == colId)
-    if (!col) return
-    col.Tiles = col?.Tiles?.filter((tile:Tile) => tile.Id != tileId)
+    if (!tileSection) return;
+    const col = tileSection?.Columns?.find((col: Column) => col.ColId == colId);
+    if (!col) return;
+    col.Tiles = col?.Tiles?.filter((tile: Tile) => tile.Id != tileId);
 
     if (!col.Tiles?.length) {
-      tileSection.Columns = tileSection.Columns?.filter((item:any) => col.ColId != item.ColId)
+      tileSection.Columns = tileSection.Columns?.filter(
+        (item: any) => col.ColId != item.ColId
+      );
     }
 
-    if(tileSection.Columns && tileSection.Columns?.length == 0) {
-      infoContentMapper.removeInfoContent(rowId)
+    if (tileSection.Columns && tileSection.Columns?.length == 0) {
+      infoContentMapper.removeInfoContent(rowId);
     }
 
     const infoSectionManager = new InfoSectionManager();
     infoSectionManager.updateInfoMapper(rowId, tileSection);
   }
 
-
-  getTileAttrs(rowId:string, colId:string, tileId:string) {
+  getTileAttrs(rowId: string, colId: string, tileId: string) {
     const infoContentMapper = new InfoContentMapper(this.pageId);
     const tileSection: InfoType | null =
       infoContentMapper.getInfoContent(rowId);
     if (tileSection) {
-      const col = tileSection.Columns?.find((col:any) => col.ColId == colId)
-      const tile = col?.Tiles?.find((tile:any) => tile.Id == tileId)
-      return tile
+      const col = tileSection.Columns?.find((col: any) => col.ColId == colId);
+      const tile = col?.Tiles?.find((tile: any) => tile.Id == tileId);
+      return tile;
     }
   }
 }
-
-
