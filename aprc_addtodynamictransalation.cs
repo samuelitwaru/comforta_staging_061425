@@ -104,7 +104,7 @@ namespace GeneXus.Programs {
          }
          AV16GXLvl11 = 0;
          /* Using cursor P00DK2 */
-         pr_default.execute(0, new Object[] {AV8SDT_TrnAttributes.gxTpr_Transaction.gxTpr_Primarykeyid, AV8SDT_TrnAttributes.gxTpr_Trnname});
+         pr_default.execute(0, new Object[] {AV8SDT_TrnAttributes.gxTpr_Trnname, AV8SDT_TrnAttributes.gxTpr_Transaction.gxTpr_Primarykeyid});
          while ( (pr_default.getStatus(0) != 101) )
          {
             A580DynamicTranslationPrimaryKey = P00DK2_A580DynamicTranslationPrimaryKey[0];
@@ -375,8 +375,8 @@ public class aprc_addtodynamictransalation__default : DataStoreHelperBase, IData
     {
        Object[] prmP00DK2;
        prmP00DK2 = new Object[] {
-       new ParDef("AV8SDT_T_1Transaction_1Primar",GXType.UniqueIdentifier,36,0) ,
-       new ParDef("AV8SDT_TrnAttributes__Trnname",GXType.VarChar,100,0)
+       new ParDef("AV8SDT_TrnAttributes__Trnname",GXType.VarChar,100,0) ,
+       new ParDef("AV8SDT_T_1Transaction_1Primar",GXType.UniqueIdentifier,36,0)
        };
        Object[] prmP00DK3;
        prmP00DK3 = new Object[] {
@@ -394,9 +394,9 @@ public class aprc_addtodynamictransalation__default : DataStoreHelperBase, IData
        new ParDef("DynamicTranslationDutch",GXType.LongVarChar,2097152,0)
        };
        def= new CursorDef[] {
-           new CursorDef("P00DK2", "SELECT DynamicTranslationPrimaryKey, DynamicTranslationTrnName, DynamicTranslationAttributeNam, DynamicTranslationEnglish, DynamicTranslationDutch, DynamicTranslationId FROM Trn_DynamicTranslation WHERE (DynamicTranslationPrimaryKey = :AV8SDT_T_1Transaction_1Primar) AND (DynamicTranslationTrnName = ( :AV8SDT_TrnAttributes__Trnname)) ORDER BY DynamicTranslationId  FOR UPDATE OF Trn_DynamicTranslation",true, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00DK2,1, GxCacheFrequency.OFF ,true,false )
+           new CursorDef("P00DK2", "SELECT DynamicTranslationPrimaryKey, DynamicTranslationTrnName, DynamicTranslationAttributeNam, DynamicTranslationEnglish, DynamicTranslationDutch, DynamicTranslationId FROM Trn_DynamicTranslation WHERE (DynamicTranslationTrnName = ( :AV8SDT_TrnAttributes__Trnname)) AND (DynamicTranslationPrimaryKey = :AV8SDT_T_1Transaction_1Primar) ORDER BY DynamicTranslationTrnName  FOR UPDATE OF Trn_DynamicTranslation",true, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00DK2,1, GxCacheFrequency.OFF ,true,false )
           ,new CursorDef("P00DK3", "SAVEPOINT gxupdate;UPDATE Trn_DynamicTranslation SET DynamicTranslationEnglish=:DynamicTranslationEnglish, DynamicTranslationDutch=:DynamicTranslationDutch  WHERE DynamicTranslationId = :DynamicTranslationId;RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK,prmP00DK3)
-          ,new CursorDef("P00DK4", "SAVEPOINT gxupdate;INSERT INTO Trn_DynamicTranslation(DynamicTranslationId, DynamicTranslationTrnName, DynamicTranslationPrimaryKey, DynamicTranslationAttributeNam, DynamicTranslationEnglish, DynamicTranslationDutch) VALUES(:DynamicTranslationId, :DynamicTranslationTrnName, :DynamicTranslationPrimaryKey, :DynamicTranslationAttributeNam, :DynamicTranslationEnglish, :DynamicTranslationDutch);RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_MASKLOOPLOCK,prmP00DK4)
+          ,new CursorDef("P00DK4", "SAVEPOINT gxupdate;INSERT INTO Trn_DynamicTranslation(DynamicTranslationId, DynamicTranslationTrnName, DynamicTranslationPrimaryKey, DynamicTranslationAttributeNam, DynamicTranslationEnglish, DynamicTranslationDutch, DynamicTranslationEnglishPubli, DynamicTranslationDutchPublish) VALUES(:DynamicTranslationId, :DynamicTranslationTrnName, :DynamicTranslationPrimaryKey, :DynamicTranslationAttributeNam, :DynamicTranslationEnglish, :DynamicTranslationDutch, '', '');RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_MASKLOOPLOCK,prmP00DK4)
        };
     }
  }

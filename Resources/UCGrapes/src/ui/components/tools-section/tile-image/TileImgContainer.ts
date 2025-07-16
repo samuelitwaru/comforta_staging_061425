@@ -1,14 +1,17 @@
 import { InfoSectionManager } from "../../../../controls/InfoSectionManager";
 import { ThemeManager } from "../../../../controls/themes/ThemeManager";
+import { InfoType, Tile } from "../../../../types";
 
 export class TileImgContainer {
   container: HTMLElement;
   positionX: number = 50;
   positionY: number = 50;
   zoomLevel: number = 1;
+  infoSectionManager: InfoSectionManager;
 
   constructor() {
     this.container = document.createElement("div");
+    this.infoSectionManager = new InfoSectionManager();
     this.init();
   }
 
@@ -35,15 +38,14 @@ export class TileImgContainer {
 
       const tileWrapper = selectedComponent.parent();
 
-      const rowComponent = tileWrapper.closest('.container-row');
-      const colComponent = tileWrapper.closest('.tile-column');
+      const rowComponent = tileWrapper.closest(".container-row");
+      const colComponent = tileWrapper.closest(".tile-column");
 
       const rowId = rowComponent.getId();
       const tileId = tileWrapper.getId();
       const colId = colComponent.getId();
 
-      const tileMapper = (globalThis as any).tileMapper;
-      const tileAttributes = tileMapper.getTile(rowId, tileId);
+      const tileAttributes = this.getInfoTileAttributes(rowId, tileId);
 
       const themeManager = new ThemeManager();
       const themeColor = themeManager.getThemeColor(tileAttributes?.BGColor);
@@ -59,9 +61,6 @@ export class TileImgContainer {
       el.style.backgroundImage = "";
       el.style.backgroundColor = themeColor;
 
-      // Update InfoSection
-      const infoSectionManager = new InfoSectionManager();
-
       const updates = {
         BGImageUrl: "",
         Opacity: "0",
@@ -73,13 +72,7 @@ export class TileImgContainer {
       };
 
       for (const [key, value] of Object.entries(updates)) {
-        infoSectionManager.updateGridTileAttribute(
-          rowId,
-          colId,
-          tileId,
-          key,
-          value
-        );
+        this.infoSectionManager.updateGridTileAttribute(rowId, colId, tileId, key, value);
       }
 
       // Hide UI elements
@@ -90,6 +83,21 @@ export class TileImgContainer {
         slider.style.display = "none";
       }
     });
+  }
+
+  private getInfoTileAttributes(rowComponentId: any, tileWrapperId: any): any {
+    if (!rowComponentId || !tileWrapperId) return;
+    const tileInfoSectionAttributes: InfoType | null =
+      this.infoSectionManager.getInfoContent(rowComponentId);
+    return this.findTileById(tileInfoSectionAttributes, tileWrapperId);
+  }
+
+  private findTileById(tileInfoSectionAttributes: any, tileWrapperId: string): Tile | null {
+    for (const column of tileInfoSectionAttributes?.Columns || []) {
+      const foundTile: Tile = column.Tiles?.find((tile: any) => tile.Id === tileWrapperId);
+      if (foundTile) return foundTile;
+    }
+    return null;
   }
 
   render(container: HTMLElement) {

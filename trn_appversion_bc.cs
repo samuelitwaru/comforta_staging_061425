@@ -230,12 +230,12 @@ namespace GeneXus.Programs {
          returnInSub = false;
          new GeneXus.Programs.wwpbaseobjects.loadwwpcontext(context ).execute( out  AV9WWPContext) ;
          AV12TrnContext.FromXml(AV13WebSession.Get("TrnContext"), null, "", "");
-         if ( ( StringUtil.StrCmp(AV12TrnContext.gxTpr_Transactionname, AV31Pgmname) == 0 ) && ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) )
+         if ( ( StringUtil.StrCmp(AV12TrnContext.gxTpr_Transactionname, AV33Pgmname) == 0 ) && ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) )
          {
-            AV32GXV1 = 1;
-            while ( AV32GXV1 <= AV12TrnContext.gxTpr_Attributes.Count )
+            AV34GXV1 = 1;
+            while ( AV34GXV1 <= AV12TrnContext.gxTpr_Attributes.Count )
             {
-               AV16TrnContextAtt = ((WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext_Attribute)AV12TrnContext.gxTpr_Attributes.Item(AV32GXV1));
+               AV16TrnContextAtt = ((WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext_Attribute)AV12TrnContext.gxTpr_Attributes.Item(AV34GXV1));
                if ( StringUtil.StrCmp(AV16TrnContextAtt.gxTpr_Attributename, "LocationId") == 0 )
                {
                   AV14Insert_LocationId = StringUtil.StrToGuid( AV16TrnContextAtt.gxTpr_Attributevalue);
@@ -248,7 +248,7 @@ namespace GeneXus.Programs {
                {
                   AV29Insert_Trn_ThemeId = StringUtil.StrToGuid( AV16TrnContextAtt.gxTpr_Attributevalue);
                }
-               AV32GXV1 = (int)(AV32GXV1+1);
+               AV34GXV1 = (int)(AV34GXV1+1);
             }
          }
       }
@@ -294,7 +294,7 @@ namespace GeneXus.Programs {
 
       protected void standaloneNotModal( )
       {
-         AV31Pgmname = "Trn_AppVersion_BC";
+         AV33Pgmname = "Trn_AppVersion_BC";
          Gx_BScreen = 0;
       }
 
@@ -2086,7 +2086,7 @@ namespace GeneXus.Programs {
          AV9WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          AV12TrnContext = new WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext(context);
          AV13WebSession = context.GetSession();
-         AV31Pgmname = "";
+         AV33Pgmname = "";
          AV16TrnContextAtt = new WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext_Attribute(context);
          AV14Insert_LocationId = Guid.Empty;
          AV15Insert_OrganisationId = Guid.Empty;
@@ -2321,7 +2321,7 @@ namespace GeneXus.Programs {
          A516PageId = Guid.NewGuid( );
          Z523AppVersionId = Guid.NewGuid( );
          A523AppVersionId = Guid.NewGuid( );
-         AV31Pgmname = "Trn_AppVersion_BC";
+         AV33Pgmname = "Trn_AppVersion_BC";
          Z541IsPredefined = false;
          A541IsPredefined = false;
          i541IsPredefined = false;
@@ -2341,12 +2341,12 @@ namespace GeneXus.Programs {
       private short Gxremove95 ;
       private int trnEnded ;
       private int nGXsfl_95_idx=1 ;
-      private int AV32GXV1 ;
+      private int AV34GXV1 ;
       private string Gx_mode ;
       private string endTrnMsgTxt ;
       private string endTrnMsgCod ;
       private string sMode94 ;
-      private string AV31Pgmname ;
+      private string AV33Pgmname ;
       private string sMode95 ;
       private DateTime Z622VersionDeletedAt ;
       private DateTime A622VersionDeletedAt ;

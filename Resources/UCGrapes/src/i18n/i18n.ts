@@ -76,7 +76,7 @@ export const i18n = new I18n({
         duplicate_title: "Duplicate version",
         rename_version: "Rename version",
         delete_version: "Delete version",
-        delete_version_message: "Are you sure you want to delete this version?",
+        delete_version_message: "Are you sure you want to delete this version %{versionName}?",
         dropdow: {
           duplicate: "Duplicate",
           rename: "Rename",

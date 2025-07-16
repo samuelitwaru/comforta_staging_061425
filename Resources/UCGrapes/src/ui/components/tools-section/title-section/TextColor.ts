@@ -85,8 +85,8 @@ export class TextColor {
         "Color",
         colorValue.trim()
       )
-    } 
-    
+    }
+
     // else {
     //   (globalThis as any).tileMapper.updateTile(
     //     selectedComponent.parent().getId(),

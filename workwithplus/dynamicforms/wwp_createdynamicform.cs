@@ -1699,8 +1699,16 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          }
          else
          {
-            GX_msglist.addItem(new WorkWithPlus.workwithplus_web.dvmessagegetbasicnotificationmsg(context).executeUdp(  "Success",  context.GetMessage( "Form created successfully", ""),  "success",  "",  "true",  ""));
-            AV16WebSession.Set(context.GetMessage( "DynamicFormCreationSuccess", ""), context.GetMessage( "success", ""));
+            if ( StringUtil.StrCmp(AV26WWPDynamicFormMode, "UPD") == 0 )
+            {
+               GX_msglist.addItem(new WorkWithPlus.workwithplus_web.dvmessagegetbasicnotificationmsg(context).executeUdp(  "Success",  context.GetMessage( "Form updated successfully", ""),  "success",  "",  "true",  ""));
+               AV16WebSession.Set(context.GetMessage( "DynamicFormUpdateSuccess", ""), context.GetMessage( "success", ""));
+            }
+            else
+            {
+               GX_msglist.addItem(new WorkWithPlus.workwithplus_web.dvmessagegetbasicnotificationmsg(context).executeUdp(  "Success",  context.GetMessage( "Form created successfully", ""),  "success",  "",  "true",  ""));
+               AV16WebSession.Set(context.GetMessage( "DynamicFormCreationSuccess", ""), context.GetMessage( "success", ""));
+            }
             AV16WebSession.Remove(StringUtil.Format( "WWP_DynamicFormDef_%1", StringUtil.Trim( StringUtil.Str( (decimal)(AV13SessionId), 4, 0)), "", "", "", "", "", "", "", ""));
             if ( StringUtil.StrCmp(AV56FormLevelType, context.GetMessage( "Supplier", "")) == 0 )
             {
@@ -2079,7 +2087,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202571111475620", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202571617591864", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2095,7 +2103,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("workwithplus/dynamicforms/wwp_createdynamicform.js", "?202571111475621", false, true);
+         context.AddJavascriptSource("workwithplus/dynamicforms/wwp_createdynamicform.js", "?202571617591867", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);

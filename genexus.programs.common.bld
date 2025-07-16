@@ -54,10 +54,7 @@ type_SdtTrn_ResidentNotification.cs
 type_SdtUForm.cs
 type_SdtUForm_Element.cs
 type_SdtTrn_OrganisationDynamicForm.cs
-type_SdtTrn_AppVersion.cs
-type_SdtTrn_AppVersion_Page.cs
 type_SdtTrn_MemoCategory.cs
-type_SdtTrn_DynamicTranslation.cs
 type_SdtTrn_ServiceImage.cs
 type_SdtTrn_LocationImage.cs
 type_SdtTrn_EnvironmentVariable.cs
@@ -66,7 +63,6 @@ type_SdtTrn_AgendaCalendar.cs
 type_SdtTrn_Memo.cs
 type_SdtTrn_Manager.cs
 type_SdtTrn_Organisation.cs
-type_SdtTrn_Location.cs
 type_SdtTrn_SupplierGen.cs
 type_SdtTrn_ProductService.cs
 type_SdtTrn_NetworkIndividual.cs
@@ -75,9 +71,13 @@ type_SdtTrn_Resident.cs
 type_SdtTrn_ResidentType.cs
 type_SdtTrn_MedicalIndication.cs
 type_SdtTrn_SupplierGenType.cs
-type_SdtTrn_ResidentPackage.cs
 type_SdtTrn_AgendaEventGroup.cs
 type_SdtTrn_SupplierDynamicForm.cs
+type_SdtTrn_DynamicTranslation.cs
+type_SdtTrn_AppVersion.cs
+type_SdtTrn_AppVersion_Page.cs
+type_SdtTrn_ResidentPackage.cs
+type_SdtTrn_Location.cs
 type_SdtQRCodeLibrary.cs
 type_SdtEO_Base64Image.cs
 type_SdtRandomStringGenerator.cs

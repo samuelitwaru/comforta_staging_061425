@@ -536,7 +536,7 @@ namespace GeneXus.Programs {
             ucTabs.Render(context, "tab", Tabs_Internalname, "TABSContainer");
             context.WriteHtmlText( "<div class=\"gx_usercontrol_child\" id=\""+"TABSContainer"+"title1"+"\" style=\"display:none;\">") ;
             /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblGeneraldynamicform_title_Internalname, context.GetMessage( "General Dynamic Form", ""), "", "", lblGeneraldynamicform_title_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlock", 0, "", 1, 1, 0, 0, "HLP_WP_DynamicForm.htm");
+            GxWebStd.gx_label_ctrl( context, lblGeneraldynamicform_title_Internalname, context.GetMessage( "General Form", ""), "", "", lblGeneraldynamicform_title_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlock", 0, "", 1, 1, 0, 0, "HLP_WP_DynamicForm.htm");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "Section", "start", "top", "", "display:none;", "div");
             context.WriteHtmlText( "GeneralDynamicForm") ;
@@ -577,7 +577,7 @@ namespace GeneXus.Programs {
             context.WriteHtmlText( "</div>") ;
             context.WriteHtmlText( "<div class=\"gx_usercontrol_child\" id=\""+"TABSContainer"+"title2"+"\" style=\"display:none;\">") ;
             /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblOrganisationdynamicform_title_Internalname, context.GetMessage( "Organisation Dynamic Form", ""), "", "", lblOrganisationdynamicform_title_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlock", 0, "", 1, 1, 0, 0, "HLP_WP_DynamicForm.htm");
+            GxWebStd.gx_label_ctrl( context, lblOrganisationdynamicform_title_Internalname, context.GetMessage( "Organisation Form", ""), "", "", lblOrganisationdynamicform_title_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlock", 0, "", 1, 1, 0, 0, "HLP_WP_DynamicForm.htm");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "Section", "start", "top", "", "display:none;", "div");
             context.WriteHtmlText( "OrganisationDynamicForm") ;
@@ -618,7 +618,7 @@ namespace GeneXus.Programs {
             context.WriteHtmlText( "</div>") ;
             context.WriteHtmlText( "<div class=\"gx_usercontrol_child\" id=\""+"TABSContainer"+"title3"+"\" style=\"display:none;\">") ;
             /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblLocationdynamicform_title_Internalname, context.GetMessage( "Location Dynamic Form", ""), "", "", lblLocationdynamicform_title_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlock", 0, "", 1, 1, 0, 0, "HLP_WP_DynamicForm.htm");
+            GxWebStd.gx_label_ctrl( context, lblLocationdynamicform_title_Internalname, context.GetMessage( "Location Form", ""), "", "", lblLocationdynamicform_title_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlock", 0, "", 1, 1, 0, 0, "HLP_WP_DynamicForm.htm");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "Section", "start", "top", "", "display:none;", "div");
             context.WriteHtmlText( "LocationDynamicForm") ;
@@ -659,7 +659,7 @@ namespace GeneXus.Programs {
             context.WriteHtmlText( "</div>") ;
             context.WriteHtmlText( "<div class=\"gx_usercontrol_child\" id=\""+"TABSContainer"+"title4"+"\" style=\"display:none;\">") ;
             /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblSupplierdynamicform_title_Internalname, context.GetMessage( "Supplier Dynamic Form", ""), "", "", lblSupplierdynamicform_title_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlock", 0, "", 1, 1, 0, 0, "HLP_WP_DynamicForm.htm");
+            GxWebStd.gx_label_ctrl( context, lblSupplierdynamicform_title_Internalname, context.GetMessage( "Supplier Form", ""), "", "", lblSupplierdynamicform_title_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlock", 0, "", 1, 1, 0, 0, "HLP_WP_DynamicForm.htm");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "Section", "start", "top", "", "display:none;", "div");
             context.WriteHtmlText( "SupplierDynamicForm") ;
@@ -1300,6 +1300,12 @@ namespace GeneXus.Programs {
                GX_msglist.addItem(new WorkWithPlus.workwithplus_web.dvmessagegetbasicnotificationmsg(context).executeUdp(  "Success",  context.GetMessage( "Form created successfully", ""),  "success",  "",  "true",  ""));
                AV22WebSession.Remove(context.GetMessage( "DynamicFormCreationSuccess", ""));
             }
+            AV23successful = AV22WebSession.Get(context.GetMessage( "DynamicFormUpdateSuccess", ""));
+            if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV23successful)) )
+            {
+               GX_msglist.addItem(new WorkWithPlus.workwithplus_web.dvmessagegetbasicnotificationmsg(context).executeUdp(  "Success",  context.GetMessage( "Form updated successfully", ""),  "success",  "",  "true",  ""));
+               AV22WebSession.Remove(context.GetMessage( "DynamicFormUpdateSuccess", ""));
+            }
          }
          else
          {
@@ -1670,7 +1676,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202571111491154", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202571617592521", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1686,7 +1692,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wp_dynamicform.js", "?202571111491154", false, true);
+         context.AddJavascriptSource("wp_dynamicform.js", "?202571617592521", false, true);
          context.AddJavascriptSource("shared/HistoryManager/HistoryManager.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/json2005.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/rsh.js", "", false, true);

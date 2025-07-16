@@ -147,6 +147,8 @@ namespace GeneXus.Programs {
             Z581DynamicTranslationAttributeNam = A581DynamicTranslationAttributeNam;
             Z582DynamicTranslationEnglish = A582DynamicTranslationEnglish;
             Z583DynamicTranslationDutch = A583DynamicTranslationDutch;
+            Z671DynamicTranslationEnglishPubli = A671DynamicTranslationEnglishPubli;
+            Z672DynamicTranslationDutchPublish = A672DynamicTranslationDutchPublish;
          }
       }
 
@@ -181,6 +183,8 @@ namespace GeneXus.Programs {
             A581DynamicTranslationAttributeNam = BC001Q4_A581DynamicTranslationAttributeNam[0];
             A582DynamicTranslationEnglish = BC001Q4_A582DynamicTranslationEnglish[0];
             A583DynamicTranslationDutch = BC001Q4_A583DynamicTranslationDutch[0];
+            A671DynamicTranslationEnglishPubli = BC001Q4_A671DynamicTranslationEnglishPubli[0];
+            A672DynamicTranslationDutchPublish = BC001Q4_A672DynamicTranslationDutchPublish[0];
             ZM1Q101( -5) ;
          }
          pr_default.close(2);
@@ -233,6 +237,8 @@ namespace GeneXus.Programs {
             A581DynamicTranslationAttributeNam = BC001Q3_A581DynamicTranslationAttributeNam[0];
             A582DynamicTranslationEnglish = BC001Q3_A582DynamicTranslationEnglish[0];
             A583DynamicTranslationDutch = BC001Q3_A583DynamicTranslationDutch[0];
+            A671DynamicTranslationEnglishPubli = BC001Q3_A671DynamicTranslationEnglishPubli[0];
+            A672DynamicTranslationDutchPublish = BC001Q3_A672DynamicTranslationDutchPublish[0];
             Z578DynamicTranslationId = A578DynamicTranslationId;
             sMode101 = Gx_mode;
             Gx_mode = "DSP";
@@ -327,7 +333,7 @@ namespace GeneXus.Programs {
                   if ( AnyError == 0 )
                   {
                      /* Using cursor BC001Q6 */
-                     pr_default.execute(4, new Object[] {A578DynamicTranslationId, A580DynamicTranslationPrimaryKey, A579DynamicTranslationTrnName, A581DynamicTranslationAttributeNam, A582DynamicTranslationEnglish, A583DynamicTranslationDutch});
+                     pr_default.execute(4, new Object[] {A578DynamicTranslationId, A580DynamicTranslationPrimaryKey, A579DynamicTranslationTrnName, A581DynamicTranslationAttributeNam, A582DynamicTranslationEnglish, A583DynamicTranslationDutch, A671DynamicTranslationEnglishPubli, A672DynamicTranslationDutchPublish});
                      pr_default.close(4);
                      pr_default.SmartCacheProvider.SetUpdated("Trn_DynamicTranslation");
                      if ( (pr_default.getStatus(4) == 1) )
@@ -382,7 +388,7 @@ namespace GeneXus.Programs {
                   if ( AnyError == 0 )
                   {
                      /* Using cursor BC001Q7 */
-                     pr_default.execute(5, new Object[] {A580DynamicTranslationPrimaryKey, A579DynamicTranslationTrnName, A581DynamicTranslationAttributeNam, A582DynamicTranslationEnglish, A583DynamicTranslationDutch, A578DynamicTranslationId});
+                     pr_default.execute(5, new Object[] {A580DynamicTranslationPrimaryKey, A579DynamicTranslationTrnName, A581DynamicTranslationAttributeNam, A582DynamicTranslationEnglish, A583DynamicTranslationDutch, A671DynamicTranslationEnglishPubli, A672DynamicTranslationDutchPublish, A578DynamicTranslationId});
                      pr_default.close(5);
                      pr_default.SmartCacheProvider.SetUpdated("Trn_DynamicTranslation");
                      if ( (pr_default.getStatus(5) == 103) )
@@ -512,6 +518,8 @@ namespace GeneXus.Programs {
             A581DynamicTranslationAttributeNam = BC001Q9_A581DynamicTranslationAttributeNam[0];
             A582DynamicTranslationEnglish = BC001Q9_A582DynamicTranslationEnglish[0];
             A583DynamicTranslationDutch = BC001Q9_A583DynamicTranslationDutch[0];
+            A671DynamicTranslationEnglishPubli = BC001Q9_A671DynamicTranslationEnglishPubli[0];
+            A672DynamicTranslationDutchPublish = BC001Q9_A672DynamicTranslationDutchPublish[0];
          }
          /* Load Subordinate Levels */
       }
@@ -537,6 +545,8 @@ namespace GeneXus.Programs {
             A581DynamicTranslationAttributeNam = BC001Q9_A581DynamicTranslationAttributeNam[0];
             A582DynamicTranslationEnglish = BC001Q9_A582DynamicTranslationEnglish[0];
             A583DynamicTranslationDutch = BC001Q9_A583DynamicTranslationDutch[0];
+            A671DynamicTranslationEnglishPubli = BC001Q9_A671DynamicTranslationEnglishPubli[0];
+            A672DynamicTranslationDutchPublish = BC001Q9_A672DynamicTranslationDutchPublish[0];
          }
          Gx_mode = sMode101;
       }
@@ -600,6 +610,8 @@ namespace GeneXus.Programs {
          A581DynamicTranslationAttributeNam = "";
          A582DynamicTranslationEnglish = "";
          A583DynamicTranslationDutch = "";
+         A671DynamicTranslationEnglishPubli = "";
+         A672DynamicTranslationDutchPublish = "";
          A580DynamicTranslationPrimaryKey = Guid.NewGuid( );
          Z580DynamicTranslationPrimaryKey = Guid.Empty;
          Z579DynamicTranslationTrnName = "";
@@ -644,6 +656,8 @@ namespace GeneXus.Programs {
          obj101.gxTpr_Dynamictranslationattributename = A581DynamicTranslationAttributeNam;
          obj101.gxTpr_Dynamictranslationenglish = A582DynamicTranslationEnglish;
          obj101.gxTpr_Dynamictranslationdutch = A583DynamicTranslationDutch;
+         obj101.gxTpr_Dynamictranslationenglishpublished = A671DynamicTranslationEnglishPubli;
+         obj101.gxTpr_Dynamictranslationdutchpublished = A672DynamicTranslationDutchPublish;
          obj101.gxTpr_Dynamictranslationprimarykey = A580DynamicTranslationPrimaryKey;
          obj101.gxTpr_Dynamictranslationid = A578DynamicTranslationId;
          obj101.gxTpr_Dynamictranslationid_Z = Z578DynamicTranslationId;
@@ -668,6 +682,8 @@ namespace GeneXus.Programs {
          A581DynamicTranslationAttributeNam = obj101.gxTpr_Dynamictranslationattributename;
          A582DynamicTranslationEnglish = obj101.gxTpr_Dynamictranslationenglish;
          A583DynamicTranslationDutch = obj101.gxTpr_Dynamictranslationdutch;
+         A671DynamicTranslationEnglishPubli = obj101.gxTpr_Dynamictranslationenglishpublished;
+         A672DynamicTranslationDutchPublish = obj101.gxTpr_Dynamictranslationdutchpublished;
          A580DynamicTranslationPrimaryKey = obj101.gxTpr_Dynamictranslationprimarykey;
          A578DynamicTranslationId = obj101.gxTpr_Dynamictranslationid;
          Z578DynamicTranslationId = obj101.gxTpr_Dynamictranslationid_Z;
@@ -1122,12 +1138,18 @@ namespace GeneXus.Programs {
          A582DynamicTranslationEnglish = "";
          Z583DynamicTranslationDutch = "";
          A583DynamicTranslationDutch = "";
+         Z671DynamicTranslationEnglishPubli = "";
+         A671DynamicTranslationEnglishPubli = "";
+         Z672DynamicTranslationDutchPublish = "";
+         A672DynamicTranslationDutchPublish = "";
          BC001Q4_A578DynamicTranslationId = new Guid[] {Guid.Empty} ;
          BC001Q4_A580DynamicTranslationPrimaryKey = new Guid[] {Guid.Empty} ;
          BC001Q4_A579DynamicTranslationTrnName = new string[] {""} ;
          BC001Q4_A581DynamicTranslationAttributeNam = new string[] {""} ;
          BC001Q4_A582DynamicTranslationEnglish = new string[] {""} ;
          BC001Q4_A583DynamicTranslationDutch = new string[] {""} ;
+         BC001Q4_A671DynamicTranslationEnglishPubli = new string[] {""} ;
+         BC001Q4_A672DynamicTranslationDutchPublish = new string[] {""} ;
          BC001Q5_A578DynamicTranslationId = new Guid[] {Guid.Empty} ;
          BC001Q3_A578DynamicTranslationId = new Guid[] {Guid.Empty} ;
          BC001Q3_A580DynamicTranslationPrimaryKey = new Guid[] {Guid.Empty} ;
@@ -1135,6 +1157,8 @@ namespace GeneXus.Programs {
          BC001Q3_A581DynamicTranslationAttributeNam = new string[] {""} ;
          BC001Q3_A582DynamicTranslationEnglish = new string[] {""} ;
          BC001Q3_A583DynamicTranslationDutch = new string[] {""} ;
+         BC001Q3_A671DynamicTranslationEnglishPubli = new string[] {""} ;
+         BC001Q3_A672DynamicTranslationDutchPublish = new string[] {""} ;
          sMode101 = "";
          BC001Q2_A578DynamicTranslationId = new Guid[] {Guid.Empty} ;
          BC001Q2_A580DynamicTranslationPrimaryKey = new Guid[] {Guid.Empty} ;
@@ -1142,12 +1166,16 @@ namespace GeneXus.Programs {
          BC001Q2_A581DynamicTranslationAttributeNam = new string[] {""} ;
          BC001Q2_A582DynamicTranslationEnglish = new string[] {""} ;
          BC001Q2_A583DynamicTranslationDutch = new string[] {""} ;
+         BC001Q2_A671DynamicTranslationEnglishPubli = new string[] {""} ;
+         BC001Q2_A672DynamicTranslationDutchPublish = new string[] {""} ;
          BC001Q9_A578DynamicTranslationId = new Guid[] {Guid.Empty} ;
          BC001Q9_A580DynamicTranslationPrimaryKey = new Guid[] {Guid.Empty} ;
          BC001Q9_A579DynamicTranslationTrnName = new string[] {""} ;
          BC001Q9_A581DynamicTranslationAttributeNam = new string[] {""} ;
          BC001Q9_A582DynamicTranslationEnglish = new string[] {""} ;
          BC001Q9_A583DynamicTranslationDutch = new string[] {""} ;
+         BC001Q9_A671DynamicTranslationEnglishPubli = new string[] {""} ;
+         BC001Q9_A672DynamicTranslationDutchPublish = new string[] {""} ;
          i580DynamicTranslationPrimaryKey = Guid.Empty;
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
@@ -1162,13 +1190,13 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.trn_dynamictranslation_bc__default(),
             new Object[][] {
                 new Object[] {
-               BC001Q2_A578DynamicTranslationId, BC001Q2_A580DynamicTranslationPrimaryKey, BC001Q2_A579DynamicTranslationTrnName, BC001Q2_A581DynamicTranslationAttributeNam, BC001Q2_A582DynamicTranslationEnglish, BC001Q2_A583DynamicTranslationDutch
+               BC001Q2_A578DynamicTranslationId, BC001Q2_A580DynamicTranslationPrimaryKey, BC001Q2_A579DynamicTranslationTrnName, BC001Q2_A581DynamicTranslationAttributeNam, BC001Q2_A582DynamicTranslationEnglish, BC001Q2_A583DynamicTranslationDutch, BC001Q2_A671DynamicTranslationEnglishPubli, BC001Q2_A672DynamicTranslationDutchPublish
                }
                , new Object[] {
-               BC001Q3_A578DynamicTranslationId, BC001Q3_A580DynamicTranslationPrimaryKey, BC001Q3_A579DynamicTranslationTrnName, BC001Q3_A581DynamicTranslationAttributeNam, BC001Q3_A582DynamicTranslationEnglish, BC001Q3_A583DynamicTranslationDutch
+               BC001Q3_A578DynamicTranslationId, BC001Q3_A580DynamicTranslationPrimaryKey, BC001Q3_A579DynamicTranslationTrnName, BC001Q3_A581DynamicTranslationAttributeNam, BC001Q3_A582DynamicTranslationEnglish, BC001Q3_A583DynamicTranslationDutch, BC001Q3_A671DynamicTranslationEnglishPubli, BC001Q3_A672DynamicTranslationDutchPublish
                }
                , new Object[] {
-               BC001Q4_A578DynamicTranslationId, BC001Q4_A580DynamicTranslationPrimaryKey, BC001Q4_A579DynamicTranslationTrnName, BC001Q4_A581DynamicTranslationAttributeNam, BC001Q4_A582DynamicTranslationEnglish, BC001Q4_A583DynamicTranslationDutch
+               BC001Q4_A578DynamicTranslationId, BC001Q4_A580DynamicTranslationPrimaryKey, BC001Q4_A579DynamicTranslationTrnName, BC001Q4_A581DynamicTranslationAttributeNam, BC001Q4_A582DynamicTranslationEnglish, BC001Q4_A583DynamicTranslationDutch, BC001Q4_A671DynamicTranslationEnglishPubli, BC001Q4_A672DynamicTranslationDutchPublish
                }
                , new Object[] {
                BC001Q5_A578DynamicTranslationId
@@ -1180,7 +1208,7 @@ namespace GeneXus.Programs {
                , new Object[] {
                }
                , new Object[] {
-               BC001Q9_A578DynamicTranslationId, BC001Q9_A580DynamicTranslationPrimaryKey, BC001Q9_A579DynamicTranslationTrnName, BC001Q9_A581DynamicTranslationAttributeNam, BC001Q9_A582DynamicTranslationEnglish, BC001Q9_A583DynamicTranslationDutch
+               BC001Q9_A578DynamicTranslationId, BC001Q9_A580DynamicTranslationPrimaryKey, BC001Q9_A579DynamicTranslationTrnName, BC001Q9_A581DynamicTranslationAttributeNam, BC001Q9_A582DynamicTranslationEnglish, BC001Q9_A583DynamicTranslationDutch, BC001Q9_A671DynamicTranslationEnglishPubli, BC001Q9_A672DynamicTranslationDutchPublish
                }
             }
          );
@@ -1209,6 +1237,10 @@ namespace GeneXus.Programs {
       private string A582DynamicTranslationEnglish ;
       private string Z583DynamicTranslationDutch ;
       private string A583DynamicTranslationDutch ;
+      private string Z671DynamicTranslationEnglishPubli ;
+      private string A671DynamicTranslationEnglishPubli ;
+      private string Z672DynamicTranslationDutchPublish ;
+      private string A672DynamicTranslationDutchPublish ;
       private string Z579DynamicTranslationTrnName ;
       private string A579DynamicTranslationTrnName ;
       private string Z581DynamicTranslationAttributeNam ;
@@ -1231,6 +1263,8 @@ namespace GeneXus.Programs {
       private string[] BC001Q4_A581DynamicTranslationAttributeNam ;
       private string[] BC001Q4_A582DynamicTranslationEnglish ;
       private string[] BC001Q4_A583DynamicTranslationDutch ;
+      private string[] BC001Q4_A671DynamicTranslationEnglishPubli ;
+      private string[] BC001Q4_A672DynamicTranslationDutchPublish ;
       private Guid[] BC001Q5_A578DynamicTranslationId ;
       private Guid[] BC001Q3_A578DynamicTranslationId ;
       private Guid[] BC001Q3_A580DynamicTranslationPrimaryKey ;
@@ -1238,18 +1272,24 @@ namespace GeneXus.Programs {
       private string[] BC001Q3_A581DynamicTranslationAttributeNam ;
       private string[] BC001Q3_A582DynamicTranslationEnglish ;
       private string[] BC001Q3_A583DynamicTranslationDutch ;
+      private string[] BC001Q3_A671DynamicTranslationEnglishPubli ;
+      private string[] BC001Q3_A672DynamicTranslationDutchPublish ;
       private Guid[] BC001Q2_A578DynamicTranslationId ;
       private Guid[] BC001Q2_A580DynamicTranslationPrimaryKey ;
       private string[] BC001Q2_A579DynamicTranslationTrnName ;
       private string[] BC001Q2_A581DynamicTranslationAttributeNam ;
       private string[] BC001Q2_A582DynamicTranslationEnglish ;
       private string[] BC001Q2_A583DynamicTranslationDutch ;
+      private string[] BC001Q2_A671DynamicTranslationEnglishPubli ;
+      private string[] BC001Q2_A672DynamicTranslationDutchPublish ;
       private Guid[] BC001Q9_A578DynamicTranslationId ;
       private Guid[] BC001Q9_A580DynamicTranslationPrimaryKey ;
       private string[] BC001Q9_A579DynamicTranslationTrnName ;
       private string[] BC001Q9_A581DynamicTranslationAttributeNam ;
       private string[] BC001Q9_A582DynamicTranslationEnglish ;
       private string[] BC001Q9_A583DynamicTranslationDutch ;
+      private string[] BC001Q9_A671DynamicTranslationEnglishPubli ;
+      private string[] BC001Q9_A672DynamicTranslationDutchPublish ;
       private SdtTrn_DynamicTranslation bcTrn_DynamicTranslation ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
@@ -1366,7 +1406,9 @@ public class trn_dynamictranslation_bc__default : DataStoreHelperBase, IDataStor
        new ParDef("DynamicTranslationTrnName",GXType.VarChar,100,0) ,
        new ParDef("DynamicTranslationAttributeNam",GXType.VarChar,100,0) ,
        new ParDef("DynamicTranslationEnglish",GXType.LongVarChar,2097152,0) ,
-       new ParDef("DynamicTranslationDutch",GXType.LongVarChar,2097152,0)
+       new ParDef("DynamicTranslationDutch",GXType.LongVarChar,2097152,0) ,
+       new ParDef("DynamicTranslationEnglishPubli",GXType.LongVarChar,2097152,0) ,
+       new ParDef("DynamicTranslationDutchPublish",GXType.LongVarChar,2097152,0)
        };
        Object[] prmBC001Q7;
        prmBC001Q7 = new Object[] {
@@ -1375,6 +1417,8 @@ public class trn_dynamictranslation_bc__default : DataStoreHelperBase, IDataStor
        new ParDef("DynamicTranslationAttributeNam",GXType.VarChar,100,0) ,
        new ParDef("DynamicTranslationEnglish",GXType.LongVarChar,2097152,0) ,
        new ParDef("DynamicTranslationDutch",GXType.LongVarChar,2097152,0) ,
+       new ParDef("DynamicTranslationEnglishPubli",GXType.LongVarChar,2097152,0) ,
+       new ParDef("DynamicTranslationDutchPublish",GXType.LongVarChar,2097152,0) ,
        new ParDef("DynamicTranslationId",GXType.UniqueIdentifier,36,0)
        };
        Object[] prmBC001Q8;
@@ -1386,14 +1430,14 @@ public class trn_dynamictranslation_bc__default : DataStoreHelperBase, IDataStor
        new ParDef("DynamicTranslationId",GXType.UniqueIdentifier,36,0)
        };
        def= new CursorDef[] {
-           new CursorDef("BC001Q2", "SELECT DynamicTranslationId, DynamicTranslationPrimaryKey, DynamicTranslationTrnName, DynamicTranslationAttributeNam, DynamicTranslationEnglish, DynamicTranslationDutch FROM Trn_DynamicTranslation WHERE DynamicTranslationId = :DynamicTranslationId  FOR UPDATE OF Trn_DynamicTranslation",true, GxErrorMask.GX_NOMASK, false, this,prmBC001Q2,1, GxCacheFrequency.OFF ,true,false )
-          ,new CursorDef("BC001Q3", "SELECT DynamicTranslationId, DynamicTranslationPrimaryKey, DynamicTranslationTrnName, DynamicTranslationAttributeNam, DynamicTranslationEnglish, DynamicTranslationDutch FROM Trn_DynamicTranslation WHERE DynamicTranslationId = :DynamicTranslationId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC001Q3,1, GxCacheFrequency.OFF ,true,false )
-          ,new CursorDef("BC001Q4", "SELECT TM1.DynamicTranslationId, TM1.DynamicTranslationPrimaryKey, TM1.DynamicTranslationTrnName, TM1.DynamicTranslationAttributeNam, TM1.DynamicTranslationEnglish, TM1.DynamicTranslationDutch FROM Trn_DynamicTranslation TM1 WHERE TM1.DynamicTranslationId = :DynamicTranslationId ORDER BY TM1.DynamicTranslationId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC001Q4,100, GxCacheFrequency.OFF ,true,false )
+           new CursorDef("BC001Q2", "SELECT DynamicTranslationId, DynamicTranslationPrimaryKey, DynamicTranslationTrnName, DynamicTranslationAttributeNam, DynamicTranslationEnglish, DynamicTranslationDutch, DynamicTranslationEnglishPubli, DynamicTranslationDutchPublish FROM Trn_DynamicTranslation WHERE DynamicTranslationId = :DynamicTranslationId  FOR UPDATE OF Trn_DynamicTranslation",true, GxErrorMask.GX_NOMASK, false, this,prmBC001Q2,1, GxCacheFrequency.OFF ,true,false )
+          ,new CursorDef("BC001Q3", "SELECT DynamicTranslationId, DynamicTranslationPrimaryKey, DynamicTranslationTrnName, DynamicTranslationAttributeNam, DynamicTranslationEnglish, DynamicTranslationDutch, DynamicTranslationEnglishPubli, DynamicTranslationDutchPublish FROM Trn_DynamicTranslation WHERE DynamicTranslationId = :DynamicTranslationId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC001Q3,1, GxCacheFrequency.OFF ,true,false )
+          ,new CursorDef("BC001Q4", "SELECT TM1.DynamicTranslationId, TM1.DynamicTranslationPrimaryKey, TM1.DynamicTranslationTrnName, TM1.DynamicTranslationAttributeNam, TM1.DynamicTranslationEnglish, TM1.DynamicTranslationDutch, TM1.DynamicTranslationEnglishPubli, TM1.DynamicTranslationDutchPublish FROM Trn_DynamicTranslation TM1 WHERE TM1.DynamicTranslationId = :DynamicTranslationId ORDER BY TM1.DynamicTranslationId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC001Q4,100, GxCacheFrequency.OFF ,true,false )
           ,new CursorDef("BC001Q5", "SELECT DynamicTranslationId FROM Trn_DynamicTranslation WHERE DynamicTranslationId = :DynamicTranslationId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC001Q5,1, GxCacheFrequency.OFF ,true,false )
-          ,new CursorDef("BC001Q6", "SAVEPOINT gxupdate;INSERT INTO Trn_DynamicTranslation(DynamicTranslationId, DynamicTranslationPrimaryKey, DynamicTranslationTrnName, DynamicTranslationAttributeNam, DynamicTranslationEnglish, DynamicTranslationDutch) VALUES(:DynamicTranslationId, :DynamicTranslationPrimaryKey, :DynamicTranslationTrnName, :DynamicTranslationAttributeNam, :DynamicTranslationEnglish, :DynamicTranslationDutch);RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT,prmBC001Q6)
-          ,new CursorDef("BC001Q7", "SAVEPOINT gxupdate;UPDATE Trn_DynamicTranslation SET DynamicTranslationPrimaryKey=:DynamicTranslationPrimaryKey, DynamicTranslationTrnName=:DynamicTranslationTrnName, DynamicTranslationAttributeNam=:DynamicTranslationAttributeNam, DynamicTranslationEnglish=:DynamicTranslationEnglish, DynamicTranslationDutch=:DynamicTranslationDutch  WHERE DynamicTranslationId = :DynamicTranslationId;RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK,prmBC001Q7)
+          ,new CursorDef("BC001Q6", "SAVEPOINT gxupdate;INSERT INTO Trn_DynamicTranslation(DynamicTranslationId, DynamicTranslationPrimaryKey, DynamicTranslationTrnName, DynamicTranslationAttributeNam, DynamicTranslationEnglish, DynamicTranslationDutch, DynamicTranslationEnglishPubli, DynamicTranslationDutchPublish) VALUES(:DynamicTranslationId, :DynamicTranslationPrimaryKey, :DynamicTranslationTrnName, :DynamicTranslationAttributeNam, :DynamicTranslationEnglish, :DynamicTranslationDutch, :DynamicTranslationEnglishPubli, :DynamicTranslationDutchPublish);RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT,prmBC001Q6)
+          ,new CursorDef("BC001Q7", "SAVEPOINT gxupdate;UPDATE Trn_DynamicTranslation SET DynamicTranslationPrimaryKey=:DynamicTranslationPrimaryKey, DynamicTranslationTrnName=:DynamicTranslationTrnName, DynamicTranslationAttributeNam=:DynamicTranslationAttributeNam, DynamicTranslationEnglish=:DynamicTranslationEnglish, DynamicTranslationDutch=:DynamicTranslationDutch, DynamicTranslationEnglishPubli=:DynamicTranslationEnglishPubli, DynamicTranslationDutchPublish=:DynamicTranslationDutchPublish  WHERE DynamicTranslationId = :DynamicTranslationId;RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK,prmBC001Q7)
           ,new CursorDef("BC001Q8", "SAVEPOINT gxupdate;DELETE FROM Trn_DynamicTranslation  WHERE DynamicTranslationId = :DynamicTranslationId;RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK,prmBC001Q8)
-          ,new CursorDef("BC001Q9", "SELECT TM1.DynamicTranslationId, TM1.DynamicTranslationPrimaryKey, TM1.DynamicTranslationTrnName, TM1.DynamicTranslationAttributeNam, TM1.DynamicTranslationEnglish, TM1.DynamicTranslationDutch FROM Trn_DynamicTranslation TM1 WHERE TM1.DynamicTranslationId = :DynamicTranslationId ORDER BY TM1.DynamicTranslationId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC001Q9,100, GxCacheFrequency.OFF ,true,false )
+          ,new CursorDef("BC001Q9", "SELECT TM1.DynamicTranslationId, TM1.DynamicTranslationPrimaryKey, TM1.DynamicTranslationTrnName, TM1.DynamicTranslationAttributeNam, TM1.DynamicTranslationEnglish, TM1.DynamicTranslationDutch, TM1.DynamicTranslationEnglishPubli, TM1.DynamicTranslationDutchPublish FROM Trn_DynamicTranslation TM1 WHERE TM1.DynamicTranslationId = :DynamicTranslationId ORDER BY TM1.DynamicTranslationId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC001Q9,100, GxCacheFrequency.OFF ,true,false )
        };
     }
  }
@@ -1411,6 +1455,8 @@ public class trn_dynamictranslation_bc__default : DataStoreHelperBase, IDataStor
              ((string[]) buf[3])[0] = rslt.getVarchar(4);
              ((string[]) buf[4])[0] = rslt.getLongVarchar(5);
              ((string[]) buf[5])[0] = rslt.getLongVarchar(6);
+             ((string[]) buf[6])[0] = rslt.getLongVarchar(7);
+             ((string[]) buf[7])[0] = rslt.getLongVarchar(8);
              return;
           case 1 :
              ((Guid[]) buf[0])[0] = rslt.getGuid(1);
@@ -1419,6 +1465,8 @@ public class trn_dynamictranslation_bc__default : DataStoreHelperBase, IDataStor
              ((string[]) buf[3])[0] = rslt.getVarchar(4);
              ((string[]) buf[4])[0] = rslt.getLongVarchar(5);
              ((string[]) buf[5])[0] = rslt.getLongVarchar(6);
+             ((string[]) buf[6])[0] = rslt.getLongVarchar(7);
+             ((string[]) buf[7])[0] = rslt.getLongVarchar(8);
              return;
           case 2 :
              ((Guid[]) buf[0])[0] = rslt.getGuid(1);
@@ -1427,6 +1475,8 @@ public class trn_dynamictranslation_bc__default : DataStoreHelperBase, IDataStor
              ((string[]) buf[3])[0] = rslt.getVarchar(4);
              ((string[]) buf[4])[0] = rslt.getLongVarchar(5);
              ((string[]) buf[5])[0] = rslt.getLongVarchar(6);
+             ((string[]) buf[6])[0] = rslt.getLongVarchar(7);
+             ((string[]) buf[7])[0] = rslt.getLongVarchar(8);
              return;
           case 3 :
              ((Guid[]) buf[0])[0] = rslt.getGuid(1);
@@ -1438,6 +1488,8 @@ public class trn_dynamictranslation_bc__default : DataStoreHelperBase, IDataStor
              ((string[]) buf[3])[0] = rslt.getVarchar(4);
              ((string[]) buf[4])[0] = rslt.getLongVarchar(5);
              ((string[]) buf[5])[0] = rslt.getLongVarchar(6);
+             ((string[]) buf[6])[0] = rslt.getLongVarchar(7);
+             ((string[]) buf[7])[0] = rslt.getLongVarchar(8);
              return;
     }
  }

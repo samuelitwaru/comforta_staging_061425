@@ -1847,6 +1847,36 @@ namespace GeneXus.Programs {
          /* PublishAppVersion Constructor */
       }
 
+      public void gxep_checktranslationsbeforepublish( Guid aP0_AppVersionId ,
+                                                       out GxSimpleCollection<string> aP1_Messages ,
+                                                       out SdtSDT_Error aP2_error )
+      {
+         restCliCheckTranslationsBeforePublish = new GXRestAPIClient();
+         if ( restLocation == null )
+         {
+            InitLocation();
+         }
+         restLocation.ResourceName = "/toolbox/v2/check-translations-before-publish";
+         restCliCheckTranslationsBeforePublish.Location = restLocation;
+         restCliCheckTranslationsBeforePublish.HttpMethod = "POST";
+         restCliCheckTranslationsBeforePublish.AddBodyVar("AppVersionId", (Guid)(aP0_AppVersionId));
+         restCliCheckTranslationsBeforePublish.RestExecute();
+         if ( restCliCheckTranslationsBeforePublish.ErrorCode != 0 )
+         {
+            gxProperties.ErrorCode = restCliCheckTranslationsBeforePublish.ErrorCode;
+            gxProperties.ErrorMessage = restCliCheckTranslationsBeforePublish.ErrorMessage;
+            gxProperties.StatusCode = restCliCheckTranslationsBeforePublish.StatusCode;
+            aP1_Messages = new GxSimpleCollection<string>();
+            aP2_error = new SdtSDT_Error();
+         }
+         else
+         {
+            aP1_Messages = restCliCheckTranslationsBeforePublish.GetBodyCollection<string>("Messages");
+            aP2_error = restCliCheckTranslationsBeforePublish.GetBodySdt<SdtSDT_Error>("error");
+         }
+         /* CheckTranslationsBeforePublish Constructor */
+      }
+
       public void gxep_createmenupage( Guid aP0_AppVersionId ,
                                        string aP1_PageName ,
                                        out SdtSDT_AppVersion_PagesItem aP2_MenuPage ,
@@ -2681,6 +2711,8 @@ namespace GeneXus.Programs {
          restCliSavePageV2 = new GXRestAPIClient();
          restCliSavePageThumbnail = new GXRestAPIClient();
          restCliPublishAppVersion = new GXRestAPIClient();
+         restCliCheckTranslationsBeforePublish = new GXRestAPIClient();
+         aP1_Messages = new GxSimpleCollection<string>();
          restCliCreateMenuPage = new GXRestAPIClient();
          aP2_MenuPage = new SdtSDT_AppVersion_PagesItem();
          restCliCreateInfoPage = new GXRestAPIClient();
@@ -2775,6 +2807,7 @@ namespace GeneXus.Programs {
       protected GXRestAPIClient restCliSavePageV2 ;
       protected GXRestAPIClient restCliSavePageThumbnail ;
       protected GXRestAPIClient restCliPublishAppVersion ;
+      protected GXRestAPIClient restCliCheckTranslationsBeforePublish ;
       protected GXRestAPIClient restCliCreateMenuPage ;
       protected GXRestAPIClient restCliCreateInfoPage ;
       protected GXRestAPIClient restCliGetPageTranslation ;
@@ -2848,6 +2881,7 @@ namespace GeneXus.Programs {
       protected SdtSDT_AppVersion aP2_AppVersion ;
       protected SdtSDT_AppVersion aP1_AppVersion ;
       protected string aP4_result ;
+      protected GxSimpleCollection<string> aP1_Messages ;
       protected SdtSDT_AppVersion_PagesItem aP2_MenuPage ;
       protected SdtSDT_TranslatedPage aP2_SDT_TranslatedPage ;
       protected SdtSDT_AppVersion_PagesItem aP5_MenuPage ;

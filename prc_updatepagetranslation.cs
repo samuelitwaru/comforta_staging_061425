@@ -294,7 +294,7 @@ public class prc_updatepagetranslation__default : DataStoreHelperBase, IDataStor
        new ParDef("DynamicTranslationId",GXType.UniqueIdentifier,36,0)
        };
        def= new CursorDef[] {
-           new CursorDef("P00H02", "SELECT DynamicTranslationPrimaryKey, DynamicTranslationAttributeNam, DynamicTranslationDutch, DynamicTranslationEnglish, DynamicTranslationId FROM Trn_DynamicTranslation WHERE DynamicTranslationPrimaryKey = :AV9DynamicTranslationPrimaryKey ORDER BY DynamicTranslationId  FOR UPDATE OF Trn_DynamicTranslation",true, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00H02,1, GxCacheFrequency.OFF ,true,false )
+           new CursorDef("P00H02", "SELECT DynamicTranslationPrimaryKey, DynamicTranslationAttributeNam, DynamicTranslationDutch, DynamicTranslationEnglish, DynamicTranslationId FROM Trn_DynamicTranslation WHERE DynamicTranslationPrimaryKey = :AV9DynamicTranslationPrimaryKey ORDER BY DynamicTranslationPrimaryKey  FOR UPDATE OF Trn_DynamicTranslation",true, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00H02,1, GxCacheFrequency.OFF ,true,false )
           ,new CursorDef("P00H03", "SAVEPOINT gxupdate;UPDATE Trn_DynamicTranslation SET DynamicTranslationDutch=:DynamicTranslationDutch, DynamicTranslationEnglish=:DynamicTranslationEnglish  WHERE DynamicTranslationId = :DynamicTranslationId;RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK,prmP00H03)
        };
     }

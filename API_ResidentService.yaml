@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: "API_ResidentService"
   description: "API Services"
-  version: "20250716064321"
+  version: "20250716152236"
 servers:
   - url: https://staging.comforta.yukon.software/api
 paths:
@@ -1563,6 +1563,31 @@ paths:
         404:
           description: "Not found"
 
+  /toolbox/v2/check-translations-before-publish:
+    post:
+      tags:
+        - API_ResidentService  
+      operationId: "API_ResidentService.CheckTranslationsBeforePublish"
+      summary: "Check translations before publish"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CheckTranslationsBeforePublishInput"
+      
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CheckTranslationsBeforePublishOutput"
+        404:
+          description: "Not found"
+
   /toolbox/v2/create-menu-page:
     post:
       tags:
@@ -2396,6 +2421,16 @@ components:
 
 
 
+    CheckTranslationsBeforePublishOutput:
+      properties:
+        Messages:
+          type: array
+          items:
+            type: "string"
+        error:
+          description: "SDT_Error"
+          $ref: "#/components/schemas/SDT_Error"
+
     CreateMenuPageOutput:
       properties:
         MenuPage:
@@ -2802,6 +2837,12 @@ components:
           format: "uuid"
         Notify:
           type: "boolean"
+
+    CheckTranslationsBeforePublishInput:  
+      properties:
+        AppVersionId:
+          type: "string"
+          format: "uuid"
 
     CreateMenuPageInput:  
       properties:

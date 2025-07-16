@@ -263,6 +263,10 @@ namespace GeneXus.Programs {
          {
             return GAMSecurityLevel.SecurityNone ;
          }
+         else if ( StringUtil.StrCmp(permissionMethod, "gxep_checktranslationsbeforepublish") == 0 )
+         {
+            return GAMSecurityLevel.SecurityNone ;
+         }
          else if ( StringUtil.StrCmp(permissionMethod, "gxep_createmenupage") == 0 )
          {
             return GAMSecurityLevel.SecurityNone ;
@@ -1474,6 +1478,19 @@ namespace GeneXus.Programs {
          aP2_error=this.AV69error;
       }
 
+      public void gxep_checktranslationsbeforepublish( Guid aP0_AppVersionId ,
+                                                       out GxSimpleCollection<string> aP1_Messages ,
+                                                       out SdtSDT_Error aP2_error )
+      {
+         this.AV92AppVersionId = aP0_AppVersionId;
+         AV69error = new SdtSDT_Error(context);
+         initialize();
+         /* CheckTranslationsBeforePublish Constructor */
+         new prc_checktranslationsbeforepublish(context ).execute(  AV92AppVersionId, out  AV214Messages, out  AV69error) ;
+         aP1_Messages=this.AV214Messages;
+         aP2_error=this.AV69error;
+      }
+
       public void gxep_createmenupage( Guid aP0_AppVersionId ,
                                        string aP1_PageName ,
                                        out SdtSDT_AppVersion_PagesItem aP2_MenuPage ,
@@ -1902,6 +1919,7 @@ namespace GeneXus.Programs {
          AV140TrashItems = new GXBaseCollection<SdtSDT_TrashItem>( context, "SDT_TrashItem", "Comforta_version2");
          AV96AppVersions = new GXBaseCollection<SdtSDT_AppVersion>( context, "SDT_AppVersion", "Comforta_version2");
          AV98AppVersion = new SdtSDT_AppVersion(context);
+         AV214Messages = new GxSimpleCollection<string>();
          AV97MenuPage = new SdtSDT_AppVersion_PagesItem(context);
          AV95ContentPage = new SdtSDT_AppVersion_PagesItem(context);
          AV176SDT_DebugResults = new SdtSDT_AppDebugResults(context);
@@ -2085,6 +2103,8 @@ namespace GeneXus.Programs {
       protected SdtSDT_AppVersion aP1_AppVersion ;
       protected GxSimpleCollection<string> AV210LanguageToCollection ;
       protected string aP4_result ;
+      protected GxSimpleCollection<string> AV214Messages ;
+      protected GxSimpleCollection<string> aP1_Messages ;
       protected SdtSDT_AppVersion_PagesItem AV97MenuPage ;
       protected SdtSDT_AppVersion_PagesItem aP2_MenuPage ;
       protected SdtSDT_TranslatedPage AV213SDT_TranslatedPage ;

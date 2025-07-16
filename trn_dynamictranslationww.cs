@@ -159,7 +159,7 @@ namespace GeneXus.Programs {
          AV16FilterFullText = GetPar( "FilterFullText");
          AV24ManageFiltersExecutionStep = (short)(Math.Round(NumberUtil.Val( GetPar( "ManageFiltersExecutionStep"), "."), 18, MidpointRounding.ToEven));
          ajax_req_read_hidden_sdt(GetNextPar( ), AV19ColumnsSelector);
-         AV46Pgmname = GetPar( "Pgmname");
+         AV50Pgmname = GetPar( "Pgmname");
          AV25TFDynamicTranslationTrnName = GetPar( "TFDynamicTranslationTrnName");
          AV26TFDynamicTranslationTrnName_Sel = GetPar( "TFDynamicTranslationTrnName_Sel");
          AV27TFDynamicTranslationAttributeName = GetPar( "TFDynamicTranslationAttributeName");
@@ -168,6 +168,10 @@ namespace GeneXus.Programs {
          AV30TFDynamicTranslationEnglish_Sel = GetPar( "TFDynamicTranslationEnglish_Sel");
          AV31TFDynamicTranslationDutch = GetPar( "TFDynamicTranslationDutch");
          AV32TFDynamicTranslationDutch_Sel = GetPar( "TFDynamicTranslationDutch_Sel");
+         AV46TFDynamicTranslationEnglishPublished = GetPar( "TFDynamicTranslationEnglishPublished");
+         AV47TFDynamicTranslationEnglishPublished_Sel = GetPar( "TFDynamicTranslationEnglishPublished_Sel");
+         AV48TFDynamicTranslationDutchPublished = GetPar( "TFDynamicTranslationDutchPublished");
+         AV49TFDynamicTranslationDutchPublished_Sel = GetPar( "TFDynamicTranslationDutchPublished_Sel");
          AV42IsAuthorized_Display = StringUtil.StrToBool( GetPar( "IsAuthorized_Display"));
          AV43IsAuthorized_Update = StringUtil.StrToBool( GetPar( "IsAuthorized_Update"));
          AV44IsAuthorized_Delete = StringUtil.StrToBool( GetPar( "IsAuthorized_Delete"));
@@ -179,7 +183,7 @@ namespace GeneXus.Programs {
             GxWebError = 1;
             return  ;
          }
-         gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV46Pgmname, AV25TFDynamicTranslationTrnName, AV26TFDynamicTranslationTrnName_Sel, AV27TFDynamicTranslationAttributeName, AV28TFDynamicTranslationAttributeName_Sel, AV29TFDynamicTranslationEnglish, AV30TFDynamicTranslationEnglish_Sel, AV31TFDynamicTranslationDutch, AV32TFDynamicTranslationDutch_Sel, AV42IsAuthorized_Display, AV43IsAuthorized_Update, AV44IsAuthorized_Delete, AV40IsAuthorized_DynamicTranslationTrnName, AV45IsAuthorized_Insert) ;
+         gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV50Pgmname, AV25TFDynamicTranslationTrnName, AV26TFDynamicTranslationTrnName_Sel, AV27TFDynamicTranslationAttributeName, AV28TFDynamicTranslationAttributeName_Sel, AV29TFDynamicTranslationEnglish, AV30TFDynamicTranslationEnglish_Sel, AV31TFDynamicTranslationDutch, AV32TFDynamicTranslationDutch_Sel, AV46TFDynamicTranslationEnglishPublished, AV47TFDynamicTranslationEnglishPublished_Sel, AV48TFDynamicTranslationDutchPublished, AV49TFDynamicTranslationDutchPublished_Sel, AV42IsAuthorized_Display, AV43IsAuthorized_Update, AV44IsAuthorized_Delete, AV40IsAuthorized_DynamicTranslationTrnName, AV45IsAuthorized_Insert) ;
          AddString( context.getJSONResponse( )) ;
          /* End function gxgrGrid_refresh_invoke */
       }
@@ -351,8 +355,8 @@ namespace GeneXus.Programs {
 
       protected void send_integrity_footer_hashes( )
       {
-         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV46Pgmname));
-         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV46Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV50Pgmname));
+         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV50Pgmname, "")), context));
          GxWebStd.gx_boolean_hidden_field( context, "vISAUTHORIZED_DISPLAY", AV42IsAuthorized_Display);
          GxWebStd.gx_hidden_field( context, "gxhash_vISAUTHORIZED_DISPLAY", GetSecureSignedToken( "", AV42IsAuthorized_Display, context));
          GxWebStd.gx_boolean_hidden_field( context, "vISAUTHORIZED_UPDATE", AV43IsAuthorized_Update);
@@ -403,8 +407,8 @@ namespace GeneXus.Programs {
             context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vCOLUMNSSELECTOR", AV19ColumnsSelector);
          }
          GxWebStd.gx_hidden_field( context, "vMANAGEFILTERSEXECUTIONSTEP", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV24ManageFiltersExecutionStep), 1, 0, context.GetLanguageProperty( "decimal_point"), "")));
-         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV46Pgmname));
-         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV46Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV50Pgmname));
+         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV50Pgmname, "")), context));
          GxWebStd.gx_hidden_field( context, "vTFDYNAMICTRANSLATIONTRNNAME", AV25TFDynamicTranslationTrnName);
          GxWebStd.gx_hidden_field( context, "vTFDYNAMICTRANSLATIONTRNNAME_SEL", AV26TFDynamicTranslationTrnName_Sel);
          GxWebStd.gx_hidden_field( context, "vTFDYNAMICTRANSLATIONATTRIBUTENAME", AV27TFDynamicTranslationAttributeName);
@@ -413,6 +417,10 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "vTFDYNAMICTRANSLATIONENGLISH_SEL", AV30TFDynamicTranslationEnglish_Sel);
          GxWebStd.gx_hidden_field( context, "vTFDYNAMICTRANSLATIONDUTCH", AV31TFDynamicTranslationDutch);
          GxWebStd.gx_hidden_field( context, "vTFDYNAMICTRANSLATIONDUTCH_SEL", AV32TFDynamicTranslationDutch_Sel);
+         GxWebStd.gx_hidden_field( context, "vTFDYNAMICTRANSLATIONENGLISHPUBLISHED", AV46TFDynamicTranslationEnglishPublished);
+         GxWebStd.gx_hidden_field( context, "vTFDYNAMICTRANSLATIONENGLISHPUBLISHED_SEL", AV47TFDynamicTranslationEnglishPublished_Sel);
+         GxWebStd.gx_hidden_field( context, "vTFDYNAMICTRANSLATIONDUTCHPUBLISHED", AV48TFDynamicTranslationDutchPublished);
+         GxWebStd.gx_hidden_field( context, "vTFDYNAMICTRANSLATIONDUTCHPUBLISHED_SEL", AV49TFDynamicTranslationDutchPublished_Sel);
          GxWebStd.gx_hidden_field( context, "vORDEREDBY", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV13OrderedBy), 4, 0, context.GetLanguageProperty( "decimal_point"), "")));
          GxWebStd.gx_boolean_hidden_field( context, "vORDEREDDSC", AV14OrderedDsc);
          GxWebStd.gx_boolean_hidden_field( context, "vISAUTHORIZED_DISPLAY", AV42IsAuthorized_Display);
@@ -493,8 +501,8 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Rowsperpageselectedvalue", StringUtil.LTrim( StringUtil.NToC( (decimal)(Gridpaginationbar_Rowsperpageselectedvalue), 9, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "DDO_GRID_Activeeventkey", StringUtil.RTrim( Ddo_grid_Activeeventkey));
          GxWebStd.gx_hidden_field( context, "DDO_GRID_Selectedvalue_get", StringUtil.RTrim( Ddo_grid_Selectedvalue_get));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Selectedcolumn", StringUtil.RTrim( Ddo_grid_Selectedcolumn));
          GxWebStd.gx_hidden_field( context, "DDO_GRID_Filteredtext_get", StringUtil.RTrim( Ddo_grid_Filteredtext_get));
+         GxWebStd.gx_hidden_field( context, "DDO_GRID_Selectedcolumn", StringUtil.RTrim( Ddo_grid_Selectedcolumn));
          GxWebStd.gx_hidden_field( context, "DDO_GRIDCOLUMNSSELECTOR_Columnsselectorvalues", StringUtil.RTrim( Ddo_gridcolumnsselector_Columnsselectorvalues));
          GxWebStd.gx_hidden_field( context, "DDO_MANAGEFILTERS_Activeeventkey", StringUtil.RTrim( Ddo_managefilters_Activeeventkey));
          GxWebStd.gx_hidden_field( context, "GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
@@ -502,8 +510,8 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Rowsperpageselectedvalue", StringUtil.LTrim( StringUtil.NToC( (decimal)(Gridpaginationbar_Rowsperpageselectedvalue), 9, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "DDO_GRID_Activeeventkey", StringUtil.RTrim( Ddo_grid_Activeeventkey));
          GxWebStd.gx_hidden_field( context, "DDO_GRID_Selectedvalue_get", StringUtil.RTrim( Ddo_grid_Selectedvalue_get));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Selectedcolumn", StringUtil.RTrim( Ddo_grid_Selectedcolumn));
          GxWebStd.gx_hidden_field( context, "DDO_GRID_Filteredtext_get", StringUtil.RTrim( Ddo_grid_Filteredtext_get));
+         GxWebStd.gx_hidden_field( context, "DDO_GRID_Selectedcolumn", StringUtil.RTrim( Ddo_grid_Selectedcolumn));
          GxWebStd.gx_hidden_field( context, "DDO_GRIDCOLUMNSSELECTOR_Columnsselectorvalues", StringUtil.RTrim( Ddo_gridcolumnsselector_Columnsselectorvalues));
          GxWebStd.gx_hidden_field( context, "DDO_MANAGEFILTERS_Activeeventkey", StringUtil.RTrim( Ddo_managefilters_Activeeventkey));
          GxWebStd.gx_hidden_field( context, "GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
@@ -823,10 +831,10 @@ namespace GeneXus.Programs {
             if ( ! isFullAjaxMode( ) )
             {
                /* WebComponent */
-               GxWebStd.gx_hidden_field( context, "W0058"+"", StringUtil.RTrim( WebComp_Wwpaux_wc_Component));
+               GxWebStd.gx_hidden_field( context, "W0060"+"", StringUtil.RTrim( WebComp_Wwpaux_wc_Component));
                context.WriteHtmlText( "<div") ;
                GxWebStd.ClassAttribute( context, "gxwebcomponent");
-               context.WriteHtmlText( " id=\""+"gxHTMLWrpW0058"+""+"\""+"") ;
+               context.WriteHtmlText( " id=\""+"gxHTMLWrpW0060"+""+"\""+"") ;
                context.WriteHtmlText( ">") ;
                if ( bGXsfl_39_Refreshing )
                {
@@ -834,7 +842,7 @@ namespace GeneXus.Programs {
                   {
                      if ( StringUtil.StrCmp(StringUtil.Lower( OldWwpaux_wc), StringUtil.Lower( WebComp_Wwpaux_wc_Component)) != 0 )
                      {
-                        context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0058"+"");
+                        context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0060"+"");
                      }
                      WebComp_Wwpaux_wc.componentdraw();
                      if ( StringUtil.StrCmp(StringUtil.Lower( OldWwpaux_wc), StringUtil.Lower( WebComp_Wwpaux_wc_Component)) != 0 )
@@ -1012,6 +1020,8 @@ namespace GeneXus.Programs {
                               A581DynamicTranslationAttributeNam = cgiGet( edtDynamicTranslationAttributeNam_Internalname);
                               A582DynamicTranslationEnglish = cgiGet( edtDynamicTranslationEnglish_Internalname);
                               A583DynamicTranslationDutch = cgiGet( edtDynamicTranslationDutch_Internalname);
+                              A671DynamicTranslationEnglishPubli = cgiGet( edtDynamicTranslationEnglishPubli_Internalname);
+                              A672DynamicTranslationDutchPublish = cgiGet( edtDynamicTranslationDutchPublish_Internalname);
                               cmbavActiongroup.Name = cmbavActiongroup_Internalname;
                               cmbavActiongroup.CurrentValue = cgiGet( cmbavActiongroup_Internalname);
                               AV41ActionGroup = (short)(Math.Round(NumberUtil.Val( cgiGet( cmbavActiongroup_Internalname), "."), 18, MidpointRounding.ToEven));
@@ -1092,9 +1102,9 @@ namespace GeneXus.Programs {
                         sEvtType = StringUtil.Left( sEvt, 4);
                         sEvt = StringUtil.Right( sEvt, (short)(StringUtil.Len( sEvt)-4));
                         nCmpId = (short)(Math.Round(NumberUtil.Val( sEvtType, "."), 18, MidpointRounding.ToEven));
-                        if ( nCmpId == 58 )
+                        if ( nCmpId == 60 )
                         {
-                           OldWwpaux_wc = cgiGet( "W0058");
+                           OldWwpaux_wc = cgiGet( "W0060");
                            if ( ( StringUtil.Len( OldWwpaux_wc) == 0 ) || ( StringUtil.StrCmp(OldWwpaux_wc, WebComp_Wwpaux_wc_Component) != 0 ) )
                            {
                               WebComp_Wwpaux_wc = getWebComponent(GetType(), "GeneXus.Programs", OldWwpaux_wc, new Object[] {context} );
@@ -1104,7 +1114,7 @@ namespace GeneXus.Programs {
                            }
                            if ( StringUtil.Len( WebComp_Wwpaux_wc_Component) != 0 )
                            {
-                              WebComp_Wwpaux_wc.componentprocess("W0058", "", sEvt);
+                              WebComp_Wwpaux_wc.componentprocess("W0060", "", sEvt);
                            }
                            WebComp_Wwpaux_wc_Component = OldWwpaux_wc;
                         }
@@ -1185,7 +1195,7 @@ namespace GeneXus.Programs {
                                        string AV16FilterFullText ,
                                        short AV24ManageFiltersExecutionStep ,
                                        WorkWithPlus.workwithplus_web.SdtWWPColumnsSelector AV19ColumnsSelector ,
-                                       string AV46Pgmname ,
+                                       string AV50Pgmname ,
                                        string AV25TFDynamicTranslationTrnName ,
                                        string AV26TFDynamicTranslationTrnName_Sel ,
                                        string AV27TFDynamicTranslationAttributeName ,
@@ -1194,6 +1204,10 @@ namespace GeneXus.Programs {
                                        string AV30TFDynamicTranslationEnglish_Sel ,
                                        string AV31TFDynamicTranslationDutch ,
                                        string AV32TFDynamicTranslationDutch_Sel ,
+                                       string AV46TFDynamicTranslationEnglishPublished ,
+                                       string AV47TFDynamicTranslationEnglishPublished_Sel ,
+                                       string AV48TFDynamicTranslationDutchPublished ,
+                                       string AV49TFDynamicTranslationDutchPublished_Sel ,
                                        bool AV42IsAuthorized_Display ,
                                        bool AV43IsAuthorized_Update ,
                                        bool AV44IsAuthorized_Delete ,
@@ -1242,7 +1256,7 @@ namespace GeneXus.Programs {
       protected void initialize_formulas( )
       {
          /* GeneXus formulas. */
-         AV46Pgmname = "Trn_DynamicTranslationWW";
+         AV50Pgmname = "Trn_DynamicTranslationWW";
       }
 
       protected void RFB92( )
@@ -1288,40 +1302,52 @@ namespace GeneXus.Programs {
             GXPagingFrom2 = (int)(((subGrid_Rows==0) ? 0 : GRID_nFirstRecordOnPage));
             GXPagingTo2 = ((subGrid_Rows==0) ? 10000 : subGrid_fnc_Recordsperpage( )+1);
             pr_default.dynParam(0, new Object[]{ new Object[]{
-                                                 AV47Trn_dynamictranslationwwds_1_filterfulltext ,
-                                                 AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel ,
-                                                 AV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname ,
-                                                 AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel ,
-                                                 AV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributename ,
-                                                 AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel ,
-                                                 AV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish ,
-                                                 AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel ,
-                                                 AV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch ,
+                                                 AV51Trn_dynamictranslationwwds_1_filterfulltext ,
+                                                 AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel ,
+                                                 AV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname ,
+                                                 AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel ,
+                                                 AV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributename ,
+                                                 AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel ,
+                                                 AV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish ,
+                                                 AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel ,
+                                                 AV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch ,
+                                                 AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpublished_sel ,
+                                                 AV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpublished ,
+                                                 AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpublished_sel ,
+                                                 AV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpublished ,
                                                  A579DynamicTranslationTrnName ,
                                                  A581DynamicTranslationAttributeNam ,
                                                  A582DynamicTranslationEnglish ,
                                                  A583DynamicTranslationDutch ,
+                                                 A671DynamicTranslationEnglishPubli ,
+                                                 A672DynamicTranslationDutchPublish ,
                                                  AV13OrderedBy ,
                                                  AV14OrderedDsc } ,
                                                  new int[]{
                                                  TypeConstants.SHORT, TypeConstants.BOOLEAN
                                                  }
             });
-            lV47Trn_dynamictranslationwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV47Trn_dynamictranslationwwds_1_filterfulltext), "%", "");
-            lV47Trn_dynamictranslationwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV47Trn_dynamictranslationwwds_1_filterfulltext), "%", "");
-            lV47Trn_dynamictranslationwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV47Trn_dynamictranslationwwds_1_filterfulltext), "%", "");
-            lV47Trn_dynamictranslationwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV47Trn_dynamictranslationwwds_1_filterfulltext), "%", "");
-            lV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname = StringUtil.Concat( StringUtil.RTrim( AV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname), "%", "");
-            lV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributename = StringUtil.Concat( StringUtil.RTrim( AV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributename), "%", "");
-            lV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish = StringUtil.Concat( StringUtil.RTrim( AV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish), "%", "");
-            lV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch = StringUtil.Concat( StringUtil.RTrim( AV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch), "%", "");
+            lV51Trn_dynamictranslationwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV51Trn_dynamictranslationwwds_1_filterfulltext), "%", "");
+            lV51Trn_dynamictranslationwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV51Trn_dynamictranslationwwds_1_filterfulltext), "%", "");
+            lV51Trn_dynamictranslationwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV51Trn_dynamictranslationwwds_1_filterfulltext), "%", "");
+            lV51Trn_dynamictranslationwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV51Trn_dynamictranslationwwds_1_filterfulltext), "%", "");
+            lV51Trn_dynamictranslationwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV51Trn_dynamictranslationwwds_1_filterfulltext), "%", "");
+            lV51Trn_dynamictranslationwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV51Trn_dynamictranslationwwds_1_filterfulltext), "%", "");
+            lV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname = StringUtil.Concat( StringUtil.RTrim( AV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname), "%", "");
+            lV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributename = StringUtil.Concat( StringUtil.RTrim( AV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributename), "%", "");
+            lV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish = StringUtil.Concat( StringUtil.RTrim( AV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish), "%", "");
+            lV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch = StringUtil.Concat( StringUtil.RTrim( AV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch), "%", "");
+            lV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpublished = StringUtil.Concat( StringUtil.RTrim( AV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpublished), "%", "");
+            lV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpublished = StringUtil.Concat( StringUtil.RTrim( AV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpublished), "%", "");
             /* Using cursor H00B92 */
-            pr_default.execute(0, new Object[] {lV47Trn_dynamictranslationwwds_1_filterfulltext, lV47Trn_dynamictranslationwwds_1_filterfulltext, lV47Trn_dynamictranslationwwds_1_filterfulltext, lV47Trn_dynamictranslationwwds_1_filterfulltext, lV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname, AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel, lV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributename, AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel, lV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish, AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel, lV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch, AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel, GXPagingFrom2, GXPagingTo2, GXPagingTo2});
+            pr_default.execute(0, new Object[] {lV51Trn_dynamictranslationwwds_1_filterfulltext, lV51Trn_dynamictranslationwwds_1_filterfulltext, lV51Trn_dynamictranslationwwds_1_filterfulltext, lV51Trn_dynamictranslationwwds_1_filterfulltext, lV51Trn_dynamictranslationwwds_1_filterfulltext, lV51Trn_dynamictranslationwwds_1_filterfulltext, lV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname, AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel, lV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributename, AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel, lV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish, AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel, lV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch, AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel, lV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpublished, AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpublished_sel, lV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpublished, AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpublished_sel, GXPagingFrom2, GXPagingTo2, GXPagingTo2});
             nGXsfl_39_idx = 1;
             sGXsfl_39_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_39_idx), 4, 0), 4, "0");
             SubsflControlProps_392( ) ;
             while ( ( (pr_default.getStatus(0) != 101) ) && ( ( ( subGrid_Rows == 0 ) || ( GRID_nCurrentRecord < subGrid_fnc_Recordsperpage( ) ) ) ) )
             {
+               A672DynamicTranslationDutchPublish = H00B92_A672DynamicTranslationDutchPublish[0];
+               A671DynamicTranslationEnglishPubli = H00B92_A671DynamicTranslationEnglishPubli[0];
                A583DynamicTranslationDutch = H00B92_A583DynamicTranslationDutch[0];
                A582DynamicTranslationEnglish = H00B92_A582DynamicTranslationEnglish[0];
                A581DynamicTranslationAttributeNam = H00B92_A581DynamicTranslationAttributeNam[0];
@@ -1343,8 +1369,8 @@ namespace GeneXus.Programs {
 
       protected void send_integrity_lvl_hashesB92( )
       {
-         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV46Pgmname));
-         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV46Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV50Pgmname));
+         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV50Pgmname, "")), context));
          GxWebStd.gx_boolean_hidden_field( context, "vISAUTHORIZED_DISPLAY", AV42IsAuthorized_Display);
          GxWebStd.gx_hidden_field( context, "gxhash_vISAUTHORIZED_DISPLAY", GetSecureSignedToken( "", AV42IsAuthorized_Display, context));
          GxWebStd.gx_boolean_hidden_field( context, "vISAUTHORIZED_UPDATE", AV43IsAuthorized_Update);
@@ -1370,45 +1396,59 @@ namespace GeneXus.Programs {
 
       protected int subGrid_fnc_Recordcount( )
       {
-         AV47Trn_dynamictranslationwwds_1_filterfulltext = AV16FilterFullText;
-         AV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname = AV25TFDynamicTranslationTrnName;
-         AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel = AV26TFDynamicTranslationTrnName_Sel;
-         AV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributename = AV27TFDynamicTranslationAttributeName;
-         AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel = AV28TFDynamicTranslationAttributeName_Sel;
-         AV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish = AV29TFDynamicTranslationEnglish;
-         AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel = AV30TFDynamicTranslationEnglish_Sel;
-         AV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch = AV31TFDynamicTranslationDutch;
-         AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel = AV32TFDynamicTranslationDutch_Sel;
+         AV51Trn_dynamictranslationwwds_1_filterfulltext = AV16FilterFullText;
+         AV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname = AV25TFDynamicTranslationTrnName;
+         AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel = AV26TFDynamicTranslationTrnName_Sel;
+         AV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributename = AV27TFDynamicTranslationAttributeName;
+         AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel = AV28TFDynamicTranslationAttributeName_Sel;
+         AV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish = AV29TFDynamicTranslationEnglish;
+         AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel = AV30TFDynamicTranslationEnglish_Sel;
+         AV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch = AV31TFDynamicTranslationDutch;
+         AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel = AV32TFDynamicTranslationDutch_Sel;
+         AV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpublished = AV46TFDynamicTranslationEnglishPublished;
+         AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpublished_sel = AV47TFDynamicTranslationEnglishPublished_Sel;
+         AV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpublished = AV48TFDynamicTranslationDutchPublished;
+         AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpublished_sel = AV49TFDynamicTranslationDutchPublished_Sel;
          pr_default.dynParam(1, new Object[]{ new Object[]{
-                                              AV47Trn_dynamictranslationwwds_1_filterfulltext ,
-                                              AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel ,
-                                              AV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname ,
-                                              AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel ,
-                                              AV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributename ,
-                                              AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel ,
-                                              AV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish ,
-                                              AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel ,
-                                              AV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch ,
+                                              AV51Trn_dynamictranslationwwds_1_filterfulltext ,
+                                              AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel ,
+                                              AV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname ,
+                                              AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel ,
+                                              AV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributename ,
+                                              AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel ,
+                                              AV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish ,
+                                              AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel ,
+                                              AV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch ,
+                                              AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpublished_sel ,
+                                              AV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpublished ,
+                                              AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpublished_sel ,
+                                              AV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpublished ,
                                               A579DynamicTranslationTrnName ,
                                               A581DynamicTranslationAttributeNam ,
                                               A582DynamicTranslationEnglish ,
                                               A583DynamicTranslationDutch ,
+                                              A671DynamicTranslationEnglishPubli ,
+                                              A672DynamicTranslationDutchPublish ,
                                               AV13OrderedBy ,
                                               AV14OrderedDsc } ,
                                               new int[]{
                                               TypeConstants.SHORT, TypeConstants.BOOLEAN
                                               }
          });
-         lV47Trn_dynamictranslationwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV47Trn_dynamictranslationwwds_1_filterfulltext), "%", "");
-         lV47Trn_dynamictranslationwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV47Trn_dynamictranslationwwds_1_filterfulltext), "%", "");
-         lV47Trn_dynamictranslationwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV47Trn_dynamictranslationwwds_1_filterfulltext), "%", "");
-         lV47Trn_dynamictranslationwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV47Trn_dynamictranslationwwds_1_filterfulltext), "%", "");
-         lV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname = StringUtil.Concat( StringUtil.RTrim( AV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname), "%", "");
-         lV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributename = StringUtil.Concat( StringUtil.RTrim( AV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributename), "%", "");
-         lV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish = StringUtil.Concat( StringUtil.RTrim( AV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish), "%", "");
-         lV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch = StringUtil.Concat( StringUtil.RTrim( AV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch), "%", "");
+         lV51Trn_dynamictranslationwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV51Trn_dynamictranslationwwds_1_filterfulltext), "%", "");
+         lV51Trn_dynamictranslationwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV51Trn_dynamictranslationwwds_1_filterfulltext), "%", "");
+         lV51Trn_dynamictranslationwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV51Trn_dynamictranslationwwds_1_filterfulltext), "%", "");
+         lV51Trn_dynamictranslationwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV51Trn_dynamictranslationwwds_1_filterfulltext), "%", "");
+         lV51Trn_dynamictranslationwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV51Trn_dynamictranslationwwds_1_filterfulltext), "%", "");
+         lV51Trn_dynamictranslationwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV51Trn_dynamictranslationwwds_1_filterfulltext), "%", "");
+         lV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname = StringUtil.Concat( StringUtil.RTrim( AV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname), "%", "");
+         lV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributename = StringUtil.Concat( StringUtil.RTrim( AV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributename), "%", "");
+         lV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish = StringUtil.Concat( StringUtil.RTrim( AV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish), "%", "");
+         lV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch = StringUtil.Concat( StringUtil.RTrim( AV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch), "%", "");
+         lV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpublished = StringUtil.Concat( StringUtil.RTrim( AV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpublished), "%", "");
+         lV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpublished = StringUtil.Concat( StringUtil.RTrim( AV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpublished), "%", "");
          /* Using cursor H00B93 */
-         pr_default.execute(1, new Object[] {lV47Trn_dynamictranslationwwds_1_filterfulltext, lV47Trn_dynamictranslationwwds_1_filterfulltext, lV47Trn_dynamictranslationwwds_1_filterfulltext, lV47Trn_dynamictranslationwwds_1_filterfulltext, lV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname, AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel, lV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributename, AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel, lV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish, AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel, lV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch, AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel});
+         pr_default.execute(1, new Object[] {lV51Trn_dynamictranslationwwds_1_filterfulltext, lV51Trn_dynamictranslationwwds_1_filterfulltext, lV51Trn_dynamictranslationwwds_1_filterfulltext, lV51Trn_dynamictranslationwwds_1_filterfulltext, lV51Trn_dynamictranslationwwds_1_filterfulltext, lV51Trn_dynamictranslationwwds_1_filterfulltext, lV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname, AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel, lV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributename, AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel, lV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish, AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel, lV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch, AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel, lV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpublished, AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpublished_sel, lV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpublished, AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpublished_sel});
          GRID_nRecordCount = H00B93_AGRID_nRecordCount[0];
          pr_default.close(1);
          return (int)(GRID_nRecordCount) ;
@@ -1433,20 +1473,24 @@ namespace GeneXus.Programs {
 
       protected short subgrid_firstpage( )
       {
-         AV47Trn_dynamictranslationwwds_1_filterfulltext = AV16FilterFullText;
-         AV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname = AV25TFDynamicTranslationTrnName;
-         AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel = AV26TFDynamicTranslationTrnName_Sel;
-         AV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributename = AV27TFDynamicTranslationAttributeName;
-         AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel = AV28TFDynamicTranslationAttributeName_Sel;
-         AV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish = AV29TFDynamicTranslationEnglish;
-         AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel = AV30TFDynamicTranslationEnglish_Sel;
-         AV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch = AV31TFDynamicTranslationDutch;
-         AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel = AV32TFDynamicTranslationDutch_Sel;
+         AV51Trn_dynamictranslationwwds_1_filterfulltext = AV16FilterFullText;
+         AV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname = AV25TFDynamicTranslationTrnName;
+         AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel = AV26TFDynamicTranslationTrnName_Sel;
+         AV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributename = AV27TFDynamicTranslationAttributeName;
+         AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel = AV28TFDynamicTranslationAttributeName_Sel;
+         AV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish = AV29TFDynamicTranslationEnglish;
+         AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel = AV30TFDynamicTranslationEnglish_Sel;
+         AV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch = AV31TFDynamicTranslationDutch;
+         AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel = AV32TFDynamicTranslationDutch_Sel;
+         AV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpublished = AV46TFDynamicTranslationEnglishPublished;
+         AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpublished_sel = AV47TFDynamicTranslationEnglishPublished_Sel;
+         AV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpublished = AV48TFDynamicTranslationDutchPublished;
+         AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpublished_sel = AV49TFDynamicTranslationDutchPublished_Sel;
          GRID_nFirstRecordOnPage = 0;
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV46Pgmname, AV25TFDynamicTranslationTrnName, AV26TFDynamicTranslationTrnName_Sel, AV27TFDynamicTranslationAttributeName, AV28TFDynamicTranslationAttributeName_Sel, AV29TFDynamicTranslationEnglish, AV30TFDynamicTranslationEnglish_Sel, AV31TFDynamicTranslationDutch, AV32TFDynamicTranslationDutch_Sel, AV42IsAuthorized_Display, AV43IsAuthorized_Update, AV44IsAuthorized_Delete, AV40IsAuthorized_DynamicTranslationTrnName, AV45IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV50Pgmname, AV25TFDynamicTranslationTrnName, AV26TFDynamicTranslationTrnName_Sel, AV27TFDynamicTranslationAttributeName, AV28TFDynamicTranslationAttributeName_Sel, AV29TFDynamicTranslationEnglish, AV30TFDynamicTranslationEnglish_Sel, AV31TFDynamicTranslationDutch, AV32TFDynamicTranslationDutch_Sel, AV46TFDynamicTranslationEnglishPublished, AV47TFDynamicTranslationEnglishPublished_Sel, AV48TFDynamicTranslationDutchPublished, AV49TFDynamicTranslationDutchPublished_Sel, AV42IsAuthorized_Display, AV43IsAuthorized_Update, AV44IsAuthorized_Delete, AV40IsAuthorized_DynamicTranslationTrnName, AV45IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1454,15 +1498,19 @@ namespace GeneXus.Programs {
 
       protected short subgrid_nextpage( )
       {
-         AV47Trn_dynamictranslationwwds_1_filterfulltext = AV16FilterFullText;
-         AV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname = AV25TFDynamicTranslationTrnName;
-         AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel = AV26TFDynamicTranslationTrnName_Sel;
-         AV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributename = AV27TFDynamicTranslationAttributeName;
-         AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel = AV28TFDynamicTranslationAttributeName_Sel;
-         AV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish = AV29TFDynamicTranslationEnglish;
-         AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel = AV30TFDynamicTranslationEnglish_Sel;
-         AV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch = AV31TFDynamicTranslationDutch;
-         AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel = AV32TFDynamicTranslationDutch_Sel;
+         AV51Trn_dynamictranslationwwds_1_filterfulltext = AV16FilterFullText;
+         AV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname = AV25TFDynamicTranslationTrnName;
+         AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel = AV26TFDynamicTranslationTrnName_Sel;
+         AV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributename = AV27TFDynamicTranslationAttributeName;
+         AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel = AV28TFDynamicTranslationAttributeName_Sel;
+         AV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish = AV29TFDynamicTranslationEnglish;
+         AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel = AV30TFDynamicTranslationEnglish_Sel;
+         AV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch = AV31TFDynamicTranslationDutch;
+         AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel = AV32TFDynamicTranslationDutch_Sel;
+         AV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpublished = AV46TFDynamicTranslationEnglishPublished;
+         AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpublished_sel = AV47TFDynamicTranslationEnglishPublished_Sel;
+         AV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpublished = AV48TFDynamicTranslationDutchPublished;
+         AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpublished_sel = AV49TFDynamicTranslationDutchPublished_Sel;
          GRID_nRecordCount = subGrid_fnc_Recordcount( );
          if ( ( GRID_nRecordCount >= subGrid_fnc_Recordsperpage( ) ) && ( GRID_nEOF == 0 ) )
          {
@@ -1476,7 +1524,7 @@ namespace GeneXus.Programs {
          GridContainer.AddObjectProperty("GRID_nFirstRecordOnPage", GRID_nFirstRecordOnPage);
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV46Pgmname, AV25TFDynamicTranslationTrnName, AV26TFDynamicTranslationTrnName_Sel, AV27TFDynamicTranslationAttributeName, AV28TFDynamicTranslationAttributeName_Sel, AV29TFDynamicTranslationEnglish, AV30TFDynamicTranslationEnglish_Sel, AV31TFDynamicTranslationDutch, AV32TFDynamicTranslationDutch_Sel, AV42IsAuthorized_Display, AV43IsAuthorized_Update, AV44IsAuthorized_Delete, AV40IsAuthorized_DynamicTranslationTrnName, AV45IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV50Pgmname, AV25TFDynamicTranslationTrnName, AV26TFDynamicTranslationTrnName_Sel, AV27TFDynamicTranslationAttributeName, AV28TFDynamicTranslationAttributeName_Sel, AV29TFDynamicTranslationEnglish, AV30TFDynamicTranslationEnglish_Sel, AV31TFDynamicTranslationDutch, AV32TFDynamicTranslationDutch_Sel, AV46TFDynamicTranslationEnglishPublished, AV47TFDynamicTranslationEnglishPublished_Sel, AV48TFDynamicTranslationDutchPublished, AV49TFDynamicTranslationDutchPublished_Sel, AV42IsAuthorized_Display, AV43IsAuthorized_Update, AV44IsAuthorized_Delete, AV40IsAuthorized_DynamicTranslationTrnName, AV45IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return (short)(((GRID_nEOF==0) ? 0 : 2)) ;
@@ -1484,15 +1532,19 @@ namespace GeneXus.Programs {
 
       protected short subgrid_previouspage( )
       {
-         AV47Trn_dynamictranslationwwds_1_filterfulltext = AV16FilterFullText;
-         AV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname = AV25TFDynamicTranslationTrnName;
-         AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel = AV26TFDynamicTranslationTrnName_Sel;
-         AV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributename = AV27TFDynamicTranslationAttributeName;
-         AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel = AV28TFDynamicTranslationAttributeName_Sel;
-         AV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish = AV29TFDynamicTranslationEnglish;
-         AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel = AV30TFDynamicTranslationEnglish_Sel;
-         AV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch = AV31TFDynamicTranslationDutch;
-         AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel = AV32TFDynamicTranslationDutch_Sel;
+         AV51Trn_dynamictranslationwwds_1_filterfulltext = AV16FilterFullText;
+         AV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname = AV25TFDynamicTranslationTrnName;
+         AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel = AV26TFDynamicTranslationTrnName_Sel;
+         AV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributename = AV27TFDynamicTranslationAttributeName;
+         AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel = AV28TFDynamicTranslationAttributeName_Sel;
+         AV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish = AV29TFDynamicTranslationEnglish;
+         AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel = AV30TFDynamicTranslationEnglish_Sel;
+         AV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch = AV31TFDynamicTranslationDutch;
+         AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel = AV32TFDynamicTranslationDutch_Sel;
+         AV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpublished = AV46TFDynamicTranslationEnglishPublished;
+         AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpublished_sel = AV47TFDynamicTranslationEnglishPublished_Sel;
+         AV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpublished = AV48TFDynamicTranslationDutchPublished;
+         AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpublished_sel = AV49TFDynamicTranslationDutchPublished_Sel;
          if ( GRID_nFirstRecordOnPage >= subGrid_fnc_Recordsperpage( ) )
          {
             GRID_nFirstRecordOnPage = (long)(GRID_nFirstRecordOnPage-subGrid_fnc_Recordsperpage( ));
@@ -1504,7 +1556,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV46Pgmname, AV25TFDynamicTranslationTrnName, AV26TFDynamicTranslationTrnName_Sel, AV27TFDynamicTranslationAttributeName, AV28TFDynamicTranslationAttributeName_Sel, AV29TFDynamicTranslationEnglish, AV30TFDynamicTranslationEnglish_Sel, AV31TFDynamicTranslationDutch, AV32TFDynamicTranslationDutch_Sel, AV42IsAuthorized_Display, AV43IsAuthorized_Update, AV44IsAuthorized_Delete, AV40IsAuthorized_DynamicTranslationTrnName, AV45IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV50Pgmname, AV25TFDynamicTranslationTrnName, AV26TFDynamicTranslationTrnName_Sel, AV27TFDynamicTranslationAttributeName, AV28TFDynamicTranslationAttributeName_Sel, AV29TFDynamicTranslationEnglish, AV30TFDynamicTranslationEnglish_Sel, AV31TFDynamicTranslationDutch, AV32TFDynamicTranslationDutch_Sel, AV46TFDynamicTranslationEnglishPublished, AV47TFDynamicTranslationEnglishPublished_Sel, AV48TFDynamicTranslationDutchPublished, AV49TFDynamicTranslationDutchPublished_Sel, AV42IsAuthorized_Display, AV43IsAuthorized_Update, AV44IsAuthorized_Delete, AV40IsAuthorized_DynamicTranslationTrnName, AV45IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1512,15 +1564,19 @@ namespace GeneXus.Programs {
 
       protected short subgrid_lastpage( )
       {
-         AV47Trn_dynamictranslationwwds_1_filterfulltext = AV16FilterFullText;
-         AV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname = AV25TFDynamicTranslationTrnName;
-         AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel = AV26TFDynamicTranslationTrnName_Sel;
-         AV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributename = AV27TFDynamicTranslationAttributeName;
-         AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel = AV28TFDynamicTranslationAttributeName_Sel;
-         AV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish = AV29TFDynamicTranslationEnglish;
-         AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel = AV30TFDynamicTranslationEnglish_Sel;
-         AV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch = AV31TFDynamicTranslationDutch;
-         AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel = AV32TFDynamicTranslationDutch_Sel;
+         AV51Trn_dynamictranslationwwds_1_filterfulltext = AV16FilterFullText;
+         AV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname = AV25TFDynamicTranslationTrnName;
+         AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel = AV26TFDynamicTranslationTrnName_Sel;
+         AV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributename = AV27TFDynamicTranslationAttributeName;
+         AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel = AV28TFDynamicTranslationAttributeName_Sel;
+         AV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish = AV29TFDynamicTranslationEnglish;
+         AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel = AV30TFDynamicTranslationEnglish_Sel;
+         AV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch = AV31TFDynamicTranslationDutch;
+         AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel = AV32TFDynamicTranslationDutch_Sel;
+         AV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpublished = AV46TFDynamicTranslationEnglishPublished;
+         AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpublished_sel = AV47TFDynamicTranslationEnglishPublished_Sel;
+         AV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpublished = AV48TFDynamicTranslationDutchPublished;
+         AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpublished_sel = AV49TFDynamicTranslationDutchPublished_Sel;
          GRID_nRecordCount = subGrid_fnc_Recordcount( );
          if ( GRID_nRecordCount > subGrid_fnc_Recordsperpage( ) )
          {
@@ -1540,7 +1596,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV46Pgmname, AV25TFDynamicTranslationTrnName, AV26TFDynamicTranslationTrnName_Sel, AV27TFDynamicTranslationAttributeName, AV28TFDynamicTranslationAttributeName_Sel, AV29TFDynamicTranslationEnglish, AV30TFDynamicTranslationEnglish_Sel, AV31TFDynamicTranslationDutch, AV32TFDynamicTranslationDutch_Sel, AV42IsAuthorized_Display, AV43IsAuthorized_Update, AV44IsAuthorized_Delete, AV40IsAuthorized_DynamicTranslationTrnName, AV45IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV50Pgmname, AV25TFDynamicTranslationTrnName, AV26TFDynamicTranslationTrnName_Sel, AV27TFDynamicTranslationAttributeName, AV28TFDynamicTranslationAttributeName_Sel, AV29TFDynamicTranslationEnglish, AV30TFDynamicTranslationEnglish_Sel, AV31TFDynamicTranslationDutch, AV32TFDynamicTranslationDutch_Sel, AV46TFDynamicTranslationEnglishPublished, AV47TFDynamicTranslationEnglishPublished_Sel, AV48TFDynamicTranslationDutchPublished, AV49TFDynamicTranslationDutchPublished_Sel, AV42IsAuthorized_Display, AV43IsAuthorized_Update, AV44IsAuthorized_Delete, AV40IsAuthorized_DynamicTranslationTrnName, AV45IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1548,15 +1604,19 @@ namespace GeneXus.Programs {
 
       protected int subgrid_gotopage( int nPageNo )
       {
-         AV47Trn_dynamictranslationwwds_1_filterfulltext = AV16FilterFullText;
-         AV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname = AV25TFDynamicTranslationTrnName;
-         AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel = AV26TFDynamicTranslationTrnName_Sel;
-         AV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributename = AV27TFDynamicTranslationAttributeName;
-         AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel = AV28TFDynamicTranslationAttributeName_Sel;
-         AV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish = AV29TFDynamicTranslationEnglish;
-         AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel = AV30TFDynamicTranslationEnglish_Sel;
-         AV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch = AV31TFDynamicTranslationDutch;
-         AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel = AV32TFDynamicTranslationDutch_Sel;
+         AV51Trn_dynamictranslationwwds_1_filterfulltext = AV16FilterFullText;
+         AV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname = AV25TFDynamicTranslationTrnName;
+         AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel = AV26TFDynamicTranslationTrnName_Sel;
+         AV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributename = AV27TFDynamicTranslationAttributeName;
+         AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel = AV28TFDynamicTranslationAttributeName_Sel;
+         AV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish = AV29TFDynamicTranslationEnglish;
+         AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel = AV30TFDynamicTranslationEnglish_Sel;
+         AV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch = AV31TFDynamicTranslationDutch;
+         AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel = AV32TFDynamicTranslationDutch_Sel;
+         AV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpublished = AV46TFDynamicTranslationEnglishPublished;
+         AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpublished_sel = AV47TFDynamicTranslationEnglishPublished_Sel;
+         AV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpublished = AV48TFDynamicTranslationDutchPublished;
+         AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpublished_sel = AV49TFDynamicTranslationDutchPublished_Sel;
          if ( nPageNo > 0 )
          {
             GRID_nFirstRecordOnPage = (long)(subGrid_fnc_Recordsperpage( )*(nPageNo-1));
@@ -1568,7 +1628,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV46Pgmname, AV25TFDynamicTranslationTrnName, AV26TFDynamicTranslationTrnName_Sel, AV27TFDynamicTranslationAttributeName, AV28TFDynamicTranslationAttributeName_Sel, AV29TFDynamicTranslationEnglish, AV30TFDynamicTranslationEnglish_Sel, AV31TFDynamicTranslationDutch, AV32TFDynamicTranslationDutch_Sel, AV42IsAuthorized_Display, AV43IsAuthorized_Update, AV44IsAuthorized_Delete, AV40IsAuthorized_DynamicTranslationTrnName, AV45IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV50Pgmname, AV25TFDynamicTranslationTrnName, AV26TFDynamicTranslationTrnName_Sel, AV27TFDynamicTranslationAttributeName, AV28TFDynamicTranslationAttributeName_Sel, AV29TFDynamicTranslationEnglish, AV30TFDynamicTranslationEnglish_Sel, AV31TFDynamicTranslationDutch, AV32TFDynamicTranslationDutch_Sel, AV46TFDynamicTranslationEnglishPublished, AV47TFDynamicTranslationEnglishPublished_Sel, AV48TFDynamicTranslationDutchPublished, AV49TFDynamicTranslationDutchPublished_Sel, AV42IsAuthorized_Display, AV43IsAuthorized_Update, AV44IsAuthorized_Delete, AV40IsAuthorized_DynamicTranslationTrnName, AV45IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return (int)(0) ;
@@ -1576,13 +1636,15 @@ namespace GeneXus.Programs {
 
       protected void before_start_formulas( )
       {
-         AV46Pgmname = "Trn_DynamicTranslationWW";
+         AV50Pgmname = "Trn_DynamicTranslationWW";
          edtDynamicTranslationId_Enabled = 0;
          edtDynamicTranslationTrnName_Enabled = 0;
          edtDynamicTranslationPrimaryKey_Enabled = 0;
          edtDynamicTranslationAttributeNam_Enabled = 0;
          edtDynamicTranslationEnglish_Enabled = 0;
          edtDynamicTranslationDutch_Enabled = 0;
+         edtDynamicTranslationEnglishPubli_Enabled = 0;
+         edtDynamicTranslationDutchPublish_Enabled = 0;
          fix_multi_value_controls( ) ;
       }
 
@@ -1669,8 +1731,8 @@ namespace GeneXus.Programs {
             Gridpaginationbar_Rowsperpageselectedvalue = (int)(Math.Round(context.localUtil.CToN( cgiGet( "GRIDPAGINATIONBAR_Rowsperpageselectedvalue"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
             Ddo_grid_Activeeventkey = cgiGet( "DDO_GRID_Activeeventkey");
             Ddo_grid_Selectedvalue_get = cgiGet( "DDO_GRID_Selectedvalue_get");
-            Ddo_grid_Selectedcolumn = cgiGet( "DDO_GRID_Selectedcolumn");
             Ddo_grid_Filteredtext_get = cgiGet( "DDO_GRID_Filteredtext_get");
+            Ddo_grid_Selectedcolumn = cgiGet( "DDO_GRID_Selectedcolumn");
             Ddo_gridcolumnsselector_Columnsselectorvalues = cgiGet( "DDO_GRIDCOLUMNSSELECTOR_Columnsselectorvalues");
             Ddo_managefilters_Activeeventkey = cgiGet( "DDO_MANAGEFILTERS_Activeeventkey");
             subGrid_Rows = (int)(Math.Round(context.localUtil.CToN( cgiGet( "GRID_Rows"), context.GetLanguageProperty( "decimal_point"), context.GetLanguageProperty( "thousand_sep")), 18, MidpointRounding.ToEven));
@@ -1690,6 +1752,8 @@ namespace GeneXus.Programs {
                A581DynamicTranslationAttributeNam = cgiGet( edtDynamicTranslationAttributeNam_Internalname);
                A582DynamicTranslationEnglish = cgiGet( edtDynamicTranslationEnglish_Internalname);
                A583DynamicTranslationDutch = cgiGet( edtDynamicTranslationDutch_Internalname);
+               A671DynamicTranslationEnglishPubli = cgiGet( edtDynamicTranslationEnglishPubli_Internalname);
+               A672DynamicTranslationDutchPublish = cgiGet( edtDynamicTranslationDutchPublish_Internalname);
                cmbavActiongroup.Name = cmbavActiongroup_Internalname;
                cmbavActiongroup.CurrentValue = cgiGet( cmbavActiongroup_Internalname);
                AV41ActionGroup = (short)(Math.Round(NumberUtil.Val( cgiGet( cmbavActiongroup_Internalname), "."), 18, MidpointRounding.ToEven));
@@ -1861,23 +1925,31 @@ namespace GeneXus.Programs {
          AssignProp("", false, edtDynamicTranslationEnglish_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtDynamicTranslationEnglish_Visible), 5, 0), !bGXsfl_39_Refreshing);
          edtDynamicTranslationDutch_Visible = (((WorkWithPlus.workwithplus_web.SdtWWPColumnsSelector_Column)AV19ColumnsSelector.gxTpr_Columns.Item(4)).gxTpr_Isvisible ? 1 : 0);
          AssignProp("", false, edtDynamicTranslationDutch_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtDynamicTranslationDutch_Visible), 5, 0), !bGXsfl_39_Refreshing);
+         edtDynamicTranslationEnglishPubli_Visible = (((WorkWithPlus.workwithplus_web.SdtWWPColumnsSelector_Column)AV19ColumnsSelector.gxTpr_Columns.Item(5)).gxTpr_Isvisible ? 1 : 0);
+         AssignProp("", false, edtDynamicTranslationEnglishPubli_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtDynamicTranslationEnglishPubli_Visible), 5, 0), !bGXsfl_39_Refreshing);
+         edtDynamicTranslationDutchPublish_Visible = (((WorkWithPlus.workwithplus_web.SdtWWPColumnsSelector_Column)AV19ColumnsSelector.gxTpr_Columns.Item(6)).gxTpr_Isvisible ? 1 : 0);
+         AssignProp("", false, edtDynamicTranslationDutchPublish_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtDynamicTranslationDutchPublish_Visible), 5, 0), !bGXsfl_39_Refreshing);
          AV37GridCurrentPage = subGrid_fnc_Currentpage( );
          AssignAttri("", false, "AV37GridCurrentPage", StringUtil.LTrimStr( (decimal)(AV37GridCurrentPage), 10, 0));
          AV38GridPageCount = subGrid_fnc_Pagecount( );
          AssignAttri("", false, "AV38GridPageCount", StringUtil.LTrimStr( (decimal)(AV38GridPageCount), 10, 0));
          GXt_char3 = AV39GridAppliedFilters;
-         new WorkWithPlus.workwithplus_web.wwp_getappliedfiltersdescription(context ).execute(  AV46Pgmname, out  GXt_char3) ;
+         new WorkWithPlus.workwithplus_web.wwp_getappliedfiltersdescription(context ).execute(  AV50Pgmname, out  GXt_char3) ;
          AV39GridAppliedFilters = GXt_char3;
          AssignAttri("", false, "AV39GridAppliedFilters", AV39GridAppliedFilters);
-         AV47Trn_dynamictranslationwwds_1_filterfulltext = AV16FilterFullText;
-         AV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname = AV25TFDynamicTranslationTrnName;
-         AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel = AV26TFDynamicTranslationTrnName_Sel;
-         AV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributename = AV27TFDynamicTranslationAttributeName;
-         AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel = AV28TFDynamicTranslationAttributeName_Sel;
-         AV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish = AV29TFDynamicTranslationEnglish;
-         AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel = AV30TFDynamicTranslationEnglish_Sel;
-         AV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch = AV31TFDynamicTranslationDutch;
-         AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel = AV32TFDynamicTranslationDutch_Sel;
+         AV51Trn_dynamictranslationwwds_1_filterfulltext = AV16FilterFullText;
+         AV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname = AV25TFDynamicTranslationTrnName;
+         AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel = AV26TFDynamicTranslationTrnName_Sel;
+         AV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributename = AV27TFDynamicTranslationAttributeName;
+         AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel = AV28TFDynamicTranslationAttributeName_Sel;
+         AV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish = AV29TFDynamicTranslationEnglish;
+         AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel = AV30TFDynamicTranslationEnglish_Sel;
+         AV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch = AV31TFDynamicTranslationDutch;
+         AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel = AV32TFDynamicTranslationDutch_Sel;
+         AV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpublished = AV46TFDynamicTranslationEnglishPublished;
+         AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpublished_sel = AV47TFDynamicTranslationEnglishPublished_Sel;
+         AV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpublished = AV48TFDynamicTranslationDutchPublished;
+         AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpublished_sel = AV49TFDynamicTranslationDutchPublished_Sel;
          /*  Sending Event outputs  */
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV19ColumnsSelector", AV19ColumnsSelector);
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV22ManageFiltersData", AV22ManageFiltersData);
@@ -1961,6 +2033,20 @@ namespace GeneXus.Programs {
                AssignAttri("", false, "AV31TFDynamicTranslationDutch", AV31TFDynamicTranslationDutch);
                AV32TFDynamicTranslationDutch_Sel = Ddo_grid_Selectedvalue_get;
                AssignAttri("", false, "AV32TFDynamicTranslationDutch_Sel", AV32TFDynamicTranslationDutch_Sel);
+            }
+            else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "DynamicTranslationEnglishPublished") == 0 )
+            {
+               AV46TFDynamicTranslationEnglishPublished = Ddo_grid_Filteredtext_get;
+               AssignAttri("", false, "AV46TFDynamicTranslationEnglishPublished", AV46TFDynamicTranslationEnglishPublished);
+               AV47TFDynamicTranslationEnglishPublished_Sel = Ddo_grid_Selectedvalue_get;
+               AssignAttri("", false, "AV47TFDynamicTranslationEnglishPublished_Sel", AV47TFDynamicTranslationEnglishPublished_Sel);
+            }
+            else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "DynamicTranslationDutchPublished") == 0 )
+            {
+               AV48TFDynamicTranslationDutchPublished = Ddo_grid_Filteredtext_get;
+               AssignAttri("", false, "AV48TFDynamicTranslationDutchPublished", AV48TFDynamicTranslationDutchPublished);
+               AV49TFDynamicTranslationDutchPublished_Sel = Ddo_grid_Selectedvalue_get;
+               AssignAttri("", false, "AV49TFDynamicTranslationDutchPublished_Sel", AV49TFDynamicTranslationDutchPublished_Sel);
             }
             subgrid_firstpage( ) ;
          }
@@ -2053,7 +2139,7 @@ namespace GeneXus.Programs {
                if (true) return;
             }
             GXKey = Crypto.GetSiteKey( );
-            GXEncryptionTmp = "wwpbaseobjects.savefilteras.aspx"+UrlEncode(StringUtil.RTrim("Trn_DynamicTranslationWWFilters")) + "," + UrlEncode(StringUtil.RTrim(AV46Pgmname+"GridState"));
+            GXEncryptionTmp = "wwpbaseobjects.savefilteras.aspx"+UrlEncode(StringUtil.RTrim("Trn_DynamicTranslationWWFilters")) + "," + UrlEncode(StringUtil.RTrim(AV50Pgmname+"GridState"));
             context.PopUp(formatLink("wwpbaseobjects.savefilteras.aspx") + "?" + UriEncrypt64( GXEncryptionTmp+Crypto.CheckSum( GXEncryptionTmp, 6), GXKey), new Object[] {});
             AV24ManageFiltersExecutionStep = 2;
             AssignAttri("", false, "AV24ManageFiltersExecutionStep", StringUtil.Str( (decimal)(AV24ManageFiltersExecutionStep), 1, 0));
@@ -2086,7 +2172,7 @@ namespace GeneXus.Programs {
                   returnInSub = true;
                   if (true) return;
                }
-               new WorkWithPlus.workwithplus_web.savegridstate(context ).execute(  AV46Pgmname+"GridState",  AV23ManageFiltersXml) ;
+               new WorkWithPlus.workwithplus_web.savegridstate(context ).execute(  AV50Pgmname+"GridState",  AV23ManageFiltersXml) ;
                AV11GridState.FromXml(AV23ManageFiltersXml, null, "", "");
                AV13OrderedBy = AV11GridState.gxTpr_Orderedby;
                AssignAttri("", false, "AV13OrderedBy", StringUtil.LTrimStr( (decimal)(AV13OrderedBy), 4, 0));
@@ -2200,12 +2286,12 @@ namespace GeneXus.Programs {
          if ( StringUtil.Len( WebComp_Wwpaux_wc_Component) != 0 )
          {
             WebComp_Wwpaux_wc.setjustcreated();
-            WebComp_Wwpaux_wc.componentprepare(new Object[] {(string)"W0058",(string)"",(string)"Trn_DynamicTranslation",(short)1,(string)"",(string)""});
+            WebComp_Wwpaux_wc.componentprepare(new Object[] {(string)"W0060",(string)"",(string)"Trn_DynamicTranslation",(short)1,(string)"",(string)""});
             WebComp_Wwpaux_wc.componentbind(new Object[] {(string)"",(string)"",(string)"",(string)""});
          }
          if ( isFullAjaxMode( ) || isAjaxCallMode( ) && bDynCreated_Wwpaux_wc )
          {
-            context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0058"+"");
+            context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0060"+"");
             WebComp_Wwpaux_wc.componentdraw();
             context.httpAjaxContext.ajax_rspEndCmp();
          }
@@ -2229,6 +2315,8 @@ namespace GeneXus.Programs {
          new WorkWithPlus.workwithplus_web.wwp_columnsselector_add(context ).execute( ref  AV19ColumnsSelector,  "DynamicTranslationAttributeName",  "",  "Attribute Name",  true,  "") ;
          new WorkWithPlus.workwithplus_web.wwp_columnsselector_add(context ).execute( ref  AV19ColumnsSelector,  "DynamicTranslationEnglish",  "",  "Translation English",  true,  "") ;
          new WorkWithPlus.workwithplus_web.wwp_columnsselector_add(context ).execute( ref  AV19ColumnsSelector,  "DynamicTranslationDutch",  "",  "Translation Dutch",  true,  "") ;
+         new WorkWithPlus.workwithplus_web.wwp_columnsselector_add(context ).execute( ref  AV19ColumnsSelector,  "DynamicTranslationEnglishPublished",  "",  "English Published",  true,  "") ;
+         new WorkWithPlus.workwithplus_web.wwp_columnsselector_add(context ).execute( ref  AV19ColumnsSelector,  "DynamicTranslationDutchPublished",  "",  "Dutch Published",  true,  "") ;
          GXt_char3 = AV18UserCustomValue;
          new WorkWithPlus.workwithplus_web.loadcolumnsselectorstate(context ).execute(  "Trn_DynamicTranslationWWColumnsSelector", out  GXt_char3) ;
          AV18UserCustomValue = GXt_char3;
@@ -2306,6 +2394,14 @@ namespace GeneXus.Programs {
          AssignAttri("", false, "AV31TFDynamicTranslationDutch", AV31TFDynamicTranslationDutch);
          AV32TFDynamicTranslationDutch_Sel = "";
          AssignAttri("", false, "AV32TFDynamicTranslationDutch_Sel", AV32TFDynamicTranslationDutch_Sel);
+         AV46TFDynamicTranslationEnglishPublished = "";
+         AssignAttri("", false, "AV46TFDynamicTranslationEnglishPublished", AV46TFDynamicTranslationEnglishPublished);
+         AV47TFDynamicTranslationEnglishPublished_Sel = "";
+         AssignAttri("", false, "AV47TFDynamicTranslationEnglishPublished_Sel", AV47TFDynamicTranslationEnglishPublished_Sel);
+         AV48TFDynamicTranslationDutchPublished = "";
+         AssignAttri("", false, "AV48TFDynamicTranslationDutchPublished", AV48TFDynamicTranslationDutchPublished);
+         AV49TFDynamicTranslationDutchPublished_Sel = "";
+         AssignAttri("", false, "AV49TFDynamicTranslationDutchPublished_Sel", AV49TFDynamicTranslationDutchPublished_Sel);
          Ddo_grid_Selectedvalue_set = "";
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "SelectedValue_set", Ddo_grid_Selectedvalue_set);
          Ddo_grid_Filteredtext_set = "";
@@ -2370,13 +2466,13 @@ namespace GeneXus.Programs {
       {
          /* 'LOADGRIDSTATE' Routine */
          returnInSub = false;
-         if ( StringUtil.StrCmp(AV21Session.Get(AV46Pgmname+"GridState"), "") == 0 )
+         if ( StringUtil.StrCmp(AV21Session.Get(AV50Pgmname+"GridState"), "") == 0 )
          {
-            AV11GridState.FromXml(new WorkWithPlus.workwithplus_web.loadgridstate(context).executeUdp(  AV46Pgmname+"GridState"), null, "", "");
+            AV11GridState.FromXml(new WorkWithPlus.workwithplus_web.loadgridstate(context).executeUdp(  AV50Pgmname+"GridState"), null, "", "");
          }
          else
          {
-            AV11GridState.FromXml(AV21Session.Get(AV46Pgmname+"GridState"), null, "", "");
+            AV11GridState.FromXml(AV21Session.Get(AV50Pgmname+"GridState"), null, "", "");
          }
          AV13OrderedBy = AV11GridState.gxTpr_Orderedby;
          AssignAttri("", false, "AV13OrderedBy", StringUtil.LTrimStr( (decimal)(AV13OrderedBy), 4, 0));
@@ -2408,10 +2504,10 @@ namespace GeneXus.Programs {
       {
          /* 'LOADREGFILTERSSTATE' Routine */
          returnInSub = false;
-         AV56GXV1 = 1;
-         while ( AV56GXV1 <= AV11GridState.gxTpr_Filtervalues.Count )
+         AV64GXV1 = 1;
+         while ( AV64GXV1 <= AV11GridState.gxTpr_Filtervalues.Count )
          {
-            AV12GridStateFilterValue = ((WorkWithPlus.workwithplus_web.SdtWWPGridState_FilterValue)AV11GridState.gxTpr_Filtervalues.Item(AV56GXV1));
+            AV12GridStateFilterValue = ((WorkWithPlus.workwithplus_web.SdtWWPGridState_FilterValue)AV11GridState.gxTpr_Filtervalues.Item(AV64GXV1));
             if ( StringUtil.StrCmp(AV12GridStateFilterValue.gxTpr_Name, "FILTERFULLTEXT") == 0 )
             {
                AV16FilterFullText = AV12GridStateFilterValue.gxTpr_Value;
@@ -2457,7 +2553,27 @@ namespace GeneXus.Programs {
                AV32TFDynamicTranslationDutch_Sel = AV12GridStateFilterValue.gxTpr_Value;
                AssignAttri("", false, "AV32TFDynamicTranslationDutch_Sel", AV32TFDynamicTranslationDutch_Sel);
             }
-            AV56GXV1 = (int)(AV56GXV1+1);
+            else if ( StringUtil.StrCmp(AV12GridStateFilterValue.gxTpr_Name, "TFDYNAMICTRANSLATIONENGLISHPUBLISHED") == 0 )
+            {
+               AV46TFDynamicTranslationEnglishPublished = AV12GridStateFilterValue.gxTpr_Value;
+               AssignAttri("", false, "AV46TFDynamicTranslationEnglishPublished", AV46TFDynamicTranslationEnglishPublished);
+            }
+            else if ( StringUtil.StrCmp(AV12GridStateFilterValue.gxTpr_Name, "TFDYNAMICTRANSLATIONENGLISHPUBLISHED_SEL") == 0 )
+            {
+               AV47TFDynamicTranslationEnglishPublished_Sel = AV12GridStateFilterValue.gxTpr_Value;
+               AssignAttri("", false, "AV47TFDynamicTranslationEnglishPublished_Sel", AV47TFDynamicTranslationEnglishPublished_Sel);
+            }
+            else if ( StringUtil.StrCmp(AV12GridStateFilterValue.gxTpr_Name, "TFDYNAMICTRANSLATIONDUTCHPUBLISHED") == 0 )
+            {
+               AV48TFDynamicTranslationDutchPublished = AV12GridStateFilterValue.gxTpr_Value;
+               AssignAttri("", false, "AV48TFDynamicTranslationDutchPublished", AV48TFDynamicTranslationDutchPublished);
+            }
+            else if ( StringUtil.StrCmp(AV12GridStateFilterValue.gxTpr_Name, "TFDYNAMICTRANSLATIONDUTCHPUBLISHED_SEL") == 0 )
+            {
+               AV49TFDynamicTranslationDutchPublished_Sel = AV12GridStateFilterValue.gxTpr_Value;
+               AssignAttri("", false, "AV49TFDynamicTranslationDutchPublished_Sel", AV49TFDynamicTranslationDutchPublished_Sel);
+            }
+            AV64GXV1 = (int)(AV64GXV1+1);
          }
          GXt_char3 = "";
          new WorkWithPlus.workwithplus_web.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV26TFDynamicTranslationTrnName_Sel)),  AV26TFDynamicTranslationTrnName_Sel, out  GXt_char3) ;
@@ -2467,17 +2583,25 @@ namespace GeneXus.Programs {
          new WorkWithPlus.workwithplus_web.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV30TFDynamicTranslationEnglish_Sel)),  AV30TFDynamicTranslationEnglish_Sel, out  GXt_char6) ;
          GXt_char7 = "";
          new WorkWithPlus.workwithplus_web.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV32TFDynamicTranslationDutch_Sel)),  AV32TFDynamicTranslationDutch_Sel, out  GXt_char7) ;
-         Ddo_grid_Selectedvalue_set = GXt_char3+"|"+GXt_char5+"|"+GXt_char6+"|"+GXt_char7;
+         GXt_char8 = "";
+         new WorkWithPlus.workwithplus_web.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV47TFDynamicTranslationEnglishPublished_Sel)),  AV47TFDynamicTranslationEnglishPublished_Sel, out  GXt_char8) ;
+         GXt_char9 = "";
+         new WorkWithPlus.workwithplus_web.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV49TFDynamicTranslationDutchPublished_Sel)),  AV49TFDynamicTranslationDutchPublished_Sel, out  GXt_char9) ;
+         Ddo_grid_Selectedvalue_set = GXt_char3+"|"+GXt_char5+"|"+GXt_char6+"|"+GXt_char7+"|"+GXt_char8+"|"+GXt_char9;
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "SelectedValue_set", Ddo_grid_Selectedvalue_set);
+         GXt_char9 = "";
+         new WorkWithPlus.workwithplus_web.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV25TFDynamicTranslationTrnName)),  AV25TFDynamicTranslationTrnName, out  GXt_char9) ;
+         GXt_char8 = "";
+         new WorkWithPlus.workwithplus_web.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV27TFDynamicTranslationAttributeName)),  AV27TFDynamicTranslationAttributeName, out  GXt_char8) ;
          GXt_char7 = "";
-         new WorkWithPlus.workwithplus_web.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV25TFDynamicTranslationTrnName)),  AV25TFDynamicTranslationTrnName, out  GXt_char7) ;
+         new WorkWithPlus.workwithplus_web.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV29TFDynamicTranslationEnglish)),  AV29TFDynamicTranslationEnglish, out  GXt_char7) ;
          GXt_char6 = "";
-         new WorkWithPlus.workwithplus_web.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV27TFDynamicTranslationAttributeName)),  AV27TFDynamicTranslationAttributeName, out  GXt_char6) ;
+         new WorkWithPlus.workwithplus_web.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV31TFDynamicTranslationDutch)),  AV31TFDynamicTranslationDutch, out  GXt_char6) ;
          GXt_char5 = "";
-         new WorkWithPlus.workwithplus_web.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV29TFDynamicTranslationEnglish)),  AV29TFDynamicTranslationEnglish, out  GXt_char5) ;
+         new WorkWithPlus.workwithplus_web.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV46TFDynamicTranslationEnglishPublished)),  AV46TFDynamicTranslationEnglishPublished, out  GXt_char5) ;
          GXt_char3 = "";
-         new WorkWithPlus.workwithplus_web.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV31TFDynamicTranslationDutch)),  AV31TFDynamicTranslationDutch, out  GXt_char3) ;
-         Ddo_grid_Filteredtext_set = GXt_char7+"|"+GXt_char6+"|"+GXt_char5+"|"+GXt_char3;
+         new WorkWithPlus.workwithplus_web.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV48TFDynamicTranslationDutchPublished)),  AV48TFDynamicTranslationDutchPublished, out  GXt_char3) ;
+         Ddo_grid_Filteredtext_set = GXt_char9+"|"+GXt_char8+"|"+GXt_char7+"|"+GXt_char6+"|"+GXt_char5+"|"+GXt_char3;
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "FilteredText_set", Ddo_grid_Filteredtext_set);
       }
 
@@ -2485,7 +2609,7 @@ namespace GeneXus.Programs {
       {
          /* 'SAVEGRIDSTATE' Routine */
          returnInSub = false;
-         AV11GridState.FromXml(AV21Session.Get(AV46Pgmname+"GridState"), null, "", "");
+         AV11GridState.FromXml(AV21Session.Get(AV50Pgmname+"GridState"), null, "", "");
          AV11GridState.gxTpr_Orderedby = AV13OrderedBy;
          AV11GridState.gxTpr_Ordereddsc = AV14OrderedDsc;
          AV11GridState.gxTpr_Filtervalues.Clear();
@@ -2494,9 +2618,11 @@ namespace GeneXus.Programs {
          new WorkWithPlus.workwithplus_web.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV11GridState,  "TFDYNAMICTRANSLATIONATTRIBUTENAME",  context.GetMessage( "Attribute Name", ""),  !String.IsNullOrEmpty(StringUtil.RTrim( AV27TFDynamicTranslationAttributeName)),  0,  AV27TFDynamicTranslationAttributeName,  AV27TFDynamicTranslationAttributeName,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV28TFDynamicTranslationAttributeName_Sel)),  AV28TFDynamicTranslationAttributeName_Sel,  AV28TFDynamicTranslationAttributeName_Sel) ;
          new WorkWithPlus.workwithplus_web.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV11GridState,  "TFDYNAMICTRANSLATIONENGLISH",  context.GetMessage( "Translation English", ""),  !String.IsNullOrEmpty(StringUtil.RTrim( AV29TFDynamicTranslationEnglish)),  0,  AV29TFDynamicTranslationEnglish,  AV29TFDynamicTranslationEnglish,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV30TFDynamicTranslationEnglish_Sel)),  AV30TFDynamicTranslationEnglish_Sel,  AV30TFDynamicTranslationEnglish_Sel) ;
          new WorkWithPlus.workwithplus_web.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV11GridState,  "TFDYNAMICTRANSLATIONDUTCH",  context.GetMessage( "Translation Dutch", ""),  !String.IsNullOrEmpty(StringUtil.RTrim( AV31TFDynamicTranslationDutch)),  0,  AV31TFDynamicTranslationDutch,  AV31TFDynamicTranslationDutch,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV32TFDynamicTranslationDutch_Sel)),  AV32TFDynamicTranslationDutch_Sel,  AV32TFDynamicTranslationDutch_Sel) ;
+         new WorkWithPlus.workwithplus_web.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV11GridState,  "TFDYNAMICTRANSLATIONENGLISHPUBLISHED",  context.GetMessage( "English Published", ""),  !String.IsNullOrEmpty(StringUtil.RTrim( AV46TFDynamicTranslationEnglishPublished)),  0,  AV46TFDynamicTranslationEnglishPublished,  AV46TFDynamicTranslationEnglishPublished,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV47TFDynamicTranslationEnglishPublished_Sel)),  AV47TFDynamicTranslationEnglishPublished_Sel,  AV47TFDynamicTranslationEnglishPublished_Sel) ;
+         new WorkWithPlus.workwithplus_web.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV11GridState,  "TFDYNAMICTRANSLATIONDUTCHPUBLISHED",  context.GetMessage( "Dutch Published", ""),  !String.IsNullOrEmpty(StringUtil.RTrim( AV48TFDynamicTranslationDutchPublished)),  0,  AV48TFDynamicTranslationDutchPublished,  AV48TFDynamicTranslationDutchPublished,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV49TFDynamicTranslationDutchPublished_Sel)),  AV49TFDynamicTranslationDutchPublished_Sel,  AV49TFDynamicTranslationDutchPublished_Sel) ;
          AV11GridState.gxTpr_Pagesize = StringUtil.Str( (decimal)(subGrid_Rows), 10, 0);
          AV11GridState.gxTpr_Currentpage = (short)(subGrid_fnc_Currentpage( ));
-         new WorkWithPlus.workwithplus_web.savegridstate(context ).execute(  AV46Pgmname+"GridState",  AV11GridState.ToXml(false, true, "", "")) ;
+         new WorkWithPlus.workwithplus_web.savegridstate(context ).execute(  AV50Pgmname+"GridState",  AV11GridState.ToXml(false, true, "", "")) ;
       }
 
       protected void S122( )
@@ -2504,7 +2630,7 @@ namespace GeneXus.Programs {
          /* 'PREPARETRANSACTION' Routine */
          returnInSub = false;
          AV9TrnContext = new WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext(context);
-         AV9TrnContext.gxTpr_Callerobject = AV46Pgmname;
+         AV9TrnContext.gxTpr_Callerobject = AV50Pgmname;
          AV9TrnContext.gxTpr_Callerondelete = true;
          AV9TrnContext.gxTpr_Callerurl = AV8HTTPRequest.ScriptName+"?"+AV8HTTPRequest.QueryString;
          AV9TrnContext.gxTpr_Transactionname = "Trn_DynamicTranslation";
@@ -2558,7 +2684,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202572132105", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025716180099", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2574,7 +2700,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("trn_dynamictranslationww.js", "?202572132107", false, true);
+         context.AddJavascriptSource("trn_dynamictranslationww.js", "?202571618013", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2603,6 +2729,8 @@ namespace GeneXus.Programs {
          edtDynamicTranslationAttributeNam_Internalname = "DYNAMICTRANSLATIONATTRIBUTENAM_"+sGXsfl_39_idx;
          edtDynamicTranslationEnglish_Internalname = "DYNAMICTRANSLATIONENGLISH_"+sGXsfl_39_idx;
          edtDynamicTranslationDutch_Internalname = "DYNAMICTRANSLATIONDUTCH_"+sGXsfl_39_idx;
+         edtDynamicTranslationEnglishPubli_Internalname = "DYNAMICTRANSLATIONENGLISHPUBLI_"+sGXsfl_39_idx;
+         edtDynamicTranslationDutchPublish_Internalname = "DYNAMICTRANSLATIONDUTCHPUBLISH_"+sGXsfl_39_idx;
          cmbavActiongroup_Internalname = "vACTIONGROUP_"+sGXsfl_39_idx;
       }
 
@@ -2614,6 +2742,8 @@ namespace GeneXus.Programs {
          edtDynamicTranslationAttributeNam_Internalname = "DYNAMICTRANSLATIONATTRIBUTENAM_"+sGXsfl_39_fel_idx;
          edtDynamicTranslationEnglish_Internalname = "DYNAMICTRANSLATIONENGLISH_"+sGXsfl_39_fel_idx;
          edtDynamicTranslationDutch_Internalname = "DYNAMICTRANSLATIONDUTCH_"+sGXsfl_39_fel_idx;
+         edtDynamicTranslationEnglishPubli_Internalname = "DYNAMICTRANSLATIONENGLISHPUBLI_"+sGXsfl_39_fel_idx;
+         edtDynamicTranslationDutchPublish_Internalname = "DYNAMICTRANSLATIONDUTCHPUBLISH_"+sGXsfl_39_fel_idx;
          cmbavActiongroup_Internalname = "vACTIONGROUP_"+sGXsfl_39_fel_idx;
       }
 
@@ -2732,9 +2862,25 @@ namespace GeneXus.Programs {
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
+               context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtDynamicTranslationEnglishPubli_Visible==0) ? "display:none;" : "")+"\">") ;
+            }
+            /* Single line edit */
+            ROClassString = "Attribute";
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtDynamicTranslationEnglishPubli_Internalname,(string)A671DynamicTranslationEnglishPubli,(string)A671DynamicTranslationEnglishPubli,(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtDynamicTranslationEnglishPubli_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(int)edtDynamicTranslationEnglishPubli_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(int)2097152,(short)0,(short)0,(short)39,(short)0,(short)0,(short)-1,(bool)true,(string)"",(string)"start",(bool)false,(string)""});
+            /* Subfile cell */
+            if ( GridContainer.GetWrapped() == 1 )
+            {
+               context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtDynamicTranslationDutchPublish_Visible==0) ? "display:none;" : "")+"\">") ;
+            }
+            /* Single line edit */
+            ROClassString = "Attribute";
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtDynamicTranslationDutchPublish_Internalname,(string)A672DynamicTranslationDutchPublish,(string)A672DynamicTranslationDutchPublish,(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtDynamicTranslationDutchPublish_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(int)edtDynamicTranslationDutchPublish_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(int)2097152,(short)0,(short)0,(short)39,(short)0,(short)0,(short)-1,(bool)true,(string)"",(string)"start",(bool)false,(string)""});
+            /* Subfile cell */
+            if ( GridContainer.GetWrapped() == 1 )
+            {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"end"+"\""+" style=\""+""+"\">") ;
             }
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 46,'',false,'" + sGXsfl_39_idx + "',39)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 48,'',false,'" + sGXsfl_39_idx + "',39)\"";
             if ( ( cmbavActiongroup.ItemCount == 0 ) && isAjaxCallMode( ) )
             {
                GXCCtl = "vACTIONGROUP_" + sGXsfl_39_idx;
@@ -2747,7 +2893,7 @@ namespace GeneXus.Programs {
                }
             }
             /* ComboBox */
-            GridRow.AddColumnProperties("combobox", 2, isAjaxCallMode( ), new Object[] {(GXCombobox)cmbavActiongroup,(string)cmbavActiongroup_Internalname,StringUtil.Trim( StringUtil.Str( (decimal)(AV41ActionGroup), 4, 0)),(short)1,(string)cmbavActiongroup_Jsonclick,(short)5,"'"+""+"'"+",false,"+"'"+"EVACTIONGROUP.CLICK."+sGXsfl_39_idx+"'",(string)"int",(string)"",(short)-1,(short)1,(short)0,(short)0,(short)0,(string)"px",(short)0,(string)"px",(string)"",(string)cmbavActiongroup_Class,(string)"WWActionGroupColumn",(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,46);\"",(string)"",(bool)true,(short)0});
+            GridRow.AddColumnProperties("combobox", 2, isAjaxCallMode( ), new Object[] {(GXCombobox)cmbavActiongroup,(string)cmbavActiongroup_Internalname,StringUtil.Trim( StringUtil.Str( (decimal)(AV41ActionGroup), 4, 0)),(short)1,(string)cmbavActiongroup_Jsonclick,(short)5,"'"+""+"'"+",false,"+"'"+"EVACTIONGROUP.CLICK."+sGXsfl_39_idx+"'",(string)"int",(string)"",(short)-1,(short)1,(short)0,(short)0,(short)0,(string)"px",(short)0,(string)"px",(string)"",(string)cmbavActiongroup_Class,(string)"WWActionGroupColumn",(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,48);\"",(string)"",(bool)true,(short)0});
             cmbavActiongroup.CurrentValue = StringUtil.Trim( StringUtil.Str( (decimal)(AV41ActionGroup), 4, 0));
             AssignProp("", false, cmbavActiongroup_Internalname, "Values", (string)(cmbavActiongroup.ToJavascriptSource()), !bGXsfl_39_Refreshing);
             send_integrity_lvl_hashesB92( ) ;
@@ -2827,6 +2973,12 @@ namespace GeneXus.Programs {
             context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((edtDynamicTranslationDutch_Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
             context.SendWebValue( context.GetMessage( "Translation Dutch", "")) ;
             context.WriteHtmlTextNl( "</th>") ;
+            context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((edtDynamicTranslationEnglishPubli_Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
+            context.SendWebValue( context.GetMessage( "English Published", "")) ;
+            context.WriteHtmlTextNl( "</th>") ;
+            context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((edtDynamicTranslationDutchPublish_Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
+            context.SendWebValue( context.GetMessage( "Dutch Published", "")) ;
+            context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlText( "<th align=\""+"end"+"\" "+" nowrap=\"nowrap\" "+" class=\""+cmbavActiongroup_Class+"\" "+" style=\""+""+""+"\" "+">") ;
             context.SendWebValue( "") ;
             context.WriteHtmlTextNl( "</th>") ;
@@ -2877,6 +3029,14 @@ namespace GeneXus.Programs {
             GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtDynamicTranslationDutch_Visible), 5, 0, ".", "")));
             GridContainer.AddColumnProperties(GridColumn);
             GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( A671DynamicTranslationEnglishPubli));
+            GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtDynamicTranslationEnglishPubli_Visible), 5, 0, ".", "")));
+            GridContainer.AddColumnProperties(GridColumn);
+            GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( A672DynamicTranslationDutchPublish));
+            GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtDynamicTranslationDutchPublish_Visible), 5, 0, ".", "")));
+            GridContainer.AddColumnProperties(GridColumn);
+            GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
             GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.LTrim( StringUtil.NToC( (decimal)(AV41ActionGroup), 4, 0, ".", ""))));
             GridColumn.AddObjectProperty("Class", StringUtil.RTrim( cmbavActiongroup_Class));
             GridContainer.AddColumnProperties(GridColumn);
@@ -2908,6 +3068,8 @@ namespace GeneXus.Programs {
          edtDynamicTranslationAttributeNam_Internalname = "DYNAMICTRANSLATIONATTRIBUTENAM";
          edtDynamicTranslationEnglish_Internalname = "DYNAMICTRANSLATIONENGLISH";
          edtDynamicTranslationDutch_Internalname = "DYNAMICTRANSLATIONDUTCH";
+         edtDynamicTranslationEnglishPubli_Internalname = "DYNAMICTRANSLATIONENGLISHPUBLI";
+         edtDynamicTranslationDutchPublish_Internalname = "DYNAMICTRANSLATIONDUTCHPUBLISH";
          cmbavActiongroup_Internalname = "vACTIONGROUP";
          Gridpaginationbar_Internalname = "GRIDPAGINATIONBAR";
          divGridtablewithpaginationbar_Internalname = "GRIDTABLEWITHPAGINATIONBAR";
@@ -2937,6 +3099,8 @@ namespace GeneXus.Programs {
          subGrid_Header = "";
          cmbavActiongroup_Jsonclick = "";
          cmbavActiongroup_Class = "ConvertToDDO";
+         edtDynamicTranslationDutchPublish_Jsonclick = "";
+         edtDynamicTranslationEnglishPubli_Jsonclick = "";
          edtDynamicTranslationDutch_Jsonclick = "";
          edtDynamicTranslationEnglish_Jsonclick = "";
          edtDynamicTranslationAttributeNam_Jsonclick = "";
@@ -2946,10 +3110,14 @@ namespace GeneXus.Programs {
          edtDynamicTranslationId_Jsonclick = "";
          subGrid_Class = "GridWithPaginationBar WorkWithSelection WorkWith";
          subGrid_Backcolorstyle = 0;
+         edtDynamicTranslationDutchPublish_Visible = -1;
+         edtDynamicTranslationEnglishPubli_Visible = -1;
          edtDynamicTranslationDutch_Visible = -1;
          edtDynamicTranslationEnglish_Visible = -1;
          edtDynamicTranslationAttributeNam_Visible = -1;
          edtDynamicTranslationTrnName_Visible = -1;
+         edtDynamicTranslationDutchPublish_Enabled = 0;
+         edtDynamicTranslationEnglishPubli_Enabled = 0;
          edtDynamicTranslationDutch_Enabled = 0;
          edtDynamicTranslationEnglish_Enabled = 0;
          edtDynamicTranslationAttributeNam_Enabled = 0;
@@ -2971,13 +3139,13 @@ namespace GeneXus.Programs {
          Ddo_gridcolumnsselector_Icon = "fas fa-cog";
          Ddo_gridcolumnsselector_Icontype = "FontIcon";
          Ddo_grid_Datalistproc = "Trn_DynamicTranslationWWGetFilterData";
-         Ddo_grid_Datalisttype = "Dynamic|Dynamic|Dynamic|Dynamic";
+         Ddo_grid_Datalisttype = "Dynamic|Dynamic|Dynamic|Dynamic|Dynamic|Dynamic";
          Ddo_grid_Includedatalist = "T";
-         Ddo_grid_Filtertype = "Character|Character|Character|Character";
+         Ddo_grid_Filtertype = "Character|Character|Character|Character|Character|Character";
          Ddo_grid_Includefilter = "T";
          Ddo_grid_Includesortasc = "T";
-         Ddo_grid_Columnssortvalues = "1|2|3|4";
-         Ddo_grid_Columnids = "1:DynamicTranslationTrnName|3:DynamicTranslationAttributeName|4:DynamicTranslationEnglish|5:DynamicTranslationDutch";
+         Ddo_grid_Columnssortvalues = "1|2|3|4|5|6";
+         Ddo_grid_Columnids = "1:DynamicTranslationTrnName|3:DynamicTranslationAttributeName|4:DynamicTranslationEnglish|5:DynamicTranslationDutch|6:DynamicTranslationEnglishPublished|7:DynamicTranslationDutchPublished";
          Ddo_grid_Gridinternalname = "";
          Ddc_subscriptions_Titlecontrolidtoreplace = "";
          Ddc_subscriptions_Cls = "ColumnsSelector";
@@ -3026,23 +3194,23 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV46Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV25TFDynamicTranslationTrnName","fld":"vTFDYNAMICTRANSLATIONTRNNAME"},{"av":"AV26TFDynamicTranslationTrnName_Sel","fld":"vTFDYNAMICTRANSLATIONTRNNAME_SEL"},{"av":"AV27TFDynamicTranslationAttributeName","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME"},{"av":"AV28TFDynamicTranslationAttributeName_Sel","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME_SEL"},{"av":"AV29TFDynamicTranslationEnglish","fld":"vTFDYNAMICTRANSLATIONENGLISH"},{"av":"AV30TFDynamicTranslationEnglish_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISH_SEL"},{"av":"AV31TFDynamicTranslationDutch","fld":"vTFDYNAMICTRANSLATIONDUTCH"},{"av":"AV32TFDynamicTranslationDutch_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCH_SEL"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV40IsAuthorized_DynamicTranslationTrnName","fld":"vISAUTHORIZED_DYNAMICTRANSLATIONTRNNAME","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true}]""");
-         setEventMetadata("REFRESH",""","oparms":[{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtDynamicTranslationTrnName_Visible","ctrl":"DYNAMICTRANSLATIONTRNNAME","prop":"Visible"},{"av":"edtDynamicTranslationAttributeNam_Visible","ctrl":"DYNAMICTRANSLATIONATTRIBUTENAM","prop":"Visible"},{"av":"edtDynamicTranslationEnglish_Visible","ctrl":"DYNAMICTRANSLATIONENGLISH","prop":"Visible"},{"av":"edtDynamicTranslationDutch_Visible","ctrl":"DYNAMICTRANSLATIONDUTCH","prop":"Visible"},{"av":"AV37GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV38GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV39GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"ctrl":"BTNSUBSCRIPTIONS","prop":"Visible"},{"av":"AV22ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV11GridState","fld":"vGRIDSTATE"}]}""");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","""{"handler":"E12B92","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV46Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV25TFDynamicTranslationTrnName","fld":"vTFDYNAMICTRANSLATIONTRNNAME"},{"av":"AV26TFDynamicTranslationTrnName_Sel","fld":"vTFDYNAMICTRANSLATIONTRNNAME_SEL"},{"av":"AV27TFDynamicTranslationAttributeName","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME"},{"av":"AV28TFDynamicTranslationAttributeName_Sel","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME_SEL"},{"av":"AV29TFDynamicTranslationEnglish","fld":"vTFDYNAMICTRANSLATIONENGLISH"},{"av":"AV30TFDynamicTranslationEnglish_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISH_SEL"},{"av":"AV31TFDynamicTranslationDutch","fld":"vTFDYNAMICTRANSLATIONDUTCH"},{"av":"AV32TFDynamicTranslationDutch_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCH_SEL"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV40IsAuthorized_DynamicTranslationTrnName","fld":"vISAUTHORIZED_DYNAMICTRANSLATIONTRNNAME","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Gridpaginationbar_Selectedpage","ctrl":"GRIDPAGINATIONBAR","prop":"SelectedPage"}]}""");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","""{"handler":"E13B92","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV46Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV25TFDynamicTranslationTrnName","fld":"vTFDYNAMICTRANSLATIONTRNNAME"},{"av":"AV26TFDynamicTranslationTrnName_Sel","fld":"vTFDYNAMICTRANSLATIONTRNNAME_SEL"},{"av":"AV27TFDynamicTranslationAttributeName","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME"},{"av":"AV28TFDynamicTranslationAttributeName_Sel","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME_SEL"},{"av":"AV29TFDynamicTranslationEnglish","fld":"vTFDYNAMICTRANSLATIONENGLISH"},{"av":"AV30TFDynamicTranslationEnglish_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISH_SEL"},{"av":"AV31TFDynamicTranslationDutch","fld":"vTFDYNAMICTRANSLATIONDUTCH"},{"av":"AV32TFDynamicTranslationDutch_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCH_SEL"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV40IsAuthorized_DynamicTranslationTrnName","fld":"vISAUTHORIZED_DYNAMICTRANSLATIONTRNNAME","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Gridpaginationbar_Rowsperpageselectedvalue","ctrl":"GRIDPAGINATIONBAR","prop":"RowsPerPageSelectedValue"}]""");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV50Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV25TFDynamicTranslationTrnName","fld":"vTFDYNAMICTRANSLATIONTRNNAME"},{"av":"AV26TFDynamicTranslationTrnName_Sel","fld":"vTFDYNAMICTRANSLATIONTRNNAME_SEL"},{"av":"AV27TFDynamicTranslationAttributeName","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME"},{"av":"AV28TFDynamicTranslationAttributeName_Sel","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME_SEL"},{"av":"AV29TFDynamicTranslationEnglish","fld":"vTFDYNAMICTRANSLATIONENGLISH"},{"av":"AV30TFDynamicTranslationEnglish_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISH_SEL"},{"av":"AV31TFDynamicTranslationDutch","fld":"vTFDYNAMICTRANSLATIONDUTCH"},{"av":"AV32TFDynamicTranslationDutch_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCH_SEL"},{"av":"AV46TFDynamicTranslationEnglishPublished","fld":"vTFDYNAMICTRANSLATIONENGLISHPUBLISHED"},{"av":"AV47TFDynamicTranslationEnglishPublished_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISHPUBLISHED_SEL"},{"av":"AV48TFDynamicTranslationDutchPublished","fld":"vTFDYNAMICTRANSLATIONDUTCHPUBLISHED"},{"av":"AV49TFDynamicTranslationDutchPublished_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCHPUBLISHED_SEL"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV40IsAuthorized_DynamicTranslationTrnName","fld":"vISAUTHORIZED_DYNAMICTRANSLATIONTRNNAME","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true}]""");
+         setEventMetadata("REFRESH",""","oparms":[{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtDynamicTranslationTrnName_Visible","ctrl":"DYNAMICTRANSLATIONTRNNAME","prop":"Visible"},{"av":"edtDynamicTranslationAttributeNam_Visible","ctrl":"DYNAMICTRANSLATIONATTRIBUTENAM","prop":"Visible"},{"av":"edtDynamicTranslationEnglish_Visible","ctrl":"DYNAMICTRANSLATIONENGLISH","prop":"Visible"},{"av":"edtDynamicTranslationDutch_Visible","ctrl":"DYNAMICTRANSLATIONDUTCH","prop":"Visible"},{"av":"edtDynamicTranslationEnglishPubli_Visible","ctrl":"DYNAMICTRANSLATIONENGLISHPUBLI","prop":"Visible"},{"av":"edtDynamicTranslationDutchPublish_Visible","ctrl":"DYNAMICTRANSLATIONDUTCHPUBLISH","prop":"Visible"},{"av":"AV37GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV38GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV39GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"ctrl":"BTNSUBSCRIPTIONS","prop":"Visible"},{"av":"AV22ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV11GridState","fld":"vGRIDSTATE"}]}""");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","""{"handler":"E12B92","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV50Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV25TFDynamicTranslationTrnName","fld":"vTFDYNAMICTRANSLATIONTRNNAME"},{"av":"AV26TFDynamicTranslationTrnName_Sel","fld":"vTFDYNAMICTRANSLATIONTRNNAME_SEL"},{"av":"AV27TFDynamicTranslationAttributeName","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME"},{"av":"AV28TFDynamicTranslationAttributeName_Sel","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME_SEL"},{"av":"AV29TFDynamicTranslationEnglish","fld":"vTFDYNAMICTRANSLATIONENGLISH"},{"av":"AV30TFDynamicTranslationEnglish_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISH_SEL"},{"av":"AV31TFDynamicTranslationDutch","fld":"vTFDYNAMICTRANSLATIONDUTCH"},{"av":"AV32TFDynamicTranslationDutch_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCH_SEL"},{"av":"AV46TFDynamicTranslationEnglishPublished","fld":"vTFDYNAMICTRANSLATIONENGLISHPUBLISHED"},{"av":"AV47TFDynamicTranslationEnglishPublished_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISHPUBLISHED_SEL"},{"av":"AV48TFDynamicTranslationDutchPublished","fld":"vTFDYNAMICTRANSLATIONDUTCHPUBLISHED"},{"av":"AV49TFDynamicTranslationDutchPublished_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCHPUBLISHED_SEL"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV40IsAuthorized_DynamicTranslationTrnName","fld":"vISAUTHORIZED_DYNAMICTRANSLATIONTRNNAME","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Gridpaginationbar_Selectedpage","ctrl":"GRIDPAGINATIONBAR","prop":"SelectedPage"}]}""");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","""{"handler":"E13B92","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV50Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV25TFDynamicTranslationTrnName","fld":"vTFDYNAMICTRANSLATIONTRNNAME"},{"av":"AV26TFDynamicTranslationTrnName_Sel","fld":"vTFDYNAMICTRANSLATIONTRNNAME_SEL"},{"av":"AV27TFDynamicTranslationAttributeName","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME"},{"av":"AV28TFDynamicTranslationAttributeName_Sel","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME_SEL"},{"av":"AV29TFDynamicTranslationEnglish","fld":"vTFDYNAMICTRANSLATIONENGLISH"},{"av":"AV30TFDynamicTranslationEnglish_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISH_SEL"},{"av":"AV31TFDynamicTranslationDutch","fld":"vTFDYNAMICTRANSLATIONDUTCH"},{"av":"AV32TFDynamicTranslationDutch_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCH_SEL"},{"av":"AV46TFDynamicTranslationEnglishPublished","fld":"vTFDYNAMICTRANSLATIONENGLISHPUBLISHED"},{"av":"AV47TFDynamicTranslationEnglishPublished_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISHPUBLISHED_SEL"},{"av":"AV48TFDynamicTranslationDutchPublished","fld":"vTFDYNAMICTRANSLATIONDUTCHPUBLISHED"},{"av":"AV49TFDynamicTranslationDutchPublished_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCHPUBLISHED_SEL"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV40IsAuthorized_DynamicTranslationTrnName","fld":"vISAUTHORIZED_DYNAMICTRANSLATIONTRNNAME","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Gridpaginationbar_Rowsperpageselectedvalue","ctrl":"GRIDPAGINATIONBAR","prop":"RowsPerPageSelectedValue"}]""");
          setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE",""","oparms":[{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"}]}""");
-         setEventMetadata("DDO_GRID.ONOPTIONCLICKED","""{"handler":"E15B92","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV46Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV25TFDynamicTranslationTrnName","fld":"vTFDYNAMICTRANSLATIONTRNNAME"},{"av":"AV26TFDynamicTranslationTrnName_Sel","fld":"vTFDYNAMICTRANSLATIONTRNNAME_SEL"},{"av":"AV27TFDynamicTranslationAttributeName","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME"},{"av":"AV28TFDynamicTranslationAttributeName_Sel","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME_SEL"},{"av":"AV29TFDynamicTranslationEnglish","fld":"vTFDYNAMICTRANSLATIONENGLISH"},{"av":"AV30TFDynamicTranslationEnglish_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISH_SEL"},{"av":"AV31TFDynamicTranslationDutch","fld":"vTFDYNAMICTRANSLATIONDUTCH"},{"av":"AV32TFDynamicTranslationDutch_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCH_SEL"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV40IsAuthorized_DynamicTranslationTrnName","fld":"vISAUTHORIZED_DYNAMICTRANSLATIONTRNNAME","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Ddo_grid_Activeeventkey","ctrl":"DDO_GRID","prop":"ActiveEventKey"},{"av":"Ddo_grid_Selectedvalue_get","ctrl":"DDO_GRID","prop":"SelectedValue_get"},{"av":"Ddo_grid_Selectedcolumn","ctrl":"DDO_GRID","prop":"SelectedColumn"},{"av":"Ddo_grid_Filteredtext_get","ctrl":"DDO_GRID","prop":"FilteredText_get"}]""");
-         setEventMetadata("DDO_GRID.ONOPTIONCLICKED",""","oparms":[{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV25TFDynamicTranslationTrnName","fld":"vTFDYNAMICTRANSLATIONTRNNAME"},{"av":"AV26TFDynamicTranslationTrnName_Sel","fld":"vTFDYNAMICTRANSLATIONTRNNAME_SEL"},{"av":"AV27TFDynamicTranslationAttributeName","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME"},{"av":"AV28TFDynamicTranslationAttributeName_Sel","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME_SEL"},{"av":"AV29TFDynamicTranslationEnglish","fld":"vTFDYNAMICTRANSLATIONENGLISH"},{"av":"AV30TFDynamicTranslationEnglish_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISH_SEL"},{"av":"AV31TFDynamicTranslationDutch","fld":"vTFDYNAMICTRANSLATIONDUTCH"},{"av":"AV32TFDynamicTranslationDutch_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCH_SEL"},{"av":"Ddo_grid_Sortedstatus","ctrl":"DDO_GRID","prop":"SortedStatus"}]}""");
+         setEventMetadata("DDO_GRID.ONOPTIONCLICKED","""{"handler":"E15B92","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV50Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV25TFDynamicTranslationTrnName","fld":"vTFDYNAMICTRANSLATIONTRNNAME"},{"av":"AV26TFDynamicTranslationTrnName_Sel","fld":"vTFDYNAMICTRANSLATIONTRNNAME_SEL"},{"av":"AV27TFDynamicTranslationAttributeName","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME"},{"av":"AV28TFDynamicTranslationAttributeName_Sel","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME_SEL"},{"av":"AV29TFDynamicTranslationEnglish","fld":"vTFDYNAMICTRANSLATIONENGLISH"},{"av":"AV30TFDynamicTranslationEnglish_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISH_SEL"},{"av":"AV31TFDynamicTranslationDutch","fld":"vTFDYNAMICTRANSLATIONDUTCH"},{"av":"AV32TFDynamicTranslationDutch_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCH_SEL"},{"av":"AV46TFDynamicTranslationEnglishPublished","fld":"vTFDYNAMICTRANSLATIONENGLISHPUBLISHED"},{"av":"AV47TFDynamicTranslationEnglishPublished_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISHPUBLISHED_SEL"},{"av":"AV48TFDynamicTranslationDutchPublished","fld":"vTFDYNAMICTRANSLATIONDUTCHPUBLISHED"},{"av":"AV49TFDynamicTranslationDutchPublished_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCHPUBLISHED_SEL"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV40IsAuthorized_DynamicTranslationTrnName","fld":"vISAUTHORIZED_DYNAMICTRANSLATIONTRNNAME","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Ddo_grid_Activeeventkey","ctrl":"DDO_GRID","prop":"ActiveEventKey"},{"av":"Ddo_grid_Selectedvalue_get","ctrl":"DDO_GRID","prop":"SelectedValue_get"},{"av":"Ddo_grid_Filteredtext_get","ctrl":"DDO_GRID","prop":"FilteredText_get"},{"av":"Ddo_grid_Selectedcolumn","ctrl":"DDO_GRID","prop":"SelectedColumn"}]""");
+         setEventMetadata("DDO_GRID.ONOPTIONCLICKED",""","oparms":[{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV48TFDynamicTranslationDutchPublished","fld":"vTFDYNAMICTRANSLATIONDUTCHPUBLISHED"},{"av":"AV49TFDynamicTranslationDutchPublished_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCHPUBLISHED_SEL"},{"av":"AV46TFDynamicTranslationEnglishPublished","fld":"vTFDYNAMICTRANSLATIONENGLISHPUBLISHED"},{"av":"AV47TFDynamicTranslationEnglishPublished_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISHPUBLISHED_SEL"},{"av":"AV31TFDynamicTranslationDutch","fld":"vTFDYNAMICTRANSLATIONDUTCH"},{"av":"AV32TFDynamicTranslationDutch_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCH_SEL"},{"av":"AV29TFDynamicTranslationEnglish","fld":"vTFDYNAMICTRANSLATIONENGLISH"},{"av":"AV30TFDynamicTranslationEnglish_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISH_SEL"},{"av":"AV27TFDynamicTranslationAttributeName","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME"},{"av":"AV28TFDynamicTranslationAttributeName_Sel","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME_SEL"},{"av":"AV25TFDynamicTranslationTrnName","fld":"vTFDYNAMICTRANSLATIONTRNNAME"},{"av":"AV26TFDynamicTranslationTrnName_Sel","fld":"vTFDYNAMICTRANSLATIONTRNNAME_SEL"},{"av":"Ddo_grid_Sortedstatus","ctrl":"DDO_GRID","prop":"SortedStatus"}]}""");
          setEventMetadata("GRID.LOAD","""{"handler":"E20B92","iparms":[{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV40IsAuthorized_DynamicTranslationTrnName","fld":"vISAUTHORIZED_DYNAMICTRANSLATIONTRNNAME","hsh":true},{"av":"A578DynamicTranslationId","fld":"DYNAMICTRANSLATIONID","hsh":true}]""");
          setEventMetadata("GRID.LOAD",""","oparms":[{"av":"cmbavActiongroup"},{"av":"AV41ActionGroup","fld":"vACTIONGROUP","pic":"ZZZ9"},{"av":"edtDynamicTranslationTrnName_Link","ctrl":"DYNAMICTRANSLATIONTRNNAME","prop":"Link"}]}""");
-         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED","""{"handler":"E16B92","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV46Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV25TFDynamicTranslationTrnName","fld":"vTFDYNAMICTRANSLATIONTRNNAME"},{"av":"AV26TFDynamicTranslationTrnName_Sel","fld":"vTFDYNAMICTRANSLATIONTRNNAME_SEL"},{"av":"AV27TFDynamicTranslationAttributeName","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME"},{"av":"AV28TFDynamicTranslationAttributeName_Sel","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME_SEL"},{"av":"AV29TFDynamicTranslationEnglish","fld":"vTFDYNAMICTRANSLATIONENGLISH"},{"av":"AV30TFDynamicTranslationEnglish_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISH_SEL"},{"av":"AV31TFDynamicTranslationDutch","fld":"vTFDYNAMICTRANSLATIONDUTCH"},{"av":"AV32TFDynamicTranslationDutch_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCH_SEL"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV40IsAuthorized_DynamicTranslationTrnName","fld":"vISAUTHORIZED_DYNAMICTRANSLATIONTRNNAME","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Ddo_gridcolumnsselector_Columnsselectorvalues","ctrl":"DDO_GRIDCOLUMNSSELECTOR","prop":"ColumnsSelectorValues"}]""");
-         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED",""","oparms":[{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"edtDynamicTranslationTrnName_Visible","ctrl":"DYNAMICTRANSLATIONTRNNAME","prop":"Visible"},{"av":"edtDynamicTranslationAttributeNam_Visible","ctrl":"DYNAMICTRANSLATIONATTRIBUTENAM","prop":"Visible"},{"av":"edtDynamicTranslationEnglish_Visible","ctrl":"DYNAMICTRANSLATIONENGLISH","prop":"Visible"},{"av":"edtDynamicTranslationDutch_Visible","ctrl":"DYNAMICTRANSLATIONDUTCH","prop":"Visible"},{"av":"AV37GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV38GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV39GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"ctrl":"BTNSUBSCRIPTIONS","prop":"Visible"},{"av":"AV22ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV11GridState","fld":"vGRIDSTATE"}]}""");
-         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED","""{"handler":"E11B92","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV46Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV25TFDynamicTranslationTrnName","fld":"vTFDYNAMICTRANSLATIONTRNNAME"},{"av":"AV26TFDynamicTranslationTrnName_Sel","fld":"vTFDYNAMICTRANSLATIONTRNNAME_SEL"},{"av":"AV27TFDynamicTranslationAttributeName","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME"},{"av":"AV28TFDynamicTranslationAttributeName_Sel","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME_SEL"},{"av":"AV29TFDynamicTranslationEnglish","fld":"vTFDYNAMICTRANSLATIONENGLISH"},{"av":"AV30TFDynamicTranslationEnglish_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISH_SEL"},{"av":"AV31TFDynamicTranslationDutch","fld":"vTFDYNAMICTRANSLATIONDUTCH"},{"av":"AV32TFDynamicTranslationDutch_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCH_SEL"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV40IsAuthorized_DynamicTranslationTrnName","fld":"vISAUTHORIZED_DYNAMICTRANSLATIONTRNNAME","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Ddo_managefilters_Activeeventkey","ctrl":"DDO_MANAGEFILTERS","prop":"ActiveEventKey"},{"av":"AV11GridState","fld":"vGRIDSTATE"}]""");
-         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",""","oparms":[{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV11GridState","fld":"vGRIDSTATE"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV25TFDynamicTranslationTrnName","fld":"vTFDYNAMICTRANSLATIONTRNNAME"},{"av":"AV26TFDynamicTranslationTrnName_Sel","fld":"vTFDYNAMICTRANSLATIONTRNNAME_SEL"},{"av":"AV27TFDynamicTranslationAttributeName","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME"},{"av":"AV28TFDynamicTranslationAttributeName_Sel","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME_SEL"},{"av":"AV29TFDynamicTranslationEnglish","fld":"vTFDYNAMICTRANSLATIONENGLISH"},{"av":"AV30TFDynamicTranslationEnglish_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISH_SEL"},{"av":"AV31TFDynamicTranslationDutch","fld":"vTFDYNAMICTRANSLATIONDUTCH"},{"av":"AV32TFDynamicTranslationDutch_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCH_SEL"},{"av":"Ddo_grid_Selectedvalue_set","ctrl":"DDO_GRID","prop":"SelectedValue_set"},{"av":"Ddo_grid_Filteredtext_set","ctrl":"DDO_GRID","prop":"FilteredText_set"},{"av":"Ddo_grid_Sortedstatus","ctrl":"DDO_GRID","prop":"SortedStatus"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtDynamicTranslationTrnName_Visible","ctrl":"DYNAMICTRANSLATIONTRNNAME","prop":"Visible"},{"av":"edtDynamicTranslationAttributeNam_Visible","ctrl":"DYNAMICTRANSLATIONATTRIBUTENAM","prop":"Visible"},{"av":"edtDynamicTranslationEnglish_Visible","ctrl":"DYNAMICTRANSLATIONENGLISH","prop":"Visible"},{"av":"edtDynamicTranslationDutch_Visible","ctrl":"DYNAMICTRANSLATIONDUTCH","prop":"Visible"},{"av":"AV37GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV38GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV39GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"ctrl":"BTNSUBSCRIPTIONS","prop":"Visible"},{"av":"AV22ManageFiltersData","fld":"vMANAGEFILTERSDATA"}]}""");
-         setEventMetadata("VACTIONGROUP.CLICK","""{"handler":"E21B92","iparms":[{"av":"cmbavActiongroup"},{"av":"AV41ActionGroup","fld":"vACTIONGROUP","pic":"ZZZ9"},{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV46Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV25TFDynamicTranslationTrnName","fld":"vTFDYNAMICTRANSLATIONTRNNAME"},{"av":"AV26TFDynamicTranslationTrnName_Sel","fld":"vTFDYNAMICTRANSLATIONTRNNAME_SEL"},{"av":"AV27TFDynamicTranslationAttributeName","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME"},{"av":"AV28TFDynamicTranslationAttributeName_Sel","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME_SEL"},{"av":"AV29TFDynamicTranslationEnglish","fld":"vTFDYNAMICTRANSLATIONENGLISH"},{"av":"AV30TFDynamicTranslationEnglish_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISH_SEL"},{"av":"AV31TFDynamicTranslationDutch","fld":"vTFDYNAMICTRANSLATIONDUTCH"},{"av":"AV32TFDynamicTranslationDutch_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCH_SEL"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV40IsAuthorized_DynamicTranslationTrnName","fld":"vISAUTHORIZED_DYNAMICTRANSLATIONTRNNAME","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"A578DynamicTranslationId","fld":"DYNAMICTRANSLATIONID","hsh":true}]""");
-         setEventMetadata("VACTIONGROUP.CLICK",""","oparms":[{"av":"cmbavActiongroup"},{"av":"AV41ActionGroup","fld":"vACTIONGROUP","pic":"ZZZ9"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtDynamicTranslationTrnName_Visible","ctrl":"DYNAMICTRANSLATIONTRNNAME","prop":"Visible"},{"av":"edtDynamicTranslationAttributeNam_Visible","ctrl":"DYNAMICTRANSLATIONATTRIBUTENAM","prop":"Visible"},{"av":"edtDynamicTranslationEnglish_Visible","ctrl":"DYNAMICTRANSLATIONENGLISH","prop":"Visible"},{"av":"edtDynamicTranslationDutch_Visible","ctrl":"DYNAMICTRANSLATIONDUTCH","prop":"Visible"},{"av":"AV37GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV38GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV39GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"ctrl":"BTNSUBSCRIPTIONS","prop":"Visible"},{"av":"AV22ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV11GridState","fld":"vGRIDSTATE"}]}""");
-         setEventMetadata("'DOINSERT'","""{"handler":"E17B92","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV46Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV25TFDynamicTranslationTrnName","fld":"vTFDYNAMICTRANSLATIONTRNNAME"},{"av":"AV26TFDynamicTranslationTrnName_Sel","fld":"vTFDYNAMICTRANSLATIONTRNNAME_SEL"},{"av":"AV27TFDynamicTranslationAttributeName","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME"},{"av":"AV28TFDynamicTranslationAttributeName_Sel","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME_SEL"},{"av":"AV29TFDynamicTranslationEnglish","fld":"vTFDYNAMICTRANSLATIONENGLISH"},{"av":"AV30TFDynamicTranslationEnglish_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISH_SEL"},{"av":"AV31TFDynamicTranslationDutch","fld":"vTFDYNAMICTRANSLATIONDUTCH"},{"av":"AV32TFDynamicTranslationDutch_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCH_SEL"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV40IsAuthorized_DynamicTranslationTrnName","fld":"vISAUTHORIZED_DYNAMICTRANSLATIONTRNNAME","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"A578DynamicTranslationId","fld":"DYNAMICTRANSLATIONID","hsh":true}]""");
-         setEventMetadata("'DOINSERT'",""","oparms":[{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtDynamicTranslationTrnName_Visible","ctrl":"DYNAMICTRANSLATIONTRNNAME","prop":"Visible"},{"av":"edtDynamicTranslationAttributeNam_Visible","ctrl":"DYNAMICTRANSLATIONATTRIBUTENAM","prop":"Visible"},{"av":"edtDynamicTranslationEnglish_Visible","ctrl":"DYNAMICTRANSLATIONENGLISH","prop":"Visible"},{"av":"edtDynamicTranslationDutch_Visible","ctrl":"DYNAMICTRANSLATIONDUTCH","prop":"Visible"},{"av":"AV37GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV38GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV39GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"ctrl":"BTNSUBSCRIPTIONS","prop":"Visible"},{"av":"AV22ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV11GridState","fld":"vGRIDSTATE"}]}""");
+         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED","""{"handler":"E16B92","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV50Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV25TFDynamicTranslationTrnName","fld":"vTFDYNAMICTRANSLATIONTRNNAME"},{"av":"AV26TFDynamicTranslationTrnName_Sel","fld":"vTFDYNAMICTRANSLATIONTRNNAME_SEL"},{"av":"AV27TFDynamicTranslationAttributeName","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME"},{"av":"AV28TFDynamicTranslationAttributeName_Sel","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME_SEL"},{"av":"AV29TFDynamicTranslationEnglish","fld":"vTFDYNAMICTRANSLATIONENGLISH"},{"av":"AV30TFDynamicTranslationEnglish_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISH_SEL"},{"av":"AV31TFDynamicTranslationDutch","fld":"vTFDYNAMICTRANSLATIONDUTCH"},{"av":"AV32TFDynamicTranslationDutch_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCH_SEL"},{"av":"AV46TFDynamicTranslationEnglishPublished","fld":"vTFDYNAMICTRANSLATIONENGLISHPUBLISHED"},{"av":"AV47TFDynamicTranslationEnglishPublished_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISHPUBLISHED_SEL"},{"av":"AV48TFDynamicTranslationDutchPublished","fld":"vTFDYNAMICTRANSLATIONDUTCHPUBLISHED"},{"av":"AV49TFDynamicTranslationDutchPublished_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCHPUBLISHED_SEL"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV40IsAuthorized_DynamicTranslationTrnName","fld":"vISAUTHORIZED_DYNAMICTRANSLATIONTRNNAME","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Ddo_gridcolumnsselector_Columnsselectorvalues","ctrl":"DDO_GRIDCOLUMNSSELECTOR","prop":"ColumnsSelectorValues"}]""");
+         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED",""","oparms":[{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"edtDynamicTranslationTrnName_Visible","ctrl":"DYNAMICTRANSLATIONTRNNAME","prop":"Visible"},{"av":"edtDynamicTranslationAttributeNam_Visible","ctrl":"DYNAMICTRANSLATIONATTRIBUTENAM","prop":"Visible"},{"av":"edtDynamicTranslationEnglish_Visible","ctrl":"DYNAMICTRANSLATIONENGLISH","prop":"Visible"},{"av":"edtDynamicTranslationDutch_Visible","ctrl":"DYNAMICTRANSLATIONDUTCH","prop":"Visible"},{"av":"edtDynamicTranslationEnglishPubli_Visible","ctrl":"DYNAMICTRANSLATIONENGLISHPUBLI","prop":"Visible"},{"av":"edtDynamicTranslationDutchPublish_Visible","ctrl":"DYNAMICTRANSLATIONDUTCHPUBLISH","prop":"Visible"},{"av":"AV37GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV38GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV39GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"ctrl":"BTNSUBSCRIPTIONS","prop":"Visible"},{"av":"AV22ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV11GridState","fld":"vGRIDSTATE"}]}""");
+         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED","""{"handler":"E11B92","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV50Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV25TFDynamicTranslationTrnName","fld":"vTFDYNAMICTRANSLATIONTRNNAME"},{"av":"AV26TFDynamicTranslationTrnName_Sel","fld":"vTFDYNAMICTRANSLATIONTRNNAME_SEL"},{"av":"AV27TFDynamicTranslationAttributeName","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME"},{"av":"AV28TFDynamicTranslationAttributeName_Sel","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME_SEL"},{"av":"AV29TFDynamicTranslationEnglish","fld":"vTFDYNAMICTRANSLATIONENGLISH"},{"av":"AV30TFDynamicTranslationEnglish_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISH_SEL"},{"av":"AV31TFDynamicTranslationDutch","fld":"vTFDYNAMICTRANSLATIONDUTCH"},{"av":"AV32TFDynamicTranslationDutch_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCH_SEL"},{"av":"AV46TFDynamicTranslationEnglishPublished","fld":"vTFDYNAMICTRANSLATIONENGLISHPUBLISHED"},{"av":"AV47TFDynamicTranslationEnglishPublished_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISHPUBLISHED_SEL"},{"av":"AV48TFDynamicTranslationDutchPublished","fld":"vTFDYNAMICTRANSLATIONDUTCHPUBLISHED"},{"av":"AV49TFDynamicTranslationDutchPublished_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCHPUBLISHED_SEL"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV40IsAuthorized_DynamicTranslationTrnName","fld":"vISAUTHORIZED_DYNAMICTRANSLATIONTRNNAME","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Ddo_managefilters_Activeeventkey","ctrl":"DDO_MANAGEFILTERS","prop":"ActiveEventKey"},{"av":"AV11GridState","fld":"vGRIDSTATE"}]""");
+         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",""","oparms":[{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV11GridState","fld":"vGRIDSTATE"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV25TFDynamicTranslationTrnName","fld":"vTFDYNAMICTRANSLATIONTRNNAME"},{"av":"AV26TFDynamicTranslationTrnName_Sel","fld":"vTFDYNAMICTRANSLATIONTRNNAME_SEL"},{"av":"AV27TFDynamicTranslationAttributeName","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME"},{"av":"AV28TFDynamicTranslationAttributeName_Sel","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME_SEL"},{"av":"AV29TFDynamicTranslationEnglish","fld":"vTFDYNAMICTRANSLATIONENGLISH"},{"av":"AV30TFDynamicTranslationEnglish_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISH_SEL"},{"av":"AV31TFDynamicTranslationDutch","fld":"vTFDYNAMICTRANSLATIONDUTCH"},{"av":"AV32TFDynamicTranslationDutch_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCH_SEL"},{"av":"AV46TFDynamicTranslationEnglishPublished","fld":"vTFDYNAMICTRANSLATIONENGLISHPUBLISHED"},{"av":"AV47TFDynamicTranslationEnglishPublished_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISHPUBLISHED_SEL"},{"av":"AV48TFDynamicTranslationDutchPublished","fld":"vTFDYNAMICTRANSLATIONDUTCHPUBLISHED"},{"av":"AV49TFDynamicTranslationDutchPublished_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCHPUBLISHED_SEL"},{"av":"Ddo_grid_Selectedvalue_set","ctrl":"DDO_GRID","prop":"SelectedValue_set"},{"av":"Ddo_grid_Filteredtext_set","ctrl":"DDO_GRID","prop":"FilteredText_set"},{"av":"Ddo_grid_Sortedstatus","ctrl":"DDO_GRID","prop":"SortedStatus"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtDynamicTranslationTrnName_Visible","ctrl":"DYNAMICTRANSLATIONTRNNAME","prop":"Visible"},{"av":"edtDynamicTranslationAttributeNam_Visible","ctrl":"DYNAMICTRANSLATIONATTRIBUTENAM","prop":"Visible"},{"av":"edtDynamicTranslationEnglish_Visible","ctrl":"DYNAMICTRANSLATIONENGLISH","prop":"Visible"},{"av":"edtDynamicTranslationDutch_Visible","ctrl":"DYNAMICTRANSLATIONDUTCH","prop":"Visible"},{"av":"edtDynamicTranslationEnglishPubli_Visible","ctrl":"DYNAMICTRANSLATIONENGLISHPUBLI","prop":"Visible"},{"av":"edtDynamicTranslationDutchPublish_Visible","ctrl":"DYNAMICTRANSLATIONDUTCHPUBLISH","prop":"Visible"},{"av":"AV37GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV38GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV39GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"ctrl":"BTNSUBSCRIPTIONS","prop":"Visible"},{"av":"AV22ManageFiltersData","fld":"vMANAGEFILTERSDATA"}]}""");
+         setEventMetadata("VACTIONGROUP.CLICK","""{"handler":"E21B92","iparms":[{"av":"cmbavActiongroup"},{"av":"AV41ActionGroup","fld":"vACTIONGROUP","pic":"ZZZ9"},{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV50Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV25TFDynamicTranslationTrnName","fld":"vTFDYNAMICTRANSLATIONTRNNAME"},{"av":"AV26TFDynamicTranslationTrnName_Sel","fld":"vTFDYNAMICTRANSLATIONTRNNAME_SEL"},{"av":"AV27TFDynamicTranslationAttributeName","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME"},{"av":"AV28TFDynamicTranslationAttributeName_Sel","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME_SEL"},{"av":"AV29TFDynamicTranslationEnglish","fld":"vTFDYNAMICTRANSLATIONENGLISH"},{"av":"AV30TFDynamicTranslationEnglish_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISH_SEL"},{"av":"AV31TFDynamicTranslationDutch","fld":"vTFDYNAMICTRANSLATIONDUTCH"},{"av":"AV32TFDynamicTranslationDutch_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCH_SEL"},{"av":"AV46TFDynamicTranslationEnglishPublished","fld":"vTFDYNAMICTRANSLATIONENGLISHPUBLISHED"},{"av":"AV47TFDynamicTranslationEnglishPublished_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISHPUBLISHED_SEL"},{"av":"AV48TFDynamicTranslationDutchPublished","fld":"vTFDYNAMICTRANSLATIONDUTCHPUBLISHED"},{"av":"AV49TFDynamicTranslationDutchPublished_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCHPUBLISHED_SEL"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV40IsAuthorized_DynamicTranslationTrnName","fld":"vISAUTHORIZED_DYNAMICTRANSLATIONTRNNAME","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"A578DynamicTranslationId","fld":"DYNAMICTRANSLATIONID","hsh":true}]""");
+         setEventMetadata("VACTIONGROUP.CLICK",""","oparms":[{"av":"cmbavActiongroup"},{"av":"AV41ActionGroup","fld":"vACTIONGROUP","pic":"ZZZ9"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtDynamicTranslationTrnName_Visible","ctrl":"DYNAMICTRANSLATIONTRNNAME","prop":"Visible"},{"av":"edtDynamicTranslationAttributeNam_Visible","ctrl":"DYNAMICTRANSLATIONATTRIBUTENAM","prop":"Visible"},{"av":"edtDynamicTranslationEnglish_Visible","ctrl":"DYNAMICTRANSLATIONENGLISH","prop":"Visible"},{"av":"edtDynamicTranslationDutch_Visible","ctrl":"DYNAMICTRANSLATIONDUTCH","prop":"Visible"},{"av":"edtDynamicTranslationEnglishPubli_Visible","ctrl":"DYNAMICTRANSLATIONENGLISHPUBLI","prop":"Visible"},{"av":"edtDynamicTranslationDutchPublish_Visible","ctrl":"DYNAMICTRANSLATIONDUTCHPUBLISH","prop":"Visible"},{"av":"AV37GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV38GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV39GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"ctrl":"BTNSUBSCRIPTIONS","prop":"Visible"},{"av":"AV22ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV11GridState","fld":"vGRIDSTATE"}]}""");
+         setEventMetadata("'DOINSERT'","""{"handler":"E17B92","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV50Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV25TFDynamicTranslationTrnName","fld":"vTFDYNAMICTRANSLATIONTRNNAME"},{"av":"AV26TFDynamicTranslationTrnName_Sel","fld":"vTFDYNAMICTRANSLATIONTRNNAME_SEL"},{"av":"AV27TFDynamicTranslationAttributeName","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME"},{"av":"AV28TFDynamicTranslationAttributeName_Sel","fld":"vTFDYNAMICTRANSLATIONATTRIBUTENAME_SEL"},{"av":"AV29TFDynamicTranslationEnglish","fld":"vTFDYNAMICTRANSLATIONENGLISH"},{"av":"AV30TFDynamicTranslationEnglish_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISH_SEL"},{"av":"AV31TFDynamicTranslationDutch","fld":"vTFDYNAMICTRANSLATIONDUTCH"},{"av":"AV32TFDynamicTranslationDutch_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCH_SEL"},{"av":"AV46TFDynamicTranslationEnglishPublished","fld":"vTFDYNAMICTRANSLATIONENGLISHPUBLISHED"},{"av":"AV47TFDynamicTranslationEnglishPublished_Sel","fld":"vTFDYNAMICTRANSLATIONENGLISHPUBLISHED_SEL"},{"av":"AV48TFDynamicTranslationDutchPublished","fld":"vTFDYNAMICTRANSLATIONDUTCHPUBLISHED"},{"av":"AV49TFDynamicTranslationDutchPublished_Sel","fld":"vTFDYNAMICTRANSLATIONDUTCHPUBLISHED_SEL"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV40IsAuthorized_DynamicTranslationTrnName","fld":"vISAUTHORIZED_DYNAMICTRANSLATIONTRNNAME","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"A578DynamicTranslationId","fld":"DYNAMICTRANSLATIONID","hsh":true}]""");
+         setEventMetadata("'DOINSERT'",""","oparms":[{"av":"AV24ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV19ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtDynamicTranslationTrnName_Visible","ctrl":"DYNAMICTRANSLATIONTRNNAME","prop":"Visible"},{"av":"edtDynamicTranslationAttributeNam_Visible","ctrl":"DYNAMICTRANSLATIONATTRIBUTENAM","prop":"Visible"},{"av":"edtDynamicTranslationEnglish_Visible","ctrl":"DYNAMICTRANSLATIONENGLISH","prop":"Visible"},{"av":"edtDynamicTranslationDutch_Visible","ctrl":"DYNAMICTRANSLATIONDUTCH","prop":"Visible"},{"av":"edtDynamicTranslationEnglishPubli_Visible","ctrl":"DYNAMICTRANSLATIONENGLISHPUBLI","prop":"Visible"},{"av":"edtDynamicTranslationDutchPublish_Visible","ctrl":"DYNAMICTRANSLATIONDUTCHPUBLISH","prop":"Visible"},{"av":"AV37GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV38GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV39GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV42IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV43IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV44IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV45IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"ctrl":"BTNSUBSCRIPTIONS","prop":"Visible"},{"av":"AV22ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV11GridState","fld":"vGRIDSTATE"}]}""");
          setEventMetadata("DDC_SUBSCRIPTIONS.ONLOADCOMPONENT","""{"handler":"E14B92","iparms":[]""");
          setEventMetadata("DDC_SUBSCRIPTIONS.ONLOADCOMPONENT",""","oparms":[{"ctrl":"WWPAUX_WC"}]}""");
          setEventMetadata("NULL","""{"handler":"Validv_Actiongroup","iparms":[]}""");
@@ -3063,15 +3231,15 @@ namespace GeneXus.Programs {
          Gridpaginationbar_Selectedpage = "";
          Ddo_grid_Activeeventkey = "";
          Ddo_grid_Selectedvalue_get = "";
-         Ddo_grid_Selectedcolumn = "";
          Ddo_grid_Filteredtext_get = "";
+         Ddo_grid_Selectedcolumn = "";
          Ddo_gridcolumnsselector_Columnsselectorvalues = "";
          Ddo_managefilters_Activeeventkey = "";
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
          AV16FilterFullText = "";
          AV19ColumnsSelector = new WorkWithPlus.workwithplus_web.SdtWWPColumnsSelector(context);
-         AV46Pgmname = "";
+         AV50Pgmname = "";
          AV25TFDynamicTranslationTrnName = "";
          AV26TFDynamicTranslationTrnName_Sel = "";
          AV27TFDynamicTranslationAttributeName = "";
@@ -3080,6 +3248,10 @@ namespace GeneXus.Programs {
          AV30TFDynamicTranslationEnglish_Sel = "";
          AV31TFDynamicTranslationDutch = "";
          AV32TFDynamicTranslationDutch_Sel = "";
+         AV46TFDynamicTranslationEnglishPublished = "";
+         AV47TFDynamicTranslationEnglishPublished_Sel = "";
+         AV48TFDynamicTranslationDutchPublished = "";
+         AV49TFDynamicTranslationDutchPublished_Sel = "";
          sDynURL = "";
          FormProcess = "";
          bodyStyle = "";
@@ -3125,20 +3297,30 @@ namespace GeneXus.Programs {
          A581DynamicTranslationAttributeNam = "";
          A582DynamicTranslationEnglish = "";
          A583DynamicTranslationDutch = "";
-         lV47Trn_dynamictranslationwwds_1_filterfulltext = "";
-         lV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname = "";
-         lV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributename = "";
-         lV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish = "";
-         lV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch = "";
-         AV47Trn_dynamictranslationwwds_1_filterfulltext = "";
-         AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel = "";
-         AV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname = "";
-         AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel = "";
-         AV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributename = "";
-         AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel = "";
-         AV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish = "";
-         AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel = "";
-         AV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch = "";
+         A671DynamicTranslationEnglishPubli = "";
+         A672DynamicTranslationDutchPublish = "";
+         lV51Trn_dynamictranslationwwds_1_filterfulltext = "";
+         lV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname = "";
+         lV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributename = "";
+         lV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish = "";
+         lV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch = "";
+         lV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpublished = "";
+         lV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpublished = "";
+         AV51Trn_dynamictranslationwwds_1_filterfulltext = "";
+         AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel = "";
+         AV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname = "";
+         AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel = "";
+         AV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributename = "";
+         AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel = "";
+         AV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish = "";
+         AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel = "";
+         AV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch = "";
+         AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpublished_sel = "";
+         AV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpublished = "";
+         AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpublished_sel = "";
+         AV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpublished = "";
+         H00B92_A672DynamicTranslationDutchPublish = new string[] {""} ;
+         H00B92_A671DynamicTranslationEnglishPubli = new string[] {""} ;
          H00B92_A583DynamicTranslationDutch = new string[] {""} ;
          H00B92_A582DynamicTranslationEnglish = new string[] {""} ;
          H00B92_A581DynamicTranslationAttributeNam = new string[] {""} ;
@@ -3160,6 +3342,8 @@ namespace GeneXus.Programs {
          AV20ColumnsSelectorAux = new WorkWithPlus.workwithplus_web.SdtWWPColumnsSelector(context);
          GXt_objcol_SdtDVB_SDTDropDownOptionsData_Item4 = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtDVB_SDTDropDownOptionsData_Item>( context, "Item", "");
          AV12GridStateFilterValue = new WorkWithPlus.workwithplus_web.SdtWWPGridState_FilterValue(context);
+         GXt_char9 = "";
+         GXt_char8 = "";
          GXt_char7 = "";
          GXt_char6 = "";
          GXt_char5 = "";
@@ -3174,7 +3358,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.trn_dynamictranslationww__default(),
             new Object[][] {
                 new Object[] {
-               H00B92_A583DynamicTranslationDutch, H00B92_A582DynamicTranslationEnglish, H00B92_A581DynamicTranslationAttributeNam, H00B92_A580DynamicTranslationPrimaryKey, H00B92_A579DynamicTranslationTrnName, H00B92_A578DynamicTranslationId
+               H00B92_A672DynamicTranslationDutchPublish, H00B92_A671DynamicTranslationEnglishPubli, H00B92_A583DynamicTranslationDutch, H00B92_A582DynamicTranslationEnglish, H00B92_A581DynamicTranslationAttributeNam, H00B92_A580DynamicTranslationPrimaryKey, H00B92_A579DynamicTranslationTrnName, H00B92_A578DynamicTranslationId
                }
                , new Object[] {
                H00B93_AGRID_nRecordCount
@@ -3182,9 +3366,9 @@ namespace GeneXus.Programs {
             }
          );
          WebComp_Wwpaux_wc = new GeneXus.Http.GXNullWebComponent();
-         AV46Pgmname = "Trn_DynamicTranslationWW";
+         AV50Pgmname = "Trn_DynamicTranslationWW";
          /* GeneXus formulas. */
-         AV46Pgmname = "Trn_DynamicTranslationWW";
+         AV50Pgmname = "Trn_DynamicTranslationWW";
       }
 
       private short GRID_nEOF ;
@@ -3224,12 +3408,16 @@ namespace GeneXus.Programs {
       private int edtDynamicTranslationAttributeNam_Enabled ;
       private int edtDynamicTranslationEnglish_Enabled ;
       private int edtDynamicTranslationDutch_Enabled ;
+      private int edtDynamicTranslationEnglishPubli_Enabled ;
+      private int edtDynamicTranslationDutchPublish_Enabled ;
       private int edtDynamicTranslationTrnName_Visible ;
       private int edtDynamicTranslationAttributeNam_Visible ;
       private int edtDynamicTranslationEnglish_Visible ;
       private int edtDynamicTranslationDutch_Visible ;
+      private int edtDynamicTranslationEnglishPubli_Visible ;
+      private int edtDynamicTranslationDutchPublish_Visible ;
       private int AV36PageToGo ;
-      private int AV56GXV1 ;
+      private int AV64GXV1 ;
       private int idxLst ;
       private int subGrid_Backcolor ;
       private int subGrid_Allbackcolor ;
@@ -3245,14 +3433,14 @@ namespace GeneXus.Programs {
       private string Gridpaginationbar_Selectedpage ;
       private string Ddo_grid_Activeeventkey ;
       private string Ddo_grid_Selectedvalue_get ;
-      private string Ddo_grid_Selectedcolumn ;
       private string Ddo_grid_Filteredtext_get ;
+      private string Ddo_grid_Selectedcolumn ;
       private string Ddo_gridcolumnsselector_Columnsselectorvalues ;
       private string Ddo_managefilters_Activeeventkey ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string sGXsfl_39_idx="0001" ;
-      private string AV46Pgmname ;
+      private string AV50Pgmname ;
       private string sDynURL ;
       private string FormProcess ;
       private string bodyStyle ;
@@ -3344,10 +3532,14 @@ namespace GeneXus.Programs {
       private string edtDynamicTranslationAttributeNam_Internalname ;
       private string edtDynamicTranslationEnglish_Internalname ;
       private string edtDynamicTranslationDutch_Internalname ;
+      private string edtDynamicTranslationEnglishPubli_Internalname ;
+      private string edtDynamicTranslationDutchPublish_Internalname ;
       private string cmbavActiongroup_Internalname ;
       private string cmbavActiongroup_Class ;
       private string edtDynamicTranslationTrnName_Link ;
       private string GXEncryptionTmp ;
+      private string GXt_char9 ;
+      private string GXt_char8 ;
       private string GXt_char7 ;
       private string GXt_char6 ;
       private string GXt_char5 ;
@@ -3362,6 +3554,8 @@ namespace GeneXus.Programs {
       private string edtDynamicTranslationAttributeNam_Jsonclick ;
       private string edtDynamicTranslationEnglish_Jsonclick ;
       private string edtDynamicTranslationDutch_Jsonclick ;
+      private string edtDynamicTranslationEnglishPubli_Jsonclick ;
+      private string edtDynamicTranslationDutchPublish_Jsonclick ;
       private string GXCCtl ;
       private string cmbavActiongroup_Jsonclick ;
       private string subGrid_Header ;
@@ -3391,6 +3585,8 @@ namespace GeneXus.Programs {
       private bool GXt_boolean1 ;
       private string A582DynamicTranslationEnglish ;
       private string A583DynamicTranslationDutch ;
+      private string A671DynamicTranslationEnglishPubli ;
+      private string A672DynamicTranslationDutchPublish ;
       private string AV17ColumnsSelectorXML ;
       private string AV23ManageFiltersXml ;
       private string AV18UserCustomValue ;
@@ -3403,23 +3599,33 @@ namespace GeneXus.Programs {
       private string AV30TFDynamicTranslationEnglish_Sel ;
       private string AV31TFDynamicTranslationDutch ;
       private string AV32TFDynamicTranslationDutch_Sel ;
+      private string AV46TFDynamicTranslationEnglishPublished ;
+      private string AV47TFDynamicTranslationEnglishPublished_Sel ;
+      private string AV48TFDynamicTranslationDutchPublished ;
+      private string AV49TFDynamicTranslationDutchPublished_Sel ;
       private string AV39GridAppliedFilters ;
       private string A579DynamicTranslationTrnName ;
       private string A581DynamicTranslationAttributeNam ;
-      private string lV47Trn_dynamictranslationwwds_1_filterfulltext ;
-      private string lV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname ;
-      private string lV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributename ;
-      private string lV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish ;
-      private string lV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch ;
-      private string AV47Trn_dynamictranslationwwds_1_filterfulltext ;
-      private string AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel ;
-      private string AV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname ;
-      private string AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel ;
-      private string AV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributename ;
-      private string AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel ;
-      private string AV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish ;
-      private string AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel ;
-      private string AV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch ;
+      private string lV51Trn_dynamictranslationwwds_1_filterfulltext ;
+      private string lV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname ;
+      private string lV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributename ;
+      private string lV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish ;
+      private string lV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch ;
+      private string lV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpublished ;
+      private string lV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpublished ;
+      private string AV51Trn_dynamictranslationwwds_1_filterfulltext ;
+      private string AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel ;
+      private string AV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname ;
+      private string AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel ;
+      private string AV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributename ;
+      private string AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel ;
+      private string AV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish ;
+      private string AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel ;
+      private string AV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch ;
+      private string AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpublished_sel ;
+      private string AV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpublished ;
+      private string AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpublished_sel ;
+      private string AV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpublished ;
       private Guid A578DynamicTranslationId ;
       private Guid A580DynamicTranslationPrimaryKey ;
       private IGxSession AV21Session ;
@@ -3444,6 +3650,8 @@ namespace GeneXus.Programs {
       private WorkWithPlus.workwithplus_web.SdtDVB_SDTDropDownOptionsTitleSettingsIcons AV33DDO_TitleSettingsIcons ;
       private WorkWithPlus.workwithplus_web.SdtWWPGridState AV11GridState ;
       private IDataStoreProvider pr_default ;
+      private string[] H00B92_A672DynamicTranslationDutchPublish ;
+      private string[] H00B92_A671DynamicTranslationEnglishPubli ;
       private string[] H00B92_A583DynamicTranslationDutch ;
       private string[] H00B92_A582DynamicTranslationEnglish ;
       private string[] H00B92_A581DynamicTranslationAttributeNam ;
@@ -3466,122 +3674,170 @@ namespace GeneXus.Programs {
    public class trn_dynamictranslationww__default : DataStoreHelperBase, IDataStoreHelper
    {
       protected Object[] conditional_H00B92( IGxContext context ,
-                                             string AV47Trn_dynamictranslationwwds_1_filterfulltext ,
-                                             string AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel ,
-                                             string AV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname ,
-                                             string AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel ,
-                                             string AV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributename ,
-                                             string AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel ,
-                                             string AV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish ,
-                                             string AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel ,
-                                             string AV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch ,
+                                             string AV51Trn_dynamictranslationwwds_1_filterfulltext ,
+                                             string AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel ,
+                                             string AV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname ,
+                                             string AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel ,
+                                             string AV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributename ,
+                                             string AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel ,
+                                             string AV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish ,
+                                             string AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel ,
+                                             string AV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch ,
+                                             string AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpublished_sel ,
+                                             string AV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpublished ,
+                                             string AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpublished_sel ,
+                                             string AV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpublished ,
                                              string A579DynamicTranslationTrnName ,
                                              string A581DynamicTranslationAttributeNam ,
                                              string A582DynamicTranslationEnglish ,
                                              string A583DynamicTranslationDutch ,
+                                             string A671DynamicTranslationEnglishPubli ,
+                                             string A672DynamicTranslationDutchPublish ,
                                              short AV13OrderedBy ,
                                              bool AV14OrderedDsc )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
-         short[] GXv_int8 = new short[15];
-         Object[] GXv_Object9 = new Object[2];
+         short[] GXv_int10 = new short[21];
+         Object[] GXv_Object11 = new Object[2];
          string sSelectString;
          string sFromString;
          string sOrderString;
-         sSelectString = " DynamicTranslationDutch, DynamicTranslationEnglish, DynamicTranslationAttributeNam, DynamicTranslationPrimaryKey, DynamicTranslationTrnName, DynamicTranslationId";
+         sSelectString = " DynamicTranslationDutchPublish, DynamicTranslationEnglishPubli, DynamicTranslationDutch, DynamicTranslationEnglish, DynamicTranslationAttributeNam, DynamicTranslationPrimaryKey, DynamicTranslationTrnName, DynamicTranslationId";
          sFromString = " FROM Trn_DynamicTranslation";
          sOrderString = "";
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV47Trn_dynamictranslationwwds_1_filterfulltext)) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV51Trn_dynamictranslationwwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(DynamicTranslationTrnName) like '%' || LOWER(:lV47Trn_dynamictranslationwwds_1_filterfulltext)) or ( LOWER(DynamicTranslationAttributeNam) like '%' || LOWER(:lV47Trn_dynamictranslationwwds_1_filterfulltext)) or ( LOWER(DynamicTranslationEnglish) like '%' || LOWER(:lV47Trn_dynamictranslationwwds_1_filterfulltext)) or ( LOWER(DynamicTranslationDutch) like '%' || LOWER(:lV47Trn_dynamictranslationwwds_1_filterfulltext)))");
+            AddWhere(sWhereString, "(( LOWER(DynamicTranslationTrnName) like '%' || LOWER(:lV51Trn_dynamictranslationwwds_1_filterfulltext)) or ( LOWER(DynamicTranslationAttributeNam) like '%' || LOWER(:lV51Trn_dynamictranslationwwds_1_filterfulltext)) or ( LOWER(DynamicTranslationEnglish) like '%' || LOWER(:lV51Trn_dynamictranslationwwds_1_filterfulltext)) or ( LOWER(DynamicTranslationDutch) like '%' || LOWER(:lV51Trn_dynamictranslationwwds_1_filterfulltext)) or ( LOWER(DynamicTranslationEnglishPubli) like '%' || LOWER(:lV51Trn_dynamictranslationwwds_1_filterfulltext)) or ( LOWER(DynamicTranslationDutchPublish) like '%' || LOWER(:lV51Trn_dynamictranslationwwds_1_filterfulltext)))");
          }
          else
          {
-            GXv_int8[0] = 1;
-            GXv_int8[1] = 1;
-            GXv_int8[2] = 1;
-            GXv_int8[3] = 1;
+            GXv_int10[0] = 1;
+            GXv_int10[1] = 1;
+            GXv_int10[2] = 1;
+            GXv_int10[3] = 1;
+            GXv_int10[4] = 1;
+            GXv_int10[5] = 1;
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname)) ) )
          {
-            AddWhere(sWhereString, "(DynamicTranslationTrnName like :lV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname)");
+            AddWhere(sWhereString, "(DynamicTranslationTrnName like :lV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname)");
          }
          else
          {
-            GXv_int8[4] = 1;
+            GXv_int10[6] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel)) && ! ( StringUtil.StrCmp(AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel)) && ! ( StringUtil.StrCmp(AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(DynamicTranslationTrnName = ( :AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_se))");
+            AddWhere(sWhereString, "(DynamicTranslationTrnName = ( :AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_se))");
          }
          else
          {
-            GXv_int8[5] = 1;
+            GXv_int10[7] = 1;
          }
-         if ( StringUtil.StrCmp(AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from DynamicTranslationTrnName))=0))");
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributename)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributename)) ) )
          {
-            AddWhere(sWhereString, "(DynamicTranslationAttributeNam like :lV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributen)");
+            AddWhere(sWhereString, "(DynamicTranslationAttributeNam like :lV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributen)");
          }
          else
          {
-            GXv_int8[6] = 1;
+            GXv_int10[8] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel)) && ! ( StringUtil.StrCmp(AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel)) && ! ( StringUtil.StrCmp(AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(DynamicTranslationAttributeNam = ( :AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributen))");
+            AddWhere(sWhereString, "(DynamicTranslationAttributeNam = ( :AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributen))");
          }
          else
          {
-            GXv_int8[7] = 1;
+            GXv_int10[9] = 1;
          }
-         if ( StringUtil.StrCmp(AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from DynamicTranslationAttributeNam))=0))");
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish)) ) )
          {
-            AddWhere(sWhereString, "(DynamicTranslationEnglish like :lV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish)");
+            AddWhere(sWhereString, "(DynamicTranslationEnglish like :lV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish)");
          }
          else
          {
-            GXv_int8[8] = 1;
+            GXv_int10[10] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel)) && ! ( StringUtil.StrCmp(AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel)) && ! ( StringUtil.StrCmp(AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(DynamicTranslationEnglish = ( :AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_se))");
+            AddWhere(sWhereString, "(DynamicTranslationEnglish = ( :AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_se))");
          }
          else
          {
-            GXv_int8[9] = 1;
+            GXv_int10[11] = 1;
          }
-         if ( StringUtil.StrCmp(AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from DynamicTranslationEnglish))=0))");
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch)) ) )
          {
-            AddWhere(sWhereString, "(DynamicTranslationDutch like :lV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch)");
+            AddWhere(sWhereString, "(DynamicTranslationDutch like :lV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch)");
          }
          else
          {
-            GXv_int8[10] = 1;
+            GXv_int10[12] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel)) && ! ( StringUtil.StrCmp(AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel)) && ! ( StringUtil.StrCmp(AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(DynamicTranslationDutch = ( :AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel))");
+            AddWhere(sWhereString, "(DynamicTranslationDutch = ( :AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel))");
          }
          else
          {
-            GXv_int8[11] = 1;
+            GXv_int10[13] = 1;
          }
-         if ( StringUtil.StrCmp(AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from DynamicTranslationDutch))=0))");
+         }
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpublished_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpublished)) ) )
+         {
+            AddWhere(sWhereString, "(DynamicTranslationEnglishPubli like :lV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpu)");
+         }
+         else
+         {
+            GXv_int10[14] = 1;
+         }
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpublished_sel)) && ! ( StringUtil.StrCmp(AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpublished_sel, "<#Empty#>") == 0 ) )
+         {
+            AddWhere(sWhereString, "(DynamicTranslationEnglishPubli = ( :AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpu))");
+         }
+         else
+         {
+            GXv_int10[15] = 1;
+         }
+         if ( StringUtil.StrCmp(AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpublished_sel, "<#Empty#>") == 0 )
+         {
+            AddWhere(sWhereString, "((char_length(trim(trailing ' ' from DynamicTranslationEnglishPubli))=0))");
+         }
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpublished_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpublished)) ) )
+         {
+            AddWhere(sWhereString, "(DynamicTranslationDutchPublish like :lV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpubl)");
+         }
+         else
+         {
+            GXv_int10[16] = 1;
+         }
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpublished_sel)) && ! ( StringUtil.StrCmp(AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpublished_sel, "<#Empty#>") == 0 ) )
+         {
+            AddWhere(sWhereString, "(DynamicTranslationDutchPublish = ( :AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpubl))");
+         }
+         else
+         {
+            GXv_int10[17] = 1;
+         }
+         if ( StringUtil.StrCmp(AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpublished_sel, "<#Empty#>") == 0 )
+         {
+            AddWhere(sWhereString, "((char_length(trim(trailing ' ' from DynamicTranslationDutchPublish))=0))");
          }
          if ( ( AV13OrderedBy == 1 ) && ! AV14OrderedDsc )
          {
@@ -3615,128 +3871,192 @@ namespace GeneXus.Programs {
          {
             sOrderString += " ORDER BY DynamicTranslationDutch DESC, DynamicTranslationId";
          }
+         else if ( ( AV13OrderedBy == 5 ) && ! AV14OrderedDsc )
+         {
+            sOrderString += " ORDER BY DynamicTranslationEnglishPubli, DynamicTranslationId";
+         }
+         else if ( ( AV13OrderedBy == 5 ) && ( AV14OrderedDsc ) )
+         {
+            sOrderString += " ORDER BY DynamicTranslationEnglishPubli DESC, DynamicTranslationId";
+         }
+         else if ( ( AV13OrderedBy == 6 ) && ! AV14OrderedDsc )
+         {
+            sOrderString += " ORDER BY DynamicTranslationDutchPublish, DynamicTranslationId";
+         }
+         else if ( ( AV13OrderedBy == 6 ) && ( AV14OrderedDsc ) )
+         {
+            sOrderString += " ORDER BY DynamicTranslationDutchPublish DESC, DynamicTranslationId";
+         }
          else if ( true )
          {
             sOrderString += " ORDER BY DynamicTranslationId";
          }
          scmdbuf = "SELECT " + sSelectString + sFromString + sWhereString + sOrderString + "" + " OFFSET " + ":GXPagingFrom2" + " LIMIT CASE WHEN " + ":GXPagingTo2" + " > 0 THEN " + ":GXPagingTo2" + " ELSE 1e9 END";
-         GXv_Object9[0] = scmdbuf;
-         GXv_Object9[1] = GXv_int8;
-         return GXv_Object9 ;
+         GXv_Object11[0] = scmdbuf;
+         GXv_Object11[1] = GXv_int10;
+         return GXv_Object11 ;
       }
 
       protected Object[] conditional_H00B93( IGxContext context ,
-                                             string AV47Trn_dynamictranslationwwds_1_filterfulltext ,
-                                             string AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel ,
-                                             string AV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname ,
-                                             string AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel ,
-                                             string AV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributename ,
-                                             string AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel ,
-                                             string AV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish ,
-                                             string AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel ,
-                                             string AV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch ,
+                                             string AV51Trn_dynamictranslationwwds_1_filterfulltext ,
+                                             string AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel ,
+                                             string AV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname ,
+                                             string AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel ,
+                                             string AV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributename ,
+                                             string AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel ,
+                                             string AV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish ,
+                                             string AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel ,
+                                             string AV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch ,
+                                             string AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpublished_sel ,
+                                             string AV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpublished ,
+                                             string AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpublished_sel ,
+                                             string AV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpublished ,
                                              string A579DynamicTranslationTrnName ,
                                              string A581DynamicTranslationAttributeNam ,
                                              string A582DynamicTranslationEnglish ,
                                              string A583DynamicTranslationDutch ,
+                                             string A671DynamicTranslationEnglishPubli ,
+                                             string A672DynamicTranslationDutchPublish ,
                                              short AV13OrderedBy ,
                                              bool AV14OrderedDsc )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
-         short[] GXv_int10 = new short[12];
-         Object[] GXv_Object11 = new Object[2];
+         short[] GXv_int12 = new short[18];
+         Object[] GXv_Object13 = new Object[2];
          scmdbuf = "SELECT COUNT(*) FROM Trn_DynamicTranslation";
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV47Trn_dynamictranslationwwds_1_filterfulltext)) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV51Trn_dynamictranslationwwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(DynamicTranslationTrnName) like '%' || LOWER(:lV47Trn_dynamictranslationwwds_1_filterfulltext)) or ( LOWER(DynamicTranslationAttributeNam) like '%' || LOWER(:lV47Trn_dynamictranslationwwds_1_filterfulltext)) or ( LOWER(DynamicTranslationEnglish) like '%' || LOWER(:lV47Trn_dynamictranslationwwds_1_filterfulltext)) or ( LOWER(DynamicTranslationDutch) like '%' || LOWER(:lV47Trn_dynamictranslationwwds_1_filterfulltext)))");
+            AddWhere(sWhereString, "(( LOWER(DynamicTranslationTrnName) like '%' || LOWER(:lV51Trn_dynamictranslationwwds_1_filterfulltext)) or ( LOWER(DynamicTranslationAttributeNam) like '%' || LOWER(:lV51Trn_dynamictranslationwwds_1_filterfulltext)) or ( LOWER(DynamicTranslationEnglish) like '%' || LOWER(:lV51Trn_dynamictranslationwwds_1_filterfulltext)) or ( LOWER(DynamicTranslationDutch) like '%' || LOWER(:lV51Trn_dynamictranslationwwds_1_filterfulltext)) or ( LOWER(DynamicTranslationEnglishPubli) like '%' || LOWER(:lV51Trn_dynamictranslationwwds_1_filterfulltext)) or ( LOWER(DynamicTranslationDutchPublish) like '%' || LOWER(:lV51Trn_dynamictranslationwwds_1_filterfulltext)))");
          }
          else
          {
-            GXv_int10[0] = 1;
-            GXv_int10[1] = 1;
-            GXv_int10[2] = 1;
-            GXv_int10[3] = 1;
+            GXv_int12[0] = 1;
+            GXv_int12[1] = 1;
+            GXv_int12[2] = 1;
+            GXv_int12[3] = 1;
+            GXv_int12[4] = 1;
+            GXv_int12[5] = 1;
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname)) ) )
          {
-            AddWhere(sWhereString, "(DynamicTranslationTrnName like :lV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname)");
+            AddWhere(sWhereString, "(DynamicTranslationTrnName like :lV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname)");
          }
          else
          {
-            GXv_int10[4] = 1;
+            GXv_int12[6] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel)) && ! ( StringUtil.StrCmp(AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel)) && ! ( StringUtil.StrCmp(AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(DynamicTranslationTrnName = ( :AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_se))");
+            AddWhere(sWhereString, "(DynamicTranslationTrnName = ( :AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_se))");
          }
          else
          {
-            GXv_int10[5] = 1;
+            GXv_int12[7] = 1;
          }
-         if ( StringUtil.StrCmp(AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from DynamicTranslationTrnName))=0))");
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributename)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributename)) ) )
          {
-            AddWhere(sWhereString, "(DynamicTranslationAttributeNam like :lV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributen)");
+            AddWhere(sWhereString, "(DynamicTranslationAttributeNam like :lV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributen)");
          }
          else
          {
-            GXv_int10[6] = 1;
+            GXv_int12[8] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel)) && ! ( StringUtil.StrCmp(AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel)) && ! ( StringUtil.StrCmp(AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(DynamicTranslationAttributeNam = ( :AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributen))");
+            AddWhere(sWhereString, "(DynamicTranslationAttributeNam = ( :AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributen))");
          }
          else
          {
-            GXv_int10[7] = 1;
+            GXv_int12[9] = 1;
          }
-         if ( StringUtil.StrCmp(AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributename_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from DynamicTranslationAttributeNam))=0))");
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish)) ) )
          {
-            AddWhere(sWhereString, "(DynamicTranslationEnglish like :lV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish)");
+            AddWhere(sWhereString, "(DynamicTranslationEnglish like :lV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish)");
          }
          else
          {
-            GXv_int10[8] = 1;
+            GXv_int12[10] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel)) && ! ( StringUtil.StrCmp(AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel)) && ! ( StringUtil.StrCmp(AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(DynamicTranslationEnglish = ( :AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_se))");
+            AddWhere(sWhereString, "(DynamicTranslationEnglish = ( :AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_se))");
          }
          else
          {
-            GXv_int10[9] = 1;
+            GXv_int12[11] = 1;
          }
-         if ( StringUtil.StrCmp(AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from DynamicTranslationEnglish))=0))");
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch)) ) )
          {
-            AddWhere(sWhereString, "(DynamicTranslationDutch like :lV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch)");
+            AddWhere(sWhereString, "(DynamicTranslationDutch like :lV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch)");
          }
          else
          {
-            GXv_int10[10] = 1;
+            GXv_int12[12] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel)) && ! ( StringUtil.StrCmp(AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel)) && ! ( StringUtil.StrCmp(AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(DynamicTranslationDutch = ( :AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel))");
+            AddWhere(sWhereString, "(DynamicTranslationDutch = ( :AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel))");
          }
          else
          {
-            GXv_int10[11] = 1;
+            GXv_int12[13] = 1;
          }
-         if ( StringUtil.StrCmp(AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from DynamicTranslationDutch))=0))");
+         }
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpublished_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpublished)) ) )
+         {
+            AddWhere(sWhereString, "(DynamicTranslationEnglishPubli like :lV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpu)");
+         }
+         else
+         {
+            GXv_int12[14] = 1;
+         }
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpublished_sel)) && ! ( StringUtil.StrCmp(AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpublished_sel, "<#Empty#>") == 0 ) )
+         {
+            AddWhere(sWhereString, "(DynamicTranslationEnglishPubli = ( :AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpu))");
+         }
+         else
+         {
+            GXv_int12[15] = 1;
+         }
+         if ( StringUtil.StrCmp(AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpublished_sel, "<#Empty#>") == 0 )
+         {
+            AddWhere(sWhereString, "((char_length(trim(trailing ' ' from DynamicTranslationEnglishPubli))=0))");
+         }
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpublished_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpublished)) ) )
+         {
+            AddWhere(sWhereString, "(DynamicTranslationDutchPublish like :lV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpubl)");
+         }
+         else
+         {
+            GXv_int12[16] = 1;
+         }
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpublished_sel)) && ! ( StringUtil.StrCmp(AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpublished_sel, "<#Empty#>") == 0 ) )
+         {
+            AddWhere(sWhereString, "(DynamicTranslationDutchPublish = ( :AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpubl))");
+         }
+         else
+         {
+            GXv_int12[17] = 1;
+         }
+         if ( StringUtil.StrCmp(AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpublished_sel, "<#Empty#>") == 0 )
+         {
+            AddWhere(sWhereString, "((char_length(trim(trailing ' ' from DynamicTranslationDutchPublish))=0))");
          }
          scmdbuf += sWhereString;
          if ( ( AV13OrderedBy == 1 ) && ! AV14OrderedDsc )
@@ -3771,13 +4091,29 @@ namespace GeneXus.Programs {
          {
             scmdbuf += "";
          }
+         else if ( ( AV13OrderedBy == 5 ) && ! AV14OrderedDsc )
+         {
+            scmdbuf += "";
+         }
+         else if ( ( AV13OrderedBy == 5 ) && ( AV14OrderedDsc ) )
+         {
+            scmdbuf += "";
+         }
+         else if ( ( AV13OrderedBy == 6 ) && ! AV14OrderedDsc )
+         {
+            scmdbuf += "";
+         }
+         else if ( ( AV13OrderedBy == 6 ) && ( AV14OrderedDsc ) )
+         {
+            scmdbuf += "";
+         }
          else if ( true )
          {
             scmdbuf += "";
          }
-         GXv_Object11[0] = scmdbuf;
-         GXv_Object11[1] = GXv_int10;
-         return GXv_Object11 ;
+         GXv_Object13[0] = scmdbuf;
+         GXv_Object13[1] = GXv_int12;
+         return GXv_Object13 ;
       }
 
       public override Object [] getDynamicStatement( int cursor ,
@@ -3787,9 +4123,9 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_H00B92(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (string)dynConstraints[7] , (string)dynConstraints[8] , (string)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (short)dynConstraints[13] , (bool)dynConstraints[14] );
+                     return conditional_H00B92(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (string)dynConstraints[7] , (string)dynConstraints[8] , (string)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (string)dynConstraints[13] , (string)dynConstraints[14] , (string)dynConstraints[15] , (string)dynConstraints[16] , (string)dynConstraints[17] , (string)dynConstraints[18] , (short)dynConstraints[19] , (bool)dynConstraints[20] );
                case 1 :
-                     return conditional_H00B93(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (string)dynConstraints[7] , (string)dynConstraints[8] , (string)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (short)dynConstraints[13] , (bool)dynConstraints[14] );
+                     return conditional_H00B93(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (string)dynConstraints[7] , (string)dynConstraints[8] , (string)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (string)dynConstraints[13] , (string)dynConstraints[14] , (string)dynConstraints[15] , (string)dynConstraints[16] , (string)dynConstraints[17] , (string)dynConstraints[18] , (short)dynConstraints[19] , (bool)dynConstraints[20] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -3810,36 +4146,48 @@ namespace GeneXus.Programs {
        {
           Object[] prmH00B92;
           prmH00B92 = new Object[] {
-          new ParDef("lV47Trn_dynamictranslationwwds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV47Trn_dynamictranslationwwds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV47Trn_dynamictranslationwwds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV47Trn_dynamictranslationwwds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname",GXType.VarChar,100,0) ,
-          new ParDef("AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_se",GXType.VarChar,100,0) ,
-          new ParDef("lV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributen",GXType.VarChar,100,0) ,
-          new ParDef("AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributen",GXType.VarChar,100,0) ,
-          new ParDef("lV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish",GXType.VarChar,200,0) ,
-          new ParDef("AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_se",GXType.VarChar,200,0) ,
-          new ParDef("lV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch",GXType.VarChar,200,0) ,
-          new ParDef("AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel",GXType.VarChar,200,0) ,
+          new ParDef("lV51Trn_dynamictranslationwwds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV51Trn_dynamictranslationwwds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV51Trn_dynamictranslationwwds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV51Trn_dynamictranslationwwds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV51Trn_dynamictranslationwwds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV51Trn_dynamictranslationwwds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname",GXType.VarChar,100,0) ,
+          new ParDef("AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_se",GXType.VarChar,100,0) ,
+          new ParDef("lV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributen",GXType.VarChar,100,0) ,
+          new ParDef("AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributen",GXType.VarChar,100,0) ,
+          new ParDef("lV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish",GXType.VarChar,200,0) ,
+          new ParDef("AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_se",GXType.VarChar,200,0) ,
+          new ParDef("lV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch",GXType.VarChar,200,0) ,
+          new ParDef("AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel",GXType.VarChar,200,0) ,
+          new ParDef("lV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpu",GXType.VarChar,200,0) ,
+          new ParDef("AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpu",GXType.VarChar,200,0) ,
+          new ParDef("lV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpubl",GXType.VarChar,200,0) ,
+          new ParDef("AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpubl",GXType.VarChar,200,0) ,
           new ParDef("GXPagingFrom2",GXType.Int32,9,0) ,
           new ParDef("GXPagingTo2",GXType.Int32,9,0) ,
           new ParDef("GXPagingTo2",GXType.Int32,9,0)
           };
           Object[] prmH00B93;
           prmH00B93 = new Object[] {
-          new ParDef("lV47Trn_dynamictranslationwwds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV47Trn_dynamictranslationwwds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV47Trn_dynamictranslationwwds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV47Trn_dynamictranslationwwds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV48Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname",GXType.VarChar,100,0) ,
-          new ParDef("AV49Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_se",GXType.VarChar,100,0) ,
-          new ParDef("lV50Trn_dynamictranslationwwds_4_tfdynamictranslationattributen",GXType.VarChar,100,0) ,
-          new ParDef("AV51Trn_dynamictranslationwwds_5_tfdynamictranslationattributen",GXType.VarChar,100,0) ,
-          new ParDef("lV52Trn_dynamictranslationwwds_6_tfdynamictranslationenglish",GXType.VarChar,200,0) ,
-          new ParDef("AV53Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_se",GXType.VarChar,200,0) ,
-          new ParDef("lV54Trn_dynamictranslationwwds_8_tfdynamictranslationdutch",GXType.VarChar,200,0) ,
-          new ParDef("AV55Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel",GXType.VarChar,200,0)
+          new ParDef("lV51Trn_dynamictranslationwwds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV51Trn_dynamictranslationwwds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV51Trn_dynamictranslationwwds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV51Trn_dynamictranslationwwds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV51Trn_dynamictranslationwwds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV51Trn_dynamictranslationwwds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV52Trn_dynamictranslationwwds_2_tfdynamictranslationtrnname",GXType.VarChar,100,0) ,
+          new ParDef("AV53Trn_dynamictranslationwwds_3_tfdynamictranslationtrnname_se",GXType.VarChar,100,0) ,
+          new ParDef("lV54Trn_dynamictranslationwwds_4_tfdynamictranslationattributen",GXType.VarChar,100,0) ,
+          new ParDef("AV55Trn_dynamictranslationwwds_5_tfdynamictranslationattributen",GXType.VarChar,100,0) ,
+          new ParDef("lV56Trn_dynamictranslationwwds_6_tfdynamictranslationenglish",GXType.VarChar,200,0) ,
+          new ParDef("AV57Trn_dynamictranslationwwds_7_tfdynamictranslationenglish_se",GXType.VarChar,200,0) ,
+          new ParDef("lV58Trn_dynamictranslationwwds_8_tfdynamictranslationdutch",GXType.VarChar,200,0) ,
+          new ParDef("AV59Trn_dynamictranslationwwds_9_tfdynamictranslationdutch_sel",GXType.VarChar,200,0) ,
+          new ParDef("lV60Trn_dynamictranslationwwds_10_tfdynamictranslationenglishpu",GXType.VarChar,200,0) ,
+          new ParDef("AV61Trn_dynamictranslationwwds_11_tfdynamictranslationenglishpu",GXType.VarChar,200,0) ,
+          new ParDef("lV62Trn_dynamictranslationwwds_12_tfdynamictranslationdutchpubl",GXType.VarChar,200,0) ,
+          new ParDef("AV63Trn_dynamictranslationwwds_13_tfdynamictranslationdutchpubl",GXType.VarChar,200,0)
           };
           def= new CursorDef[] {
               new CursorDef("H00B92", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00B92,11, GxCacheFrequency.OFF ,true,false )
@@ -3857,10 +4205,12 @@ namespace GeneXus.Programs {
              case 0 :
                 ((string[]) buf[0])[0] = rslt.getLongVarchar(1);
                 ((string[]) buf[1])[0] = rslt.getLongVarchar(2);
-                ((string[]) buf[2])[0] = rslt.getVarchar(3);
-                ((Guid[]) buf[3])[0] = rslt.getGuid(4);
+                ((string[]) buf[2])[0] = rslt.getLongVarchar(3);
+                ((string[]) buf[3])[0] = rslt.getLongVarchar(4);
                 ((string[]) buf[4])[0] = rslt.getVarchar(5);
                 ((Guid[]) buf[5])[0] = rslt.getGuid(6);
+                ((string[]) buf[6])[0] = rslt.getVarchar(7);
+                ((Guid[]) buf[7])[0] = rslt.getGuid(8);
                 return;
              case 1 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);

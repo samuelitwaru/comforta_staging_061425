@@ -109,10 +109,10 @@ namespace GeneXus.Programs {
                CheckExtendedTable046( ) ;
                if ( AnyError == 0 )
                {
+                  ZM046( 26) ;
                   ZM046( 27) ;
                   ZM046( 28) ;
                   ZM046( 29) ;
-                  ZM046( 30) ;
                }
                CloseExtendedTableCursors046( ) ;
             }
@@ -199,7 +199,7 @@ namespace GeneXus.Programs {
 
       protected void ZM046( short GX_JID )
       {
-         if ( ( GX_JID == 26 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 25 ) || ( GX_JID == 0 ) )
          {
             Z35LocationPhone = A35LocationPhone;
             Z329LocationZipCode = A329LocationZipCode;
@@ -224,23 +224,23 @@ namespace GeneXus.Programs {
             Z584ActiveAppVersionId = A584ActiveAppVersionId;
             Z598PublishedActiveAppVersionId = A598PublishedActiveAppVersionId;
          }
+         if ( ( GX_JID == 26 ) || ( GX_JID == 0 ) )
+         {
+         }
          if ( ( GX_JID == 27 ) || ( GX_JID == 0 ) )
          {
          }
          if ( ( GX_JID == 28 ) || ( GX_JID == 0 ) )
          {
+            Z273Trn_ThemeId = A273Trn_ThemeId;
+            Z598PublishedActiveAppVersionId = A523AppVersionId;
          }
          if ( ( GX_JID == 29 ) || ( GX_JID == 0 ) )
          {
             Z273Trn_ThemeId = A273Trn_ThemeId;
-            Z598PublishedActiveAppVersionId = A523AppVersionId;
-         }
-         if ( ( GX_JID == 30 ) || ( GX_JID == 0 ) )
-         {
-            Z273Trn_ThemeId = A273Trn_ThemeId;
             Z584ActiveAppVersionId = A523AppVersionId;
          }
-         if ( GX_JID == -26 )
+         if ( GX_JID == -25 )
          {
             Z35LocationPhone = A35LocationPhone;
             Z329LocationZipCode = A329LocationZipCode;
@@ -368,7 +368,7 @@ namespace GeneXus.Programs {
             n494LocationImage = BC00048_n494LocationImage[0];
             A574ReceptionImage = BC00048_A574ReceptionImage[0];
             n574ReceptionImage = BC00048_n574ReceptionImage[0];
-            ZM046( -26) ;
+            ZM046( -25) ;
          }
          pr_default.close(6);
          OnLoadActions046( ) ;
@@ -412,11 +412,6 @@ namespace GeneXus.Programs {
       {
          standaloneModal( ) ;
          A329LocationZipCode = StringUtil.Upper( A329LocationZipCode);
-         if ( ! GxRegex.IsMatch(A329LocationZipCode,context.GetMessage( "^\\d{4}\\s?[A-Z]{2}$", "")) && ! String.IsNullOrEmpty(StringUtil.RTrim( A329LocationZipCode)) )
-         {
-            GX_msglist.addItem(context.GetMessage( "Zip Code is incorrect", ""), 1, "");
-            AnyError = 1;
-         }
          if ( ! ( GxRegex.IsMatch(A34LocationEmail,"^((\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*)|(\\s*))$") ) )
          {
             GX_msglist.addItem(StringUtil.Format( context.GetMessage( "Invalid email pattern", ""), context.GetMessage( "Location Email", ""), "", "", "", "", "", "", "", ""), "OutOfRange", 1, "");
@@ -534,7 +529,7 @@ namespace GeneXus.Programs {
          pr_default.execute(1, new Object[] {n29LocationId, A29LocationId, n11OrganisationId, A11OrganisationId});
          if ( (pr_default.getStatus(1) != 101) )
          {
-            ZM046( 26) ;
+            ZM046( 25) ;
             RcdFound6 = 1;
             A35LocationPhone = BC00043_A35LocationPhone[0];
             A329LocationZipCode = BC00043_A329LocationZipCode[0];
@@ -1462,7 +1457,7 @@ namespace GeneXus.Programs {
             Z29LocationId = A29LocationId;
             Z11OrganisationId = A11OrganisationId;
          }
-         ZM046( -26) ;
+         ZM046( -25) ;
          OnLoadActions046( ) ;
          AddRow046( ) ;
          ScanKeyEnd046( ) ;
@@ -1492,7 +1487,7 @@ namespace GeneXus.Programs {
             Z29LocationId = A29LocationId;
             Z11OrganisationId = A11OrganisationId;
          }
-         ZM046( -26) ;
+         ZM046( -25) ;
          OnLoadActions046( ) ;
          AddRow046( ) ;
          ScanKeyEnd046( ) ;

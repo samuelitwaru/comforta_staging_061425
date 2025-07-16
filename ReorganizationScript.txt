@@ -1,11 +1,7 @@
-ALTER TABLE Trn_Manager ADD ManagerTitle VARCHAR(100);
-
-ALTER TABLE Trn_SupplierGen ADD SupplierGenContactTitle VARCHAR(100);
-
-ALTER TABLE Trn_NetworkIndividual ADD NetworkIndividualTitle VARCHAR(100);
-
-ALTER TABLE Trn_Receptionist ADD ReceptionistTitle VARCHAR(100);
-
-ALTER TABLE Trn_Resident ADD ResidentTitle VARCHAR(100) , ADD ResidentGroups TEXT;
-ALTER TABLE Trn_Resident ALTER COLUMN ResidentSalutation DROP NOT NULL;
+ALTER TABLE Trn_DynamicTranslation ADD DynamicTranslationEnglishPubli TEXT NOT NULL DEFAULT '', ADD DynamicTranslationDutchPublish TEXT NOT NULL DEFAULT '';
+ALTER TABLE Trn_DynamicTranslation ALTER COLUMN DynamicTranslationEnglishPubli DROP DEFAULT;
+ALTER TABLE Trn_DynamicTranslation ALTER COLUMN DynamicTranslationDutchPublish DROP DEFAULT;
+CREATE INDEX UTRN_DYNAMICTRANSLATION ON Trn_DynamicTranslation (DynamicTranslationPrimaryKey );
+CREATE INDEX UTRN_DYNAMICTRANSLATION1 ON Trn_DynamicTranslation (DynamicTranslationTrnName );
+CREATE INDEX UTRN_DYNAMICTRANSLATION2 ON Trn_DynamicTranslation (DynamicTranslationAttributeNam );
 

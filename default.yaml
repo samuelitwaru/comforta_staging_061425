@@ -1,10 +1,33 @@
 openapi: 3.0.0
 info:
   title: "Development"
-  version: "20250716064321"
+  version: "20250716152236"
 servers:
-  - url: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/rest
+  - url: http://localhost:8083/Comforta_version2DevelopmentNETPostgreSQL/rest
 paths:
+  /Trn_AppVersionLoadDVCombo:
+    post:
+      tags:
+        - Trn_AppVersionLoadDVCombo
+      operationId: "Trn_AppVersionLoadDVCombo"
+      summary: "Trn_App Version Load DVCombo"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trn_AppVersionLoadDVComboInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Trn_AppVersionLoadDVComboOutput"
+        404:
+          description: "Not found"
   /Trn_AppVersionWWGetFilterData:
     post:
       tags:
@@ -1207,10 +1230,18 @@ components:
       description: GAM OAuth 2
       flows:
         password:          
-          tokenUrl: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/oauth/gam/v2.0/access_token
+          tokenUrl: http://localhost:8083/Comforta_version2DevelopmentNETPostgreSQL/oauth/gam/v2.0/access_token
           scopes: 
             fullcontrol: Full access
   schemas:
+    Trn_AppVersionLoadDVComboOutput:
+      properties:
+        SelectedValue:
+          type: "string"
+        SelectedText:
+          type: "string"
+        Combo_DataJson:
+          type: "string"
     Trn_AppVersionWWGetFilterDataOutput:
       properties:
         OptionsJson:
@@ -1555,6 +1586,19 @@ components:
     WWPBaseObjects.Discussions.WWP_GetUsersForDiscussionMentionsOutput:
       properties:
         OptionsJson:
+          type: "string"
+    Trn_AppVersionLoadDVComboInput:  
+      properties:
+        ComboName:
+          type: "string"
+        TrnMode:
+          type: "string"
+        IsDynamicCall:
+          type: "boolean"
+        AppVersionId:
+          type: "string"
+          format: "uuid"
+        SearchTxtParms:
           type: "string"
     Trn_AppVersionWWGetFilterDataInput:  
       properties:

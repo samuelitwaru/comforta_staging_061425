@@ -75,18 +75,18 @@ export class PageAttacher {
         ).infoContentMapper.getInfoContent(rowId);
 
         tileAttributes = getTileAttrs(
-            currentPageId,
-            rowComp.getId(),
-            colComp.getId(),
-            tile.getId(),
+          currentPageId,
+          rowComp.getId(),
+          colComp.getId(),
+          tile.getId(),
         );
 
         // tileAttributes = tileInfoSectionAttributes?.Tiles?.find(
         //   (tile: any) => tile.Id === tileId
         // );
       }
-    } 
-    
+    }
+
     // else {
     //   for (const [property, value] of updates) {
     //     (globalThis as any).tileMapper.updateTile(tileId, property, value);
@@ -95,7 +95,7 @@ export class PageAttacher {
     // }
 
     const version = await this.appVersionManager.refreshActiveVersion();
-    
+
     this.attachPage(page, version, tileAttributes, isNewPage);
 
     // set tile properties
@@ -118,11 +118,11 @@ export class PageAttacher {
     const childPage =
       version?.Pages.find((page: any) => page.PageId === selectedItemPageId) ||
       null;
-    
+
     this.removeOtherEditors();
     if (childPage) {
       new ChildEditor(page.PageId, childPage, isNewPage).init(tileAttributes);
-    } 
+    }
   }
 
   removeOtherEditors(): void {
@@ -137,9 +137,8 @@ export class PageAttacher {
     ) as HTMLElement;
 
     if (actionHeaderLabel) {
-      actionHeaderLabel.innerText = `${type}, ${
-        pageName.length > 10 ? pageName.substring(0, 10) + "..." : pageName
-      }`;
+      actionHeaderLabel.innerText = `${type}, ${pageName.length > 10 ? pageName.substring(0, 10) + "..." : pageName
+        }`;
     }
   }
 }

@@ -1,18 +1,18 @@
 
 export class PageNameEditor {
     page: any;
-    constructor(page:any) {
+    constructor(page: any) {
         this.page = page
         this.render()
     }
 
-    render(){
+    render() {
         return this.createInput()
     }
 
     toggleEditMode() {
         const header = document.querySelector("#page-name-editor h1");
-        
+
     }
 
     createInput() {
@@ -27,7 +27,7 @@ export class PageNameEditor {
         // add on leave event
         input.addEventListener("blur", (e) => {
             const value = input.value;
-            if(value.length > 0){
+            if (value.length > 0) {
                 // this.updatePageName(value);
             }
         });

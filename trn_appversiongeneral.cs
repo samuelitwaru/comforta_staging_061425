@@ -503,16 +503,50 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-6 DataContentCell", "start", "top", "", "", "div");
             /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtAppVersionLanguage_Internalname+"\"", "", "div");
+            /* Attribute/Variable Label */
+            GxWebStd.gx_label_element( context, edtAppVersionLanguage_Internalname, context.GetMessage( "Version Language", ""), "col-sm-4 AttributeLabel", 1, true, "");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-8 gx-attribute", "start", "top", "", "", "div");
+            /* Single line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 34,'" + sPrefix + "',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtAppVersionLanguage_Internalname, A648AppVersionLanguage, StringUtil.RTrim( context.localUtil.Format( A648AppVersionLanguage, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,34);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtAppVersionLanguage_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtAppVersionLanguage_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_Trn_AppVersionGeneral.htm");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-6 DataContentCell", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtTrn_ThemeName_Internalname+"\"", "", "div");
+            /* Attribute/Variable Label */
+            GxWebStd.gx_label_element( context, edtTrn_ThemeName_Internalname, context.GetMessage( "Trn_Theme Id", ""), "col-sm-4 AttributeLabel", 1, true, "");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-8 gx-attribute", "start", "top", "", "", "div");
+            /* Single line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 39,'" + sPrefix + "',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtTrn_ThemeName_Internalname, A274Trn_ThemeName, StringUtil.RTrim( context.localUtil.Format( A274Trn_ThemeName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,39);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", edtTrn_ThemeName_Link, "", "", "", edtTrn_ThemeName_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtTrn_ThemeName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "Name", "start", true, "", "HLP_Trn_AppVersionGeneral.htm");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-6 DataContentCell", "start", "top", "", "", "div");
+            /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+chkIsActive_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
             GxWebStd.gx_label_element( context, chkIsActive_Internalname, context.GetMessage( "Active", ""), "col-sm-4 AttributeLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-8 gx-attribute", "start", "top", "", "", "div");
             /* Check box */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 34,'" + sPrefix + "',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 44,'" + sPrefix + "',false,'',0)\"";
             ClassString = "Attribute";
             StyleString = "";
-            GxWebStd.gx_checkbox_ctrl( context, chkIsActive_Internalname, StringUtil.BoolToStr( A535IsActive), "", context.GetMessage( "Active", ""), 1, chkIsActive.Enabled, "true", "", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(34, this, 'true', 'false',"+"'"+sPrefix+"'"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,34);\"");
+            GxWebStd.gx_checkbox_ctrl( context, chkIsActive_Internalname, StringUtil.BoolToStr( A535IsActive), "", context.GetMessage( "Active", ""), 1, chkIsActive.Enabled, "true", "", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(44, this, 'true', 'false',"+"'"+sPrefix+"'"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,44);\"");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -528,14 +562,14 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-action-group CellMarginTop10", "start", "top", " "+"data-gx-actiongroup-type=\"toolbar\""+" ", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 39,'" + sPrefix + "',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 49,'" + sPrefix + "',false,'',0)\"";
             ClassString = "ButtonMaterial";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtnupdate_Internalname, "", context.GetMessage( "Edit", ""), bttBtnupdate_Jsonclick, 5, context.GetMessage( "Edit", ""), "", StyleString, ClassString, bttBtnupdate_Visible, 1, "standard", "'"+sPrefix+"'"+",false,"+"'"+sPrefix+"E\\'DOUPDATE\\'."+"'", TempTags, "", context.GetButtonType( ), "HLP_Trn_AppVersionGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 41,'" + sPrefix + "',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 51,'" + sPrefix + "',false,'',0)\"";
             ClassString = "ButtonMaterialDefault";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtndelete_Internalname, "", context.GetMessage( "GX_BtnDelete", ""), bttBtndelete_Jsonclick, 5, context.GetMessage( "GX_BtnDelete", ""), "", StyleString, ClassString, bttBtndelete_Visible, 1, "standard", "'"+sPrefix+"'"+",false,"+"'"+sPrefix+"E\\'DODELETE\\'."+"'", TempTags, "", context.GetButtonType( ), "HLP_Trn_AppVersionGeneral.htm");
@@ -902,8 +936,13 @@ namespace GeneXus.Programs {
             pr_default.execute(0, new Object[] {A523AppVersionId});
             while ( (pr_default.getStatus(0) != 101) )
             {
+               A273Trn_ThemeId = H00BB2_A273Trn_ThemeId[0];
                A535IsActive = H00BB2_A535IsActive[0];
                AssignAttri(sPrefix, false, "A535IsActive", A535IsActive);
+               A274Trn_ThemeName = H00BB2_A274Trn_ThemeName[0];
+               AssignAttri(sPrefix, false, "A274Trn_ThemeName", A274Trn_ThemeName);
+               A648AppVersionLanguage = H00BB2_A648AppVersionLanguage[0];
+               AssignAttri(sPrefix, false, "A648AppVersionLanguage", A648AppVersionLanguage);
                A11OrganisationId = H00BB2_A11OrganisationId[0];
                n11OrganisationId = H00BB2_n11OrganisationId[0];
                AssignAttri(sPrefix, false, "A11OrganisationId", A11OrganisationId.ToString());
@@ -912,6 +951,8 @@ namespace GeneXus.Programs {
                AssignAttri(sPrefix, false, "A29LocationId", A29LocationId.ToString());
                A524AppVersionName = H00BB2_A524AppVersionName[0];
                AssignAttri(sPrefix, false, "A524AppVersionName", A524AppVersionName);
+               A274Trn_ThemeName = H00BB2_A274Trn_ThemeName[0];
+               AssignAttri(sPrefix, false, "A274Trn_ThemeName", A274Trn_ThemeName);
                /* Execute user event: Load */
                E12BB2 ();
                /* Exiting from a For First loop. */
@@ -941,6 +982,10 @@ namespace GeneXus.Programs {
          AssignProp(sPrefix, false, edtLocationId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtLocationId_Enabled), 5, 0), true);
          edtOrganisationId_Enabled = 0;
          AssignProp(sPrefix, false, edtOrganisationId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtOrganisationId_Enabled), 5, 0), true);
+         edtAppVersionLanguage_Enabled = 0;
+         AssignProp(sPrefix, false, edtAppVersionLanguage_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtAppVersionLanguage_Enabled), 5, 0), true);
+         edtTrn_ThemeName_Enabled = 0;
+         AssignProp(sPrefix, false, edtTrn_ThemeName_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtTrn_ThemeName_Enabled), 5, 0), true);
          chkIsActive.Enabled = 0;
          AssignProp(sPrefix, false, chkIsActive_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(chkIsActive.Enabled), 5, 0), true);
          fix_multi_value_controls( ) ;
@@ -972,6 +1017,10 @@ namespace GeneXus.Programs {
             A11OrganisationId = StringUtil.StrToGuid( cgiGet( edtOrganisationId_Internalname));
             n11OrganisationId = false;
             AssignAttri(sPrefix, false, "A11OrganisationId", A11OrganisationId.ToString());
+            A648AppVersionLanguage = cgiGet( edtAppVersionLanguage_Internalname);
+            AssignAttri(sPrefix, false, "A648AppVersionLanguage", A648AppVersionLanguage);
+            A274Trn_ThemeName = cgiGet( edtTrn_ThemeName_Internalname);
+            AssignAttri(sPrefix, false, "A274Trn_ThemeName", A274Trn_ThemeName);
             A535IsActive = StringUtil.StrToBool( cgiGet( chkIsActive_Internalname));
             AssignAttri(sPrefix, false, "A535IsActive", A535IsActive);
             /* Read subfile selected row values. */
@@ -1017,6 +1066,16 @@ namespace GeneXus.Programs {
       {
          /* Load Routine */
          returnInSub = false;
+         GXt_boolean1 = AV14TempBoolean;
+         new WorkWithPlus.workwithplus_commongam.secgamisauthbyfunctionalitykey(context ).execute(  "trn_themeview_Execute", out  GXt_boolean1) ;
+         AV14TempBoolean = GXt_boolean1;
+         if ( AV14TempBoolean )
+         {
+            GXKey = Crypto.GetSiteKey( );
+            GXEncryptionTmp = "trn_themeview.aspx"+UrlEncode(A273Trn_ThemeId.ToString()) + "," + UrlEncode(StringUtil.RTrim(""));
+            edtTrn_ThemeName_Link = formatLink("trn_themeview.aspx") + "?" + UriEncrypt64( GXEncryptionTmp+Crypto.CheckSum( GXEncryptionTmp, 6), GXKey);
+            AssignProp(sPrefix, false, edtTrn_ThemeName_Internalname, "Link", edtTrn_ThemeName_Link, true);
+         }
          GXt_boolean1 = AV12IsAuthorized_Update;
          new WorkWithPlus.workwithplus_commongam.secgamisauthbyfunctionalitykey(context ).execute(  "trn_appversion_Update", out  GXt_boolean1) ;
          AV12IsAuthorized_Update = GXt_boolean1;
@@ -1292,7 +1351,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257212514234", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202571617544048", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1308,7 +1367,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("trn_appversiongeneral.js", "?20257212514234", false, true);
+         context.AddJavascriptSource("trn_appversiongeneral.js", "?202571617544049", false, true);
          /* End function include_jscripts */
       }
 
@@ -1328,6 +1387,8 @@ namespace GeneXus.Programs {
          edtAppVersionName_Internalname = sPrefix+"APPVERSIONNAME";
          edtLocationId_Internalname = sPrefix+"LOCATIONID";
          edtOrganisationId_Internalname = sPrefix+"ORGANISATIONID";
+         edtAppVersionLanguage_Internalname = sPrefix+"APPVERSIONLANGUAGE";
+         edtTrn_ThemeName_Internalname = sPrefix+"TRN_THEMENAME";
          chkIsActive_Internalname = sPrefix+"ISACTIVE";
          divTransactiondetail_tableattributes_Internalname = sPrefix+"TRANSACTIONDETAIL_TABLEATTRIBUTES";
          bttBtnupdate_Internalname = sPrefix+"BTNUPDATE";
@@ -1355,6 +1416,11 @@ namespace GeneXus.Programs {
          bttBtndelete_Visible = 1;
          bttBtnupdate_Visible = 1;
          chkIsActive.Enabled = 0;
+         edtTrn_ThemeName_Jsonclick = "";
+         edtTrn_ThemeName_Link = "";
+         edtTrn_ThemeName_Enabled = 0;
+         edtAppVersionLanguage_Jsonclick = "";
+         edtAppVersionLanguage_Enabled = 0;
          edtOrganisationId_Jsonclick = "";
          edtOrganisationId_Enabled = 0;
          edtLocationId_Jsonclick = "";
@@ -1414,6 +1480,8 @@ namespace GeneXus.Programs {
          A524AppVersionName = "";
          A29LocationId = Guid.Empty;
          A11OrganisationId = Guid.Empty;
+         A648AppVersionLanguage = "";
+         A274Trn_ThemeName = "";
          ClassString = "";
          StyleString = "";
          bttBtnupdate_Jsonclick = "";
@@ -1426,12 +1494,16 @@ namespace GeneXus.Programs {
          sEvtType = "";
          GXDecQS = "";
          H00BB2_A523AppVersionId = new Guid[] {Guid.Empty} ;
+         H00BB2_A273Trn_ThemeId = new Guid[] {Guid.Empty} ;
          H00BB2_A535IsActive = new bool[] {false} ;
+         H00BB2_A274Trn_ThemeName = new string[] {""} ;
+         H00BB2_A648AppVersionLanguage = new string[] {""} ;
          H00BB2_A11OrganisationId = new Guid[] {Guid.Empty} ;
          H00BB2_n11OrganisationId = new bool[] {false} ;
          H00BB2_A29LocationId = new Guid[] {Guid.Empty} ;
          H00BB2_n29LocationId = new bool[] {false} ;
          H00BB2_A524AppVersionName = new string[] {""} ;
+         A273Trn_ThemeId = Guid.Empty;
          AV6WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          AV8TrnContext = new WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext(context);
          AV11HTTPRequest = new GxHttpRequest( context);
@@ -1442,7 +1514,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.trn_appversiongeneral__default(),
             new Object[][] {
                 new Object[] {
-               H00BB2_A523AppVersionId, H00BB2_A535IsActive, H00BB2_A11OrganisationId, H00BB2_n11OrganisationId, H00BB2_A29LocationId, H00BB2_n29LocationId, H00BB2_A524AppVersionName
+               H00BB2_A523AppVersionId, H00BB2_A273Trn_ThemeId, H00BB2_A535IsActive, H00BB2_A274Trn_ThemeName, H00BB2_A648AppVersionLanguage, H00BB2_A11OrganisationId, H00BB2_n11OrganisationId, H00BB2_A29LocationId, H00BB2_n29LocationId, H00BB2_A524AppVersionName
                }
             }
          );
@@ -1464,6 +1536,8 @@ namespace GeneXus.Programs {
       private int edtAppVersionName_Enabled ;
       private int edtLocationId_Enabled ;
       private int edtOrganisationId_Enabled ;
+      private int edtAppVersionLanguage_Enabled ;
+      private int edtTrn_ThemeName_Enabled ;
       private int bttBtnupdate_Visible ;
       private int bttBtndelete_Visible ;
       private int idxLst ;
@@ -1491,6 +1565,11 @@ namespace GeneXus.Programs {
       private string edtLocationId_Jsonclick ;
       private string edtOrganisationId_Internalname ;
       private string edtOrganisationId_Jsonclick ;
+      private string edtAppVersionLanguage_Internalname ;
+      private string edtAppVersionLanguage_Jsonclick ;
+      private string edtTrn_ThemeName_Internalname ;
+      private string edtTrn_ThemeName_Link ;
+      private string edtTrn_ThemeName_Jsonclick ;
       private string chkIsActive_Internalname ;
       private string ClassString ;
       private string StyleString ;
@@ -1517,12 +1596,16 @@ namespace GeneXus.Programs {
       private bool n11OrganisationId ;
       private bool n29LocationId ;
       private bool returnInSub ;
+      private bool AV14TempBoolean ;
       private bool GXt_boolean1 ;
       private string A524AppVersionName ;
+      private string A648AppVersionLanguage ;
+      private string A274Trn_ThemeName ;
       private Guid A523AppVersionId ;
       private Guid wcpOA523AppVersionId ;
       private Guid A29LocationId ;
       private Guid A11OrganisationId ;
+      private Guid A273Trn_ThemeId ;
       private GXWebForm Form ;
       private GxHttpRequest AV11HTTPRequest ;
       private IGxSession AV10Session ;
@@ -1532,7 +1615,10 @@ namespace GeneXus.Programs {
       private GXCheckbox chkIsActive ;
       private IDataStoreProvider pr_default ;
       private Guid[] H00BB2_A523AppVersionId ;
+      private Guid[] H00BB2_A273Trn_ThemeId ;
       private bool[] H00BB2_A535IsActive ;
+      private string[] H00BB2_A274Trn_ThemeName ;
+      private string[] H00BB2_A648AppVersionLanguage ;
       private Guid[] H00BB2_A11OrganisationId ;
       private bool[] H00BB2_n11OrganisationId ;
       private Guid[] H00BB2_A29LocationId ;
@@ -1564,7 +1650,7 @@ namespace GeneXus.Programs {
           new ParDef("AppVersionId",GXType.UniqueIdentifier,36,0)
           };
           def= new CursorDef[] {
-              new CursorDef("H00BB2", "SELECT AppVersionId, IsActive, OrganisationId, LocationId, AppVersionName FROM Trn_AppVersion WHERE AppVersionId = :AppVersionId ORDER BY AppVersionId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00BB2,1, GxCacheFrequency.OFF ,true,true )
+              new CursorDef("H00BB2", "SELECT T1.AppVersionId, T1.Trn_ThemeId, T1.IsActive, T2.Trn_ThemeName, T1.AppVersionLanguage, T1.OrganisationId, T1.LocationId, T1.AppVersionName FROM (Trn_AppVersion T1 INNER JOIN Trn_Theme T2 ON T2.Trn_ThemeId = T1.Trn_ThemeId) WHERE T1.AppVersionId = :AppVersionId ORDER BY T1.AppVersionId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00BB2,1, GxCacheFrequency.OFF ,true,true )
           };
        }
     }
@@ -1577,12 +1663,15 @@ namespace GeneXus.Programs {
        {
              case 0 :
                 ((Guid[]) buf[0])[0] = rslt.getGuid(1);
-                ((bool[]) buf[1])[0] = rslt.getBool(2);
-                ((Guid[]) buf[2])[0] = rslt.getGuid(3);
-                ((bool[]) buf[3])[0] = rslt.wasNull(3);
-                ((Guid[]) buf[4])[0] = rslt.getGuid(4);
-                ((bool[]) buf[5])[0] = rslt.wasNull(4);
-                ((string[]) buf[6])[0] = rslt.getVarchar(5);
+                ((Guid[]) buf[1])[0] = rslt.getGuid(2);
+                ((bool[]) buf[2])[0] = rslt.getBool(3);
+                ((string[]) buf[3])[0] = rslt.getVarchar(4);
+                ((string[]) buf[4])[0] = rslt.getVarchar(5);
+                ((Guid[]) buf[5])[0] = rslt.getGuid(6);
+                ((bool[]) buf[6])[0] = rslt.wasNull(6);
+                ((Guid[]) buf[7])[0] = rslt.getGuid(7);
+                ((bool[]) buf[8])[0] = rslt.wasNull(7);
+                ((string[]) buf[9])[0] = rslt.getVarchar(8);
                 return;
        }
     }

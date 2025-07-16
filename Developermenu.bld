@@ -60,6 +60,8 @@ trn_location
 trn_manager
 trn_organisationtype
 trn_organisation
+wc_selectresidents
+wc_groupresidents
 wp_createresidentandnetwork
 wc_networkindividual
 trn_icongeneral
@@ -405,6 +407,7 @@ gx0050
 gx0040
 general\ui\masterprompt
 general\ui\masterunanimosidebar
+trn_appversionloaddvcombo
 aprc_initializeresidentgroups
 wc_notificationpanelloaddvcombo
 trn_iconwwgetfilterdata

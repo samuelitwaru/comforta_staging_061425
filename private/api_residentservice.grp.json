@@ -586,6 +586,16 @@
 },
 {
 "Verb":"POST",
+"PathRegexp":"toolbox/v2/check-translations-before-publish",
+"Path":"toolbox/v2/check-translations-before-publish",
+"Name":"checktranslationsbeforepublish",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_checktranslationsbeforepublish",
+"Implementation":"Prc_CheckTranslationsBeforePublish"
+},
+{
+"Verb":"POST",
 "PathRegexp":"toolbox/v2/create-menu-page",
 "Path":"toolbox/v2/create-menu-page",
 "Name":"createmenupage",

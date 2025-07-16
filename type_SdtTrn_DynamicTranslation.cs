@@ -85,6 +85,8 @@ namespace GeneXus.Programs {
          gxTv_SdtTrn_DynamicTranslation_Dynamictranslationattributename = sdt.gxTv_SdtTrn_DynamicTranslation_Dynamictranslationattributename ;
          gxTv_SdtTrn_DynamicTranslation_Dynamictranslationenglish = sdt.gxTv_SdtTrn_DynamicTranslation_Dynamictranslationenglish ;
          gxTv_SdtTrn_DynamicTranslation_Dynamictranslationdutch = sdt.gxTv_SdtTrn_DynamicTranslation_Dynamictranslationdutch ;
+         gxTv_SdtTrn_DynamicTranslation_Dynamictranslationenglishpublished = sdt.gxTv_SdtTrn_DynamicTranslation_Dynamictranslationenglishpublished ;
+         gxTv_SdtTrn_DynamicTranslation_Dynamictranslationdutchpublished = sdt.gxTv_SdtTrn_DynamicTranslation_Dynamictranslationdutchpublished ;
          gxTv_SdtTrn_DynamicTranslation_Mode = sdt.gxTv_SdtTrn_DynamicTranslation_Mode ;
          gxTv_SdtTrn_DynamicTranslation_Initialized = sdt.gxTv_SdtTrn_DynamicTranslation_Initialized ;
          gxTv_SdtTrn_DynamicTranslation_Dynamictranslationid_Z = sdt.gxTv_SdtTrn_DynamicTranslation_Dynamictranslationid_Z ;
@@ -115,6 +117,8 @@ namespace GeneXus.Programs {
          AddObjectProperty("DynamicTranslationAttributeName", gxTv_SdtTrn_DynamicTranslation_Dynamictranslationattributename, false, includeNonInitialized);
          AddObjectProperty("DynamicTranslationEnglish", gxTv_SdtTrn_DynamicTranslation_Dynamictranslationenglish, false, includeNonInitialized);
          AddObjectProperty("DynamicTranslationDutch", gxTv_SdtTrn_DynamicTranslation_Dynamictranslationdutch, false, includeNonInitialized);
+         AddObjectProperty("DynamicTranslationEnglishPublished", gxTv_SdtTrn_DynamicTranslation_Dynamictranslationenglishpublished, false, includeNonInitialized);
+         AddObjectProperty("DynamicTranslationDutchPublished", gxTv_SdtTrn_DynamicTranslation_Dynamictranslationdutchpublished, false, includeNonInitialized);
          if ( includeState )
          {
             AddObjectProperty("Mode", gxTv_SdtTrn_DynamicTranslation_Mode, false, includeNonInitialized);
@@ -158,6 +162,16 @@ namespace GeneXus.Programs {
          {
             sdtIsNull = 0;
             gxTv_SdtTrn_DynamicTranslation_Dynamictranslationdutch = sdt.gxTv_SdtTrn_DynamicTranslation_Dynamictranslationdutch ;
+         }
+         if ( sdt.IsDirty("DynamicTranslationEnglishPublished") )
+         {
+            sdtIsNull = 0;
+            gxTv_SdtTrn_DynamicTranslation_Dynamictranslationenglishpublished = sdt.gxTv_SdtTrn_DynamicTranslation_Dynamictranslationenglishpublished ;
+         }
+         if ( sdt.IsDirty("DynamicTranslationDutchPublished") )
+         {
+            sdtIsNull = 0;
+            gxTv_SdtTrn_DynamicTranslation_Dynamictranslationdutchpublished = sdt.gxTv_SdtTrn_DynamicTranslation_Dynamictranslationdutchpublished ;
          }
          return  ;
       }
@@ -262,6 +276,38 @@ namespace GeneXus.Programs {
             sdtIsNull = 0;
             gxTv_SdtTrn_DynamicTranslation_Dynamictranslationdutch = value;
             SetDirty("Dynamictranslationdutch");
+         }
+
+      }
+
+      [  SoapElement( ElementName = "DynamicTranslationEnglishPublished" )]
+      [  XmlElement( ElementName = "DynamicTranslationEnglishPublished"   )]
+      public string gxTpr_Dynamictranslationenglishpublished
+      {
+         get {
+            return gxTv_SdtTrn_DynamicTranslation_Dynamictranslationenglishpublished ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtTrn_DynamicTranslation_Dynamictranslationenglishpublished = value;
+            SetDirty("Dynamictranslationenglishpublished");
+         }
+
+      }
+
+      [  SoapElement( ElementName = "DynamicTranslationDutchPublished" )]
+      [  XmlElement( ElementName = "DynamicTranslationDutchPublished"   )]
+      public string gxTpr_Dynamictranslationdutchpublished
+      {
+         get {
+            return gxTv_SdtTrn_DynamicTranslation_Dynamictranslationdutchpublished ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtTrn_DynamicTranslation_Dynamictranslationdutchpublished = value;
+            SetDirty("Dynamictranslationdutchpublished");
          }
 
       }
@@ -457,6 +503,8 @@ namespace GeneXus.Programs {
          gxTv_SdtTrn_DynamicTranslation_Dynamictranslationattributename = "";
          gxTv_SdtTrn_DynamicTranslation_Dynamictranslationenglish = "";
          gxTv_SdtTrn_DynamicTranslation_Dynamictranslationdutch = "";
+         gxTv_SdtTrn_DynamicTranslation_Dynamictranslationenglishpublished = "";
+         gxTv_SdtTrn_DynamicTranslation_Dynamictranslationdutchpublished = "";
          gxTv_SdtTrn_DynamicTranslation_Mode = "";
          gxTv_SdtTrn_DynamicTranslation_Dynamictranslationid_Z = Guid.Empty;
          gxTv_SdtTrn_DynamicTranslation_Dynamictranslationtrnname_Z = "";
@@ -481,6 +529,8 @@ namespace GeneXus.Programs {
       private string gxTv_SdtTrn_DynamicTranslation_Mode ;
       private string gxTv_SdtTrn_DynamicTranslation_Dynamictranslationenglish ;
       private string gxTv_SdtTrn_DynamicTranslation_Dynamictranslationdutch ;
+      private string gxTv_SdtTrn_DynamicTranslation_Dynamictranslationenglishpublished ;
+      private string gxTv_SdtTrn_DynamicTranslation_Dynamictranslationdutchpublished ;
       private string gxTv_SdtTrn_DynamicTranslation_Dynamictranslationtrnname ;
       private string gxTv_SdtTrn_DynamicTranslation_Dynamictranslationattributename ;
       private string gxTv_SdtTrn_DynamicTranslation_Dynamictranslationtrnname_Z ;
@@ -585,6 +635,32 @@ namespace GeneXus.Programs {
 
       }
 
+      [DataMember( Name = "DynamicTranslationEnglishPublished" , Order = 6 )]
+      public string gxTpr_Dynamictranslationenglishpublished
+      {
+         get {
+            return sdt.gxTpr_Dynamictranslationenglishpublished ;
+         }
+
+         set {
+            sdt.gxTpr_Dynamictranslationenglishpublished = value;
+         }
+
+      }
+
+      [DataMember( Name = "DynamicTranslationDutchPublished" , Order = 7 )]
+      public string gxTpr_Dynamictranslationdutchpublished
+      {
+         get {
+            return sdt.gxTpr_Dynamictranslationdutchpublished ;
+         }
+
+         set {
+            sdt.gxTpr_Dynamictranslationdutchpublished = value;
+         }
+
+      }
+
       public SdtTrn_DynamicTranslation sdt
       {
          get {
@@ -606,7 +682,7 @@ namespace GeneXus.Programs {
          }
       }
 
-      [DataMember( Name = "gx_md5_hash", Order = 6 )]
+      [DataMember( Name = "gx_md5_hash", Order = 8 )]
       public string Hash
       {
          get {

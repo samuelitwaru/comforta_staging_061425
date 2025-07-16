@@ -311,10 +311,10 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "gxhash_vRECORDDESCRIPTION", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV14RecordDescription, "")), context));
          GxWebStd.gx_boolean_hidden_field( context, "vISAUTHORIZED_DISCUSSIONS", AV16IsAuthorized_Discussions);
          GxWebStd.gx_hidden_field( context, "gxhash_vISAUTHORIZED_DISCUSSIONS", GetSecureSignedToken( "", AV16IsAuthorized_Discussions, context));
-         GxWebStd.gx_boolean_hidden_field( context, "vLOADALLTABS", AV11LoadAllTabs);
-         GxWebStd.gx_hidden_field( context, "vSELECTEDTABCODE", StringUtil.RTrim( AV12SelectedTabCode));
          GxWebStd.gx_hidden_field( context, "vRESIDENTPACKAGEID", AV10ResidentPackageId.ToString());
          GxWebStd.gx_hidden_field( context, "gxhash_vRESIDENTPACKAGEID", GetSecureSignedToken( "", AV10ResidentPackageId, context));
+         GxWebStd.gx_boolean_hidden_field( context, "vLOADALLTABS", AV11LoadAllTabs);
+         GxWebStd.gx_hidden_field( context, "vSELECTEDTABCODE", StringUtil.RTrim( AV12SelectedTabCode));
          GxWebStd.gx_hidden_field( context, "vTABCODE", StringUtil.RTrim( AV8TabCode));
          GxWebStd.gx_hidden_field( context, "gxhash_vTABCODE", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV8TabCode, "")), context));
          GxWebStd.gx_hidden_field( context, "DDC_SUBSCRIPTIONS_Icontype", StringUtil.RTrim( Ddc_subscriptions_Icontype));
@@ -361,6 +361,10 @@ namespace GeneXus.Programs {
          if ( ! ( WebComp_Trn_residentwc == null ) )
          {
             WebComp_Trn_residentwc.componentjscripts();
+         }
+         if ( ! ( WebComp_Wc_groupresidentswc == null ) )
+         {
+            WebComp_Wc_groupresidentswc.componentjscripts();
          }
          if ( ! ( WebComp_Wwpaux_wc == null ) )
          {
@@ -575,6 +579,47 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             context.WriteHtmlText( "</div>") ;
+            context.WriteHtmlText( "<div class=\"gx_usercontrol_child\" id=\""+"TABSContainer"+"title3"+"\" style=\"display:none;\">") ;
+            /* Text block */
+            GxWebStd.gx_label_ctrl( context, lblWc_groupresidents_title_Internalname, context.GetMessage( "Residents", ""), "", "", lblWc_groupresidents_title_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlock", 0, "", 1, 1, 0, 0, "HLP_Trn_ResidentPackageView.htm");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "Section", "start", "top", "", "display:none;", "div");
+            context.WriteHtmlText( "WC_GroupResidents") ;
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            context.WriteHtmlText( "</div>") ;
+            context.WriteHtmlText( "<div class=\"gx_usercontrol_child\" id=\""+"TABSContainer"+"panel3"+"\" style=\"display:none;\">") ;
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divUnnamedtablewc_groupresidents_Internalname, 1, 0, "px", 0, "px", "TableViewTab", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
+            if ( ! isFullAjaxMode( ) )
+            {
+               /* WebComponent */
+               GxWebStd.gx_hidden_field( context, "W0043"+"", StringUtil.RTrim( WebComp_Wc_groupresidentswc_Component));
+               context.WriteHtmlText( "<div") ;
+               GxWebStd.ClassAttribute( context, "gxwebcomponent");
+               context.WriteHtmlText( " id=\""+"gxHTMLWrpW0043"+""+"\""+"") ;
+               context.WriteHtmlText( ">") ;
+               if ( StringUtil.Len( WebComp_Wc_groupresidentswc_Component) != 0 )
+               {
+                  if ( StringUtil.StrCmp(StringUtil.Lower( OldWc_groupresidentswc), StringUtil.Lower( WebComp_Wc_groupresidentswc_Component)) != 0 )
+                  {
+                     context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0043"+"");
+                  }
+                  WebComp_Wc_groupresidentswc.componentdraw();
+                  if ( StringUtil.StrCmp(StringUtil.Lower( OldWc_groupresidentswc), StringUtil.Lower( WebComp_Wc_groupresidentswc_Component)) != 0 )
+                  {
+                     context.httpAjaxContext.ajax_rspEndCmp();
+                  }
+               }
+               context.WriteHtmlText( "</div>") ;
+            }
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            context.WriteHtmlText( "</div>") ;
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -594,16 +639,16 @@ namespace GeneXus.Programs {
             if ( ! isFullAjaxMode( ) )
             {
                /* WebComponent */
-               GxWebStd.gx_hidden_field( context, "W0040"+"", StringUtil.RTrim( WebComp_Wwpaux_wc_Component));
+               GxWebStd.gx_hidden_field( context, "W0048"+"", StringUtil.RTrim( WebComp_Wwpaux_wc_Component));
                context.WriteHtmlText( "<div") ;
                GxWebStd.ClassAttribute( context, "gxwebcomponent");
-               context.WriteHtmlText( " id=\""+"gxHTMLWrpW0040"+""+"\""+"") ;
+               context.WriteHtmlText( " id=\""+"gxHTMLWrpW0048"+""+"\""+"") ;
                context.WriteHtmlText( ">") ;
                if ( StringUtil.Len( WebComp_Wwpaux_wc_Component) != 0 )
                {
                   if ( StringUtil.StrCmp(StringUtil.Lower( OldWwpaux_wc), StringUtil.Lower( WebComp_Wwpaux_wc_Component)) != 0 )
                   {
-                     context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0040"+"");
+                     context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0048"+"");
                   }
                   WebComp_Wwpaux_wc.componentdraw();
                   if ( StringUtil.StrCmp(StringUtil.Lower( OldWwpaux_wc), StringUtil.Lower( WebComp_Wwpaux_wc_Component)) != 0 )
@@ -782,9 +827,25 @@ namespace GeneXus.Programs {
                            }
                            WebComp_Trn_residentwc_Component = OldTrn_residentwc;
                         }
-                        else if ( nCmpId == 40 )
+                        else if ( nCmpId == 43 )
                         {
-                           OldWwpaux_wc = cgiGet( "W0040");
+                           OldWc_groupresidentswc = cgiGet( "W0043");
+                           if ( ( StringUtil.Len( OldWc_groupresidentswc) == 0 ) || ( StringUtil.StrCmp(OldWc_groupresidentswc, WebComp_Wc_groupresidentswc_Component) != 0 ) )
+                           {
+                              WebComp_Wc_groupresidentswc = getWebComponent(GetType(), "GeneXus.Programs", OldWc_groupresidentswc, new Object[] {context} );
+                              WebComp_Wc_groupresidentswc.ComponentInit();
+                              WebComp_Wc_groupresidentswc.Name = "OldWc_groupresidentswc";
+                              WebComp_Wc_groupresidentswc_Component = OldWc_groupresidentswc;
+                           }
+                           if ( StringUtil.Len( WebComp_Wc_groupresidentswc_Component) != 0 )
+                           {
+                              WebComp_Wc_groupresidentswc.componentprocess("W0043", "", sEvt);
+                           }
+                           WebComp_Wc_groupresidentswc_Component = OldWc_groupresidentswc;
+                        }
+                        else if ( nCmpId == 48 )
+                        {
+                           OldWwpaux_wc = cgiGet( "W0048");
                            if ( ( StringUtil.Len( OldWwpaux_wc) == 0 ) || ( StringUtil.StrCmp(OldWwpaux_wc, WebComp_Wwpaux_wc_Component) != 0 ) )
                            {
                               WebComp_Wwpaux_wc = getWebComponent(GetType(), "GeneXus.Programs", OldWwpaux_wc, new Object[] {context} );
@@ -794,7 +855,7 @@ namespace GeneXus.Programs {
                            }
                            if ( StringUtil.Len( WebComp_Wwpaux_wc_Component) != 0 )
                            {
-                              WebComp_Wwpaux_wc.componentprocess("W0040", "", sEvt);
+                              WebComp_Wwpaux_wc.componentprocess("W0048", "", sEvt);
                            }
                            WebComp_Wwpaux_wc_Component = OldWwpaux_wc;
                         }
@@ -963,6 +1024,16 @@ namespace GeneXus.Programs {
          {
             if ( 1 != 0 )
             {
+               if ( StringUtil.Len( WebComp_Wc_groupresidentswc_Component) != 0 )
+               {
+                  WebComp_Wc_groupresidentswc.componentstart();
+               }
+            }
+         }
+         if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
+         {
+            if ( 1 != 0 )
+            {
                if ( StringUtil.Len( WebComp_Wwpaux_wc_Component) != 0 )
                {
                   WebComp_Wwpaux_wc.componentstart();
@@ -1058,14 +1129,14 @@ namespace GeneXus.Programs {
          /* Start Routine */
          returnInSub = false;
          new GeneXus.Programs.wwpbaseobjects.loadwwpcontext(context ).execute( out  AV6WWPContext) ;
-         AV19GXLvl8 = 0;
+         AV21GXLvl8 = 0;
          /* Using cursor H00AD3 */
          pr_default.execute(1, new Object[] {AV10ResidentPackageId});
          while ( (pr_default.getStatus(1) != 101) )
          {
             A527ResidentPackageId = H00AD3_A527ResidentPackageId[0];
             A531ResidentPackageName = H00AD3_A531ResidentPackageName[0];
-            AV19GXLvl8 = 1;
+            AV21GXLvl8 = 1;
             Form.Caption = A531ResidentPackageName;
             AssignProp("", false, "FORM", "Caption", Form.Caption, true);
             AV9Exists = true;
@@ -1073,7 +1144,7 @@ namespace GeneXus.Programs {
             if (true) break;
          }
          pr_default.close(1);
-         if ( AV19GXLvl8 == 0 )
+         if ( AV21GXLvl8 == 0 )
          {
             Form.Caption = context.GetMessage( "WWP_RecordNotFound", "");
             AssignProp("", false, "FORM", "Caption", Form.Caption, true);
@@ -1101,6 +1172,7 @@ namespace GeneXus.Programs {
             this.executeUsercontrolMethod("", false, "DDC_DISCUSSIONSContainer", "Open", "", new Object[] {});
          }
          this.executeExternalObjectMethod("", false, "WWPActions", "Tabs_EditCaption", new Object[] {(string)divLayoutmaintable_Internalname,(string)"Tabs",(string)"Trn_Resident",new prc_getorganisationdefinition(context).executeUdp(  "Residents"),(bool)false,(string)""}, false);
+         this.executeExternalObjectMethod("", false, "WWPActions", "Tabs_EditCaption", new Object[] {(string)divLayoutmaintable_Internalname,(string)"Tabs",(string)"WC_GroupResidents",new prc_getorganisationdefinition(context).executeUdp(  "Residents"),(bool)false,(string)""}, false);
       }
 
       protected void E15AD2( )
@@ -1169,12 +1241,12 @@ namespace GeneXus.Programs {
          if ( StringUtil.Len( WebComp_Wwpaux_wc_Component) != 0 )
          {
             WebComp_Wwpaux_wc.setjustcreated();
-            WebComp_Wwpaux_wc.componentprepare(new Object[] {(string)"W0040",(string)"",(string)"Trn_ResidentPackage",(short)2,StringUtil.Trim( A527ResidentPackageId.ToString()),(string)AV14RecordDescription});
+            WebComp_Wwpaux_wc.componentprepare(new Object[] {(string)"W0048",(string)"",(string)"Trn_ResidentPackage",(short)2,StringUtil.Trim( A527ResidentPackageId.ToString()),(string)AV14RecordDescription});
             WebComp_Wwpaux_wc.componentbind(new Object[] {(string)"",(string)"",(string)""+""+""+""+"",(string)""});
          }
          if ( isFullAjaxMode( ) || isAjaxCallMode( ) && bDynCreated_Wwpaux_wc )
          {
-            context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0040"+"");
+            context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0048"+"");
             WebComp_Wwpaux_wc.componentdraw();
             context.httpAjaxContext.ajax_rspEndCmp();
          }
@@ -1204,12 +1276,12 @@ namespace GeneXus.Programs {
                WebComp_Wwpaux_wc.setjustcreated();
                GXKey = Crypto.GetSiteKey( );
                GXEncryptionTmp = "trn_residentpackageview.aspx"+UrlEncode(A527ResidentPackageId.ToString()) + "," + UrlEncode(StringUtil.RTrim(""));
-               WebComp_Wwpaux_wc.componentprepare(new Object[] {(string)"W0040",(string)"",(string)"Trn_ResidentPackage",StringUtil.Trim( A527ResidentPackageId.ToString()),(string)AV14RecordDescription,formatLink("trn_residentpackageview.aspx") + "?" + UriEncrypt64( GXEncryptionTmp+Crypto.CheckSum( GXEncryptionTmp, 6), GXKey)});
+               WebComp_Wwpaux_wc.componentprepare(new Object[] {(string)"W0048",(string)"",(string)"Trn_ResidentPackage",StringUtil.Trim( A527ResidentPackageId.ToString()),(string)AV14RecordDescription,formatLink("trn_residentpackageview.aspx") + "?" + UriEncrypt64( GXEncryptionTmp+Crypto.CheckSum( GXEncryptionTmp, 6), GXKey)});
                WebComp_Wwpaux_wc.componentbind(new Object[] {(string)"",(string)""+""+""+""+"",(string)"",(string)""+"",(string)"",(string)""+""});
             }
             if ( isFullAjaxMode( ) || isAjaxCallMode( ) && bDynCreated_Wwpaux_wc )
             {
-               context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0040"+"");
+               context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0048"+"");
                WebComp_Wwpaux_wc.componentdraw();
                context.httpAjaxContext.ajax_rspEndCmp();
             }
@@ -1244,60 +1316,103 @@ namespace GeneXus.Programs {
       {
          /* 'LOADTABS' Routine */
          returnInSub = false;
-         if ( AV11LoadAllTabs || ( StringUtil.StrCmp(AV12SelectedTabCode, "") == 0 ) || ( StringUtil.StrCmp(AV12SelectedTabCode, "General") == 0 ) )
+         /* Using cursor H00AD4 */
+         pr_default.execute(2, new Object[] {AV10ResidentPackageId});
+         while ( (pr_default.getStatus(2) != 101) )
          {
-            /* Object Property */
-            if ( true )
+            A527ResidentPackageId = H00AD4_A527ResidentPackageId[0];
+            if ( AV11LoadAllTabs || ( StringUtil.StrCmp(AV12SelectedTabCode, "") == 0 ) || ( StringUtil.StrCmp(AV12SelectedTabCode, "General") == 0 ) )
             {
-               bDynCreated_Generalwc = true;
+               /* Object Property */
+               if ( true )
+               {
+                  bDynCreated_Generalwc = true;
+               }
+               if ( StringUtil.StrCmp(StringUtil.Lower( WebComp_Generalwc_Component), StringUtil.Lower( "Trn_ResidentPackageGeneral")) != 0 )
+               {
+                  WebComp_Generalwc = getWebComponent(GetType(), "GeneXus.Programs", "trn_residentpackagegeneral", new Object[] {context} );
+                  WebComp_Generalwc.ComponentInit();
+                  WebComp_Generalwc.Name = "Trn_ResidentPackageGeneral";
+                  WebComp_Generalwc_Component = "Trn_ResidentPackageGeneral";
+               }
+               if ( StringUtil.Len( WebComp_Generalwc_Component) != 0 )
+               {
+                  WebComp_Generalwc.setjustcreated();
+                  WebComp_Generalwc.componentprepare(new Object[] {(string)"W0027",(string)"",(Guid)AV10ResidentPackageId});
+                  WebComp_Generalwc.componentbind(new Object[] {(string)""});
+               }
+               if ( isFullAjaxMode( ) || isAjaxCallMode( ) && bDynCreated_Generalwc )
+               {
+                  context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0027"+"");
+                  WebComp_Generalwc.componentdraw();
+                  context.httpAjaxContext.ajax_rspEndCmp();
+               }
             }
-            if ( StringUtil.StrCmp(StringUtil.Lower( WebComp_Generalwc_Component), StringUtil.Lower( "Trn_ResidentPackageGeneral")) != 0 )
+            if ( 1 == 0 )
             {
-               WebComp_Generalwc = getWebComponent(GetType(), "GeneXus.Programs", "trn_residentpackagegeneral", new Object[] {context} );
-               WebComp_Generalwc.ComponentInit();
-               WebComp_Generalwc.Name = "Trn_ResidentPackageGeneral";
-               WebComp_Generalwc_Component = "Trn_ResidentPackageGeneral";
+               if ( AV11LoadAllTabs || ( StringUtil.StrCmp(AV12SelectedTabCode, "Trn_Resident") == 0 ) )
+               {
+                  /* Object Property */
+                  if ( true )
+                  {
+                     bDynCreated_Trn_residentwc = true;
+                  }
+                  if ( StringUtil.StrCmp(StringUtil.Lower( WebComp_Trn_residentwc_Component), StringUtil.Lower( "Trn_ResidentPackageTrn_ResidentWC")) != 0 )
+                  {
+                     WebComp_Trn_residentwc = getWebComponent(GetType(), "GeneXus.Programs", "trn_residentpackagetrn_residentwc", new Object[] {context} );
+                     WebComp_Trn_residentwc.ComponentInit();
+                     WebComp_Trn_residentwc.Name = "Trn_ResidentPackageTrn_ResidentWC";
+                     WebComp_Trn_residentwc_Component = "Trn_ResidentPackageTrn_ResidentWC";
+                  }
+                  if ( StringUtil.Len( WebComp_Trn_residentwc_Component) != 0 )
+                  {
+                     WebComp_Trn_residentwc.setjustcreated();
+                     WebComp_Trn_residentwc.componentprepare(new Object[] {(string)"W0035",(string)"",(Guid)AV10ResidentPackageId});
+                     WebComp_Trn_residentwc.componentbind(new Object[] {(string)""});
+                  }
+                  if ( isFullAjaxMode( ) || isAjaxCallMode( ) && bDynCreated_Trn_residentwc )
+                  {
+                     context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0035"+"");
+                     WebComp_Trn_residentwc.componentdraw();
+                     context.httpAjaxContext.ajax_rspEndCmp();
+                  }
+               }
             }
-            if ( StringUtil.Len( WebComp_Generalwc_Component) != 0 )
+            else
             {
-               WebComp_Generalwc.setjustcreated();
-               WebComp_Generalwc.componentprepare(new Object[] {(string)"W0027",(string)"",(Guid)AV10ResidentPackageId});
-               WebComp_Generalwc.componentbind(new Object[] {(string)""});
+               this.executeUsercontrolMethod("", false, "TABSContainer", "HideTab", "", new Object[] {(short)2});
             }
-            if ( isFullAjaxMode( ) || isAjaxCallMode( ) && bDynCreated_Generalwc )
+            if ( AV11LoadAllTabs || ( StringUtil.StrCmp(AV12SelectedTabCode, "WC_GroupResidents") == 0 ) )
             {
-               context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0027"+"");
-               WebComp_Generalwc.componentdraw();
-               context.httpAjaxContext.ajax_rspEndCmp();
+               /* Object Property */
+               if ( true )
+               {
+                  bDynCreated_Wc_groupresidentswc = true;
+               }
+               if ( StringUtil.StrCmp(StringUtil.Lower( WebComp_Wc_groupresidentswc_Component), StringUtil.Lower( "WC_GroupResidents")) != 0 )
+               {
+                  WebComp_Wc_groupresidentswc = getWebComponent(GetType(), "GeneXus.Programs", "wc_groupresidents", new Object[] {context} );
+                  WebComp_Wc_groupresidentswc.ComponentInit();
+                  WebComp_Wc_groupresidentswc.Name = "WC_GroupResidents";
+                  WebComp_Wc_groupresidentswc_Component = "WC_GroupResidents";
+               }
+               if ( StringUtil.Len( WebComp_Wc_groupresidentswc_Component) != 0 )
+               {
+                  WebComp_Wc_groupresidentswc.setjustcreated();
+                  WebComp_Wc_groupresidentswc.componentprepare(new Object[] {(string)"W0043",(string)"",(Guid)AV10ResidentPackageId});
+                  WebComp_Wc_groupresidentswc.componentbind(new Object[] {(string)""});
+               }
+               if ( isFullAjaxMode( ) || isAjaxCallMode( ) && bDynCreated_Wc_groupresidentswc )
+               {
+                  context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0043"+"");
+                  WebComp_Wc_groupresidentswc.componentdraw();
+                  context.httpAjaxContext.ajax_rspEndCmp();
+               }
             }
+            /* Exiting from a For First loop. */
+            if (true) break;
          }
-         if ( AV11LoadAllTabs || ( StringUtil.StrCmp(AV12SelectedTabCode, "Trn_Resident") == 0 ) )
-         {
-            /* Object Property */
-            if ( true )
-            {
-               bDynCreated_Trn_residentwc = true;
-            }
-            if ( StringUtil.StrCmp(StringUtil.Lower( WebComp_Trn_residentwc_Component), StringUtil.Lower( "Trn_ResidentPackageTrn_ResidentWC")) != 0 )
-            {
-               WebComp_Trn_residentwc = getWebComponent(GetType(), "GeneXus.Programs", "trn_residentpackagetrn_residentwc", new Object[] {context} );
-               WebComp_Trn_residentwc.ComponentInit();
-               WebComp_Trn_residentwc.Name = "Trn_ResidentPackageTrn_ResidentWC";
-               WebComp_Trn_residentwc_Component = "Trn_ResidentPackageTrn_ResidentWC";
-            }
-            if ( StringUtil.Len( WebComp_Trn_residentwc_Component) != 0 )
-            {
-               WebComp_Trn_residentwc.setjustcreated();
-               WebComp_Trn_residentwc.componentprepare(new Object[] {(string)"W0035",(string)"",(Guid)AV10ResidentPackageId});
-               WebComp_Trn_residentwc.componentbind(new Object[] {(string)""});
-            }
-            if ( isFullAjaxMode( ) || isAjaxCallMode( ) && bDynCreated_Trn_residentwc )
-            {
-               context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0035"+"");
-               WebComp_Trn_residentwc.componentdraw();
-               context.httpAjaxContext.ajax_rspEndCmp();
-            }
-         }
+         pr_default.close(2);
       }
 
       public override void setparameters( Object[] obj )
@@ -1351,6 +1466,13 @@ namespace GeneXus.Programs {
                WebComp_Trn_residentwc.componentthemes();
             }
          }
+         if ( ! ( WebComp_Wc_groupresidentswc == null ) )
+         {
+            if ( StringUtil.Len( WebComp_Wc_groupresidentswc_Component) != 0 )
+            {
+               WebComp_Wc_groupresidentswc.componentthemes();
+            }
+         }
          if ( ! ( WebComp_Wwpaux_wc == null ) )
          {
             if ( StringUtil.Len( WebComp_Wwpaux_wc_Component) != 0 )
@@ -1366,7 +1488,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202572131068", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025716175909", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1382,7 +1504,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("trn_residentpackageview.js", "?202572131068", false, true);
+         context.AddJavascriptSource("trn_residentpackageview.js", "?20257161759010", false, true);
          context.AddJavascriptSource("shared/HistoryManager/HistoryManager.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/json2005.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/rsh.js", "", false, true);
@@ -1411,6 +1533,8 @@ namespace GeneXus.Programs {
          divUnnamedtablegeneral_Internalname = "UNNAMEDTABLEGENERAL";
          lblTrn_resident_title_Internalname = "TRN_RESIDENT_TITLE";
          divUnnamedtabletrn_resident_Internalname = "UNNAMEDTABLETRN_RESIDENT";
+         lblWc_groupresidents_title_Internalname = "WC_GROUPRESIDENTS_TITLE";
+         divUnnamedtablewc_groupresidents_Internalname = "UNNAMEDTABLEWC_GROUPRESIDENTS";
          Tabs_Internalname = "TABS";
          divUnnamedtableviewcontainer_Internalname = "UNNAMEDTABLEVIEWCONTAINER";
          divTablemain_Internalname = "TABLEMAIN";
@@ -1432,7 +1556,7 @@ namespace GeneXus.Programs {
          Ddc_subscriptions_Caption = "";
          Tabs_Historymanagement = Convert.ToBoolean( -1);
          Tabs_Class = "ViewTab Tab";
-         Tabs_Pagecount = 2;
+         Tabs_Pagecount = 3;
          Ddc_discussions_Visible = Convert.ToBoolean( -1);
          Ddc_discussions_Cls = "DropDownComponent";
          Ddc_discussions_Tooltip = "WWP_Discussions_Tooltip";
@@ -1467,8 +1591,8 @@ namespace GeneXus.Programs {
          setEventMetadata("DDC_SUBSCRIPTIONS.ONLOADCOMPONENT",""","oparms":[{"ctrl":"WWPAUX_WC"}]}""");
          setEventMetadata("DDC_DISCUSSIONS.ONLOADCOMPONENT","""{"handler":"E12AD2","iparms":[{"av":"AV16IsAuthorized_Discussions","fld":"vISAUTHORIZED_DISCUSSIONS","hsh":true},{"av":"AV14RecordDescription","fld":"vRECORDDESCRIPTION","hsh":true},{"av":"A527ResidentPackageId","fld":"RESIDENTPACKAGEID"}]""");
          setEventMetadata("DDC_DISCUSSIONS.ONLOADCOMPONENT",""","oparms":[{"ctrl":"WWPAUX_WC"}]}""");
-         setEventMetadata("TABS.TABCHANGED","""{"handler":"E13AD2","iparms":[{"av":"Tabs_Activepagecontrolname","ctrl":"TABS","prop":"ActivePageControlName"},{"av":"AV11LoadAllTabs","fld":"vLOADALLTABS"},{"av":"AV12SelectedTabCode","fld":"vSELECTEDTABCODE"},{"av":"AV10ResidentPackageId","fld":"vRESIDENTPACKAGEID","hsh":true}]""");
-         setEventMetadata("TABS.TABCHANGED",""","oparms":[{"av":"AV12SelectedTabCode","fld":"vSELECTEDTABCODE"},{"av":"AV11LoadAllTabs","fld":"vLOADALLTABS"},{"ctrl":"GENERALWC"},{"ctrl":"TRN_RESIDENTWC"}]}""");
+         setEventMetadata("TABS.TABCHANGED","""{"handler":"E13AD2","iparms":[{"av":"Tabs_Activepagecontrolname","ctrl":"TABS","prop":"ActivePageControlName"},{"av":"A527ResidentPackageId","fld":"RESIDENTPACKAGEID"},{"av":"AV10ResidentPackageId","fld":"vRESIDENTPACKAGEID","hsh":true},{"av":"AV11LoadAllTabs","fld":"vLOADALLTABS"},{"av":"AV12SelectedTabCode","fld":"vSELECTEDTABCODE"}]""");
+         setEventMetadata("TABS.TABCHANGED",""","oparms":[{"av":"AV12SelectedTabCode","fld":"vSELECTEDTABCODE"},{"av":"AV11LoadAllTabs","fld":"vLOADALLTABS"},{"ctrl":"GENERALWC"},{"ctrl":"TRN_RESIDENTWC"},{"ctrl":"WC_GROUPRESIDENTSWC"}]}""");
          return  ;
       }
 
@@ -1508,6 +1632,9 @@ namespace GeneXus.Programs {
          lblTrn_resident_title_Jsonclick = "";
          WebComp_Trn_residentwc_Component = "";
          OldTrn_residentwc = "";
+         lblWc_groupresidents_title_Jsonclick = "";
+         WebComp_Wc_groupresidentswc_Component = "";
+         OldWc_groupresidentswc = "";
          WebComp_Wwpaux_wc_Component = "";
          OldWwpaux_wc = "";
          sEvt = "";
@@ -1521,6 +1648,7 @@ namespace GeneXus.Programs {
          H00AD3_A531ResidentPackageName = new string[] {""} ;
          A531ResidentPackageName = "";
          AV15Session = context.GetSession();
+         H00AD4_A527ResidentPackageId = new Guid[] {Guid.Empty} ;
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.trn_residentpackageview__default(),
@@ -1531,14 +1659,20 @@ namespace GeneXus.Programs {
                , new Object[] {
                H00AD3_A527ResidentPackageId, H00AD3_A531ResidentPackageName
                }
+               , new Object[] {
+               H00AD4_A527ResidentPackageId
+               }
             }
          );
          WebComp_Generalwc = new GeneXus.Http.GXNullWebComponent();
          WebComp_Trn_residentwc = new GeneXus.Http.GXNullWebComponent();
+         WebComp_Wc_groupresidentswc = new GeneXus.Http.GXNullWebComponent();
          WebComp_Wwpaux_wc = new GeneXus.Http.GXNullWebComponent();
          /* GeneXus formulas. */
       }
 
+      private short nRcdExists_4 ;
+      private short nIsMod_4 ;
       private short nRcdExists_3 ;
       private short nIsMod_3 ;
       private short nGotPars ;
@@ -1548,7 +1682,7 @@ namespace GeneXus.Programs {
       private short wbStart ;
       private short nCmpId ;
       private short nDonePA ;
-      private short AV19GXLvl8 ;
+      private short AV21GXLvl8 ;
       private short nGXWrapped ;
       private int Tabs_Pagecount ;
       private int idxLst ;
@@ -1593,6 +1727,11 @@ namespace GeneXus.Programs {
       private string divUnnamedtabletrn_resident_Internalname ;
       private string WebComp_Trn_residentwc_Component ;
       private string OldTrn_residentwc ;
+      private string lblWc_groupresidents_title_Internalname ;
+      private string lblWc_groupresidents_title_Jsonclick ;
+      private string divUnnamedtablewc_groupresidents_Internalname ;
+      private string WebComp_Wc_groupresidentswc_Component ;
+      private string OldWc_groupresidentswc ;
       private string divHtml_bottomauxiliarcontrols_Internalname ;
       private string divDiv_wwpauxwc_Internalname ;
       private string WebComp_Wwpaux_wc_Component ;
@@ -1619,6 +1758,7 @@ namespace GeneXus.Programs {
       private bool bDynCreated_Wwpaux_wc ;
       private bool bDynCreated_Generalwc ;
       private bool bDynCreated_Trn_residentwc ;
+      private bool bDynCreated_Wc_groupresidentswc ;
       private string AV14RecordDescription ;
       private string A531ResidentPackageName ;
       private Guid AV10ResidentPackageId ;
@@ -1627,6 +1767,7 @@ namespace GeneXus.Programs {
       private IGxSession AV15Session ;
       private GXWebComponent WebComp_Generalwc ;
       private GXWebComponent WebComp_Trn_residentwc ;
+      private GXWebComponent WebComp_Wc_groupresidentswc ;
       private GXWebComponent WebComp_Wwpaux_wc ;
       private GXUserControl ucDdc_subscriptions ;
       private GXUserControl ucDdc_discussions ;
@@ -1640,6 +1781,7 @@ namespace GeneXus.Programs {
       private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV6WWPContext ;
       private Guid[] H00AD3_A527ResidentPackageId ;
       private string[] H00AD3_A531ResidentPackageName ;
+      private Guid[] H00AD4_A527ResidentPackageId ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
    }
@@ -1652,6 +1794,7 @@ namespace GeneXus.Programs {
          return new Cursor[] {
           new ForEachCursor(def[0])
          ,new ForEachCursor(def[1])
+         ,new ForEachCursor(def[2])
        };
     }
 
@@ -1668,9 +1811,14 @@ namespace GeneXus.Programs {
           prmH00AD3 = new Object[] {
           new ParDef("AV10ResidentPackageId",GXType.UniqueIdentifier,36,0)
           };
+          Object[] prmH00AD4;
+          prmH00AD4 = new Object[] {
+          new ParDef("AV10ResidentPackageId",GXType.UniqueIdentifier,36,0)
+          };
           def= new CursorDef[] {
               new CursorDef("H00AD2", "SELECT ResidentPackageId FROM Trn_ResidentPackage WHERE ResidentPackageId = :AV10ResidentPackageId ORDER BY ResidentPackageId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00AD2,1, GxCacheFrequency.OFF ,true,true )
              ,new CursorDef("H00AD3", "SELECT ResidentPackageId, ResidentPackageName FROM Trn_ResidentPackage WHERE ResidentPackageId = :AV10ResidentPackageId ORDER BY ResidentPackageId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00AD3,1, GxCacheFrequency.OFF ,false,true )
+             ,new CursorDef("H00AD4", "SELECT ResidentPackageId FROM Trn_ResidentPackage WHERE ResidentPackageId = :AV10ResidentPackageId ORDER BY ResidentPackageId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00AD4,1, GxCacheFrequency.OFF ,false,true )
           };
        }
     }
@@ -1687,6 +1835,9 @@ namespace GeneXus.Programs {
              case 1 :
                 ((Guid[]) buf[0])[0] = rslt.getGuid(1);
                 ((string[]) buf[1])[0] = rslt.getVarchar(2);
+                return;
+             case 2 :
+                ((Guid[]) buf[0])[0] = rslt.getGuid(1);
                 return;
        }
     }

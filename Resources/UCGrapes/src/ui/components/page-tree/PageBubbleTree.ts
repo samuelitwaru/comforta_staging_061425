@@ -58,7 +58,6 @@ export class PageBubbleTree {
     const appVersionManager = this.themeManager.appVersionManager;
     this.appVersionManager = appVersionManager;
     this.pages = appVersionManager.getPages();
-    console.log("pages >> ", this.pages);
     this.processedPages = this.processPageData(this.pages);
 
     const homePage = this.processedPages.find((page) => page.title === "Home");
@@ -403,13 +402,10 @@ export class PageBubbleTree {
           page.PageInfoStructure.InfoContent.forEach((row: any) => {
             if (row.InfoType === "TileGrid" && row.Columns) {
               row.Columns.forEach((column: any) => {
-                // console.log("column", column);
                 column.Tiles.forEach((tile: any) => {
                   if (tile.Action.ObjectId) {
                     ret.children.push(tile.Action.ObjectId);
                   } else if (row.InfoType === "Cta") {
-                    // console.log("row.CtaAttributes", row.CtaAttributes);
-
                     if (
                       row.CtaAttributes.CtaType === "Form" ||
                       row.CtaAttributes.CtaType === "WebLink"
@@ -434,45 +430,42 @@ export class PageBubbleTree {
               });
             }
             if (row.InfoType === "TileRow") {
-              row.Tiles.forEach((tile: any) => {
-                // if (
-                //   tile.Action.ObjectType == "DynamicForm" ||
-                //   tile.Action.ObjectType == "WebLink"
-                // ) {
-                //   const title =
-                //     tile.Action.ObjectType == "DynamicForm"
-                //       ? "Dynamic Form"
-                //       : "Web Link";
-                //   linkPages.push({
-                //     id: tile.Action.ObjectId,
-                //     title: title,
-                //     structure: "",
-                //     thumbnail: page.PageThumbnailUrl,
-                //     children: [],
-                //     x: 0,
-                //     y: 0,
-                //   });
-                //   ret.children.push(tile.Action.ObjectId);
-                // } else if (
-                //   tile.Action.ObjectId &&
-                //   tile.Action.ObjectType !== ""
-                // ) {
-                //   if (
-                //     this.pages.some(
-                //       (page: any) => page.PageId === tile.Action.ObjectId
-                //     )
-                //   ) {
-                //     ret.children.push(tile.Action.ObjectId);
-                //   }
-                // }
-
-                if (tile.Action.ObjectId) {
-                  ret.children.push(tile.Action.ObjectId);
-                }
-              });
+              // row.Tiles.forEach((tile: any) => {
+              // if (
+              //   tile.Action.ObjectType == "DynamicForm" ||
+              //   tile.Action.ObjectType == "WebLink"
+              // ) {
+              //   const title =
+              //     tile.Action.ObjectType == "DynamicForm"
+              //       ? "Dynamic Form"
+              //       : "Web Link";
+              //   linkPages.push({
+              //     id: tile.Action.ObjectId,
+              //     title: title,
+              //     structure: "",
+              //     thumbnail: page.PageThumbnailUrl,
+              //     children: [],
+              //     x: 0,
+              //     y: 0,
+              //   });
+              //   ret.children.push(tile.Action.ObjectId);
+              // } else if (
+              //   tile.Action.ObjectId &&
+              //   tile.Action.ObjectType !== ""
+              // ) {
+              //   if (
+              //     this.pages.some(
+              //       (page: any) => page.PageId === tile.Action.ObjectId
+              //     )
+              //   ) {
+              //     ret.children.push(tile.Action.ObjectId);
+              //   }
+              // }
+              // if (tile.Action.ObjectId) {
+              //   ret.children.push(tile.Action.ObjectId);
+              // }
+              // });
             } else if (row.InfoType === "Cta") {
-              // console.log("row.CtaAttributes", row.CtaAttributes);
-
               if (
                 row.CtaAttributes.CtaType === "Form" ||
                 row.CtaAttributes.CtaType === "WebLink"
@@ -481,7 +474,7 @@ export class PageBubbleTree {
                   row.CtaAttributes.CtaType === "Form"
                     ? "Dynamic Form"
                     : "Web Link";
-
+                if (!row.CtaAttributes.Action?.ObjectId) return;
                 linkPages.push({
                   id: row.CtaAttributes.Action.ObjectId,
                   title: title,

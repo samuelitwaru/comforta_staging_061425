@@ -333,14 +333,14 @@ export class ImageUploadManager {
     }
   }
 
-  private getInfoTileAttributes(rowComponentId: any, tileWrapperId: any): any {
+  public getInfoTileAttributes(rowComponentId: any, tileWrapperId: any): any {
     if (!rowComponentId || !tileWrapperId) return;
     const tileInfoSectionAttributes: InfoType | null =
       this.infoSectionManager.getInfoContent(rowComponentId);
     return this.findTileById(tileInfoSectionAttributes, tileWrapperId);
   }
 
-  public findTileById(tileInfoSectionAttributes: any, tileWrapperId: string) : Tile | null {
+  public findTileById(tileInfoSectionAttributes: any, tileWrapperId: string): Tile | null {
     for (const column of tileInfoSectionAttributes?.Columns || []) {
       const foundTile: Tile = column.Tiles?.find((tile: any) => tile.Id === tileWrapperId);
       if (foundTile) return foundTile;
@@ -438,11 +438,9 @@ export class ImageUploadManager {
         BGSize: "",
       };
 
-
-      
-      const rowComp = tileWrapper.closest('.container-row')
-      const colComp = tileWrapper.closest('.tile-column')
-      const tile = tileWrapper.closest('.template-wrapper')
+      const rowComp = tileWrapper.closest(".container-row");
+      const colComp = tileWrapper.closest(".tile-column");
+      const tile = tileWrapper.closest(".template-wrapper");
       const rowId = rowComp?.id;
       const colId = colComp?.id;
       const tileId = tile?.id;
@@ -450,12 +448,7 @@ export class ImageUploadManager {
         const infoSectionManager = new InfoSectionManager();
 
         for (const [key, value] of Object.entries(updates)) {
-          infoSectionManager.updateGridTileAttribute(
-              rowId,
-              colId,
-              tileId,
-              key, value
-            )
+          infoSectionManager.updateGridTileAttribute(rowId, colId, tileId, key, value);
         }
       }
     }
@@ -550,7 +543,7 @@ export class ImageUploadManager {
     const tileWrapper = selectedComponent.parent();
     const parentComponent = tileWrapper.closest('[data-gjs-type="info-tiles-section"]');
     if (!parentComponent || !tileWrapper) return null;
-    
+
     const tileAttributes: Tile = this.getInfoTileAttributes(
       parentComponent?.getId(),
       tileWrapper?.getId()

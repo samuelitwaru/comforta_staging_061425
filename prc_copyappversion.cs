@@ -358,7 +358,7 @@ public class prc_copyappversion__default : DataStoreHelperBase, IDataStoreHelper
        new ParDef("AV26oldId",GXType.UniqueIdentifier,36,0)
        };
        def= new CursorDef[] {
-           new CursorDef("P00CB2", "SELECT DynamicTranslationPrimaryKey, DynamicTranslationAttributeNam, DynamicTranslationDutch, DynamicTranslationEnglish, DynamicTranslationId FROM Trn_DynamicTranslation WHERE DynamicTranslationPrimaryKey = :AV26oldId ORDER BY DynamicTranslationId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CB2,100, GxCacheFrequency.OFF ,false,false )
+           new CursorDef("P00CB2", "SELECT DynamicTranslationPrimaryKey, DynamicTranslationAttributeNam, DynamicTranslationDutch, DynamicTranslationEnglish, DynamicTranslationId FROM Trn_DynamicTranslation WHERE DynamicTranslationPrimaryKey = :AV26oldId ORDER BY DynamicTranslationPrimaryKey ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CB2,100, GxCacheFrequency.OFF ,false,false )
        };
     }
  }

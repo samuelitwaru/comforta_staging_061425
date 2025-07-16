@@ -505,6 +505,48 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-6 DataContentCell", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtDynamicTranslationEnglishPubli_Internalname+"\"", "", "div");
+            /* Attribute/Variable Label */
+            GxWebStd.gx_label_element( context, edtDynamicTranslationEnglishPubli_Internalname, context.GetMessage( "English Published", ""), "col-sm-4 AttributeLabel", 1, true, "");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-8 gx-attribute", "start", "top", "", "", "div");
+            /* Multiple line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 34,'" + sPrefix + "',false,'',0)\"";
+            ClassString = "Attribute";
+            StyleString = "";
+            ClassString = "Attribute";
+            StyleString = "";
+            GxWebStd.gx_html_textarea( context, edtDynamicTranslationEnglishPubli_Internalname, A671DynamicTranslationEnglishPubli, "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,34);\"", 0, 1, edtDynamicTranslationEnglishPubli_Enabled, 0, 80, "chr", 10, "row", 0, StyleString, ClassString, "", "", "2097152", -1, 0, "", "", -1, true, "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", 0, "", "HLP_Trn_DynamicTranslationGeneral.htm");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-6 DataContentCell", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtDynamicTranslationDutchPublish_Internalname+"\"", "", "div");
+            /* Attribute/Variable Label */
+            GxWebStd.gx_label_element( context, edtDynamicTranslationDutchPublish_Internalname, context.GetMessage( "Dutch Published", ""), "col-sm-4 AttributeLabel", 1, true, "");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-8 gx-attribute", "start", "top", "", "", "div");
+            /* Multiple line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 39,'" + sPrefix + "',false,'',0)\"";
+            ClassString = "Attribute";
+            StyleString = "";
+            ClassString = "Attribute";
+            StyleString = "";
+            GxWebStd.gx_html_textarea( context, edtDynamicTranslationDutchPublish_Internalname, A672DynamicTranslationDutchPublish, "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,39);\"", 0, 1, edtDynamicTranslationDutchPublish_Enabled, 0, 80, "chr", 10, "row", 0, StyleString, ClassString, "", "", "2097152", -1, 0, "", "", -1, true, "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", 0, "", "HLP_Trn_DynamicTranslationGeneral.htm");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -516,14 +558,14 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-action-group CellMarginTop10", "start", "top", " "+"data-gx-actiongroup-type=\"toolbar\""+" ", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 34,'" + sPrefix + "',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 44,'" + sPrefix + "',false,'',0)\"";
             ClassString = "ButtonMaterial";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtnupdate_Internalname, "", context.GetMessage( "Edit", ""), bttBtnupdate_Jsonclick, 5, context.GetMessage( "Edit", ""), "", StyleString, ClassString, bttBtnupdate_Visible, 1, "standard", "'"+sPrefix+"'"+",false,"+"'"+sPrefix+"E\\'DOUPDATE\\'."+"'", TempTags, "", context.GetButtonType( ), "HLP_Trn_DynamicTranslationGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 36,'" + sPrefix + "',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 46,'" + sPrefix + "',false,'',0)\"";
             ClassString = "ButtonMaterialDefault";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtndelete_Internalname, "", context.GetMessage( "GX_BtnDelete", ""), bttBtndelete_Jsonclick, 5, context.GetMessage( "GX_BtnDelete", ""), "", StyleString, ClassString, bttBtndelete_Visible, 1, "standard", "'"+sPrefix+"'"+",false,"+"'"+sPrefix+"E\\'DODELETE\\'."+"'", TempTags, "", context.GetButtonType( ), "HLP_Trn_DynamicTranslationGeneral.htm");
@@ -903,6 +945,10 @@ namespace GeneXus.Programs {
             {
                A580DynamicTranslationPrimaryKey = H00BA2_A580DynamicTranslationPrimaryKey[0];
                AssignAttri(sPrefix, false, "A580DynamicTranslationPrimaryKey", A580DynamicTranslationPrimaryKey.ToString());
+               A672DynamicTranslationDutchPublish = H00BA2_A672DynamicTranslationDutchPublish[0];
+               AssignAttri(sPrefix, false, "A672DynamicTranslationDutchPublish", A672DynamicTranslationDutchPublish);
+               A671DynamicTranslationEnglishPubli = H00BA2_A671DynamicTranslationEnglishPubli[0];
+               AssignAttri(sPrefix, false, "A671DynamicTranslationEnglishPubli", A671DynamicTranslationEnglishPubli);
                A583DynamicTranslationDutch = H00BA2_A583DynamicTranslationDutch[0];
                AssignAttri(sPrefix, false, "A583DynamicTranslationDutch", A583DynamicTranslationDutch);
                A582DynamicTranslationEnglish = H00BA2_A582DynamicTranslationEnglish[0];
@@ -940,6 +986,10 @@ namespace GeneXus.Programs {
          AssignProp(sPrefix, false, edtDynamicTranslationEnglish_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtDynamicTranslationEnglish_Enabled), 5, 0), true);
          edtDynamicTranslationDutch_Enabled = 0;
          AssignProp(sPrefix, false, edtDynamicTranslationDutch_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtDynamicTranslationDutch_Enabled), 5, 0), true);
+         edtDynamicTranslationEnglishPubli_Enabled = 0;
+         AssignProp(sPrefix, false, edtDynamicTranslationEnglishPubli_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtDynamicTranslationEnglishPubli_Enabled), 5, 0), true);
+         edtDynamicTranslationDutchPublish_Enabled = 0;
+         AssignProp(sPrefix, false, edtDynamicTranslationDutchPublish_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtDynamicTranslationDutchPublish_Enabled), 5, 0), true);
          edtDynamicTranslationId_Enabled = 0;
          AssignProp(sPrefix, false, edtDynamicTranslationId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtDynamicTranslationId_Enabled), 5, 0), true);
          edtDynamicTranslationPrimaryKey_Enabled = 0;
@@ -973,6 +1023,10 @@ namespace GeneXus.Programs {
             AssignAttri(sPrefix, false, "A582DynamicTranslationEnglish", A582DynamicTranslationEnglish);
             A583DynamicTranslationDutch = cgiGet( edtDynamicTranslationDutch_Internalname);
             AssignAttri(sPrefix, false, "A583DynamicTranslationDutch", A583DynamicTranslationDutch);
+            A671DynamicTranslationEnglishPubli = cgiGet( edtDynamicTranslationEnglishPubli_Internalname);
+            AssignAttri(sPrefix, false, "A671DynamicTranslationEnglishPubli", A671DynamicTranslationEnglishPubli);
+            A672DynamicTranslationDutchPublish = cgiGet( edtDynamicTranslationDutchPublish_Internalname);
+            AssignAttri(sPrefix, false, "A672DynamicTranslationDutchPublish", A672DynamicTranslationDutchPublish);
             A580DynamicTranslationPrimaryKey = StringUtil.StrToGuid( cgiGet( edtDynamicTranslationPrimaryKey_Internalname));
             AssignAttri(sPrefix, false, "A580DynamicTranslationPrimaryKey", A580DynamicTranslationPrimaryKey.ToString());
             /* Read subfile selected row values. */
@@ -1297,7 +1351,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257212521959", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202571617544936", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1313,7 +1367,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("trn_dynamictranslationgeneral.js", "?20257212521959", false, true);
+         context.AddJavascriptSource("trn_dynamictranslationgeneral.js", "?202571617544937", false, true);
          /* End function include_jscripts */
       }
 
@@ -1328,6 +1382,8 @@ namespace GeneXus.Programs {
          edtDynamicTranslationAttributeNam_Internalname = sPrefix+"DYNAMICTRANSLATIONATTRIBUTENAM";
          edtDynamicTranslationEnglish_Internalname = sPrefix+"DYNAMICTRANSLATIONENGLISH";
          edtDynamicTranslationDutch_Internalname = sPrefix+"DYNAMICTRANSLATIONDUTCH";
+         edtDynamicTranslationEnglishPubli_Internalname = sPrefix+"DYNAMICTRANSLATIONENGLISHPUBLI";
+         edtDynamicTranslationDutchPublish_Internalname = sPrefix+"DYNAMICTRANSLATIONDUTCHPUBLISH";
          divTransactiondetail_tableattributes_Internalname = sPrefix+"TRANSACTIONDETAIL_TABLEATTRIBUTES";
          bttBtnupdate_Internalname = sPrefix+"BTNUPDATE";
          bttBtndelete_Internalname = sPrefix+"BTNDELETE";
@@ -1361,6 +1417,8 @@ namespace GeneXus.Programs {
          edtDynamicTranslationId_Visible = 1;
          bttBtndelete_Visible = 1;
          bttBtnupdate_Visible = 1;
+         edtDynamicTranslationDutchPublish_Enabled = 0;
+         edtDynamicTranslationEnglishPubli_Enabled = 0;
          edtDynamicTranslationDutch_Enabled = 0;
          edtDynamicTranslationEnglish_Enabled = 0;
          edtDynamicTranslationAttributeNam_Jsonclick = "";
@@ -1421,6 +1479,8 @@ namespace GeneXus.Programs {
          StyleString = "";
          A582DynamicTranslationEnglish = "";
          A583DynamicTranslationDutch = "";
+         A671DynamicTranslationEnglishPubli = "";
+         A672DynamicTranslationDutchPublish = "";
          bttBtnupdate_Jsonclick = "";
          bttBtndelete_Jsonclick = "";
          A580DynamicTranslationPrimaryKey = Guid.Empty;
@@ -1433,6 +1493,8 @@ namespace GeneXus.Programs {
          GXDecQS = "";
          H00BA2_A578DynamicTranslationId = new Guid[] {Guid.Empty} ;
          H00BA2_A580DynamicTranslationPrimaryKey = new Guid[] {Guid.Empty} ;
+         H00BA2_A672DynamicTranslationDutchPublish = new string[] {""} ;
+         H00BA2_A671DynamicTranslationEnglishPubli = new string[] {""} ;
          H00BA2_A583DynamicTranslationDutch = new string[] {""} ;
          H00BA2_A582DynamicTranslationEnglish = new string[] {""} ;
          H00BA2_A581DynamicTranslationAttributeNam = new string[] {""} ;
@@ -1447,7 +1509,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.trn_dynamictranslationgeneral__default(),
             new Object[][] {
                 new Object[] {
-               H00BA2_A578DynamicTranslationId, H00BA2_A580DynamicTranslationPrimaryKey, H00BA2_A583DynamicTranslationDutch, H00BA2_A582DynamicTranslationEnglish, H00BA2_A581DynamicTranslationAttributeNam, H00BA2_A579DynamicTranslationTrnName
+               H00BA2_A578DynamicTranslationId, H00BA2_A580DynamicTranslationPrimaryKey, H00BA2_A672DynamicTranslationDutchPublish, H00BA2_A671DynamicTranslationEnglishPubli, H00BA2_A583DynamicTranslationDutch, H00BA2_A582DynamicTranslationEnglish, H00BA2_A581DynamicTranslationAttributeNam, H00BA2_A579DynamicTranslationTrnName
                }
             }
          );
@@ -1469,6 +1531,8 @@ namespace GeneXus.Programs {
       private int edtDynamicTranslationAttributeNam_Enabled ;
       private int edtDynamicTranslationEnglish_Enabled ;
       private int edtDynamicTranslationDutch_Enabled ;
+      private int edtDynamicTranslationEnglishPubli_Enabled ;
+      private int edtDynamicTranslationDutchPublish_Enabled ;
       private int bttBtnupdate_Visible ;
       private int bttBtndelete_Visible ;
       private int edtDynamicTranslationId_Visible ;
@@ -1500,6 +1564,8 @@ namespace GeneXus.Programs {
       private string ClassString ;
       private string StyleString ;
       private string edtDynamicTranslationDutch_Internalname ;
+      private string edtDynamicTranslationEnglishPubli_Internalname ;
+      private string edtDynamicTranslationDutchPublish_Internalname ;
       private string bttBtnupdate_Internalname ;
       private string bttBtnupdate_Jsonclick ;
       private string bttBtndelete_Internalname ;
@@ -1528,6 +1594,8 @@ namespace GeneXus.Programs {
       private bool GXt_boolean1 ;
       private string A582DynamicTranslationEnglish ;
       private string A583DynamicTranslationDutch ;
+      private string A671DynamicTranslationEnglishPubli ;
+      private string A672DynamicTranslationDutchPublish ;
       private string A579DynamicTranslationTrnName ;
       private string A581DynamicTranslationAttributeNam ;
       private Guid A578DynamicTranslationId ;
@@ -1542,6 +1610,8 @@ namespace GeneXus.Programs {
       private IDataStoreProvider pr_default ;
       private Guid[] H00BA2_A578DynamicTranslationId ;
       private Guid[] H00BA2_A580DynamicTranslationPrimaryKey ;
+      private string[] H00BA2_A672DynamicTranslationDutchPublish ;
+      private string[] H00BA2_A671DynamicTranslationEnglishPubli ;
       private string[] H00BA2_A583DynamicTranslationDutch ;
       private string[] H00BA2_A582DynamicTranslationEnglish ;
       private string[] H00BA2_A581DynamicTranslationAttributeNam ;
@@ -1572,7 +1642,7 @@ namespace GeneXus.Programs {
           new ParDef("DynamicTranslationId",GXType.UniqueIdentifier,36,0)
           };
           def= new CursorDef[] {
-              new CursorDef("H00BA2", "SELECT DynamicTranslationId, DynamicTranslationPrimaryKey, DynamicTranslationDutch, DynamicTranslationEnglish, DynamicTranslationAttributeNam, DynamicTranslationTrnName FROM Trn_DynamicTranslation WHERE DynamicTranslationId = :DynamicTranslationId ORDER BY DynamicTranslationId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00BA2,1, GxCacheFrequency.OFF ,true,true )
+              new CursorDef("H00BA2", "SELECT DynamicTranslationId, DynamicTranslationPrimaryKey, DynamicTranslationDutchPublish, DynamicTranslationEnglishPubli, DynamicTranslationDutch, DynamicTranslationEnglish, DynamicTranslationAttributeNam, DynamicTranslationTrnName FROM Trn_DynamicTranslation WHERE DynamicTranslationId = :DynamicTranslationId ORDER BY DynamicTranslationId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00BA2,1, GxCacheFrequency.OFF ,true,true )
           };
        }
     }
@@ -1588,8 +1658,10 @@ namespace GeneXus.Programs {
                 ((Guid[]) buf[1])[0] = rslt.getGuid(2);
                 ((string[]) buf[2])[0] = rslt.getLongVarchar(3);
                 ((string[]) buf[3])[0] = rslt.getLongVarchar(4);
-                ((string[]) buf[4])[0] = rslt.getVarchar(5);
-                ((string[]) buf[5])[0] = rslt.getVarchar(6);
+                ((string[]) buf[4])[0] = rslt.getLongVarchar(5);
+                ((string[]) buf[5])[0] = rslt.getLongVarchar(6);
+                ((string[]) buf[6])[0] = rslt.getVarchar(7);
+                ((string[]) buf[7])[0] = rslt.getVarchar(8);
                 return;
        }
     }

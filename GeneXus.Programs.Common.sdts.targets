@@ -138,6 +138,7 @@
  	<Compile Include="$(WebDirectory)\type_SdtSDT_ResidentPackage_SDT_ResidentPackageItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_Row.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtSDT_SelectResident.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_Theme.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_Theme_IconsItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_Theme_ColorsItem.cs" />
@@ -145,6 +146,7 @@
  	<Compile Include="$(WebDirectory)\type_SdtSDT_Tile.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_TileAction.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_TranslatedPage.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtSDT_TranslatedPageBO.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_TrashItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_TrnAttributes.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_TrnAttributes_Transaction.cs" />

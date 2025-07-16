@@ -319,52 +319,12 @@ span#scroll-right:hover {
 }
 
 /* App bar */
-.translate-app-bar,
 .app-bar,
 .home-app-bar {
   display: flex;
   align-items: center;
   padding: 12px 16px 0px 16px;
   width: 100%;
-}
-
-.translate-app-bar {
-  padding: 12px 0 0 0;
-}
-
-.translate-app-bar .title {
-  font-size: 20px;
-  font-weight: 500;
-  color: #262626;
-  text-transform: uppercase;
-  margin: 0;
-  width: 100%;
-  display: inline-block;
-}
-
-.translate-app-bar .editable-content {
-  cursor: pointer;
-  transition: all 0.2s ease;
-  border-radius: 3px;
-  padding: 1px 4px;
-  /* margin: -2px -4px; */
-}
-
-.translate-app-bar .editable-content:not(.html-content):hover {
-  background-color: rgba(0, 123, 255, 0.1);
-  outline: 1px dashed rgba(0, 123, 255, 0.3);
-}
-
-.translate-app-bar .editable-content:not(.html-content).editing {
-  background-color: rgba(0, 123, 255, 0);
-  outline: 1px solid #007bff;
-  cursor: text;
-}
-
-.translate-app-bar .editable-content:not(.html-content):focus {
-  outline: 1px solid #007bff;
-  background-color: rgba(0, 123, 255, 0);
-  margin: 1px;
 }
 
 .home-app-bar {
@@ -727,11 +687,11 @@ span#scroll-right:hover {
   position: absolute;
   top: 100%;
   left: 0;
-  /* max-height: 200px; */
+  max-height: 300px;
   min-width: 100%;
   background-color: white;
   border-radius: 6px;
-  /* overflow-y: auto; */
+  overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #888 #f1f1f1;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
@@ -742,9 +702,9 @@ span#scroll-right:hover {
 .theme-options-list.show {
   display: block;
   display: block;
-  max-height: 300px;
-  overflow-x: hidden;
-  overflow-y: auto;
+  /* max-height: 300px;
+  overflow-x: hidden; */
+  /* overflow-y: auto; */
 }
 
 .theme-option {
@@ -755,6 +715,7 @@ span#scroll-right:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .theme-option.theme {
@@ -820,9 +781,9 @@ span#scroll-right:hover {
 .theme-option.submenu > .submenu-list {
   display: none;
   /* display: block; */
-  position: absolute;
+  position: fixed;
   left: 100%;
-  margin-top: 66px;
+  /* margin-top: 66px; */
   /* top: 0; */
   background-color: white;
   border-radius: 6px;
@@ -831,8 +792,23 @@ span#scroll-right:hover {
   z-index: 1001;
 }
 
+/* Add a small gap bridge to prevent submenu from disappearing */
+.theme-option.submenu::after {
+  content: "";
+  position: fixed;
+  width: 5px;
+  height: 100%;
+  z-index: 1000;
+  display: none;
+}
+
 .theme-option.submenu:hover > .submenu-list {
   display: block;
+}
+
+/* Custom scrollbar styling for webkit browsers */
+.theme-options-list::-webkit-scrollbar {
+  width: 8px;
 }
 
 .tb-custom-category-selection {

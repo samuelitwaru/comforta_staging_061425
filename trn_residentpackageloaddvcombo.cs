@@ -108,6 +108,16 @@ namespace GeneXus.Programs {
                if (true) return;
             }
          }
+         else if ( StringUtil.StrCmp(AV13ComboName, "ListOfResidents") == 0 )
+         {
+            /* Execute user subroutine: 'LOADCOMBOITEMS_LISTOFRESIDENTS' */
+            S121 ();
+            if ( returnInSub )
+            {
+               cleanup();
+               if (true) return;
+            }
+         }
          cleanup();
       }
 
@@ -115,18 +125,18 @@ namespace GeneXus.Programs {
       {
          /* 'LOADCOMBOITEMS_RESIDENTPACKAGEMODULES' Routine */
          returnInSub = false;
-         AV22GXV2 = 1;
-         GXt_objcol_SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem1 = AV21GXV1;
+         AV23GXV2 = 1;
+         GXt_objcol_SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem1 = AV22GXV1;
          new dp_residentprovisioning(context ).execute( out  GXt_objcol_SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem1) ;
-         AV21GXV1 = GXt_objcol_SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem1;
-         while ( AV22GXV2 <= AV21GXV1.Count )
+         AV22GXV1 = GXt_objcol_SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem1;
+         while ( AV23GXV2 <= AV22GXV1.Count )
          {
-            AV20ResidentPackageModules_DPItem = ((SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem)AV21GXV1.Item(AV22GXV2));
+            AV20ResidentPackageModules_DPItem = ((SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem)AV22GXV1.Item(AV23GXV2));
             AV12Combo_DataItem = new WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item(context);
             AV12Combo_DataItem.gxTpr_Id = AV20ResidentPackageModules_DPItem.gxTpr_Residentprovisionvalue;
             AV12Combo_DataItem.gxTpr_Title = AV20ResidentPackageModules_DPItem.gxTpr_Residentprovisiondescription;
             AV11Combo_Data.Add(AV12Combo_DataItem, 0);
-            AV22GXV2 = (int)(AV22GXV2+1);
+            AV23GXV2 = (int)(AV23GXV2+1);
          }
          AV11Combo_Data.Sort("Title");
          if ( StringUtil.StrCmp(AV14TrnMode, "INS") != 0 )
@@ -144,19 +154,40 @@ namespace GeneXus.Programs {
             pr_default.close(0);
             if ( StringUtil.StrCmp(AV14TrnMode, "GET_DSC") == 0 )
             {
-               AV24GXV3 = 1;
-               while ( AV24GXV3 <= AV11Combo_Data.Count )
+               AV25GXV3 = 1;
+               while ( AV25GXV3 <= AV11Combo_Data.Count )
                {
-                  AV12Combo_DataItem = ((WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item)AV11Combo_Data.Item(AV24GXV3));
+                  AV12Combo_DataItem = ((WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item)AV11Combo_Data.Item(AV25GXV3));
                   if ( StringUtil.StrCmp(AV12Combo_DataItem.gxTpr_Id, AV16SelectedValue) == 0 )
                   {
                      AV17SelectedText = AV12Combo_DataItem.gxTpr_Title;
                      if (true) break;
                   }
-                  AV24GXV3 = (int)(AV24GXV3+1);
+                  AV25GXV3 = (int)(AV25GXV3+1);
                }
             }
          }
+      }
+
+      protected void S121( )
+      {
+         /* 'LOADCOMBOITEMS_LISTOFRESIDENTS' Routine */
+         returnInSub = false;
+         AV27GXV5 = 1;
+         GXt_objcol_SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem2 = AV26GXV4;
+         new dp_locationresident(context ).execute( out  GXt_objcol_SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem2) ;
+         AV26GXV4 = GXt_objcol_SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem2;
+         while ( AV27GXV5 <= AV26GXV4.Count )
+         {
+            AV21ListOfResidents_DPItem = ((SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem)AV26GXV4.Item(AV27GXV5));
+            AV12Combo_DataItem = new WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item(context);
+            AV12Combo_DataItem.gxTpr_Id = StringUtil.Trim( AV21ListOfResidents_DPItem.gxTpr_Residentid.ToString());
+            AV12Combo_DataItem.gxTpr_Title = AV21ListOfResidents_DPItem.gxTpr_Residentfullname;
+            AV11Combo_Data.Add(AV12Combo_DataItem, 0);
+            AV27GXV5 = (int)(AV27GXV5+1);
+         }
+         AV11Combo_Data.Sort("Title");
+         AV16SelectedValue = AV19SelectedValueCol.ToJSonString(false);
       }
 
       public override void cleanup( )
@@ -175,7 +206,7 @@ namespace GeneXus.Programs {
          AV17SelectedText = "";
          AV11Combo_Data = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item>( context, "Item", "");
          AV9WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
-         AV21GXV1 = new GXBaseCollection<SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem>( context, "SDT_ResidentProvisioningItem", "Comforta_version2");
+         AV22GXV1 = new GXBaseCollection<SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem>( context, "SDT_ResidentProvisioningItem", "Comforta_version2");
          GXt_objcol_SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem1 = new GXBaseCollection<SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem>( context, "SDT_ResidentProvisioningItem", "Comforta_version2");
          AV20ResidentPackageModules_DPItem = new SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem(context);
          AV12Combo_DataItem = new WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item(context);
@@ -183,6 +214,10 @@ namespace GeneXus.Programs {
          P00B62_A532ResidentPackageModules = new string[] {""} ;
          A527ResidentPackageId = Guid.Empty;
          A532ResidentPackageModules = "";
+         AV26GXV4 = new GXBaseCollection<SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem>( context, "SDT_ResidentAddressBookItem", "Comforta_version2");
+         GXt_objcol_SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem2 = new GXBaseCollection<SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem>( context, "SDT_ResidentAddressBookItem", "Comforta_version2");
+         AV21ListOfResidents_DPItem = new SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem(context);
+         AV19SelectedValueCol = new GxSimpleCollection<string>();
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.trn_residentpackageloaddvcombo__default(),
             new Object[][] {
                 new Object[] {
@@ -193,8 +228,9 @@ namespace GeneXus.Programs {
          /* GeneXus formulas. */
       }
 
-      private int AV22GXV2 ;
-      private int AV24GXV3 ;
+      private int AV23GXV2 ;
+      private int AV25GXV3 ;
+      private int AV27GXV5 ;
       private string AV14TrnMode ;
       private bool returnInSub ;
       private string A532ResidentPackageModules ;
@@ -208,13 +244,17 @@ namespace GeneXus.Programs {
       private IGxDataStore dsDefault ;
       private GXBaseCollection<WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item> AV11Combo_Data ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
-      private GXBaseCollection<SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem> AV21GXV1 ;
+      private GXBaseCollection<SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem> AV22GXV1 ;
       private GXBaseCollection<SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem> GXt_objcol_SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem1 ;
       private SdtSDT_ResidentProvisioning_SDT_ResidentProvisioningItem AV20ResidentPackageModules_DPItem ;
       private WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item AV12Combo_DataItem ;
       private IDataStoreProvider pr_default ;
       private Guid[] P00B62_A527ResidentPackageId ;
       private string[] P00B62_A532ResidentPackageModules ;
+      private GXBaseCollection<SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem> AV26GXV4 ;
+      private GXBaseCollection<SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem> GXt_objcol_SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem2 ;
+      private SdtSDT_ResidentAddressBook_SDT_ResidentAddressBookItem AV21ListOfResidents_DPItem ;
+      private GxSimpleCollection<string> AV19SelectedValueCol ;
       private string aP3_SelectedValue ;
       private string aP4_SelectedText ;
       private GXBaseCollection<WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item> aP5_Combo_Data ;
