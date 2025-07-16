@@ -82,9 +82,9 @@ namespace GeneXus.Programs {
             cleanup();
             if (true) return;
          }
-         AV19Udparg1 = new prc_getuserlocationid(context).executeUdp( );
+         AV20Udparg1 = new prc_getuserlocationid(context).executeUdp( );
          /* Using cursor P00BE2 */
-         pr_default.execute(0, new Object[] {AV19Udparg1});
+         pr_default.execute(0, new Object[] {AV20Udparg1});
          while ( (pr_default.getStatus(0) != 101) )
          {
             A29LocationId = P00BE2_A29LocationId[0];
@@ -92,10 +92,36 @@ namespace GeneXus.Programs {
             A620IsVersionDeleted = P00BE2_A620IsVersionDeleted[0];
             A523AppVersionId = P00BE2_A523AppVersionId[0];
             A524AppVersionName = P00BE2_A524AppVersionName[0];
-            AV10BC_Trn_AppVersion = new SdtTrn_AppVersion(context);
-            AV10BC_Trn_AppVersion.Load(A523AppVersionId);
-            new prc_loadappversionsdt(context ).execute(  AV10BC_Trn_AppVersion, out  AV9SDT_AppVersion) ;
-            AV8SDT_AppVersionCollection.Add(AV9SDT_AppVersion, 0);
+            AV21GXLvl11 = 0;
+            /* Using cursor P00BE3 */
+            pr_default.execute(1, new Object[] {A523AppVersionId});
+            while ( (pr_default.getStatus(1) != 101) )
+            {
+               A517PageName = P00BE3_A517PageName[0];
+               A516PageId = P00BE3_A516PageId[0];
+               if ( StringUtil.StrCmp(StringUtil.Lower( StringUtil.Trim( A517PageName)), context.GetMessage( "home", "")) == 0 )
+               {
+                  AV21GXLvl11 = 1;
+                  AV18HasHomePage = true;
+               }
+               pr_default.readNext(1);
+            }
+            pr_default.close(1);
+            if ( AV21GXLvl11 == 0 )
+            {
+               AV18HasHomePage = false;
+            }
+            if ( AV18HasHomePage )
+            {
+               AV10BC_Trn_AppVersion = new SdtTrn_AppVersion(context);
+               AV10BC_Trn_AppVersion.Load(A523AppVersionId);
+               new prc_loadappversionsdt(context ).execute(  AV10BC_Trn_AppVersion, out  AV9SDT_AppVersion) ;
+               AV8SDT_AppVersionCollection.Add(AV9SDT_AppVersion, 0);
+            }
+            else
+            {
+               new prc_logtoserver(context ).execute(  context.GetMessage( "deleteing verion ", "")+A524AppVersionName) ;
+            }
             pr_default.readNext(0);
          }
          pr_default.close(0);
@@ -114,7 +140,7 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV19Udparg1 = Guid.Empty;
+         AV20Udparg1 = Guid.Empty;
          P00BE2_A29LocationId = new Guid[] {Guid.Empty} ;
          P00BE2_n29LocationId = new bool[] {false} ;
          P00BE2_A620IsVersionDeleted = new bool[] {false} ;
@@ -123,6 +149,11 @@ namespace GeneXus.Programs {
          A29LocationId = Guid.Empty;
          A523AppVersionId = Guid.Empty;
          A524AppVersionName = "";
+         P00BE3_A523AppVersionId = new Guid[] {Guid.Empty} ;
+         P00BE3_A517PageName = new string[] {""} ;
+         P00BE3_A516PageId = new Guid[] {Guid.Empty} ;
+         A517PageName = "";
+         A516PageId = Guid.Empty;
          AV10BC_Trn_AppVersion = new SdtTrn_AppVersion(context);
          AV9SDT_AppVersion = new SdtSDT_AppVersion(context);
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.prc_getappversions__default(),
@@ -130,17 +161,24 @@ namespace GeneXus.Programs {
                 new Object[] {
                P00BE2_A29LocationId, P00BE2_n29LocationId, P00BE2_A620IsVersionDeleted, P00BE2_A523AppVersionId, P00BE2_A524AppVersionName
                }
+               , new Object[] {
+               P00BE3_A523AppVersionId, P00BE3_A517PageName, P00BE3_A516PageId
+               }
             }
          );
          /* GeneXus formulas. */
       }
 
+      private short AV21GXLvl11 ;
       private bool n29LocationId ;
       private bool A620IsVersionDeleted ;
+      private bool AV18HasHomePage ;
       private string A524AppVersionName ;
-      private Guid AV19Udparg1 ;
+      private string A517PageName ;
+      private Guid AV20Udparg1 ;
       private Guid A29LocationId ;
       private Guid A523AppVersionId ;
+      private Guid A516PageId ;
       private IGxDataStore dsDataStore1 ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
@@ -154,6 +192,9 @@ namespace GeneXus.Programs {
       private bool[] P00BE2_A620IsVersionDeleted ;
       private Guid[] P00BE2_A523AppVersionId ;
       private string[] P00BE2_A524AppVersionName ;
+      private Guid[] P00BE3_A523AppVersionId ;
+      private string[] P00BE3_A517PageName ;
+      private Guid[] P00BE3_A516PageId ;
       private SdtTrn_AppVersion AV10BC_Trn_AppVersion ;
       private SdtSDT_AppVersion AV9SDT_AppVersion ;
    }
@@ -165,6 +206,7 @@ namespace GeneXus.Programs {
          cursorDefinitions();
          return new Cursor[] {
           new ForEachCursor(def[0])
+         ,new ForEachCursor(def[1])
        };
     }
 
@@ -175,10 +217,15 @@ namespace GeneXus.Programs {
        {
           Object[] prmP00BE2;
           prmP00BE2 = new Object[] {
-          new ParDef("AV19Udparg1",GXType.UniqueIdentifier,36,0)
+          new ParDef("AV20Udparg1",GXType.UniqueIdentifier,36,0)
+          };
+          Object[] prmP00BE3;
+          prmP00BE3 = new Object[] {
+          new ParDef("AppVersionId",GXType.UniqueIdentifier,36,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P00BE2", "SELECT LocationId, IsVersionDeleted, AppVersionId, AppVersionName FROM Trn_AppVersion WHERE (LocationId = :AV19Udparg1) AND (IsVersionDeleted = FALSE) ORDER BY AppVersionName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00BE2,100, GxCacheFrequency.OFF ,true,false )
+              new CursorDef("P00BE2", "SELECT LocationId, IsVersionDeleted, AppVersionId, AppVersionName FROM Trn_AppVersion WHERE (LocationId = :AV20Udparg1) AND (IsVersionDeleted = FALSE) ORDER BY AppVersionName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00BE2,100, GxCacheFrequency.OFF ,true,false )
+             ,new CursorDef("P00BE3", "SELECT AppVersionId, PageName, PageId FROM Trn_AppVersionPage WHERE AppVersionId = :AppVersionId ORDER BY AppVersionId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00BE3,100, GxCacheFrequency.OFF ,false,false )
           };
        }
     }
@@ -195,6 +242,11 @@ namespace GeneXus.Programs {
                 ((bool[]) buf[2])[0] = rslt.getBool(2);
                 ((Guid[]) buf[3])[0] = rslt.getGuid(3);
                 ((string[]) buf[4])[0] = rslt.getVarchar(4);
+                return;
+             case 1 :
+                ((Guid[]) buf[0])[0] = rslt.getGuid(1);
+                ((string[]) buf[1])[0] = rslt.getVarchar(2);
+                ((Guid[]) buf[2])[0] = rslt.getGuid(3);
                 return;
        }
     }

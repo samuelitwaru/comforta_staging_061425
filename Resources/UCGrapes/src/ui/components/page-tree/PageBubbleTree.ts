@@ -58,7 +58,9 @@ export class PageBubbleTree {
     const appVersionManager = this.themeManager.appVersionManager;
     this.appVersionManager = appVersionManager;
     this.pages = appVersionManager.getPages();
+    console.log("pages >> ", this.pages);
     this.processedPages = this.processPageData(this.pages);
+
     const homePage = this.processedPages.find((page) => page.title === "Home");
 
     if (homePage) {
@@ -67,7 +69,9 @@ export class PageBubbleTree {
 
       //get pageids from the trail
       const pageIdsOnly = Array.isArray(pageTrail)
-        ? pageTrail.filter((item: any) => item && item.pageId).map((item: any) => item.pageId)
+        ? pageTrail
+            .filter((item: any) => item && item.pageId)
+            .map((item: any) => item.pageId)
         : [];
       this.primaryNodeId = homePage.id;
       this.navigationHistory = [{ id: homePage.id, name: homePage.title }];
@@ -95,7 +99,9 @@ export class PageBubbleTree {
             return { id, name: page ? page.title : id };
           });
           this.primaryNodeId = primaryNodeId;
-          const targetNode = this.processedPages.find((p) => p.id === primaryNodeId);
+          const targetNode = this.processedPages.find(
+            (p) => p.id === primaryNodeId
+          );
           if (targetNode) {
             this.updateNodeDisplay(targetNode);
             return;
@@ -143,11 +149,21 @@ export class PageBubbleTree {
   }
 
   hide() {
-    const editorSections = document.getElementsByClassName("editor-main-section");
-    const toolSection = document.getElementById("tools-section") as HTMLDivElement;
-    const treeSection = document.getElementById("tree-view-section") as HTMLDivElement;
-    const menuPageSection = document.getElementById("menu-page-section") as HTMLDivElement;
-    const contentPageSection = document.getElementById("content-page-section") as HTMLDivElement;
+    const editorSections = document.getElementsByClassName(
+      "editor-main-section"
+    );
+    const toolSection = document.getElementById(
+      "tools-section"
+    ) as HTMLDivElement;
+    const treeSection = document.getElementById(
+      "tree-view-section"
+    ) as HTMLDivElement;
+    const menuPageSection = document.getElementById(
+      "menu-page-section"
+    ) as HTMLDivElement;
+    const contentPageSection = document.getElementById(
+      "content-page-section"
+    ) as HTMLDivElement;
 
     if (editorSections.length > 0) {
       // toggle display
@@ -168,9 +184,15 @@ export class PageBubbleTree {
     this.graphContainer = this.build();
     this.buildTree();
 
-    const editorSections = document.getElementsByClassName("editor-main-section");
-    const toolSection = document.getElementById("tools-section") as HTMLDivElement;
-    const treeSection = document.getElementById("tree-view-section") as HTMLDivElement;
+    const editorSections = document.getElementsByClassName(
+      "editor-main-section"
+    );
+    const toolSection = document.getElementById(
+      "tools-section"
+    ) as HTMLDivElement;
+    const treeSection = document.getElementById(
+      "tree-view-section"
+    ) as HTMLDivElement;
 
     // Hide editor sections and tool/tree sections, show graphContainer
     if (editorSections.length > 0) {
@@ -188,13 +210,17 @@ export class PageBubbleTree {
   }
 
   build() {
-    this.mainContainer = document.getElementById("main-content") as HTMLDivElement;
+    this.mainContainer = document.getElementById(
+      "main-content"
+    ) as HTMLDivElement;
     if (!this.mainContainer) {
       return document.createElement("div");
     }
     //add style to mainContainer
     this.mainContainer.style.background = "#E9EBF0";
-    this.graphContainer = document.getElementById("graph-container-1") as HTMLDivElement;
+    this.graphContainer = document.getElementById(
+      "graph-container-1"
+    ) as HTMLDivElement;
 
     if (!this.graphContainer) {
       this.graphContainer = document.createElement("div");
@@ -205,7 +231,9 @@ export class PageBubbleTree {
     this.graphContainer.innerHTML = "<svg></svg>";
     this.mainContainer.appendChild(this.graphContainer);
 
-    this.treeFeatures = document.getElementById("tree-features") as HTMLDivElement;
+    this.treeFeatures = document.getElementById(
+      "tree-features"
+    ) as HTMLDivElement;
     if (!this.treeFeatures) {
       // Create tree features container if it doesn't exist
       this.treeFeatures = document.createElement("div");
@@ -213,7 +241,9 @@ export class PageBubbleTree {
       this.treeFeatures.className = "tree-features";
     }
 
-    this.sectionTreeMinimize = document.getElementById("section-tree-minimize") as HTMLDivElement;
+    this.sectionTreeMinimize = document.getElementById(
+      "section-tree-minimize"
+    ) as HTMLDivElement;
     if (!this.sectionTreeMinimize) {
       this.sectionTreeMinimize = document.createElement("div");
       this.sectionTreeMinimize.id = "section-tree-minimize";
@@ -230,7 +260,9 @@ export class PageBubbleTree {
       });
     }
 
-    this.sectionAllPages = document.getElementById("section-all-pages") as HTMLDivElement;
+    this.sectionAllPages = document.getElementById(
+      "section-all-pages"
+    ) as HTMLDivElement;
     if (!this.sectionAllPages) {
       this.sectionAllPages = document.createElement("div");
       this.sectionAllPages.id = "section-all-pages";
@@ -250,18 +282,29 @@ export class PageBubbleTree {
         this.previousPath = this.path ? [...this.path] : null;
 
         // Exclude MyActivity, Calendar, Map, Maps from those that are not connected to
-        const excludedTypes = ["MyActivity", "My Activity", "Calendar", "Map", "Maps"];
+        const excludedTypes = [
+          "MyActivity",
+          "My Activity",
+          "Calendar",
+          "Map",
+          "Maps",
+        ];
 
         // Find all connected page IDs
         const connectedIds = new Set<string>();
         this.processedPages.forEach((page: any) => {
-          (page.children || []).forEach((childId: string) => connectedIds.add(childId));
+          (page.children || []).forEach((childId: string) =>
+            connectedIds.add(childId)
+          );
         });
 
         // Always include pages that are connected to, or are not of excluded types
         const filteredPages = this.processedPages.filter((page: any) => {
           if (connectedIds.has(page.id)) return true;
-          return !excludedTypes.includes(page.title) && !excludedTypes.includes(page.PageType);
+          return (
+            !excludedTypes.includes(page.title) &&
+            !excludedTypes.includes(page.PageType)
+          );
         });
 
         this.nodes = this.createNodes(filteredPages);
@@ -270,7 +313,9 @@ export class PageBubbleTree {
       });
     }
 
-    this.SelectedPage = document.getElementById("section-selected-page") as HTMLDivElement;
+    this.SelectedPage = document.getElementById(
+      "section-selected-page"
+    ) as HTMLDivElement;
     if (!this.SelectedPage) {
       this.SelectedPage = document.createElement("div");
       this.SelectedPage.id = "section-selected-page";
@@ -290,7 +335,9 @@ export class PageBubbleTree {
           this.path = this.previousPath ? [...this.previousPath] : null;
         }
 
-        const node = this.processedPages.find((p: any) => p.id === this.previousPrimaryNodeId);
+        const node = this.processedPages.find(
+          (p: any) => p.id === this.previousPrimaryNodeId
+        );
         if (node) {
           this.updateNodeDisplay(node);
         }
@@ -309,14 +356,18 @@ export class PageBubbleTree {
 
   build2() {
     // console.log("Build2");
-    const TreeSection = document.getElementById("section-tree") as HTMLDivElement;
+    const TreeSection = document.getElementById(
+      "section-tree"
+    ) as HTMLDivElement;
 
     if (!TreeSection) {
       // console.error("Main content container not found");
       return document.createElement("div");
     }
 
-    this.treeContainer = document.getElementById("tree-container") as HTMLDivElement;
+    this.treeContainer = document.getElementById(
+      "tree-container"
+    ) as HTMLDivElement;
 
     if (!this.treeContainer) {
       this.treeContainer = document.createElement("div");
@@ -364,8 +415,9 @@ export class PageBubbleTree {
                       row.CtaAttributes.CtaType === "WebLink"
                     ) {
                       const title =
-                        row.CtaAttributes.CtaType === "Form" ? "Dynamic Form" : "Web Link";
-
+                        row.CtaAttributes.CtaType === "Form"
+                          ? "Dynamic Form"
+                          : "Web Link";
                       linkPages.push({
                         id: row.CtaAttributes.Action.ObjectId,
                         title: title,
@@ -421,8 +473,14 @@ export class PageBubbleTree {
             } else if (row.InfoType === "Cta") {
               // console.log("row.CtaAttributes", row.CtaAttributes);
 
-              if (row.CtaAttributes.CtaType === "Form" || row.CtaAttributes.CtaType === "WebLink") {
-                const title = row.CtaAttributes.CtaType === "Form" ? "Dynamic Form" : "Web Link";
+              if (
+                row.CtaAttributes.CtaType === "Form" ||
+                row.CtaAttributes.CtaType === "WebLink"
+              ) {
+                const title =
+                  row.CtaAttributes.CtaType === "Form"
+                    ? "Dynamic Form"
+                    : "Web Link";
 
                 linkPages.push({
                   id: row.CtaAttributes.Action.ObjectId,
@@ -441,7 +499,8 @@ export class PageBubbleTree {
       } else if (page.PageType === "Calendar") {
         ret.structure = this.PageTreeRendererInfoPage.createAgendaHTML(page);
       } else if (page.PageType === "MyActivity") {
-        ret.structure = this.PageTreeRendererInfoPage.createMyActivityHTML(page);
+        ret.structure =
+          this.PageTreeRendererInfoPage.createMyActivityHTML(page);
       } else if (page.PageType === "Map") {
         ret.structure = this.PageTreeRendererInfoPage.createMapHTML(page);
       }
@@ -475,7 +534,9 @@ export class PageBubbleTree {
     // console.log("processedPages", processedPages);
     return processedPages.flatMap((p) =>
       p.children
-        .filter((childId: string) => processedPages.some((page: any) => page.id === childId))
+        .filter((childId: string) =>
+          processedPages.some((page: any) => page.id === childId)
+        )
         .map((childId: string) => ({
           source: p.id,
           target: childId,
@@ -608,7 +669,9 @@ export class PageBubbleTree {
   }
 
   createCircularNodes() {
-    let tooltip = document.getElementById("bubble-tree-tooltip") as HTMLDivElement;
+    let tooltip = document.getElementById(
+      "bubble-tree-tooltip"
+    ) as HTMLDivElement;
     if (!tooltip) {
       tooltip = document.createElement("div");
       tooltip.id = "bubble-tree-tooltip";
@@ -668,7 +731,10 @@ export class PageBubbleTree {
     const nodeHeight = 175;
 
     this.node
-      .filter((d: any) => d.totalChildCount > d.childCount && d.id !== this.primaryNodeId)
+      .filter(
+        (d: any) =>
+          d.totalChildCount > d.childCount && d.id !== this.primaryNodeId
+      )
       .append("rect")
       .attr("width", nodeWidth)
       .attr("height", nodeHeight)
@@ -690,7 +756,9 @@ export class PageBubbleTree {
       .attr("height", nodeHeight)
       .attr("x", -nodeWidth / 2) // Center the rectangle horizontally
       .attr("y", -nodeHeight / 2) // Center the rectangle vertically
-      .attr("stroke", (d: any) => (d.id === this.primaryNodeId ? "#222F54" : "#8F8F8F73"))
+      .attr("stroke", (d: any) =>
+        d.id === this.primaryNodeId ? "#222F54" : "#8F8F8F73"
+      )
       .attr("fill", "#efeeec")
       .attr("rx", 10)
       .attr("ry", 10);
@@ -785,7 +853,9 @@ export class PageBubbleTree {
       .drag()
       .on("start", (event: any, d: any) => this.dragstarted(event, d))
       .on("drag", (event: any, d: any) => {
-        const tooltip = document.getElementById("bubble-tree-tooltip") as HTMLDivElement;
+        const tooltip = document.getElementById(
+          "bubble-tree-tooltip"
+        ) as HTMLDivElement;
         if (tooltip) tooltip.style.display = "none";
         this.dragged(event, d);
       })
@@ -816,11 +886,16 @@ export class PageBubbleTree {
     }
 
     // Check if node is already in history
-    const existingIndex = this.navigationHistory.findIndex((item) => item.id === d.id);
+    const existingIndex = this.navigationHistory.findIndex(
+      (item) => item.id === d.id
+    );
 
     if (existingIndex !== -1) {
       // If clicking a node that's in history, truncate history to that point
-      this.navigationHistory = this.navigationHistory.slice(0, existingIndex + 1);
+      this.navigationHistory = this.navigationHistory.slice(
+        0,
+        existingIndex + 1
+      );
     } else {
       // Add new node to navigation history
       this.navigationHistory.push({ id: d.id, name: d.name });
@@ -856,7 +931,9 @@ export class PageBubbleTree {
 
     // Add shared nodes (children of both current node and any ancestor)
     ancestorIds.forEach((ancestorId) => {
-      const ancestor = this.processedPages.find((p: any) => p.id === ancestorId);
+      const ancestor = this.processedPages.find(
+        (p: any) => p.id === ancestorId
+      );
       if (ancestor) {
         const shared = (ancestor.children || []).filter((id: string) =>
           (node.children || []).includes(id)
@@ -866,7 +943,9 @@ export class PageBubbleTree {
     });
 
     // Build processedPages for these nodes
-    const processedPages = this.processedPages.filter((p: any) => nodeIds.has(p.id));
+    const processedPages = this.processedPages.filter((p: any) =>
+      nodeIds.has(p.id)
+    );
 
     this.nodes = this.createNodes(processedPages);
     this.links = this.createLinks(processedPages);
@@ -887,7 +966,10 @@ export class PageBubbleTree {
     // Update navigation history if index provided
     if (historyIndex !== undefined) {
       // Truncate history if clicking on a breadcrumb
-      this.navigationHistory = this.navigationHistory.slice(0, historyIndex + 1);
+      this.navigationHistory = this.navigationHistory.slice(
+        0,
+        historyIndex + 1
+      );
     }
 
     // Use the common update function
