@@ -40,7 +40,7 @@ export class FormModalService {
 
     if (this.isInfoCtaSection) {
       this.appendSupplierSelection(formBody, form);
-      if (this.type === 'Form') {
+      if (this.type === "Form") {
         this.appendSupplierFormSelection(formBody, form);
       }
     }
@@ -65,14 +65,23 @@ export class FormModalService {
   validateFields(form: Form): boolean {
     let isValid = true;
     const fields = form["fields"] as FormField[];
-    const reservedNames = ["home", "my care", "my living", "my services", "web link", "dynamic form"];
+    const reservedNames = [
+      "home",
+      "my care",
+      "my living",
+      "my services",
+      "web link",
+      "dynamic form",
+    ];
 
     // Reset all error states
     fields.forEach((field) => field.hideError());
 
     // Validate each field
     fields.forEach((field: any) => {
-      const input = field.getElement().querySelector("input") as HTMLInputElement;
+      const input = field
+        .getElement()
+        .querySelector("input") as HTMLInputElement;
       if (!input) return;
 
       const value = input.value.trim();
@@ -114,7 +123,8 @@ export class FormModalService {
   }
 
   isValidEmail(email: string): boolean {
-    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?$/;
+    const emailRegex =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?$/;
     return emailRegex.test(email) && email.length <= 254;
   }
 
@@ -126,9 +136,9 @@ export class FormModalService {
     // const supplierItemsList = this.config.suppliers;
     const supplierItemsList = (window as any).app.suppliers;
     const itemsSelect = new SupplierSelectionComponent<any>(supplierItemsList, {
-      labelField: 'SupplierGenCompanyName',
-      valueField: 'SupplierGenId',
-      placeholder: 'Select supplier to connect...'
+      labelField: "SupplierGenCompanyName",
+      valueField: "SupplierGenId",
+      placeholder: "Select supplier to connect...",
     });
 
     this.supplierSelectComponent = itemsSelect;
@@ -159,21 +169,28 @@ export class FormModalService {
     formBody.appendChild(formSupplierField);
 
     // Listen for the clear event to reset dependent fields
-    selectElement.addEventListener('supplier-cleared', () => {
+    selectElement.addEventListener("supplier-cleared", () => {
       this.resetSupplierDependentFields(formBody, form);
     });
   }
 
-  private appendSupplierFormSelection(formBody: HTMLDivElement, form: Form, isRefresh?: boolean): void {
+  private appendSupplierFormSelection(
+    formBody: HTMLDivElement,
+    form: Form,
+    isRefresh?: boolean
+  ): void {
     const selectedSupplierId = form.getSelectedSupplierId();
-    const filteredForms = selectedSupplierId && isRefresh
-      ? this.toolBoxService.forms.filter((f: any) => f.SupplierId === selectedSupplierId)
-      : this.toolBoxService.forms;
+    const filteredForms =
+      selectedSupplierId && isRefresh
+        ? this.toolBoxService.forms.filter(
+            (f: any) => f.SupplierId === selectedSupplierId
+          )
+        : this.toolBoxService.forms;
 
     const itemsSelect = new SupplierSelectionComponent<any>(filteredForms, {
       labelField: "PageName",
       valueField: "FormUrl",
-      placeholder: "Select form..."
+      placeholder: "Select form...",
     });
 
     const formSupplierField = document.createElement("div");
@@ -203,26 +220,35 @@ export class FormModalService {
 
     // Update valueField on selection change
     itemsSelect.onChange((selectedForm: any) => {
-      const valueField = formBody.querySelector("#field_value") as HTMLInputElement;
-      const formIdField = formBody.querySelector("#field_id") as HTMLInputElement;
+      const valueField = formBody.querySelector(
+        "#field_value"
+      ) as HTMLInputElement;
+      const formIdField = formBody.querySelector(
+        "#field_id"
+      ) as HTMLInputElement;
       if ((valueField || formIdField) && selectedForm?.FormUrl) {
         valueField.value = selectedForm.FormUrl;
-        formIdField.value = selectedForm.FormId
+        formIdField.value = selectedForm.FormId;
       }
     });
   }
 
-  private resetSupplierDependentFields(formBody: HTMLDivElement, form: Form): void {
+  private resetSupplierDependentFields(
+    formBody: HTMLDivElement,
+    form: Form
+  ): void {
     form.setSelectedSupplierId("");
     // Example: reset the value field and enable it
-    const valueField = formBody.querySelector("#field_value") as HTMLInputElement;
+    const valueField = formBody.querySelector(
+      "#field_value"
+    ) as HTMLInputElement;
     if (valueField) {
       valueField.value = "";
       valueField.disabled = false;
     }
     // Reset other fields as needed
     // For example, reset a form selection dropdown:
-    if (this.type === 'Form') {
+    if (this.type === "Form") {
       const formField = formBody.querySelector("#field_id") as HTMLInputElement;
       if (formField) {
         formField.value = "";
@@ -237,8 +263,6 @@ export class FormModalService {
     }
   }
 
-
-
   private setupSupplierSelection(
     itemsSelect: SupplierSelectionComponent<any>,
     formBody: HTMLDivElement,
@@ -248,15 +272,14 @@ export class FormModalService {
 
     const lastConnectedSupplier = this.findLastConnectedSupplier();
     if (lastConnectedSupplier) {
-      const supplierId = lastConnectedSupplier.CtaAttributes?.CtaConnectedSupplierId;
+      const supplierId =
+        lastConnectedSupplier.CtaAttributes?.CtaConnectedSupplierId;
       itemsSelect.setValue(supplierId);
       form.setSelectedSupplierId(supplierId ?? null);
       // Update the form with the supplier data
       this.updateFieldWithSupplierData(
         formBody,
-        supplierItemsList.find(
-          item => item.SupplierGenId === supplierId
-        ),
+        supplierItemsList.find((item) => item.SupplierGenId === supplierId),
         form
       );
     }
@@ -269,8 +292,10 @@ export class FormModalService {
 
   private refreshFormSelection(formBody: HTMLDivElement, form: Form): void {
     // Find the existing .form-field that contains the "Select Form" label
-    const existingField = Array.from(formBody.querySelectorAll(".form-field label"))
-      .find(label => label.textContent?.includes("Select Form"))
+    const existingField = Array.from(
+      formBody.querySelectorAll(".form-field label")
+    )
+      .find((label) => label.textContent?.includes("Select Form"))
       ?.closest(".form-field");
 
     // Safely remove the existing form-field, if found and present in formBody
@@ -279,7 +304,8 @@ export class FormModalService {
     }
 
     // Append a fresh one
-    if (this.type === 'Form') this.appendSupplierFormSelection(formBody, form, true);
+    if (this.type === "Form")
+      this.appendSupplierFormSelection(formBody, form, true);
   }
 
   private findLastConnectedSupplier(): InfoType | null {
@@ -289,9 +315,11 @@ export class FormModalService {
 
     if (parsedInfoData?.PageInfoStructure?.InfoContent) {
       const items = [...parsedInfoData.PageInfoStructure.InfoContent].reverse();
-      return items.find(item =>
-        item?.InfoType === "Cta" &&
-        (item?.CtaAttributes as CtaAttributes)?.CtaSupplierIsConnected === true
+      return items.find(
+        (item) =>
+          item?.InfoType === "Cta" &&
+          (item?.CtaAttributes as CtaAttributes)?.CtaSupplierIsConnected ===
+            true
       );
     }
 
@@ -305,7 +333,9 @@ export class FormModalService {
   ): void {
     if (!supplier) return;
 
-    const valueField = formBody.querySelector("#field_value") as HTMLInputElement;
+    const valueField = formBody.querySelector(
+      "#field_value"
+    ) as HTMLInputElement;
 
     if (!valueField) {
       // console.warn("Could not find field_value element in the form");
@@ -314,11 +344,21 @@ export class FormModalService {
 
     let value = "";
     switch (this.type) {
-      case "Phone": value = supplier.SupplierGenContactPhone?.trim() || ""; break;
-      case "Email": value = supplier.SupplierGenEmail?.trim() || ""; break;
-      case "WebLink": value = supplier.SupplierGenWebsite?.trim() || ""; break;
-      case "Map": value = supplier.SupplierGenAddressLine1?.trim() || ""; break;
-      case "Form": this.refreshFormSelection(formBody, form); break; // refresh form list.
+      case "Phone":
+        value = supplier.SupplierGenContactPhone?.trim() || "";
+        break;
+      case "Email":
+        value = supplier.SupplierGenEmail?.trim() || "";
+        break;
+      case "WebLink":
+        value = supplier.SupplierGenWebsite?.trim() || "";
+        break;
+      case "Map":
+        value = supplier.SupplierGenAddressLine1?.trim() || "";
+        break;
+      case "Form":
+        this.refreshFormSelection(formBody, form);
+        break; // refresh form list.
     }
 
     // Only update the field value, not structure
@@ -327,7 +367,6 @@ export class FormModalService {
 
     form.setSelectedSupplierId(supplier.SupplierGenId);
   }
-
 
   private createSubmitSection(form: Form, onSave: () => void): HTMLDivElement {
     const submitSection = document.createElement("div");
@@ -364,7 +403,11 @@ export class FormModalService {
     return submitSection;
   }
 
-  private createButton(id: string, className: string, text: string): HTMLButtonElement {
+  private createButton(
+    id: string,
+    className: string,
+    text: string
+  ): HTMLButtonElement {
     const btn = document.createElement("button");
     btn.id = id;
     btn.classList.add("tb-btn", className);

@@ -43,7 +43,8 @@ button {
 .frame-container,
 .content-frame-container,
 .form-frame-container {
-  height: calc(100vh - 10px);
+  
+  height: calc(100vh - 0px);
   padding: 0.6em;
   display: flex;
   flex-direction: column;
@@ -1071,11 +1072,17 @@ img.content-page-block {
   display: none !important;
 }
 
-[data-gjs-type="wrapper"] {
-  min-height: 100vh;
+/* [data-gjs-type="wrapper"] {
+  min-height: 110vh;
   padding-top: 0 !important;
   padding: 0;
+  background-color: #efeeec;
 }
+
+.gjs-tools.gjs-tools-gl {
+  background-color: #efeeec;
+  height: 100vh;
+} */
 
 .gjs-resizer {
   display: none;

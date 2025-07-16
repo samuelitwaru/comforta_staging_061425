@@ -683,13 +683,9 @@ export class InfoContentMapper {
     const data: any = JSON.parse(
       localStorage.getItem(`data-${this.pageId}`) || "{}"
     );
-    console.log(infoId);
-    console.log("data", data);
-    console.log("data", data.PageInfoStructure);
     if (!data?.PageInfoStructure?.InfoContent) return null;
 
     const contentArray = data.PageInfoStructure.InfoContent;
-    console.log("content array", contentArray);
     const contentRowIndex = contentArray.findIndex(
       (row: InfoType) => row.InfoId === infoId
     );

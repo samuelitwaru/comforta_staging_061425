@@ -162,14 +162,14 @@
 }
 
 .tbap-tile .tile-icon svg {
-  height: 31px;
-  width: 28px;
+  height: auto;
+  width: 21px;
 }
 
 @media screen and (min-width: 1440px) {
   .tbap-tile .tile-icon svg {
-    height: 31px;
-    width: 28px;
+    height: auto;
+    width: 21px;
   }
 
   .tbap-tile .tile-title {

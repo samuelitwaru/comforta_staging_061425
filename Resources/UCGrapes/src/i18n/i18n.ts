@@ -48,7 +48,8 @@ export const i18n = new I18n({
         affected_tile: "Affected Tile",
         affected_content: "Affected Content",
         affected_cta: "Affected CTA",
-        debug_error_message: "*Page has some errors in the link. Please check again",
+        debug_error_message:
+          "*Page has some errors in the link. Please check again",
         processing_message: "Please wait while we are checking the urls...",
       },
       share: {
@@ -102,7 +103,8 @@ export const i18n = new I18n({
         label: "Templates",
         click_to_add_template: "Click to add template",
         confirmation_title: "Confirmation",
-        confirmation_message: "When you continue, all the changes you have made will be cleared.",
+        confirmation_message:
+          "When you continue, all the changes you have made will be cleared.",
       },
       confirmation_accept: "Confirm",
       confirmation_cancel: "Cancel",
@@ -110,7 +112,8 @@ export const i18n = new I18n({
         modal_title: "Edit Content",
         cancel: "Cancel",
         save: "Save",
-        upload_message: "<p>Drag and drop or <a href='#' id='browseLink'>browse</a></p>",
+        upload_message:
+          "<p>Drag and drop or <a href='#' id='browseLink'>browse</a></p>",
         upload_success_message: "The images have been published successfully.",
         no_images_added: "No images added",
         preparing_images: "Preparing images...",
@@ -121,7 +124,8 @@ export const i18n = new I18n({
         delete_image_title: "Delete image",
         delete_image_modal_title: "Delete media",
         delete_image_message: "Are you sure you want to delete this image?",
-        delete_images_message: "Are you sure you want to delete selected images?",
+        delete_images_message:
+          "Are you sure you want to delete selected images?",
       },
       icon_category: {
         general: "Technical Services & Support",
@@ -237,6 +241,7 @@ export const i18n = new I18n({
       connect_supplier: "Connect supplier(optional)",
       label: "Label",
       field_error_message: "This field is required",
+      email_error_message: "Invalid email address",
       label_error_message: "Please enter a valid label",
       email: {
         modal_title: "Add Email Address",
@@ -284,7 +289,8 @@ export const i18n = new I18n({
         modal_title: "Publiceren",
         modal_description:
           "Weet je zeker dat je wilt publiceren? Zodra gepubliceerd, worden alle momenteel zichtbare pagina's afgerond en zichtbaar voor bewoners. Deze actie kan niet ongedaan worden gemaakt.",
-        notify_residents: "Bewoners op de hoogte stellen van de gemaakte updates",
+        notify_residents:
+          "Bewoners op de hoogte stellen van de gemaakte updates",
         modal_confirm: "Publiceren",
         modal_cancel: "Annuleren",
         sidebar_mapping_title: "Indeling",
@@ -306,7 +312,8 @@ export const i18n = new I18n({
         affected_tile: "Beïnvloede tegel",
         affected_content: "Beïnvloede inhoud",
         affected_cta: "Beïnvloede CTA",
-        debug_error_message: "*Pagina bevat enkele fouten in de link. Controleer het opnieuw",
+        debug_error_message:
+          "*Pagina bevat enkele fouten in de link. Controleer het opnieuw",
         processing_message: "Even geduld terwijl we de URL's controleren...",
       },
       share: {
@@ -324,7 +331,8 @@ export const i18n = new I18n({
         duplicate_title: "Versie dupliceren",
         rename_version: "Versie hernoemen",
         delete_version: "Versie verwijderen",
-        delete_version_message: "Weet je zeker dat je deze versie wilt verwijderen?",
+        delete_version_message:
+          "Weet je zeker dat je deze versie wilt verwijderen?",
         dropdow: {
           duplicate: "Dupliceren",
           rename: "Hernoemen",
@@ -359,7 +367,8 @@ export const i18n = new I18n({
         modal_title: "Inhoud bewerken",
         cancel: "Annuleren",
         save: "Opslaan",
-        upload_message: "<p>Sleep en plaats of <a href='#' id='browseLink'>blader</a></p>",
+        upload_message:
+          "<p>Sleep en plaats of <a href='#' id='browseLink'>blader</a></p>",
         upload_success_message: "De afbeeldingen zijn succesvol gepubliceerd.",
         no_images_added: "Geen afbeeldingen toegevoegd",
         preparing_images: "Afbeeldingen voorbereiden...",
@@ -369,7 +378,8 @@ export const i18n = new I18n({
         deselect_all: "Alles deselecteren",
         delete_image_title: "Afbeelding verwijderen",
         delete_image_modal_title: "Media verwijderen",
-        delete_image_message: "Weet je zeker dat je deze afbeelding wilt verwijderen?",
+        delete_image_message:
+          "Weet je zeker dat je deze afbeelding wilt verwijderen?",
         delete_images_message:
           "Weet je zeker dat je de geselecteerde afbeeldingen wilt verwijderen?",
       },
@@ -455,7 +465,8 @@ export const i18n = new I18n({
         page_linking: "Pagina kan niet aan zichzelf worden gekoppeld",
         select_tile: "Selecteer een tegel om door te gaan",
         empty_page_name: "Voer een paginanaam in",
-        templates_on_menu_pages: "Sjablonen kunnen alleen aan menupagina's worden toegevoegd",
+        templates_on_menu_pages:
+          "Sjablonen kunnen alleen aan menupagina's worden toegevoegd",
         no_active_page: "Geen actieve pagina",
         empty_version_name: "Versienaam is verplicht.",
         existing_version_name: "Er bestaat al een versie met deze naam.",
@@ -490,6 +501,7 @@ export const i18n = new I18n({
       connect_supplier: "Leverancier koppelen (optioneel)",
       label: "Label",
       field_error_message: "Dit veld is verplicht",
+      email_error_message: "ongeldig e-mailadres",
       label_error_message: "Voer een geldig label in",
       email: {
         modal_title: "E-mailadres toevoegen",

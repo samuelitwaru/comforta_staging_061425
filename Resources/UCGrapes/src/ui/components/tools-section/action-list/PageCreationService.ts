@@ -31,85 +31,102 @@ export class PageCreationService {
   }
 
   handlePhone() {
-    this.createFormAndModal("phone-form", i18n.t("cta_modal_forms.phone.modal_title"), "Phone", [
-      {
-        label: i18n.t("cta_modal_forms.phone.field_placeholder"),
-        type: "tel",
-        id: "field_value",
-        placeholder: i18n.t("cta_modal_forms.phone.field_placeholder"),
-        required: true,
-        errorMessage: i18n.t("cta_modal_forms.field_error_message"),
-        validate: (value: string) => this.formModalService.isValidPhone(value),
-      },
-      {
-        label: i18n.t("cta_modal_forms.label"),
-        type: "text",
-        id: "field_label",
-        placeholder: i18n.t("cta_modal_forms.phone.label_placeholder"),
-        required: true,
-        errorMessage: i18n.t("cta_modal_forms.label_error_message"),
-        minLength: 2,
-      },
-    ]);
+    this.createFormAndModal(
+      "phone-form",
+      i18n.t("cta_modal_forms.phone.modal_title"),
+      "Phone",
+      [
+        {
+          label: i18n.t("cta_modal_forms.phone.field_placeholder"),
+          type: "tel",
+          id: "field_value",
+          placeholder: i18n.t("cta_modal_forms.phone.field_placeholder"),
+          required: true,
+          errorMessage: i18n.t("cta_modal_forms.field_error_message"),
+          validate: (value: string) =>
+            this.formModalService.isValidPhone(value),
+        },
+        {
+          label: i18n.t("cta_modal_forms.label"),
+          type: "text",
+          id: "field_label",
+          placeholder: i18n.t("cta_modal_forms.phone.label_placeholder"),
+          required: true,
+          errorMessage: i18n.t("cta_modal_forms.label_error_message"),
+          minLength: 2,
+        },
+      ]
+    );
   }
 
   handleEmail() {
-    this.createFormAndModal("email-form", i18n.t("cta_modal_forms.email.modal_title"), "Email", [
-      {
-        label: i18n.t("cta_modal_forms.email.field_label"),
-        type: "email",
-        id: "field_value",
-        placeholder: i18n.t("cta_modal_forms.email.field_placeholder"),
-        required: true,
-        errorMessage: i18n.t("cta_modal_forms.field_error_message"),
-        validate: (value: string) => this.formModalService.isValidEmail(value),
-      },
-      {
-        label: i18n.t("cta_modal_forms.label"),
-        type: "text",
-        id: "field_label",
-        placeholder: i18n.t("cta_modal_forms.email.label_placeholder"),
-        required: true,
-        errorMessage: i18n.t("cta_modal_forms.label_error_message"),
-        minLength: 2,
-      },
-    ]);
+    this.createFormAndModal(
+      "email-form",
+      i18n.t("cta_modal_forms.email.modal_title"),
+      "Email",
+      [
+        {
+          label: i18n.t("cta_modal_forms.email.field_label"),
+          type: "email",
+          id: "field_value",
+          placeholder: i18n.t("cta_modal_forms.email.field_placeholder"),
+          required: true,
+          errorMessage: i18n.t("cta_modal_forms.email_error_message"),
+          validate: (value: string) =>
+            this.formModalService.isValidEmail(value),
+        },
+        {
+          label: i18n.t("cta_modal_forms.label"),
+          type: "text",
+          id: "field_label",
+          placeholder: i18n.t("cta_modal_forms.email.label_placeholder"),
+          required: true,
+          errorMessage: i18n.t("cta_modal_forms.label_error_message"),
+          minLength: 2,
+        },
+      ]
+    );
   }
 
   handleForm() {
-    this.createFormAndModal("form-form", i18n.t("cta_modal_forms.form.modal_title"), "Form", [
-      {
-        label: i18n.t("cta_modal_forms.form.field_placeholder"),
-        type: "url",
-        id: "field_value",
-        placeholder: i18n.t("cta_modal_forms.form.field_placeholder"),
-        required: true,
-        hidden: true,
-        errorMessage: i18n.t("cta_modal_forms.field_error_message"),
-        validate: (value: string) => this.formModalService.isValidUrl(value),
-      },
-      {
-        label: i18n.t("cta_modal_forms.form.field_placeholder"),
-        type: "number",
-        id: "field_id",
-        required: false,
-        hidden: true,
-        errorMessage: i18n.t("cta_modal_forms.label_error_message"),
-        validate: (value: string) => this.formModalService.isValidUrl(value),
-      },
-      {
-        label: i18n.t("cta_modal_forms.label"),
-        type: "text",
-        id: "field_label",
-        placeholder: i18n.t("cta_modal_forms.form.label_placeholder"),
-        required: true,
-        errorMessage: i18n.t("cta_modal_forms.label_error_message"),
-        minLength: 5,
-      },
-    ]);
+    this.createFormAndModal(
+      "form-form",
+      i18n.t("cta_modal_forms.form.modal_title"),
+      "Form",
+      [
+        {
+          label: i18n.t("cta_modal_forms.form.field_placeholder"),
+          type: "url",
+          id: "field_value",
+          placeholder: i18n.t("cta_modal_forms.form.field_placeholder"),
+          required: true,
+          hidden: true,
+          errorMessage: i18n.t("cta_modal_forms.field_error_message"),
+          validate: (value: string) => this.formModalService.isValidUrl(value),
+        },
+        {
+          label: i18n.t("cta_modal_forms.form.field_placeholder"),
+          type: "number",
+          id: "field_id",
+          required: false,
+          hidden: true,
+          errorMessage: i18n.t("cta_modal_forms.label_error_message"),
+          validate: (value: string) => this.formModalService.isValidUrl(value),
+        },
+        {
+          label: i18n.t("cta_modal_forms.label"),
+          type: "text",
+          id: "field_label",
+          placeholder: i18n.t("cta_modal_forms.form.label_placeholder"),
+          required: true,
+          errorMessage: i18n.t("cta_modal_forms.label_error_message"),
+          minLength: 5,
+        },
+      ]
+    );
   }
 
-  handleWebLinks() {    
+  handleWebLinks() {
     this.createFormAndModal(
       "web-link-form",
       i18n.t("cta_modal_forms.web_link.modal_title"),
@@ -138,26 +155,32 @@ export class PageCreationService {
   }
 
   handleAddress() {
-    this.createFormAndModal("address-form", i18n.t("cta_modal_forms.address.modal_title"), "Map", [
-      {
-        label: i18n.t("cta_modal_forms.address.field_label"),
-        type: "text",
-        id: "field_value",
-        placeholder: i18n.t("cta_modal_forms.address.field_placeholder"),
-        required: true,
-        errorMessage: i18n.t("cta_modal_forms.field_error_message"),
-        validate: (value: string) => this.formModalService.isValidAddress(value),
-      },
-      {
-        label: i18n.t("cta_modal_forms.label"),
-        type: "text",
-        id: "field_label",
-        placeholder: i18n.t("cta_modal_forms.address.label_placeholder"),
-        required: true,
-        errorMessage: i18n.t("cta_modal_forms.label_error_message"),
-        minLength: 5,
-      },
-    ]);
+    this.createFormAndModal(
+      "address-form",
+      i18n.t("cta_modal_forms.address.modal_title"),
+      "Map",
+      [
+        {
+          label: i18n.t("cta_modal_forms.address.field_label"),
+          type: "text",
+          id: "field_value",
+          placeholder: i18n.t("cta_modal_forms.address.field_placeholder"),
+          required: true,
+          errorMessage: i18n.t("cta_modal_forms.field_error_message"),
+          validate: (value: string) =>
+            this.formModalService.isValidAddress(value),
+        },
+        {
+          label: i18n.t("cta_modal_forms.label"),
+          type: "text",
+          id: "field_label",
+          placeholder: i18n.t("cta_modal_forms.address.label_placeholder"),
+          required: true,
+          errorMessage: i18n.t("cta_modal_forms.label_error_message"),
+          minLength: 5,
+        },
+      ]
+    );
   }
 
   private createFormAndModal(
@@ -188,9 +211,9 @@ export class PageCreationService {
     const tileTitle = selectedComponent.find(".tile-title")[0];
     if (tileTitle) tileTitle.components(formData.field_label);
 
-    const rowComp = selectedComponent.closest('.container-row');
-    const colComp = selectedComponent.closest('.tile-column');
-    const tile = selectedComponent.closest('.template-wrapper');
+    const rowComp = selectedComponent.closest(".container-row");
+    const colComp = selectedComponent.closest(".tile-column");
+    const tile = selectedComponent.closest(".template-wrapper");
 
     const tileId = tile.getId();
     const rowId = rowComp.getId();
@@ -215,7 +238,6 @@ export class PageCreationService {
 
     if (pageData.PageType === "Information") {
       for (const [property, value] of updates) {
-        
         this.InfoSectionManager.updateGridTileAttribute(
           rowId,
           colId,
@@ -231,15 +253,15 @@ export class PageCreationService {
       tileAttributes = tileInfoSectionAttributes?.Tiles?.find(
         (tile: any) => tile.Id === tileId
       );
-    } 
-    
+    }
+
     // else {
     //   for (const [property, value] of updates) {
     //     (globalThis as any).tileMapper.updateTile(tileId, property, value);
     //   }
     //   tileAttributes = (globalThis as any).tileMapper.getTile(rowId, tileId);
     // }
-    
+
     new PageAttacher().removeOtherEditors();
     if (childPage) {
       new ChildEditor(childPage.PageId, childPage).init(tileAttributes);
@@ -270,7 +292,7 @@ export class PageCreationService {
           formData.field_label,
           formData.field_value,
           formId,
-          ''
+          ""
         );
         childPage = response.MenuPage;
       } catch (error) {

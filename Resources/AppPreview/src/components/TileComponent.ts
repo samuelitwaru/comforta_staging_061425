@@ -9,7 +9,7 @@ export class TileComponent {
     pageId: string;
     tileContainer: HTMLElement;
     isHighPriority: boolean;
-    themeManager: any;
+    themeManager: ThemeManager;
     rowTileLength: number;
 
     constructor(tile: Tile, isHighPriority: boolean = false, pageId: string, rowTileLength: number) {
@@ -46,7 +46,10 @@ export class TileComponent {
             this.tileContainer.style.backgroundPosition = "center";
             this.tileContainer.style.backgroundSize = "cover"
         } else if (this.tile.BGColor) {
-            this.tileContainer.style.backgroundColor = this.themeManager.getThemeColor(this.tile.BGColor);
+            const themeColor = this.themeManager.getThemeColor(this.tile.BGColor);
+            if (themeColor) {
+                this.tileContainer.style.backgroundColor = themeColor;
+            }
         }
 
         // Create and add icon
@@ -54,7 +57,12 @@ export class TileComponent {
         icon.classList.add("tile-icon");
         icon.style.color = this.tile.Color;
         if (this.tile.Icon) {
-            icon.innerHTML = this.themeManager.getThemeIcon(this.tile.Icon);
+            console.log('this.tile.icon', this.tile.Icon)
+            const themeIcon = this.themeManager.getThemeIcon(this.tile.Icon);
+            console.log('themeIcon', themeIcon)
+            if (themeIcon) {
+                icon.innerHTML = themeIcon;
+            }
 
             const path = icon.querySelector("path");
             if (path) {

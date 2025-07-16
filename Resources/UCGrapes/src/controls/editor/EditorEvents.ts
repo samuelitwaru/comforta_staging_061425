@@ -577,29 +577,23 @@ export class EditorEvents {
 
   private cleanupResize(): void {
     this.resizeState.isResizing = false;
-
     // Reset body cursor
     document.body.style.removeProperty("cursor");
-
     // Remove overlay
     if (this.resizeState.resizeOverlay) {
       document.body.removeChild(this.resizeState.resizeOverlay);
       this.resizeState.resizeOverlay = null;
     }
-
     // Reset affected element cursors
     this.resetAffectedElementCursors();
-
-    // Reset frame children cursors
+    // // Reset frame children cursors
     this.resizeState.frameChildren?.forEach((child) => {
       child.style.removeProperty("cursor");
     });
-
     // Reset info section spacer
     if (this.resizeState.infoSectionSpacer) {
       this.resizeState.infoSectionSpacer.style.pointerEvents = "auto";
     }
-
     // Clear references
     this.clearResizeReferences();
   }
@@ -766,6 +760,7 @@ export class EditorEvents {
   }
 
   private processClick(e: MouseEvent, targetElement: Element): void {
+    console.log("processClick");
     (globalThis as any).pageData = this.pageData;
     const addButtonClicked =
       (e.target as Element).classList.contains("add-button-right") ||
