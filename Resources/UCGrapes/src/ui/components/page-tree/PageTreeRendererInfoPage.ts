@@ -1,6 +1,6 @@
 import { ThemeManager } from "../../../controls/themes/ThemeManager";
 import { AppConfig } from "../../../AppConfig";
-import { Column } from "../../../types";
+import { Column, Tile } from "../../../types";
 // import { CtaAttributes } from "./CtaAttributes";
 
 interface CtaAttributes {
@@ -60,10 +60,7 @@ export class PageTreeRendererInfoPage {
     let roundCtaBuffer: any[] = [];
 
     json.InfoContent.forEach((row: any, index: number) => {
-      if (
-        row.InfoType === "Cta" &&
-        row.CtaAttributes.CtaButtonType === "Round"
-      ) {
+      if (row.InfoType === "Cta" && row.CtaAttributes.CtaButtonType === "Round") {
         roundCtaBuffer.push(row);
 
         // Process buffer if we have 3 CTAs or this is the last item or next item is not a Round CTA
@@ -74,8 +71,7 @@ export class PageTreeRendererInfoPage {
           json.InfoContent[index + 1]?.CtaAttributes.CtaButtonType !== "Round"
         ) {
           const groupContainer = document.createElement("div");
-          groupContainer.style.cssText =
-            "display: flex; justify-content: center; flex-flow: wrap;";
+          groupContainer.style.cssText = "display: flex; justify-content: center; flex-flow: wrap;";
 
           roundCtaBuffer.forEach((bufferedRow) => {
             const ctaButton = this.createCTAs(bufferedRow.CtaAttributes);
@@ -105,40 +101,46 @@ export class PageTreeRendererInfoPage {
         if (row.InfoType === "TileGrid") {
           const rowDiv = document.createElement("div");
           rowDiv.style.display = "flex";
-          rowDiv.style.flexWrap = "wrap";
           rowDiv.style.margin = "2.5px 2.5px";
           rowDiv.style.gap = "2.5px";
+
           row.Columns.forEach((col: Column) => {
-            col.Tiles.forEach((tile: any) => {
-              // console.log("tile.size", tile.Size);
-              const tileHeight = tile.Size ? tile.Size / 3.2 : 25;
+            // Create column container
+            const columnDiv = document.createElement("div");
+            columnDiv.style.display = "flex";
+            columnDiv.style.flexDirection = "column";
+            columnDiv.style.flex = "1";
+            columnDiv.style.gap = "2.5px";
+
+            col.Tiles.forEach((tile) => {
+              // Calculate tile height - use Size if available, otherwise use Height property or default
+              const tileHeight = tile.Size ? Number(tile.Size) / 3.2 : 25;
 
               const tileDiv = document.createElement("div");
               tileDiv.id = tile.Id;
 
-              // Dynamically set alignment based on tile.Align
-              const horizontalAlign =
-                tile.Align === "center" ? "center" : "flex-start";
-              const verticalAlign =
-                tile.Align === "center" ? "center" : "flex-start";
-
+              // Create icon container
               const icondiv = document.createElement("div");
-              icondiv.style.color = tile.Color;
+              icondiv.style.color = tile.Color ? tile.Color : "white";
+              icondiv.style.marginBottom = "2px";
+
               if (tile.Icon) {
                 icondiv.innerHTML = this.themeManager
                   .getThemeIcon(tile.Icon)
                   .IconSVG.replace(/fill="[^"]*"/g, 'fill="currentColor"')
                   .replace(/style="[^"]*background[^"]*"/g, "")
-                  .replace(
-                    /<rect[^>]*fill="[^"]*"/g,
-                    '<rect fill="currentColor"'
-                  )
-                  .replace("<svg", '<svg style="width: 7.5px; height: 7.5px;"');
+                  .replace(/<rect[^>]*fill="[^"]*"/g, '<rect fill="currentColor"')
+                  .replace("<svg", '<svg style="width: 12px; height: 12px;"');
               }
 
+              // Create title container
               const titlediv = document.createElement("div");
-              titlediv.style.color = tile.Color;
-              titlediv.style.textAlign = tile.Align;
+              titlediv.style.color = tile.Color ? tile.Color : "#ccc";
+              titlediv.style.textAlign = tile.Align ? tile.Align : "center";
+              titlediv.style.fontSize = "8px";
+              titlediv.style.lineHeight = "1.2";
+              titlediv.style.wordBreak = "break-word";
+
               if (tile.Text) {
                 titlediv.innerHTML = tile.Text;
               }
@@ -146,34 +148,53 @@ export class PageTreeRendererInfoPage {
               tileDiv.appendChild(icondiv);
               tileDiv.appendChild(titlediv);
 
+              // Set alignment based on tile.Align
+              const alignItems =
+                tile.Align === "center"
+                  ? "center"
+                  : tile.Align === "right"
+                    ? "flex-end"
+                    : "flex-start";
+              const justifyContent =
+                tile.Align === "center"
+                  ? "center"
+                  : tile.Align === "right"
+                    ? "flex-end"
+                    : "flex-start";
+
+              // For single tile columns, use flex: 1 to fill the column height
+              // For multi-tile columns, use the calculated height
+              const flexValue = col.Tiles.length === 1 ? "1" : "0 0 auto";
+              const minHeight = col.Tiles.length === 1 ? "auto" : `${tileHeight}px`;
+
               tileDiv.style.cssText = `
-                  display: flex; /* Ensures flexbox layout */
-                  flex-direction: column; /* Aligns icon and title vertically */
-                  align-items: ${horizontalAlign}; /* Aligns content horizontally */
-                  justify-content: ${verticalAlign}; /* Aligns content vertically */
-                  padding: 2.5px;
-                  min-width: 25px;
-                  height: ${tileHeight}px;
-                  flex: 1;
-                  color: ${tile.Color};
-                  background-color: ${
-                    this.currentTheme.ThemeColors[tile.BGColor]
-                  };
-                  background-image: ${
-                    tile.BGImageUrl ? `url('${tile.BGImageUrl}')` : "none"
-                  };
-                  background-size: cover;
-                  background-repeat: no-repeat;
-                  background-position: center;
-                  text-align: ${tile.Align};
-                  border-radius: 5px;
-                  border: 2px dashed #4c53577d;
-                  font-size: 7px;
-                  font-family: ${this.currentTheme.ThemeFontFamily};
+                display: flex;
+                flex-direction: column;
+                align-items: ${alignItems};
+                justify-content: ${justifyContent};
+                padding: 5px;
+                min-height: ${minHeight};
+                flex: ${flexValue};
+                color: ${tile.Color};
+                background-color: ${this.currentTheme.ThemeColors[tile.BGColor || "primaryColor"]};
+                background-image: ${tile.BGImageUrl ? `url('${tile.BGImageUrl}')` : "none"};
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                text-align: ${tile.Align};
+                border-radius: 5px;
+                border: 2px dashed #4c53577d;
+                font-size: 8px;
+                font-family: ${this.currentTheme.ThemeFontFamily};
+                box-sizing: border-box;
+                cursor: pointer;
+                transition: transform 0.2s ease;
               `;
 
-              rowDiv.appendChild(tileDiv);
+              columnDiv.appendChild(tileDiv);
             });
+
+            rowDiv.appendChild(columnDiv);
           });
 
           container.appendChild(rowDiv);
@@ -269,9 +290,7 @@ export class PageTreeRendererInfoPage {
 
     let pageData = `
                 <div class="tb-date-selector-tree"  
-                  style="background-color: ${
-                    this.currentTheme.ThemeColors["backgroundColor"]
-                  }">
+                  style="background-color: ${this.currentTheme.ThemeColors["backgroundColor"]}">
                   <span class="tb-arrow">❮</span>
                   <span class="tb-date-text" id="current-date" > ${this.formatDate()}</span>
                   <span class="tb-arrow">❯</span>
@@ -418,9 +437,7 @@ export class PageTreeRendererInfoPage {
               <div class="cta-icon-button-tree" style="background:${this.getCtaColor(
                 cta.CtaBGColor
               )}">
-                <div class="cta-icon-button-icon-tree" >${
-                  icons[cta.CtaButtonIcon]
-                }</div>
+                <div class="cta-icon-button-icon-tree" >${icons[cta.CtaButtonIcon]}</div>
                 <div class="cta-icon-button-label-tree">
                   ${cta.CtaLabel}
                 </div>

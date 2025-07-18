@@ -112,6 +112,7 @@ export class TileManager {
     );
     this.addNewTileToGrid(rowComponent.getId(), newCol.colId, newCol.tileId);
     this.tileUpdate.updateGridTiles(rowComponent);
+    this.tileUpdate.updateTilesDraggableProperty(this.editor);
   }
 
   deleteGridTile(tileComponent: any) {
@@ -155,6 +156,7 @@ export class TileManager {
         infoSectionManager.removeConsecutivePlusButtons();
         infoSectionManager.restoreEmptyStateIfNoSections();
       }
+      this.tileUpdate.updateTilesDraggableProperty(this.editor);
 
       this.removeEditor(tileComponent.getId() as string);
     }
@@ -487,8 +489,8 @@ export class TileManager {
   private getTile(isSingleTile: boolean = false) {
     return `
       <div ${tileWrapperDefaultAttributes} ${
-      isSingleTile ? `style="height:${minTileHeight}px"` : ``
-    } class="template-wrapper" id="${randomIdGenerator(8)}">
+  isSingleTile ? `style="height:${minTileHeight}px"` : ``
+} class="template-wrapper" id="${randomIdGenerator(8)}">
         <div ${tileDefaultAttributes} class="template-block" style="background-color: transparent; color: #333333; justify-content: left">
             <div ${DefaultAttributes} id="igtdq" data-gjs-type="default" class="tile-icon-section">
               <span ${DefaultAttributes} id="is1dw" data-gjs-type="text" class="tile-close-icon top-right selected-tile-title readonly-mode">×</span>
@@ -497,8 +499,8 @@ export class TileManager {
             <div ${DefaultAttributes} id="igtdq" data-gjs-type="default" class="tile-title-section">
               <span ${DefaultAttributes} id="is1dw" data-gjs-type="text" class="tile-close-title top-right selected-tile-title readonly-mode">×</span>
               <span ${DefaultAttributes} style="display: block" id="ic26t" data-gjs-type="text" is-hidden="false" title="${i18n.t(
-      "tile.title"
-    )}" class="tile-title">${i18n.t("tile.title")}</span>
+  "tile.title"
+)}" class="tile-title">${i18n.t("tile.title")}</span>
             </div>
         </div>
         <button ${DefaultAttributes} id="i9sxl" data-gjs-type="default" title="Delete tile" class="action-button delete-button readonly-mode">&minus;</button>
@@ -508,23 +510,23 @@ export class TileManager {
           </svg>
         </button>
         ${
-          isSingleTile
-            ? `
+  isSingleTile
+    ? `
             ${resizeButton("Resize")}
           `
-            : ``
-        }
+    : ``
+}
         ${
-          this.page?.PageType === "Information"
-            ? ``
-            : `
+  this.page?.PageType === "Information"
+    ? ``
+    : `
           <button ${DefaultAttributes} id="i4ubt" data-gjs-type="default" title="Add template bottom" class="action-button add-button-bottom">
           <svg ${DefaultAttributes} fill="#fff" width="15" height="15" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path ${DefaultAttributes} d="M19,11H13V5a1,1,0,0,0-2,0v6H5a1,1,0,0,0,0,2h6v6a1,1,0,0,0,2,0V13h6a1,1,0,0,0,0-2Z"/>
           </svg>
           </button>
         `
-        }
+}
         <svg ${DefaultAttributes} class="tile-open-menu readonly-mode" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 27 27">
           <g ${DefaultAttributes} id="Group_2383" data-name="Group 2383" transform="translate(-921 -417.999)">
             <g ${DefaultAttributes} id="Group_2382" data-name="Group 2382" transform="translate(921 418)">
@@ -547,18 +549,18 @@ export class TileManager {
     const rowHTML = `
           <div class="container-row" ${infoRowDefaultAttributes} id="${rowId}">
             ${columns
-              .map(
-                (col: any) => `
+    .map(
+      (col: any) => `
               <div class="tile-column" id="${col.ColId}">
                 ${col.Tiles.map(
-                  (tile: any) => `
+    (tile: any) => `
                     ${tileFromAttributes(tileAttributes, this.themeManager)}
                   `
-                ).join("")}
+  ).join("")}
               </div>
               `
-              )
-              .join("")}
+    )
+    .join("")}
           </div>
         `;
 
@@ -571,6 +573,7 @@ export class TileManager {
     const nextRowComp = getNextSiblingComponent(rowComponent, "container-row");
     this.addTileToNewGrid(tileAttributes, rowId, colId, nextRowComp);
     this.tileUpdate.updateGridTiles(previousRowComponent);
+    this.tileUpdate.updateTilesDraggableProperty(this.editor);
   }
 
   addNewTileToGrid(rowId: string, colId: string, tileId: string) {

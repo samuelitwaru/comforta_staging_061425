@@ -140,16 +140,14 @@ namespace GeneXus.Programs {
             pr_default.execute(3, new Object[] {A273Trn_ThemeId});
             while ( (pr_default.getStatus(3) != 101) )
             {
-               A282IconId = P00965_A282IconId[0];
-               A443IconCategory = P00965_A443IconCategory[0];
-               A283IconName = P00965_A283IconName[0];
-               A284IconSVG = P00965_A284IconSVG[0];
-               AV16IconsItem = new SdtSDT_Theme_IconsItem(context);
-               AV16IconsItem.gxTpr_Iconid = A282IconId;
-               AV16IconsItem.gxTpr_Iconcategory = A443IconCategory;
-               AV16IconsItem.gxTpr_Iconname = A283IconName;
-               AV16IconsItem.gxTpr_Iconsvg = A284IconSVG;
-               AV14SDT_Theme.gxTpr_Icons.Add(AV16IconsItem, 0);
+               A275ColorId = P00965_A275ColorId[0];
+               A276ColorName = P00965_A276ColorName[0];
+               A277ColorCode = P00965_A277ColorCode[0];
+               AV15ColorsItem = new SdtSDT_Theme_ColorsItem(context);
+               AV15ColorsItem.gxTpr_Colorid = A275ColorId;
+               AV15ColorsItem.gxTpr_Colorname = A276ColorName;
+               AV15ColorsItem.gxTpr_Colorcode = A277ColorCode;
+               AV14SDT_Theme.gxTpr_Colors.Add(AV15ColorsItem, 0);
                pr_default.readNext(3);
             }
             pr_default.close(3);
@@ -203,15 +201,13 @@ namespace GeneXus.Programs {
          A274Trn_ThemeName = "";
          A281Trn_ThemeFontFamily = "";
          P00965_A273Trn_ThemeId = new Guid[] {Guid.Empty} ;
-         P00965_A282IconId = new Guid[] {Guid.Empty} ;
-         P00965_A443IconCategory = new string[] {""} ;
-         P00965_A283IconName = new string[] {""} ;
-         P00965_A284IconSVG = new string[] {""} ;
-         A282IconId = Guid.Empty;
-         A443IconCategory = "";
-         A283IconName = "";
-         A284IconSVG = "";
-         AV16IconsItem = new SdtSDT_Theme_IconsItem(context);
+         P00965_A275ColorId = new Guid[] {Guid.Empty} ;
+         P00965_A276ColorName = new string[] {""} ;
+         P00965_A277ColorCode = new string[] {""} ;
+         A275ColorId = Guid.Empty;
+         A276ColorName = "";
+         A277ColorCode = "";
+         AV15ColorsItem = new SdtSDT_Theme_ColorsItem(context);
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.prc_getlocationtheme__default(),
             new Object[][] {
                 new Object[] {
@@ -224,7 +220,7 @@ namespace GeneXus.Programs {
                P00964_A273Trn_ThemeId, P00964_A274Trn_ThemeName, P00964_A281Trn_ThemeFontFamily, P00964_A405Trn_ThemeFontSize
                }
                , new Object[] {
-               P00965_A273Trn_ThemeId, P00965_A282IconId, P00965_A443IconCategory, P00965_A283IconName, P00965_A284IconSVG
+               P00965_A273Trn_ThemeId, P00965_A275ColorId, P00965_A276ColorName, P00965_A277ColorCode
                }
             }
          );
@@ -236,11 +232,10 @@ namespace GeneXus.Programs {
       private bool n29LocationId ;
       private bool n598PublishedActiveAppVersionId ;
       private bool n584ActiveAppVersionId ;
-      private string A284IconSVG ;
       private string A274Trn_ThemeName ;
       private string A281Trn_ThemeFontFamily ;
-      private string A443IconCategory ;
-      private string A283IconName ;
+      private string A276ColorName ;
+      private string A277ColorCode ;
       private Guid AV8LocationId ;
       private Guid AV9OrganisationId ;
       private Guid A11OrganisationId ;
@@ -251,7 +246,7 @@ namespace GeneXus.Programs {
       private Guid A523AppVersionId ;
       private Guid A273Trn_ThemeId ;
       private Guid AV13ThemeId ;
-      private Guid A282IconId ;
+      private Guid A275ColorId ;
       private IGxDataStore dsDataStore1 ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
@@ -278,11 +273,10 @@ namespace GeneXus.Programs {
       private string[] P00964_A281Trn_ThemeFontFamily ;
       private short[] P00964_A405Trn_ThemeFontSize ;
       private Guid[] P00965_A273Trn_ThemeId ;
-      private Guid[] P00965_A282IconId ;
-      private string[] P00965_A443IconCategory ;
-      private string[] P00965_A283IconName ;
-      private string[] P00965_A284IconSVG ;
-      private SdtSDT_Theme_IconsItem AV16IconsItem ;
+      private Guid[] P00965_A275ColorId ;
+      private string[] P00965_A276ColorName ;
+      private string[] P00965_A277ColorCode ;
+      private SdtSDT_Theme_ColorsItem AV15ColorsItem ;
       private SdtSDT_Theme aP2_SDT_Theme ;
    }
 
@@ -363,7 +357,7 @@ namespace GeneXus.Programs {
               new CursorDef("P00962", "SELECT OrganisationId, LocationId, PublishedActiveAppVersionId, ActiveAppVersionId FROM Trn_Location WHERE LocationId = :AV8LocationId and OrganisationId = :AV9OrganisationId ORDER BY LocationId, OrganisationId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00962,1, GxCacheFrequency.OFF ,false,true )
              ,new CursorDef("P00963", "SELECT AppVersionId, OrganisationId, LocationId, Trn_ThemeId FROM Trn_AppVersion WHERE (LocationId = :AV8LocationId and OrganisationId = :AV9OrganisationId) AND (AppVersionId = :AV17AppVersionId) ORDER BY LocationId, OrganisationId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00963,100, GxCacheFrequency.OFF ,false,false )
              ,new CursorDef("P00964", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00964,1, GxCacheFrequency.OFF ,true,true )
-             ,new CursorDef("P00965", "SELECT Trn_ThemeId, IconId, IconCategory, IconName, IconSVG FROM Trn_ThemeIcon WHERE Trn_ThemeId = :Trn_ThemeId ORDER BY Trn_ThemeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00965,100, GxCacheFrequency.OFF ,false,false )
+             ,new CursorDef("P00965", "SELECT Trn_ThemeId, ColorId, ColorName, ColorCode FROM Trn_ThemeColor WHERE Trn_ThemeId = :Trn_ThemeId ORDER BY Trn_ThemeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00965,100, GxCacheFrequency.OFF ,false,false )
           };
        }
     }
@@ -401,7 +395,6 @@ namespace GeneXus.Programs {
                 ((Guid[]) buf[1])[0] = rslt.getGuid(2);
                 ((string[]) buf[2])[0] = rslt.getVarchar(3);
                 ((string[]) buf[3])[0] = rslt.getVarchar(4);
-                ((string[]) buf[4])[0] = rslt.getLongVarchar(5);
                 return;
        }
     }

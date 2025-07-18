@@ -114,13 +114,13 @@ export class ToolboxManager {
               : JSON.stringify(page.PageStructure);
 
           if (localStructureString !== pageStructureString) {
-            const pageInfo = {
-              AppVersionId: activeVersion.AppVersionId,
-              PageId: pageId,
-              PageName: page.PageName,
-              PageType: page.PageType,
-              PageStructure: localStructureString,
-            };
+            // const pageInfo = {
+            //   AppVersionId: activeVersion.AppVersionId,
+            //   PageId: pageId,
+            //   PageName: page.PageName,
+            //   PageType: page.PageType,
+            //   PageStructure: localStructureString,
+            // };
             const autoSaveSection = document.querySelector(
               ".auto-saving-section-content-text"
             ) as HTMLElement;
@@ -134,14 +134,14 @@ export class ToolboxManager {
               autoSaveSection.style.display = "flex";
 
               // Start timing and create minimum delay promise
-              const startTime = Date.now();
-              const minDelay = 500; // Minimum 500ms delay
+              // const startTime = Date.now();
+              // const minDelay = 500; // Minimum 500ms delay
 
-              // Run save operation and minimum delay in parallel
-              const [saveResult] = await Promise.all([
-                this.toolboxService.autoSavePage(pageInfo),
-                new Promise((resolve) => setTimeout(resolve, minDelay)),
-              ]);
+              // // Run save operation and minimum delay in parallel
+              // const [saveResult] = await Promise.all([
+              //   this.toolboxService.autoSavePage(pageInfo),
+              //   new Promise((resolve) => setTimeout(resolve, minDelay)),
+              // ]);
 
               // Update state after both save and minimum delay complete
               lastSavedStates.set(pageId, localStructureString);
@@ -190,7 +190,6 @@ export class ToolboxManager {
     const pageId = (globalThis as any).currentPageId;
 
     if (!pageId) {
-      console.log("No editor found....");
       return;
     }
 
@@ -265,7 +264,7 @@ export class ToolboxManager {
         frameContainerEl.style.visibility = "hidden";
       }
     } catch (error) {
-      console.warn("Could not capture current state:", error);
+      throw new Error("Could not capture scroll position: " + error);
     }
 
     return {
@@ -305,6 +304,7 @@ export class ToolboxManager {
       // format plus buttons
       const infoSectionMapper = new InfoSectionManager();
       infoSectionMapper.removeConsecutivePlusButtons(editor);
+      tileUpdate.updateTilesDraggableProperty(editor);
     };
 
     // for smooth restoration
@@ -362,11 +362,9 @@ export class ToolboxManager {
         if (newComponent) {
           editor.select(newComponent);
           (globalThis as any).selectedComponent = newComponent;
-        } else {
-          console.log("Previously selected component no longer exists");
         }
       } catch (error) {
-        console.log("Could not restore selected component:", error);
+        throw new Error("Could not restore selected component: " + error);
       }
     }, 150);
   }
@@ -379,7 +377,7 @@ export class ToolboxManager {
         frameContainerEl.style.visibility = "visible";
       }
     } catch (error) {
-      console.log("Could not ensure container visibility:", error);
+      throw new Error("Could not ensure container visibility: " + error);
     }
   }
 }

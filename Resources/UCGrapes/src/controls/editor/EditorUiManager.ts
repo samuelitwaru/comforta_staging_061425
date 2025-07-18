@@ -295,13 +295,33 @@ export class EditorUIManager {
           parentEl.getAttribute("data-gjs-type") === "tile-col-wrapper";
 
         if (isDroppedInTileSection) {
-          // If the parent is a tile container, update the tile in the both parents
-          infoContentMapper.handleDragAndDropToExistingTileArea(
-            targetId,
-            sourceParentId,
-            destinationId,
-            destinationRowIndex
-          );
+          // check if the tile being dropped is a tile-wrapper or tile-col-wrapper
+          if (
+            modalElement.getAttribute("data-gjs-type") === "tile-col-wrapper"
+          ) {
+            // If the parent is a tile container, update the tile in the both parents
+            infoContentMapper.handleDragAndDropToExistingTileArea(
+              targetId,
+              sourceParentId,
+              destinationId,
+              destinationRowIndex
+            );
+          } else if (
+            modalElement.getAttribute("data-gjs-type") === "tile-wrapper"
+          ) {
+            // If the tile is a tile-wrapper, we need to handle it differently
+            // get parent id of the tile section that was dragged
+            const sourceTileSectionId = sourceComponent.parent().getId();
+
+            infoContentMapper.handleDragAndDropTileToExistingTileSectionWithNoGrid(
+              targetId,
+              sourceParentId,
+              destinationId,
+              sourceTileSectionId,
+              destinationId,
+              destinationRowIndex
+            );
+          }
         } else if (isDroppedInColumnWrapper) {
           // check if the tile being dropped is a tile-wrapper or tile-col-wrapper
           if (
@@ -326,15 +346,42 @@ export class EditorUIManager {
           ) {
             // get parent id of the tile column
             const sourceParent = sourceComponent.parent();
-            const tileSectionId = sourceParent ? sourceParent.getId() : null;
-            // If the parent is a tile column, update the tile in the column
-            infoContentMapper.handleDragAndDropWithinExistingTileColumn(
-              targetId,
-              sourceParentId,
-              destinationId,
-              tileSectionId,
-              destinationRowIndex
-            );
+            const sourceTileSectionId = sourceParent ? sourceParent.getId() : null;
+            // if dragging tiles within a long column
+            if(sourceParentId === destinationId) {
+              // If the parent is a tile column, update the tile in the column
+              infoContentMapper.handleDragAndDropWithinExistingTileColumn(
+                targetId,
+                sourceParentId,
+                destinationId,
+                sourceTileSectionId,
+                destinationRowIndex
+              );
+            } else {
+            // if the tile is a tile-wrapper, and dragged to another column that is not a long tile column
+              const destinationParent = destinationComponent.parent();
+              const destinationTileSectionId = destinationParent
+                ? destinationParent.getId()
+                : null;
+
+              // check if destinationParent is a tile section with 1 column
+              if(destinationParent.get("type") === "info-tiles-section") {
+                const colWrappers = destinationParent
+                  .components()
+                  .filter((comp: any) => comp.get("type") === "tile-col-wrapper");
+                if (colWrappers.length <= 2) {
+                  // if there is only one column, we can update the tile in the column
+                  infoContentMapper.handleDragAndDropTileToExistingTileSectionWithNoGrid(
+                    targetId,
+                    sourceParentId,
+                    destinationId,
+                    sourceTileSectionId,
+                    destinationTileSectionId,
+                    destinationRowIndex
+                  );
+                }
+              }
+            }
           }
         } else {
           // Find the index of the target element in the components array
@@ -417,7 +464,7 @@ export class EditorUIManager {
   private handleComponentAdd = (model: any) => {
     const parent = model.parent();
     if (parent && parent.getEl()?.classList.contains("container-row")) {
-      const tileWrappers = parent.components().filter((comp: any) => {
+      parent.components().filter((comp: any) => {
         const type = comp.get("type");
         return type === "tile-wrapper";
       });
@@ -428,7 +475,7 @@ export class EditorUIManager {
     const framelist = document.querySelectorAll(".mobile-frame");
     framelist.forEach((frame: any) => {
       if (frame.id.includes(this.frameId)) {
-        frame.addEventListener("click", (event: MouseEvent) => {
+        frame.addEventListener("click", () => {
           (globalThis as any).currentPageId = this.pageId;
           (globalThis as any).pageData = this.pageData;
           (globalThis as any).frameId = this.frameId;
@@ -436,7 +483,7 @@ export class EditorUIManager {
           this.clearAllMenuContainers();
         });
 
-        frame.addEventListener("input", (event: MouseEvent) => {
+        frame.addEventListener("input", () => {
           (globalThis as any).currentPageId = this.pageId;
           (globalThis as any).pageData = this.pageData;
           (globalThis as any).frameId = this.frameId;
@@ -445,7 +492,7 @@ export class EditorUIManager {
       }
     });
 
-    document.addEventListener("click", (event: MouseEvent) => {
+    document.addEventListener("click", () => {
       this.clearAllMenuContainers();
     });
   }
@@ -485,7 +532,7 @@ export class EditorUIManager {
       const inactiveEditors = Object.entries(editors).filter(
         ([key]) => key !== frameId
       );
-      inactiveEditors.forEach(([key, editor]: [string, any]) => {
+      inactiveEditors.forEach(([, editor]: [string, any]) => {
         editor.select(null);
       });
 
@@ -594,8 +641,8 @@ export class EditorUIManager {
           });
         } else if (info.InfoType === "Cta" && info.CtaAttributes.Action) {
           const objectType = info.CtaAttributes.Action.ObjectType;
-          console.log("objecttype", info.CtaAttributes);
-          console.log("objecttype", objectType);
+          // console.log("objecttype", info.CtaAttributes);
+          // console.log("objecttype", objectType);
           if (["DynamicForm", "WebLink", "Map"].includes(objectType)) {
             listHTML += `<li>${info.CtaAttributes.CtaLabel}</li>`;
           }
@@ -673,7 +720,6 @@ export class EditorUIManager {
       const menuSection = document.getElementById(
         "menu-page-section"
       ) as HTMLElement;
-      const contentection = document.getElementById("content-page-section");
       if (menuSection) menuSection.style.display = "block";
       // if (contentection) contentection.remove();
     } else toolSection.style.display = "none";
@@ -907,8 +953,8 @@ export class EditorUIManager {
           ? "center"
           : "center"
         : frames.length > 2
-        ? "center"
-        : "center";
+          ? "center"
+          : "center";
 
     scrollContainer.style.setProperty("justify-content", alignment);
 

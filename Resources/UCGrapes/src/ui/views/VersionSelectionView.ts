@@ -130,11 +130,9 @@ export class VersionSelectionView {
     optionButtons.className = "option-buttons";
     versionOption.append(optionButtons);
 
-    // Check if this is the active version
     const activeVersion =
       (globalThis as any).activeVersion || (await this.versionController.getActiveVersion());
-    // console.log('activeVersion', activeVersion);
-    // console.log('version', version);
+
     const isActive = version.AppVersionId === activeVersion?.AppVersionId;
 
     if (isActive) {
@@ -144,7 +142,6 @@ export class VersionSelectionView {
 
     versionOption.addEventListener("click", (e) => this.handleVersionSelection(e, version));
 
-    // Create submenu with options
     const subMenu = this.createVersionSubMenu(version, isActive);
     versionOption.appendChild(subMenu);
 
@@ -155,7 +152,6 @@ export class VersionSelectionView {
     const subMenu = document.createElement("div");
     subMenu.className = "submenu-list";
 
-    // Duplicate option
     const duplicateOption = document.createElement("div");
     duplicateOption.classList.add("theme-option");
     duplicateOption.innerHTML = i18n.t("navbar.appversion.duplicate");
@@ -187,7 +183,6 @@ export class VersionSelectionView {
     });
     subMenu.appendChild(renameOption);
 
-    // Delete option (only if not active)
     if (!isActive) {
       const deleteOption = document.createElement("div");
       deleteOption.classList.add("theme-option");
@@ -204,14 +199,16 @@ export class VersionSelectionView {
 
   private confirmDeleteVersion(version: AppVersion): void {
     const title = i18n.t("navbar.appversion.delete_version");
-    const message = i18n.t("navbar.appversion.delete_version_message");
+    const message = i18n.t("navbar.appversion.delete_version_message", {
+      versionName: version.AppVersionName,
+    });
 
     const handleConfirmation = async () => {
       try {
         await this.versionController.deleteVersion(version.AppVersionId);
         await this.refreshVersionList();
       } catch (error) {
-        console.error("Error deleting version:", error);
+        throw "Error deleting version" + error;
       }
     };
 
@@ -226,17 +223,14 @@ export class VersionSelectionView {
     }
 
     try {
-      // Mark selected in UI
       const allOptions = this.versionSelection.querySelectorAll(".theme-option");
       allOptions.forEach((opt) => opt.classList.remove("selected"));
 
       const selectedOption = e.currentTarget as HTMLElement;
       selectedOption.classList.add("selected");
 
-      // Update display
       this.activeVersion.textContent = truncateString(version.AppVersionName, 15);
 
-      // Activate version and reload if successful
       const activationResult = await this.versionController.activateVersion(version.AppVersionId);
       if (activationResult) {
         this.reloadPage(activationResult.AppVersion);
@@ -244,25 +238,14 @@ export class VersionSelectionView {
 
       this.closeSelection();
     } catch (error) {
-      console.error("Error activating version:", error);
+      throw "Error activating version" + error;
     }
   }
 
   private async reloadPage(appVersion: any) {
-    // reload browser
-    // window.location.reload();
     this.clearGlobalVariables();
     App.createWithVersion(appVersion, appVersion?.ThemeId);
     this.refreshVersionList();
-
-    // (globalThis as any).activeVersion = appVersion.AppVersion;
-    // const editorEvents = new EditorEvents();
-    // editorEvents.clearAllEditors();
-    // const newEditor = new EditorManager();
-    // newEditor.init(appVersion.AppVersion);
-    // console.log('appVersion.AppVersion', appVersion.AppVersion)
-    // this.updateTheme(appVersion.AppVersion?.ThemeId);
-    // this.refreshVersionList();
   }
 
   private clearGlobalVariables(): void {
@@ -278,29 +261,7 @@ export class VersionSelectionView {
     (globalThis as any).isTranslationMode = false;
   }
 
-  private updateTheme(themeId: string): void {
-    if (!themeId) return;
-    const themeSelectionEl = document.getElementById("tb-custom-theme-selection");
-    if (themeSelectionEl) {
-      const themeList = themeSelectionEl.querySelectorAll(
-        ".theme-option"
-      ) as NodeListOf<HTMLDivElement>;
-      themeList.forEach((theme) => {
-        theme.classList.remove("selected");
-        if (theme.id === themeId) {
-          theme.classList.add("selected");
-          const selectedThemeEl = themeSelectionEl.querySelector(
-            `.selected-theme-value`
-          ) as HTMLSpanElement;
-          if (selectedThemeEl) {
-            selectedThemeEl.innerText = theme.innerText;
-          }
-        }
-      });
-    }
-  }
-
-  public openVersionModal(
+  private openVersionModal(
     initialValue: string = "",
     title: string = i18n.t("navbar.appversion.create_new"),
     buttonText: string = i18n.t("navbar.appversion.save"),
@@ -360,8 +321,6 @@ export class VersionSelectionView {
 
     const div = document.createElement("div");
     form.render(div);
-
-    //create dive to explain
 
     //hide language field if action is duplicate or rename
     if (action === "duplicate" || action === "rename") {
@@ -466,9 +425,11 @@ export class VersionSelectionView {
         // Reload only for create and activate actions
         if (result && (action === "create" || action === "duplicate")) {
           this.reloadPage(result.AppVersion);
+        } else if (result && action === "rename") {
+          this.refreshVersionList();
         }
       } catch (error) {
-        console.error(`Error during ${action} operation:`, error);
+        throw `Error during ${action} operation:`+ error;
       }
     });
 

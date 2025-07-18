@@ -96,7 +96,7 @@ export class TileUpdate {
     rowComponent.addStyle("height", `${maxTileCount * minTileHeight}px`);
     const columnCount = columnComponents.length;
 
-    if (maxTileCount == 1 && columnCount > 1) {
+    if (maxTileCount === 1 && columnCount > 1) {
       // set all tile heights to min height
       rowComponent.find(".template-wrapper").forEach((comp: any) => {
         comp.addStyle({ height: `${minTileHeight}px` });
@@ -320,10 +320,14 @@ export class TileUpdate {
           colB.set("droppable", false);
           colB.addAttributes({ "data-gjs-droppable": "false" });
           colB.trigger("change:droppable");
+          colA.set("draggable", false);
+          colA.trigger("change:draggable");
         } else if (colBChildren.length > 1 && colAChildren.length <= 1) {
           colA.set("droppable", false);
           colA.addAttributes({ "data-gjs-droppable": "false" });
           colA.trigger("change:droppable");
+          colB.set("draggable", false);
+          colB.trigger("change:draggable");
         }
         // 2b. If either col has exactly 2 tile-wrapper children, set its droppable to both types
         if (colAChildren.length === 2) {

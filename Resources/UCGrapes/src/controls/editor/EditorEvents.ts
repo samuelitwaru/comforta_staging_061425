@@ -1,4 +1,3 @@
-import { set } from "lodash";
 import { ToolBoxService } from "../../services/ToolBoxService";
 import { ResizeState, TileHeights } from "../../types";
 import { EditorThumbs } from "../../ui/components/editor-content/EditorThumbs";
@@ -6,7 +5,6 @@ import { minTileHeight } from "../../utils/default-attributes";
 import { newTile } from "../../utils/gjs-components";
 import { ImageUploadManager } from "../ImageUploadManager";
 import { InfoSectionManager } from "../InfoSectionManager";
-import { CtaManager } from "../themes/CtaManager";
 import { HistoryManager } from "../toolbox/HistoryManager";
 import { AppVersionManager } from "../versions/AppVersionManager";
 import { ChildEditor } from "./ChildEditor";
@@ -214,36 +212,35 @@ export class EditorEvents {
     );
   }
 
-  private handleDocumentMouseOver(e: MouseEvent): void {
-    // eslint-disable-next-line no-useless-return
+  private handleDocumentMouseOver(): void {
     if (this.disableEditor()) return;
   }
 
-  private handleDocumentMouseOut(e: MouseEvent): void {
+  private handleDocumentMouseOut(): void {
     if (this.disableEditor()) return;
   }
 
-  private handleDocumentMouseEnter(e: MouseEvent): void {
+  private handleDocumentMouseEnter(): void {
     if (this.disableEditor()) return;
   }
 
-  private handleDocumentMouseLeave(e: MouseEvent): void {
+  private handleDocumentMouseLeave(): void {
     if (this.disableEditor()) return;
   }
 
-  private handleDocumentPointerOver(e: MouseEvent): void {
+  private handleDocumentPointerOver(): void {
     if (this.disableEditor()) return;
   }
 
-  private handleDocumentPointerOut(e: MouseEvent): void {
+  private handleDocumentPointerOut(): void {
     if (this.disableEditor()) return;
   }
 
-  private handleDocumentPointerEnter(e: MouseEvent): void {
+  private handleDocumentPointerEnter(): void {
     if (this.disableEditor()) return;
   }
 
-  private handleDocumentPointerLeave(e: MouseEvent): void {
+  private handleDocumentPointerLeave(): void {
     if (this.disableEditor()) return;
   }
 
@@ -446,7 +443,7 @@ export class EditorEvents {
     }
   }
 
-  private handleMouseUp(e: MouseEvent): void {
+  private handleMouseUp(): void {
     if (this.disableEditor()) return;
     if (this.resizeState.isDragging) {
       this.resizeState.isDragging = false;
@@ -502,7 +499,7 @@ export class EditorEvents {
     }
   }
 
-  private handleDocumentMouseUp(e: MouseEvent): void {
+  private handleDocumentMouseUp(): void {
     if (this.disableEditor()) return;
     if (!this.resizeState.isResizing || !this.resizeState.resizingRow) return;
 
@@ -760,7 +757,6 @@ export class EditorEvents {
   }
 
   private processClick(e: MouseEvent, targetElement: Element): void {
-    console.log("processClick");
     (globalThis as any).pageData = this.pageData;
     const addButtonClicked =
       (e.target as Element).classList.contains("add-button-right") ||
@@ -947,6 +943,10 @@ export class EditorEvents {
           // If any column has more than one tile-wrapper child, disable dropping a new column in this section
           // This is to prevent adding a new column when there are already two columns with tiles.
           if (hasMultiTileCol) {
+            // multi-tile columns should not be draggable
+            section.set("droppable", false);
+            section.addAttributes({ "data-gjs-droppable": "false" });
+
             // if the dragged column tile is one of the columns in the colWrappers, then allow drop to re-order
             if (
               model.target.getId() === colWrappers[0].getId() ||

@@ -318,13 +318,52 @@ span#scroll-right:hover {
   gap: 10px;
 }
 
-/* App bar */
+.translate-app-bar,
 .app-bar,
 .home-app-bar {
   display: flex;
   align-items: center;
   padding: 12px 16px 0px 16px;
   width: 100%;
+}
+
+.translate-app-bar {
+  padding: 12px 0 0 0;
+}
+
+.translate-app-bar .title {
+  font-size: 20px;
+  font-weight: 500;
+  color: #262626;
+  text-transform: uppercase;
+  margin: 0;
+  width: 100%;
+  display: inline-block;
+}
+
+.translate-app-bar .editable-content {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 3px;
+  padding: 1px 4px;
+  /* margin: -2px -4px; */
+}
+
+.translate-app-bar .editable-content:not(.html-content):hover {
+  background-color: rgba(0, 123, 255, 0.1);
+  outline: 1px dashed rgba(0, 123, 255, 0.3);
+}
+
+.translate-app-bar .editable-content:not(.html-content).editing {
+  background-color: rgba(0, 123, 255, 0);
+  outline: 1px solid #007bff;
+  cursor: text;
+}
+
+.translate-app-bar .editable-content:not(.html-content):focus {
+  outline: 1px solid #007bff;
+  background-color: rgba(0, 123, 255, 0);
+  margin: 2px;
 }
 
 .home-app-bar {

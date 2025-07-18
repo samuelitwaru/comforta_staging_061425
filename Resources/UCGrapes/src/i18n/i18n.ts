@@ -76,7 +76,8 @@ export const i18n = new I18n({
         duplicate_title: "Duplicate version",
         rename_version: "Rename version",
         delete_version: "Delete version",
-        delete_version_message: "Are you sure you want to delete this version %{versionName}?",
+        delete_version_message:
+          "Are you sure you want to delete the version <strong>%{versionName}</strong>?",
         dropdow: {
           duplicate: "Duplicate",
           rename: "Rename",
@@ -332,7 +333,7 @@ export const i18n = new I18n({
         rename_version: "Versie hernoemen",
         delete_version: "Versie verwijderen",
         delete_version_message:
-          "Weet je zeker dat je deze versie wilt verwijderen?",
+          "Weet je zeker dat je versie <strong>%{versionName}</strong> wilt verwijderen?",
         dropdow: {
           duplicate: "Dupliceren",
           rename: "Hernoemen",

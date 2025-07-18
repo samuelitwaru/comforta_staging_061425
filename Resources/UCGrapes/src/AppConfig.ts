@@ -46,7 +46,7 @@ export class AppConfig {
     displayMessageEvent: ((title: string, status: string, description: string) => void) | undefined
   ): void {
     if (this._isInitialized) {
-      console.warn("AppConfig already initialized - ignoring new data");
+
       return;
     }
     this.UC = UC;
@@ -55,8 +55,8 @@ export class AppConfig {
     this._services = services;
     this._forms = forms;
     this._media = media;
-    this._currentThemeId = currentThemeId,
-      this._currentVersion = currentVersion;
+    this._currentThemeId = currentThemeId;
+    this._currentVersion = currentVersion;
     this._organisationLogo = organisationLogo;
     this.addServiceButtonEvent = addServiceButtonEvent;
     this.addTemplatesButtonEvent = addTemplatesButtonEvent;

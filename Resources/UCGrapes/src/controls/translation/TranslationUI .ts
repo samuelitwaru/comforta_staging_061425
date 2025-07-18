@@ -91,7 +91,7 @@ export class TranslationUI {
   }
 
   // In TranslationUI.ts
-  public createTileGridSection(section: any, sectionIndex: number): string {
+  public createTileGridSection(section: InfoType, sectionIndex: number): string {
     const columns = section.Columns || [];
     let columnsHtml = "";
 
