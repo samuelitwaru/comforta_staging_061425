@@ -239,7 +239,6 @@ export class ToolBoxService {
   }
 
   async autoSavePage(pageData: any) {
-    alert("saving");
     const response = await this.fetchAPI(
       "/api/toolbox/v2/save-page",
       {

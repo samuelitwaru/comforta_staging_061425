@@ -101,12 +101,11 @@ export class ToolboxManager {
 
           let localStructureProperty = null;
           if (
-            page.PageType === "Menu" ||
             page.PageType === "MyCare" ||
             page.PageType === "MyLiving" ||
             page.PageType === "MyService"
           )
-            localStructureProperty = "PageMenuStructure";
+            localStructureProperty = "PageInfoStructure";
           else if (page.PageType === "Information") {
             localStructureProperty = "PageInfoStructure";
           }
@@ -124,13 +123,13 @@ export class ToolboxManager {
               : JSON.stringify(page.PageStructure);
 
           if (localStructureString !== pageStructureString) {
-            // const pageInfo = {
-            //   AppVersionId: activeVersion.AppVersionId,
-            //   PageId: pageId,
-            //   PageName: page.PageName,
-            //   PageType: page.PageType,
-            //   PageStructure: localStructureString,
-            // };
+            const pageInfo = {
+              AppVersionId: activeVersion.AppVersionId,
+              PageId: pageId,
+              PageName: page.PageName,
+              PageType: page.PageType,
+              PageStructure: localStructureString,
+            };
             const autoSaveSection = document.querySelector(
               ".auto-saving-section-content-text"
             ) as HTMLElement;
@@ -145,13 +144,13 @@ export class ToolboxManager {
 
               // Start timing and create minimum delay promise
               // const startTime = Date.now();
-              // const minDelay = 500; // Minimum 500ms delay
+              const minDelay = 500; // Minimum 500ms delay
 
-              // // Run save operation and minimum delay in parallel
-              // const [saveResult] = await Promise.all([
-              //   this.toolboxService.autoSavePage(pageInfo),
-              //   new Promise((resolve) => setTimeout(resolve, minDelay)),
-              // ]);
+              // Run save operation and minimum delay in parallel
+              await Promise.all([
+                this.toolboxService.autoSavePage(pageInfo),
+                new Promise((resolve) => setTimeout(resolve, minDelay)),
+              ]);
 
               // Update state after both save and minimum delay complete
               lastSavedStates.set(pageId, localStructureString);
