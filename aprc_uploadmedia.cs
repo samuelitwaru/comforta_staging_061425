@@ -147,8 +147,6 @@ namespace GeneXus.Programs {
             AV20MediaUrl = AV27baseUrl + context.GetMessage( "media/", "") + AV11MediaName;
             AV13BC_Trn_Media.gxTpr_Mediaurl = AV20MediaUrl;
             AV13BC_Trn_Media.Save();
-            new prc_logtofile(context ).execute(  AV13BC_Trn_Media.ToJSonString(true, true)) ;
-            new prc_logtofile(context ).execute(  StringUtil.BoolToStr( AV13BC_Trn_Media.Success())) ;
             if ( AV13BC_Trn_Media.Success() )
             {
                AV19Path = context.GetMessage( "media/", "");

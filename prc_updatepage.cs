@@ -166,7 +166,6 @@ namespace GeneXus.Programs {
                   while ( AV30GXV2 <= AV29GXV1.Count )
                   {
                      AV14Message = ((GeneXus.Utils.SdtMessages_Message)AV29GXV1.Item(AV30GXV2));
-                     new prc_logtofile(context ).execute(  AV14Message.gxTpr_Description) ;
                      AV30GXV2 = (int)(AV30GXV2+1);
                   }
                }

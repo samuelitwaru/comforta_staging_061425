@@ -150,13 +150,7 @@ namespace GeneXus.Programs {
          obj = new SdtTrn_Manager(context);
          trn = obj.getTransaction();
          result = trn.Reindex();
-         obj = new SdtTrn_Organisation(context);
-         trn = obj.getTransaction();
-         result = trn.Reindex();
          obj = new SdtTrn_SupplierGen(context);
-         trn = obj.getTransaction();
-         result = trn.Reindex();
-         obj = new SdtTrn_ProductService(context);
          trn = obj.getTransaction();
          result = trn.Reindex();
          obj = new SdtTrn_NetworkIndividual(context);
@@ -193,6 +187,12 @@ namespace GeneXus.Programs {
          trn = obj.getTransaction();
          result = trn.Reindex();
          obj = new SdtTrn_Location(context);
+         trn = obj.getTransaction();
+         result = trn.Reindex();
+         obj = new SdtTrn_Organisation(context);
+         trn = obj.getTransaction();
+         result = trn.Reindex();
+         obj = new SdtTrn_ProductService(context);
          trn = obj.getTransaction();
          result = trn.Reindex();
          return 1 ;

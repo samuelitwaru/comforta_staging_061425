@@ -108,8 +108,6 @@ namespace GeneXus.Programs {
             {
                AV9isSuccessful = true;
                context.CommitDataStores("prc_deletecascadeorganisation",pr_default);
-               CallWebObject(formatLink("trn_organisationww.aspx") );
-               context.wjLocDisableFrm = 1;
             }
             else
             {

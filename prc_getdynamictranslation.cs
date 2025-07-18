@@ -46,32 +46,37 @@ namespace GeneXus.Programs {
 
       public void execute( Guid aP0_DynamicTranslationPrimaryKey ,
                            string aP1_Language ,
-                           ref SdtSDT_TranslatedPageBO aP2_TranslatedValue )
+                           string aP2_VersionLanguage ,
+                           ref SdtSDT_TranslatedPageBO aP3_TranslatedValue )
       {
          this.AV10DynamicTranslationPrimaryKey = aP0_DynamicTranslationPrimaryKey;
          this.AV13Language = aP1_Language;
-         this.AV14TranslatedValue = aP2_TranslatedValue;
+         this.AV15VersionLanguage = aP2_VersionLanguage;
+         this.AV14TranslatedValue = aP3_TranslatedValue;
          initialize();
          ExecuteImpl();
-         aP2_TranslatedValue=this.AV14TranslatedValue;
+         aP3_TranslatedValue=this.AV14TranslatedValue;
       }
 
       public SdtSDT_TranslatedPageBO executeUdp( Guid aP0_DynamicTranslationPrimaryKey ,
-                                                 string aP1_Language )
+                                                 string aP1_Language ,
+                                                 string aP2_VersionLanguage )
       {
-         execute(aP0_DynamicTranslationPrimaryKey, aP1_Language, ref aP2_TranslatedValue);
+         execute(aP0_DynamicTranslationPrimaryKey, aP1_Language, aP2_VersionLanguage, ref aP3_TranslatedValue);
          return AV14TranslatedValue ;
       }
 
       public void executeSubmit( Guid aP0_DynamicTranslationPrimaryKey ,
                                  string aP1_Language ,
-                                 ref SdtSDT_TranslatedPageBO aP2_TranslatedValue )
+                                 string aP2_VersionLanguage ,
+                                 ref SdtSDT_TranslatedPageBO aP3_TranslatedValue )
       {
          this.AV10DynamicTranslationPrimaryKey = aP0_DynamicTranslationPrimaryKey;
          this.AV13Language = aP1_Language;
-         this.AV14TranslatedValue = aP2_TranslatedValue;
+         this.AV15VersionLanguage = aP2_VersionLanguage;
+         this.AV14TranslatedValue = aP3_TranslatedValue;
          SubmitImpl();
-         aP2_TranslatedValue=this.AV14TranslatedValue;
+         aP3_TranslatedValue=this.AV14TranslatedValue;
       }
 
       protected override void ExecutePrivate( )
@@ -87,26 +92,29 @@ namespace GeneXus.Programs {
             A672DynamicTranslationDutchPublish = P00ED2_A672DynamicTranslationDutchPublish[0];
             A671DynamicTranslationEnglishPubli = P00ED2_A671DynamicTranslationEnglishPubli[0];
             A578DynamicTranslationId = P00ED2_A578DynamicTranslationId[0];
-            if ( StringUtil.StrCmp(A581DynamicTranslationAttributeNam, "PageName") == 0 )
+            if ( StringUtil.StrCmp(AV13Language, AV15VersionLanguage) != 0 )
             {
-               if ( StringUtil.StrCmp(AV13Language, "nl") == 0 )
+               if ( StringUtil.StrCmp(A581DynamicTranslationAttributeNam, "PageName") == 0 )
                {
-                  AV14TranslatedValue.gxTpr_Pagename = A672DynamicTranslationDutchPublish;
+                  if ( StringUtil.StrCmp(AV13Language, "nl") == 0 )
+                  {
+                     AV14TranslatedValue.gxTpr_Pagename = A672DynamicTranslationDutchPublish;
+                  }
+                  else if ( StringUtil.StrCmp(AV13Language, "en") == 0 )
+                  {
+                     AV14TranslatedValue.gxTpr_Pagename = A671DynamicTranslationEnglishPubli;
+                  }
                }
-               else if ( StringUtil.StrCmp(AV13Language, "en") == 0 )
+               if ( StringUtil.StrCmp(A581DynamicTranslationAttributeNam, "PageStructure") == 0 )
                {
-                  AV14TranslatedValue.gxTpr_Pagename = A671DynamicTranslationEnglishPubli;
-               }
-            }
-            if ( StringUtil.StrCmp(A581DynamicTranslationAttributeNam, "PageStructure") == 0 )
-            {
-               if ( StringUtil.StrCmp(AV13Language, "nl") == 0 )
-               {
-                  AV14TranslatedValue.gxTpr_Pagestructure = A672DynamicTranslationDutchPublish;
-               }
-               else if ( StringUtil.StrCmp(AV13Language, "en") == 0 )
-               {
-                  AV14TranslatedValue.gxTpr_Pagestructure = A671DynamicTranslationEnglishPubli;
+                  if ( StringUtil.StrCmp(AV13Language, "nl") == 0 )
+                  {
+                     AV14TranslatedValue.gxTpr_Pagestructure = A672DynamicTranslationDutchPublish;
+                  }
+                  else if ( StringUtil.StrCmp(AV13Language, "en") == 0 )
+                  {
+                     AV14TranslatedValue.gxTpr_Pagestructure = A671DynamicTranslationEnglishPubli;
+                  }
                }
             }
             pr_default.readNext(0);
@@ -150,6 +158,7 @@ namespace GeneXus.Programs {
       private string A672DynamicTranslationDutchPublish ;
       private string A671DynamicTranslationEnglishPubli ;
       private string AV13Language ;
+      private string AV15VersionLanguage ;
       private string A581DynamicTranslationAttributeNam ;
       private Guid AV10DynamicTranslationPrimaryKey ;
       private Guid A580DynamicTranslationPrimaryKey ;
@@ -158,7 +167,7 @@ namespace GeneXus.Programs {
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private SdtSDT_TranslatedPageBO AV14TranslatedValue ;
-      private SdtSDT_TranslatedPageBO aP2_TranslatedValue ;
+      private SdtSDT_TranslatedPageBO aP3_TranslatedValue ;
       private IDataStoreProvider pr_default ;
       private Guid[] P00ED2_A580DynamicTranslationPrimaryKey ;
       private string[] P00ED2_A581DynamicTranslationAttributeNam ;

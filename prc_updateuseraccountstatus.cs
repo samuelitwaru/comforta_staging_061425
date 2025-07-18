@@ -83,7 +83,6 @@ namespace GeneXus.Programs {
                /* End optimized UPDATE. */
             }
          }
-         new prc_logtofile(context ).execute(  context.GetMessage( "Commit is done. Account is activted", "")) ;
          AV9GAMUser.unblockaccess(out  AV17GAMErrorCollection);
          context.CommitDataStores("prc_updateuseraccountstatus",pr_default);
          cleanup();

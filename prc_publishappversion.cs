@@ -86,6 +86,7 @@ namespace GeneXus.Programs {
             if (true) return;
          }
          AV17BC_Trn_AppVersion.Load(AV15AppVersionId);
+         new prc_logtoserver(context ).execute(  context.GetMessage( "Notify", "")+StringUtil.BoolToStr( AV18Notify)) ;
          if ( ! (Guid.Empty==AV17BC_Trn_AppVersion.gxTpr_Appversionid) )
          {
             /* Using cursor P00BL2 */
@@ -162,6 +163,8 @@ namespace GeneXus.Programs {
                if (true) break;
             }
             pr_default.close(4);
+            new prc_logtoserver(context ).execute(  ">>>"+AV21Metadata.ToJSonString(false, true)) ;
+            new prc_logtoserver(context ).execute(  context.GetMessage( "Notify", "")+StringUtil.BoolToStr( AV18Notify)) ;
             if ( AV18Notify )
             {
                AV19Title = "New Updates Available";

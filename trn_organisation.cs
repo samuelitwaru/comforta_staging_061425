@@ -1201,13 +1201,6 @@ namespace GeneXus.Programs {
                            E14012 ();
                            nKeyPressed = 3;
                         }
-                        else if ( StringUtil.StrCmp(sEvt, "'DOUDELETE'") == 0 )
-                        {
-                           context.wbHandled = 1;
-                           dynload_actions( ) ;
-                           /* Execute user event: 'DoUDelete' */
-                           E15012 ();
-                        }
                         else if ( StringUtil.StrCmp(sEvt, "ENTER") == 0 )
                         {
                            context.wbHandled = 1;
@@ -1583,26 +1576,6 @@ namespace GeneXus.Programs {
             Combo_organisationtypeid_Enabled = false;
             ucCombo_organisationtypeid.SendProperty(context, "", false, Combo_organisationtypeid_Internalname, "Enabled", StringUtil.BoolToStr( Combo_organisationtypeid_Enabled));
          }
-      }
-
-      protected void E15012( )
-      {
-         /* 'DoUDelete' Routine */
-         returnInSub = false;
-         new prc_deletecascadeorganisation(context ).execute(  A11OrganisationId, ref  AV32isSuccessful, ref  AV33Message) ;
-         AssignAttri("", false, "AV32isSuccessful", AV32isSuccessful);
-         AssignAttri("", false, "AV33Message", AV33Message);
-         if ( AV32isSuccessful )
-         {
-            GX_msglist.addItem(new WorkWithPlus.workwithplus_web.dvmessagegetbasicnotificationmsg(context).executeUdp(  "Success",  context.GetMessage( "Deleted organisation successfully", ""),  "success",  "",  "true",  ""));
-            CallWebObject(formatLink("trn_organisation.aspx") );
-            context.wjLocDisableFrm = 1;
-         }
-         else
-         {
-            GX_msglist.addItem(new WorkWithPlus.workwithplus_web.dvmessagegetbasicnotificationmsg(context).executeUdp(  "Failed",  AV33Message,  "error",  "",  "true",  ""));
-         }
-         /*  Sending Event outputs  */
       }
 
       protected void ZM013( short GX_JID )
@@ -2943,8 +2916,6 @@ namespace GeneXus.Programs {
             context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vWWPCONTEXT", AV8WWPContext);
          }
          GxWebStd.gx_hidden_field( context, "gxhash_vWWPCONTEXT", GetSecureSignedToken( "", AV8WWPContext, context));
-         GxWebStd.gx_boolean_hidden_field( context, "vISSUCCESSFUL", AV32isSuccessful);
-         GxWebStd.gx_hidden_field( context, "vMESSAGE", StringUtil.RTrim( AV33Message));
          GxWebStd.gx_hidden_field( context, "vORGANISATIONID", AV7OrganisationId.ToString());
          GxWebStd.gx_hidden_field( context, "gxhash_vORGANISATIONID", GetSecureSignedToken( "", AV7OrganisationId, context));
          GxWebStd.gx_hidden_field( context, "vINSERT_ORGANISATIONTYPEID", AV13Insert_OrganisationTypeId.ToString());
@@ -3137,7 +3108,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202571111454387", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257188585028", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3153,7 +3124,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("trn_organisation.js", "?202571111454390", false, true);
+         context.AddJavascriptSource("trn_organisation.js", "?20257188585030", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3447,8 +3418,6 @@ namespace GeneXus.Programs {
          setEventMetadata("'DOUPDATEORGANISATION'","""{"handler":"E14012","iparms":[{"av":"AV8WWPContext","fld":"vWWPCONTEXT","hsh":true}]}""");
          setEventMetadata("COMBO_ORGANISATIONTYPEID.ONOPTIONCLICKED","""{"handler":"E12012","iparms":[{"av":"Combo_organisationtypeid_Selectedvalue_get","ctrl":"COMBO_ORGANISATIONTYPEID","prop":"SelectedValue_get"}]""");
          setEventMetadata("COMBO_ORGANISATIONTYPEID.ONOPTIONCLICKED",""","oparms":[{"av":"AV20ComboOrganisationTypeId","fld":"vCOMBOORGANISATIONTYPEID"}]}""");
-         setEventMetadata("'DOUDELETE'","""{"handler":"E15012","iparms":[{"av":"A11OrganisationId","fld":"ORGANISATIONID"},{"av":"AV32isSuccessful","fld":"vISSUCCESSFUL"},{"av":"AV33Message","fld":"vMESSAGE"}]""");
-         setEventMetadata("'DOUDELETE'",""","oparms":[{"av":"AV33Message","fld":"vMESSAGE"},{"av":"AV32isSuccessful","fld":"vISSUCCESSFUL"}]}""");
          setEventMetadata("VALID_ORGANISATIONTYPEID","""{"handler":"Valid_Organisationtypeid","iparms":[{"av":"A19OrganisationTypeId","fld":"ORGANISATIONTYPEID"},{"av":"A20OrganisationTypeName","fld":"ORGANISATIONTYPENAME"}]""");
          setEventMetadata("VALID_ORGANISATIONTYPEID",""","oparms":[{"av":"A20OrganisationTypeName","fld":"ORGANISATIONTYPENAME"}]}""");
          setEventMetadata("VALID_ORGANISATIONKVKNUMBER","""{"handler":"Valid_Organisationkvknumber","iparms":[]}""");
@@ -3653,7 +3622,6 @@ namespace GeneXus.Programs {
          AV18ComboSelectedText = "";
          AV29defaultCountryPhoneCode = "";
          GXEncryptionTmp = "";
-         AV33Message = "";
          Z506OrganisationLogo = "";
          Z40000OrganisationLogo_GXI = "";
          Z20OrganisationTypeName = "";
@@ -4050,7 +4018,6 @@ namespace GeneXus.Programs {
       private string endTrnMsgTxt ;
       private string endTrnMsgCod ;
       private string GXEncryptionTmp ;
-      private string AV33Message ;
       private string sDynURL ;
       private string FormProcess ;
       private string bodyStyle ;
@@ -4090,7 +4057,6 @@ namespace GeneXus.Programs {
       private bool Combo_organisationaddresscountry_Includeselectalloption ;
       private bool Combo_organisationaddresscountry_Includeaddnewoption ;
       private bool returnInSub ;
-      private bool AV32isSuccessful ;
       private bool Gx_longc ;
       private bool GXt_boolean3 ;
       private bool ZV35OrganisationHasOwnBrand ;

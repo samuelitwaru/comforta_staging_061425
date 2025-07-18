@@ -140,7 +140,6 @@ namespace GeneXus.Programs {
                {
                   AV13Message = ((GeneXus.Utils.SdtMessages_Message)AV31GXV2.Item(AV32GXV3));
                   AV10Error.gxTpr_Message = AV13Message.gxTpr_Description;
-                  new prc_logtofile(context ).execute(  AV13Message.gxTpr_Description) ;
                   AV32GXV3 = (int)(AV32GXV3+1);
                }
             }

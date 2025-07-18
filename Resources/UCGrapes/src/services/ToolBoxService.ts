@@ -4,7 +4,9 @@ import { Theme } from "../types";
 
 export const baseURL =
   window.location.origin +
-  (window.location.origin.startsWith("http://localhost") ? process.env.ENVIRONMENT : "");
+  (window.location.origin.startsWith("http://localhost")
+    ? process.env.ENVIRONMENT
+    : "");
 
 export class ToolBoxService {
   private config: AppConfig;
@@ -79,12 +81,20 @@ export class ToolBoxService {
   }
 
   async getVersions() {
-    const response = await this.fetchAPI("/api/toolbox/v2/appversions", {}, true);
+    const response = await this.fetchAPI(
+      "/api/toolbox/v2/appversions",
+      {},
+      true
+    );
     return response;
   }
 
   async getVersion() {
-    const response = await this.fetchAPI("/api/toolbox/v2/appversion", {}, true);
+    const response = await this.fetchAPI(
+      "/api/toolbox/v2/appversion",
+      {},
+      true
+    );
     return response;
   }
 
@@ -125,12 +135,15 @@ export class ToolBoxService {
   }
 
   async activateVersion(versionId: any) {
-    const response = await this.fetchAPI("/api/toolbox/v2/activate-appversion", {
-      method: "POST",
-      body: JSON.stringify({
-        AppVersionId: versionId,
-      }),
-    });
+    const response = await this.fetchAPI(
+      "/api/toolbox/v2/activate-appversion",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          AppVersionId: versionId,
+        }),
+      }
+    );
 
     return response;
   }
@@ -190,24 +203,30 @@ export class ToolBoxService {
   }
 
   async createServicePage(appVersionId: string, productServiceId: string) {
-    const response = await this.fetchAPI("/api/toolbox/v2/create-service-page", {
-      method: "POST",
-      body: JSON.stringify({
-        appVersionId: appVersionId,
-        ProductServiceId: productServiceId,
-      }),
-    });
+    const response = await this.fetchAPI(
+      "/api/toolbox/v2/create-service-page",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          appVersionId: appVersionId,
+          ProductServiceId: productServiceId,
+        }),
+      }
+    );
     return response;
   }
 
   async createContentPage(appVersionId: string, pageName: string) {
-    const response = await this.fetchAPI("/api/toolbox/v2/create-content-page", {
-      method: "POST",
-      body: JSON.stringify({
-        appVersionId: appVersionId,
-        PageName: pageName,
-      }),
-    });
+    const response = await this.fetchAPI(
+      "/api/toolbox/v2/create-content-page",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          appVersionId: appVersionId,
+          PageName: pageName,
+        }),
+      }
+    );
     return response;
   }
 
@@ -220,6 +239,7 @@ export class ToolBoxService {
   }
 
   async autoSavePage(pageData: any) {
+    alert("saving");
     const response = await this.fetchAPI(
       "/api/toolbox/v2/save-page",
       {
@@ -283,7 +303,11 @@ export class ToolBoxService {
 
   // get forms of a supplier
   async getSupplierForms(supplierId: string | number) {
-    return await this.fetchAPI(`/api/toolbox/v2/supplier-forms?Supplierid=${supplierId}`, {}, true);
+    return await this.fetchAPI(
+      `/api/toolbox/v2/supplier-forms?Supplierid=${supplierId}`,
+      {},
+      true
+    );
   }
 
   async getSinglePage(pageId: string | number) {
@@ -300,7 +324,10 @@ export class ToolBoxService {
     });
   }
 
-  async getTranslatedVersion(appVersionId: string, selectedLanguageCode: string) {
+  async getTranslatedVersion(
+    appVersionId: string,
+    selectedLanguageCode: string
+  ) {
     return await this.fetchAPI("/api/toolbox/V2/get-translated-version", {
       method: "POST",
       body: JSON.stringify({
@@ -310,7 +337,11 @@ export class ToolBoxService {
     });
   }
 
-  async updateTranslatedVersion(pageId: string, selectedLanguageCode: string, data: any) {
+  async updateTranslatedVersion(
+    pageId: string,
+    selectedLanguageCode: string,
+    data: any
+  ) {
     return await this.fetchAPI(
       "/api/toolbox/V2/update-translated-page",
       {
@@ -358,7 +389,10 @@ export class ToolBoxService {
     });
   }
 
-  async addPageChild(childPageId: string | number, currentPageId: string | number) {
+  async addPageChild(
+    childPageId: string | number,
+    currentPageId: string | number
+  ) {
     return await this.fetchAPI("/api/toolbox/add-page-children", {
       method: "POST",
       body: JSON.stringify({
@@ -395,7 +429,11 @@ export class ToolBoxService {
   }
 
   //translate Appversion
-  async TranslateAppVersion(appVersionId: string, LanguageFrom: string, LanguageTo: string) {
+  async TranslateAppVersion(
+    appVersionId: string,
+    LanguageFrom: string,
+    LanguageTo: string
+  ) {
     return await this.fetchAPI("/api/toolbox/translate-appversion", {
       method: "POST",
       body: JSON.stringify({
@@ -448,7 +486,12 @@ export class ToolBoxService {
     return await this.fetchAPI(`/api/media/delete?MediaId=${mediaId}`);
   }
 
-  async uploadFile(fileData: string, fileName: string, fileSize: number, fileType: string) {
+  async uploadFile(
+    fileData: string,
+    fileName: string,
+    fileSize: number,
+    fileType: string
+  ) {
     if (!fileData) {
       throw new Error("Please select a file!");
     }

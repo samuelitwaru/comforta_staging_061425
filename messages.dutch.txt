@@ -1496,3 +1496,4 @@ Remove from Group=Verwijder uit groep
 Remove=Verwijder
 removed successfully=succesvol verwijderd
 Are you sure you want to remove this=Weet u zeker dat u dit wilt verwijderen
+View Location=Bekijk locatie

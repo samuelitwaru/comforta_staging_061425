@@ -60,6 +60,7 @@ trn_location
 trn_manager
 trn_organisationtype
 trn_organisation
+wp_viewlocation
 wc_selectresidents
 wc_groupresidents
 wp_createresidentandnetwork

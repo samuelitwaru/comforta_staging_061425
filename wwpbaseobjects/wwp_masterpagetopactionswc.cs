@@ -251,6 +251,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
          context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
          context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
+         context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
          if ( StringUtil.Len( sPrefix) == 0 )
          {
             context.CloseHtmlHeader();
@@ -324,8 +325,21 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          GxWebStd.gx_boolean_hidden_field( context, sPrefix+"vISRECEPTIONISTORMANAGER", AV19isReceptionistOrManager);
          GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vISRECEPTIONISTORMANAGER", GetSecureSignedToken( sPrefix, AV19isReceptionistOrManager, context));
+         GxWebStd.gx_boolean_hidden_field( context, sPrefix+"vISRECEPTIONIST", AV21isReceptionist);
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vISRECEPTIONIST", GetSecureSignedToken( sPrefix, AV21isReceptionist, context));
          GxWebStd.gx_boolean_hidden_field( context, sPrefix+"vISAUTHORIZED_MYPROFILE", AV16IsAuthorized_MyProfile);
          GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vISAUTHORIZED_MYPROFILE", GetSecureSignedToken( sPrefix, AV16IsAuthorized_MyProfile, context));
+         GxWebStd.gx_boolean_hidden_field( context, sPrefix+"vISAUTHORIZED_MYLOCATION", AV22IsAuthorized_MyLocation);
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vISAUTHORIZED_MYLOCATION", GetSecureSignedToken( sPrefix, AV22IsAuthorized_MyLocation, context));
+         if ( context.isAjaxRequest( ) )
+         {
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vWWPCONTEXT", AV23WWPContext);
+         }
+         else
+         {
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vWWPCONTEXT", AV23WWPContext);
+         }
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vWWPCONTEXT", GetSecureSignedToken( sPrefix, AV23WWPContext, context));
          GXKey = Crypto.GetSiteKey( );
          forbiddenHiddens = new GXProperties();
          forbiddenHiddens.Add("hshsalt", sPrefix+"hsh"+"WWP_MasterPageTopActionsWC");
@@ -341,8 +355,21 @@ namespace GeneXus.Programs.wwpbaseobjects {
          send_integrity_footer_hashes( ) ;
          GxWebStd.gx_boolean_hidden_field( context, sPrefix+"vISRECEPTIONISTORMANAGER", AV19isReceptionistOrManager);
          GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vISRECEPTIONISTORMANAGER", GetSecureSignedToken( sPrefix, AV19isReceptionistOrManager, context));
+         GxWebStd.gx_boolean_hidden_field( context, sPrefix+"vISRECEPTIONIST", AV21isReceptionist);
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vISRECEPTIONIST", GetSecureSignedToken( sPrefix, AV21isReceptionist, context));
          GxWebStd.gx_boolean_hidden_field( context, sPrefix+"vISAUTHORIZED_MYPROFILE", AV16IsAuthorized_MyProfile);
          GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vISAUTHORIZED_MYPROFILE", GetSecureSignedToken( sPrefix, AV16IsAuthorized_MyProfile, context));
+         GxWebStd.gx_boolean_hidden_field( context, sPrefix+"vISAUTHORIZED_MYLOCATION", AV22IsAuthorized_MyLocation);
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vISAUTHORIZED_MYLOCATION", GetSecureSignedToken( sPrefix, AV22IsAuthorized_MyLocation, context));
+         if ( context.isAjaxRequest( ) )
+         {
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vWWPCONTEXT", AV23WWPContext);
+         }
+         else
+         {
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vWWPCONTEXT", AV23WWPContext);
+         }
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vWWPCONTEXT", GetSecureSignedToken( sPrefix, AV23WWPContext, context));
          GxWebStd.gx_hidden_field( context, sPrefix+"RECEPTIONISTGAMGUID", A95ReceptionistGAMGUID);
          GxWebStd.gx_hidden_field( context, sPrefix+"TOOLBOXLASTUPDATERECEPTIONISTI", A630ToolBoxLastUpdateReceptionistI.ToString());
          GxWebStd.gx_hidden_field( context, sPrefix+"RECEPTIONISTID", A89ReceptionistId.ToString());
@@ -427,6 +454,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
                context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
                context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
                context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
+               context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
             }
             GxWebStd.gx_msg_list( context, "", context.GX_msglist.DisplayMode, "", "", sPrefix, "false");
             /* Div Control */
@@ -498,6 +526,18 @@ namespace GeneXus.Programs.wwpbaseobjects {
             ucBtnactionchangepassword.SetProperty("Caption", Btnactionchangepassword_Caption);
             ucBtnactionchangepassword.SetProperty("Class", Btnactionchangepassword_Class);
             ucBtnactionchangepassword.Render(context, "wwp_iconbutton", Btnactionchangepassword_Internalname, sPrefix+"BTNACTIONCHANGEPASSWORDContainer");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
+            /* User Defined Control */
+            ucBtnmylocation.SetProperty("TooltipText", Btnmylocation_Tooltiptext);
+            ucBtnmylocation.SetProperty("BeforeIconClass", Btnmylocation_Beforeiconclass);
+            ucBtnmylocation.SetProperty("Caption", Btnmylocation_Caption);
+            ucBtnmylocation.SetProperty("Class", Btnmylocation_Class);
+            ucBtnmylocation.Render(context, "wwp_iconbutton", Btnmylocation_Internalname, sPrefix+"BTNMYLOCATIONContainer");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
@@ -676,6 +716,23 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                  }
                               }
                            }
+                           else if ( StringUtil.StrCmp(sEvt, "'DOMYLOCATION'") == 0 )
+                           {
+                              if ( ( StringUtil.Len( sPrefix) != 0 ) && ( nDoneStart == 0 ) )
+                              {
+                                 STRUP3A0( ) ;
+                              }
+                              if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
+                              {
+                                 context.wbHandled = 1;
+                                 if ( ! wbErr )
+                                 {
+                                    dynload_actions( ) ;
+                                    /* Execute user event: 'DoMyLocation' */
+                                    E153A2 ();
+                                 }
+                              }
+                           }
                            else if ( StringUtil.StrCmp(sEvt, "'DOLOGOUT'") == 0 )
                            {
                               if ( ( StringUtil.Len( sPrefix) != 0 ) && ( nDoneStart == 0 ) )
@@ -689,7 +746,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                  {
                                     dynload_actions( ) ;
                                     /* Execute user event: 'DoLogout' */
-                                    E153A2 ();
+                                    E163A2 ();
                                  }
                               }
                            }
@@ -706,7 +763,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                  {
                                     dynload_actions( ) ;
                                     /* Execute user event: 'DoActionChangeYourPassword' */
-                                    E163A2 ();
+                                    E173A2 ();
                                  }
                               }
                            }
@@ -723,7 +780,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                  {
                                     dynload_actions( ) ;
                                     /* Execute user event: Load */
-                                    E173A2 ();
+                                    E183A2 ();
                                  }
                               }
                            }
@@ -883,7 +940,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
          {
             /* Execute user event: Load */
-            E173A2 ();
+            E183A2 ();
             WB3A0( ) ;
          }
       }
@@ -892,8 +949,21 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          GxWebStd.gx_boolean_hidden_field( context, sPrefix+"vISRECEPTIONISTORMANAGER", AV19isReceptionistOrManager);
          GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vISRECEPTIONISTORMANAGER", GetSecureSignedToken( sPrefix, AV19isReceptionistOrManager, context));
+         GxWebStd.gx_boolean_hidden_field( context, sPrefix+"vISRECEPTIONIST", AV21isReceptionist);
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vISRECEPTIONIST", GetSecureSignedToken( sPrefix, AV21isReceptionist, context));
          GxWebStd.gx_boolean_hidden_field( context, sPrefix+"vISAUTHORIZED_MYPROFILE", AV16IsAuthorized_MyProfile);
          GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vISAUTHORIZED_MYPROFILE", GetSecureSignedToken( sPrefix, AV16IsAuthorized_MyProfile, context));
+         GxWebStd.gx_boolean_hidden_field( context, sPrefix+"vISAUTHORIZED_MYLOCATION", AV22IsAuthorized_MyLocation);
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vISAUTHORIZED_MYLOCATION", GetSecureSignedToken( sPrefix, AV22IsAuthorized_MyLocation, context));
+         if ( context.isAjaxRequest( ) )
+         {
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vWWPCONTEXT", AV23WWPContext);
+         }
+         else
+         {
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vWWPCONTEXT", AV23WWPContext);
+         }
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vWWPCONTEXT", GetSecureSignedToken( sPrefix, AV23WWPContext, context));
       }
 
       protected void before_start_formulas( )
@@ -968,10 +1038,10 @@ namespace GeneXus.Programs.wwpbaseobjects {
          AV6UserName = (String.IsNullOrEmpty(StringUtil.RTrim( AV9GAMUser.gxTpr_Firstname)) ? AV9GAMUser.gxTpr_Name : StringUtil.Trim( AV9GAMUser.gxTpr_Firstname)+" "+StringUtil.Trim( AV9GAMUser.gxTpr_Lastname));
          AssignAttri(sPrefix, false, "AV6UserName", AV6UserName);
          AV10GAMRoleCollection = new GeneXus.Programs.genexussecurity.SdtGAMSession(context).getroles(out  AV7GAMErrorCollection);
-         AV21GXV1 = 1;
-         while ( AV21GXV1 <= AV10GAMRoleCollection.Count )
+         AV24GXV1 = 1;
+         while ( AV24GXV1 <= AV10GAMRoleCollection.Count )
          {
-            AV11GAMRole = ((GeneXus.Programs.genexussecurity.SdtGAMRole)AV10GAMRoleCollection.Item(AV21GXV1));
+            AV11GAMRole = ((GeneXus.Programs.genexussecurity.SdtGAMRole)AV10GAMRoleCollection.Item(AV24GXV1));
             if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV12RolesDescriptions)) )
             {
                AV12RolesDescriptions += ", ";
@@ -987,7 +1057,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
             }
             AV12RolesDescriptions += AV18RoleNameDefinition;
             AssignAttri(sPrefix, false, "AV12RolesDescriptions", AV12RolesDescriptions);
-            AV21GXV1 = (int)(AV21GXV1+1);
+            AV24GXV1 = (int)(AV24GXV1+1);
          }
          AV19isReceptionistOrManager = false;
          AssignAttri(sPrefix, false, "AV19isReceptionistOrManager", AV19isReceptionistOrManager);
@@ -1000,12 +1070,16 @@ namespace GeneXus.Programs.wwpbaseobjects {
          }
          if ( StringUtil.Contains( AV12RolesDescriptions, "Receptionist") )
          {
+            AV21isReceptionist = true;
+            AssignAttri(sPrefix, false, "AV21isReceptionist", AV21isReceptionist);
+            GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vISRECEPTIONIST", GetSecureSignedToken( sPrefix, AV21isReceptionist, context));
             GXt_char1 = AV20ReceptionistTitle;
             new prc_getorganisationdefinition(context ).execute(  "Receptionist", out  GXt_char1) ;
             AV20ReceptionistTitle = GXt_char1;
             AV12RolesDescriptions = StringUtil.StringReplace( AV12RolesDescriptions, "Receptionist", AV20ReceptionistTitle);
             AssignAttri(sPrefix, false, "AV12RolesDescriptions", AV12RolesDescriptions);
          }
+         new GeneXus.Programs.wwpbaseobjects.loadwwpcontext(context ).execute( out  AV23WWPContext) ;
       }
 
       protected void E123A2( )
@@ -1045,6 +1119,24 @@ namespace GeneXus.Programs.wwpbaseobjects {
       }
 
       protected void E153A2( )
+      {
+         /* 'DoMyLocation' Routine */
+         returnInSub = false;
+         if ( AV22IsAuthorized_MyLocation )
+         {
+            GXKey = Crypto.GetSiteKey( );
+            GXEncryptionTmp = "wp_viewlocation.aspx"+UrlEncode(AV23WWPContext.gxTpr_Locationid.ToString()) + "," + UrlEncode(AV23WWPContext.gxTpr_Organisationid.ToString());
+            CallWebObject(formatLink("wp_viewlocation.aspx") + "?" + UriEncrypt64( GXEncryptionTmp+Crypto.CheckSum( GXEncryptionTmp, 6), GXKey));
+            context.wjLocDisableFrm = 1;
+         }
+         else
+         {
+            GX_msglist.addItem(context.GetMessage( "WWP_ActionNoLongerAvailable", ""));
+            context.DoAjaxRefreshCmp(sPrefix);
+         }
+      }
+
+      protected void E163A2( )
       {
          /* 'DoLogout' Routine */
          returnInSub = false;
@@ -1098,9 +1190,19 @@ namespace GeneXus.Programs.wwpbaseobjects {
             Btnmyprofile_Visible = false;
             ucBtnmyprofile.SendProperty(context, sPrefix, false, Btnmyprofile_Internalname, "Visible", StringUtil.BoolToStr( Btnmyprofile_Visible));
          }
+         GXt_boolean2 = AV22IsAuthorized_MyLocation;
+         new WorkWithPlus.workwithplus_commongam.secgamisauthbyfunctionalitykey(context ).execute(  "wp_viewlocation_Execute", out  GXt_boolean2) ;
+         AV22IsAuthorized_MyLocation = GXt_boolean2;
+         AssignAttri(sPrefix, false, "AV22IsAuthorized_MyLocation", AV22IsAuthorized_MyLocation);
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vISAUTHORIZED_MYLOCATION", GetSecureSignedToken( sPrefix, AV22IsAuthorized_MyLocation, context));
+         if ( ! ( AV22IsAuthorized_MyLocation && ( ( AV21isReceptionist ) ) ) )
+         {
+            Btnmylocation_Visible = false;
+            ucBtnmylocation.SendProperty(context, sPrefix, false, Btnmylocation_Internalname, "Visible", StringUtil.BoolToStr( Btnmylocation_Visible));
+         }
       }
 
-      protected void E163A2( )
+      protected void E173A2( )
       {
          /* 'DoActionChangeYourPassword' Routine */
          returnInSub = false;
@@ -1113,7 +1215,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
       }
 
-      protected void E173A2( )
+      protected void E183A2( )
       {
          /* Load Routine */
          returnInSub = false;
@@ -1294,7 +1396,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202571111445083", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257188583849", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1312,7 +1414,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          if ( nGXWrapped != 1 )
          {
-            context.AddJavascriptSource("wwpbaseobjects/wwp_masterpagetopactionswc.js", "?202571111445086", false, true);
+            context.AddJavascriptSource("wwpbaseobjects/wwp_masterpagetopactionswc.js", "?20257188583853", false, true);
+            context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
             context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
             context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
             context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
@@ -1333,6 +1436,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          divUserinformation_Internalname = sPrefix+"USERINFORMATION";
          Btnmyprofile_Internalname = sPrefix+"BTNMYPROFILE";
          Btnactionchangepassword_Internalname = sPrefix+"BTNACTIONCHANGEPASSWORD";
+         Btnmylocation_Internalname = sPrefix+"BTNMYLOCATION";
          Btnlogout_Internalname = sPrefix+"BTNLOGOUT";
          divTablemain_Internalname = sPrefix+"TABLEMAIN";
          divLayoutmaintable_Internalname = sPrefix+"LAYOUTMAINTABLE";
@@ -1353,11 +1457,16 @@ namespace GeneXus.Programs.wwpbaseobjects {
             }
          }
          init_default_properties( ) ;
+         Btnmylocation_Visible = Convert.ToBoolean( -1);
          Btnmyprofile_Visible = Convert.ToBoolean( -1);
          Btnlogout_Class = "MasterPageTopActionsOption";
          Btnlogout_Caption = context.GetMessage( "WWP_GAM_Logout", "");
          Btnlogout_Beforeiconclass = "fas fa-sign-out-alt FontIconTopRightActions";
          Btnlogout_Tooltiptext = "";
+         Btnmylocation_Class = "MasterPageTopActionsOption";
+         Btnmylocation_Caption = context.GetMessage( "My Location", "");
+         Btnmylocation_Beforeiconclass = "fas fa-map-marker-alt FontIconTopRightActions";
+         Btnmylocation_Tooltiptext = "";
          Btnactionchangepassword_Class = "MasterPageTopActionsOption";
          Btnactionchangepassword_Caption = context.GetMessage( "WWP_GAM_ChangePassword", "");
          Btnactionchangepassword_Beforeiconclass = "fa fa-lock FontIconTopRightActions";
@@ -1386,13 +1495,14 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV19isReceptionistOrManager","fld":"vISRECEPTIONISTORMANAGER","hsh":true},{"av":"AV16IsAuthorized_MyProfile","fld":"vISAUTHORIZED_MYPROFILE","hsh":true},{"av":"AV12RolesDescriptions","fld":"vROLESDESCRIPTIONS"}]""");
-         setEventMetadata("REFRESH",""","oparms":[{"av":"AV16IsAuthorized_MyProfile","fld":"vISAUTHORIZED_MYPROFILE","hsh":true},{"av":"Btnmyprofile_Visible","ctrl":"BTNMYPROFILE","prop":"Visible"}]}""");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV19isReceptionistOrManager","fld":"vISRECEPTIONISTORMANAGER","hsh":true},{"av":"AV21isReceptionist","fld":"vISRECEPTIONIST","hsh":true},{"av":"AV16IsAuthorized_MyProfile","fld":"vISAUTHORIZED_MYPROFILE","hsh":true},{"av":"AV22IsAuthorized_MyLocation","fld":"vISAUTHORIZED_MYLOCATION","hsh":true},{"av":"AV23WWPContext","fld":"vWWPCONTEXT","hsh":true},{"av":"AV12RolesDescriptions","fld":"vROLESDESCRIPTIONS"}]""");
+         setEventMetadata("REFRESH",""","oparms":[{"av":"AV16IsAuthorized_MyProfile","fld":"vISAUTHORIZED_MYPROFILE","hsh":true},{"av":"Btnmyprofile_Visible","ctrl":"BTNMYPROFILE","prop":"Visible"},{"av":"AV22IsAuthorized_MyLocation","fld":"vISAUTHORIZED_MYLOCATION","hsh":true},{"av":"Btnmylocation_Visible","ctrl":"BTNMYLOCATION","prop":"Visible"}]}""");
          setEventMetadata("'DOMYPROFILE'","""{"handler":"E133A2","iparms":[{"av":"AV16IsAuthorized_MyProfile","fld":"vISAUTHORIZED_MYPROFILE","hsh":true}]}""");
          setEventMetadata("'DOACTIONCHANGEPASSWORD'","""{"handler":"E143A2","iparms":[]}""");
-         setEventMetadata("'DOLOGOUT'","""{"handler":"E153A2","iparms":[{"av":"A95ReceptionistGAMGUID","fld":"RECEPTIONISTGAMGUID"},{"av":"A630ToolBoxLastUpdateReceptionistI","fld":"TOOLBOXLASTUPDATERECEPTIONISTI"},{"av":"A89ReceptionistId","fld":"RECEPTIONISTID"}]""");
+         setEventMetadata("'DOMYLOCATION'","""{"handler":"E153A2","iparms":[{"av":"AV22IsAuthorized_MyLocation","fld":"vISAUTHORIZED_MYLOCATION","hsh":true},{"av":"AV23WWPContext","fld":"vWWPCONTEXT","hsh":true}]}""");
+         setEventMetadata("'DOLOGOUT'","""{"handler":"E163A2","iparms":[{"av":"A95ReceptionistGAMGUID","fld":"RECEPTIONISTGAMGUID"},{"av":"A630ToolBoxLastUpdateReceptionistI","fld":"TOOLBOXLASTUPDATERECEPTIONISTI"},{"av":"A89ReceptionistId","fld":"RECEPTIONISTID"}]""");
          setEventMetadata("'DOLOGOUT'",""","oparms":[{"av":"AV17UserId","fld":"vUSERID"}]}""");
-         setEventMetadata("'DOACTIONCHANGEYOURPASSWORD'","""{"handler":"E163A2","iparms":[]}""");
+         setEventMetadata("'DOACTIONCHANGEYOURPASSWORD'","""{"handler":"E173A2","iparms":[]}""");
          return  ;
       }
 
@@ -1413,6 +1523,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          sDynURL = "";
          FormProcess = "";
          bodyStyle = "";
+         AV23WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          GXKey = "";
          forbiddenHiddens = new GXProperties();
          AV12RolesDescriptions = "";
@@ -1424,6 +1535,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          AV6UserName = "";
          ucBtnmyprofile = new GXUserControl();
          ucBtnactionchangepassword = new GXUserControl();
+         ucBtnmylocation = new GXUserControl();
          ucBtnlogout = new GXUserControl();
          Form = new GXWebForm();
          sXEvt = "";
@@ -1438,6 +1550,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          AV11GAMRole = new GeneXus.Programs.genexussecurity.SdtGAMRole(context);
          AV18RoleNameDefinition = "";
          AV20ReceptionistTitle = "";
+         GXEncryptionTmp = "";
          AV17UserId = "";
          GXt_char1 = "";
          H003A2_A630ToolBoxLastUpdateReceptionistI = new Guid[] {Guid.Empty} ;
@@ -1485,7 +1598,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private short nDonePA ;
       private int edtavUsername_Enabled ;
       private int edtavRolesdescriptions_Enabled ;
-      private int AV21GXV1 ;
+      private int AV24GXV1 ;
       private int idxLst ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
@@ -1516,6 +1629,11 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string Btnactionchangepassword_Caption ;
       private string Btnactionchangepassword_Class ;
       private string Btnactionchangepassword_Internalname ;
+      private string Btnmylocation_Tooltiptext ;
+      private string Btnmylocation_Beforeiconclass ;
+      private string Btnmylocation_Caption ;
+      private string Btnmylocation_Class ;
+      private string Btnmylocation_Internalname ;
       private string Btnlogout_Tooltiptext ;
       private string Btnlogout_Beforeiconclass ;
       private string Btnlogout_Caption ;
@@ -1527,11 +1645,14 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string EvtRowId ;
       private string sEvtType ;
       private string hsh ;
+      private string GXEncryptionTmp ;
       private string GXt_char1 ;
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
       private bool AV19isReceptionistOrManager ;
+      private bool AV21isReceptionist ;
       private bool AV16IsAuthorized_MyProfile ;
+      private bool AV22IsAuthorized_MyLocation ;
       private bool wbLoad ;
       private bool Rfr0gs ;
       private bool wbErr ;
@@ -1539,8 +1660,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private bool returnInSub ;
       private bool n630ToolBoxLastUpdateReceptionistI ;
       private bool AV8isOk ;
-      private bool GXt_boolean2 ;
       private bool Btnmyprofile_Visible ;
+      private bool GXt_boolean2 ;
+      private bool Btnmylocation_Visible ;
       private string AV12RolesDescriptions ;
       private string A95ReceptionistGAMGUID ;
       private string AV6UserName ;
@@ -1554,12 +1676,14 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private GXProperties forbiddenHiddens ;
       private GXUserControl ucBtnmyprofile ;
       private GXUserControl ucBtnactionchangepassword ;
+      private GXUserControl ucBtnmylocation ;
       private GXUserControl ucBtnlogout ;
       private GXWebForm Form ;
       private IGxSession AV13WebSession ;
       private IGxDataStore dsDataStore1 ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV23WWPContext ;
       private GeneXus.Programs.genexussecurity.SdtGAMUser AV9GAMUser ;
       private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMRole> AV10GAMRoleCollection ;
       private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV7GAMErrorCollection ;

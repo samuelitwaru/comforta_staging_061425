@@ -166,7 +166,6 @@ namespace GeneXus.Programs {
                   AV19Path = context.GetMessage( "C:\\KBs\\Comforta_version2.1\\Data018\\web\\media\\cropped\\", "");
                }
                new SdtEO_Base64Image(context).saveimage(AV15MediaImageData, AV19Path+AV11MediaName) ;
-               new prc_logtofile(context ).execute(  AV19Path+AV11MediaName) ;
                AV9response = AV13BC_Trn_Media.ToJSonString(true, true);
                context.CommitDataStores("prc_uploadcroppedmedia",pr_default);
             }
