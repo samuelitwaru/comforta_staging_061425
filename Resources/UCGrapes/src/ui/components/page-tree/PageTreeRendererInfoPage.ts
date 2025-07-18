@@ -60,7 +60,10 @@ export class PageTreeRendererInfoPage {
     let roundCtaBuffer: any[] = [];
 
     json.InfoContent.forEach((row: any, index: number) => {
-      if (row.InfoType === "Cta" && row.CtaAttributes.CtaButtonType === "Round") {
+      if (
+        row.InfoType === "Cta" &&
+        row.CtaAttributes.CtaButtonType === "Round"
+      ) {
         roundCtaBuffer.push(row);
 
         // Process buffer if we have 3 CTAs or this is the last item or next item is not a Round CTA
@@ -71,7 +74,8 @@ export class PageTreeRendererInfoPage {
           json.InfoContent[index + 1]?.CtaAttributes.CtaButtonType !== "Round"
         ) {
           const groupContainer = document.createElement("div");
-          groupContainer.style.cssText = "display: flex; justify-content: center; flex-flow: wrap;";
+          groupContainer.style.cssText =
+            "display: flex; justify-content: center; flex-flow: wrap;";
 
           roundCtaBuffer.forEach((bufferedRow) => {
             const ctaButton = this.createCTAs(bufferedRow.CtaAttributes);
@@ -125,12 +129,17 @@ export class PageTreeRendererInfoPage {
               icondiv.style.marginBottom = "2px";
 
               if (tile.Icon) {
-                icondiv.innerHTML = this.themeManager
-                  .getThemeIcon(tile.Icon)
-                  .IconSVG.replace(/fill="[^"]*"/g, 'fill="currentColor"')
-                  .replace(/style="[^"]*background[^"]*"/g, "")
-                  .replace(/<rect[^>]*fill="[^"]*"/g, '<rect fill="currentColor"')
-                  .replace("<svg", '<svg style="width: 12px; height: 12px;"');
+                const icon = (icondiv.innerHTML =
+                  this.themeManager.getThemeIcon(tile.Icon));
+                if (icon) {
+                  icon.IconSVG.replace(/fill="[^"]*"/g, 'fill="currentColor"')
+                    .replace(/style="[^"]*background[^"]*"/g, "")
+                    .replace(
+                      /<rect[^>]*fill="[^"]*"/g,
+                      '<rect fill="currentColor"'
+                    )
+                    .replace("<svg", '<svg style="width: 12px; height: 12px;"');
+                }
               }
 
               // Create title container
@@ -153,19 +162,20 @@ export class PageTreeRendererInfoPage {
                 tile.Align === "center"
                   ? "center"
                   : tile.Align === "right"
-                    ? "flex-end"
-                    : "flex-start";
+                  ? "flex-end"
+                  : "flex-start";
               const justifyContent =
                 tile.Align === "center"
                   ? "center"
                   : tile.Align === "right"
-                    ? "flex-end"
-                    : "flex-start";
+                  ? "flex-end"
+                  : "flex-start";
 
               // For single tile columns, use flex: 1 to fill the column height
               // For multi-tile columns, use the calculated height
               const flexValue = col.Tiles.length === 1 ? "1" : "0 0 auto";
-              const minHeight = col.Tiles.length === 1 ? "auto" : `${tileHeight}px`;
+              const minHeight =
+                col.Tiles.length === 1 ? "auto" : `${tileHeight}px`;
 
               tileDiv.style.cssText = `
                 display: flex;
@@ -176,8 +186,12 @@ export class PageTreeRendererInfoPage {
                 min-height: ${minHeight};
                 flex: ${flexValue};
                 color: ${tile.Color};
-                background-color: ${this.currentTheme.ThemeColors[tile.BGColor || "primaryColor"]};
-                background-image: ${tile.BGImageUrl ? `url('${tile.BGImageUrl}')` : "none"};
+                background-color: ${
+                  this.currentTheme.ThemeColors[tile.BGColor || "primaryColor"]
+                };
+                background-image: ${
+                  tile.BGImageUrl ? `url('${tile.BGImageUrl}')` : "none"
+                };
                 background-size: cover;
                 background-repeat: no-repeat;
                 background-position: center;
@@ -290,7 +304,9 @@ export class PageTreeRendererInfoPage {
 
     let pageData = `
                 <div class="tb-date-selector-tree"  
-                  style="background-color: ${this.currentTheme.ThemeColors["backgroundColor"]}">
+                  style="background-color: ${
+                    this.currentTheme.ThemeColors["backgroundColor"]
+                  }">
                   <span class="tb-arrow">❮</span>
                   <span class="tb-date-text" id="current-date" > ${this.formatDate()}</span>
                   <span class="tb-arrow">❯</span>
@@ -437,7 +453,9 @@ export class PageTreeRendererInfoPage {
               <div class="cta-icon-button-tree" style="background:${this.getCtaColor(
                 cta.CtaBGColor
               )}">
-                <div class="cta-icon-button-icon-tree" >${icons[cta.CtaButtonIcon]}</div>
+                <div class="cta-icon-button-icon-tree" >${
+                  icons[cta.CtaButtonIcon]
+                }</div>
                 <div class="cta-icon-button-label-tree">
                   ${cta.CtaLabel}
                 </div>
