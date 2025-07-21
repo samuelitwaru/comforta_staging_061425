@@ -54,6 +54,7 @@ button {
   box-sizing: border-box;
   overflow-y: auto;
   overflow-x: hidden;
+  scrollbar-width: none;
   /* pointer-events: none; */
 }
 
@@ -61,7 +62,7 @@ button {
 .translate-container::-webkit-scrollbar,
 .content-frame-container::-webkit-scrollbar,
 .form-frame-container::-webkit-scrollbar {
-  width: 2px;
+  width: 0px;
 }
 
 .frame-container::-webkit-scrollbar-track {
@@ -1537,5 +1538,18 @@ img.content-page-block {
   gap: 10px;
   /* border: 1px solid #ccc; */
   box-sizing: border-box;
+}
+
+.drag-ghost {
+  pointer-events: none;
+  opacity: 0.8;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  border-radius: 4px;
+  transition: transform 0.1s;
+}
+
+.drag-hidden {
+  opacity: 0;
+  visibility: hidden;
 }
 

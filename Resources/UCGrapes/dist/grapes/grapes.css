@@ -2755,7 +2755,7 @@ span.CodeMirror-selectedtext {
   padding: 0;
 }
 .gjs-selected-parent {
-  border: 1px solid #ffca6f;
+  border: 1px dashed #ffca6f;
 }
 .gjs-opac50 {
   opacity: 0.5;
