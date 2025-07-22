@@ -256,10 +256,6 @@ namespace GeneXus.Programs {
          AV15SDT_InfoTile.gxTpr_Bgcolor = GXt_char1;
          AV15SDT_InfoTile.gxTpr_Size = (decimal)(((AV15SDT_InfoTile.gxTpr_Size==Convert.ToDecimal(0)) ? 80 : (short)(Math.Round(AV15SDT_InfoTile.gxTpr_Size, 18, MidpointRounding.ToEven))));
          AV15SDT_InfoTile.gxTpr_Size = (decimal)(AV15SDT_InfoTile.gxTpr_Size/ (decimal)(80));
-         if ( StringUtil.StrCmp(AV15SDT_InfoTile.gxTpr_Action.gxTpr_Objecttype, "Map") == 0 )
-         {
-            AV15SDT_InfoTile.gxTpr_Action.gxTpr_Objecttype = "Maps";
-         }
          if ( StringUtil.StrCmp(AV15SDT_InfoTile.gxTpr_Action.gxTpr_Objecttype, "DynamicForm") == 0 )
          {
             /* Using cursor P00GB6 */
