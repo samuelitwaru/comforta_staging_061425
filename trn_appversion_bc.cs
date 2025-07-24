@@ -2673,7 +2673,7 @@ public class trn_appversion_bc__default : DataStoreHelperBase, IDataStoreHelper
        new ParDef("IsActive",GXType.Boolean,4,0) ,
        new ParDef("IsVersionDeleted",GXType.Boolean,4,0) ,
        new ParDef("VersionDeletedAt",GXType.DateTime,8,5){Nullable=true} ,
-       new ParDef("AppVersionLanguage",GXType.VarChar,40,0) ,
+       new ParDef("AppVersionLanguage",GXType.VarChar,100,0) ,
        new ParDef("OrganisationId",GXType.UniqueIdentifier,36,0){Nullable=true} ,
        new ParDef("Trn_ThemeId",GXType.UniqueIdentifier,36,0) ,
        new ParDef("LocationId",GXType.UniqueIdentifier,36,0){Nullable=true}
@@ -2684,7 +2684,7 @@ public class trn_appversion_bc__default : DataStoreHelperBase, IDataStoreHelper
        new ParDef("IsActive",GXType.Boolean,4,0) ,
        new ParDef("IsVersionDeleted",GXType.Boolean,4,0) ,
        new ParDef("VersionDeletedAt",GXType.DateTime,8,5){Nullable=true} ,
-       new ParDef("AppVersionLanguage",GXType.VarChar,40,0) ,
+       new ParDef("AppVersionLanguage",GXType.VarChar,100,0) ,
        new ParDef("OrganisationId",GXType.UniqueIdentifier,36,0){Nullable=true} ,
        new ParDef("Trn_ThemeId",GXType.UniqueIdentifier,36,0) ,
        new ParDef("LocationId",GXType.UniqueIdentifier,36,0){Nullable=true} ,

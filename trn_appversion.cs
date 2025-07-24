@@ -485,7 +485,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-8 gx-attribute", "start", "top", "", "", "div");
          /* Single line edit */
          TempTags = "  onfocus=\"gx.evt.onfocus(this, 41,'',false,'',0)\"";
-         GxWebStd.gx_single_line_edit( context, edtAppVersionLanguage_Internalname, A648AppVersionLanguage, StringUtil.RTrim( context.localUtil.Format( A648AppVersionLanguage, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,41);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtAppVersionLanguage_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtAppVersionLanguage_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_Trn_AppVersion.htm");
+         GxWebStd.gx_single_line_edit( context, edtAppVersionLanguage_Internalname, A648AppVersionLanguage, StringUtil.RTrim( context.localUtil.Format( A648AppVersionLanguage, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,41);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtAppVersionLanguage_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtAppVersionLanguage_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_Trn_AppVersion.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -3685,7 +3685,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202571617552191", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257232019455", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3701,7 +3701,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("trn_appversion.js", "?20257161755221", false, true);
+         context.AddJavascriptSource("trn_appversion.js", "?20257232019457", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -4948,7 +4948,7 @@ public class trn_appversion__default : DataStoreHelperBase, IDataStoreHelper
        new ParDef("IsActive",GXType.Boolean,4,0) ,
        new ParDef("IsVersionDeleted",GXType.Boolean,4,0) ,
        new ParDef("VersionDeletedAt",GXType.DateTime,8,5){Nullable=true} ,
-       new ParDef("AppVersionLanguage",GXType.VarChar,40,0) ,
+       new ParDef("AppVersionLanguage",GXType.VarChar,100,0) ,
        new ParDef("OrganisationId",GXType.UniqueIdentifier,36,0){Nullable=true} ,
        new ParDef("Trn_ThemeId",GXType.UniqueIdentifier,36,0) ,
        new ParDef("LocationId",GXType.UniqueIdentifier,36,0){Nullable=true}
@@ -4959,7 +4959,7 @@ public class trn_appversion__default : DataStoreHelperBase, IDataStoreHelper
        new ParDef("IsActive",GXType.Boolean,4,0) ,
        new ParDef("IsVersionDeleted",GXType.Boolean,4,0) ,
        new ParDef("VersionDeletedAt",GXType.DateTime,8,5){Nullable=true} ,
-       new ParDef("AppVersionLanguage",GXType.VarChar,40,0) ,
+       new ParDef("AppVersionLanguage",GXType.VarChar,100,0) ,
        new ParDef("OrganisationId",GXType.UniqueIdentifier,36,0){Nullable=true} ,
        new ParDef("Trn_ThemeId",GXType.UniqueIdentifier,36,0) ,
        new ParDef("LocationId",GXType.UniqueIdentifier,36,0){Nullable=true} ,

@@ -2,9 +2,9 @@ openapi: 3.0.0
 info:
   title: "API_ResidentService"
   description: "API Services"
-  version: "20250718055935"
+  version: "20250723172146"
 servers:
-  - url: https://staging.comforta.yukon.software/api
+  - url: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/api
 paths:
   /auth/resident-login:
     post:
@@ -762,6 +762,51 @@ paths:
         - API_ResidentService  
       operationId: "API_ResidentService.InfoPageAPI"
       summary: "Pages API"
+      security: 
+        - oAuthGXGAM: []
+      parameters:
+        - name: "Pageid"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+            format: "uuid"
+        - name: "Locationid"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+            format: "uuid"
+        - name: "Organisationid"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+            format: "uuid"
+        - name: "Userid"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+            
+      
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SDT_InfoPage"  
+
+        404:
+          description: "Not found"
+
+  /toolbox/module-page:
+    get:
+      tags:
+        - API_ResidentService  
+      operationId: "API_ResidentService.ModulePageAPI"
+      summary: "Module Page API"
       security: 
         - oAuthGXGAM: []
       parameters:
@@ -2152,7 +2197,7 @@ components:
       description: GAM OAuth 2
       flows:
         password:          
-          tokenUrl: https://staging.comforta.yukon.software/oauth/gam/v2.0/access_token
+          tokenUrl: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/oauth/gam/v2.0/access_token
           scopes: 
             fullcontrol: Full access
 
@@ -2206,6 +2251,7 @@ components:
         error:
           description: "SDT_Error"
           $ref: "#/components/schemas/SDT_Error"
+
 
 
 
@@ -2639,6 +2685,7 @@ components:
       properties:
         ProfileImageUrl:
           type: "string"
+
 
 
 

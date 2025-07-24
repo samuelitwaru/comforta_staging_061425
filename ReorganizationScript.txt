@@ -1,7 +1,2 @@
-ALTER TABLE Trn_DynamicTranslation ADD DynamicTranslationEnglishPubli TEXT NOT NULL DEFAULT '', ADD DynamicTranslationDutchPublish TEXT NOT NULL DEFAULT '';
-ALTER TABLE Trn_DynamicTranslation ALTER COLUMN DynamicTranslationEnglishPubli DROP DEFAULT;
-ALTER TABLE Trn_DynamicTranslation ALTER COLUMN DynamicTranslationDutchPublish DROP DEFAULT;
-CREATE INDEX UTRN_DYNAMICTRANSLATION ON Trn_DynamicTranslation (DynamicTranslationPrimaryKey );
-CREATE INDEX UTRN_DYNAMICTRANSLATION1 ON Trn_DynamicTranslation (DynamicTranslationTrnName );
-CREATE INDEX UTRN_DYNAMICTRANSLATION2 ON Trn_DynamicTranslation (DynamicTranslationAttributeNam );
+ALTER TABLE Trn_AppVersion ALTER COLUMN AppVersionLanguage TYPE VARCHAR(100);
 

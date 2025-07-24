@@ -894,6 +894,39 @@ namespace GeneXus.Programs {
          /* InfoPageAPI Constructor */
       }
 
+      public void gxep_modulepageapi( Guid aP0_PageId ,
+                                      Guid aP1_locationId ,
+                                      Guid aP2_organisationId ,
+                                      string aP3_userId ,
+                                      out SdtSDT_InfoPage aP4_SDT_InfoPage )
+      {
+         restCliModulePageAPI = new GXRestAPIClient();
+         if ( restLocation == null )
+         {
+            InitLocation();
+         }
+         restLocation.ResourceName = "/toolbox/module-page";
+         restCliModulePageAPI.Location = restLocation;
+         restCliModulePageAPI.HttpMethod = "GET";
+         restCliModulePageAPI.AddQueryVar("Pageid", (Guid)(aP0_PageId));
+         restCliModulePageAPI.AddQueryVar("Locationid", (Guid)(aP1_locationId));
+         restCliModulePageAPI.AddQueryVar("Organisationid", (Guid)(aP2_organisationId));
+         restCliModulePageAPI.AddQueryVar("Userid", (string)(aP3_userId));
+         restCliModulePageAPI.RestExecute();
+         if ( restCliModulePageAPI.ErrorCode != 0 )
+         {
+            gxProperties.ErrorCode = restCliModulePageAPI.ErrorCode;
+            gxProperties.ErrorMessage = restCliModulePageAPI.ErrorMessage;
+            gxProperties.StatusCode = restCliModulePageAPI.StatusCode;
+            aP4_SDT_InfoPage = new SdtSDT_InfoPage();
+         }
+         else
+         {
+            aP4_SDT_InfoPage = restCliModulePageAPI.GetBodySdt<SdtSDT_InfoPage>("SDT_InfoPage");
+         }
+         /* ModulePageAPI Constructor */
+      }
+
       public void gxep_contentpagesapi( Guid aP0_locationId ,
                                         Guid aP1_organisationId ,
                                         out GXBaseCollection<SdtSDT_ContentPage> aP2_SDT_ContentPageCollection )
@@ -2659,6 +2692,7 @@ namespace GeneXus.Programs {
          aP4_SDT_MobilePage = new SdtSDT_MobilePage();
          restCliInfoPageAPI = new GXRestAPIClient();
          aP4_SDT_InfoPage = new SdtSDT_InfoPage();
+         restCliModulePageAPI = new GXRestAPIClient();
          restCliContentPagesAPI = new GXRestAPIClient();
          aP2_SDT_ContentPageCollection = new GXBaseCollection<SdtSDT_ContentPage>();
          restCliGetSinglePage = new GXRestAPIClient();
@@ -2776,6 +2810,7 @@ namespace GeneXus.Programs {
       protected GXRestAPIClient restCliHomePageAPI ;
       protected GXRestAPIClient restCliPageAPI ;
       protected GXRestAPIClient restCliInfoPageAPI ;
+      protected GXRestAPIClient restCliModulePageAPI ;
       protected GXRestAPIClient restCliContentPagesAPI ;
       protected GXRestAPIClient restCliGetSinglePage ;
       protected GXRestAPIClient restCliDeletePage ;
