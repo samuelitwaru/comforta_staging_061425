@@ -323,12 +323,12 @@ span#scroll-right:hover {
 .home-app-bar {
   display: flex;
   align-items: center;
-  padding: 12px 16px 0px 16px;
+  padding: 12px 16px 0px 10px;
   width: 100%;
 }
 
 .translate-app-bar {
-  padding: 12px 0 0 0;
+  padding: 12px 16px 0px 10px;
 }
 
 .translate-app-bar .title {
@@ -501,7 +501,7 @@ span#scroll-right:hover {
 }
 
 .app-bar .title {
-  font-size: 18px;
+  font-size: 20px;
   color: #1f2937;
   margin: 0;
   text-transform: uppercase;
@@ -575,9 +575,11 @@ span#scroll-right:hover {
   stroke: #fff;
 }
 
-.app-bar svg {
+.app-bar svg,
+.translate-app-bar svg {
   width: 50px;
   flex-shrink: 0;
+  margin-left: -4px;
 }
 /* Input field */
 .tb-form-control {
@@ -1119,7 +1121,6 @@ h5#current-page-title {
 .tb-custom-menu-item.active-tree-item {
   color: #536baa;
 }
-
 
 .sidebar-section.theme-section {
   padding-bottom: 0;
@@ -3785,7 +3786,9 @@ input[type="range"]::-webkit-slider-thumb {
 
 .tree-view-section {
   position: absolute;
-  top: 700px;
+  left: 18px;
+  right: 18px;
+  top: 700px !important;
 }
 
 /* translationf frame */
@@ -3799,7 +3802,8 @@ input[type="range"]::-webkit-slider-thumb {
   border: 6px solid #373737;
   overflow: hidden;
   transition: all 0.3s ease;
-  padding: 0 12px;
+  display: flex; /* Add this */
+  flex-direction: column; /* Add this */
 }
 
 @media screen and (max-width: 1440px) {
@@ -3814,25 +3818,27 @@ input[type="range"]::-webkit-slider-thumb {
   flex-direction: column;
   gap: 0.5rem;
   width: 100%;
-  height: 100%;
+  flex: 1; /* Change from height: 100% to flex: 1 */
+  min-height: 0; /* Add this to ensure flex child can shrink */
   background-color: #efeeec;
   box-sizing: border-box;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: none;
-  padding-top: 10px;
+  padding: 0 12px;
+  padding-top: 14px;
 }
 
 .translate-column {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.8rem;
   margin: 20px 0;
   margin-top: 4px;
   width: 100%;
-  overflow-y: visible;
+  /* overflow-y: visible;
   overflow-x: hidden;
-  scrollbar-width: none;
+  scrollbar-width: none; */
 }
 
 .tile-grid-section,
@@ -3863,7 +3869,7 @@ input[type="range"]::-webkit-slider-thumb {
 
 .translated-tile .tile-icon svg {
   width: 100%;
-  height: 100%;
+  height: 29px;
   display: block;
 }
 
@@ -3925,8 +3931,8 @@ input[type="range"]::-webkit-slider-thumb {
 
 .translated-cta-img-button__img {
   border-radius: 8px;
-  max-width: 70px;
-  height: 65px;
+  max-width: 72px;
+  height: 68.5px;
   object-fit: cover;
 }
 
@@ -4036,7 +4042,11 @@ input[type="range"]::-webkit-slider-thumb {
   transition: all 0.2s ease;
   border-radius: 3px;
   padding: 2px 4px;
-  margin: -2px -4px;
+  /* margin: -2px -4px; */
+}
+
+.translate-column .translated-tile .editable-content {
+  padding-left: 0;
 }
 
 .translate-column .editable-content:not(.html-content):hover {

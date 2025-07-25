@@ -1,0 +1,39 @@
+{
+	"Name": "UC_DynamicFormJSCSS",
+	"Target": "",
+	"IsControlType": false,
+	 "Template": "", 
+	"Events": [
+	],
+	"Properties": [
+		{
+			"Id": "BackgroundColor",
+			"Name": "BackgroundColor",
+			"Type": "string",
+			"Default": ""
+		} 
+	],
+	"Methods": {
+		"Public": [
+		],
+		"Private": [
+		]
+	},
+	"Scripts": {
+		"AfterShow": [
+			{
+				"Name": "Start",
+				"Source": "		try {			if(document) {				const submitButtons = document.querySelectorAll(\".MobileSubmitBtn\")				submitButtons.forEach((button) => {					button.style.backgroundColor = this.BackgroundColor					button.style.border = \"0px\"				});								const fileInputButtons = document.querySelectorAll(\".fileinput-button\")				fileInputButtons.forEach((span) => {					span.style.backgroundColor = this.BackgroundColor;					span.style.fontWeight = \"normal\";					span.style.fontSize = \"14px\";					span.style.fontStyle = \"normal\";					span.style.border = \"0px\";					span.style.borderRadius = \"4px\";				});								const stepNumberBulletSelecteds = document.querySelectorAll(\".TableStepBulletSelected\")				stepNumberBulletSelecteds.forEach((button) => {					button.style.backgroundColor = this.BackgroundColor;					button.style.border = \"0px\";				});								const tableStepBulletCheckeds = document.querySelectorAll(\".TableStepBulletChecked\")				tableStepBulletCheckeds.forEach((button) => {					button.style.backgroundColor = this.BackgroundColor;					button.style.border = \"0px\";				});							const tableStepBulletLineChecked = document.querySelectorAll(\".TableStepBulletLineChecked\")				tableStepBulletLineChecked.forEach((tableItem) => {					tableItem.style.borderBottomColor = this.BackgroundColor;				});								const nextButtons = document.querySelectorAll(\".NxtWzdBtn\")				nextButtons.forEach((button) => {					button.style.backgroundColor = this.BackgroundColor;					button.style.border = \"0px\";					button.style.minWidth = \"86px\";				});								const prevButtons = document.querySelectorAll(\".PrevWzdBtn\")				prevButtons.forEach((button) => {					button.style.backgroundColor = this.BackgroundColor;					button.style.border = \"0px\";					button.style.minWidth = \"86px\";				});								const wizardStepsCell = document.querySelectorAll(\".WizardStepsCell\");				wizardStepsCell.forEach((cell) => {					// Callback function to execute when mutations are observed					const callback = (mutationList, observer) => {												const fileInputButtons = document.querySelectorAll(\".fileinput-button\")						fileInputButtons.forEach((span) => {							span.style.backgroundColor = this.BackgroundColor;							span.style.fontWeight = \"normal\";							span.style.fontSize = \"14px\";							span.style.fontStyle = \"normal\";							span.style.border = \"0px\";							span.style.borderRadius = \"4px\";						});												const stepNumberBulletSelecteds = document.querySelectorAll(\".TableStepBulletSelected\")						stepNumberBulletSelecteds.forEach((button) => {							button.style.backgroundColor = this.BackgroundColor;							button.style.border = \"0px\";						});												const tableStepBulletCheckeds = document.querySelectorAll(\".TableStepBulletChecked\")						tableStepBulletCheckeds.forEach((button) => {							button.style.backgroundColor = this.BackgroundColor;							button.style.border = \"0px\";						});												const tableStepBulletLineChecked = document.querySelectorAll(\".TableStepBulletLineChecked\")						tableStepBulletLineChecked.forEach((tableItem) => {							tableItem.style.borderBottomColor = this.BackgroundColor;						});					};										// Create an observer instance linked to the callback function					const observer = new MutationObserver(callback);										const config = {						childList: true,						subtree: true,					};										observer.observe(cell, config);				});							(function () {										const grid = document.querySelector(\'.FreeStyleGrid\');					if (!grid) return;										// Include all known form controls					const formControls = grid.querySelectorAll(						\'input, textarea, select, button, fieldset, output, object, keygen, datalist\'					);										for (let i = 0; i < formControls.length; i++) {						const el = formControls[i];												// Skip non-elements, hidden, or disabled elements						if (!(el instanceof HTMLElement)) continue;						if (el.offsetParent === null || el.disabled) continue;												// Skip <input type=\"hidden\"> explicitly						if (el.tagName.toLowerCase() === \'input\' &&							(el.type || \'\').toLowerCase() === \'hidden\') continue;												const tag = el.tagName.toLowerCase();						const type = (el.type || \'\').toLowerCase();												const isTextInput =							tag === \'textarea\' ||							(tag === \'input\' && (type === \'text\' || type === \'password\' || type === \'number\'));												if (isTextInput) {							el.focus();							el.scrollIntoView({ behavior: \'smooth\', block: \'center\' });						}						break; // Evaluate only the first visible, enabled form control					}				})();			} else {				console.log(\"No document found\")			}		} catch (e) {			console.log(e)		}		",
+				"AngularLocation": ""
+			} 
+		],
+		"BeforeShow": [
+		]
+	},
+	"Dependencies": [
+	],
+	"Imports": [
+	],
+	"Styles": [
+	]
+}

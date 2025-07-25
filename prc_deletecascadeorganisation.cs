@@ -80,57 +80,59 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         pr_default.dynParam(0, new Object[]{ new Object[]{
-                                              AV13OrganisationId ,
-                                              A11OrganisationId } ,
-                                              new int[]{
-                                              }
-         });
-         /* Using cursor P00BM2 */
-         pr_default.execute(0, new Object[] {AV13OrganisationId});
-         while ( (pr_default.getStatus(0) != 101) )
+         if ( ! (Guid.Empty==AV13OrganisationId) )
          {
-            A11OrganisationId = P00BM2_A11OrganisationId[0];
-            AV12Message = "";
-            GXt_boolean1 = false;
-            GXt_char2 = "";
-            new prc_deletecascadelocation(context ).execute(  Guid.Empty,  Guid.Empty,  A11OrganisationId,  false, ref  GXt_boolean1, ref  GXt_char2) ;
-            new prc_deletecascadeorganisationdynamicform(context ).execute(  Guid.Empty,  0,  A11OrganisationId) ;
-            new prc_deletecascadeaudit(context ).execute(  Guid.Empty,  A11OrganisationId) ;
-            new prc_deletecascademanager(context ).execute(  Guid.Empty,  A11OrganisationId) ;
-            new prc_deletecascadeorganisationsetting(context ).execute(  Guid.Empty,  A11OrganisationId) ;
-            GXt_boolean3 = false;
-            GXt_char4 = "";
-            new prc_deletecascadesuppliergen(context ).execute(  Guid.Empty,  A11OrganisationId,  false, ref  GXt_boolean3, ref  GXt_char4) ;
-            AV14Trn_Organisation.Load(A11OrganisationId);
-            AV14Trn_Organisation.Delete();
-            if ( AV14Trn_Organisation.Success() )
+            /* Using cursor P00BM2 */
+            pr_default.execute(0, new Object[] {AV13OrganisationId});
+            while ( (pr_default.getStatus(0) != 101) )
             {
-               AV9isSuccessful = true;
-               context.CommitDataStores("prc_deletecascadeorganisation",pr_default);
-            }
-            else
-            {
-               AV18GXV2 = 1;
-               AV17GXV1 = AV14Trn_Organisation.GetMessages();
-               while ( AV18GXV2 <= AV17GXV1.Count )
+               A11OrganisationId = P00BM2_A11OrganisationId[0];
+               AV12Message = "";
+               GXt_boolean1 = false;
+               GXt_char2 = "";
+               new prc_deletecascadelocation(context ).execute(  Guid.Empty,  Guid.Empty,  A11OrganisationId,  false, ref  GXt_boolean1, ref  GXt_char2) ;
+               new prc_deletecascadeorganisationdynamicform(context ).execute(  Guid.Empty,  0,  A11OrganisationId) ;
+               new prc_deletecascadeaudit(context ).execute(  Guid.Empty,  A11OrganisationId) ;
+               new prc_deletecascademanager(context ).execute(  Guid.Empty,  A11OrganisationId) ;
+               new prc_deletecascadeorganisationsetting(context ).execute(  Guid.Empty,  A11OrganisationId) ;
+               GXt_boolean3 = false;
+               GXt_char4 = "";
+               new prc_deletecascadesuppliergen(context ).execute(  Guid.Empty,  A11OrganisationId,  false, ref  GXt_boolean3, ref  GXt_char4) ;
+               AV14Trn_Organisation.Load(A11OrganisationId);
+               AV14Trn_Organisation.Delete();
+               if ( AV14Trn_Organisation.Success() )
                {
-                  AV8ErrorMessage = ((GeneXus.Utils.SdtMessages_Message)AV17GXV1.Item(AV18GXV2));
-                  if ( String.IsNullOrEmpty(StringUtil.RTrim( AV12Message)) )
-                  {
-                     AV12Message = AV8ErrorMessage.gxTpr_Description;
-                  }
-                  else
-                  {
-                     AV12Message += ", " + AV8ErrorMessage.gxTpr_Description;
-                  }
-                  AV18GXV2 = (int)(AV18GXV2+1);
+                  AV9isSuccessful = true;
+                  context.CommitDataStores("prc_deletecascadeorganisation",pr_default);
                }
-               AV9isSuccessful = false;
+               else
+               {
+                  AV18GXV2 = 1;
+                  AV17GXV1 = AV14Trn_Organisation.GetMessages();
+                  while ( AV18GXV2 <= AV17GXV1.Count )
+                  {
+                     AV8ErrorMessage = ((GeneXus.Utils.SdtMessages_Message)AV17GXV1.Item(AV18GXV2));
+                     if ( String.IsNullOrEmpty(StringUtil.RTrim( AV12Message)) )
+                     {
+                        AV12Message = AV8ErrorMessage.gxTpr_Description;
+                     }
+                     else
+                     {
+                        AV12Message += ", " + AV8ErrorMessage.gxTpr_Description;
+                     }
+                     AV18GXV2 = (int)(AV18GXV2+1);
+                  }
+                  AV9isSuccessful = false;
+               }
+               /* Exiting from a For First loop. */
+               if (true) break;
             }
-            pr_default.readNext(0);
+            pr_default.close(0);
          }
-         pr_default.close(0);
+         else
+         {
+            AV12Message = context.GetMessage( "Organisation not found", "");
+         }
          cleanup();
       }
 
@@ -146,8 +148,8 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         A11OrganisationId = Guid.Empty;
          P00BM2_A11OrganisationId = new Guid[] {Guid.Empty} ;
+         A11OrganisationId = Guid.Empty;
          GXt_char2 = "";
          GXt_char4 = "";
          AV14Trn_Organisation = new SdtTrn_Organisation(context);
@@ -260,42 +262,6 @@ namespace GeneXus.Programs {
 
 public class prc_deletecascadeorganisation__default : DataStoreHelperBase, IDataStoreHelper
 {
-   protected Object[] conditional_P00BM2( IGxContext context ,
-                                          Guid AV13OrganisationId ,
-                                          Guid A11OrganisationId )
-   {
-      System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
-      string scmdbuf;
-      short[] GXv_int5 = new short[1];
-      Object[] GXv_Object6 = new Object[2];
-      scmdbuf = "SELECT OrganisationId FROM Trn_Organisation";
-      if ( ! (Guid.Empty==AV13OrganisationId) )
-      {
-         AddWhere(sWhereString, "(OrganisationId = :AV13OrganisationId)");
-      }
-      else
-      {
-         GXv_int5[0] = 1;
-      }
-      scmdbuf += sWhereString;
-      scmdbuf += " ORDER BY OrganisationId";
-      GXv_Object6[0] = scmdbuf;
-      GXv_Object6[1] = GXv_int5;
-      return GXv_Object6 ;
-   }
-
-   public override Object [] getDynamicStatement( int cursor ,
-                                                  IGxContext context ,
-                                                  Object [] dynConstraints )
-   {
-      switch ( cursor )
-      {
-            case 0 :
-                  return conditional_P00BM2(context, (Guid)dynConstraints[0] , (Guid)dynConstraints[1] );
-      }
-      return base.getDynamicStatement(cursor, context, dynConstraints);
-   }
-
    public ICursor[] getCursors( )
    {
       cursorDefinitions();
@@ -314,7 +280,7 @@ public class prc_deletecascadeorganisation__default : DataStoreHelperBase, IData
        new ParDef("AV13OrganisationId",GXType.UniqueIdentifier,36,0)
        };
        def= new CursorDef[] {
-           new CursorDef("P00BM2", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00BM2,100, GxCacheFrequency.OFF ,true,false )
+           new CursorDef("P00BM2", "SELECT OrganisationId FROM Trn_Organisation WHERE OrganisationId = :AV13OrganisationId ORDER BY OrganisationId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00BM2,1, GxCacheFrequency.OFF ,true,true )
        };
     }
  }

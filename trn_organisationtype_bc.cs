@@ -129,6 +129,18 @@ namespace GeneXus.Programs {
       {
          /* After Trn Routine */
          returnInSub = false;
+         if ( StringUtil.StrCmp(Gx_mode, "UPD") == 0 )
+         {
+            AV12WebSession.Set(context.GetMessage( "NotificationMessage", ""), context.GetMessage( "Organisation type updated successfully", ""));
+         }
+         if ( StringUtil.StrCmp(Gx_mode, "DLT") == 0 )
+         {
+            AV12WebSession.Set(context.GetMessage( "NotificationMessage", ""), context.GetMessage( "Organisation type deleted successfully", ""));
+         }
+         if ( StringUtil.StrCmp(Gx_mode, "INS") == 0 )
+         {
+            AV12WebSession.Set(context.GetMessage( "NotificationMessage", ""), context.GetMessage( "Organisation type inserted successfully", ""));
+         }
       }
 
       protected void ZM024( short GX_JID )

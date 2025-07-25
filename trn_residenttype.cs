@@ -737,6 +737,7 @@ namespace GeneXus.Programs {
          new prc_getorganisationdefinition(context ).execute(  "Resident", out  GXt_char1) ;
          AV13ResidentTitle = GXt_char1;
          AssignAttri("", false, "AV13ResidentTitle", AV13ResidentTitle);
+         GxWebStd.gx_hidden_field( context, "gxhash_vRESIDENTTITLE", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV13ResidentTitle, "")), context));
          edtResidentTypeName_Caption = AV13ResidentTitle+" "+context.GetMessage( "Type", "");
          AssignProp("", false, edtResidentTypeName_Internalname, "Caption", edtResidentTypeName_Caption, true);
          Form.Caption = AV13ResidentTitle+" "+context.GetMessage( "Type", "");
@@ -747,6 +748,40 @@ namespace GeneXus.Programs {
       {
          /* After Trn Routine */
          returnInSub = false;
+         AV15ActiveLanguageName = context.GetLanguage( );
+         if ( ( StringUtil.StrCmp(Gx_mode, "UPD") == 0 ) && StringUtil.Contains( AV15ActiveLanguageName, context.GetMessage( "English", "")) )
+         {
+            AV12WebSession.Set(context.GetMessage( "NotificationMessage", ""), AV13ResidentTitle+" "+context.GetMessage( "type updated successfully", ""));
+         }
+         else
+         {
+            if ( ( StringUtil.StrCmp(Gx_mode, "UPD") == 0 ) && StringUtil.Contains( AV15ActiveLanguageName, context.GetMessage( "Dutch", "")) )
+            {
+               AV12WebSession.Set(context.GetMessage( "NotificationMessage", ""), AV13ResidentTitle+" "+context.GetMessage( "type succesvol bijgewerkt", ""));
+            }
+         }
+         if ( ( StringUtil.StrCmp(Gx_mode, "DLT") == 0 ) && StringUtil.Contains( AV15ActiveLanguageName, context.GetMessage( "English", "")) )
+         {
+            AV12WebSession.Set(context.GetMessage( "NotificationMessage", ""), AV13ResidentTitle+" "+context.GetMessage( "type deleted successfully", ""));
+         }
+         else
+         {
+            if ( ( StringUtil.StrCmp(Gx_mode, "DLT") == 0 ) && StringUtil.Contains( AV15ActiveLanguageName, context.GetMessage( "Dutch", "")) )
+            {
+               AV12WebSession.Set(context.GetMessage( "NotificationMessage", ""), AV13ResidentTitle+" "+context.GetMessage( "type succesvol verwijderd", ""));
+            }
+         }
+         if ( ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) && StringUtil.Contains( AV15ActiveLanguageName, context.GetMessage( "English", "")) )
+         {
+            AV12WebSession.Set(context.GetMessage( "NotificationMessage", ""), AV13ResidentTitle+" "+context.GetMessage( "type inserted successfully", ""));
+         }
+         else
+         {
+            if ( ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) && StringUtil.Contains( AV15ActiveLanguageName, context.GetMessage( "Dutch", "")) )
+            {
+               AV12WebSession.Set(context.GetMessage( "NotificationMessage", ""), AV13ResidentTitle+" "+context.GetMessage( "type succesvol ingevoerd", ""));
+            }
+         }
          if ( ( StringUtil.StrCmp(Gx_mode, "DLT") == 0 ) && ! AV11TrnContext.gxTpr_Callerondelete )
          {
             CallWebObject(formatLink("trn_residenttypeww.aspx") );
@@ -758,6 +793,7 @@ namespace GeneXus.Programs {
          context.nUserReturn = 1;
          returnInSub = true;
          if (true) return;
+         /*  Sending Event outputs  */
       }
 
       protected void ZM0D22( short GX_JID )
@@ -1551,6 +1587,8 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "gxhash_Mode", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( Gx_mode, "@!")), context));
          GxWebStd.gx_hidden_field( context, "vMODE", StringUtil.RTrim( Gx_mode));
          GxWebStd.gx_hidden_field( context, "gxhash_vMODE", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( Gx_mode, "@!")), context));
+         GxWebStd.gx_hidden_field( context, "vRESIDENTTITLE", AV13ResidentTitle);
+         GxWebStd.gx_hidden_field( context, "gxhash_vRESIDENTTITLE", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV13ResidentTitle, "")), context));
          if ( context.isAjaxRequest( ) )
          {
             context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vTRNCONTEXT", AV11TrnContext);
@@ -1676,7 +1714,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202571111471395", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257258554038", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1692,7 +1730,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("trn_residenttype.js", "?202571111471396", false, true);
+         context.AddJavascriptSource("trn_residenttype.js", "?20257258554038", false, true);
          /* End function include_jscripts */
       }
 
@@ -1781,8 +1819,8 @@ namespace GeneXus.Programs {
       public override void InitializeDynEvents( )
       {
          setEventMetadata("ENTER","""{"handler":"UserMainFullajax","iparms":[{"postForm":true},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV7ResidentTypeId","fld":"vRESIDENTTYPEID","hsh":true}]}""");
-         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV11TrnContext","fld":"vTRNCONTEXT","hsh":true},{"av":"AV7ResidentTypeId","fld":"vRESIDENTTYPEID","hsh":true}]}""");
-         setEventMetadata("AFTER TRN","""{"handler":"E120D2","iparms":[{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV11TrnContext","fld":"vTRNCONTEXT","hsh":true}]}""");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV13ResidentTitle","fld":"vRESIDENTTITLE","hsh":true},{"av":"AV11TrnContext","fld":"vTRNCONTEXT","hsh":true},{"av":"AV7ResidentTypeId","fld":"vRESIDENTTYPEID","hsh":true}]}""");
+         setEventMetadata("AFTER TRN","""{"handler":"E120D2","iparms":[{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV13ResidentTitle","fld":"vRESIDENTTITLE","hsh":true},{"av":"AV11TrnContext","fld":"vTRNCONTEXT","hsh":true}]}""");
          setEventMetadata("VALID_RESIDENTTYPENAME","""{"handler":"Valid_Residenttypename","iparms":[]}""");
          setEventMetadata("VALID_RESIDENTTYPEID","""{"handler":"Valid_Residenttypeid","iparms":[]}""");
          return  ;
@@ -1839,6 +1877,7 @@ namespace GeneXus.Programs {
          AV12WebSession = context.GetSession();
          AV13ResidentTitle = "";
          GXt_char1 = "";
+         AV15ActiveLanguageName = "";
          T000D4_A96ResidentTypeId = new Guid[] {Guid.Empty} ;
          T000D4_n96ResidentTypeId = new bool[] {false} ;
          T000D4_A97ResidentTypeName = new string[] {""} ;
@@ -1980,6 +2019,7 @@ namespace GeneXus.Programs {
       private string Z97ResidentTypeName ;
       private string A97ResidentTypeName ;
       private string AV13ResidentTitle ;
+      private string AV15ActiveLanguageName ;
       private Guid wcpOAV7ResidentTypeId ;
       private Guid Z96ResidentTypeId ;
       private Guid AV7ResidentTypeId ;

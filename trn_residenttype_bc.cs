@@ -129,6 +129,40 @@ namespace GeneXus.Programs {
       {
          /* After Trn Routine */
          returnInSub = false;
+         AV15ActiveLanguageName = context.GetLanguage( );
+         if ( ( StringUtil.StrCmp(Gx_mode, "UPD") == 0 ) && StringUtil.Contains( AV15ActiveLanguageName, context.GetMessage( "English", "")) )
+         {
+            AV12WebSession.Set(context.GetMessage( "NotificationMessage", ""), AV13ResidentTitle+" "+context.GetMessage( "type updated successfully", ""));
+         }
+         else
+         {
+            if ( ( StringUtil.StrCmp(Gx_mode, "UPD") == 0 ) && StringUtil.Contains( AV15ActiveLanguageName, context.GetMessage( "Dutch", "")) )
+            {
+               AV12WebSession.Set(context.GetMessage( "NotificationMessage", ""), AV13ResidentTitle+" "+context.GetMessage( "type succesvol bijgewerkt", ""));
+            }
+         }
+         if ( ( StringUtil.StrCmp(Gx_mode, "DLT") == 0 ) && StringUtil.Contains( AV15ActiveLanguageName, context.GetMessage( "English", "")) )
+         {
+            AV12WebSession.Set(context.GetMessage( "NotificationMessage", ""), AV13ResidentTitle+" "+context.GetMessage( "type deleted successfully", ""));
+         }
+         else
+         {
+            if ( ( StringUtil.StrCmp(Gx_mode, "DLT") == 0 ) && StringUtil.Contains( AV15ActiveLanguageName, context.GetMessage( "Dutch", "")) )
+            {
+               AV12WebSession.Set(context.GetMessage( "NotificationMessage", ""), AV13ResidentTitle+" "+context.GetMessage( "type succesvol verwijderd", ""));
+            }
+         }
+         if ( ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) && StringUtil.Contains( AV15ActiveLanguageName, context.GetMessage( "English", "")) )
+         {
+            AV12WebSession.Set(context.GetMessage( "NotificationMessage", ""), AV13ResidentTitle+" "+context.GetMessage( "type inserted successfully", ""));
+         }
+         else
+         {
+            if ( ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) && StringUtil.Contains( AV15ActiveLanguageName, context.GetMessage( "Dutch", "")) )
+            {
+               AV12WebSession.Set(context.GetMessage( "NotificationMessage", ""), AV13ResidentTitle+" "+context.GetMessage( "type succesvol ingevoerd", ""));
+            }
+         }
       }
 
       protected void ZM0D22( short GX_JID )
@@ -1094,6 +1128,8 @@ namespace GeneXus.Programs {
          AV8WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          AV11TrnContext = new WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext(context);
          AV12WebSession = context.GetSession();
+         AV15ActiveLanguageName = "";
+         AV13ResidentTitle = "";
          Z97ResidentTypeName = "";
          A97ResidentTypeName = "";
          BC000D4_A96ResidentTypeId = new Guid[] {Guid.Empty} ;
@@ -1173,6 +1209,8 @@ namespace GeneXus.Programs {
       private string sMode22 ;
       private bool returnInSub ;
       private bool n96ResidentTypeId ;
+      private string AV15ActiveLanguageName ;
+      private string AV13ResidentTitle ;
       private string Z97ResidentTypeName ;
       private string A97ResidentTypeName ;
       private Guid Z96ResidentTypeId ;

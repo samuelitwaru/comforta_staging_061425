@@ -131,12 +131,12 @@ namespace GeneXus.Programs {
             if (true) return;
          }
          AV11TrnContext.FromXml(AV12WebSession.Get("TrnContext"), null, "", "");
-         if ( ( StringUtil.StrCmp(AV11TrnContext.gxTpr_Transactionname, AV36Pgmname) == 0 ) && ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) )
+         if ( ( StringUtil.StrCmp(AV11TrnContext.gxTpr_Transactionname, AV38Pgmname) == 0 ) && ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) )
          {
-            AV37GXV1 = 1;
-            while ( AV37GXV1 <= AV11TrnContext.gxTpr_Attributes.Count )
+            AV39GXV1 = 1;
+            while ( AV39GXV1 <= AV11TrnContext.gxTpr_Attributes.Count )
             {
-               AV15TrnContextAtt = ((WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext_Attribute)AV11TrnContext.gxTpr_Attributes.Item(AV37GXV1));
+               AV15TrnContextAtt = ((WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext_Attribute)AV11TrnContext.gxTpr_Attributes.Item(AV39GXV1));
                if ( StringUtil.StrCmp(AV15TrnContextAtt.gxTpr_Attributename, "SG_LocationId") == 0 )
                {
                   AV32Insert_SG_LocationId = StringUtil.StrToGuid( AV15TrnContextAtt.gxTpr_Attributevalue);
@@ -145,7 +145,7 @@ namespace GeneXus.Programs {
                {
                   AV33Insert_SG_OrganisationId = StringUtil.StrToGuid( AV15TrnContextAtt.gxTpr_Attributevalue);
                }
-               AV37GXV1 = (int)(AV37GXV1+1);
+               AV39GXV1 = (int)(AV39GXV1+1);
             }
          }
       }
@@ -154,6 +154,40 @@ namespace GeneXus.Programs {
       {
          /* After Trn Routine */
          returnInSub = false;
+         AV37ActiveLanguageName = context.GetLanguage( );
+         if ( ( StringUtil.StrCmp(Gx_mode, "UPD") == 0 ) && StringUtil.Contains( AV37ActiveLanguageName, context.GetMessage( "English", "")) )
+         {
+            AV12WebSession.Set(context.GetMessage( "NotificationMessage", ""), AV36ResidentTitle+" "+context.GetMessage( "package updated successfully", ""));
+         }
+         else
+         {
+            if ( ( StringUtil.StrCmp(Gx_mode, "UPD") == 0 ) && StringUtil.Contains( AV37ActiveLanguageName, context.GetMessage( "Dutch", "")) )
+            {
+               AV12WebSession.Set(context.GetMessage( "NotificationMessage", ""), context.GetMessage( "Bewonerspakket succesvol bijgewerkt", ""));
+            }
+         }
+         if ( ( StringUtil.StrCmp(Gx_mode, "DLT") == 0 ) && StringUtil.Contains( AV37ActiveLanguageName, context.GetMessage( "English", "")) )
+         {
+            AV12WebSession.Set(context.GetMessage( "NotificationMessage", ""), AV36ResidentTitle+" "+context.GetMessage( "package deleted successfully", ""));
+         }
+         else
+         {
+            if ( ( StringUtil.StrCmp(Gx_mode, "DLT") == 0 ) && StringUtil.Contains( AV37ActiveLanguageName, context.GetMessage( "Dutch", "")) )
+            {
+               AV12WebSession.Set(context.GetMessage( "NotificationMessage", ""), context.GetMessage( "Bewonerspakket succesvol verwijderd", ""));
+            }
+         }
+         if ( ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) && StringUtil.Contains( AV37ActiveLanguageName, context.GetMessage( "English", "")) )
+         {
+            AV12WebSession.Set(context.GetMessage( "NotificationMessage", ""), AV36ResidentTitle+" "+context.GetMessage( "package inserted successfully", ""));
+         }
+         else
+         {
+            if ( ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) && StringUtil.Contains( AV37ActiveLanguageName, context.GetMessage( "Dutch", "")) )
+            {
+               AV12WebSession.Set(context.GetMessage( "NotificationMessage", ""), context.GetMessage( "Bewonerspakket succesvol ingevoerd", ""));
+            }
+         }
       }
 
       protected void S112( )
@@ -187,7 +221,7 @@ namespace GeneXus.Programs {
 
       protected void standaloneNotModal( )
       {
-         AV36Pgmname = "Trn_ResidentPackage_BC";
+         AV38Pgmname = "Trn_ResidentPackage_BC";
       }
 
       protected void standaloneModal( )
@@ -1194,10 +1228,12 @@ namespace GeneXus.Programs {
          AV8WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          AV11TrnContext = new WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext(context);
          AV12WebSession = context.GetSession();
-         AV36Pgmname = "";
+         AV38Pgmname = "";
          AV15TrnContextAtt = new WorkWithPlus.workwithplus_commonobjects.SdtWWPTransactionContext_Attribute(context);
          AV32Insert_SG_LocationId = Guid.Empty;
          AV33Insert_SG_OrganisationId = Guid.Empty;
+         AV37ActiveLanguageName = "";
+         AV36ResidentTitle = "";
          Z531ResidentPackageName = "";
          A531ResidentPackageName = "";
          Z528SG_LocationId = Guid.Empty;
@@ -1289,7 +1325,7 @@ namespace GeneXus.Programs {
          n527ResidentPackageId = false;
          A527ResidentPackageId = Guid.NewGuid( );
          n527ResidentPackageId = false;
-         AV36Pgmname = "Trn_ResidentPackage_BC";
+         AV38Pgmname = "Trn_ResidentPackage_BC";
          INITTRN();
          /* Execute Start event if defined. */
          /* Execute user event: Start */
@@ -1301,11 +1337,11 @@ namespace GeneXus.Programs {
       private short Gx_BScreen ;
       private short RcdFound96 ;
       private int trnEnded ;
-      private int AV37GXV1 ;
+      private int AV39GXV1 ;
       private string Gx_mode ;
       private string endTrnMsgTxt ;
       private string endTrnMsgCod ;
-      private string AV36Pgmname ;
+      private string AV38Pgmname ;
       private string sMode96 ;
       private bool returnInSub ;
       private bool Z533ResidentPackageDefault ;
@@ -1313,6 +1349,8 @@ namespace GeneXus.Programs {
       private bool n527ResidentPackageId ;
       private string Z532ResidentPackageModules ;
       private string A532ResidentPackageModules ;
+      private string AV37ActiveLanguageName ;
+      private string AV36ResidentTitle ;
       private string Z531ResidentPackageName ;
       private string A531ResidentPackageName ;
       private Guid Z527ResidentPackageId ;

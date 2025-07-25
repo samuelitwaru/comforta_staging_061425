@@ -577,7 +577,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
             /* Div Control */
             GxWebStd.gx_div_start( context, divTableactions_Internalname, 1, 0, "px", 0, "px", "Flex", "start", "top", " "+"data-gx-flex"+" ", "flex-wrap:wrap;justify-content:space-between;", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "", "start", "top", "", "flex-grow:1;", "div");
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "", "start", "top", "", "", "div");
             /* User Defined Control */
             ucBtnprevious.SetProperty("TooltipText", Btnprevious_Tooltiptext);
             ucBtnprevious.SetProperty("BeforeIconClass", Btnprevious_Beforeiconclass);
@@ -586,7 +586,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
             ucBtnprevious.Render(context, "wwp_iconbutton", Btnprevious_Internalname, sPrefix+"BTNPREVIOUSContainer");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "", "start", "top", "", "flex-grow:1;", "div");
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "", "start", "top", "", "", "div");
             /* User Defined Control */
             ucBtnnext.SetProperty("TooltipText", Btnnext_Tooltiptext);
             ucBtnnext.SetProperty("AfterIconClass", Btnnext_Aftericonclass);
@@ -2088,7 +2088,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257212435831", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025725855962", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2104,7 +2104,7 @@ namespace GeneXus.Programs.workwithplus.dynamicforms {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("workwithplus/dynamicforms/wwp_dfc_wizard_wc.js", "?20257212435831", false, true);
+         context.AddJavascriptSource("workwithplus/dynamicforms/wwp_dfc_wizard_wc.js", "?2025725855962", false, true);
          context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
          context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
          context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);

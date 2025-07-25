@@ -95,91 +95,99 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         pr_default.dynParam(0, new Object[]{ new Object[]{
-                                              AV12LocationId ,
-                                              AV14OrganisationId ,
-                                              AV15Trn_ThemeId ,
-                                              A29LocationId ,
-                                              A11OrganisationId ,
-                                              A273Trn_ThemeId } ,
-                                              new int[]{
-                                              }
-         });
-         /* Using cursor P00BN2 */
-         pr_default.execute(0, new Object[] {AV12LocationId, AV14OrganisationId});
-         while ( (pr_default.getStatus(0) != 101) )
+         if ( ! (Guid.Empty==AV12LocationId) && ! (Guid.Empty==AV14OrganisationId) && ! (Guid.Empty==AV15Trn_ThemeId) )
          {
-            GXTBN2 = 0;
-            A584ActiveAppVersionId = P00BN2_A584ActiveAppVersionId[0];
-            n584ActiveAppVersionId = P00BN2_n584ActiveAppVersionId[0];
-            A598PublishedActiveAppVersionId = P00BN2_A598PublishedActiveAppVersionId[0];
-            n598PublishedActiveAppVersionId = P00BN2_n598PublishedActiveAppVersionId[0];
-            A11OrganisationId = P00BN2_A11OrganisationId[0];
-            A29LocationId = P00BN2_A29LocationId[0];
-            /* Using cursor P00BN3 */
-            pr_default.execute(1, new Object[] {n598PublishedActiveAppVersionId, A598PublishedActiveAppVersionId});
-            A273Trn_ThemeId = P00BN3_A273Trn_ThemeId[0];
-            pr_default.close(1);
-            /* Using cursor P00BN4 */
-            pr_default.execute(2, new Object[] {n584ActiveAppVersionId, A584ActiveAppVersionId});
-            A273Trn_ThemeId = P00BN4_A273Trn_ThemeId[0];
-            pr_default.close(2);
-            new prc_deletecascadeproductservice(context ).execute(  Guid.Empty,  Guid.Empty,  A29LocationId,  A11OrganisationId) ;
-            new prc_deletecascadelocationdynamicform(context ).execute(  Guid.Empty,  0,  A29LocationId,  A11OrganisationId) ;
-            new prc_deletecascadepage(context ).execute(  Guid.Empty,  Guid.Empty,  A29LocationId,  A11OrganisationId) ;
-            GXt_guid1 = Guid.Empty;
-            new prc_deletecascadememo(context ).execute(  Guid.Empty, ref  GXt_guid1,  A29LocationId,  A11OrganisationId) ;
-            new prc_deletecascadeagendacalendar(context ).execute(  Guid.Empty,  A29LocationId,  A11OrganisationId) ;
-            new prc_deletecascadereceptionist(context ).execute(  Guid.Empty,  A29LocationId,  A11OrganisationId) ;
-            GXt_boolean2 = false;
-            GXt_char3 = "";
-            new prc_deletecascaderesident(context ).execute(  Guid.Empty,  A29LocationId,  A11OrganisationId,  false, ref  GXt_boolean2, ref  GXt_char3) ;
-            if ( AV10isMain )
+            pr_default.dynParam(0, new Object[]{ new Object[]{
+                                                 AV12LocationId ,
+                                                 AV14OrganisationId ,
+                                                 AV15Trn_ThemeId ,
+                                                 A29LocationId ,
+                                                 A11OrganisationId ,
+                                                 A273Trn_ThemeId } ,
+                                                 new int[]{
+                                                 }
+            });
+            /* Using cursor P00BN2 */
+            pr_default.execute(0, new Object[] {AV12LocationId, AV14OrganisationId});
+            while ( (pr_default.getStatus(0) != 101) )
             {
-               AV8Trn_Location.Load(A29LocationId, A11OrganisationId);
-               AV8Trn_Location.Delete();
-               if ( AV8Trn_Location.Success() )
+               GXTBN2 = 0;
+               A584ActiveAppVersionId = P00BN2_A584ActiveAppVersionId[0];
+               n584ActiveAppVersionId = P00BN2_n584ActiveAppVersionId[0];
+               A598PublishedActiveAppVersionId = P00BN2_A598PublishedActiveAppVersionId[0];
+               n598PublishedActiveAppVersionId = P00BN2_n598PublishedActiveAppVersionId[0];
+               A11OrganisationId = P00BN2_A11OrganisationId[0];
+               A29LocationId = P00BN2_A29LocationId[0];
+               /* Using cursor P00BN3 */
+               pr_default.execute(1, new Object[] {n598PublishedActiveAppVersionId, A598PublishedActiveAppVersionId});
+               A273Trn_ThemeId = P00BN3_A273Trn_ThemeId[0];
+               pr_default.close(1);
+               /* Using cursor P00BN4 */
+               pr_default.execute(2, new Object[] {n584ActiveAppVersionId, A584ActiveAppVersionId});
+               A273Trn_ThemeId = P00BN4_A273Trn_ThemeId[0];
+               pr_default.close(2);
+               new prc_deletecascadeappversion(context ).execute(  Guid.Empty,  A29LocationId,  A11OrganisationId) ;
+               new prc_deletecascadeproductservice(context ).execute(  Guid.Empty,  Guid.Empty,  A29LocationId,  A11OrganisationId) ;
+               new prc_deletecascadelocationdynamicform(context ).execute(  Guid.Empty,  0,  A29LocationId,  A11OrganisationId) ;
+               new prc_deletecascadepage(context ).execute(  Guid.Empty,  Guid.Empty,  A29LocationId,  A11OrganisationId) ;
+               GXt_guid1 = Guid.Empty;
+               new prc_deletecascadememo(context ).execute(  Guid.Empty, ref  GXt_guid1,  A29LocationId,  A11OrganisationId) ;
+               new prc_deletecascadeagendacalendar(context ).execute(  Guid.Empty,  A29LocationId,  A11OrganisationId) ;
+               new prc_deletecascadereceptionist(context ).execute(  Guid.Empty,  A29LocationId,  A11OrganisationId) ;
+               GXt_boolean2 = false;
+               GXt_char3 = "";
+               new prc_deletecascaderesident(context ).execute(  Guid.Empty,  A29LocationId,  A11OrganisationId,  false, ref  GXt_boolean2, ref  GXt_char3) ;
+               if ( AV10isMain )
                {
-                  AV11isSuccessful = true;
-                  GXTBN2 = 1;
-                  CallWebObject(formatLink("trn_locationww.aspx") );
-                  context.wjLocDisableFrm = 1;
+                  AV8Trn_Location.Load(A29LocationId, A11OrganisationId);
+                  AV8Trn_Location.Delete();
+                  if ( AV8Trn_Location.Success() )
+                  {
+                     AV11isSuccessful = true;
+                     GXTBN2 = 1;
+                     CallWebObject(formatLink("trn_locationww.aspx") );
+                     context.wjLocDisableFrm = 1;
+                  }
+                  else
+                  {
+                     AV18GXV2 = 1;
+                     AV17GXV1 = AV8Trn_Location.GetMessages();
+                     while ( AV18GXV2 <= AV17GXV1.Count )
+                     {
+                        AV9ErrorMessage = ((GeneXus.Utils.SdtMessages_Message)AV17GXV1.Item(AV18GXV2));
+                        if ( String.IsNullOrEmpty(StringUtil.RTrim( AV13Message)) )
+                        {
+                           AV13Message = AV9ErrorMessage.gxTpr_Description;
+                        }
+                        else
+                        {
+                           AV13Message += ", " + AV9ErrorMessage.gxTpr_Description;
+                        }
+                        AV18GXV2 = (int)(AV18GXV2+1);
+                     }
+                     AV11isSuccessful = false;
+                  }
                }
                else
                {
-                  AV18GXV2 = 1;
-                  AV17GXV1 = AV8Trn_Location.GetMessages();
-                  while ( AV18GXV2 <= AV17GXV1.Count )
-                  {
-                     AV9ErrorMessage = ((GeneXus.Utils.SdtMessages_Message)AV17GXV1.Item(AV18GXV2));
-                     if ( String.IsNullOrEmpty(StringUtil.RTrim( AV13Message)) )
-                     {
-                        AV13Message = AV9ErrorMessage.gxTpr_Description;
-                     }
-                     else
-                     {
-                        AV13Message += ", " + AV9ErrorMessage.gxTpr_Description;
-                     }
-                     AV18GXV2 = (int)(AV18GXV2+1);
-                  }
-                  AV11isSuccessful = false;
+                  /* Using cursor P00BN5 */
+                  pr_default.execute(3, new Object[] {A29LocationId, A11OrganisationId});
+                  pr_default.close(3);
+                  pr_default.SmartCacheProvider.SetUpdated("Trn_Location");
                }
+               if ( GXTBN2 == 1 )
+               {
+                  context.CommitDataStores("prc_deletecascadelocation",pr_default);
+               }
+               pr_default.readNext(0);
             }
-            else
-            {
-               /* Using cursor P00BN5 */
-               pr_default.execute(3, new Object[] {A29LocationId, A11OrganisationId});
-               pr_default.close(3);
-               pr_default.SmartCacheProvider.SetUpdated("Trn_Location");
-            }
-            if ( GXTBN2 == 1 )
-            {
-               context.CommitDataStores("prc_deletecascadelocation",pr_default);
-            }
-            pr_default.readNext(0);
+            pr_default.close(0);
+            pr_default.close(2);
          }
-         pr_default.close(0);
-         pr_default.close(2);
+         else
+         {
+            AV13Message = context.GetMessage( "Location not found", "");
+         }
          cleanup();
       }
 

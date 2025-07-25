@@ -75,6 +75,7 @@ namespace GeneXus.Programs {
          chkavLocationhasmyliving = new GXCheckbox();
          chkavLocationhasmyservices = new GXCheckbox();
          chkavLocationhasownbrand = new GXCheckbox();
+         chkavLocationsupportstranslation = new GXCheckbox();
       }
 
       protected void INITWEB( )
@@ -264,6 +265,9 @@ namespace GeneXus.Programs {
          {
             enableOutput();
          }
+         context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
          context.AddJavascriptSource("UserControls/UC_ThemeSelectorRender.js", "", false, true);
          context.AddJavascriptSource("UserControls/UC_CtaThemeSelectorRender.js", "", false, true);
          context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
@@ -359,6 +363,22 @@ namespace GeneXus.Programs {
          send_integrity_footer_hashes( ) ;
          if ( context.isAjaxRequest( ) )
          {
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vDDO_TITLESETTINGSICONS", AV31DDO_TitleSettingsIcons);
+         }
+         else
+         {
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vDDO_TITLESETTINGSICONS", AV31DDO_TitleSettingsIcons);
+         }
+         if ( context.isAjaxRequest( ) )
+         {
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vLANGUAGEOPTIONS_DATA", AV33LanguageOptions_Data);
+         }
+         else
+         {
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vLANGUAGEOPTIONS_DATA", AV33LanguageOptions_Data);
+         }
+         if ( context.isAjaxRequest( ) )
+         {
             context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vSELECTEDBRANDTHEME", AV22SelectedBrandTheme);
          }
          else
@@ -380,6 +400,14 @@ namespace GeneXus.Programs {
          GxWebStd.gx_boolean_hidden_field( context, sPrefix+"vHASVALIDATIONERRORS", AV10HasValidationErrors);
          GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vHASVALIDATIONERRORS", GetSecureSignedToken( sPrefix, AV10HasValidationErrors, context));
          GxWebStd.gx_hidden_field( context, sPrefix+"vWEBSESSIONKEY", AV20WebSessionKey);
+         if ( context.isAjaxRequest( ) )
+         {
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vLANGUAGEOPTIONS", AV32LanguageOptions);
+         }
+         else
+         {
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vLANGUAGEOPTIONS", AV32LanguageOptions);
+         }
          if ( context.isAjaxRequest( ) )
          {
             context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vWIZARDDATA", AV21WizardData);
@@ -409,6 +437,7 @@ namespace GeneXus.Programs {
          }
          GxWebStd.gx_hidden_field( context, sPrefix+"vPREVIOUSSTEP", AV17PreviousStep);
          GxWebStd.gx_boolean_hidden_field( context, sPrefix+"vGOINGBACK", AV9GoingBack);
+         GxWebStd.gx_hidden_field( context, sPrefix+"COMBO_LANGUAGEOPTIONS_Selectedvalue_get", StringUtil.RTrim( Combo_languageoptions_Selectedvalue_get));
       }
 
       protected void RenderHtmlCloseFormAZ2( )
@@ -484,6 +513,9 @@ namespace GeneXus.Programs {
             if ( StringUtil.Len( sPrefix) != 0 )
             {
                GxWebStd.gx_hidden_field( context, sPrefix+"_CMPPGM", "wp_createlocationandlicensestep2.aspx");
+               context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
+               context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
+               context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
                context.AddJavascriptSource("UserControls/UC_ThemeSelectorRender.js", "", false, true);
                context.AddJavascriptSource("UserControls/UC_CtaThemeSelectorRender.js", "", false, true);
                context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
@@ -590,6 +622,37 @@ namespace GeneXus.Programs {
             StyleString = "";
             GxWebStd.gx_checkbox_ctrl( context, chkavLocationhasownbrand_Internalname, StringUtil.BoolToStr( AV15LocationHasOwnBrand), "", context.GetMessage( "Location Has Own Brand", ""), 1, chkavLocationhasownbrand.Enabled, "true", context.GetMessage( "My Location Brand Theme", ""), StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(35, this, 'true', 'false',"+"'"+sPrefix+"'"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,35);\"");
             GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 DataContentCell", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
+            /* Attribute/Variable Label */
+            GxWebStd.gx_label_element( context, chkavLocationsupportstranslation_Internalname, context.GetMessage( "Location Supports Translation", ""), "col-sm-3 AttributeCheckBoxLabel", 0, true, "");
+            /* Check box */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 39,'" + sPrefix + "',false,'',0)\"";
+            ClassString = "AttributeCheckBox";
+            StyleString = "";
+            GxWebStd.gx_checkbox_ctrl( context, chkavLocationsupportstranslation_Internalname, StringUtil.BoolToStr( AV35LocationSupportsTranslation), "", context.GetMessage( "Location Supports Translation", ""), 1, chkavLocationsupportstranslation.Enabled, "true", context.GetMessage( "Multilingual Application Support", ""), StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(39, this, 'true', 'false',"+"'"+sPrefix+"'"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,39);\"");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divCombo_languageoptions_cell_Internalname, 1, 0, "px", 0, "px", divCombo_languageoptions_cell_Class, "start", "top", "", "", "div");
+            /* User Defined Control */
+            ucCombo_languageoptions.SetProperty("Caption", Combo_languageoptions_Caption);
+            ucCombo_languageoptions.SetProperty("Cls", Combo_languageoptions_Cls);
+            ucCombo_languageoptions.SetProperty("AllowMultipleSelection", Combo_languageoptions_Allowmultipleselection);
+            ucCombo_languageoptions.SetProperty("IncludeOnlySelectedOption", Combo_languageoptions_Includeonlyselectedoption);
+            ucCombo_languageoptions.SetProperty("MultipleValuesType", Combo_languageoptions_Multiplevaluestype);
+            ucCombo_languageoptions.SetProperty("DropDownOptionsTitleSettingsIcons", AV31DDO_TitleSettingsIcons);
+            ucCombo_languageoptions.SetProperty("DropDownOptionsData", AV33LanguageOptions_Data);
+            ucCombo_languageoptions.Render(context, "dvelop.gxbootstrap.ddoextendedcombo", Combo_languageoptions_Internalname, sPrefix+"COMBO_LANGUAGEOPTIONSContainer");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1022,6 +1085,8 @@ namespace GeneXus.Programs {
          AssignAttri(sPrefix, false, "AV14LocationHasMyServices", AV14LocationHasMyServices);
          AV15LocationHasOwnBrand = StringUtil.StrToBool( StringUtil.BoolToStr( AV15LocationHasOwnBrand));
          AssignAttri(sPrefix, false, "AV15LocationHasOwnBrand", AV15LocationHasOwnBrand);
+         AV35LocationSupportsTranslation = StringUtil.StrToBool( StringUtil.BoolToStr( AV35LocationSupportsTranslation));
+         AssignAttri(sPrefix, false, "AV35LocationSupportsTranslation", AV35LocationSupportsTranslation);
       }
 
       public void Refresh( )
@@ -1089,8 +1154,11 @@ namespace GeneXus.Programs {
          if ( ! GetJustCreated( ) && ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 ) )
          {
             /* Read saved SDTs. */
+            ajax_req_read_hidden_sdt(cgiGet( sPrefix+"vDDO_TITLESETTINGSICONS"), AV31DDO_TitleSettingsIcons);
+            ajax_req_read_hidden_sdt(cgiGet( sPrefix+"vLANGUAGEOPTIONS_DATA"), AV33LanguageOptions_Data);
             ajax_req_read_hidden_sdt(cgiGet( sPrefix+"vSELECTEDBRANDTHEME"), AV22SelectedBrandTheme);
             ajax_req_read_hidden_sdt(cgiGet( sPrefix+"vSELECTEDCTATHEME"), AV23SelectedCtaTheme);
+            ajax_req_read_hidden_sdt(cgiGet( sPrefix+"vLANGUAGEOPTIONS"), AV32LanguageOptions);
             /* Read saved values. */
             wcpOAV20WebSessionKey = cgiGet( sPrefix+"wcpOAV20WebSessionKey");
             wcpOAV17PreviousStep = cgiGet( sPrefix+"wcpOAV17PreviousStep");
@@ -1121,9 +1189,22 @@ namespace GeneXus.Programs {
          /* Execute user subroutine: 'LOADVARIABLESFROMWIZARDDATA' */
          S112 ();
          if (returnInSub) return;
-         /* Execute user subroutine: 'ATTRIBUTESSECURITYCODE' */
+         GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons1 = AV31DDO_TitleSettingsIcons;
+         new GeneXus.Programs.wwpbaseobjects.getwwptitlesettingsicons(context ).execute( out  GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons1) ;
+         AV31DDO_TitleSettingsIcons = GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons1;
+         /* Execute user subroutine: 'LOADCOMBOLANGUAGEOPTIONS' */
          S122 ();
          if (returnInSub) return;
+         /* Execute user subroutine: 'ATTRIBUTESSECURITYCODE' */
+         S132 ();
+         if (returnInSub) return;
+         AV35LocationSupportsTranslation = false;
+         AssignAttri(sPrefix, false, "AV35LocationSupportsTranslation", AV35LocationSupportsTranslation);
+         /* Execute user subroutine: 'ATTRIBUTESSECURITYCODE' */
+         S132 ();
+         if (returnInSub) return;
+         Combo_languageoptions_Emptyitemtext = context.GetMessage( "Select Language Option", "");
+         ucCombo_languageoptions.SendProperty(context, sPrefix, false, Combo_languageoptions_Internalname, "EmptyItemText", Combo_languageoptions_Emptyitemtext);
       }
 
       public void GXEnter( )
@@ -1140,10 +1221,10 @@ namespace GeneXus.Programs {
          if ( ! AV10HasValidationErrors )
          {
             /* Execute user subroutine: 'SAVEVARIABLESTOWIZARDDATA' */
-            S132 ();
+            S142 ();
             if (returnInSub) return;
             /* Execute user subroutine: 'FINISHWIZARD' */
-            S142 ();
+            S152 ();
             if (returnInSub) return;
             AV19WebSession.Remove(AV20WebSessionKey);
          }
@@ -1157,7 +1238,7 @@ namespace GeneXus.Programs {
          /* 'WizardPrevious' Routine */
          returnInSub = false;
          /* Execute user subroutine: 'SAVEVARIABLESTOWIZARDDATA' */
-         S132 ();
+         S142 ();
          if (returnInSub) return;
          GXKey = Crypto.GetSiteKey( );
          GXEncryptionTmp = "wp_createlocationandlicense.aspx"+UrlEncode(StringUtil.RTrim("Step2")) + "," + UrlEncode(StringUtil.RTrim("Step1")) + "," + UrlEncode(StringUtil.BoolToStr(true)) + "," + UrlEncode(AV16OrganisationId.ToString());
@@ -1174,10 +1255,10 @@ namespace GeneXus.Programs {
          if ( ! AV10HasValidationErrors )
          {
             /* Execute user subroutine: 'SAVEVARIABLESTOWIZARDDATA' */
-            S132 ();
+            S142 ();
             if (returnInSub) return;
             /* Execute user subroutine: 'FINISHWIZARD' */
-            S142 ();
+            S152 ();
             if (returnInSub) return;
          }
          /*  Sending Event outputs  */
@@ -1198,9 +1279,12 @@ namespace GeneXus.Programs {
          AssignAttri(sPrefix, false, "AV14LocationHasMyServices", AV14LocationHasMyServices);
          AV15LocationHasOwnBrand = AV21WizardData.gxTpr_Step2.gxTpr_Locationhasownbrand;
          AssignAttri(sPrefix, false, "AV15LocationHasOwnBrand", AV15LocationHasOwnBrand);
+         AV35LocationSupportsTranslation = AV21WizardData.gxTpr_Step2.gxTpr_Locationsupportstranslation;
+         AssignAttri(sPrefix, false, "AV35LocationSupportsTranslation", AV35LocationSupportsTranslation);
+         AV32LanguageOptions = AV21WizardData.gxTpr_Step2.gxTpr_Languageoptions;
       }
 
-      protected void S132( )
+      protected void S142( )
       {
          /* 'SAVEVARIABLESTOWIZARDDATA' Routine */
          returnInSub = false;
@@ -1209,10 +1293,12 @@ namespace GeneXus.Programs {
          AV21WizardData.gxTpr_Step2.gxTpr_Locationhasmyliving = AV13LocationHasMyLiving;
          AV21WizardData.gxTpr_Step2.gxTpr_Locationhasmyservices = AV14LocationHasMyServices;
          AV21WizardData.gxTpr_Step2.gxTpr_Locationhasownbrand = AV15LocationHasOwnBrand;
+         AV21WizardData.gxTpr_Step2.gxTpr_Locationsupportstranslation = AV35LocationSupportsTranslation;
+         AV21WizardData.gxTpr_Step2.gxTpr_Languageoptions = AV32LanguageOptions;
          AV19WebSession.Set(AV20WebSessionKey, AV21WizardData.ToJSonString(false, true));
       }
 
-      protected void S142( )
+      protected void S152( )
       {
          /* 'FINISHWIZARD' Routine */
          returnInSub = false;
@@ -1252,6 +1338,28 @@ namespace GeneXus.Programs {
             AV18Trn_Location.gxTpr_Locationbrandtheme = AV22SelectedBrandTheme.ToJSonString(false, true);
             AV18Trn_Location.gxTpr_Locationctatheme = AV23SelectedCtaTheme.ToJSonString(false, true);
          }
+         AV18Trn_Location.gxTpr_Toolboxhasmultilingualsupport = AV35LocationSupportsTranslation;
+         if ( AV35LocationSupportsTranslation )
+         {
+            AV38ToolboxLanguages = new GXBaseCollection<SdtSDT_LanguageOptions_SDT_LanguageOptionsItem>( context, "SDT_LanguageOptionsItem", "Comforta_version2");
+            if ( AV32LanguageOptions.Count > 0 )
+            {
+               AV39GXV1 = 1;
+               while ( AV39GXV1 <= AV33LanguageOptions_Data.Count )
+               {
+                  AV29Combo_DataItem = ((WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item)AV33LanguageOptions_Data.Item(AV39GXV1));
+                  AV37SelectedLangugeOption = new SdtSDT_LanguageOptions_SDT_LanguageOptionsItem(context);
+                  if ( (AV32LanguageOptions.IndexOf(AV29Combo_DataItem.gxTpr_Id)>0) )
+                  {
+                     AV37SelectedLangugeOption.gxTpr_Value = AV29Combo_DataItem.gxTpr_Id;
+                     AV37SelectedLangugeOption.gxTpr_Label = AV29Combo_DataItem.gxTpr_Title;
+                     AV38ToolboxLanguages.Add(AV37SelectedLangugeOption, 0);
+                  }
+                  AV39GXV1 = (int)(AV39GXV1+1);
+               }
+            }
+            AV18Trn_Location.gxTpr_Toolboxsupportedlanguages = AV38ToolboxLanguages.ToJSonString(false);
+         }
          AV5isLocationInserted = AV18Trn_Location.Insert();
          if ( AV5isLocationInserted )
          {
@@ -1259,10 +1367,10 @@ namespace GeneXus.Programs {
             {
                if ( AV25SDT_FileUploadData.FromJSonString(AV21WizardData.gxTpr_Step1.gxTpr_Locationimagevar, null) )
                {
-                  AV29GXV1 = 1;
-                  while ( AV29GXV1 <= AV25SDT_FileUploadData.Count )
+                  AV40GXV2 = 1;
+                  while ( AV40GXV2 <= AV25SDT_FileUploadData.Count )
                   {
-                     AV26File = ((SdtSDT_FileUploadData)AV25SDT_FileUploadData.Item(AV29GXV1));
+                     AV26File = ((SdtSDT_FileUploadData)AV25SDT_FileUploadData.Item(AV40GXV2));
                      if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV26File.gxTpr_File)) )
                      {
                         AV27ImageFile = "";
@@ -1277,7 +1385,7 @@ namespace GeneXus.Programs {
                            AV28Trn_LocationImage.Insert();
                         }
                      }
-                     AV29GXV1 = (int)(AV29GXV1+1);
+                     AV40GXV2 = (int)(AV40GXV2+1);
                   }
                }
             }
@@ -1293,31 +1401,67 @@ namespace GeneXus.Programs {
             context.RollbackDataStores("wp_createlocationandlicensestep2",pr_default);
             AV8ErrorMessages = AV18Trn_Location.GetMessages();
             /* Execute user subroutine: 'DISPLAYMESSAGES' */
-            S152 ();
+            S162 ();
             if (returnInSub) return;
          }
       }
 
-      protected void S122( )
+      protected void S132( )
       {
          /* 'ATTRIBUTESSECURITYCODE' Routine */
          returnInSub = false;
+         if ( ! ( ( AV35LocationSupportsTranslation ) ) )
+         {
+            Combo_languageoptions_Visible = false;
+            ucCombo_languageoptions.SendProperty(context, sPrefix, false, Combo_languageoptions_Internalname, "Visible", StringUtil.BoolToStr( Combo_languageoptions_Visible));
+            divCombo_languageoptions_cell_Class = "Invisible";
+            AssignProp(sPrefix, false, divCombo_languageoptions_cell_Internalname, "Class", divCombo_languageoptions_cell_Class, true);
+         }
+         else
+         {
+            Combo_languageoptions_Visible = true;
+            ucCombo_languageoptions.SendProperty(context, sPrefix, false, Combo_languageoptions_Internalname, "Visible", StringUtil.BoolToStr( Combo_languageoptions_Visible));
+            divCombo_languageoptions_cell_Class = "col-xs-12 ExtendedComboCell";
+            AssignProp(sPrefix, false, divCombo_languageoptions_cell_Internalname, "Class", divCombo_languageoptions_cell_Class, true);
+         }
          divBrandtable_Visible = (((AV15LocationHasOwnBrand)) ? 1 : 0);
          AssignProp(sPrefix, false, divBrandtable_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(divBrandtable_Visible), 5, 0), true);
          divCtatable_Visible = (((AV15LocationHasOwnBrand)) ? 1 : 0);
          AssignProp(sPrefix, false, divCtatable_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(divCtatable_Visible), 5, 0), true);
       }
 
-      protected void S152( )
+      protected void S122( )
+      {
+         /* 'LOADCOMBOLANGUAGEOPTIONS' Routine */
+         returnInSub = false;
+         AV42GXV4 = 1;
+         GXt_objcol_SdtSDT_LanguageOptions_SDT_LanguageOptionsItem2 = AV41GXV3;
+         new dp_toolboxlanguages(context ).execute( out  GXt_objcol_SdtSDT_LanguageOptions_SDT_LanguageOptionsItem2) ;
+         AV41GXV3 = GXt_objcol_SdtSDT_LanguageOptions_SDT_LanguageOptionsItem2;
+         while ( AV42GXV4 <= AV41GXV3.Count )
+         {
+            AV34LanguageOptions_DPItem = ((SdtSDT_LanguageOptions_SDT_LanguageOptionsItem)AV41GXV3.Item(AV42GXV4));
+            AV29Combo_DataItem = new WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item(context);
+            AV29Combo_DataItem.gxTpr_Id = AV34LanguageOptions_DPItem.gxTpr_Value;
+            AV29Combo_DataItem.gxTpr_Title = AV34LanguageOptions_DPItem.gxTpr_Label;
+            AV33LanguageOptions_Data.Add(AV29Combo_DataItem, 0);
+            AV42GXV4 = (int)(AV42GXV4+1);
+         }
+         AV33LanguageOptions_Data.Sort("Title");
+         Combo_languageoptions_Selectedvalue_set = AV32LanguageOptions.ToJSonString(false);
+         ucCombo_languageoptions.SendProperty(context, sPrefix, false, Combo_languageoptions_Internalname, "SelectedValue_set", Combo_languageoptions_Selectedvalue_set);
+      }
+
+      protected void S162( )
       {
          /* 'DISPLAYMESSAGES' Routine */
          returnInSub = false;
-         AV30GXV2 = 1;
-         while ( AV30GXV2 <= AV8ErrorMessages.Count )
+         AV43GXV5 = 1;
+         while ( AV43GXV5 <= AV8ErrorMessages.Count )
          {
-            AV7Error = ((GeneXus.Utils.SdtMessages_Message)AV8ErrorMessages.Item(AV30GXV2));
+            AV7Error = ((GeneXus.Utils.SdtMessages_Message)AV8ErrorMessages.Item(AV43GXV5));
             GX_msglist.addItem(new WorkWithPlus.workwithplus_web.dvmessagegetbasicnotificationmsg(context).executeUdp(  "",  AV7Error.gxTpr_Description,  "error",  "",  "true",  ""));
-            AV30GXV2 = (int)(AV30GXV2+1);
+            AV43GXV5 = (int)(AV43GXV5+1);
          }
       }
 
@@ -1598,7 +1742,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257212524850", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257258552655", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1614,7 +1758,10 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("wp_createlocationandlicensestep2.js", "?20257212524850", false, true);
+         context.AddJavascriptSource("wp_createlocationandlicensestep2.js", "?20257258552656", false, true);
+         context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
          context.AddJavascriptSource("UserControls/UC_ThemeSelectorRender.js", "", false, true);
          context.AddJavascriptSource("UserControls/UC_CtaThemeSelectorRender.js", "", false, true);
          context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
@@ -1644,6 +1791,11 @@ namespace GeneXus.Programs {
          chkavLocationhasownbrand.Caption = context.GetMessage( "Location Has Own Brand", "");
          AssignProp(sPrefix, false, chkavLocationhasownbrand_Internalname, "TitleCaption", chkavLocationhasownbrand.Caption, true);
          chkavLocationhasownbrand.CheckedValue = "false";
+         chkavLocationsupportstranslation.Name = "vLOCATIONSUPPORTSTRANSLATION";
+         chkavLocationsupportstranslation.WebTags = "";
+         chkavLocationsupportstranslation.Caption = context.GetMessage( "Location Supports Translation", "");
+         AssignProp(sPrefix, false, chkavLocationsupportstranslation_Internalname, "TitleCaption", chkavLocationsupportstranslation.Caption, true);
+         chkavLocationsupportstranslation.CheckedValue = "false";
          /* End function init_web_controls */
       }
 
@@ -1653,6 +1805,9 @@ namespace GeneXus.Programs {
          chkavLocationhasmyliving_Internalname = sPrefix+"vLOCATIONHASMYLIVING";
          chkavLocationhasmyservices_Internalname = sPrefix+"vLOCATIONHASMYSERVICES";
          chkavLocationhasownbrand_Internalname = sPrefix+"vLOCATIONHASOWNBRAND";
+         chkavLocationsupportstranslation_Internalname = sPrefix+"vLOCATIONSUPPORTSTRANSLATION";
+         Combo_languageoptions_Internalname = sPrefix+"COMBO_LANGUAGEOPTIONS";
+         divCombo_languageoptions_cell_Internalname = sPrefix+"COMBO_LANGUAGEOPTIONS_CELL";
          divAgreementfields_Internalname = sPrefix+"AGREEMENTFIELDS";
          lblThemelabel_Internalname = sPrefix+"THEMELABEL";
          Themeselector_Internalname = sPrefix+"THEMESELECTOR";
@@ -1686,10 +1841,13 @@ namespace GeneXus.Programs {
             }
          }
          init_default_properties( ) ;
+         chkavLocationsupportstranslation.Caption = context.GetMessage( "Location Supports Translation", "");
          chkavLocationhasownbrand.Caption = context.GetMessage( "Location Has Own Brand", "");
          chkavLocationhasmyservices.Caption = context.GetMessage( "Location Has My Services", "");
          chkavLocationhasmyliving.Caption = context.GetMessage( "Location Has My Living", "");
          chkavLocationhasmycare.Caption = context.GetMessage( "Location Has My Care", "");
+         Combo_languageoptions_Visible = Convert.ToBoolean( -1);
+         Combo_languageoptions_Emptyitemtext = "GX_EmptyItemText";
          Btnwizardfinish_Class = "ButtonMaterial";
          Btnwizardfinish_Caption = context.GetMessage( "Finish", "");
          Btnwizardfinish_Tooltiptext = "";
@@ -1698,6 +1856,13 @@ namespace GeneXus.Programs {
          Btnwizardprevious_Tooltiptext = "";
          divCtatable_Visible = 1;
          divBrandtable_Visible = 1;
+         Combo_languageoptions_Multiplevaluestype = "Tags";
+         Combo_languageoptions_Includeonlyselectedoption = Convert.ToBoolean( -1);
+         Combo_languageoptions_Allowmultipleselection = Convert.ToBoolean( -1);
+         Combo_languageoptions_Cls = "ExtendedCombo CellMarginTop10";
+         Combo_languageoptions_Caption = "";
+         divCombo_languageoptions_cell_Class = "col-xs-12";
+         chkavLocationsupportstranslation.Enabled = 1;
          chkavLocationhasownbrand.Enabled = 1;
          chkavLocationhasmyservices.Enabled = 1;
          chkavLocationhasmyliving.Enabled = 1;
@@ -1719,12 +1884,12 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV12LocationHasMyCare","fld":"vLOCATIONHASMYCARE"},{"av":"AV13LocationHasMyLiving","fld":"vLOCATIONHASMYLIVING"},{"av":"AV14LocationHasMyServices","fld":"vLOCATIONHASMYSERVICES"},{"av":"AV15LocationHasOwnBrand","fld":"vLOCATIONHASOWNBRAND"},{"av":"AV10HasValidationErrors","fld":"vHASVALIDATIONERRORS","hsh":true},{"av":"AV25SDT_FileUploadData","fld":"vSDT_FILEUPLOADDATA","hsh":true}]}""");
-         setEventMetadata("ENTER","""{"handler":"E12AZ2","iparms":[{"av":"AV10HasValidationErrors","fld":"vHASVALIDATIONERRORS","hsh":true},{"av":"AV20WebSessionKey","fld":"vWEBSESSIONKEY"},{"av":"AV12LocationHasMyCare","fld":"vLOCATIONHASMYCARE"},{"av":"AV13LocationHasMyLiving","fld":"vLOCATIONHASMYLIVING"},{"av":"AV14LocationHasMyServices","fld":"vLOCATIONHASMYSERVICES"},{"av":"AV15LocationHasOwnBrand","fld":"vLOCATIONHASOWNBRAND"},{"av":"AV21WizardData","fld":"vWIZARDDATA"},{"av":"AV11ImageFile2","fld":"vIMAGEFILE2"},{"av":"AV16OrganisationId","fld":"vORGANISATIONID"},{"av":"AV22SelectedBrandTheme","fld":"vSELECTEDBRANDTHEME"},{"av":"AV23SelectedCtaTheme","fld":"vSELECTEDCTATHEME"},{"av":"AV25SDT_FileUploadData","fld":"vSDT_FILEUPLOADDATA","hsh":true},{"av":"AV8ErrorMessages","fld":"vERRORMESSAGES"}]""");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV12LocationHasMyCare","fld":"vLOCATIONHASMYCARE"},{"av":"AV13LocationHasMyLiving","fld":"vLOCATIONHASMYLIVING"},{"av":"AV14LocationHasMyServices","fld":"vLOCATIONHASMYSERVICES"},{"av":"AV15LocationHasOwnBrand","fld":"vLOCATIONHASOWNBRAND"},{"av":"AV35LocationSupportsTranslation","fld":"vLOCATIONSUPPORTSTRANSLATION"},{"av":"AV10HasValidationErrors","fld":"vHASVALIDATIONERRORS","hsh":true},{"av":"AV25SDT_FileUploadData","fld":"vSDT_FILEUPLOADDATA","hsh":true}]}""");
+         setEventMetadata("ENTER","""{"handler":"E12AZ2","iparms":[{"av":"AV10HasValidationErrors","fld":"vHASVALIDATIONERRORS","hsh":true},{"av":"AV20WebSessionKey","fld":"vWEBSESSIONKEY"},{"av":"AV12LocationHasMyCare","fld":"vLOCATIONHASMYCARE"},{"av":"AV13LocationHasMyLiving","fld":"vLOCATIONHASMYLIVING"},{"av":"AV14LocationHasMyServices","fld":"vLOCATIONHASMYSERVICES"},{"av":"AV15LocationHasOwnBrand","fld":"vLOCATIONHASOWNBRAND"},{"av":"AV35LocationSupportsTranslation","fld":"vLOCATIONSUPPORTSTRANSLATION"},{"av":"AV32LanguageOptions","fld":"vLANGUAGEOPTIONS"},{"av":"AV21WizardData","fld":"vWIZARDDATA"},{"av":"AV11ImageFile2","fld":"vIMAGEFILE2"},{"av":"AV16OrganisationId","fld":"vORGANISATIONID"},{"av":"AV22SelectedBrandTheme","fld":"vSELECTEDBRANDTHEME"},{"av":"AV23SelectedCtaTheme","fld":"vSELECTEDCTATHEME"},{"av":"AV33LanguageOptions_Data","fld":"vLANGUAGEOPTIONS_DATA"},{"av":"AV25SDT_FileUploadData","fld":"vSDT_FILEUPLOADDATA","hsh":true},{"av":"AV8ErrorMessages","fld":"vERRORMESSAGES"}]""");
          setEventMetadata("ENTER",""","oparms":[{"av":"AV21WizardData","fld":"vWIZARDDATA"},{"av":"AV11ImageFile2","fld":"vIMAGEFILE2"},{"av":"AV8ErrorMessages","fld":"vERRORMESSAGES"}]}""");
-         setEventMetadata("'WIZARDPREVIOUS'","""{"handler":"E13AZ2","iparms":[{"av":"AV16OrganisationId","fld":"vORGANISATIONID"},{"av":"AV20WebSessionKey","fld":"vWEBSESSIONKEY"},{"av":"AV12LocationHasMyCare","fld":"vLOCATIONHASMYCARE"},{"av":"AV13LocationHasMyLiving","fld":"vLOCATIONHASMYLIVING"},{"av":"AV14LocationHasMyServices","fld":"vLOCATIONHASMYSERVICES"},{"av":"AV15LocationHasOwnBrand","fld":"vLOCATIONHASOWNBRAND"}]""");
+         setEventMetadata("'WIZARDPREVIOUS'","""{"handler":"E13AZ2","iparms":[{"av":"AV16OrganisationId","fld":"vORGANISATIONID"},{"av":"AV20WebSessionKey","fld":"vWEBSESSIONKEY"},{"av":"AV12LocationHasMyCare","fld":"vLOCATIONHASMYCARE"},{"av":"AV13LocationHasMyLiving","fld":"vLOCATIONHASMYLIVING"},{"av":"AV14LocationHasMyServices","fld":"vLOCATIONHASMYSERVICES"},{"av":"AV15LocationHasOwnBrand","fld":"vLOCATIONHASOWNBRAND"},{"av":"AV35LocationSupportsTranslation","fld":"vLOCATIONSUPPORTSTRANSLATION"},{"av":"AV32LanguageOptions","fld":"vLANGUAGEOPTIONS"}]""");
          setEventMetadata("'WIZARDPREVIOUS'",""","oparms":[{"av":"AV16OrganisationId","fld":"vORGANISATIONID"},{"av":"AV21WizardData","fld":"vWIZARDDATA"}]}""");
-         setEventMetadata("'DOWIZARDFINISH'","""{"handler":"E14AZ2","iparms":[{"av":"AV10HasValidationErrors","fld":"vHASVALIDATIONERRORS","hsh":true},{"av":"AV20WebSessionKey","fld":"vWEBSESSIONKEY"},{"av":"AV12LocationHasMyCare","fld":"vLOCATIONHASMYCARE"},{"av":"AV13LocationHasMyLiving","fld":"vLOCATIONHASMYLIVING"},{"av":"AV14LocationHasMyServices","fld":"vLOCATIONHASMYSERVICES"},{"av":"AV15LocationHasOwnBrand","fld":"vLOCATIONHASOWNBRAND"},{"av":"AV21WizardData","fld":"vWIZARDDATA"},{"av":"AV11ImageFile2","fld":"vIMAGEFILE2"},{"av":"AV16OrganisationId","fld":"vORGANISATIONID"},{"av":"AV22SelectedBrandTheme","fld":"vSELECTEDBRANDTHEME"},{"av":"AV23SelectedCtaTheme","fld":"vSELECTEDCTATHEME"},{"av":"AV25SDT_FileUploadData","fld":"vSDT_FILEUPLOADDATA","hsh":true},{"av":"AV8ErrorMessages","fld":"vERRORMESSAGES"}]""");
+         setEventMetadata("'DOWIZARDFINISH'","""{"handler":"E14AZ2","iparms":[{"av":"AV10HasValidationErrors","fld":"vHASVALIDATIONERRORS","hsh":true},{"av":"AV20WebSessionKey","fld":"vWEBSESSIONKEY"},{"av":"AV12LocationHasMyCare","fld":"vLOCATIONHASMYCARE"},{"av":"AV13LocationHasMyLiving","fld":"vLOCATIONHASMYLIVING"},{"av":"AV14LocationHasMyServices","fld":"vLOCATIONHASMYSERVICES"},{"av":"AV15LocationHasOwnBrand","fld":"vLOCATIONHASOWNBRAND"},{"av":"AV35LocationSupportsTranslation","fld":"vLOCATIONSUPPORTSTRANSLATION"},{"av":"AV32LanguageOptions","fld":"vLANGUAGEOPTIONS"},{"av":"AV21WizardData","fld":"vWIZARDDATA"},{"av":"AV11ImageFile2","fld":"vIMAGEFILE2"},{"av":"AV16OrganisationId","fld":"vORGANISATIONID"},{"av":"AV22SelectedBrandTheme","fld":"vSELECTEDBRANDTHEME"},{"av":"AV23SelectedCtaTheme","fld":"vSELECTEDCTATHEME"},{"av":"AV33LanguageOptions_Data","fld":"vLANGUAGEOPTIONS_DATA"},{"av":"AV25SDT_FileUploadData","fld":"vSDT_FILEUPLOADDATA","hsh":true},{"av":"AV8ErrorMessages","fld":"vERRORMESSAGES"}]""");
          setEventMetadata("'DOWIZARDFINISH'",""","oparms":[{"av":"AV21WizardData","fld":"vWIZARDDATA"},{"av":"AV11ImageFile2","fld":"vIMAGEFILE2"},{"av":"AV8ErrorMessages","fld":"vERRORMESSAGES"}]}""");
          return  ;
       }
@@ -1743,6 +1908,7 @@ namespace GeneXus.Programs {
          wcpOAV20WebSessionKey = "";
          wcpOAV17PreviousStep = "";
          wcpOAV16OrganisationId = Guid.Empty;
+         Combo_languageoptions_Selectedvalue_get = "";
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
          sPrefix = "";
@@ -1752,8 +1918,11 @@ namespace GeneXus.Programs {
          GXKey = "";
          GXEncryptionTmp = "";
          AV25SDT_FileUploadData = new GXBaseCollection<SdtSDT_FileUploadData>( context, "SDT_FileUploadData", "Comforta_version2");
+         AV31DDO_TitleSettingsIcons = new WorkWithPlus.workwithplus_web.SdtDVB_SDTDropDownOptionsTitleSettingsIcons(context);
+         AV33LanguageOptions_Data = new GXBaseCollection<WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item>( context, "Item", "");
          AV22SelectedBrandTheme = new SdtSDT_BrandThemeColors(context);
          AV23SelectedCtaTheme = new SdtSDT_CtaThemeColors(context);
+         AV32LanguageOptions = new GxSimpleCollection<string>();
          AV21WizardData = new SdtWP_CreateLocationAndLicenseData(context);
          AV11ImageFile2 = "";
          AV8ErrorMessages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus");
@@ -1765,6 +1934,8 @@ namespace GeneXus.Programs {
          AV13LocationHasMyLiving = false;
          AV14LocationHasMyServices = false;
          AV15LocationHasOwnBrand = false;
+         AV35LocationSupportsTranslation = true;
+         ucCombo_languageoptions = new GXUserControl();
          lblThemelabel_Jsonclick = "";
          ucThemeselector = new GXUserControl();
          lblCtatheme_Jsonclick = "";
@@ -1778,12 +1949,20 @@ namespace GeneXus.Programs {
          EvtRowId = "";
          sEvtType = "";
          GXDecQS = "";
+         GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons1 = new WorkWithPlus.workwithplus_web.SdtDVB_SDTDropDownOptionsTitleSettingsIcons(context);
          AV19WebSession = context.GetSession();
          AV18Trn_Location = new SdtTrn_Location(context);
+         AV38ToolboxLanguages = new GXBaseCollection<SdtSDT_LanguageOptions_SDT_LanguageOptionsItem>( context, "SDT_LanguageOptionsItem", "Comforta_version2");
+         AV29Combo_DataItem = new WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item(context);
+         AV37SelectedLangugeOption = new SdtSDT_LanguageOptions_SDT_LanguageOptionsItem(context);
          AV26File = new SdtSDT_FileUploadData(context);
          AV27ImageFile = "";
          AV24base64String = "";
          AV28Trn_LocationImage = new SdtTrn_LocationImage(context);
+         AV41GXV3 = new GXBaseCollection<SdtSDT_LanguageOptions_SDT_LanguageOptionsItem>( context, "SDT_LanguageOptionsItem", "Comforta_version2");
+         GXt_objcol_SdtSDT_LanguageOptions_SDT_LanguageOptionsItem2 = new GXBaseCollection<SdtSDT_LanguageOptions_SDT_LanguageOptionsItem>( context, "SDT_LanguageOptionsItem", "Comforta_version2");
+         AV34LanguageOptions_DPItem = new SdtSDT_LanguageOptions_SDT_LanguageOptionsItem(context);
+         Combo_languageoptions_Selectedvalue_set = "";
          AV7Error = new GeneXus.Utils.SdtMessages_Message(context);
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
@@ -1817,9 +1996,12 @@ namespace GeneXus.Programs {
       private short nGXWrapped ;
       private int divBrandtable_Visible ;
       private int divCtatable_Visible ;
-      private int AV29GXV1 ;
-      private int AV30GXV2 ;
+      private int AV39GXV1 ;
+      private int AV40GXV2 ;
+      private int AV42GXV4 ;
+      private int AV43GXV5 ;
       private int idxLst ;
+      private string Combo_languageoptions_Selectedvalue_get ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string sPrefix ;
@@ -1844,6 +2026,13 @@ namespace GeneXus.Programs {
       private string chkavLocationhasmyliving_Internalname ;
       private string chkavLocationhasmyservices_Internalname ;
       private string chkavLocationhasownbrand_Internalname ;
+      private string chkavLocationsupportstranslation_Internalname ;
+      private string divCombo_languageoptions_cell_Internalname ;
+      private string divCombo_languageoptions_cell_Class ;
+      private string Combo_languageoptions_Caption ;
+      private string Combo_languageoptions_Cls ;
+      private string Combo_languageoptions_Multiplevaluestype ;
+      private string Combo_languageoptions_Internalname ;
       private string divBrandthemetable_Internalname ;
       private string divBrandtable_Internalname ;
       private string lblThemelabel_Internalname ;
@@ -1868,6 +2057,8 @@ namespace GeneXus.Programs {
       private string EvtRowId ;
       private string sEvtType ;
       private string GXDecQS ;
+      private string Combo_languageoptions_Emptyitemtext ;
+      private string Combo_languageoptions_Selectedvalue_set ;
       private string sCtrlAV20WebSessionKey ;
       private string sCtrlAV17PreviousStep ;
       private string sCtrlAV9GoingBack ;
@@ -1882,11 +2073,15 @@ namespace GeneXus.Programs {
       private bool AV13LocationHasMyLiving ;
       private bool AV14LocationHasMyServices ;
       private bool AV15LocationHasOwnBrand ;
+      private bool AV35LocationSupportsTranslation ;
+      private bool Combo_languageoptions_Allowmultipleselection ;
+      private bool Combo_languageoptions_Includeonlyselectedoption ;
       private bool Rfr0gs ;
       private bool wbErr ;
       private bool gxdyncontrolsrefreshing ;
       private bool returnInSub ;
       private bool AV5isLocationInserted ;
+      private bool Combo_languageoptions_Visible ;
       private string AV24base64String ;
       private string AV20WebSessionKey ;
       private string AV17PreviousStep ;
@@ -1896,6 +2091,7 @@ namespace GeneXus.Programs {
       private Guid wcpOAV16OrganisationId ;
       private string AV11ImageFile2 ;
       private string AV27ImageFile ;
+      private GXUserControl ucCombo_languageoptions ;
       private GXUserControl ucThemeselector ;
       private GXUserControl ucCalltoactionthemeselector ;
       private GXUserControl ucBtnwizardprevious ;
@@ -1910,15 +2106,26 @@ namespace GeneXus.Programs {
       private GXCheckbox chkavLocationhasmyliving ;
       private GXCheckbox chkavLocationhasmyservices ;
       private GXCheckbox chkavLocationhasownbrand ;
+      private GXCheckbox chkavLocationsupportstranslation ;
       private GXBaseCollection<SdtSDT_FileUploadData> AV25SDT_FileUploadData ;
+      private WorkWithPlus.workwithplus_web.SdtDVB_SDTDropDownOptionsTitleSettingsIcons AV31DDO_TitleSettingsIcons ;
+      private GXBaseCollection<WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item> AV33LanguageOptions_Data ;
       private SdtSDT_BrandThemeColors AV22SelectedBrandTheme ;
       private SdtSDT_CtaThemeColors AV23SelectedCtaTheme ;
+      private GxSimpleCollection<string> AV32LanguageOptions ;
       private SdtWP_CreateLocationAndLicenseData AV21WizardData ;
       private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV8ErrorMessages ;
+      private WorkWithPlus.workwithplus_web.SdtDVB_SDTDropDownOptionsTitleSettingsIcons GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons1 ;
       private SdtTrn_Location AV18Trn_Location ;
+      private GXBaseCollection<SdtSDT_LanguageOptions_SDT_LanguageOptionsItem> AV38ToolboxLanguages ;
+      private WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item AV29Combo_DataItem ;
+      private SdtSDT_LanguageOptions_SDT_LanguageOptionsItem AV37SelectedLangugeOption ;
       private SdtSDT_FileUploadData AV26File ;
       private SdtTrn_LocationImage AV28Trn_LocationImage ;
       private IDataStoreProvider pr_default ;
+      private GXBaseCollection<SdtSDT_LanguageOptions_SDT_LanguageOptionsItem> AV41GXV3 ;
+      private GXBaseCollection<SdtSDT_LanguageOptions_SDT_LanguageOptionsItem> GXt_objcol_SdtSDT_LanguageOptions_SDT_LanguageOptionsItem2 ;
+      private SdtSDT_LanguageOptions_SDT_LanguageOptionsItem AV34LanguageOptions_DPItem ;
       private GeneXus.Utils.SdtMessages_Message AV7Error ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;

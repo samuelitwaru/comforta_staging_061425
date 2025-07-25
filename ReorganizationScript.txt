@@ -1,2 +1,43 @@
-ALTER TABLE Trn_AppVersion ALTER COLUMN AppVersionLanguage TYPE VARCHAR(100);
+CREATE TABLE GXA0006 (LocationId CHAR(36) NOT NULL , OrganisationId CHAR(36) NOT NULL , LocationName VARCHAR(100) NOT NULL , LocationEmail VARCHAR(100) NOT NULL , LocationPhone CHAR(20) NOT NULL , LocationDescription TEXT NOT NULL , LocationCity VARCHAR(100) NOT NULL , LocationZipCode VARCHAR(100) NOT NULL , LocationAddressLine1 VARCHAR(100) NOT NULL , LocationAddressLine2 VARCHAR(100) NOT NULL , LocationPhoneCode VARCHAR(40) NOT NULL , LocationPhoneNumber VARCHAR(9) NOT NULL , LocationCountry VARCHAR(100) NOT NULL , LocationImage BYTEA , LocationImage_GXI VARCHAR(2048) , ToolBoxDefaultLogo VARCHAR(200) , ToolBoxDefaultProfileImage VARCHAR(200) , LocationBrandTheme TEXT , LocationCtaTheme TEXT , LocationHasMyCare BOOLEAN NOT NULL , LocationHasMyServices BOOLEAN NOT NULL , LocationHasMyLiving BOOLEAN NOT NULL , LocationHasOwnBrand BOOLEAN NOT NULL , ReceptionImage BYTEA , ReceptionImage_GXI VARCHAR(2048) , ReceptionDescription VARCHAR(200) , LocationThemeId CHAR(36) , ActiveAppVersionId CHAR(36) , PublishedActiveAppVersionId CHAR(36) , ToolBoxLastUpdateReceptionistI CHAR(36) , ToolBoxLastUpdateTime timestamp without time zone , ToolboxHasMultiLingualSupport BOOLEAN , ToolboxSupportedLanguages TEXT );
+Run conversion program for table Trn_Location;
+DROP TABLE Trn_Location CASCADE;
+ALTER TABLE GXA0006 RENAME TO Trn_Location;
+ALTER TABLE Trn_Location ADD CONSTRAINT Trn_Location_pkey PRIMARY KEY(LocationId, OrganisationId);
+CREATE INDEX UTRN_LOCATION ON Trn_Location (LocationName ,LocationEmail ,LocationPhone );
+CREATE INDEX ITRN_LOCATION3 ON Trn_Location (LocationThemeId );
+CREATE INDEX ITRN_LOCATION4 ON Trn_Location (ActiveAppVersionId );
+CREATE INDEX ITRN_LOCATION5 ON Trn_Location (PublishedActiveAppVersionId );
+CREATE INDEX ITRN_LOCATION1 ON Trn_Location (ToolBoxLastUpdateReceptionistI ,OrganisationId ,LocationId );
+
+ALTER TABLE Trn_SupplierGen ADD CONSTRAINT ITRN_SUPPLIERGEN1 FOREIGN KEY (SupplierGenTypeId) REFERENCES Trn_SupplierGenType (SupplierGenTypeId);
+ALTER TABLE Trn_SupplierGen ADD CONSTRAINT ITRN_SUPPLIERGEN3 FOREIGN KEY (SG_LocationSupplierLocationId, SG_LocationSupplierOrganisatio) REFERENCES Trn_Location (LocationId, OrganisationId);
+ALTER TABLE Trn_SupplierGen ADD CONSTRAINT ITRN_SUPPLIERGEN2 FOREIGN KEY (SG_OrganisationSupplierId) REFERENCES Trn_Organisation (OrganisationId);
+
+ALTER TABLE Trn_Memo ADD CONSTRAINT ITRN_MEMO2 FOREIGN KEY (ResidentId, SG_LocationId, SG_OrganisationId) REFERENCES Trn_Resident (ResidentId, LocationId, OrganisationId);
+
+ALTER TABLE Trn_ResidentPackage ADD CONSTRAINT ITRN_RESIDENTPACKAGE1 FOREIGN KEY (SG_LocationId, SG_OrganisationId) REFERENCES Trn_Location (LocationId, OrganisationId);
+
+ALTER TABLE Trn_AppVersion ADD CONSTRAINT ITRN_APPVERSION1 FOREIGN KEY (LocationId, OrganisationId) REFERENCES Trn_Location (LocationId, OrganisationId);
+ALTER TABLE Trn_AppVersion ADD CONSTRAINT ITRN_APPVERSION2 FOREIGN KEY (Trn_ThemeId) REFERENCES Trn_Theme (Trn_ThemeId);
+
+ALTER TABLE Trn_AgendaCalendar ADD CONSTRAINT ITRN_AGENDACALENDAR1 FOREIGN KEY (LocationId, OrganisationId) REFERENCES Trn_Location (LocationId, OrganisationId);
+
+ALTER TABLE Trn_LocationDynamicForm ADD CONSTRAINT ITRN_LOCATIONDYNAMICFORM2 FOREIGN KEY (LocationId, OrganisationId) REFERENCES Trn_Location (LocationId, OrganisationId);
+ALTER TABLE Trn_LocationDynamicForm ADD CONSTRAINT ITRN_LOCATIONDYNAMICFORM1 FOREIGN KEY (WWPFormId, WWPFormVersionNumber) REFERENCES WWP_Form (WWPFormId, WWPFormVersionNumber);
+
+ALTER TABLE Trn_ProductService ADD CONSTRAINT ITRN_PRODUCTSERVICE3 FOREIGN KEY (LocationId, OrganisationId) REFERENCES Trn_Location (LocationId, OrganisationId);
+ALTER TABLE Trn_ProductService ADD CONSTRAINT ITRN_PRODUCTSERVICE2 FOREIGN KEY (SupplierGenId) REFERENCES Trn_SupplierGen (SupplierGenId);
+ALTER TABLE Trn_ProductService ADD CONSTRAINT ITRN_PRODUCTSERVICE1 FOREIGN KEY (SupplierAgbId) REFERENCES Trn_SupplierAGB (SupplierAgbId);
+
+ALTER TABLE Trn_Resident ADD CONSTRAINT ITRN_RESIDENT4 FOREIGN KEY (LocationId, OrganisationId) REFERENCES Trn_Location (LocationId, OrganisationId);
+ALTER TABLE Trn_Resident ADD CONSTRAINT ITRN_RESIDENT3 FOREIGN KEY (ResidentTypeId) REFERENCES Trn_ResidentType (ResidentTypeId);
+ALTER TABLE Trn_Resident ADD CONSTRAINT ITRN_RESIDENT2 FOREIGN KEY (MedicalIndicationId) REFERENCES Trn_MedicalIndication (MedicalIndicationId);
+ALTER TABLE Trn_Resident ADD CONSTRAINT ITRN_RESIDENT1 FOREIGN KEY (ResidentPackageId) REFERENCES Trn_ResidentPackage (ResidentPackageId);
+
+ALTER TABLE Trn_Receptionist ADD CONSTRAINT ITRN_RECEPTIONIST1 FOREIGN KEY (LocationId, OrganisationId) REFERENCES Trn_Location (LocationId, OrganisationId);
+
+ALTER TABLE Trn_Location ADD CONSTRAINT ITRN_LOCATION1 FOREIGN KEY (ToolBoxLastUpdateReceptionistI, OrganisationId, LocationId) REFERENCES Trn_Receptionist (ReceptionistId, OrganisationId, LocationId);
+ALTER TABLE Trn_Location ADD CONSTRAINT ITRN_LOCATION3 FOREIGN KEY (LocationThemeId) REFERENCES Trn_Theme (Trn_ThemeId);
+ALTER TABLE Trn_Location ADD CONSTRAINT ITRN_LOCATION5 FOREIGN KEY (PublishedActiveAppVersionId) REFERENCES Trn_AppVersion (AppVersionId);
+ALTER TABLE Trn_Location ADD CONSTRAINT ITRN_LOCATION4 FOREIGN KEY (ActiveAppVersionId) REFERENCES Trn_AppVersion (AppVersionId);
 

@@ -102,6 +102,7 @@ namespace GeneXus.Programs {
             cleanup();
             if (true) return;
          }
+         new prc_logtofile(context ).execute(  AV8AppVersionId.ToString()+" "+AV18activePageId.ToString()+" "+AV9languageFrom+" "+AV19LanguageToCollection.ToJSonString(false)) ;
          AV25GXV1 = 1;
          while ( AV25GXV1 <= AV19LanguageToCollection.Count )
          {
@@ -155,7 +156,7 @@ namespace GeneXus.Programs {
             new prc_addappversionpagetodynamictransalation3(context).executeSubmit(  AV13SDT_InfoPageTranslationCollection, ref  AV9languageFrom, ref  AV10LanguageTo) ;
             AV25GXV1 = (int)(AV25GXV1+1);
          }
-         AV21result = context.GetMessage( "success", "");
+         AV21result = "success";
          cleanup();
       }
 

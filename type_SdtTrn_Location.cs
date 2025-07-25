@@ -96,6 +96,7 @@ namespace GeneXus.Programs {
          state.Add("gxTpr_Locationthemeid_Z");
          state.Add("gxTpr_Toolboxlastupdatereceptionistid_Z");
          state.Add("gxTpr_Toolboxlastupdatetime_Z_Nullable");
+         state.Add("gxTpr_Toolboxhasmultilingualsupport_Z");
          state.Add("gxTpr_Locationimage_gxi_Z");
          state.Add("gxTpr_Receptionimage_gxi_Z");
          state.Add("gxTpr_Locationid_N");
@@ -112,6 +113,8 @@ namespace GeneXus.Programs {
          state.Add("gxTpr_Locationthemeid_N");
          state.Add("gxTpr_Toolboxlastupdatereceptionistid_N");
          state.Add("gxTpr_Toolboxlastupdatetime_N");
+         state.Add("gxTpr_Toolboxhasmultilingualsupport_N");
+         state.Add("gxTpr_Toolboxsupportedlanguages_N");
          state.Add("gxTpr_Locationimage_gxi_N");
          state.Add("gxTpr_Receptionimage_gxi_N");
          return state ;
@@ -153,6 +156,8 @@ namespace GeneXus.Programs {
          gxTv_SdtTrn_Location_Locationthemeid = sdt.gxTv_SdtTrn_Location_Locationthemeid ;
          gxTv_SdtTrn_Location_Toolboxlastupdatereceptionistid = sdt.gxTv_SdtTrn_Location_Toolboxlastupdatereceptionistid ;
          gxTv_SdtTrn_Location_Toolboxlastupdatetime = sdt.gxTv_SdtTrn_Location_Toolboxlastupdatetime ;
+         gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport = sdt.gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport ;
+         gxTv_SdtTrn_Location_Toolboxsupportedlanguages = sdt.gxTv_SdtTrn_Location_Toolboxsupportedlanguages ;
          gxTv_SdtTrn_Location_Mode = sdt.gxTv_SdtTrn_Location_Mode ;
          gxTv_SdtTrn_Location_Initialized = sdt.gxTv_SdtTrn_Location_Initialized ;
          gxTv_SdtTrn_Location_Locationid_Z = sdt.gxTv_SdtTrn_Location_Locationid_Z ;
@@ -180,6 +185,7 @@ namespace GeneXus.Programs {
          gxTv_SdtTrn_Location_Locationthemeid_Z = sdt.gxTv_SdtTrn_Location_Locationthemeid_Z ;
          gxTv_SdtTrn_Location_Toolboxlastupdatereceptionistid_Z = sdt.gxTv_SdtTrn_Location_Toolboxlastupdatereceptionistid_Z ;
          gxTv_SdtTrn_Location_Toolboxlastupdatetime_Z = sdt.gxTv_SdtTrn_Location_Toolboxlastupdatetime_Z ;
+         gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_Z = sdt.gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_Z ;
          gxTv_SdtTrn_Location_Locationimage_gxi_Z = sdt.gxTv_SdtTrn_Location_Locationimage_gxi_Z ;
          gxTv_SdtTrn_Location_Receptionimage_gxi_Z = sdt.gxTv_SdtTrn_Location_Receptionimage_gxi_Z ;
          gxTv_SdtTrn_Location_Locationid_N = sdt.gxTv_SdtTrn_Location_Locationid_N ;
@@ -196,6 +202,8 @@ namespace GeneXus.Programs {
          gxTv_SdtTrn_Location_Locationthemeid_N = sdt.gxTv_SdtTrn_Location_Locationthemeid_N ;
          gxTv_SdtTrn_Location_Toolboxlastupdatereceptionistid_N = sdt.gxTv_SdtTrn_Location_Toolboxlastupdatereceptionistid_N ;
          gxTv_SdtTrn_Location_Toolboxlastupdatetime_N = sdt.gxTv_SdtTrn_Location_Toolboxlastupdatetime_N ;
+         gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_N = sdt.gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_N ;
+         gxTv_SdtTrn_Location_Toolboxsupportedlanguages_N = sdt.gxTv_SdtTrn_Location_Toolboxsupportedlanguages_N ;
          gxTv_SdtTrn_Location_Locationimage_gxi_N = sdt.gxTv_SdtTrn_Location_Locationimage_gxi_N ;
          gxTv_SdtTrn_Location_Receptionimage_gxi_N = sdt.gxTv_SdtTrn_Location_Receptionimage_gxi_N ;
          return  ;
@@ -279,6 +287,10 @@ namespace GeneXus.Programs {
          sDateCnv += StringUtil.Substring( "00", 1, 2-StringUtil.Len( sNumToPad)) + sNumToPad;
          AddObjectProperty("ToolBoxLastUpdateTime", sDateCnv, false, includeNonInitialized);
          AddObjectProperty("ToolBoxLastUpdateTime_N", gxTv_SdtTrn_Location_Toolboxlastupdatetime_N, false, includeNonInitialized);
+         AddObjectProperty("ToolboxHasMultiLingualSupport", gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport, false, includeNonInitialized);
+         AddObjectProperty("ToolboxHasMultiLingualSupport_N", gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_N, false, includeNonInitialized);
+         AddObjectProperty("ToolboxSupportedLanguages", gxTv_SdtTrn_Location_Toolboxsupportedlanguages, false, includeNonInitialized);
+         AddObjectProperty("ToolboxSupportedLanguages_N", gxTv_SdtTrn_Location_Toolboxsupportedlanguages_N, false, includeNonInitialized);
          if ( includeState )
          {
             AddObjectProperty("LocationImage_GXI", gxTv_SdtTrn_Location_Locationimage_gxi, false, includeNonInitialized);
@@ -329,6 +341,7 @@ namespace GeneXus.Programs {
             sNumToPad = StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Second( datetime_STZ)), 10, 0));
             sDateCnv += StringUtil.Substring( "00", 1, 2-StringUtil.Len( sNumToPad)) + sNumToPad;
             AddObjectProperty("ToolBoxLastUpdateTime_Z", sDateCnv, false, includeNonInitialized);
+            AddObjectProperty("ToolboxHasMultiLingualSupport_Z", gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_Z, false, includeNonInitialized);
             AddObjectProperty("LocationImage_GXI_Z", gxTv_SdtTrn_Location_Locationimage_gxi_Z, false, includeNonInitialized);
             AddObjectProperty("ReceptionImage_GXI_Z", gxTv_SdtTrn_Location_Receptionimage_gxi_Z, false, includeNonInitialized);
             AddObjectProperty("LocationId_N", gxTv_SdtTrn_Location_Locationid_N, false, includeNonInitialized);
@@ -345,6 +358,8 @@ namespace GeneXus.Programs {
             AddObjectProperty("LocationThemeId_N", gxTv_SdtTrn_Location_Locationthemeid_N, false, includeNonInitialized);
             AddObjectProperty("ToolBoxLastUpdateReceptionistId_N", gxTv_SdtTrn_Location_Toolboxlastupdatereceptionistid_N, false, includeNonInitialized);
             AddObjectProperty("ToolBoxLastUpdateTime_N", gxTv_SdtTrn_Location_Toolboxlastupdatetime_N, false, includeNonInitialized);
+            AddObjectProperty("ToolboxHasMultiLingualSupport_N", gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_N, false, includeNonInitialized);
+            AddObjectProperty("ToolboxSupportedLanguages_N", gxTv_SdtTrn_Location_Toolboxsupportedlanguages_N, false, includeNonInitialized);
             AddObjectProperty("LocationImage_GXI_N", gxTv_SdtTrn_Location_Locationimage_gxi_N, false, includeNonInitialized);
             AddObjectProperty("ReceptionImage_GXI_N", gxTv_SdtTrn_Location_Receptionimage_gxi_N, false, includeNonInitialized);
          }
@@ -527,6 +542,18 @@ namespace GeneXus.Programs {
             sdtIsNull = 0;
             gxTv_SdtTrn_Location_Toolboxlastupdatetime = sdt.gxTv_SdtTrn_Location_Toolboxlastupdatetime ;
          }
+         if ( sdt.IsDirty("ToolboxHasMultiLingualSupport") )
+         {
+            gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_N = (short)(sdt.gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_N);
+            sdtIsNull = 0;
+            gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport = sdt.gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport ;
+         }
+         if ( sdt.IsDirty("ToolboxSupportedLanguages") )
+         {
+            gxTv_SdtTrn_Location_Toolboxsupportedlanguages_N = (short)(sdt.gxTv_SdtTrn_Location_Toolboxsupportedlanguages_N);
+            sdtIsNull = 0;
+            gxTv_SdtTrn_Location_Toolboxsupportedlanguages = sdt.gxTv_SdtTrn_Location_Toolboxsupportedlanguages ;
+         }
          return  ;
       }
 
@@ -568,6 +595,7 @@ namespace GeneXus.Programs {
                this.gxTv_SdtTrn_Location_Locationthemeid_Z_SetNull( );
                this.gxTv_SdtTrn_Location_Toolboxlastupdatereceptionistid_Z_SetNull( );
                this.gxTv_SdtTrn_Location_Toolboxlastupdatetime_Z_SetNull( );
+               this.gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_Z_SetNull( );
                this.gxTv_SdtTrn_Location_Locationimage_gxi_Z_SetNull( );
                this.gxTv_SdtTrn_Location_Receptionimage_gxi_Z_SetNull( );
             }
@@ -615,6 +643,7 @@ namespace GeneXus.Programs {
                this.gxTv_SdtTrn_Location_Locationthemeid_Z_SetNull( );
                this.gxTv_SdtTrn_Location_Toolboxlastupdatereceptionistid_Z_SetNull( );
                this.gxTv_SdtTrn_Location_Toolboxlastupdatetime_Z_SetNull( );
+               this.gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_Z_SetNull( );
                this.gxTv_SdtTrn_Location_Locationimage_gxi_Z_SetNull( );
                this.gxTv_SdtTrn_Location_Receptionimage_gxi_Z_SetNull( );
             }
@@ -1320,6 +1349,66 @@ namespace GeneXus.Programs {
       public bool gxTv_SdtTrn_Location_Toolboxlastupdatetime_IsNull( )
       {
          return (gxTv_SdtTrn_Location_Toolboxlastupdatetime_N==1) ;
+      }
+
+      [  SoapElement( ElementName = "ToolboxHasMultiLingualSupport" )]
+      [  XmlElement( ElementName = "ToolboxHasMultiLingualSupport"   )]
+      public bool gxTpr_Toolboxhasmultilingualsupport
+      {
+         get {
+            return gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport ;
+         }
+
+         set {
+            gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_N = 0;
+            sdtIsNull = 0;
+            gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport = value;
+            SetDirty("Toolboxhasmultilingualsupport");
+         }
+
+      }
+
+      public void gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_SetNull( )
+      {
+         gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_N = 1;
+         gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport = false;
+         SetDirty("Toolboxhasmultilingualsupport");
+         return  ;
+      }
+
+      public bool gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_IsNull( )
+      {
+         return (gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_N==1) ;
+      }
+
+      [  SoapElement( ElementName = "ToolboxSupportedLanguages" )]
+      [  XmlElement( ElementName = "ToolboxSupportedLanguages"   )]
+      public string gxTpr_Toolboxsupportedlanguages
+      {
+         get {
+            return gxTv_SdtTrn_Location_Toolboxsupportedlanguages ;
+         }
+
+         set {
+            gxTv_SdtTrn_Location_Toolboxsupportedlanguages_N = 0;
+            sdtIsNull = 0;
+            gxTv_SdtTrn_Location_Toolboxsupportedlanguages = value;
+            SetDirty("Toolboxsupportedlanguages");
+         }
+
+      }
+
+      public void gxTv_SdtTrn_Location_Toolboxsupportedlanguages_SetNull( )
+      {
+         gxTv_SdtTrn_Location_Toolboxsupportedlanguages_N = 1;
+         gxTv_SdtTrn_Location_Toolboxsupportedlanguages = "";
+         SetDirty("Toolboxsupportedlanguages");
+         return  ;
+      }
+
+      public bool gxTv_SdtTrn_Location_Toolboxsupportedlanguages_IsNull( )
+      {
+         return (gxTv_SdtTrn_Location_Toolboxsupportedlanguages_N==1) ;
       }
 
       [  SoapElement( ElementName = "Mode" )]
@@ -2097,6 +2186,34 @@ namespace GeneXus.Programs {
          return false ;
       }
 
+      [  SoapElement( ElementName = "ToolboxHasMultiLingualSupport_Z" )]
+      [  XmlElement( ElementName = "ToolboxHasMultiLingualSupport_Z"   )]
+      public bool gxTpr_Toolboxhasmultilingualsupport_Z
+      {
+         get {
+            return gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_Z ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_Z = value;
+            SetDirty("Toolboxhasmultilingualsupport_Z");
+         }
+
+      }
+
+      public void gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_Z_SetNull( )
+      {
+         gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_Z = false;
+         SetDirty("Toolboxhasmultilingualsupport_Z");
+         return  ;
+      }
+
+      public bool gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_Z_IsNull( )
+      {
+         return false ;
+      }
+
       [  SoapElement( ElementName = "LocationImage_GXI_Z" )]
       [  XmlElement( ElementName = "LocationImage_GXI_Z"   )]
       public string gxTpr_Locationimage_gxi_Z
@@ -2545,6 +2662,62 @@ namespace GeneXus.Programs {
          return false ;
       }
 
+      [  SoapElement( ElementName = "ToolboxHasMultiLingualSupport_N" )]
+      [  XmlElement( ElementName = "ToolboxHasMultiLingualSupport_N"   )]
+      public short gxTpr_Toolboxhasmultilingualsupport_N
+      {
+         get {
+            return gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_N ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_N = value;
+            SetDirty("Toolboxhasmultilingualsupport_N");
+         }
+
+      }
+
+      public void gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_N_SetNull( )
+      {
+         gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_N = 0;
+         SetDirty("Toolboxhasmultilingualsupport_N");
+         return  ;
+      }
+
+      public bool gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_N_IsNull( )
+      {
+         return false ;
+      }
+
+      [  SoapElement( ElementName = "ToolboxSupportedLanguages_N" )]
+      [  XmlElement( ElementName = "ToolboxSupportedLanguages_N"   )]
+      public short gxTpr_Toolboxsupportedlanguages_N
+      {
+         get {
+            return gxTv_SdtTrn_Location_Toolboxsupportedlanguages_N ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtTrn_Location_Toolboxsupportedlanguages_N = value;
+            SetDirty("Toolboxsupportedlanguages_N");
+         }
+
+      }
+
+      public void gxTv_SdtTrn_Location_Toolboxsupportedlanguages_N_SetNull( )
+      {
+         gxTv_SdtTrn_Location_Toolboxsupportedlanguages_N = 0;
+         SetDirty("Toolboxsupportedlanguages_N");
+         return  ;
+      }
+
+      public bool gxTv_SdtTrn_Location_Toolboxsupportedlanguages_N_IsNull( )
+      {
+         return false ;
+      }
+
       [  SoapElement( ElementName = "LocationImage_GXI_N" )]
       [  XmlElement( ElementName = "LocationImage_GXI_N"   )]
       public short gxTpr_Locationimage_gxi_N
@@ -2650,6 +2823,8 @@ namespace GeneXus.Programs {
          gxTv_SdtTrn_Location_Locationthemeid = Guid.Empty;
          gxTv_SdtTrn_Location_Toolboxlastupdatereceptionistid = Guid.Empty;
          gxTv_SdtTrn_Location_Toolboxlastupdatetime = (DateTime)(DateTime.MinValue);
+         gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport = true;
+         gxTv_SdtTrn_Location_Toolboxsupportedlanguages = context.GetMessage( "[{\"value\": \"en\",\"label\": \"English\"},{\"value\": \"nl\",\"label\": \"Nederlands\"}]", "");
          gxTv_SdtTrn_Location_Mode = "";
          gxTv_SdtTrn_Location_Locationid_Z = Guid.Empty;
          gxTv_SdtTrn_Location_Organisationid_Z = Guid.Empty;
@@ -2707,6 +2882,8 @@ namespace GeneXus.Programs {
       private short gxTv_SdtTrn_Location_Locationthemeid_N ;
       private short gxTv_SdtTrn_Location_Toolboxlastupdatereceptionistid_N ;
       private short gxTv_SdtTrn_Location_Toolboxlastupdatetime_N ;
+      private short gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_N ;
+      private short gxTv_SdtTrn_Location_Toolboxsupportedlanguages_N ;
       private short gxTv_SdtTrn_Location_Locationimage_gxi_N ;
       private short gxTv_SdtTrn_Location_Receptionimage_gxi_N ;
       private string gxTv_SdtTrn_Location_Locationphone ;
@@ -2721,13 +2898,16 @@ namespace GeneXus.Programs {
       private bool gxTv_SdtTrn_Location_Locationhasmyservices ;
       private bool gxTv_SdtTrn_Location_Locationhasmyliving ;
       private bool gxTv_SdtTrn_Location_Locationhasownbrand ;
+      private bool gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport ;
       private bool gxTv_SdtTrn_Location_Locationhasmycare_Z ;
       private bool gxTv_SdtTrn_Location_Locationhasmyservices_Z ;
       private bool gxTv_SdtTrn_Location_Locationhasmyliving_Z ;
       private bool gxTv_SdtTrn_Location_Locationhasownbrand_Z ;
+      private bool gxTv_SdtTrn_Location_Toolboxhasmultilingualsupport_Z ;
       private string gxTv_SdtTrn_Location_Locationdescription ;
       private string gxTv_SdtTrn_Location_Locationbrandtheme ;
       private string gxTv_SdtTrn_Location_Locationctatheme ;
+      private string gxTv_SdtTrn_Location_Toolboxsupportedlanguages ;
       private string gxTv_SdtTrn_Location_Locationname ;
       private string gxTv_SdtTrn_Location_Locationimage_gxi ;
       private string gxTv_SdtTrn_Location_Locationcountry ;
@@ -3204,6 +3384,33 @@ namespace GeneXus.Programs {
 
       }
 
+      [DataMember( Name = "ToolboxHasMultiLingualSupport" , Order = 30 )]
+      [GxSeudo()]
+      public bool gxTpr_Toolboxhasmultilingualsupport
+      {
+         get {
+            return sdt.gxTpr_Toolboxhasmultilingualsupport ;
+         }
+
+         set {
+            sdt.gxTpr_Toolboxhasmultilingualsupport = value;
+         }
+
+      }
+
+      [DataMember( Name = "ToolboxSupportedLanguages" , Order = 31 )]
+      public string gxTpr_Toolboxsupportedlanguages
+      {
+         get {
+            return sdt.gxTpr_Toolboxsupportedlanguages ;
+         }
+
+         set {
+            sdt.gxTpr_Toolboxsupportedlanguages = value;
+         }
+
+      }
+
       public SdtTrn_Location sdt
       {
          get {
@@ -3225,7 +3432,7 @@ namespace GeneXus.Programs {
          }
       }
 
-      [DataMember( Name = "gx_md5_hash", Order = 30 )]
+      [DataMember( Name = "gx_md5_hash", Order = 32 )]
       public string Hash
       {
          get {

@@ -81,4 +81,7 @@
   <Object name="DP_ResidentAccessGroups" id="35" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="DP_ResidentAccessGroups" xmlns="qv">
     <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
   </Object>
+  <Object name="DP_ToolboxLanguages" id="36" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="DP_ToolboxLanguages" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
 </Objects>

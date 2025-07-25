@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: "API_ResidentService"
   description: "API Services"
-  version: "20250725041221"
+  version: "20250725055749"
 servers:
   - url: http://localhost:8082/Comforta_version2DevelopmentNETPostgreSQL/api
 paths:
@@ -4299,6 +4299,12 @@ components:
           description: "Tool Box Last Update Time"
           type: "string"
           format: "date-time"
+        ToolboxHasMultiLingualSupport:
+          description: "Has Multilingual Support"
+          type: "boolean"
+        ToolboxSupportedLanguages:
+          description: "Toolbox Supported Languages"
+          type: "string"
 
 
 

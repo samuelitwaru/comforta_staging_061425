@@ -77,6 +77,7 @@
  	<Compile Include="$(WebDirectory)\type_SdtSDT_InfoPageTranslation.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_InfoTile_SDT_InfoTileItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_InfoTile_SDT_InfoTileItem_Action.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtSDT_LanguageOptions_SDT_LanguageOptionsItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_LinkPage.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_Location.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_LocationDynamicForm_SDT_LocationDynamicFormItem.cs" />

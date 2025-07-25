@@ -237,9 +237,12 @@ namespace GeneXus.Programs {
                   while ( AV81GXV5 <= AV63Column.gxTpr_Tiles.Count )
                   {
                      AV24SDT_InfoTileItem = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV63Column.gxTpr_Tiles.Item(AV81GXV5));
-                     GXt_char1 = "";
-                     new prc_translatelanguage(context ).execute(  AV57LanguageFrom,  AV58languageTo,  AV24SDT_InfoTileItem.gxTpr_Text, out  GXt_char1) ;
-                     AV24SDT_InfoTileItem.gxTpr_Text = GXt_char1;
+                     if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV24SDT_InfoTileItem.gxTpr_Text)) )
+                     {
+                        GXt_char1 = "";
+                        new prc_translatelanguage(context ).execute(  AV57LanguageFrom,  AV58languageTo,  AV24SDT_InfoTileItem.gxTpr_Text, out  GXt_char1) ;
+                        AV24SDT_InfoTileItem.gxTpr_Text = GXt_char1;
+                     }
                      AV81GXV5 = (int)(AV81GXV5+1);
                   }
                   AV80GXV4 = (int)(AV80GXV4+1);
@@ -498,9 +501,16 @@ namespace GeneXus.Programs {
                                                                   AV62SDT_InfoTileItemTranslate.gxTpr_Top = AV24SDT_InfoTileItem.gxTpr_Top;
                                                                   if ( ! ( StringUtil.StrCmp(AV28SDT_InfoTileItemOld.gxTpr_Text, AV24SDT_InfoTileItem.gxTpr_Text) == 0 ) )
                                                                   {
-                                                                     GXt_char1 = "";
-                                                                     new prc_translatelanguage(context ).execute(  AV57LanguageFrom,  AV58languageTo,  AV24SDT_InfoTileItem.gxTpr_Text, out  GXt_char1) ;
-                                                                     AV62SDT_InfoTileItemTranslate.gxTpr_Text = GXt_char1;
+                                                                     if ( String.IsNullOrEmpty(StringUtil.RTrim( AV24SDT_InfoTileItem.gxTpr_Text)) )
+                                                                     {
+                                                                        AV62SDT_InfoTileItemTranslate.gxTpr_Text = AV24SDT_InfoTileItem.gxTpr_Text;
+                                                                     }
+                                                                     else
+                                                                     {
+                                                                        GXt_char1 = "";
+                                                                        new prc_translatelanguage(context ).execute(  AV57LanguageFrom,  AV58languageTo,  AV24SDT_InfoTileItem.gxTpr_Text, out  GXt_char1) ;
+                                                                        AV62SDT_InfoTileItemTranslate.gxTpr_Text = GXt_char1;
+                                                                     }
                                                                   }
                                                                }
                                                                AV105GXV29 = (int)(AV105GXV29+1);
@@ -520,9 +530,12 @@ namespace GeneXus.Programs {
                                                    AV74TranslateColumn = ((SdtSDT_InfoContent_InfoContentItem_ColumnsItem)AV61SDT_InfoContentItemTranslate.gxTpr_Columns.Item(AV106GXV30));
                                                    if ( StringUtil.StrCmp(AV74TranslateColumn.gxTpr_Colid, AV63Column.gxTpr_Colid) == 0 )
                                                    {
-                                                      GXt_char1 = "";
-                                                      new prc_translatelanguage(context ).execute(  AV57LanguageFrom,  AV58languageTo,  AV24SDT_InfoTileItem.gxTpr_Text, out  GXt_char1) ;
-                                                      AV24SDT_InfoTileItem.gxTpr_Text = GXt_char1;
+                                                      if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV24SDT_InfoTileItem.gxTpr_Text)) )
+                                                      {
+                                                         GXt_char1 = "";
+                                                         new prc_translatelanguage(context ).execute(  AV57LanguageFrom,  AV58languageTo,  AV24SDT_InfoTileItem.gxTpr_Text, out  GXt_char1) ;
+                                                         AV24SDT_InfoTileItem.gxTpr_Text = GXt_char1;
+                                                      }
                                                       AV74TranslateColumn.gxTpr_Tiles.Add(AV24SDT_InfoTileItem, 0);
                                                    }
                                                    AV106GXV30 = (int)(AV106GXV30+1);
@@ -607,9 +620,12 @@ namespace GeneXus.Programs {
                                     while ( AV114GXV38 <= AV63Column.gxTpr_Tiles.Count )
                                     {
                                        AV24SDT_InfoTileItem = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV63Column.gxTpr_Tiles.Item(AV114GXV38));
-                                       GXt_char1 = "";
-                                       new prc_translatelanguage(context ).execute(  AV57LanguageFrom,  AV58languageTo,  AV24SDT_InfoTileItem.gxTpr_Text, out  GXt_char1) ;
-                                       AV24SDT_InfoTileItem.gxTpr_Text = GXt_char1;
+                                       if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV24SDT_InfoTileItem.gxTpr_Text)) )
+                                       {
+                                          GXt_char1 = "";
+                                          new prc_translatelanguage(context ).execute(  AV57LanguageFrom,  AV58languageTo,  AV24SDT_InfoTileItem.gxTpr_Text, out  GXt_char1) ;
+                                          AV24SDT_InfoTileItem.gxTpr_Text = GXt_char1;
+                                       }
                                        AV114GXV38 = (int)(AV114GXV38+1);
                                     }
                                     AV61SDT_InfoContentItemTranslate.gxTpr_Columns.Add(AV63Column, 0);
@@ -718,9 +734,12 @@ namespace GeneXus.Programs {
                      while ( AV121GXV45 <= AV63Column.gxTpr_Tiles.Count )
                      {
                         AV24SDT_InfoTileItem = ((SdtSDT_InfoTile_SDT_InfoTileItem)AV63Column.gxTpr_Tiles.Item(AV121GXV45));
-                        GXt_char1 = "";
-                        new prc_translatelanguage(context ).execute(  AV57LanguageFrom,  AV58languageTo,  AV24SDT_InfoTileItem.gxTpr_Text, out  GXt_char1) ;
-                        AV24SDT_InfoTileItem.gxTpr_Text = GXt_char1;
+                        if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV24SDT_InfoTileItem.gxTpr_Text)) )
+                        {
+                           GXt_char1 = "";
+                           new prc_translatelanguage(context ).execute(  AV57LanguageFrom,  AV58languageTo,  AV24SDT_InfoTileItem.gxTpr_Text, out  GXt_char1) ;
+                           AV24SDT_InfoTileItem.gxTpr_Text = GXt_char1;
+                        }
                         AV121GXV45 = (int)(AV121GXV45+1);
                      }
                      AV120GXV44 = (int)(AV120GXV44+1);

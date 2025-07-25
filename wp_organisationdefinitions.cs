@@ -872,12 +872,19 @@ namespace GeneXus.Programs {
                                  dynload_actions( ) ;
                               }
                            }
+                           else if ( StringUtil.StrCmp(sEvt, "REFRESH") == 0 )
+                           {
+                              context.wbHandled = 1;
+                              dynload_actions( ) ;
+                              /* Execute user event: Refresh */
+                              E13BR2 ();
+                           }
                            else if ( StringUtil.StrCmp(sEvt, "LOAD") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               /* Execute user event: Load */
-                              E13BR2 ();
+                              E14BR2 ();
                               /* No code required for Cancel button. It is implemented as the Reset button. */
                            }
                            else if ( StringUtil.StrCmp(sEvt, "LSCR") == 0 )
@@ -982,13 +989,15 @@ namespace GeneXus.Programs {
       {
          initialize_formulas( ) ;
          clear_multi_value_controls( ) ;
+         /* Execute user event: Refresh */
+         E13BR2 ();
          gxdyncontrolsrefreshing = true;
          fix_multi_value_controls( ) ;
          gxdyncontrolsrefreshing = false;
          if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
          {
             /* Execute user event: Load */
-            E13BR2 ();
+            E14BR2 ();
             WBBR0( ) ;
          }
       }
@@ -1149,6 +1158,7 @@ namespace GeneXus.Programs {
          if ( AV16Trn_OrganisationSetting.Update() )
          {
             context.CommitDataStores("wp_organisationdefinitions",pr_default);
+            AV40websession.Set(context.GetMessage( "NotificationMessage", ""), context.GetMessage( "Updated successfully", ""));
             this.executeExternalObjectMethod("", false, "gx.extensions.web.interop", "runJS", new Object[] {"window.location.reload();"}, false);
          }
          else
@@ -1164,16 +1174,28 @@ namespace GeneXus.Programs {
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV18ErrorMessages", AV18ErrorMessages);
       }
 
+      protected void E13BR2( )
+      {
+         /* Refresh Routine */
+         returnInSub = false;
+         AV39successmsg = AV40websession.Get(context.GetMessage( "NotificationMessage", ""));
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV39successmsg)) )
+         {
+            GX_msglist.addItem(new WorkWithPlus.workwithplus_web.dvmessagegetbasicnotificationmsg(context).executeUdp(  "Success",  AV39successmsg,  "success",  "",  "true",  ""));
+            AV40websession.Remove(context.GetMessage( "NotificationMessage", ""));
+         }
+      }
+
       protected void S122( )
       {
          /* 'DISPLAYMESSAGES' Routine */
          returnInSub = false;
-         AV40GXV1 = 1;
-         while ( AV40GXV1 <= AV18ErrorMessages.Count )
+         AV42GXV1 = 1;
+         while ( AV42GXV1 <= AV18ErrorMessages.Count )
          {
-            AV19Message = ((GeneXus.Utils.SdtMessages_Message)AV18ErrorMessages.Item(AV40GXV1));
+            AV19Message = ((GeneXus.Utils.SdtMessages_Message)AV18ErrorMessages.Item(AV42GXV1));
             GX_msglist.addItem(new WorkWithPlus.workwithplus_web.dvmessagegetbasicnotificationmsg(context).executeUdp(  "Error",  AV19Message.gxTpr_Description,  "error",  "",  "true",  ""));
-            AV40GXV1 = (int)(AV40GXV1+1);
+            AV42GXV1 = (int)(AV42GXV1+1);
          }
          AV18ErrorMessages.Clear();
       }
@@ -1204,7 +1226,7 @@ namespace GeneXus.Programs {
       {
       }
 
-      protected void E13BR2( )
+      protected void E14BR2( )
       {
          /* Load Routine */
          returnInSub = false;
@@ -1295,7 +1317,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202572132111", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257258564564", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1311,7 +1333,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wp_organisationdefinitions.js", "?202572132111", false, true);
+         context.AddJavascriptSource("wp_organisationdefinitions.js", "?20257258564564", false, true);
          context.AddJavascriptSource("web-extension/gx-web-extensions.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/HistoryManager.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/json2005.js", "", false, true);
@@ -1492,6 +1514,8 @@ namespace GeneXus.Programs {
          H00BR2_A100OrganisationSettingid = new Guid[] {Guid.Empty} ;
          A11OrganisationId = Guid.Empty;
          A100OrganisationSettingid = Guid.Empty;
+         AV40websession = context.GetSession();
+         AV39successmsg = "";
          AV19Message = new GeneXus.Utils.SdtMessages_Message(context);
          sStyleString = "";
          lblTermlabel2_Jsonclick = "";
@@ -1534,7 +1558,7 @@ namespace GeneXus.Programs {
       private int edtavReceptionistpluraleng_Enabled ;
       private int edtavResidentsingulareng_Enabled ;
       private int edtavResidentpluraleng_Enabled ;
-      private int AV40GXV1 ;
+      private int AV42GXV1 ;
       private int idxLst ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
@@ -1644,9 +1668,11 @@ namespace GeneXus.Programs {
       private string AV34ReceptionistPluralEng ;
       private string AV31ResidentSingularEng ;
       private string AV32ResidentPluralEng ;
+      private string AV39successmsg ;
       private Guid A11OrganisationId ;
       private Guid A100OrganisationSettingid ;
       private GXUserControl ucGxuitabspanel_tabs ;
+      private IGxSession AV40websession ;
       private GXWebForm Form ;
       private IGxDataStore dsDataStore1 ;
       private IGxDataStore dsGAM ;

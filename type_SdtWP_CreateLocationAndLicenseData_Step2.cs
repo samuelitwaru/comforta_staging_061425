@@ -68,6 +68,13 @@ namespace GeneXus.Programs
 
 			AddObjectProperty("LocationHasOwnBrand", gxTpr_Locationhasownbrand, false);
 
+
+			AddObjectProperty("LocationSupportsTranslation", gxTpr_Locationsupportstranslation, false);
+
+			if (gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Languageoptions != null)
+			{
+				AddObjectProperty("LanguageOptions", gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Languageoptions, false);
+			}
 			return;
 		}
 		#endregion
@@ -137,6 +144,75 @@ namespace GeneXus.Programs
 
 
 
+
+		[SoapElement(ElementName="LocationSupportsTranslation")]
+		[XmlElement(ElementName="LocationSupportsTranslation")]
+		public bool gxTpr_Locationsupportstranslation
+		{
+			get {
+				return gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Locationsupportstranslation; 
+			}
+			set {
+				gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Locationsupportstranslation = value;
+				SetDirty("Locationsupportstranslation");
+			}
+		}
+
+
+
+
+		[SoapElement(ElementName="LanguageOptions" )]
+		[XmlArray(ElementName="LanguageOptions"  )]
+		[XmlArrayItemAttribute(ElementName="Item" , IsNullable=false )]
+		public GxSimpleCollection<string> gxTpr_Languageoptions_GxSimpleCollection
+		{
+			get {
+				if ( gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Languageoptions == null )
+				{
+					gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Languageoptions = new GxSimpleCollection<string>( );
+				}
+				return gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Languageoptions;
+			}
+			set {
+				gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Languageoptions_N = false;
+				gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Languageoptions = value;
+			}
+		}
+
+		[XmlIgnore]
+		public GxSimpleCollection<string> gxTpr_Languageoptions
+		{
+			get {
+				if ( gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Languageoptions == null )
+				{
+					gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Languageoptions = new GxSimpleCollection<string>();
+				}
+				gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Languageoptions_N = false;
+				return gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Languageoptions ;
+			}
+			set {
+				gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Languageoptions_N = false;
+				gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Languageoptions = value;
+				SetDirty("Languageoptions");
+			}
+		}
+
+		public void gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Languageoptions_SetNull()
+		{
+			gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Languageoptions_N = true;
+			gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Languageoptions = null;
+		}
+
+		public bool gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Languageoptions_IsNull()
+		{
+			return gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Languageoptions == null;
+		}
+		public bool ShouldSerializegxTpr_Languageoptions_GxSimpleCollection_Json()
+		{
+			return gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Languageoptions != null && gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Languageoptions.Count > 0;
+
+		}
+
 		public override bool ShouldSerializeSdtJson()
 		{
 			return true;
@@ -162,6 +238,10 @@ namespace GeneXus.Programs
 			gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Locationhasmyliving = false;
 			gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Locationhasmyservices = false;
 			gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Locationhasownbrand = false;
+			gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Locationsupportstranslation = true;
+
+			gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Languageoptions_N = true;
+
 			return  ;
 		}
 
@@ -182,6 +262,11 @@ namespace GeneXus.Programs
 
 		protected bool gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Locationhasownbrand;
 		 
+
+		protected bool gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Locationsupportstranslation;
+		 
+		protected bool gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Languageoptions_N;
+		protected GxSimpleCollection<string> gxTv_SdtWP_CreateLocationAndLicenseData_Step2_Languageoptions = null;  
 
 
 		#endregion
@@ -245,6 +330,33 @@ namespace GeneXus.Programs
 			}
 			set { 
 				sdt.gxTpr_Locationhasownbrand = value;
+			}
+		}
+
+		[DataMember(Name="LocationSupportsTranslation", Order=4)]
+		public bool gxTpr_Locationsupportstranslation
+		{
+			get { 
+				return sdt.gxTpr_Locationsupportstranslation;
+
+			}
+			set { 
+				sdt.gxTpr_Locationsupportstranslation = value;
+			}
+		}
+
+		[DataMember(Name="LanguageOptions", Order=5, EmitDefaultValue=false)]
+		public  GxSimpleCollection<string> gxTpr_Languageoptions
+		{
+			get { 
+				if (sdt.ShouldSerializegxTpr_Languageoptions_GxSimpleCollection_Json())
+					return sdt.gxTpr_Languageoptions;
+				else
+					return null;
+
+			}
+			set { 
+				sdt.gxTpr_Languageoptions = value ;
 			}
 		}
 
