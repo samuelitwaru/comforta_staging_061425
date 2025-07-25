@@ -310,7 +310,7 @@ namespace GeneXus.Programs
 		public void initialize( )
 		{
 			gxTv_SdtSDT_Location_Locationname = "";
-			gxTv_SdtSDT_Location_Locationcountry = context.GetMessage( "Netherlands", "");
+			gxTv_SdtSDT_Location_Locationcountry = "Netherlands";
 			gxTv_SdtSDT_Location_Locationcity = "";
 			gxTv_SdtSDT_Location_Locationzipcode = "";
 			gxTv_SdtSDT_Location_Locationaddressline1 = "";
