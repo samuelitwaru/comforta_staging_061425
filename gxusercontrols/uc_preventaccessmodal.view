@@ -42,14 +42,14 @@
 	
 	<div class="pv-modal">
 		<div class="popup-header">
-			<span>Access Blocked</span>
+			<span>{{gxTpr_PAM_ModalTitle}}{{PAM_ModalTitle}}</span>
 		</div>
 		<hr style="margin:0px"/>
 		<div class="popup-body">
-			<p>The App builder is being used by another receptionist.</p>
+			<p>{{gxTpr_PAM_ModalMessage}}{{PAM_ModalMessage}}</p>
 			<div class="popup-footer">
-				<a target="_blank" style="text-decoration:none" href="{{gxTpr_PreviewLink}}{{PreviewLink}}" class="tb-btn tb-btn-primary" id='pv-button-review'>Review Only</a>
-				<button class="tb-btn tb-btn-outline" id='pv-button'>Close</button>
+				<a target="_blank" style="text-decoration:none" href="{{gxTpr_PreviewLink}}{{PreviewLink}}" class="tb-btn tb-btn-primary" id='pv-button-review'>{{gxTpr_PAM_ModalButtonReview}}{{PAM_ModalButtonReview}}</a>
+				<button class="tb-btn tb-btn-outline" id='pv-button'>{{gxTpr_PAM_ModalButtonClose}}{{PAM_ModalButtonClose}}</button>
 			</div>
 		</div>
 	</div>

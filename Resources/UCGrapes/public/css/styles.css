@@ -3788,7 +3788,7 @@ input[type="range"]::-webkit-slider-thumb {
   position: absolute;
   left: 18px;
   right: 18px;
-  top: 700px !important;
+  top: 700px;
 }
 
 /* translationf frame */

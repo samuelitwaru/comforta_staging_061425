@@ -1511,3 +1511,7 @@ Organisation type deleted successfully=Organisatietype succesvol verwijderd
 Select Group Residents=Selecteer groepsbewoners
 Group Name=Groepsnaam
 Group Access Rights=Groepstoegangsrechten
+PAM_ModalTitle=Toegang Geblokkeerd
+PAM_ModalMessage=Toegang geblokkeerd wanneer twee receptionisten dezelfde locatie in de app builder proberen te benaderen.
+PAM_ModalButtonReview=Alleen bekijken
+PAM_ModalButtonClose=Sluiten

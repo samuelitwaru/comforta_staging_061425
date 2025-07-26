@@ -380,6 +380,10 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "APPTOOLBOX1_Current_theme", StringUtil.RTrim( Apptoolbox1_Current_theme));
          GxWebStd.gx_hidden_field( context, "APPTOOLBOX1_Organisationlogo", StringUtil.RTrim( Apptoolbox1_Organisationlogo));
          GxWebStd.gx_hidden_field( context, "PREVENTACCESSMODAL_Previewlink", StringUtil.RTrim( Preventaccessmodal_Previewlink));
+         GxWebStd.gx_hidden_field( context, "PREVENTACCESSMODAL_Pam_modaltitle", StringUtil.RTrim( Preventaccessmodal_Pam_modaltitle));
+         GxWebStd.gx_hidden_field( context, "PREVENTACCESSMODAL_Pam_modalmessage", StringUtil.RTrim( Preventaccessmodal_Pam_modalmessage));
+         GxWebStd.gx_hidden_field( context, "PREVENTACCESSMODAL_Pam_modalbuttonreview", StringUtil.RTrim( Preventaccessmodal_Pam_modalbuttonreview));
+         GxWebStd.gx_hidden_field( context, "PREVENTACCESSMODAL_Pam_modalbuttonclose", StringUtil.RTrim( Preventaccessmodal_Pam_modalbuttonclose));
          GxWebStd.gx_hidden_field( context, "PREVENTACCESSMODAL_Visible", StringUtil.BoolToStr( Preventaccessmodal_Visible));
       }
 
@@ -833,6 +837,10 @@ namespace GeneXus.Programs {
             Apptoolbox1_Current_theme = cgiGet( "APPTOOLBOX1_Current_theme");
             Apptoolbox1_Organisationlogo = cgiGet( "APPTOOLBOX1_Organisationlogo");
             Preventaccessmodal_Previewlink = cgiGet( "PREVENTACCESSMODAL_Previewlink");
+            Preventaccessmodal_Pam_modaltitle = cgiGet( "PREVENTACCESSMODAL_Pam_modaltitle");
+            Preventaccessmodal_Pam_modalmessage = cgiGet( "PREVENTACCESSMODAL_Pam_modalmessage");
+            Preventaccessmodal_Pam_modalbuttonreview = cgiGet( "PREVENTACCESSMODAL_Pam_modalbuttonreview");
+            Preventaccessmodal_Pam_modalbuttonclose = cgiGet( "PREVENTACCESSMODAL_Pam_modalbuttonclose");
             Preventaccessmodal_Visible = StringUtil.StrToBool( cgiGet( "PREVENTACCESSMODAL_Visible"));
             /* Read variables values. */
             /* Read subfile selected row values. */
@@ -856,6 +864,14 @@ namespace GeneXus.Programs {
       {
          /* Start Routine */
          returnInSub = false;
+         Preventaccessmodal_Pam_modaltitle = context.GetMessage( "PAM_ModalTitle", "");
+         ucPreventaccessmodal.SendProperty(context, "", false, Preventaccessmodal_Internalname, "PAM_ModalTitle", Preventaccessmodal_Pam_modaltitle);
+         Preventaccessmodal_Pam_modalmessage = context.GetMessage( "PAM_ModalMessage", "");
+         ucPreventaccessmodal.SendProperty(context, "", false, Preventaccessmodal_Internalname, "PAM_ModalMessage", Preventaccessmodal_Pam_modalmessage);
+         Preventaccessmodal_Pam_modalbuttonreview = context.GetMessage( "PAM_ModalButtonReview", "");
+         ucPreventaccessmodal.SendProperty(context, "", false, Preventaccessmodal_Internalname, "PAM_ModalButtonReview", Preventaccessmodal_Pam_modalbuttonreview);
+         Preventaccessmodal_Pam_modalbuttonclose = context.GetMessage( "PAM_ModalButtonClose", "");
+         ucPreventaccessmodal.SendProperty(context, "", false, Preventaccessmodal_Internalname, "PAM_ModalButtonClose", Preventaccessmodal_Pam_modalbuttonclose);
          Preventaccessmodal_Visible = false;
          ucPreventaccessmodal.SendProperty(context, "", false, Preventaccessmodal_Internalname, "Visible", StringUtil.BoolToStr( Preventaccessmodal_Visible));
          GXt_boolean1 = AV61IsBusy;
@@ -1153,7 +1169,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257258563930", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257267381089", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1169,7 +1185,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wp_applicationdesign.js", "?20257258563932", false, true);
+         context.AddJavascriptSource("wp_applicationdesign.js", "?20257267381091", false, true);
          context.AddJavascriptSource("UserControls/UC_AppToolBox1Render.js", "", false, true);
          context.AddJavascriptSource("UserControls/UC_PreventAccessModalRender.js", "", false, true);
          /* End function include_jscripts */
@@ -1201,6 +1217,10 @@ namespace GeneXus.Programs {
          init_default_properties( ) ;
          divPreventaccessmodaltable_Visible = 1;
          Preventaccessmodal_Visible = Convert.ToBoolean( -1);
+         Preventaccessmodal_Pam_modalbuttonclose = "";
+         Preventaccessmodal_Pam_modalbuttonreview = "";
+         Preventaccessmodal_Pam_modalmessage = "";
+         Preventaccessmodal_Pam_modaltitle = "";
          Preventaccessmodal_Previewlink = "";
          Apptoolbox1_Organisationlogo = "&OrganisationLogo";
          Apptoolbox1_Current_theme = "";
@@ -1458,6 +1478,10 @@ namespace GeneXus.Programs {
       private string Apptoolbox1_Current_theme ;
       private string Apptoolbox1_Organisationlogo ;
       private string Preventaccessmodal_Previewlink ;
+      private string Preventaccessmodal_Pam_modaltitle ;
+      private string Preventaccessmodal_Pam_modalmessage ;
+      private string Preventaccessmodal_Pam_modalbuttonreview ;
+      private string Preventaccessmodal_Pam_modalbuttonclose ;
       private string GX_FocusControl ;
       private string sPrefix ;
       private string divLayoutmaintable_Internalname ;

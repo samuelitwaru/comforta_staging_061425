@@ -1264,7 +1264,7 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-8 gx-attribute", "start", "top", "", "", "div");
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 204,'',false,'',0)\"";
             /* ComboBox */
-            GxWebStd.gx_combobox_ctrl1( context, cmbavNetworkindividualrelationship, cmbavNetworkindividualrelationship_Internalname, StringUtil.RTrim( AV79NetworkIndividualRelationship), 1, cmbavNetworkindividualrelationship_Jsonclick, 0, "'"+""+"'"+",false,"+"'"+""+"'", "svchar", "", 1, cmbavNetworkindividualrelationship.Enabled, 0, 0, 0, "em", 0, "", "", "Attribute", "", "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,204);\"", "", true, 0, "HLP_WP_CreateResidentAndNetwork.htm");
+            GxWebStd.gx_combobox_ctrl1( context, cmbavNetworkindividualrelationship, cmbavNetworkindividualrelationship_Internalname, StringUtil.RTrim( AV79NetworkIndividualRelationship), 1, cmbavNetworkindividualrelationship_Jsonclick, 0, "'"+""+"'"+",false,"+"'"+""+"'", "svchar", "", 1, cmbavNetworkindividualrelationship.Enabled, 1, 0, 0, "em", 0, "", "", "Attribute", "", "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,204);\"", "", true, 0, "HLP_WP_CreateResidentAndNetwork.htm");
             cmbavNetworkindividualrelationship.CurrentValue = StringUtil.RTrim( AV79NetworkIndividualRelationship);
             AssignProp("", false, cmbavNetworkindividualrelationship_Internalname, "Values", (string)(cmbavNetworkindividualrelationship.ToJavascriptSource()), true);
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -2432,10 +2432,23 @@ namespace GeneXus.Programs {
             S212 ();
             if (returnInSub) return;
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV70ComboResidentCountry)) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV32ResidentCountry)) )
          {
-            AV70ComboResidentCountry = "Netherlands";
-            AssignAttri("", false, "AV70ComboResidentCountry", AV70ComboResidentCountry);
+            AV32ResidentCountry = AV84defaultCountry;
+            AssignAttri("", false, "AV32ResidentCountry", AV32ResidentCountry);
+            Combo_residentcountry_Selectedtext_set = AV84defaultCountry;
+            ucCombo_residentcountry.SendProperty(context, "", false, Combo_residentcountry_Internalname, "SelectedText_set", Combo_residentcountry_Selectedtext_set);
+            Combo_residentcountry_Selectedvalue_set = AV84defaultCountry;
+            ucCombo_residentcountry.SendProperty(context, "", false, Combo_residentcountry_Internalname, "SelectedValue_set", Combo_residentcountry_Selectedvalue_set);
+         }
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV10NetworkIndividualCountry)) )
+         {
+            AV10NetworkIndividualCountry = AV84defaultCountry;
+            AssignAttri("", false, "AV10NetworkIndividualCountry", AV10NetworkIndividualCountry);
+            Combo_networkindividualcountry_Selectedtext_set = AV84defaultCountry;
+            ucCombo_networkindividualcountry.SendProperty(context, "", false, Combo_networkindividualcountry_Internalname, "SelectedText_set", Combo_networkindividualcountry_Selectedtext_set);
+            Combo_networkindividualcountry_Selectedvalue_set = AV84defaultCountry;
+            ucCombo_networkindividualcountry.SendProperty(context, "", false, Combo_networkindividualcountry_Internalname, "SelectedValue_set", Combo_networkindividualcountry_Selectedvalue_set);
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV72ComboResidentPhoneCode)) )
          {
@@ -2622,13 +2635,13 @@ namespace GeneXus.Programs {
       {
          /* 'LOADCOMBONETWORKINDIVIDUALCOUNTRY' Routine */
          returnInSub = false;
-         AV92GXV2 = 1;
-         GXt_objcol_SdtSDT_Country_SDT_CountryItem3 = AV91GXV1;
+         AV93GXV2 = 1;
+         GXt_objcol_SdtSDT_Country_SDT_CountryItem3 = AV92GXV1;
          new dp_country(context ).execute( out  GXt_objcol_SdtSDT_Country_SDT_CountryItem3) ;
-         AV91GXV1 = GXt_objcol_SdtSDT_Country_SDT_CountryItem3;
-         while ( AV92GXV2 <= AV91GXV1.Count )
+         AV92GXV1 = GXt_objcol_SdtSDT_Country_SDT_CountryItem3;
+         while ( AV93GXV2 <= AV92GXV1.Count )
          {
-            AV56NetworkIndividualCountry_DPItem = ((SdtSDT_Country_SDT_CountryItem)AV91GXV1.Item(AV92GXV2));
+            AV56NetworkIndividualCountry_DPItem = ((SdtSDT_Country_SDT_CountryItem)AV92GXV1.Item(AV93GXV2));
             AV55Combo_DataItem = new WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item(context);
             AV55Combo_DataItem.gxTpr_Id = AV56NetworkIndividualCountry_DPItem.gxTpr_Countryname;
             AV52ComboTitles = (GxSimpleCollection<string>)(new GxSimpleCollection<string>());
@@ -2636,7 +2649,7 @@ namespace GeneXus.Programs {
             AV52ComboTitles.Add(AV56NetworkIndividualCountry_DPItem.gxTpr_Countryflag, 0);
             AV55Combo_DataItem.gxTpr_Title = AV52ComboTitles.ToJSonString(false);
             AV53NetworkIndividualCountry_Data.Add(AV55Combo_DataItem, 0);
-            AV92GXV2 = (int)(AV92GXV2+1);
+            AV93GXV2 = (int)(AV93GXV2+1);
          }
          AV53NetworkIndividualCountry_Data.Sort("Title");
          Combo_networkindividualcountry_Selectedvalue_set = AV10NetworkIndividualCountry;
@@ -2647,13 +2660,13 @@ namespace GeneXus.Programs {
       {
          /* 'LOADCOMBONETWORKINDIVIDUALHOMEPHONECODE' Routine */
          returnInSub = false;
-         AV94GXV4 = 1;
-         GXt_objcol_SdtSDT_Country_SDT_CountryItem3 = AV93GXV3;
+         AV95GXV4 = 1;
+         GXt_objcol_SdtSDT_Country_SDT_CountryItem3 = AV94GXV3;
          new dp_country(context ).execute( out  GXt_objcol_SdtSDT_Country_SDT_CountryItem3) ;
-         AV93GXV3 = GXt_objcol_SdtSDT_Country_SDT_CountryItem3;
-         while ( AV94GXV4 <= AV93GXV3.Count )
+         AV94GXV3 = GXt_objcol_SdtSDT_Country_SDT_CountryItem3;
+         while ( AV95GXV4 <= AV94GXV3.Count )
          {
-            AV58NetworkIndividualHomePhoneCode_DPItem = ((SdtSDT_Country_SDT_CountryItem)AV93GXV3.Item(AV94GXV4));
+            AV58NetworkIndividualHomePhoneCode_DPItem = ((SdtSDT_Country_SDT_CountryItem)AV94GXV3.Item(AV95GXV4));
             AV55Combo_DataItem = new WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item(context);
             AV55Combo_DataItem.gxTpr_Id = AV58NetworkIndividualHomePhoneCode_DPItem.gxTpr_Countrydialcode;
             AV52ComboTitles = (GxSimpleCollection<string>)(new GxSimpleCollection<string>());
@@ -2661,7 +2674,7 @@ namespace GeneXus.Programs {
             AV52ComboTitles.Add(AV58NetworkIndividualHomePhoneCode_DPItem.gxTpr_Countryflag, 0);
             AV55Combo_DataItem.gxTpr_Title = AV52ComboTitles.ToJSonString(false);
             AV57NetworkIndividualHomePhoneCode_Data.Add(AV55Combo_DataItem, 0);
-            AV94GXV4 = (int)(AV94GXV4+1);
+            AV95GXV4 = (int)(AV95GXV4+1);
          }
          AV57NetworkIndividualHomePhoneCode_Data.Sort("Title");
          Combo_networkindividualhomephonecode_Selectedvalue_set = AV21NetworkIndividualHomePhoneCode;
@@ -2672,13 +2685,13 @@ namespace GeneXus.Programs {
       {
          /* 'LOADCOMBONETWORKINDIVIDUALPHONECODE' Routine */
          returnInSub = false;
-         AV96GXV6 = 1;
-         GXt_objcol_SdtSDT_Country_SDT_CountryItem3 = AV95GXV5;
+         AV97GXV6 = 1;
+         GXt_objcol_SdtSDT_Country_SDT_CountryItem3 = AV96GXV5;
          new dp_country(context ).execute( out  GXt_objcol_SdtSDT_Country_SDT_CountryItem3) ;
-         AV95GXV5 = GXt_objcol_SdtSDT_Country_SDT_CountryItem3;
-         while ( AV96GXV6 <= AV95GXV5.Count )
+         AV96GXV5 = GXt_objcol_SdtSDT_Country_SDT_CountryItem3;
+         while ( AV97GXV6 <= AV96GXV5.Count )
          {
-            AV60NetworkIndividualPhoneCode_DPItem = ((SdtSDT_Country_SDT_CountryItem)AV95GXV5.Item(AV96GXV6));
+            AV60NetworkIndividualPhoneCode_DPItem = ((SdtSDT_Country_SDT_CountryItem)AV96GXV5.Item(AV97GXV6));
             AV55Combo_DataItem = new WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item(context);
             AV55Combo_DataItem.gxTpr_Id = AV60NetworkIndividualPhoneCode_DPItem.gxTpr_Countrydialcode;
             AV52ComboTitles = (GxSimpleCollection<string>)(new GxSimpleCollection<string>());
@@ -2686,7 +2699,7 @@ namespace GeneXus.Programs {
             AV52ComboTitles.Add(AV60NetworkIndividualPhoneCode_DPItem.gxTpr_Countryflag, 0);
             AV55Combo_DataItem.gxTpr_Title = AV52ComboTitles.ToJSonString(false);
             AV59NetworkIndividualPhoneCode_Data.Add(AV55Combo_DataItem, 0);
-            AV96GXV6 = (int)(AV96GXV6+1);
+            AV97GXV6 = (int)(AV97GXV6+1);
          }
          AV59NetworkIndividualPhoneCode_Data.Sort("Title");
          Combo_networkindividualphonecode_Selectedvalue_set = AV23NetworkIndividualPhoneCode;
@@ -2697,9 +2710,9 @@ namespace GeneXus.Programs {
       {
          /* 'LOADCOMBORESIDENTPACKAGEID' Routine */
          returnInSub = false;
-         AV98Udparg1 = new prc_getuserlocationid(context).executeUdp( );
+         AV99Udparg1 = new prc_getuserlocationid(context).executeUdp( );
          /* Using cursor H00BX2 */
-         pr_default.execute(0, new Object[] {AV98Udparg1});
+         pr_default.execute(0, new Object[] {AV99Udparg1});
          while ( (pr_default.getStatus(0) != 101) )
          {
             A528SG_LocationId = H00BX2_A528SG_LocationId[0];
@@ -2741,13 +2754,13 @@ namespace GeneXus.Programs {
       {
          /* 'LOADCOMBORESIDENTCOUNTRY' Routine */
          returnInSub = false;
-         AV101GXV8 = 1;
-         GXt_objcol_SdtSDT_Country_SDT_CountryItem3 = AV100GXV7;
+         AV102GXV8 = 1;
+         GXt_objcol_SdtSDT_Country_SDT_CountryItem3 = AV101GXV7;
          new dp_country(context ).execute( out  GXt_objcol_SdtSDT_Country_SDT_CountryItem3) ;
-         AV100GXV7 = GXt_objcol_SdtSDT_Country_SDT_CountryItem3;
-         while ( AV101GXV8 <= AV100GXV7.Count )
+         AV101GXV7 = GXt_objcol_SdtSDT_Country_SDT_CountryItem3;
+         while ( AV102GXV8 <= AV101GXV7.Count )
          {
-            AV64ResidentCountry_DPItem = ((SdtSDT_Country_SDT_CountryItem)AV100GXV7.Item(AV101GXV8));
+            AV64ResidentCountry_DPItem = ((SdtSDT_Country_SDT_CountryItem)AV101GXV7.Item(AV102GXV8));
             AV55Combo_DataItem = new WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item(context);
             AV55Combo_DataItem.gxTpr_Id = AV64ResidentCountry_DPItem.gxTpr_Countryname;
             AV52ComboTitles = (GxSimpleCollection<string>)(new GxSimpleCollection<string>());
@@ -2755,7 +2768,7 @@ namespace GeneXus.Programs {
             AV52ComboTitles.Add(AV64ResidentCountry_DPItem.gxTpr_Countryflag, 0);
             AV55Combo_DataItem.gxTpr_Title = AV52ComboTitles.ToJSonString(false);
             AV63ResidentCountry_Data.Add(AV55Combo_DataItem, 0);
-            AV101GXV8 = (int)(AV101GXV8+1);
+            AV102GXV8 = (int)(AV102GXV8+1);
          }
          AV63ResidentCountry_Data.Sort("Title");
          Combo_residentcountry_Selectedvalue_set = AV32ResidentCountry;
@@ -2766,13 +2779,13 @@ namespace GeneXus.Programs {
       {
          /* 'LOADCOMBORESIDENTHOMEPHONECODE' Routine */
          returnInSub = false;
-         AV103GXV10 = 1;
-         GXt_objcol_SdtSDT_Country_SDT_CountryItem3 = AV102GXV9;
+         AV104GXV10 = 1;
+         GXt_objcol_SdtSDT_Country_SDT_CountryItem3 = AV103GXV9;
          new dp_country(context ).execute( out  GXt_objcol_SdtSDT_Country_SDT_CountryItem3) ;
-         AV102GXV9 = GXt_objcol_SdtSDT_Country_SDT_CountryItem3;
-         while ( AV103GXV10 <= AV102GXV9.Count )
+         AV103GXV9 = GXt_objcol_SdtSDT_Country_SDT_CountryItem3;
+         while ( AV104GXV10 <= AV103GXV9.Count )
          {
-            AV66ResidentHomePhoneCode_DPItem = ((SdtSDT_Country_SDT_CountryItem)AV102GXV9.Item(AV103GXV10));
+            AV66ResidentHomePhoneCode_DPItem = ((SdtSDT_Country_SDT_CountryItem)AV103GXV9.Item(AV104GXV10));
             AV55Combo_DataItem = new WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item(context);
             AV55Combo_DataItem.gxTpr_Id = AV66ResidentHomePhoneCode_DPItem.gxTpr_Countrydialcode;
             AV52ComboTitles = (GxSimpleCollection<string>)(new GxSimpleCollection<string>());
@@ -2780,7 +2793,7 @@ namespace GeneXus.Programs {
             AV52ComboTitles.Add(AV66ResidentHomePhoneCode_DPItem.gxTpr_Countryflag, 0);
             AV55Combo_DataItem.gxTpr_Title = AV52ComboTitles.ToJSonString(false);
             AV65ResidentHomePhoneCode_Data.Add(AV55Combo_DataItem, 0);
-            AV103GXV10 = (int)(AV103GXV10+1);
+            AV104GXV10 = (int)(AV104GXV10+1);
          }
          AV65ResidentHomePhoneCode_Data.Sort("Title");
          Combo_residenthomephonecode_Selectedvalue_set = AV49ResidentHomePhoneCode;
@@ -2791,13 +2804,13 @@ namespace GeneXus.Programs {
       {
          /* 'LOADCOMBORESIDENTPHONECODE' Routine */
          returnInSub = false;
-         AV105GXV12 = 1;
-         GXt_objcol_SdtSDT_Country_SDT_CountryItem3 = AV104GXV11;
+         AV106GXV12 = 1;
+         GXt_objcol_SdtSDT_Country_SDT_CountryItem3 = AV105GXV11;
          new dp_country(context ).execute( out  GXt_objcol_SdtSDT_Country_SDT_CountryItem3) ;
-         AV104GXV11 = GXt_objcol_SdtSDT_Country_SDT_CountryItem3;
-         while ( AV105GXV12 <= AV104GXV11.Count )
+         AV105GXV11 = GXt_objcol_SdtSDT_Country_SDT_CountryItem3;
+         while ( AV106GXV12 <= AV105GXV11.Count )
          {
-            AV68ResidentPhoneCode_DPItem = ((SdtSDT_Country_SDT_CountryItem)AV104GXV11.Item(AV105GXV12));
+            AV68ResidentPhoneCode_DPItem = ((SdtSDT_Country_SDT_CountryItem)AV105GXV11.Item(AV106GXV12));
             AV55Combo_DataItem = new WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item(context);
             AV55Combo_DataItem.gxTpr_Id = AV68ResidentPhoneCode_DPItem.gxTpr_Countrydialcode;
             AV52ComboTitles = (GxSimpleCollection<string>)(new GxSimpleCollection<string>());
@@ -2805,7 +2818,7 @@ namespace GeneXus.Programs {
             AV52ComboTitles.Add(AV68ResidentPhoneCode_DPItem.gxTpr_Countryflag, 0);
             AV55Combo_DataItem.gxTpr_Title = AV52ComboTitles.ToJSonString(false);
             AV67ResidentPhoneCode_Data.Add(AV55Combo_DataItem, 0);
-            AV105GXV12 = (int)(AV105GXV12+1);
+            AV106GXV12 = (int)(AV106GXV12+1);
          }
          AV67ResidentPhoneCode_Data.Sort("Title");
          Combo_residentphonecode_Selectedvalue_set = AV51ResidentPhoneCode;
@@ -3148,12 +3161,15 @@ namespace GeneXus.Programs {
       {
          /* 'DISPLAYMESSAGES' Routine */
          returnInSub = false;
-         AV107GXV13 = 1;
-         while ( AV107GXV13 <= AV81ErrorMessageCollection.Count )
+         AV108GXV13 = 1;
+         while ( AV108GXV13 <= AV81ErrorMessageCollection.Count )
          {
-            AV82ErrorMessage = ((GeneXus.Utils.SdtMessages_Message)AV81ErrorMessageCollection.Item(AV107GXV13));
-            GX_msglist.addItem(new WorkWithPlus.workwithplus_web.dvmessagegetbasicnotificationmsg(context).executeUdp(  "",  AV82ErrorMessage.gxTpr_Description,  "error",  "",  "true",  ""));
-            AV107GXV13 = (int)(AV107GXV13+1);
+            AV82ErrorMessage = ((GeneXus.Utils.SdtMessages_Message)AV81ErrorMessageCollection.Item(AV108GXV13));
+            if ( StringUtil.StrCmp(AV82ErrorMessage.gxTpr_Description, context.GetMessage( "GXM_unexp", "")) != 0 )
+            {
+               GX_msglist.addItem(new WorkWithPlus.workwithplus_web.dvmessagegetbasicnotificationmsg(context).executeUdp(  "",  AV82ErrorMessage.gxTpr_Description,  "error",  "",  "true",  ""));
+            }
+            AV108GXV13 = (int)(AV108GXV13+1);
          }
       }
 
@@ -3245,6 +3261,8 @@ namespace GeneXus.Programs {
          AssignProp("", false, edtavNetworkindividualaddressline2_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavNetworkindividualaddressline2_Enabled), 5, 0), true);
          cmbavNetworkindividualsalutation.Enabled = 0;
          AssignProp("", false, cmbavNetworkindividualsalutation_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(cmbavNetworkindividualsalutation.Enabled), 5, 0), true);
+         cmbavNetworkindividualrelationship.Enabled = 0;
+         AssignProp("", false, cmbavNetworkindividualrelationship_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(cmbavNetworkindividualrelationship.Enabled), 5, 0), true);
       }
 
       protected void S242( )
@@ -3391,7 +3409,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202571111494716", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20257267381198", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3407,7 +3425,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages."+StringUtil.Lower( context.GetLanguageProperty( "code"))+".js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wp_createresidentandnetwork.js", "?202571111494717", false, true);
+         context.AddJavascriptSource("wp_createresidentandnetwork.js", "?20257267381199", false, true);
          context.AddJavascriptSource("shared/HistoryManager/HistoryManager.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/json2005.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/rsh.js", "", false, true);
@@ -3975,19 +3993,18 @@ namespace GeneXus.Programs {
          GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons1 = new WorkWithPlus.workwithplus_web.SdtDVB_SDTDropDownOptionsTitleSettingsIcons(context);
          AV71defaultCountryPhoneCode = "";
          AV84defaultCountry = "";
-         AV70ComboResidentCountry = "";
          AV72ComboResidentPhoneCode = "";
          AV73ComboResidentHomePhoneCode = "";
          GXt_char2 = "";
-         AV91GXV1 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
+         AV92GXV1 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
          AV56NetworkIndividualCountry_DPItem = new SdtSDT_Country_SDT_CountryItem(context);
          AV55Combo_DataItem = new WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item(context);
          AV52ComboTitles = new GxSimpleCollection<string>();
-         AV93GXV3 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
+         AV94GXV3 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
          AV58NetworkIndividualHomePhoneCode_DPItem = new SdtSDT_Country_SDT_CountryItem(context);
-         AV95GXV5 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
+         AV96GXV5 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
          AV60NetworkIndividualPhoneCode_DPItem = new SdtSDT_Country_SDT_CountryItem(context);
-         AV98Udparg1 = Guid.Empty;
+         AV99Udparg1 = Guid.Empty;
          H00BX2_A528SG_LocationId = new Guid[] {Guid.Empty} ;
          H00BX2_A527ResidentPackageId = new Guid[] {Guid.Empty} ;
          H00BX2_A531ResidentPackageName = new string[] {""} ;
@@ -3998,11 +4015,11 @@ namespace GeneXus.Programs {
          H00BX3_A97ResidentTypeName = new string[] {""} ;
          A96ResidentTypeId = Guid.Empty;
          A97ResidentTypeName = "";
-         AV100GXV7 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
+         AV101GXV7 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
          AV64ResidentCountry_DPItem = new SdtSDT_Country_SDT_CountryItem(context);
-         AV102GXV9 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
+         AV103GXV9 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
          AV66ResidentHomePhoneCode_DPItem = new SdtSDT_Country_SDT_CountryItem(context);
-         AV104GXV11 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
+         AV105GXV11 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
          GXt_objcol_SdtSDT_Country_SDT_CountryItem3 = new GXBaseCollection<SdtSDT_Country_SDT_CountryItem>( context, "SDT_CountryItem", "Comforta_version2");
          AV68ResidentPhoneCode_DPItem = new SdtSDT_Country_SDT_CountryItem(context);
          AV87ActiveLanguageName = "";
@@ -4164,13 +4181,13 @@ namespace GeneXus.Programs {
       private int edtavResidentguid_Enabled ;
       private int edtavMedicalindicationid_Visible ;
       private int edtavMedicalindicationid_Enabled ;
-      private int AV92GXV2 ;
-      private int AV94GXV4 ;
-      private int AV96GXV6 ;
-      private int AV101GXV8 ;
-      private int AV103GXV10 ;
-      private int AV105GXV12 ;
-      private int AV107GXV13 ;
+      private int AV93GXV2 ;
+      private int AV95GXV4 ;
+      private int AV97GXV6 ;
+      private int AV102GXV8 ;
+      private int AV104GXV10 ;
+      private int AV106GXV12 ;
+      private int AV108GXV13 ;
       private int idxLst ;
       private string Gx_mode ;
       private string wcpOGx_mode ;
@@ -4490,7 +4507,6 @@ namespace GeneXus.Programs {
       private string AV45ResidentGUID ;
       private string AV71defaultCountryPhoneCode ;
       private string AV84defaultCountry ;
-      private string AV70ComboResidentCountry ;
       private string AV72ComboResidentPhoneCode ;
       private string AV73ComboResidentHomePhoneCode ;
       private string A531ResidentPackageName ;
@@ -4525,7 +4541,7 @@ namespace GeneXus.Programs {
       private Guid AV26SG_OrganisationId ;
       private Guid AV27SG_LocationId ;
       private Guid AV47MedicalIndicationId ;
-      private Guid AV98Udparg1 ;
+      private Guid AV99Udparg1 ;
       private Guid A528SG_LocationId ;
       private Guid A527ResidentPackageId ;
       private Guid A96ResidentTypeId ;
@@ -4563,13 +4579,13 @@ namespace GeneXus.Programs {
       private GxSimpleCollection<Guid> AV25ResidentPackageId ;
       private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV81ErrorMessageCollection ;
       private WorkWithPlus.workwithplus_web.SdtDVB_SDTDropDownOptionsTitleSettingsIcons GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons1 ;
-      private GXBaseCollection<SdtSDT_Country_SDT_CountryItem> AV91GXV1 ;
+      private GXBaseCollection<SdtSDT_Country_SDT_CountryItem> AV92GXV1 ;
       private SdtSDT_Country_SDT_CountryItem AV56NetworkIndividualCountry_DPItem ;
       private WorkWithPlus.workwithplus_web.SdtDVB_SDTComboData_Item AV55Combo_DataItem ;
       private GxSimpleCollection<string> AV52ComboTitles ;
-      private GXBaseCollection<SdtSDT_Country_SDT_CountryItem> AV93GXV3 ;
+      private GXBaseCollection<SdtSDT_Country_SDT_CountryItem> AV94GXV3 ;
       private SdtSDT_Country_SDT_CountryItem AV58NetworkIndividualHomePhoneCode_DPItem ;
-      private GXBaseCollection<SdtSDT_Country_SDT_CountryItem> AV95GXV5 ;
+      private GXBaseCollection<SdtSDT_Country_SDT_CountryItem> AV96GXV5 ;
       private SdtSDT_Country_SDT_CountryItem AV60NetworkIndividualPhoneCode_DPItem ;
       private IDataStoreProvider pr_default ;
       private Guid[] H00BX2_A528SG_LocationId ;
@@ -4577,11 +4593,11 @@ namespace GeneXus.Programs {
       private string[] H00BX2_A531ResidentPackageName ;
       private Guid[] H00BX3_A96ResidentTypeId ;
       private string[] H00BX3_A97ResidentTypeName ;
-      private GXBaseCollection<SdtSDT_Country_SDT_CountryItem> AV100GXV7 ;
+      private GXBaseCollection<SdtSDT_Country_SDT_CountryItem> AV101GXV7 ;
       private SdtSDT_Country_SDT_CountryItem AV64ResidentCountry_DPItem ;
-      private GXBaseCollection<SdtSDT_Country_SDT_CountryItem> AV102GXV9 ;
+      private GXBaseCollection<SdtSDT_Country_SDT_CountryItem> AV103GXV9 ;
       private SdtSDT_Country_SDT_CountryItem AV66ResidentHomePhoneCode_DPItem ;
-      private GXBaseCollection<SdtSDT_Country_SDT_CountryItem> AV104GXV11 ;
+      private GXBaseCollection<SdtSDT_Country_SDT_CountryItem> AV105GXV11 ;
       private GXBaseCollection<SdtSDT_Country_SDT_CountryItem> GXt_objcol_SdtSDT_Country_SDT_CountryItem3 ;
       private SdtSDT_Country_SDT_CountryItem AV68ResidentPhoneCode_DPItem ;
       private Guid[] H00BX4_A62ResidentId ;
@@ -4701,7 +4717,7 @@ public class wp_createresidentandnetwork__default : DataStoreHelperBase, IDataSt
     {
        Object[] prmH00BX2;
        prmH00BX2 = new Object[] {
-       new ParDef("AV98Udparg1",GXType.UniqueIdentifier,36,0)
+       new ParDef("AV99Udparg1",GXType.UniqueIdentifier,36,0)
        };
        Object[] prmH00BX3;
        prmH00BX3 = new Object[] {
@@ -4715,7 +4731,7 @@ public class wp_createresidentandnetwork__default : DataStoreHelperBase, IDataSt
        new ParDef("AV33ResidentId",GXType.UniqueIdentifier,36,0)
        };
        def= new CursorDef[] {
-           new CursorDef("H00BX2", "SELECT SG_LocationId, ResidentPackageId, ResidentPackageName FROM Trn_ResidentPackage WHERE SG_LocationId = :AV98Udparg1 ORDER BY ResidentPackageName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00BX2,100, GxCacheFrequency.OFF ,false,false )
+           new CursorDef("H00BX2", "SELECT SG_LocationId, ResidentPackageId, ResidentPackageName FROM Trn_ResidentPackage WHERE SG_LocationId = :AV99Udparg1 ORDER BY ResidentPackageName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00BX2,100, GxCacheFrequency.OFF ,false,false )
           ,new CursorDef("H00BX3", "SELECT ResidentTypeId, ResidentTypeName FROM Trn_ResidentType ORDER BY ResidentTypeName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00BX3,100, GxCacheFrequency.OFF ,false,false )
           ,new CursorDef("H00BX4", "SELECT ResidentId, NetworkIndividualId, NetworkIndividualBsnNumber, NetworkIndividualGivenName, NetworkIndividualLastName, NetworkIndividualEmail, NetworkIndividualPhone, NetworkIndividualHomePhone, NetworkIndividualPhoneCode, NetworkIndividualHomePhoneCode, NetworkIndividualPhoneNumber, NetworkIndividualHomePhoneNumb, NetworkIndividualRelationship, NetworkIndividualGender, NetworkIndividualCountry, NetworkIndividualCity, NetworkIndividualZipCode, NetworkIndividualAddressLine1, NetworkIndividualAddressLine2, NetworkIndividualSalutation, NetworkIndividualTitle FROM Trn_NetworkIndividual WHERE ResidentId = :AV74Trn_Resident__Residentid ORDER BY NetworkIndividualId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00BX4,100, GxCacheFrequency.OFF ,false,false )
           ,new CursorDef("H00BX5", "SELECT ResidentId, NetworkIndividualId FROM Trn_NetworkIndividual WHERE ResidentId = :AV33ResidentId ORDER BY NetworkIndividualId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00BX5,1, GxCacheFrequency.OFF ,false,true )
